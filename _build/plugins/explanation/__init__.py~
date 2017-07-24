@@ -1,0 +1,83 @@
+from docutils import nodes
+from docutils.parsers.rst import Directive
+from docutils.parsers.rst import directives
+
+
+
+class ExplanationNode(nodes.Labeled, nodes.container):
+    pass
+
+class Explanation(Directive):
+
+    required_arguments = 0
+    optional_arguments = 1
+    final_argument_whitespace = True
+    option_spec = {
+        'forms': directives.unchanged, 
+        'language': directives.unchanged
+    }
+    has_content = True
+    
+    # def run(self):
+    #     self.assert_has_content()
+    #     
+    #     node = nodes.raw('', '<div class="explanation">Explanation <button>Show</button>
+    
+    def clojure_form_links(self, *forms):
+        """
+        Return a list of link nodes in clojuredocs for each passed clojure form.
+        """
+        source = "\n"
+        
+        for form in forms:
+            source += "    * HEY `{} <{}>`__\n".format(form, "http://somewhere")
+        
+        # links = nodes.block_quote(rawsource=source)
+        source += "\n"
+        return source
+    
+    def run(self):
+        # Raise an error if the directive does not have contents.
+        
+        
+        # main node
+        self.assert_has_content()
+        text = '\n'.join(self.content)
+        
+        # add explanation header
+        print(self.arguments)
+        try:
+            title = self.arguments[0]
+        except IndexError:
+            title = "Explanation"
+            
+        header = nodes.title(text=title)
+        
+        body = nodes.container(rawsource=text)
+        
+        node = nodes.section()
+        node['classes'] = ["explanation"]
+        node += header
+        
+        # Parse the directive contents.
+        # 
+        
+        forms = self.options.get("forms", None)
+        
+        if forms:
+            forms = forms.split()
+            links = self.clojure_form_links(*forms)
+            links_node = nodes.Element()
+            self.state.nested_parse(links, self.content_offset, links_node)
+            body += links_node
+        
+        self.state.nested_parse(body, self.content_offset, node)
+        
+        node += body
+        
+        return [node]
+
+
+
+def register():
+    directives.register_directive('explanation', Explanation)

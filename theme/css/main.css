@@ -1,0 +1,60 @@
+/* general styles */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12pt;
+}
+
+@font-face {
+    font-family: Inconsolata;
+    src: url("/theme/inconsolata.woff");
+}
+
+pre {
+    font-family: Inconsolata, monospace;
+    line-height: 125%
+}
+
+.note {
+    background-color: #CCCCCC;
+    color: #666666;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+.note .admonition-title {
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.highlighttable .highlight {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.highlighttable {
+    margin-bottom: 1em;
+}
+
+.highlight {
+    padding: 0.5em;
+    display: inline-block;
+}
+
+.highlighttable pre, .highlight pre {
+        margin: 0em;
+}
+
+.explanation {
+    display: block;
+    border: 3px double;
+    padding: 1em;
+}
+
+.explanation .compound-first {
+    font-weight: bold;
+    font-size: 110%;
+}
