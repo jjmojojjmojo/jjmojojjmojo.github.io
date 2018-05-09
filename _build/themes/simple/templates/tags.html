@@ -3,8 +3,13 @@
 {% block title %}{{ SITENAME }} - Tags{% endblock %}
 
 {% block content %}
-    <h1>Tags for {{ SITENAME }}</h1>
+    <h1>Tags</h1>
+    <dl>
     {%- for tag, articles in tags|sort %}
-        <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
+    <dt><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a></dt>
+    <dd>{{TAG_DESCRIPTIONS[tag]}}
+    
+    <em>{{ articles|count|pluralize("article","articles")|capitalize }}</em></dd>
     {% endfor %}
+    </dl>
 {% endblock %}

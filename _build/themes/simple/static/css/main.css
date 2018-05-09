@@ -12,13 +12,12 @@ body {
 
 #content-wrapper {
     margin: 0;
-    min-height: 400px;
     border-left: 1px #897C81 solid;
     border-right: 1px #897C81 solid;
     padding: 1em;
 }
 
-header {
+#banner {
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
     background-size: 100%;
@@ -28,21 +27,38 @@ header {
     height: 200px;
 }
 
-header h1 {
+#banner h1 {
+    font-size: 24pt;
     margin: 0;
     padding: 0.25em;
     position: absolute;
     bottom: 0em;
     left: 0em;
     right: 0em;
-    height: 1.25em;
-    line-height: 1.25em;
+    height: 1.5em;
+    line-height: 1.5em;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    vertical-align: middle;
 }
 
-header a, header a:visited {
+#menu {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    font-size: 18pt;
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+#menu li {
+    padding: 0.25em;
+    display: inline;
+    list-style-type: none;
+}
+
+#banner a, #banner a:visited {
     color: white;
 }
 
@@ -143,7 +159,7 @@ h1, h2, h3, h4, h5, h6, h7 {
     margin: 0.25em;
 }
 
-footer {
+#contentinfo {
     background-color: #B6CE9E;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
@@ -151,10 +167,10 @@ footer {
     background-repeat: no-repeat;
     background-image: url("/theme/images/footer_large.jpg");
     position: relative;
-    height: 200px;
+    height: 150px;
 }
 
-#footer-text {
+#contentinfo #footer-text {
 	text-align: center;
 	margin: auto;
 	top: 50%;
@@ -163,7 +179,7 @@ footer {
 	height: 50%;
 }
 
-#footer-text-wrapper {
+#contentinfo #footer-text-wrapper {
     background-color: rgba(256, 256, 256, 0.4);
     margin: auto;
     overflow: auto;
@@ -176,3 +192,4 @@ footer {
     height: 65%;
     position: absolute;
 }
+

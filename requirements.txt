@@ -5,6 +5,7 @@ docutils==0.14
 feedgenerator==1.9
 Jinja2==2.10
 MarkupSafe==1.0
+num2words==0.5.6
 pelican==3.7.1
 Pygments==2.2.0
 python-dateutil==2.7.2

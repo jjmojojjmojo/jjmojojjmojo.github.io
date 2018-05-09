@@ -2,7 +2,7 @@ Boot: Getting Started With Clojure In < 10 Minutes
 ##################################################
 :date: 2015-01-17 11:41
 :author: lionfacelemonface
-:category: clojure
+:category: tutorials
 :tags: boot, clojure
 :slug: boot-getting-started-with-clojure-in-10-minutes
 

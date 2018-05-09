@@ -1,5 +1,6 @@
 _build/output
 _build/srv.pid
+_build/pelican.pid
 
 # Can't distribute with my code due to GPL
 _build/plugins/pelican_toc/

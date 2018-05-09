@@ -38,6 +38,12 @@
 <body id="index" class="home">
         <header id="banner" class="body">
                 <h1><a href="{{ SITEURL }}/">{{ SITENAME }} <strong>{{ SITESUBTITLE }}</strong></a></h1>
+                <ul id="menu">
+                    <li><a href="{{ SITEURL }}/pages/about.html">About</a></li>
+                    <li><a href="{{ SITEURL }}/pages/contact.html">Contact</a></li>
+                    <li><a href="{{ SITEURL }}/categories.html">Categories</a></li>
+                    <li><a href="{{ SITEURL }}/tags.html">Tags</a></li>
+                </ul>
         </header><!-- /#banner -->
         <div id="content-wrapper">
             {% block content %}
