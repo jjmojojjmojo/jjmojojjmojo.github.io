@@ -1,3 +1,16 @@
 _build/output
+_build/srv.pid
+
+# Can't distribute with my code due to GPL
+_build/plugins/pelican_toc/
+
+__pycache__
+*.pyc
 *~
 \#*\#
+.DS_Store
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json

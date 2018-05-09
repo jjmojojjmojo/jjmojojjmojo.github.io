@@ -7,7 +7,7 @@ SITENAME = 'The Collected Works of Jjmojojjmojo'
 SITEURL = ''
 
 PLUGIN_PATHS = ["plugins", "/srv/pelican/plugins"]
-PLUGINS = ["explanation"]
+PLUGINS = ["explanation", "pelican_toc"]
 
 PATH = 'content'
 
@@ -26,6 +26,8 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+DISPLAY_PAGES_ON_MENU = False
+
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),
@@ -40,3 +42,8 @@ DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+TOC = {
+    'TOC_HEADERS': '^h[1-2]',
+    'TOC_INCLUDE_TITLE': 'false'
+}
