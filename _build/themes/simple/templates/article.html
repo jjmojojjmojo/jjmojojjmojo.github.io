@@ -38,6 +38,11 @@
     {% endif %}
   </footer><!-- /.post-info -->
   <div class="entry-content">
+    {% if article.toc %}
+    <div>
+        {{article.toc}}
+    </div>
+    {% endif %}
     {{ article.content }}
   </div><!-- /.entry-content -->
 </section>

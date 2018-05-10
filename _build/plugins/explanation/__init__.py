@@ -1,47 +1,38 @@
 from docutils import nodes
-from docutils.parsers.rst import Directive
-from docutils.parsers.rst import directives
+from docutils.parsers.rst import Directive, directives
+from docutils.parsers.rst.directives.admonitions import BaseAdmonition
 
 
 class ExplanationNode(nodes.Labeled, nodes.container):
     pass
 
-class Explanation(Directive):
+class Explanation(BaseAdmonition):
 
     required_arguments = 0
     optional_arguments = 1
     final_argument_whitespace = True
-    option_spec = {
-        'forms': directives.unchanged, 
-        'language': directives.unchanged
-    }
     has_content = True
     
-    # def run(self):
-    #     self.assert_has_content()
-    #     
-    #     node = nodes.raw('', '<div class="explanation">Explanation <button>Show</button>
-    
-    def clojure_form_links(self):
-        """
-        Return a list of link nodes in clojuredocs for each passed clojure form.
-        """
-        forms = self.options.get("forms", None)
-        out = []
-        if forms:
-            forms = forms.split()
-            
-            for form in forms:
-                out.append("* HEY `{} <{}>`__\n".format(form, "http://somewhere"))
-            
-            print(out)
-            
-            links = nodes.block_quote("\n".join(out))
-            
-            return links
-        else:
-            return nodes.container()
+    def _run(self):
+        self.assert_has_content()
+        text = '\n'.join(self.content)
         
+        node = nodes.container(text)
+        
+        try:
+            title = self.arguments[0]
+        except IndexError:
+            title = "Explanation"
+        
+        textnodes, messages = self.state.inline_text(text, self.lineno)
+        node += nodes.title(title, '', *textnodes)
+        node += messages
+        
+        # admonition_node = self.node_class(rawsource=text)
+        node['classes'] = ["explanation"]
+        # Parse the directive contents.
+        self.state.nested_parse(self.content, self.content_offset, node)
+        return [node]
     
     def run(self):
         # Raise an error if the directive does not have contents.
@@ -50,8 +41,7 @@ class Explanation(Directive):
         # main node
         self.assert_has_content()
         
-        text = "`google <http://www.google.com>`__\n"
-        text += '\n'.join(self.content)
+        text = '\n'.join(self.content)
         
         # add explanation header
         print(self.arguments)
@@ -64,19 +54,13 @@ class Explanation(Directive):
         
         body = nodes.container(text)
         
-        links = self.clojure_form_links()
-        
         node = nodes.section()
         node['classes'] = ["explanation"]
         
         node += header
-        node += links
         node += body
         
-        self.state.nested_parse(self.content, self.content_offset, links)
-        self.state.nested_parse(self.content, self.content_offset, body)
-        
-        
+        self.state.nested_parse(self.content, self.content_offset, node)
         
         return [node]
 

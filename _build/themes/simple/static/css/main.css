@@ -79,8 +79,16 @@ pre {
     margin: 1em;
 }
 
-dt {
+.tip .admonition-title {
     font-weight: bold;
+    font-size: 110%;
+}
+
+.tip {
+    background-color: #F2F2B4;
+    color: #60603c;
+    padding: 0.5em;
+    margin: 1em;
 }
 
 .note .admonition-title {
@@ -88,22 +96,29 @@ dt {
     font-size: 110%;
 }
 
-.highlighttable .highlight {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+dt {
+    font-weight: bold;
 }
+
 
 .highlighttable {
     margin-bottom: 1em;
+    border: 1px #bee0f0 solid;
+    width: 100%;
+    background-color: white;
 }
 
 .highlight {
-    padding: 0.5em;
-    display: inline-block;
+    width: 100%;
 }
 
 .highlighttable pre, .highlight pre {
         margin: 0em;
+}
+
+.linenos {
+    width: 1ch;
+    background-color: white;
 }
 
 .explanation {
@@ -114,7 +129,8 @@ dt {
     background-color: #DBEFEB;
 }
 
-.explanation div {
+/* Initially hide the contents of the explanation */
+.explanation *:not(:first-child) {
     display: none;
 }
 
@@ -193,3 +209,16 @@ h1, h2, h3, h4, h5, h6, h7 {
     position: absolute;
 }
 
+.admonition-edit {
+    font-style: oblique;
+    margin-left: 2em;
+}
+
+.admonition-title {
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.align-middle {
+    vertical-align: middle;
+}

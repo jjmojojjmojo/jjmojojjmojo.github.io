@@ -47,7 +47,7 @@ These scripts work just like shell scripts, with a few key exceptions:
 
 This means you can distribute Boot scripts in the same manner as Python or Bash scripts - except dependencies are handled automatically.
 
-This concept is explored in the sister post to this one, [LINK TO BOOT SCRIPTING TUTORIAL HERE].
+This concept is explored in the sister post to this one, `Boot: Getting Started With Clojure In 10 Minutes <{filename}boot-getting-started-with-clojure-in-10-minutes.rst>`__
 
 Installation/Development Setup
 ------------------------------
@@ -65,88 +65,7 @@ Behind the scenes, `Maven <https://maven.apache.org/>`__ is used to manage JARs.
 
 Conventions
 -----------
-
-Code examples and command-line interactions are provided with syntax-highlighting and line numbers.
-
-Example 1, clojure code:
-
-.. code-block:: clojure
-   
-   (defn add-it-up
-     [&args]
-     (apply + args))
-     
-Example 2, command-line interaction:
-
-.. code-block:: console
-   :linenos: none
-   
-   $ mkdir -p ~/newdir
-   $ touch ~/newdir/newfile
-   $ rm -rf ~/newdir
-   $ echo $HOME
-   /home/jj
-   $ sudo su
-   # whoami
-   root
-   
-Note how we differentiate doing something as root and as a regular user by changing the prompt from :code:`$` to :code:`#`. 
-
-Where applicable, each example is discussed in great detail below it - these explanations are hidden by default so as not to distract from the flow of the article, when such discussion would be a distraction:
-
-.. code-block:: python
-   
-   def some_function(arg1, arg2, **kwargs):
-       print(arg1)
-       print(arg2)
-       for key in kwargs:
-           print("%s: %s" % (key, kwargs[key]))
-           
-
-.. explanation::
-   
-   Overview
-        A standard python function that takes a few positional arguments, and any number of keyword arguments, and prints the result.
-        
-   Line 1
-        Standard python function definition. The first two arguments :code:`arg1` and :code:`arg2` are *positional* arguments. They do not have default values, so they must be specified, and in the given order.
-        
-        The special form :code:`**kwargs` collects any given keyword arguments into a dictionary. 
-        
-   Line 2 and 3
-        Print the values of :code:`arg1` and :code:`arg2` to standard out (STDOUT). Note that this is using the Python 3 form of the print statement. To use this code in recent versions of python 2, you must add :code:`from __future__ import print_function` at the top of your script.
-        
-   Line 4
-        Loop over each key in the :code:`kwargs` dictionary, setting the name of the key to a string variable called :code:`key`. 
-        
-   Line 5
-        With each iteration of the for loop, print the key and it's value in the :code:`kwargs` dictionary. Here we are combining the two values into a single string, separated by a colon, using *string interpolation*. The special :code:`%s` tokens are place holders for the values passed in the tuple that follows the interpolation character (:code:`%`). The :code:`s` is significant, in that python will cast the value to a string before interpolating it.
-        
-   
-   Example
-   
-   .. code-block:: pycon
-      :linenos: none
-      
-      >>> def some_function(arg1, arg2, **kwargs):
-      ...        print(arg1)
-      ...        print(arg2)
-      ...        for key in kwargs:
-      ...            print("%s: %s" % (key, kwargs[key]))
-      ...
-      >>> some_function("boo")
-      Traceback (most recent call last):
-        File "<stdin>", line 1, in <module>
-      TypeError: some_function() missing 1 required positional argument: 'arg2'
-      >>> some_function("boo", "foo")
-      boo
-      foo
-      >>> some_function("boo", "foo", kw1="value 1", kw4="value 5")
-      boo
-      foo
-      kw4: value 5
-      kw1: value 1
-      
+See `Site-wide Conventions Explained <{filename}/pages/conventions.rst>`__.
 
 
 Prerequisites
@@ -166,9 +85,11 @@ There's an expectation that you know basic `Clojure <http://clojure.org/>`__, an
 
 It may be helpful to give the `boot readme <https://github.com/boot-clj/boot>`__ and `wiki documentation <https://github.com/boot-clj/boot/wiki>`__ a read. 
 
-**For questions about boot or clojure,** `The Clojurians Slack <http://clojurians.net/>`__ **is the defacto place to go to converse with clojure rockstars and other newbs alike.**
-
-**If slack isn't your jam,** `IRC <http://en.wikipedia.org/wiki/Internet_Relay_Chat>`__ **is another great way to get in touch with clojure folks. Come join us on** `freenode <https://freenode.net/>`__, **in #hoplon.**
+.. tip::
+   **For questions about boot or clojure,** `The Clojurians Slack <http://clojurians.net/>`__ **is the defacto place to go to converse with clojure rockstars and other newbs alike.**
+   
+   **If slack isn't your jam,** `IRC <http://en.wikipedia.org/wiki/Internet_Relay_Chat>`__ **is another great way to get in touch with clojure folks. Come join us on** `freenode <https://freenode.net/>`__, **in #hoplon.**
+   
 
 *¡Dales la Bota!* (Give 'em The *Boot*!)
 ========================================
@@ -238,14 +159,30 @@ Then we need to update our :code:`$PATH` environment variable so the shell can f
 The real magic happens when boot is run. Boot sets everything up in a ``.boot`` directory in your home folder. Without having any code to execute yet, you can trigger this by simply asking boot for help: 
 
 .. code-block:: console
-    
-    $ boot -h
+   :linenos: none
+   
+   $ boot -h
+   Downloading https://github.com/boot-clj/boot/releases/download/2.7.2/boot.jar...
+   Running for the first time, BOOT_VERSION not set: updating to latest.
+   Retrieving clojure-1.8.0.pom from https://repo1.maven.org/maven2/ (8k)
+   Retrieving oss-parent-7.pom from https://repo1.maven.org/maven2/ (5k)
+   Retrieving maven-metadata.xml from https://repo.clojars.org/
+   Retrieving boot-2.7.2.pom from https://repo.clojars.org/ (2k)
+   Retrieving boot-2.7.2.jar from https://repo.clojars.org/ (3k)
+   Retrieving clojure-1.8.0.jar from https://repo1.maven.org/maven2/ (3538k)
+   #http://boot-clj.com
+   #Wed May 09 20:19:27 EDT 2018
+   BOOT_CLOJURE_NAME=org.clojure/clojure
+   BOOT_VERSION=2.7.2
+   BOOT_CLOJURE_VERSION=1.8.0
+   
 
 .. note::
    
    If you have previously installed boot, it's a good idea to run boot's self-update (:code:`boot -u`) before continuing:
    
    .. code-block:: console
+      :linenos: none
       
       $ boot -u
       Retrieving boot-2.7.0.jar from https://clojars.org/repo/
@@ -266,23 +203,51 @@ Clojure utilizes a concept called a `REPL <http://en.wikipedia.org/wiki/Read%E2%
     
     $ boot repl
 
+.. tip::
+   
+   Boot's ``repl`` task downloads a bunch of dependencies. Don't be alarmed if a bunch of text scrolls by the first time you run ``boot repl``.
+    
 Boot then provides you with a prompt, where you can play around:
 
 .. code-block:: clojure
-    
-    boot.user=> (+ 1 2 3 4 5)
-    15
-    boot.user=> (/ 10 0)
-
+   
+   nREPL server started on port 62443 on host 127.0.0.1 - nrepl://127.0.0.1:62443
+   REPL-y 0.3.7, nREPL 0.2.12
+   Clojure 1.8.0
+   Java HotSpot(TM) 64-Bit Server VM 1.8.0_92-b14
+           Exit: Control+D or (exit) or (quit)
+       Commands: (user/help)
+           Docs: (doc function-name-here)
+                 (find-doc "part-of-name-here")
+   Find by Name: (find-name "part-of-name-here")
+         Source: (source function-name-here)
+        Javadoc: (javadoc java-object-or-class-here)
+       Examples from clojuredocs.org: [clojuredocs or cdoc]
+                 (user/clojuredocs name-here)
+                 (user/clojuredocs "ns-here" "name-here")
+   boot.user=> (+ 1 2 3 4 5)
+   15
+   boot.user=> (/ 10 0)
+   
    java.lang.ArithmeticException: Divide by zero
    
+
 .. explanation::
+   
+   The first few lines provide some basic information:
+   
+   * Line 1: `nREPL <https://github.com/clojure/tools.nrepl>`__ is a service that allows you to connect to a repl using a remote client.
+   * Line 2: `REPL-y <https://github.com/trptcolin/reply>`__ is an alternative to the built-in REPL that has some nice features.
+   * Line 3: We're using Clojure 1.8.
+   * Line 4: This is the particular JVM in use. 
+   
+   Line's 5 through 14 are some helpful forms and functions you can use inside the REPL.
    
    The :code:`boot.user=>` prompt tells us that we are in a special namespace, set up for us by boot.
    
-   On line 1, we're doing a simple addition of some integers. When you press enter after typing some code, the result is printed below.
+   On line 15, we're doing a simple addition of some integers. When you press enter after typing some code, the result is printed below.
    
-   On line 3, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the :code:`(pst)` `form <https://clojuredocs.org/clojure.repl/pst>`__:
+   On line 17, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the :code:`(pst)` `form <https://clojuredocs.org/clojure.repl/pst>`__:
    
    .. code-block:: clojure
       
@@ -299,6 +264,8 @@ Boot then provides you with a prompt, where you can play around:
       nil
       
    
+   
+
 
 Here's a simple Clojure function that prints the `fibonacci sequence <http://www.mathsisfun.com/numbers/fibonacci-sequence.html>`__ to a given number of digits:
 
@@ -314,10 +281,7 @@ Here's a simple Clojure function that prints the `fibonacci sequence <http://www
           (println))))
 
 .. explanation:: Discussion
-   :forms: int println print defn
    
-    
-
    Boo.
 
 
