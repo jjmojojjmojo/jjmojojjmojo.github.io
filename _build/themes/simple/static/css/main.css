@@ -22,7 +22,7 @@ body {
     border-top-right-radius: 1em;
     background-size: 100%;
     background-repeat: no-repeat;
-    background-image: url("/theme/images/header_large.jpg");
+    background-image: url("/theme/images/header_4k.jpg");
     position: relative;
     height: 200px;
 }
@@ -39,6 +39,10 @@ body {
     line-height: 1.5em;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
+}
+
+#header-home-icon {
+   display: none;
 }
 
 #menu {
@@ -60,6 +64,17 @@ body {
 
 #banner a, #banner a:visited {
     color: white;
+}
+
+#settings-button {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+}
+
+#settings-button img {
+    width: 2em;
+    height: 2em;
 }
 
 @font-face {
@@ -103,13 +118,19 @@ dt {
 
 .highlighttable {
     margin-bottom: 1em;
-    border: 1px #bee0f0 solid;
     width: 100%;
-    background-color: white;
+    border: 1px #bee0f0 solid;
 }
 
 .highlight {
-    width: 100%;
+    background-color: white;
+    border: 1px #bee0f0 solid;
+    padding: 0.25em;
+    overflow: auto;
+}
+
+.highlighttable .code {
+    overflow: auto;
 }
 
 .highlighttable pre, .highlight pre {
@@ -181,7 +202,7 @@ h1, h2, h3, h4, h5, h6, h7 {
     border-bottom-right-radius: 1em;
     background-size: 100%;
     background-repeat: no-repeat;
-    background-image: url("/theme/images/footer_large.jpg");
+    background-image: url("/theme/images/footer_4k.jpg");
     position: relative;
     height: 150px;
 }
@@ -221,4 +242,72 @@ h1, h2, h3, h4, h5, h6, h7 {
 
 .align-middle {
     vertical-align: middle;
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+      margin: 0;
+  }
+  
+  #settings-button img {
+      width: 1.5em;
+      height: 1.5em;
+  }
+  
+  #banner {
+      background-size: cover;
+  }
+  
+  #contentinfo {
+      background-size: cover;
+      font-size: 8pt;
+  }
+  
+  #banner h1 {
+      font-size: 12pt;
+  }
+  
+  #menu {
+      font-size: 10pt;
+  }
+  
+  #header-home-icon {
+      display: inline;
+  }
+  
+  #header-site-title {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+    #banner {
+        background-image: url("/theme/images/header_2k.jpg");
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_2k.jpg");
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #banner {
+        background-image: url("/theme/images/header_1k.jpg");
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_1k.jpg");
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #banner {
+        background-image: url("/theme/images/header_500.jpg");
+        height: 80px;
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_500.jpg");
+        height: 80px;
+    }
 }

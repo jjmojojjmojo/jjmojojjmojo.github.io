@@ -87,4 +87,4 @@ CATEGORY_DESCRIPTIONS = {
     'tutorials': "How-tos, introductions, walk-throughs."
 }
 
-STATIC_PATHS = ['images', 'files']
+STATIC_PATHS = ['images', 'files', 'js']

@@ -305,7 +305,10 @@ You can paste this into your REPL and try it out:
     boot.user=> exit
     Bye for now!
 
-
+.. tip::
+   
+   You can copy the prompts along with the code, the REPL will ignore them.
+   
 
 Boot also works as a `scripting platform <https://github.com/boot-clj/boot/wiki/Scripts>`__ - you can construct applications, specifying dependencies, and parse command-line arguments. 
 
