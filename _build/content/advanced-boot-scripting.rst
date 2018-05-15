@@ -58,7 +58,7 @@ Adding the following to your environment will speed boot startup by a vast amoun
 .. code-block:: console
    :linenos: none
    
-   export BOOT\_JVM\_OPTIONS="-client -XX:+TieredCompilation XX:TieredStopAtLevel=1 -Xverify:none"
+   export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation XX:TieredStopAtLevel=1 -Xverify:none"
    
 
 A Simple Script
