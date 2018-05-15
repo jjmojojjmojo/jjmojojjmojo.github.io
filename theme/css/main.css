@@ -1,7 +1,80 @@
 /* general styles */
+
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12pt;
+    margin-top: 1em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    margin-bottom: 1em;
+    background-color: #FFFFFF;
+}
+
+#content-wrapper {
+    margin: 0;
+    border-left: 1px #897C81 solid;
+    border-right: 1px #897C81 solid;
+    padding: 1em;
+}
+
+#banner {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url("/theme/images/header_4k.jpg");
+    position: relative;
+    height: 200px;
+}
+
+#banner h1 {
+    font-size: 24pt;
+    margin: 0;
+    padding: 0.25em;
+    position: absolute;
+    bottom: 0em;
+    left: 0em;
+    right: 0em;
+    height: 1.5em;
+    line-height: 1.5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+#header-home-icon {
+   display: none;
+}
+
+#menu {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    font-size: 18pt;
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+#menu li {
+    padding: 0.25em;
+    display: inline;
+    list-style-type: none;
+}
+
+#banner a, #banner a:visited {
+    color: white;
+}
+
+#settings-button {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+}
+
+#settings-button img {
+    width: 2em;
+    height: 2em;
 }
 
 @font-face {
@@ -21,8 +94,16 @@ pre {
     margin: 1em;
 }
 
-dt {
+.tip .admonition-title {
     font-weight: bold;
+    font-size: 110%;
+}
+
+.tip {
+    background-color: #F2F2B4;
+    color: #60603c;
+    padding: 0.5em;
+    margin: 1em;
 }
 
 .note .admonition-title {
@@ -30,31 +111,203 @@ dt {
     font-size: 110%;
 }
 
-.highlighttable .highlight {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+dt {
+    font-weight: bold;
 }
+
 
 .highlighttable {
     margin-bottom: 1em;
+    width: 100%;
+    border: 1px #bee0f0 solid;
 }
 
 .highlight {
-    padding: 0.5em;
-    display: inline-block;
+    background-color: white;
+    border: 1px #bee0f0 solid;
+    padding: 0.25em;
+    overflow: auto;
+}
+
+.highlighttable .code {
+    overflow: auto;
 }
 
 .highlighttable pre, .highlight pre {
         margin: 0em;
 }
 
-.explanation {
-    display: block;
-    border: 3px double;
-    padding: 1em;
+.linenos {
+    width: 1ch;
+    background-color: white;
 }
 
-.explanation .compound-first {
+.explanation {
+    display: block;
+    position: relative;
+    border: 1px #387164 solid;
+    padding: 0.5em;
+    background-color: #DBEFEB;
+}
+
+/* Initially hide the contents of the explanation */
+.explanation *:not(:first-child) {
+    display: none;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
     font-weight: bold;
+}
+
+#content-wrapper > h1:first-of-type, 
+#content-wrapper > h2:first-of-type, 
+#content-wrapper > h3:first-of-type, 
+#content-wrapper > h4:first-of-type, 
+#content-wrapper > h5:first-of-type, 
+#content-wrapper > h6:first-of-type {
+    margin-top: 0;
+}
+
+#content-wrapper > h1:last-of-type, 
+#content-wrapper > h2:last-of-type, 
+#content-wrapper > h3:last-of-type, 
+#content-wrapper > h4:last-of-type, 
+#content-wrapper > h5:last-of-type, 
+#content-wrapper > h6:last-of-type{
+    margin-bottom: 0;
+}
+
+.explanation h1, 
+.explanation h2, 
+.explanation h3, 
+.explanation h4, 
+.explanation h5,
+.explanation h6,
+.explanation h7{
+    margin: 0;
+    padding: 0;
+    color: #316F61;
+}
+
+.explanation .button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.25em;
+}
+
+#contentinfo {
+    background-color: #B6CE9E;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url("/theme/images/footer_4k.jpg");
+    position: relative;
+    height: 150px;
+}
+
+#contentinfo #footer-text {
+	text-align: center;
+	margin: auto;
+	top: 50%;
+	position: absolute;
+	width: 100%;
+	height: 50%;
+}
+
+#contentinfo #footer-text-wrapper {
+    background-color: rgba(256, 256, 256, 0.4);
+    margin: auto;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+    width: 65%;
+    height: 65%;
+    position: absolute;
+}
+
+.admonition-edit {
+    font-style: oblique;
+    margin-left: 2em;
+}
+
+.admonition-title {
     font-size: 110%;
+    font-weight: bold;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+      margin: 0;
+  }
+  
+  #settings-button img {
+      width: 1.5em;
+      height: 1.5em;
+  }
+  
+  #banner {
+      background-size: cover;
+  }
+  
+  #contentinfo {
+      background-size: cover;
+      font-size: 8pt;
+  }
+  
+  #banner h1 {
+      font-size: 12pt;
+  }
+  
+  #menu {
+      font-size: 10pt;
+  }
+  
+  #header-home-icon {
+      display: inline;
+  }
+  
+  #header-site-title {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+    #banner {
+        background-image: url("/theme/images/header_2k.jpg");
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_2k.jpg");
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #banner {
+        background-image: url("/theme/images/header_1k.jpg");
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_1k.jpg");
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #banner {
+        background-image: url("/theme/images/header_500.jpg");
+        height: 80px;
+    }
+    
+    #contentinfo {
+        background-image: url("/theme/images/footer_500.jpg");
+        height: 80px;
+    }
 }
