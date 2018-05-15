@@ -848,7 +848,25 @@ At this point we have a project and can build a standalone jar file from it. Thi
    
    ``set-env!`` was introduced earlier, here's the new concepts introduced:
    
-   * we're using the special ``LATEST`` version specification in our dependency list. This pulls in the latest version of the boot libs we're using, so we don't have to remember what version we're using. This is only useful for things like boot - in standard practice you will *always* want to specify the versions you developed your application against - using LATEST will bring your 
+   * We have to specify the precise versions of our dependencies here - this might seem tedious, but it's best to *always* do this, even with things we take for granted like clojure itself and boot. This way, our code will always be explicitly telling any users which versions its compatible with, and we won't get any surprises. 
+   
+     Most of the time, you'll know the version number you're using from clojars, but for boot and clojure itself, it might have been a while since you isntalled, and you may not remember. 
+     
+     To find out the boot and clojure version number, we can ask ``boot``:
+     
+     .. code-block:: console
+        :linenos: none
+        
+        $ boot -V
+        #http://boot-clj.com
+        #Tue May 15 14:27:28 EDT 2018
+        BOOT_CLOJURE_NAME=org.clojure/clojure
+        BOOT_CLOJURE_VERSION=1.8.0
+        BOOT_VERSION=2.7.2
+        
+     
+     
+   
    
    * The ``:source-paths`` setting is using a neat built-in data structure called a `hash set <https://clojure.org/reference/data_structures#Sets>`__. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.
    

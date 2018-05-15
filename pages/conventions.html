@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Site-wide Conventions Explained</title>
+        <meta charset="utf-8" />
+        
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of Jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+    <h1>Site-wide Conventions Explained</h1>
+    
+        <div class="contents">
+            <div id="toc"><ul><li><a class="toc-href" href="#source-code-examples" title="Source Code Examples">Source Code Examples</a></li><li><a class="toc-href" href="#explainations" title="Explainations">Explainations</a></li></ul></div>
+        </div>
+    <div class="section" id="source-code-examples">
+<h2 id="source-code-examples">Source Code Examples</h2>
+<p>Code examples and command-line interactions are provided with syntax-highlighting and line numbers.</p>
+<div class="section" id="example-1-clojure-code">
+<h3>Example 1, clojure code</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">add-it-up</span>
+  <span class="p">[</span><span class="o">&amp;</span><span class="nv">args</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">apply + </span><span class="nv">args</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="example-2-command-line-interaction">
+<h3>Example 2, command-line interaction</h3>
+<div class="highlight"><pre><span></span><span class="gp">$</span> mkdir -p ~/newdir
+<span class="gp">$</span> touch ~/newdir/newfile
+<span class="gp">$</span> rm -rf ~/newdir
+<span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$HOME</span>
+<span class="go">/home/jj</span>
+<span class="gp">$</span> sudo su
+<span class="gp">#</span> whoami
+<span class="go">root</span>
+</pre></div>
+<p>Note how we differentiate doing something as root and as a regular user by changing the prompt from <code>$</code> to <code>#</code>.</p>
+</div>
+</div>
+<div class="section" id="explainations">
+<h2 id="explainations">Explainations</h2>
+<p>Where applicable, each example is discussed in great detail below it - these explanations are hidden by default so as not to distract from the flow of the article, when such discussion would be a distraction:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+</pre></div>
+</td></tr></table><div class="explanation section">
+<h3>Explanation</h3>
+<div class="docutils container">
+</div>
+<dl class="docutils">
+<dt>Overview</dt>
+<dd>A standard python function that takes a few positional arguments, and any number of keyword arguments, and prints the result.</dd>
+<dt>Line 1</dt>
+<dd><p class="first">Standard python function definition. The first two arguments <code>arg1</code> and <code>arg2</code> are <em>positional</em> arguments. They do not have default values, so they must be specified, and in the given order.</p>
+<p class="last">The special form <code>**kwargs</code> collects any given keyword arguments into a dictionary.</p>
+</dd>
+<dt>Line 2 and 3</dt>
+<dd>Print the values of <code>arg1</code> and <code>arg2</code> to standard out (STDOUT). Note that this is using the Python 3 form of the print statement. To use this code in recent versions of python 2, you must add <code>from __future__ import print_function</code> at the top of your script.</dd>
+<dt>Line 4</dt>
+<dd>Loop over each key in the <code>kwargs</code> dictionary, setting the name of the key to a string variable called <code>key</code>.</dd>
+<dt>Line 5</dt>
+<dd>With each iteration of the for loop, print the key and it's value in the <code>kwargs</code> dictionary. Here we are combining the two values into a single string, separated by a colon, using <em>string interpolation</em>. The special <code>%s</code> tokens are place holders for the values passed in the tuple that follows the interpolation character (<code>%</code>). The <code>s</code> is significant, in that python will cast the value to a string before interpolating it.</dd>
+</dl>
+<p>Example</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">some_function() missing 1 required positional argument: 'arg2'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">)</span>
+<span class="go">boo</span>
+<span class="go">foo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="n">kw1</span><span class="o">=</span><span class="s2">"value 1"</span><span class="p">,</span> <span class="n">kw4</span><span class="o">=</span><span class="s2">"value 5"</span><span class="p">)</span>
+<span class="go">boo</span>
+<span class="go">foo</span>
+<span class="go">kw4: value 5</span>
+<span class="go">kw1: value 1</span>
+</pre></div>
+</div>
+<p>You can click on the book icon <object class="align-middle" data="/images/book.svg" type="image/svg+xml">CLOSED_BOOK_ICON</object> to show an explanation. Clicking on the open book icon <object class="align-middle" data="/images/book-open.svg" type="image/svg+xml">OPEN_BOOK_ICON</object> will close it.</p>
+</div>
+
+
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved.</div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
+</body>
+</html>
