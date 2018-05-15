@@ -6,9 +6,14 @@ var save_settings = function() {
 };
 
 var clear_settings = function() {
-    var ok = prompt("Are you sure you want to clear all settings?");
+    var ok = confirm("Are you sure you want to clear all settings?");
     if(ok){
         localStorage.clear();
+        $("#choose-highlight-css").val("/theme/css/syntax-solarized-light.css");
+        test_css();
+        $("input[name='choose-explain-toggle'][value='nothing']").prop("checked", true);
+        $("input[name='choose-explain-toggle'][value='open']").prop("checked", false);
+        $("input[name='choose-explain-toggle'][value='close']").prop("checked", false);
     }
 };
 
