@@ -88,3 +88,7 @@ CATEGORY_DESCRIPTIONS = {
 }
 
 STATIC_PATHS = ['images', 'files', 'js']
+
+DEFAULT_METADATA = {
+    'status': 'draft',
+}

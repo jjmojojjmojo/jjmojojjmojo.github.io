@@ -244,6 +244,15 @@ h1, h2, h3, h4, h5, h6, h7 {
     vertical-align: middle;
 }
 
+li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+ol.arabic ol.arabic {
+    list-style-type: lower-alpha;
+}
+
 @media screen and (max-width: 1200px) {
   body {
       margin: 0;
