@@ -89,10 +89,46 @@ Some related tips:
 Mentor Every Day
 ================
 
+Learn A New Language
+====================
+There's a lot to be gained by going through the process of learning a new language, besides adding a new skill to your resume. 
+
+Languages have many commonalities, but where they diverge is where you can find some serious insight into computer science. It really can make you a more thoughtful programmer, more of a real, literal, *software engineer*. 
+
+Further, you'll start to better learn *how to learn* languages, and it will make it easier for you to change things up in your career. It happens a lot more than you might think, given the way that job postings seem to be obsessed with specific technologies. Often you'll run into legacy systems written in "classic" languages, have to integrate with code from external entities, or business needs will change and you'll find yourself having to work outside of your primary language. There's also the ebb and flow of what's popular - job opportunities are constantly shifting from one technology to the next.  Knowing how to change direction quickly is a huge asset to your career. It can keep you employed when there's a sea change at your place of employment, and it can find you work between jobs.
+
+Take a look at what kind of language(s) you already know, and seek out languages that represent other paradigms, or have different workflows.
+
+For example, if you're primary language is interpreted, look into something compiled. If you usually use something procedural, look into event driven or functional languages. 
+
+My primary experience is with Python (procedural and interpreted), but I found that learning Clojure (functional and compiled) really made me an overall better programmer. I'm currently learning Haskell - it's a departure from both, since it's strongly typed and compiled to machine code (as opposed to JVM bytecode).
+
+There's a great book called `"Seven Languages In Seven Weeks" <https://pragprog.com/book/btlang/seven-languages-in-seven-weeks>`__ by Bruce A. Tate that is a great starting point if you have trouble identifying languages to try on your own. 
+
 Work For Free - With Conditions
 ===============================
+A great way to establish yourself and gain real-life experience is to do volunteer work. 
 
-[The Duff]
+Look for community organizations, home owner's associations, churches, charities, animal rescues, user groups, etc. Start with groups you are an active member of, or have an interest in. It's a great way to give back.
+
+.. tip::
+    
+    This doesn't always mean working for free - non-profits are often hard pressed to find good people to help them achieve their development goals due to budget restraints, and they're willing to pay, just maybe not as much as you could make elsewhere.
+    
+
+But when you are going to work for free, be sure to clearly outline what you are agreeing to do before you commit. There's something odd about free work - in spite of the fact that your "customer" knows your time is valuable, there's a tendency to ask for too much, take up an unreasonable amount of time, or micromanage. So it's imperative that you set realistic expectations, establish attainable time lines and clear goals.
+
+One tact I take is borrowed from Duff Goldman, the "Ace Of Cakes". He's a baker and cake decorator from Baltimore, MD, often credited with launching the modern cake decorating era. In his reality show, he tells his friends that he will make and decorate cakes for them at no cost. However, there's a catch: *Duff's friend is not allowed to have any input on what Duff makes.*
+
+This concept is genius for several reasons. 
+
+First, it's a rare opportunity for Duff to have total creative freedom. He can experiment, push the envelope, and see his vision come to life without outside interference. 
+
+Second, it sets a very clear boundary. The customer understands without ambiguity that they need to stay out of the creative process.
+
+Next, there's no chance of a monetary dispute between friends. 
+
+Finally, Duff has a chance to do something really special, since the cake is technically a gift. 
 
 Know How Servers And Virtualization Work
 ========================================

@@ -300,8 +300,20 @@ ol.arabic ol.arabic {
 }
 
 @media screen and (max-width: 1000px) {
+    body {
+        font-size: xx-large;
+    }
+    
     #banner {
         background-image: url("/theme/images/header_1k.jpg");
+    }
+    
+    #banner h1 {
+        font-size: 12pt;
+    }
+    
+    #menu {
+        font-size: 10pt;
     }
     
     #contentinfo {
@@ -310,9 +322,20 @@ ol.arabic ol.arabic {
 }
 
 @media screen and (max-width: 500px) {
+    body {
+        font-size: xx-large;
+    }
     #banner {
         background-image: url("/theme/images/header_500.jpg");
         height: 80px;
+    }
+    
+    #banner h1 {
+        font-size: 12pt;
+    }
+    
+    #menu {
+        font-size: 10pt;
     }
     
     #contentinfo {
