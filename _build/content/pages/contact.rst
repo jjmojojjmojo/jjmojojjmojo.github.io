@@ -1,6 +1,18 @@
-How To Contact jjmojojjmojo
+How To Contact Josh Johnson
 ###########################
 :slug: contact
 :tags: about
 
-This is the contact page.
+How do you get in contact with the site author?
+
+.. PELICAN_END_SUMMARY
+
+The best way to reach me is to direct message me on twitter, my handle is `@jjmojojjmojo <https://twitter.com/jjmojojjmojo>`__.
+
+You can also reach out on the `freenode IRC network <https://freenode.net/>`__, I hang out in #blitzen. My screen name is also jjmojojjmojo.
+
+.. tip:: 
+    
+    More contact methods are in the works! Stay tuned.
+    
+

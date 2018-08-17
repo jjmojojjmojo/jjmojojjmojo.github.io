@@ -5,7 +5,7 @@ DevOps Is Bullshit: Why One Programmer Doesn't Do It Anymore
 :category: commentary, culture, devops, editorial
 :tags: culture, devops
 :slug: devops-is-bullshit-why-one-programmer-doesnt-do-it-anymore
-:status: published
+:status: draft
 
 I've always been handy with hardware. I was one of "those kids" you hear
 about that keeps taking things apart just to see how they work - and

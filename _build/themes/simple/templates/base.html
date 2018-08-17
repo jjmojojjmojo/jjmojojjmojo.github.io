@@ -4,7 +4,7 @@
         {% block head %}
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta charset="utf-8" />
-        
+        <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/main.css" />
         <link id="highlight-css" rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/syntax-solarized-light.css" />
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/zepto.min.js"></script>
@@ -41,6 +41,7 @@
                 <ul id="menu">
                     <li><a href="{{ SITEURL }}/pages/about.html">About</a></li>
                     <li><a href="{{ SITEURL }}/pages/contact.html">Contact</a></li>
+                    <li><a href="{{ SITEURL }}/pages/index.html">Pages</a></li>
                     <li><a href="{{ SITEURL }}/categories.html">Categories</a></li>
                     <li><a href="{{ SITEURL }}/tags.html">Tags</a></li>
                 </ul>
@@ -56,7 +57,7 @@
         </div>
         <footer id="contentinfo" class="body">
             <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved.</div>
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="{{ SITEURL }}/pages/about.html">About</a></div>
             </div>
         </footer>
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/main.js"></script>

@@ -2,11 +2,11 @@
 
 body {
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 12pt;
-    margin-top: 1em;
-    margin-left: 1.5em;
-    margin-right: 1.5em;
-    margin-bottom: 1em;
+    font-size: 110%;
+    margin-top: 1vw;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+    margin-bottom: 1vw;
     background-color: #FFFFFF;
 }
 
@@ -14,7 +14,7 @@ body {
     margin: 0;
     border-left: 1px #897C81 solid;
     border-right: 1px #897C81 solid;
-    padding: 1em;
+    padding: 1vw;
 }
 
 #banner {
@@ -77,14 +77,37 @@ body {
     height: 2em;
 }
 
-@font-face {
-    font-family: Inconsolata;
-    src: url("/theme/inconsolata.woff");
+.figure {
+    border: 0.5em double #000000;
 }
 
-pre {
-    font-family: Inconsolata, monospace;
-    line-height: 125%
+.figure img {
+    width: 100%;
+}
+
+.figure .caption {
+    font-size: smaller;
+    font-weight: bold;
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.align-center {
+    margin: auto;
+    display: block;
+}
+
+.align-right {
+    float: right;
+    clear: left;
+    margin-left: 1em;
+}
+
+.align-middle {
+    vertical-align: middle;
 }
 
 .note {
@@ -92,6 +115,23 @@ pre {
     color: #666666;
     padding: 0.5em;
     margin: 1em;
+}
+
+.warning .admonition-title {
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.warning {
+    background-color: #FFCC99;
+    color: #7E5321;
+    padding: 0.5em;
+    margin: 1em;
+}
+
+.note .admonition-title {
+    font-weight: bold;
+    font-size: 110%;
 }
 
 .tip .admonition-title {
@@ -106,15 +146,25 @@ pre {
     margin: 1em;
 }
 
-.note .admonition-title {
-    font-weight: bold;
+.admonition-edit {
+    font-style: oblique;
+    margin-left: 2em;
+}
+
+.admonition-title {
     font-size: 110%;
+    font-weight: bold;
 }
 
 dt {
     font-weight: bold;
 }
 
+/* syntax highlighting */
+.highlight-wrapper {
+    width: 100%;
+    overflow: auto;
+}
 
 .highlighttable {
     margin-bottom: 1em;
@@ -142,6 +192,17 @@ dt {
     background-color: white;
 }
 
+@font-face {
+    font-family: Inconsolata;
+    src: url("/theme/inconsolata.woff");
+}
+
+pre {
+    font-family: Inconsolata, monospace;
+    line-height: 125%
+}
+
+/* custom explanation tag */
 .explanation {
     display: block;
     position: relative;
@@ -153,6 +214,38 @@ dt {
 /* Initially hide the contents of the explanation */
 .explanation *:not(:first-child) {
     display: none;
+}
+
+.explanation h1, 
+.explanation h2, 
+.explanation h3, 
+.explanation h4, 
+.explanation h5,
+.explanation h6,
+.explanation h7{
+    margin: 0;
+    padding: 0;
+    color: #316F61;
+}
+
+.explanation .button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.25em;
+}
+
+/* Line blocks */
+.line-block {
+    border-left: 2px double #999999;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    width: 75%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    font-size: 1.2rem;
+    font-style: oblique;
 }
 
 h1, h2, h3, h4, h5, h6, h7 {
@@ -175,25 +268,6 @@ h1, h2, h3, h4, h5, h6, h7 {
 #content-wrapper > h5:last-of-type, 
 #content-wrapper > h6:last-of-type{
     margin-bottom: 0;
-}
-
-.explanation h1, 
-.explanation h2, 
-.explanation h3, 
-.explanation h4, 
-.explanation h5,
-.explanation h6,
-.explanation h7{
-    margin: 0;
-    padding: 0;
-    color: #316F61;
-}
-
-.explanation .button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0.25em;
 }
 
 #contentinfo {
@@ -224,24 +298,9 @@ h1, h2, h3, h4, h5, h6, h7 {
     left: 0;
     bottom: 0;
     right: 0;
-    
     width: 65%;
     height: 65%;
     position: absolute;
-}
-
-.admonition-edit {
-    font-style: oblique;
-    margin-left: 2em;
-}
-
-.admonition-title {
-    font-size: 110%;
-    font-weight: bold;
-}
-
-.align-middle {
-    vertical-align: middle;
 }
 
 li {
@@ -253,11 +312,72 @@ ol.arabic ol.arabic {
     list-style-type: lower-alpha;
 }
 
+/* Make video fit in the screen */
+
+.video-container {
+  width: 80%;
+  margin: auto;
+}
+
+.video-container video {
+  width: 100%; 
+  height: 100%; 
+
+}
+
+/* settings/config page */
+#settings {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+#settings button {
+    cursor: pointer;
+    font-size: 105%;
+    padding: 1.5em;
+    border: 6px double;
+    border-radius: 1em;
+    width: 30%;
+    color: #333333;
+}
+
+#settings #clear {
+    background-color: #F2F2B4;
+}
+
+#settings #clear:active {
+    color: #FFFFFF;
+    background-color: #333333;
+}
+
+
+#settings #save {
+    background-color: #ccffcc;
+    border-color: #006600;
+}
+
+#settings #save:active {
+    color: #FFFFFF;
+    background-color: #333333;
+}
+
+#settings #save .icon {
+    font-size: 150%;
+    color: #99ff66;
+}
+
+#settings #clear .icon {
+    font-size: 150%;
+    color: #ff3333
+}
+
+.status-draft {
+    border: 0.2rem dashed red;
+    padding: 1em;
+    background-image: url("/theme/images/draft.png");
+}
+
 @media screen and (max-width: 1200px) {
-  body {
-      margin: 0;
-  }
-  
   #settings-button img {
       width: 1.5em;
       height: 1.5em;
@@ -300,12 +420,9 @@ ol.arabic ol.arabic {
 }
 
 @media screen and (max-width: 1000px) {
-    body {
-        font-size: xx-large;
-    }
-    
     #banner {
         background-image: url("/theme/images/header_1k.jpg");
+        height: 100px;
     }
     
     #banner h1 {
@@ -322,12 +439,8 @@ ol.arabic ol.arabic {
 }
 
 @media screen and (max-width: 500px) {
-    body {
-        font-size: xx-large;
-    }
     #banner {
         background-image: url("/theme/images/header_500.jpg");
-        height: 80px;
     }
     
     #banner h1 {
@@ -343,3 +456,4 @@ ol.arabic ol.arabic {
         height: 80px;
     }
 }
+

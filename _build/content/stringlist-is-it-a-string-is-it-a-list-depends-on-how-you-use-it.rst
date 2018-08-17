@@ -5,6 +5,7 @@ StringList - Is It A String? Is It A List? Depends On How You Use It!
 :category: Uncategorized
 :tags: code, github, jjmojojjmojo, lis, list, magic methods, python, string
 :slug: stringlist-is-it-a-string-is-it-a-list-depends-on-how-you-use-it
+:status: draft
 
 At my job, I had an API problem: I had a object property that could
 contain one or more strings. I assumed it would be a list, some of my

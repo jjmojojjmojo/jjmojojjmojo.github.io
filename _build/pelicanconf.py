@@ -33,12 +33,16 @@ JINJA_FILTERS = {
     'pluralize': my_plural
 }
 
+CACHE_CONTENT = True
+LOAD_CONTENT_CACHE = True
+CACHE_PATH = "./cache"
+
 AUTHOR = 'jjmojojjmojo'
-SITENAME = 'The Collected Works of Jjmojojjmojo'
+SITENAME = 'The Collected Works of jjmojojjmojo'
 SITEURL = ''
 
-PLUGIN_PATHS = ["plugins", "/srv/pelican/plugins"]
-PLUGINS = ["explanation", "pelican_toc"]
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["explanation", "pelican_toc", "summary"]
 
 PATH = 'content'
 
@@ -69,10 +73,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
-DEFAULT_PAGINATION = False
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+DEFAULT_PAGINATION = 10
 
 TOC = {
     'TOC_HEADERS': '^h[1-2]',
@@ -87,8 +88,10 @@ CATEGORY_DESCRIPTIONS = {
     'tutorials': "How-tos, introductions, walk-throughs."
 }
 
-STATIC_PATHS = ['images', 'files', 'js']
+STATIC_PATHS = ['images', 'files', 'js', 'videos']
 
-DEFAULT_METADATA = {
-    # 'status': 'draft',
-}
+TEMPLATE_PAGES = {'pages.html': 'pages/index.html'}
+
+# DEFAULT_METADATA = {
+#     'status': 'hidden'
+# }

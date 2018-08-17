@@ -4,6 +4,7 @@ Making And Distributing Jars With Boot
 :author: lionfacelemonface
 :category: tutorial
 :slug: making-jars-with-boot
+:status: draft
 
 This post covers using boot to build and distribute your applications. We'll dive deep into packing up our clojure code, publishing to clojars, as well as considering other self-hosted distribution options.
 

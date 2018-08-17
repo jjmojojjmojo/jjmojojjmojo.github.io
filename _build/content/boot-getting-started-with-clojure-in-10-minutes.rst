@@ -1,13 +1,15 @@
 Boot: Getting Started With Clojure In < 10 Minutes
 ##################################################
-:date: 2015-01-17 11:41
-:author: lionfacelemonface
+:date: 2018-08-01 11:41
+:author: jjmojojjmojo
 :category: tutorials
 :tags: boot, clojure
 :slug: boot-getting-started-with-clojure-in-10-minutes
 :status: published
 
 With the power of `boot <http://boot-clj.com/>`__, it's possible to go from "never used java before" to budding `Clojure <http://clojure.org/>`__-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.
+
+.. PELICAN_END_SUMMARY
 
 Overview For The Unititated
 ===========================

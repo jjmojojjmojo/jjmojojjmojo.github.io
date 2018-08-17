@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+</head>
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/drafts/building-a-dns-sandbox.html" rel="bookmark" title="Permalink to Building A DNS Sandbox">Building A DNS Sandbox</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2013-12-26T13:53:00-05:00">
+      Thu 26 December 2013
+    </time>
+<address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#use-case" title="Use Case">Use Case</a></li><li><a class="toc-href" href="#coming-soon" title="Coming Soon">Coming Soon</a></li><li><a class="toc-href" href="#server-setup" title="Server Setup">Server Setup</a></li><li><a class="toc-href" href="#zone-files" title="Zone Files">Zone Files</a></li><li><a class="toc-href" href="#configuration" title="Configuration">Configuration</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#using-your-sandbox" title="Using Your Sandbox">Using Your Sandbox</a></li></ul></div>
+</div>
+<div class="warning">
+<h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+<div class="entry-content status-draft">
+<p>I'm developing some automation around DNS. Its imperative that I don't
+break anything that might impact any users. This post documents the
+process I went through to build a DNS sandbox, and serves as a
+crash-course in DNS, which is, like most technology that's been around
+since the dawn of time, a lot simpler than it seems at first glance.</p>
+<div class="section" id="use-case">
+<h2 id="use-case">Use Case</h2>
+<p>When a new machine is brought up, I need to register it with my internal
+DNS server. The DNS server doesn't allow remote updating, and there's no
+DHCP server in play (for the record, I'm bringing up machines in AWS). I
+have access to the machine via SSH, so I can edit the zone files
+directly. As SOP, we use <a class="reference external" href="http://code.google.com/p/hostdb/">hostdb</a>
+and a git repository. This works really well for manual updates, but
+it's a bit clunky to automate, and has one fatal flaw: there can be
+parity between what's in DNS and what's in the git repo. My hope is to
+eliminate this by using the DNS server as the single source of truth,
+using other mechanisms for auditing and change-management.</p>
+<p>So the point of the DNS sandbox is to make testing/debugging of hostdb
+easier and to facilitate rapid development of new tools.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Please be aware that this setup is designed strictly for experimentation
+and testing - it's not secure, or terribly useful outside of <em>basic</em> DNS
+functionality. Please take the time to really understand what it takes
+to run a DNS server before you try to set something like this up outside
+of a laboratory setting.</p>
+</div>
+</div>
+<div class="section" id="coming-soon">
+<h2 id="coming-soon">Coming Soon</h2>
+<p>There are a lot of features of DNS that this setup doesn't take into
+account. I'm planning on following up this post as I add the following
+to my sandbox setup (suggestions for other things are welcome!)</p>
+<ul class="simple">
+<li>Remote updates (being able to speak DNS directly to the server from a
+script)</li>
+<li>Chrooting the bind installation for security.</li>
+<li>DNS Security (DNSSEC) - makes remote updates secure.</li>
+<li>Slaves - DNS can be configured so that when one server is updated,
+the changes propagate to <em>n</em> number of servers.</li>
+</ul>
+</div>
+<div class="section" id="server-setup">
+<h2 id="server-setup">Server Setup</h2>
+<p>I started with stock Ubuntu 12.04 server instance.</p>
+<p>I installed bind9 using apt, and created a couple of directories for log
+and zone files.</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install bind9
+<span class="gp">$</span> sudo mkdir -p /var/log/named
+<span class="gp">$</span> sudo chown bind:bind /var/log/named
+<span class="gp">$</span> sudo mkdir /etc/bind/zones
+</pre></div>
+</div>
+<div class="section" id="zone-files">
+<h2 id="zone-files">Zone Files</h2>
+<div class="section" id="basics">
+<h3>Basics</h3>
+<p>See: <a class="reference external" href="http://www.zytrax.com/books/dns/ch8">http://www.zytrax.com/books/dns/ch8</a></p>
+<ul class="simple">
+<li>Zone files have a header section called the SOA</li>
+<li>Fully-qualified domain names end with a period (e.g. my.domain.com.),
+subdomains relative to an FDQN do not (e.g. my, www).</li>
+<li>Zone files have an <em>origin</em> - a base added to every name in the file.
+The origin is defined using the $ORIGIN directive (see:
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#directives">http://www.zytrax.com/books/dns/ch8/#directives</a>)</li>
+<li>The @ symbol is used as a shortcut for $ORIGIN.</li>
+<li>Each zone file is referenced in the named.conf file (see
+<a class="reference external" href="#configuration">Configuration</a> below for details)</li>
+<li>The name of the file itself is immaterial - there are many standards
+in the wild - I'm opting to keep them consistent with the name of the
+zone in named.conf.</li>
+<li>Zone files have a <em>serial number</em>, which consists of the current date
+and an increment number. Example: 20131226000 (YYYYMMDDXXX). This
+number must be incremented every time you make a change to a zone
+file, or bind will ignore the changes.</li>
+<li>Comments start with a semi-colon (;) and run to the end of the line.</li>
+</ul>
+<p>DNS lookups can happen in two directions: <em>forward</em> and <em>reverse</em>.
+Forward lookups resolve a doman name to an IP address (<tt class="docutils literal">my.domain.com</tt>
+-&gt; <tt class="docutils literal">192.168.0.1</tt>). Reverse lookups resolve an IP address to a domain
+name (<tt class="docutils literal">192.168.0.1</tt> -&gt; <tt class="docutils literal">my.domain.name</tt>). Each type of lookup is
+controlled from a separate zone file, with different types of records.</p>
+<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#types">http://www.zytrax.com/books/dns/ch8/#types</a> for details about the
+different types of records. This post only deals with <strong>SOA</strong>, <strong>NS</strong>,
+<strong>A</strong>, <strong>CNAME</strong> and <strong>PTR</strong> records.</p>
+<p>Note that reverse lookup is not required for a functioning DNS setup,
+but is recommended.</p>
+</div>
+<div class="section" id="forward-lookup">
+<h3>Forward Lookup</h3>
+<dl class="docutils">
+<dt>Filename:</dt>
+<dd><tt class="docutils literal">/etc/bind/zones/example.test</tt></dd>
+<dt>Reference:</dt>
+<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch8/">http://www.zytrax.com/books/dns/ch8/</a></dd>
+</dl>
+<p>Our domain name is <em>example.test</em>.</p>
+<div class="line-block">
+<div class="line">[code language="text"]</div>
+<div class="line-block">
+<div class="line">$ORIGIN example.test.</div>
+<div class="line">$TTL 1h</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">@ IN SOA ns.example.test. hostmaster.example.test. (</div>
+<div class="line-block">
+<div class="line">20131226000 ; serial number</div>
+<div class="line">1d ; refresh</div>
+<div class="line">2h ; update retry</div>
+<div class="line">4w ; expiry</div>
+<div class="line">1h ; minimum</div>
+<div class="line">)</div>
+</div>
+</div>
+<p>@ NS ns</p>
+<div class="line-block">
+<div class="line">ns A 127.0.0.1</div>
+<div class="line-block">
+<div class="line">box1 A 192.168.0.1</div>
+<div class="line">alt CNAME box1</div>
+</div>
+</div>
+<p>[/code]</p>
+<ul>
+<li><p>Line 1 sets the origin. All entries will be a subdomain of example.test.
+You can put whatever you want in this stanza, but keep it consistent in
+the other areas.</p>
+</li>
+<li><p>Line 2 sets the Time To Live for records in this zone.</p>
+</li>
+<li><p>Lines 4-10 are the
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/soa.html">SOA</a>.</p>
+</li>
+<li><p>On line 5, We use @ to stand in for the $ORIGIN directive defined on
+line 1. We specifify the authoritative server (<tt class="docutils literal">ns.example.test.</tt>),
+which we will define in an A record later. Finally, we specify the
+e-mail address of a person responsible for this zone, replacing the at
+symbol (@) with a period.</p>
+</li>
+<li><p>Line 5 contains the serial number. This will need to be incremented
+every time we make a change. In this example, I'm starting with the
+current date and 000, so we'll get 999 updates before we have to
+increment the date.</p>
+</li>
+<li><p>Line 12 is a requirement of Bind - we must specify at least one NS
+record for our DNS server. The @ symbol is used again here to avoid
+typing the origin again. The hostname for the NS record is <tt class="docutils literal">ns</tt>, which
+means <tt class="docutils literal">ns.example.test</tt>, defined in an A record on line 14.</p>
+</li>
+<li><p>Line 14 defines our DNS server for the NS record on line 12. We're using
+localhost here to point back to the default setup we got from using the
+ubuntu packages.</p>
+</li>
+<li><p>Line 15 is an example of another A record, for a box named
+<tt class="docutils literal">box1.example.test</tt>. Its IP address is <tt class="docutils literal">192.168.0.1</tt>. Note that the
+actual IP addresses here do not need to be routable to the DNS server;
+all it's doing is translating a hostname to an IP address. For testing
+purposes, this can be anything. Just be aware that reverse lookups are
+scoped to a given address range, so things will need to be consistent
+across the two zones.</p>
+</li>
+<li><p>Finally on line 16, we have an example of a CNAME record. This aliases
+the name <tt class="docutils literal">alt.example.test</tt> to <tt class="docutils literal">box1.example.test</tt>, and ultimately
+resolves to <tt class="docutils literal">192.168.0.1</tt>.</p>
+</li></ul></div>
+<div class="section" id="reverse-lookup">
+<h3>Reverse Lookup</h3>
+<dl class="docutils">
+<dt>Filename:</dt>
+<dd><tt class="docutils literal"><span class="pre">/etc/bind/zones/0.168.192.in-addr.arpa</span></tt></dd>
+<dt>Reference:</dt>
+<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch3/">http://www.zytrax.com/books/dns/ch3/</a></dd>
+</dl>
+<p>We're setting up reverse lookups for the 192.168.0.x subnet (CIDR
+192.168.0.0/24).</p>
+<div class="line-block">
+<div class="line">[code language="text"]</div>
+<div class="line-block">
+<div class="line">$ORIGIN 0.168.192.in-addr.arpa.</div>
+<div class="line">$TTL 1h</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">@ IN SOA ns.example.test hostmaster.example.test (</div>
+<div class="line-block">
+<div class="line">20131226000 ; serial number</div>
+<div class="line">1d ; refresh</div>
+<div class="line">2h ; update retry</div>
+<div class="line">4w ; expiry</div>
+<div class="line">1h ; minimum</div>
+<div class="line">)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">IN NS ns.example.test.</div>
+<div class="line-block">
+<div class="line">1 IN PTR box1.example.test</div>
+<div class="line">[/code]</div>
+</div>
+</div>
+<ul>
+<li><p class="first">Lines 1-10 are the SOA, and are formatted the exact same way as in
+our forward zone file.</p>
+<p>Note that the <tt class="docutils literal">$ORIGIN</tt> is now <tt class="docutils literal"><span class="pre">0.168.192.in-addr.arpa.</span></tt>. The
+<tt class="docutils literal"><span class="pre">in-addr.arpa</span></tt> domain is special; used for reverse lookups. The
+numbers before the top level domain are simply the subnet octets,
+reversed (<tt class="docutils literal">192.168.0</tt> becomes <tt class="docutils literal">0.168.192</tt>).</p>
+<p></p><p>Remember, this serves as shorthand for defining the entry records
+below the SOA.</p>
+</li>
+<li><p class="first">Line 12 is the required NS record, pointing at the one that we set up
+an A record for in the forward zone file.</p>
+</li>
+<li><p class="first">Finally, line 13 is a typical PTR record. It associates
+<tt class="docutils literal">192.168.0.1</tt> with <tt class="docutils literal">box1.example.test</tt>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2 id="configuration">Configuration</h2>
+<p>In the default ubuntu setup, local configuration is handled in
+<tt class="docutils literal">/etc/bind/named.conf.local</tt> (this is just simply included into
+<tt class="docutils literal">/etc/bind/named.conf</tt>).</p>
+<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch7/">http://www.zytrax.com/books/dns/ch7/</a> for details about the
+<tt class="docutils literal">named.conf</tt> format and what the directives mean.</p>
+<div class="line-block">
+<div class="line">[code language="text"]</div>
+<div class="line-block">
+<div class="line">zone "example.test." {</div>
+<div class="line">type master;</div>
+<div class="line">file "/etc/bind/zones/example.test";</div>
+<div class="line">allow-update { none; };</div>
+<div class="line">};</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">zone "0.168.192.in-addr.arpa." {</div>
+<div class="line-block">
+<div class="line">type master;</div>
+<div class="line">file "/etc/bind/zones/0.168.192.in-addr.arpa";</div>
+<div class="line">allow-update { none; };</div>
+<div class="line">};</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">logging{</div>
+<div class="line-block">
+<div class="line">channel simple_log {</div>
+<div class="line">file "/var/log/named/bind.log" versions 3 size 5m;</div>
+<div class="line">severity debug;</div>
+<div class="line">print-time yes;</div>
+<div class="line">print-severity yes;</div>
+<div class="line">print-category yes;</div>
+<div class="line">};</div>
+<div class="line">category default{</div>
+<div class="line">simple_log;</div>
+<div class="line">};</div>
+<div class="line">};</div>
+<div class="line">[/code]</div>
+</div>
+</div>
+<ul class="simple">
+<li>Lines 1-5 set up our forward zone "example.test.". Note that
+<tt class="docutils literal"><span class="pre">allow-update</span></tt> is set to <tt class="docutils literal">none</tt>. This simplifies our
+configuration and prevents updates to this zone from other servers.</li>
+<li>Lines 7-11 set up the reverse zone "0.168.192.in-addr.arpa.".</li>
+<li>Lines 13-24 set up simple (and verbose) logging to
+<tt class="docutils literal">/var/log/named/bind.log</tt>. See
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch7/logging.html">http://www.zytrax.com/books/dns/ch7/logging.html</a> for details about
+the setting here.</li>
+</ul>
+</div>
+<div class="section" id="testing">
+<h2 id="testing">Testing</h2>
+<div class="section" id="configuration-syntax-check">
+<h3>Configuration Syntax Check</h3>
+<p>We can use the <tt class="docutils literal"><span class="pre">named-checkzone</span></tt> utility to verify our zone file
+syntax before reloading the configuration.</p>
+<p>You specify the name of the zone and then the filename (the <tt class="docutils literal"><span class="pre">-k</span> fail</tt>
+parameter causes it to return a failed return code when an error is
+found, useful for automated scripts):</p>
+<pre class="literal-block">
+$ named-checkzone -k fail example.test /etc/bind/zones/example.test
+zone example.test/IN: loaded serial 2951356816
+OK
+</pre>
+<p>In the case of a reverse zone file:</p>
+<pre class="literal-block">
+$ named-checkzone -k fail 0.168.192.in-addr.arpa /etc/bind/zones/0.168.192.in-addr.arpa
+zone 0.168.192.in-addr.arpa/IN: loaded serial 2951356817
+OK
+</pre>
+</div>
+<div class="section" id="reloading-config">
+<h3>Reloading Config</h3>
+<p>Configuraiton can be reloaded with the <tt class="docutils literal">rndc reload</tt> command.</p>
+<pre class="literal-block">
+$ sudo rndc reload
+</pre>
+<p>It's helpful to run <tt class="docutils literal">tail <span class="pre">-f</span> /var/log/named/bind.log</tt> in another
+terminal window during testing.</p>
+</div>
+<div class="section" id="testing-dns-queries">
+<h3>Testing DNS Queries</h3>
+<p>The definitive tool is <tt class="docutils literal">dig</tt>. <tt class="docutils literal">nslookup</tt> is also useful for basic
+queries.</p>
+<p>With both tools, its possible to specify a specific DNS server to query.
+In this case, it's assumed that we're logged in to the sandbox DNS
+server, so we'll use 127.0.0.1 for the server to query.</p>
+<div class="section" id="with-dig">
+<h4>With dig</h4>
+<p>Note: remove the <tt class="docutils literal">+short</tt> parameter from the end of the query to get
+more info.</p>
+<div class="section" id="id1">
+<h5>Forward Lookup</h5>
+<p>The A record:</p>
+<pre class="literal-block">
+$ dig @127.0.0.1 box1.example.test +short
+192.168.0.1
+</pre>
+<p>The CNAME:</p>
+<pre class="literal-block">
+$ dig @127.0.0.1 alt.example.test +short
+192.168.0.1
+</pre>
+</div>
+<div class="section" id="id2">
+<h5>Reverse Lookup</h5>
+<pre class="literal-block">
+$ dig @127.0.0.1 -x 192.168.0.1 +short
+box1.example.test.0.168.192.in-addr.arpa.
+</pre>
+</div>
+</div>
+<div class="section" id="with-nslookup">
+<h4>With nslookup</h4>
+<div class="section" id="id3">
+<h5>Forward Lookup</h5>
+<p>The A record:</p>
+<pre class="literal-block">
+$ nslookup box1.example.test 127.0.0.1
+Server:     127.0.0.1
+Address:    127.0.0.1#53
+
+Name:   box1.example.test
+Address: 192.168.0.1
+</pre>
+<p>The CNAME:</p>
+<pre class="literal-block">
+$ nslookup alt.example.test 127.0.0.1
+Server:     127.0.0.1
+Address:    127.0.0.1#53
+
+alt.example.test    canonical name = box1.example.test.
+Name:   box1.example.test
+Address: 192.168.0.1
+</pre>
+</div>
+<div class="section" id="id4">
+<h5>Reverse Lookup</h5>
+<pre class="literal-block">
+$ nslookup 192.168.0.1 127.0.0.1
+Server:     127.0.0.1
+Address:    127.0.0.1#53
+
+1.0.168.192.in-addr.arpa    name = box1.example.test.0.168.192.in-addr.arpa.
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-your-sandbox">
+<h2 id="using-your-sandbox">Using Your Sandbox</h2>
+<div class="line-block">
+<div class="line">Now that the DNS sandbox is built and working correctly, you may want
+to add it</div>
+<div class="line-block">
+<div class="line">to your list of DNS servers.</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">This process will vary depending on what operating system you use, and
+is an</div>
+<div class="line-block">
+<div class="line">exercise best left to the user. However, here are some pointers:</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line">Note: depending on your setup, you will likely need to put your
+sandbox DNS server</div>
+<div class="line-block">
+<div class="line"><em>first</em> in the list.</div>
+</div>
+</div>
+<p>Mac OS X:
+<a class="reference external" href="https://www.plus.net/support/software/dns/changing_dns_mac.shtml">https://www.plus.net/support/software/dns/changing_dns_mac.shtml</a></p>
+<p>Ubuntu:
+<a class="reference external" href="http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/">http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/</a></p>
+</div>
+</div><!-- /.entry-content -->
+</section>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
+</body>
+</html>

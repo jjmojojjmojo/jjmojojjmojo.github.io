@@ -5,6 +5,7 @@ Purely Python: LSB-Compliant Init Scripts
 :category: python
 :tags: init script, lsb, python
 :slug: python-init-scripts
+:status: draft
 
 I've recently been writing a large number of Linux
 `Sys-V <http://en.wikipedia.org/wiki/UNIX_System_V>`__ style init

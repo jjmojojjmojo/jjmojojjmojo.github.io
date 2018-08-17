@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+
+
+    <meta name="tags" content="code" />
+    <meta name="tags" content="github" />
+    <meta name="tags" content="jjmojojjmojo" />
+    <meta name="tags" content="lis" />
+    <meta name="tags" content="list" />
+    <meta name="tags" content="magic methods" />
+    <meta name="tags" content="python" />
+    <meta name="tags" content="string" />
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/stringlist-is-it-a-string-is-it-a-list-depends-on-how-you-use-it.html" rel="bookmark"
+         title="Permalink to StringList - Is It A String? Is It A List? Depends On How You Use It!">StringList - Is It A String? Is It A List? Depends On How You Use It!</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2013-10-23T19:39:00-04:00">
+      Wed 23 October 2013
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href="#so-what-is-it" title="So what is it?">So what is it?</a></li><li><a class="toc-href" href="#how-would-i-use-it" title="How would I use it?">How would I use it?</a></li><li><a class="toc-href" href="#notes" title="Notes">Notes</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+  <div class="entry-content status-draft">
+    <p>At my job, I had an API problem: I had a object property that could
+contain one or more strings. I assumed it would be a list, some of my
+users felt that <tt class="docutils literal"><span class="pre">['value',]</span></tt> was harder to write than <tt class="docutils literal">'value'</tt>. I
+found myself making the same mistake. So, I solved the problem, then I
+took the rough class I wrote and polished it. It's up on my github, at
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist">https://github.com/jjmojojjmojo/stringlist</a></p>
+<div class="section" id="so-what-is-it">
+<h2 id="so-what-is-it">So what is it?</h2>
+<p>It's a class that tries to make a slick API when there can be one, or
+many values for a property. The class can be instantiated with either a
+single value or many. If you use many, it will act like a list. If you
+use a single value (a string), it will act like a string. If it's a
+string, and you use the <tt class="docutils literal">.append()</tt> method, it becomes a list. Bam.</p>
+</div>
+<div class="section" id="how-would-i-use-it">
+<h2 id="how-would-i-use-it">How would I use it?</h2>
+<p>Like so (see the
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist#stringlist">README</a>for
+a more detailed example, and the
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/tree/master/tests">tests</a>
+for comprehensive usage):</p>
+<pre class="literal-block">
+class Thing(object):
+    """
+    Arbitrary class representing a single thing with one or more roles.
+    """
+
+    role = StringList()
+
+    def __init__(self, role=None):
+        self.role = role
+
+# initialize with a single string value
+obj = Thing('single role')
+
+# initialize with multiple string values
+obj = Thing(('one', 'two', 'three'))
+
+# set to a single string value
+obj.roles = 'new role'
+
+# set to many string values
+obj.roles = 'primary', 'secondary'
+
+# when it's a string, it works like a string
+obj = Thing('role1')
+
+# ROLE1
+obj.roles = obj.upper()
+
+# convert to a list using .append()
+obj.roles.append('role2')
+
+# now its a list
+obj.roles[1] == 'role2'
+</pre>
+</div>
+<div class="section" id="notes">
+<h2 id="notes">Notes</h2>
+<ul class="simple">
+<li>The module sports 100% test coverage.</li>
+<li>There is a buildout in the repo. Just run
+<tt class="docutils literal">python bootstrap.py; bin/buildout</tt> and then you can run the tests
+with <tt class="docutils literal">bin/nosetests</tt></li>
+<li>It was originally developed to avoid <tt class="docutils literal">['h', 'e', 'l', 'l', 'o']</tt>
+mistakes when a single string was used instead of a list.</li>
+<li>This is the first time I've used
+<a class="reference external" href="http://docs.python.org/2/howto/descriptor.html">descriptors</a> in
+Python. Very cool.</li>
+<li>It would not have been possible without <a class="reference external" href="http://www.rafekettler.com/magicmethods.html">this marvelous post about
+Python's magic
+methods</a> (big thanks
+to Rafe Kettler).</li>
+<li>Some things were not as straight-forward as they could have been,
+given Python's string implementation. Of special interest is the
+implementation of the
+<tt class="docutils literal">`__delitem__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64</a>&gt;`__
+and
+<tt class="docutils literal">`__iter__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70</a>&gt;`__
+methods. In both cases, the base <tt class="docutils literal">str</tt> class doesn't have either
+method, so instead of doing the sane thing and proxying the call, I
+had to fall back to re-doing the operation in the method.</li>
+</ul>
+</div>
+
+  </div><!-- /.entry-content -->
+</section>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
+</body>
+</html>

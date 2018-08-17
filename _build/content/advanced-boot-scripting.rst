@@ -1,10 +1,12 @@
 Advanced Boot Scripting
 #######################
-:date: 2015-04-11 15:07
-:author: lionfacelemonface
-:category: tutorial
+:date: 2018-08-08 13:34
+:author: jjmojojjmojo
+:category: tutorials
 :slug: advanced-boot-scripting
 :status: published
+
+.. include:: ../emojis.rst
 
 `As covered in a previous post <{filename}boot-getting-started-with-clojure-in-10-minutes.rst>`__,
 `boot <https://github.com/boot-clj/boot>`__ is an all-around useful tool
@@ -21,13 +23,15 @@ discussion about getting your jars into
 `Clojars <http://clojars.org>`__, and setting up a simple bare-minimum
 `Maven <http://maven.apache.org/index.html>`__ repository.
 
+.. PELICAN_END_SUMMARY
+
 .. [*] I originally had "*interfectorem pluma*" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin->English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as *interfectorem pluma* literally translates to something like "feather murderer". In my amateur approach *adjuncti finalum* literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate. 
 
 Setup
 =====
 
 `As I've covered before <{filename}boot-getting-started-with-clojure-in-10-minutes.rst>`__,
-boot is easy to install. All you need is a JDK and the `boot executable <https://github.com/boot-clj/boot/releases>`__. Here's arecap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):
+boot is easy to install. All you need is a JDK and the `boot executable <https://github.com/boot-clj/boot/releases>`__. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):
 
 .. code-block:: console
    :linenos: none
@@ -94,12 +98,12 @@ Adding the following to your environment will speed boot startup by a vast amoun
 A Simple Script
 ===============
 
-For this article, we'll start with an example of a useful application that grabs the most recent tweet from the `Nihilist Arby's <https://twitter.com/nihilist_arbys>`__ twitter feed. A great addition to your `MOTD <http://en.wikipedia.org/wiki/Motd_%28Unix%29>`__ to de-motivate users overzealous about the fact that they have SSH privileges to your machine.
+For this article, we'll start with an example of a useful application that grabs the most recent tweet from the `Nihilist Arby's <https://twitter.com/nihilist_arbys>`__ twitter feed. A great addition to your `MOTD <http://en.wikipedia.org/wiki/Motd_%28Unix%29>`__ to de-motivate users overzealous about the fact that they have SSH privileges to your machine. |grin|
 
 Twitter API Tokens
 ==================
 
-Before we begin, set up an application and `obtain a consumer key <https://dev.twitter.com/oauth/overview/application-owner-access-tokens>`__ using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to read only. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful. 
+Before we begin, set up an application and `obtain a consumer key <https://dev.twitter.com/oauth/overview/application-owner-access-tokens>`__ using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to *read only*. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful. 
 
 Quick Note: Development Deviations
 ==================================
@@ -111,7 +115,7 @@ Since we're not building anything right now, or utilizing the task infrastructur
    (set-env! :dependencies '[[twitter-api "1.8.0"]])
    
 
-Alternatively, we can pre-load dependencies on the command line when we run the repl task:
+Alternatively, we can pre-load dependencies on the command line when we run the ``repl`` task:
 
 .. code-block:: console
    :linenos: none
@@ -452,9 +456,11 @@ Since we don't need logging for our project, we'll choose the ``slf4j-nop`` back
 
 To figure out exactly what the dependency specification looks like, we can search in the `Maven Central Repository <https://search.maven.org/>`__.
 
-.. image:: {filename}images/maven-search.png
-   :width: 75%
-   :alt: Screen grab of Maven Central search results for slf4j-nop
+.. figure:: {filename}images/maven-search.png
+   :figwidth: 85%
+   :align: center
+   
+   Screen grab of Maven Central search results for 'slf4j-nop'
 
 From the screen grab above, we can derive the dependency specification: ``[group-id/artifact-id "version"]``.
 

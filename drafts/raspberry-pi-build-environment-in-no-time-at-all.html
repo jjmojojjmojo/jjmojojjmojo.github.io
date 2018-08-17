@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/raspberry-pi-build-environment-in-no-time-at-all.html" rel="bookmark"
+         title="Permalink to Raspberry Pi Build Environment In No Time At All">Raspberry Pi Build Environment In No Time At All</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2015-04-18T18:07:00-04:00">
+      Sat 18 April 2015
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href="#table-of-contents" title="Table Of Contents">Table Of Contents</a></li><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a class="toc-href" href="#working-with-a-disk-image" title="Working With A Disk Image">Working With A Disk Image</a></li><li><a class="toc-href" href="#working-with-an-existing-disk" title="Working With An Existing Disk">Working With An Existing Disk</a></li><li><a class="toc-href" href="#basic-configurationpackage-installation" title="Basic Configuration/Package Installation">Basic Configuration/Package Installation</a></li><li><a class="toc-href" href="#compiling-for-the-rpi" title="Compiling For The RPi">Compiling For The RPi</a></li><li><a class="toc-href" href="#umount-and-clean-up" title="Umount and Clean Up">Umount and Clean Up</a></li><li><a class="toc-href" href="#writing-a-disk-image-to-an-sd-card" title="Writing a Disk Image to an SD Card">Writing a Disk Image to an SD Card</a></li><li><a class="toc-href" href="#extra-credit-making-our-own-disk-image" title="Extra Credit: Making our own disk image">Extra Credit: Making our own disk image</a></li><li><a class="toc-href" href="#where-to-go-from-here" title="Where To Go From Here">Where To Go From Here</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+  <div class="entry-content status-draft">
+    <p>Leveraging <a class="reference external" href="http://proot.me/">PRoot</a> and <a class="reference external" href="www.qemu.org">qemu</a>,
+it's easy to configure Raspberry Pi's, build and install packages,
+without the need to do so on&nbsp;physical hardware. It's especially nice if
+you have to work with many disk images at once, create specialized
+distributions, reset passwords, or install/customize
+applications&nbsp;that&nbsp;aren't yet in the official repositories.</p>
+<p>I've recently dug in to building apps and doing fun things with the
+<a class="reference external" href="https://www.raspberrypi.org/">Raspberry Pi</a>. With the recent release
+of the <a class="reference external" href="https://www.raspberrypi.org/blog/page/6/#raspberry-pi-2-on-sale">Raspberry Pi 2</a>,
+its an even more exciting platform. I've documented what I've been using
+to make my workflow more productive.</p>
+<div class="section" id="table-of-contents">
+<h2 id="table-of-contents"><a class="toc-backref" href="#id1">Table Of Contents</a></h2>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#table-of-contents" id="id1">Table Of Contents</a></li>
+<li><a class="reference internal" href="#setup" id="id2">Setup</a><ul>
+<li><a class="reference internal" href="#virtual-machine-notes" id="id3">Virtual Machine&nbsp;Notes</a></li>
+<li><a class="reference internal" href="#advanced-usage-note" id="id4">Advanced Usage Note</a></li>
+<li><a class="reference internal" href="#arch-linux" id="id5">Arch Linux</a></li>
+<li><a class="reference internal" href="#ubuntu" id="id6">Ubuntu</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-a-disk-image" id="id7">Working With A Disk Image</a></li>
+<li><a class="reference internal" href="#working-with-an-existing-disk" id="id8">Working With An Existing Disk</a></li>
+<li><a class="reference internal" href="#basic-configuration-package-installation" id="id9">Basic Configuration/Package Installation</a></li>
+<li><a class="reference internal" href="#compiling-for-the-rpi" id="id10">Compiling For The RPi</a><ul>
+<li><a class="reference internal" href="#using-apt-to-install-build-dependencies" id="id11">Using Apt To Install Build Dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#umount-and-clean-up" id="id12">Umount and Clean Up</a></li>
+<li><a class="reference internal" href="#writing-a-disk-image-to-an-sd-card" id="id13">Writing a Disk Image to an SD Card</a></li>
+<li><a class="reference internal" href="#extra-credit-making-our-own-disk-image" id="id14">Extra Credit: Making our own disk image</a></li>
+<li><a class="reference internal" href="#where-to-go-from-here" id="id15">Where To Go From Here</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="setup">
+<h2 id="setup"><a class="toc-backref" href="#id2">Setup</a></h2>
+<p>We'll use a Linux machine. Below are setup instructions for
+<a class="reference external" href="http://www.ubuntu.com/">Ubuntu</a> and
+<a class="reference external" href="https://www.archlinux.org/">Arch</a>. I prefer Arch for desktop and
+personal work, I use <a class="reference external" href="https://www.debian.org/">Debian</a> or Ubuntu for
+production deployments.</p>
+<p>Arch Linux is a great "tinkerer's" distribution - if you haven't used it
+before it's worth checking out. It's <a class="reference external" href="http://archlinuxarm.org/">great on the Raspberry Pi</a>.</p>
+<p>Debian and Ubuntu have some differences, but share the same base and use
+the same package management system
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">apt</a>). I've
+included instructions for&nbsp;Ubuntu in particular, since it's&nbsp;the most
+similar to <a class="reference external" href="http://www.raspbian.org/">Raspbian</a>, the
+default&nbsp;Raspberry Pi operating system, and folks may be more familiar
+with that environment.</p>
+<p>Generally speaking, you'll need the following things:</p>
+<ul class="simple">
+<li>A physical computer or virtual machine running some version of Linux
+(setup instructions are provided for the latest Arch and Ubuntu, but
+any Linux should work).</li>
+<li><a class="reference external" href="https://www.raspberrypi.org/downloads/">Installation files&nbsp;for the Raspberry Pi.</a></li>
+<li>SD cards <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/sd-cards.md">suitable for whatever Raspberry Pi you have</a>.
+We'll learn how to work with raw disk images and how to copy disk images to SD cards.</li>
+<li><a class="reference external" href="http://www.qemu.org">QEMU</a>, an emulator system, and it's <a class="reference external" href="http://en.wikipedia.org/wiki/ARM_architecture">ARM processor</a> support (the Raspberry Pi uses an ARM processor).</li>
+<li><a class="reference external" href="http://proot.me/">PRoot</a>&nbsp;- a convenience tool that makes it
+easy&nbsp;to mount a "foreign" filesystem and run commands inside of it
+without booting.</li>
+<li>A way to create disk images, and mount them like physical devices.</li>
+</ul>
+<p>Once the packages are installed, the commands and processes for building
+and working with Raspberry Pi boot disks are the same.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We assume you have <a class="reference external" href="http://en.wikipedia.org/wiki/Sudo">sudo</a>&nbsp;installed and configured.</p>
+</div>
+<div class="section" id="virtual-machine-notes">
+<h3><a class="toc-backref" href="#id3">Virtual Machine&nbsp;Notes</a></h3>
+<p>If you're using an Apple (Mac OS X) computer or Windows, the easiest way
+to work with Linux systems is via virtualization.
+<a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> is available for most
+platforms and is easy to work with.</p>
+<p>The virtualbox documentation can walk you through the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html">installation of VirtualBox and creating your first virtual machine</a>.</p>
+<p>When working with an SD card, you'll might want to follow instructions for "<a class="reference external" href="https://www.virtualbox.org/manual/ch09.html#rawdisk">Access to entire physical hard disk</a>" to make
+the card accessible to the virtual machine. As an alternative, you could
+use a USB SD card reader, and <a class="reference external" href="https://www.virtualbox.org/manual/ch03.html#settings-usb">usb pass-thru</a>&nbsp;to
+present not the disk to the virtual machine, but the entire USB device,
+and let the virtual machine deal with mounting it.</p>
+<p>Both of these approaches can be (very) error prone, but provide the most
+"native" way of working.</p>
+<p>Instead I'd&nbsp;recommend installing&nbsp;<a class="reference external" href="https://www.virtualbox.org/manual/ch04.html">guest additions</a>.&nbsp;With guest
+additions installed in your virtual machine, you can use the <a class="reference external" href="https://www.virtualbox.org/manual/ch04.html#sharedfolders">shared folders feature</a>
+of VirtualBox. This makes it easy to copy disk images created in your
+virtual machine to your host machine, and then you can use the standard
+instructions for
+<a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a>
+and <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac OS</a>&nbsp;to
+copy the disks images to your SD cards.</p>
+</div>
+<div class="section" id="advanced-usage-note">
+<h3><a class="toc-backref" href="#id4">Advanced Usage Note</a></h3>
+<p>Personally, my usual method of operations with
+VirtualBox VMs is to set up <a class="reference external" href="https://www.samba.org/">Samba</a> in my
+virtual machine and share a folder over a <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">host-only network</a>
+(or I'll use <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_bridged">bridged networking</a>&nbsp;so
+I can connect to it from any machine on my LAN) - I'd consider this a
+more "advanced" approach but I've had more consistent results for
+day-to-day work than using guest additions or mounting host disks.
+However, for the simple task of just copying disk images back and forth
+to the virtual machine, the shared folders feature should suffice.</p>
+</div>
+<div class="section" id="arch-linux">
+<h3><a class="toc-backref" href="#id5">Arch Linux</a></h3>
+<p>We'll use <a class="reference external" href="https://wiki.archlinux.org/index.php/Pacman">pacman</a> and
+<a class="reference external" href="https://www.gnu.org/software/wget/">wget</a> to procure and install
+most of the tools we need:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pacman -S dosfstools wget qemu unzip pv
+<span class="gp">$</span> wget http://static.proot.me/proot-x86<span class="se">\_</span><span class="m">64</span>
+<span class="gp">$</span> chmod +x proot-x86<span class="se">\_</span><span class="m">64</span>
+<span class="gp">$</span> sudo mv proot-x86<span class="se">\_</span><span class="m">64</span> /usr/local/bin/proot
+</pre></div>
+</td></tr></table><p>First, we&nbsp;install the following packages:</p>
+<dl class="docutils">
+<dt>dosfstools</dt>
+<dd>Gives us the ability to create FAT filesystems, required for making
+a disk bootable on the RaspberryPi.</dd>
+<dt>wget</dt>
+<dd>General purpose file grabber - used for downloading installation
+files and PRoot</dd>
+<dt>qemu</dt>
+<dd>QEMU emulator - allows us to run RaspberryPi executables</dd>
+<dt>unzip</dt>
+<dd>Decompresses ZIP archives.</dd>
+<dt>pv</dt>
+<dd>Pipeline middleware that shows a progress bar (we'll be using it to
+make copying disk images with <tt class="docutils literal">dd</tt> a little easier for the
+impatient)</dd>
+</dl>
+<p>Then&nbsp;we download PRoot, make the file executable, and copy it to a
+common location for global executable that everyone on a machine can
+access, <tt class="docutils literal">/usr/local/bin</tt>. This location is just a suggestion - to
+follow along with the examples in this article, you just need to put the
+<tt class="docutils literal">proot</tt> executable somewhere on your
+<a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29">$PATH</a>.</p>
+<p>Finally, we'll use an <a class="reference external" href="https://aur.archlinux.org/">AUR</a> package to
+obtain the <tt class="docutils literal">kpartx</tt> tool.</p>
+<p>kpartx wraps a handful of tasks&nbsp;required for creating loopback devices
+into a single action.</p>
+<p>If you haven't used the AUR before, <a class="reference external" href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_package">check out the documentation first</a>
+for an overview of the process, and to install prerequisites.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> wget
+<span class="go">https://aur.archlinux.org/packages/mu/multipath-tools/multipath-tools.tar.gz</span>
+<span class="gp"> $</span> tar -zxvf multipath-tools.tar.gz
+<span class="gp"> $</span> <span class="nb">cd</span> multipath-tools
+<span class="gp"> $</span> makepkg
+<span class="gp"> $</span> sudo pacman -U sudo pacman -U multipath-tools-<span class="se">\*</span>.pkg.tar.xz
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="ubuntu">
+<h3><a class="toc-backref" href="#id6">Ubuntu</a></h3>
+<p>Ubuntu Desktop comes with most of the tools we need (in particular,
+<tt class="docutils literal">wget</tt>, the ability to mount dos file systems, and <tt class="docutils literal">unzip</tt>). As
+such, the process of getting set up for using PRoot is a bit simpler,
+compared to Arch.</p>
+<p>Ubuntu uses
+<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">apt-get</a> for
+package installation.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install qemu kpartx pv
+<span class="gp">$</span> wget http://static.proot.me/proot-x86<span class="se">\_</span><span class="m">64</span>
+<span class="gp">$</span> chmod +x proot-x86<span class="se">\_</span><span class="m">64</span>
+<span class="gp">$</span> sudo mv proot-x86<span class="se">\_</span><span class="m">64</span> /usr/local/bin/proot
+</pre></div>
+</td></tr></table><p>First, we install the following packages:</p>
+<dl class="docutils">
+<dt>qemu</dt>
+<dd>QEMU emulator &ndash; allows us to run RaspberryPi executables</dd>
+<dt>kpartx</dt>
+<dd>Helper tool that wraps a handful of tasks required for creating
+loopback devices into a single action.</dd>
+<dt>pv</dt>
+<dd>Pipeline middleware that shows a progress bar (we&rsquo;ll be using it to
+make copying disk images with dd a little easier for the impatient)</dd>
+</dl>
+<p>Then, we install PRoot by downloading the binary from
+<a class="reference external" href="http://proot.me">proot.me</a>, making it executable, and putting it
+somewhere on our <a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29">$PATH</a>,
+<tt class="docutils literal">/usr/local/bin</tt>, making it available to all users on the system. This
+location is merely a suggestion, but putting the <tt class="docutils literal">proot</tt> executable
+somewhere on your $PATH will make it easier to follow along with the
+examples below.</p>
+</div>
+</div>
+<div class="section" id="working-with-a-disk-image">
+<h2 id="working-with-a-disk-image"><a class="toc-backref" href="#id7">Working With A Disk Image</a></h2>
+<p>A disk (in the Raspberry Pi's case, we're talking about an SD card) is
+just an arrangement of blocks for data storage. On top of those blocks
+is a description of how files are represented in those blocks, or a
+<em>filesystem</em> (for more detail, see the Wikipedia articles on <a class="reference external" href="http://en.wikipedia.org/wiki/Disk_storage">Disk Storage</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/File_system">File System</a>).</p>
+<p>Disks can exist in the physical world, or can be represented by a
+special file, called a disk image. We can download pre-made images with
+Raspbian already installed from the official <a class="reference external" href="https://www.raspberrypi.org/downloads/">Raspberry Pi downloads page</a>.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> wget http://downloads.raspberrypi.org/raspbian<span class="se">\_</span>latest -O
+<span class="go">rasbian\_latest.img.zip</span>
+<span class="gp"> $</span> unzip rasbian<span class="se">\_</span>latest.img.zip
+<span class="go"> Archive: raspbian\_latest.zip</span>
+<span class="go"> inflating: 2015-02-16-raspbian-wheezy.img</span>
+</pre></div>
+</td></tr></table><p>Take note of the name of the img file - it will vary depending on the
+current release of Raspbian at the time.</p>
+<p>At this point we have a disk image we can mount by creating a loopback
+device. Once we have it mounted, we can use QEMU and PRoot to run
+commands within it without fully booting it.</p>
+<p>We'll use kpartx to set up a loopback device for each partition in the
+disk image:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kpartx -a -v <span class="m">2015</span>-02-16-raspbian-wheezy.img
+<span class="go">add map loop0p1 (254:0): 0 114688 linear /dev/loop0 8192</span>
+<span class="go">add map loop0p2 (254:1): 0 6277120 linear /dev/loop0 122880</span>
+</pre></div>
+</td></tr></table><p>The <tt class="docutils literal"><span class="pre">-a</span></tt> command line switch tells kpartx to&nbsp;<em>create&nbsp;*new loopback
+devices. The ``-v`` switch asks kpartx to be more&nbsp;*verbose</em> and print
+out what it's doing.</p>
+<p>We can do a dry-run and inspect the disk image using the <tt class="docutils literal"><span class="pre">-l</span></tt> switch:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kpartx -l <span class="m">2015</span>-02-16-raspbian-wheezy.img
+<span class="go">loop0p1 : 0 114688 /dev/loop0 8192</span>
+<span class="go">loop0p2 : 0 6277120 /dev/loop0 122880</span>
+<span class="go">loop deleted : /dev/loop0</span>
+</pre></div>
+</td></tr></table><p>We can see the partitions to be sure, using <tt class="docutils literal">fdisk <span class="pre">-l</span></tt></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo fdisk -l /dev/loop0
+
+<span class="go">Disk /dev/loop0: 3.1 GiB, 3276800000 bytes, 6400000 sectors</span>
+<span class="go">Units: sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disklabel type: dos</span>
+<span class="go">Disk identifier: 0x0009bf4f</span>
+
+<span class="go">Device Boot Start End Sectors Size Id Type</span>
+<span class="go">/dev/loop0p1 8192 122879 114688 56M c W95 FAT32 (LBA)</span>
+<span class="go">/dev/loop0p2 122880 6399999 6277120 3G 83 Linux</span>
+</pre></div>
+</td></tr></table><p>We can also see them using <tt class="docutils literal">lsblk</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+<span class="go">loop0 7:0 0 3.1G 0 loop</span>
+<span class="go">├─loop0p1 254:0 0 56M 0 part</span>
+<span class="go">└─loop0p2 254:1 0 3G 0 part</span>
+</pre></div>
+</td></tr></table><p>Generally speaking, the first, smaller partition will be the boot
+partition, and the others will hold data. It's typical with RaspberryPi
+distributions to use a simple 2-partition scheme like this.</p>
+<p>The new partitions will end up in <tt class="docutils literal">/dev/mapper</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ls /dev/mapper
+<span class="go">control loop0p1 loop0p2</span>
+</pre></div>
+</td></tr></table><p>Now we can mount our partitions. We'll first make a couple of
+descriptive directories for mount points:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir raspbian-boot raspbian-root
+<span class="gp">$</span> sudo mount /dev/mapper/loop0p1 raspbian-boot
+<span class="gp">$</span> sudo mount /dev/mapper/loop0p2 raspbian-root
+</pre></div>
+</td></tr></table><p>At this point we can go to the next section where we will run PRoot and
+start doing things "inside" the disk image.</p>
+</div>
+<div class="section" id="working-with-an-existing-disk">
+<h2 id="working-with-an-existing-disk"><a class="toc-backref" href="#id8">Working With An Existing Disk</a></h2>
+<p>We can use PRoot with an existing disk (SD card) as well. The first step
+is to insert the disk into your computer. Your operating system will
+likely automatically boot it. We also need to find out which device the
+disk is registered as.</p>
+<p><tt class="docutils literal">lsblk</tt> can answer both questions for us:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> lsblk
+<span class="go"> NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go"> sda 8:0 0 14.9G 0 disk</span>
+<span class="go"> └─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go"> sdb 8:16 1 14.9G 0 disk</span>
+<span class="go"> ├─sdb1 8:17 1 56M 0 part /run/media/jj/boot</span>
+<span class="go"> └─sdb2 8:18 1 3G 0 part</span>
+<span class="go">/run/media/jj/f24a4949-f4b2-4cad-a780-a138695079ec</span>
+<span class="go"> sdc 8:32 0 29.8G 0 disk</span>
+<span class="go"> └─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p>On my system, the SD card I inserted (a Raspbian disk I pulled out of a
+Raspberry Pi) came up as <tt class="docutils literal">/dev/sdb</tt>. It has two paritions, <tt class="docutils literal">sdb1</tt>
+and <tt class="docutils literal">sdb2</tt>. Both partitions were automatically mounted, to
+<tt class="docutils literal">/run/media/jj/boot</tt> and
+<tt class="docutils literal"><span class="pre">/run/media/jj/f24a4949-f4b2-4cad-a780-a138695079ec</span></tt>, respectively.</p>
+<p>Typically, the first, smaller partition will be the boot partition. To
+verify this, we'll again use <tt class="docutils literal">fdisk <span class="pre">-l</span></tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo fdisk -l /dev/sdb
+<span class="go">Disk /dev/sdb: 14.9 GiB, 16021192704 bytes, 31291392 sectors</span>
+<span class="go">Units: sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disklabel type: dos</span>
+<span class="go">Disk identifier: 0x0009bf4f</span>
+
+<span class="go">Device Boot Start End Sectors Size Id Type</span>
+<span class="go">/dev/sdb1 8192 122879 114688 56M c W95 FAT32 (LBA)</span>
+<span class="go">/dev/sdb2 122880 6399999 6277120 3G 83 Linux</span>
+</pre></div>
+</td></tr></table><p>Here we see that <tt class="docutils literal">/dev/sdb1</tt> is 56 megabytes in size, and is of type
+"W95 FAT32 (LBA)". This is typically indicative of a RasbperryPi boot
+partition, so <tt class="docutils literal">/dev/sdb1</tt> is our boot partition, and <tt class="docutils literal">/dev/sdb2</tt> is
+our root partition.</p>
+<p>We can use the existing mounts that the operating system set up
+automatically for us, if we want, but it's a bit easier to un-mount the
+partitions and mount them somewhere more descriptive, like
+<tt class="docutils literal"><span class="pre">raspbian-boot</span></tt> and <tt class="docutils literal"><span class="pre">raspbian-boot</span></tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo umount /dev/sdb1 /dev/sdb2
+<span class="gp">$</span> mkdir -p raspbian-boot raspbian-root
+<span class="gp">$</span> sudo mount /dev/sdb1 raspbian-boot
+<span class="gp">$</span> sudo mount /dev/sdb2 raspbian-root
+</pre></div>
+</td></tr></table><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">-p</span></tt> switch to <tt class="docutils literal">mkdir</tt> causes <tt class="docutils literal">mkdir</tt> to ignore
+already-exsiting directories. We've added it here in case you were
+following along in the previous section and already have these
+directories handy.</p>
+</div>
+<p>A call to <tt class="docutils literal">lsblk</tt> will confirm that we've mounted things as we
+expected:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdb 8:16 1 14.9G 0 disk</span>
+<span class="go">├─sdb1 8:17 1 56M 0 part /run/media/jj/STEALTH/raspbian-boot</span>
+<span class="go">└─sdb2 8:18 1 3G 0 part /run/media/jj/STEALTH/raspbian-root</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p>Now we can proceed to the next section, and run the same PRoot command
+to configure, compile and/or install things - but this time we'll be
+working directly on the SD card instead of inside of a disk image.</p>
+</div>
+<div class="section" id="basic-configuration-package-installation">
+<h2 id="basic-configurationpackage-installation"><a class="toc-backref" href="#id9">Basic Configuration/Package Installation</a></h2>
+<p>Now that we've got either a disk image or a physical disk mounted, we
+can run commands within those filesystems using PRoot.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The following command line switches worked for me, but took some experimentation to figure out. Please take some time to read <a class="reference external" href="http://proot.me/">the PRoot documentation</a> so you understand exactly what the switches mean.</p>
+</div>
+<p>We can run any command directly (like say, <tt class="docutils literal"><span class="pre">apt-get</span></tt>) but it's useful
+to be able to "log in" to the disk image (run a shell), and then perform
+our tasks:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> sudo proot -q qemu-arm -S raspbian-root -b raspbian-boot:/boot
+<span class="go">/bin/bash</span>
+</pre></div>
+</td></tr></table><p>This mode of PRoot forces the root user inside of the disk image. The
+<tt class="docutils literal"><span class="pre">-q</span></tt> switch wraps every command in the <tt class="docutils literal"><span class="pre">qemu-arm</span></tt> emulator program,
+making it possible to run code compiled for the RaspberryPi's ARM
+processor. The <tt class="docutils literal"><span class="pre">-S</span></tt> parameter sets the directory that will be the
+"root" - essentially that means that <tt class="docutils literal"><span class="pre">raspbian-root</span></tt> will map to
+<tt class="docutils literal">/</tt>. <tt class="docutils literal"><span class="pre">-S</span></tt> also fakes the root user (id 0), and adds some protections
+for us in the event we've mixed in files from our host system that we
+don't want the disk image code to modify. <tt class="docutils literal"><span class="pre">-b</span></tt> splices in additional
+directories - we add the <tt class="docutils literal">/boot</tt> partition, since that's where new
+kernel images and other boot-related stuff gets installed. This isn't
+entirely necessary, but its useful for system upgrades and making
+changes to boot settings. Finally, we tell PRoot which command to run,
+in this case, <tt class="docutils literal">/bin/bash</tt>, the BASH shell.</p>
+<p>Now that we're "in" the disk image, we can update and install new
+packages.</p>
+<p>Since root is not a "normal" user in the default Rasbian installation,
+the path needs to be adjusted:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/sbin:/sbin:/bin:/usr/local/sbin
+</pre></div>
+</td></tr></table><p>Now we can do the update/upgrade, and install any additional packages we
+might want (for example, the samba file sharing server):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get update
+<span class="gp">#</span> apt-get upgrade
+<span class="gp">#</span> apt-get install samba
+</pre></div>
+</td></tr></table><p>Check out the man page for apt-get for full details (type
+<tt class="docutils literal">man <span class="pre">apt-get</span></tt> at a shell prompt).</p>
+<p>You will likely see a lot of warnings and possibly errors when
+installing packages - these can usually be ignored, but make note of
+them - there may be some environmental tweaks that need to be made.</p>
+<p>We can do almost anything in the PRoot environment that we could do
+logged into a running Raspberry Pi.</p>
+<p>We can edit config.txt and change settings (for an explanation of the
+settings, see <a class="reference external" href="https://www.raspberrypi.org/documentation/configuration/config-txt.md">the documentation</a>):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> vi /boot/config.txt
+</pre></div>
+</td></tr></table><p>We can add a new user:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> adduser jj
+<span class="go">Adding user `jj' ...</span>
+<span class="go">Adding new group `jj' (1004) ...</span>
+<span class="go">Adding new user `jj' (1001) with group `jj' ...</span>
+<span class="go">Creating home directory `/home/jj' ...</span>
+<span class="go">Copying files from `/etc/skel' ...</span>
+<span class="go">Enter new UNIX password:</span>
+<span class="go">Retype new UNIX password:</span>
+<span class="go">passwd: password updated successfully</span>
+<span class="go">Changing the user information for jj</span>
+<span class="go">Enter the new value, or press ENTER for the default</span>
+<span class="go">Full Name []: Josh Johnson</span>
+<span class="go">Room Number []:</span>
+<span class="go">Work Phone []:</span>
+<span class="go">Home Phone []:</span>
+<span class="go">Other []:</span>
+</pre></div>
+</td></tr></table><p>We can grant a user sudo privileges (the default sudo configuration
+allows anyone in the <tt class="docutils literal">sudo</tt> group to run commands as root via sudo):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> usermod -a -G sudo jj
+<span class="gp">#</span> groups jj
+<span class="go">jj : jj sudo</span>
+</pre></div>
+</td></tr></table><p>You can reset someone's password, or change the password of the default
+<tt class="docutils literal">pi</tt> user:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> passwd pi
+<span class="go">Enter new UNIX password:</span>
+<span class="go">Retype new UNIX password:</span>
+<span class="go">passwd: password updated successfully</span>
+</pre></div>
+</td></tr></table><p>The possibilities here are endless, with a few exceptions:</p>
+<ul class="simple">
+<li>Running code that relies on the GPIO pins or drivers loaded into the
+kernel will not work.</li>
+<li>Configuring devices (like, say, a wifi adapter) may work, but device
+information will likely be wrong.</li>
+<li>Testing startup/shutdown scripts - since we're not booting the disk
+image, these scripts aren't run.</li>
+</ul>
+</div>
+<div class="section" id="compiling-for-the-rpi">
+<h2 id="compiling-for-the-rpi"><a class="toc-backref" href="#id10">Compiling For The RPi</a></h2>
+<p>Raspbian comes with most of the tools we'll need (in particular, the
+<tt class="docutils literal"><span class="pre">build-essential</span></tt> package). Lets build and install the <a class="reference external" href="http://nginx.org/">nginx web server</a> - a relatively easy to build package.</p>
+<p>If you've never compiled software on Linux before, most (but not
+all!)&nbsp;source code&nbsp;packages are provided as tarballs, and include some
+scripts that help you build the software in what's known as the
+"configure, make, make install" (or CMMI) procedure.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a great explanation (with examples you can follow to
+build your own CMMI package), <a class="reference external" href="https://twitter.com/georgebrock">George Brocklehurst</a> wrote an excellent
+article explaining the details behind CMMI called "<a class="reference external" href="https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install">The magic behind configure, make, make install</a>".</p>
+</div>
+<p>First we'll need to obtain the nginx tarball:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> wget http://nginx.org/download/nginx-1.7.12.tar.gz
+<span class="gp">#</span> tar -zxvf nginx-1.7.12.tar.gz
+</pre></div>
+</td></tr></table><p>Next we'll look for a README or INSTALL file, to check for any extra
+build dependencies:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nb">cd</span> nginx-1.7.12
+<span class="gp">#</span> ls -l
+<span class="go">total 660</span>
+<span class="go">-rw-r--r-- 1 jj indiecity 249016 Apr 7 15:35 CHANGES</span>
+<span class="go">-rw-r--r-- 1 jj indiecity 378885 Apr 7 15:35 CHANGES.ru</span>
+<span class="go">-rw-r--r-- 1 jj indiecity 1397 Apr 7 15:35 LICENSE</span>
+<span class="go">-rw-r--r-- 1 root root 46 Apr 18 10:21 Makefile</span>
+<span class="go">-rw-r--r-- 1 jj indiecity 49 Apr 7 15:35 README</span>
+<span class="go">drwxr-xr-x 6 jj indiecity 4096 Apr 18 10:21 auto</span>
+<span class="go">drwxr-xr-x 2 jj indiecity 4096 Apr 18 10:21 conf</span>
+<span class="go">-rwxr-xr-x 1 jj indiecity 2478 Apr 7 15:35 configure</span>
+<span class="go">drwxr-xr-x 4 jj indiecity 4096 Apr 18 10:21 contrib</span>
+<span class="go">drwxr-xr-x 2 jj indiecity 4096 Apr 18 10:21 html</span>
+<span class="go">drwxr-xr-x 2 jj indiecity 4096 Apr 18 10:21 man</span>
+<span class="go">drwxr-xr-x 2 root root 4096 Apr 18 10:23 objs</span>
+<span class="go">drwxr-xr-x 8 jj indiecity 4096 Apr 18 10:21 src</span>
+<span class="gp">#</span> view README
+</pre></div>
+</td></tr></table><p>We'll note that, helpfully (<em>cue eye roll</em>) that nginx has put into the README:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Documentation is available at http://nginx.org</span>
+</pre></div>
+</td></tr></table><p>A more <a class="reference external" href="http://nginx.org/en/docs/configure.html">direct link</a> gives
+us a little more useful information. Scanning this, there aren't any
+obvious dependencies or features we want to add/enable, so we can
+proceed.</p>
+<p>We can also find out which options are available by running
+<tt class="docutils literal">./configure <span class="pre">--help</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are several configuration options that control where
+files are put when the compiled code is installed - they may be of use,
+in particular the standard <tt class="docutils literal"><span class="pre">--PREFIX</span></tt>. This can help segregate
+multiple versions of the same application on a system, for example if
+you need to install a newer/older version and already have one installed
+via the apt package. It is also useful to build self-contained directory
+structures that you can easily copy from one system to another.</p>
+</div>
+<p>Run <tt class="docutils literal">./configure</tt>, note any warnings or errors. There may be some
+modules or other things <tt class="docutils literal">not found</tt> - that's typically OK, but can
+help explain why an eventual error happened toward the end of the
+configure script or during compilation:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> #</span> <span class="nb">cd</span> nginx-1.7.12
+<span class="gp"> #</span> ./configure
+<span class="go"> ...</span>
+<span class="go"> checking for PCRE library ... not found</span>
+<span class="go"> checking for PCRE library in /usr/local/ ... not found</span>
+<span class="go"> checking for PCRE library in /usr/include/pcre/ ... not found</span>
+<span class="go"> checking for PCRE library in /usr/pkg/ ... not found</span>
+<span class="go"> checking for PCRE library in /opt/local/ ... not found</span>
+<span class="go"> ...</span>
+
+<span class="go"> ./configure: error: the HTTP rewrite module requires the PCRE library.</span>
+<span class="go"> You can either disable the module by using</span>
+<span class="go">--without-http\_rewrite\_module</span>
+<span class="go"> option, or install the PCRE library into the system, or build the</span>
+<span class="go">PCRE library</span>
+<span class="go"> statically from the source with nginx by using</span>
+<span class="go">--with-pcre=&amp;lt;path&amp;gt; option.</span>
+</pre></div>
+</td></tr></table><p>Whoa, we ran into a problem! For our use case (just showing off how to
+do a CMMI build in a PRoot environment) we probably don't need the
+rewrite module, so we can re-run <tt class="docutils literal">./configure</tt> with the
+<tt class="docutils literal"><span class="pre">--without-http_rewrite_module</span></tt> switch.</p>
+<p>However, it's useful to understand how to track down dependencies like
+this, and rewriting is a pretty killer feature of any http server, so
+lets install the dependency.</p>
+<p>The configure script mentions the "PCRE library". PCRE stands for "Perl
+Compatible Regular Expressions". <a class="reference external" href="http://www.perl.org/">Perl</a> is a
+classical systems language that has hard-core text processing
+capabilities. It's particularly known for its <a class="reference external" href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> support
+and syntax. The Perl regular expression syntax is so useful in fact,
+that <a class="reference external" href="http://www.pcre.org/">some folks built a library allowing other programmers to use it without having to use Perl itself</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This information can be found by using your favorite search engine!</p>
+</div>
+<p>There are two ways libraries like PCRE are installed. The first, and
+easiest, is that a system package will be available with the library
+pre-compiled and ready to go. The second will require the same steps
+we're following to install nginx - download a tarball, extract, and
+configure, make, make install.</p>
+<p>To find a package, you can use <tt class="docutils literal"><span class="pre">apt-cache</span> search</tt> or
+<tt class="docutils literal">aptitude search</tt>.</p>
+<p>I prefer <tt class="docutils literal">aptitude</tt>, since it will tell us what packages are already
+installed:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> #</span> aptitude search pcre
+<span class="go"> v apertium-pcre2 -</span>
+<span class="go"> p cl-ppcre - Portable Regular Express Library for Common Lisp</span>
+<span class="go"> p clisp-module-pcre - clisp module that adds libpcre support</span>
+<span class="go"> p gambas3-gb-pcre - Gambas regexp component</span>
+<span class="go"> p haskell-pcre-light-doc - transitional dummy package</span>
+<span class="go"> p libghc-pcre-light-dev - Haskell library for Perl 5-compatible</span>
+<span class="go">regular expressions</span>
+<span class="go"> v libghc-pcre-light-dev-0.4-4f534 -</span>
+<span class="go"> p libghc-pcre-light-doc - library documentation for pcre-light</span>
+<span class="go"> p libghc-pcre-light-prof - pcre-light library with profiling enabled</span>
+<span class="go"> v libghc-pcre-light-prof-0.4-4f534 -</span>
+<span class="go"> p libghc-regex-pcre-dev - Perl-compatible regular expressions</span>
+<span class="go"> v libghc-regex-pcre-dev-0.94.2-49128 -</span>
+<span class="go"> p libghc-regex-pcre-doc - Perl-compatible regular expressions;</span>
+<span class="go">documentation</span>
+<span class="go"> p libghc-regex-pcre-prof - Perl-compatible regular expressions;</span>
+<span class="go">profiling libraries</span>
+<span class="go"> v libghc-regex-pcre-prof-0.94.2-49128 -</span>
+<span class="go"> p libghc6-pcre-light-dev - transitional dummy package</span>
+<span class="go"> p libghc6-pcre-light-doc - transitional dummy package</span>
+<span class="go"> p libghc6-pcre-light-prof - transitional dummy package</span>
+<span class="go"> p liblua5.1-rex-pcre-dev - Transitional package for lua-rex-pcre-dev</span>
+<span class="go"> p liblua5.1-rex-pcre0 - Transitional package for lua-rex-pcre</span>
+<span class="go"> p libpcre++-dev - C++ wrapper class for pcre (development)</span>
+<span class="go"> p libpcre++0 - C++ wrapper class for pcre (runtime)</span>
+<span class="go"> p libpcre-ocaml - OCaml bindings for PCRE (runtime)</span>
+<span class="go"> p libpcre-ocaml-dev - OCaml bindings for PCRE (Perl Compatible</span>
+<span class="go">Regular Expression)</span>
+<span class="go"> v libpcre-ocaml-dev-werc3 -</span>
+<span class="go"> v libpcre-ocaml-werc3 -</span>
+<span class="go"> i libpcre3 - Perl 5 Compatible Regular Expression Library - runtime</span>
+<span class="go">files</span>
+<span class="go"> p libpcre3-dbg - Perl 5 Compatible Regular Expression Library - debug</span>
+<span class="go">symbols</span>
+<span class="go"> p libpcre3-dev - Perl 5 Compatible Regular Expression Library -</span>
+<span class="go">development f</span>
+<span class="go"> p libpcrecpp0 - Perl 5 Compatible Regular Expression Library - C++</span>
+<span class="go">runtime f</span>
+<span class="go"> p lua-rex-pcre - Perl regular expressions library for the Lua</span>
+<span class="go">language</span>
+<span class="go"> p lua-rex-pcre-dev - PCRE development files for the Lua language</span>
+<span class="go"> v lua5.1-rex-pcre -</span>
+<span class="go"> v lua5.1-rex-pcre-dev -</span>
+<span class="go"> v lua5.2-rex-pcre -</span>
+<span class="go"> v lua5.2-rex-pcre-dev -</span>
+<span class="go"> p pcregrep - grep utility that uses perl 5 compatible regexes.</span>
+<span class="go"> p pike7.8-pcre - PCRE module for Pike</span>
+<span class="go"> p postfix-pcre - PCRE map support for Postfix</span>
+</pre></div>
+</td></tr></table><p>See <tt class="docutils literal">man aptitude</tt> for full details, but the gist is that <tt class="docutils literal">p</tt> means
+the package is available but not installed, <tt class="docutils literal">v</tt> is a virtual package
+that points to other packages, and <tt class="docutils literal">i</tt> means the package is installed.</p>
+<p>What we want is a package with header files and modules we can compile
+against - these are usually named <tt class="docutils literal"><span class="pre">lib[SOMETHING]-dev</span></tt>.</p>
+<p>Scanning the list, we see a package named <tt class="docutils literal"><span class="pre">libpcre3-dev</span></tt> - this is
+probably what we want, we can find out by installing it:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install libpcre3-dev
+</pre></div>
+</td></tr></table><p>Now we can re-run <tt class="docutils literal">./configure</tt> and see if it works:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> ./configure
+<span class="go">...</span>
+<span class="go">checking for PCRE library ... found</span>
+<span class="go">...</span>
+<span class="go">Configuration summary</span>
+<span class="go">+ using system PCRE library</span>
+<span class="go">+ OpenSSL library is not used</span>
+<span class="go">+ using builtin md5 code</span>
+<span class="go">+ sha1 library is not found</span>
+<span class="go">+ using system zlib library</span>
+
+<span class="go">nginx path prefix: "/usr/local/nginx"</span>
+<span class="go">nginx binary file: "/usr/local/nginx/sbin/nginx"</span>
+<span class="go">nginx configuration prefix: "/usr/local/nginx/conf"</span>
+<span class="go">nginx configuration file: "/usr/local/nginx/conf/nginx.conf"</span>
+<span class="go">nginx pid file: "/usr/local/nginx/logs/nginx.pid"</span>
+<span class="go">nginx error log file: "/usr/local/nginx/logs/error.log"</span>
+<span class="go">nginx http access log file: "/usr/local/nginx/logs/access.log"</span>
+<span class="go">nginx http client request body temporary files: "client\_body\_temp"</span>
+<span class="go">nginx http proxy temporary files: "proxy\_temp"</span>
+<span class="go">nginx http fastcgi temporary files: "fastcgi\_temp"</span>
+<span class="go">nginx http uwsgi temporary files: "uwsgi\_temp"</span>
+<span class="go">nginx http scgi temporary files: "scgi\_temp"</span>
+</pre></div>
+</td></tr></table><p>The library was found, the error is gone, and so now we can proceed with
+compilation.</p>
+<p>To build nginx, we simply run <tt class="docutils literal">make</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> make
+</pre></div>
+</td></tr></table><p>If all goes well, then you can isntall it:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> make install
+</pre></div>
+</td></tr></table><p>This same basic process can be used to build custom&nbsp;applications written
+in C/C++, to build applications that aren't yet in the package
+repository, or build applications with specific features or
+optimizations enabled that the standard packages might not have.</p>
+<div class="section" id="using-apt-to-install-build-dependencies">
+<h3><a class="toc-backref" href="#id11">Using Apt To Install Build Dependencies</a></h3>
+<p>One more useful thing that apt-get can do for us: it can install
+the&nbsp;<em>build</em> dependencies for any given package in the repository. This
+allows us to get most, if not all, potentially missing dependencies to
+build a known application.</p>
+<p>We could have started off with our nginx exploration by first installing
+it's build dependencies:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get build-dep nginx
+</pre></div>
+</td></tr></table><p>This won't solve every dependency issue, but it's a useful tool in
+getting all of your ducks in a row for building, especially for more
+complex things like desktop applications.</p>
+<p>Be careful with build-dep - it can bring in a&nbsp;<em>lot</em> of things, some
+you may not really need. In our case it's not really a problem, but be
+aware of space limitations.</p>
+</div>
+</div>
+<div class="section" id="umount-and-clean-up">
+<h2 id="umount-and-clean-up"><a class="toc-backref" href="#id12">Umount and Clean Up</a></h2>
+<p>Once we've gotten our disk image configured as we like, we need to
+un-mount it.</p>
+<p>First, we need to exit the bash shell we started with PRoot, then we'll
+call <tt class="docutils literal">sync</tt> to ensure all data is flushed to any disks:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nb">exit</span>
+<span class="gp">$</span> sync
+</pre></div>
+</td></tr></table><p>Now we can un-mount the partitions (the command is the same whether
+we're using a disk image or an SD card):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo umount raspbian-root rasbian-boot
+</pre></div>
+</td></tr></table><p>We can double-check that the disk is no longer mounted by calling
+<tt class="docutils literal">mount</tt> without any additional parameters, or using <tt class="docutils literal">lsblk</tt></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mount
+<span class="go">...</span>
+</pre></div>
+</td></tr></table><p>With <tt class="docutils literal">lsblk</tt>, we'll still see the disks (or loopback devices) present,
+but not mounted:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+<span class="go">loop0 7:0 0 3.1G 0 loop</span>
+<span class="go">├─loop0p1 254:0 0 56M 0 part</span>
+<span class="go">└─loop0p2 254:1 0 3G 0 part</span>
+</pre></div>
+</td></tr></table><p>If we're using a disk image, we'll want to destroy the loopback devices.
+This is accomplished with <tt class="docutils literal">kpartx <span class="pre">-d</span></tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kpartx -d <span class="m">2015</span>-02-16-raspbian-wheezy.img
+</pre></div>
+</td></tr></table><p>We can verify that it's gone using <tt class="docutils literal">lsblk</tt> again:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p>At this point we can write the disk image to an SD card, or eject the SD
+card and insert it into a Raspberry Pi.</p>
+</div>
+<div class="section" id="writing-a-disk-image-to-an-sd-card">
+<h2 id="writing-a-disk-image-to-an-sd-card"><a class="toc-backref" href="#id13">Writing a Disk Image to an SD Card</a></h2>
+<p>We'll use the <tt class="docutils literal">dd</tt> command, which writes raw blocks of data from one
+block device to another, to copy the disk image we made into an SD card.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The SD card you use will be COMPLETELY erased. Proceed with caution.</p>
+</div>
+<p>First, insert the SD card into your computer (or card reader, etc).
+Depending on your system, it may be automatically mounted. We can find
+out the device name and if its mounted using <tt class="docutils literal">lsblk</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdb 8:16 1 14.9G 0 disk</span>
+<span class="go">├─sdb1 8:17 1 114.3M 0 part</span>
+<span class="go">├─sdb2 8:18 1 1K 0 part</span>
+<span class="go">└─sdb3 8:19 1 32M 0 part /run/media/jj/SETTINGS</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p>We can see the new disk came up as <tt class="docutils literal">sdb</tt>. It has three partitions,
+<tt class="docutils literal">sdb1</tt>, <tt class="docutils literal">sdb2</tt>, and <tt class="docutils literal">sdb3</tt>. Looking at the <tt class="docutils literal">MOUNTPOINT</tt> column,
+we can tell that my operating system auto-mounted <tt class="docutils literal">sdb3</tt> into the
+<tt class="docutils literal">/run/media/jj/SETTINGS</tt> directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The partition layout may vary depending on what was on the SD
+card before you inserted it. My SD card had a fresh copy of
+<a class="reference external" href="https://www.raspberrypi.org/introducing-noobs/">NOOBS</a> that hadn't
+yet installed an OS.</p>
+</div>
+<p>We can double-check that <tt class="docutils literal">sdb</tt> is the right disk with <tt class="docutils literal">fdisk</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo fdisk -l /dev/sdb
+<span class="go">Disk /dev/sdb: 14.9 GiB, 16021192704 bytes, 31291392 sectors</span>
+<span class="go">Units: sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disklabel type: dos</span>
+<span class="go">Disk identifier: 0x000cb53d</span>
+
+<span class="go">Device Boot Start End Sectors Size Id Type</span>
+<span class="go">/dev/sdb1 8192 242187 233996 114.3M e W95 FAT16 (LBA)</span>
+<span class="go">/dev/sdb2 245760 31225855 30980096 14.8G 85 Linux extended</span>
+<span class="go">/dev/sdb3 31225856 31291391 65536 32M 83 Linux</span>
+</pre></div>
+</td></tr></table><p><tt class="docutils literal">fdisk</tt> tells us that this is a 16GB drive. The exact amount cited by
+some drive manufacturers is not in "real" gigabytes, an exponent of
+2[<a class="reference external" href="#gb">*</a>] but in billions of bytes - note the byte count:
+16,021,192,704.</p>
+<p>We can see the three partitions, and what format they are in. The small
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table">FAT</a> filesystem
+is a good indication that this is a bootable Raspberry Pi disk.</p>
+<p>With a fresh SD card, the call to <tt class="docutils literal">fdisk</tt> may look more like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Disk /dev/sdb: 14.9 GiB, 16021192704 bytes, 31291392 sectors</span>
+<span class="go">Units: sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disklabel type: dos</span>
+<span class="go">Disk identifier: 0x00000000</span>
+
+<span class="go">Device Boot Start End Sectors Size Id Type</span>
+<span class="go">/dev/sdb1 8192 31291391 31283200 14.9G c W95 FAT32 (LBA)</span>
+</pre></div>
+</td></tr></table><p>Most SD cards are pre-formatted with a single partition containing a
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">FAT32</a>
+filesystem.</p>
+<p>It's important to be able to differentiate between your system drives
+and the target for copying over your disk image - if you point <tt class="docutils literal">dd</tt> at
+the wrong place, you can destroy important things, like your operating
+system!</p>
+<p>Now that we're sure that <tt class="docutils literal">/dev/sdb</tt> is our SD card, we can proceed.</p>
+<p>Since <tt class="docutils literal">lsblk</tt> indicated that at least one of the partitions was
+mounted (<tt class="docutils literal">sdb3</tt>), we will fist need to un-mount it:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo umount /dev/sdb3
+</pre></div>
+</td></tr></table><p>Now we can verify it's indeed not mounted:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdb 8:16 1 14.9G 0 disk</span>
+<span class="go">├─sdb1 8:17 1 114.3M 0 part</span>
+<span class="go">├─sdb2 8:18 1 1K 0 part</span>
+<span class="go">└─sdb3 8:19 1 32M 0 part</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p>And copy the disk image:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo dd <span class="k">if</span><span class="o">=</span><span class="m">2015</span>-02-16-raspbian-wheezy.img <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span>4M
+<span class="go">781+1 records in</span>
+<span class="go">781+1 records out</span>
+<span class="go">3276800000 bytes (3.3 GB) copied, 318.934 s, 10.3 MB/s</span>
+</pre></div>
+</td></tr></table><p>This will take some time, and <tt class="docutils literal">dd</tt> gives no output until it's
+finished. Be patient.</p>
+<p><tt class="docutils literal">dd</tt> has a fairly simple interface. The <tt class="docutils literal">if</tt> option indicates the
+<em>in file</em>, or the disk (or disk image in our case) that is being copied.
+The <tt class="docutils literal">of</tt> option sets the <em>out file</em>, or the disk to write to. <tt class="docutils literal">bs</tt>
+sets the <em>block size</em>, which indicates how big of a piece of data to
+write at a time.</p>
+<p>The <tt class="docutils literal">bs</tt> value can be tweaked to get faster or more reliable
+performance in various situations - we're using <tt class="docutils literal">4M</tt> (four megabytes)
+as <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">recommended by raspberrypi.org</a>.
+The larger the value, the faster <tt class="docutils literal">dd</tt> will run, but there are physical
+limits to what your system can handle, so it's best to stick with the
+recommended value.</p>
+<p>So <tt class="docutils literal">dd</tt> gives us no output until it's completed. This is kind of an
+annoying thing about <tt class="docutils literal">dd</tt> <a class="reference external" href="http://askubuntu.com/questions/215505/how-do-you-monitor-the-progress-of-dd">but it can be remedied</a>.
+The easiest way is to install a tool called&nbsp;<tt class="docutils literal">pv</tt>, and split the
+command - <tt class="docutils literal">pv</tt> acts as an intermediary between two commands and
+displays a progress bar as it moves along. <tt class="docutils literal">dd</tt> can read and write
+data to a pipe
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Pipeline_%28Unix%29">details</a>). So we
+can use two <tt class="docutils literal">dd</tt> commands, put <tt class="docutils literal">pv</tt> in the middle, and get a nice
+progress bar.</p>
+<p>Here's the same copy as before, but using <tt class="docutils literal">pv</tt>:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Here we're using <tt class="docutils literal">sh <span class="pre">-c</span></tt> to wrap the command pipeline in
+quotes. This allows us to provide the entire pipeline as a single unit.
+If we didn't, the shell would interpret the first pipe in the pipeline
+as part of the call to sudo, and not what we want to run as root.</p>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> ls -l <span class="m">2015</span>-02-16-raspbian-wheezy.img
+<span class="go"> -rw-r--r-- 1 jj jj 3276800000 Apr 18 07:58</span>
+<span class="go">2015-02-16-raspbian-wheezy.img</span>
+<span class="gp"> $</span> sudo sh -c <span class="s2">"dd if=2015-02-16-raspbian-wheezy.img bs=4M \   pv</span>
+<span class="go">--size=3276800000 \   dd of=/dev/sdb"</span>
+<span class="go"> 613MiB 0:02:31 [4.22MiB/s] [===========&gt; ] 19% ETA 0:10:04</span>
+<span class="gp"> #</span> <span class="nb">exit</span>
+</pre></div>
+</td></tr></table><p>We pass <tt class="docutils literal">pv</tt> a <tt class="docutils literal"><span class="pre">--size</span></tt> argument to give it an idea of how big the
+file is, so it can provide accurate progress. We found out the size of
+our disk image using <tt class="docutils literal">ls <span class="pre">-l.</span></tt>, which shows the size of the file
+in&nbsp;<em>bytes</em>.</p>
+<p>If we run <tt class="docutils literal">lsblk</tt> again, we'll see the different partition arrangement
+now on <tt class="docutils literal">sdb</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> lsblk
+<span class="go">NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda 8:0 0 14.9G 0 disk</span>
+<span class="go">└─sda1 8:1 0 14.9G 0 part /</span>
+<span class="go">sdb 8:16 1 14.9G 0 disk</span>
+<span class="go">├─sdb1 8:17 1 56M 0 part</span>
+<span class="go">└─sdb2 8:18 1 3G 0 part</span>
+<span class="go">sdc 8:32 0 29.8G 0 disk</span>
+<span class="go">└─sdc1 8:33 0 29.8G 0 part /run/media/jj/STEALTH</span>
+</pre></div>
+</td></tr></table><p><tt class="docutils literal">fdisk <span class="pre">-l</span></tt> gives a bit more detail:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo fdisk -l /dev/sdb
+<span class="go">Disk /dev/sdb: 14.9 GiB, 16021192704 bytes, 31291392 sectors</span>
+<span class="go">Units: sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disklabel type: dos</span>
+<span class="go">Disk identifier: 0x0009bf4f</span>
+
+<span class="go">Device Boot Start End Sectors Size Id Type</span>
+<span class="go">/dev/sdb1 8192 122879 114688 56M c W95 FAT32 (LBA)</span>
+<span class="go">/dev/sdb2 122880 6399999 6277120 3G 83 Linux</span>
+</pre></div>
+</td></tr></table><p>Now we can <tt class="docutils literal">sync</tt> the disks:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sync
+</pre></div>
+</td></tr></table><p>At this point we have an SD card we can put into a Raspberry Pi and
+boot.</p>
+<p>[*] <em>(1GB = 1 byte * 1024 (kilobyte) * 1024 (megabyte) * 1024, or
+1,073,741,824 bytes)</em></p>
+</div>
+<div class="section" id="extra-credit-making-our-own-disk-image">
+<h2 id="extra-credit-making-our-own-disk-image"><a class="toc-backref" href="#id14">Extra Credit: Making our own disk image</a></h2>
+<p>Some distributions, such as Arch, don't distribute disk images, but
+instead distribute tarballs of files. They let you set up the disk
+however you want, then copy the files over to install the operating
+system.</p>
+<p>We can create our own disk images using <tt class="docutils literal">fallocate</tt>, and then use
+<tt class="docutils literal">fdisk</tt> or <tt class="docutils literal">`parted</tt> &lt;<a class="reference external" href="http://www.gnu.org/software/parted/">http://www.gnu.org/software/parted/</a>&gt;`__ (or if
+you prefer a GUI, <a class="reference external" href="http://gparted.org/">gparted</a>) to partition the
+disk.</p>
+<p>We'll create a disk image for the latest <a class="reference external" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2">Arch Linux ARM distribution for the Raspberry Pi 2</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must create the disk image file on a compatible
+filesystem, such as ext4, for this to work. This is the default system
+disk filesystem for most modern Linux distributions, including Arch and
+Ubuntu, so for most people this isn't a problem. The implication is that
+this will not work on, say, an external hard drive formatted in an
+incompatible format, such as FAT32.</p>
+</div>
+<p>First we'll create an 8 gigabyte empty disk image:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> fallocate -l 8G arch-latest-rpi2.img
+</pre></div>
+</td></tr></table><p>We'll use <tt class="docutils literal">fdisk</tt> to partition the disk. We need two partitions. The
+first will be 100 megabytes, formatted as
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">FAT32</a>.
+We'll need to set the partition's <a class="reference external" href="http://en.wikipedia.org/wiki/Partition_type">*system id*</a> to correspond to
+FAT32 with <a class="reference external" href="http://en.wikipedia.org/wiki/Logical_block_addressing">LBA</a> so that the Raspberry Pi's BIOS knows how to read it.</p>
+<p>..note:</p>
+<pre class="literal-block">
+I've had trouble finding documentation as to exactly why FAT + LBA is required, the assumption is it has something to do with how the ARM processor loads the operating system in the earliest boot stages; if anyone knows more detail or can point me to the documentation about this, it would be greatly appreciated!
+</pre>
+<p>The offset for the partition will be 2048 blocks - this is the default
+that <tt class="docutils literal">fdisk</tt> will suggest (and what the Arch installation instructions
+tell us to do).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This seems to work well- however, there is some confusion
+about partition alignment. The Raspbian disk images use a 8192 block
+offset, and there is a lot of information available explaining how a bad
+alignment can cause quicker SD card degradation and hurt write
+performance. I'm still trying to figure out the best way to address
+this, this is another area where community help would be appreciated :)
+Here are a few links that dig into the issue:
+<a class="reference external" href="http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device">http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device</a>,
+<a class="reference external" href="http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/">http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/</a>,
+<a class="reference external" href="http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/">http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/</a>.</p>
+</div>
+<p>The second partition will be ext4, and use the rest of the the available
+disk space.</p>
+<p>We'll start fdisk and get the initial prompt. No changes will be saved
+until we instruct <tt class="docutils literal">fdisk</tt> to do so:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> fdisk arch-latest-rpi2.img
+<span class="go"> Device contains neither a valid DOS partition table, nor Sun, SGI or</span>
+<span class="go">OSF disklabel</span>
+<span class="go"> Building a new DOS disklabel with disk identifier 0x152a22d4.</span>
+<span class="go"> Changes will remain in memory only, until you decide to write them.</span>
+<span class="go"> After that, of course, the previous content won't be recoverable.</span>
+</pre></div>
+</td></tr></table><p>Warning: invalid flag 0x0000 of partition table 4 will be corrected by
+w(rite)</p>
+<blockquote>
+Command (m for help):</blockquote>
+<p>Most of the information here is just telling us that this is a block
+device with no partitions. If you need help, as indicated, you can type
+<tt class="docutils literal">m</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Command (m for help): m</span>
+<span class="go">Command action</span>
+<span class="go">a toggle a bootable flag</span>
+<span class="go">b edit bsd disklabel</span>
+<span class="go">c toggle the dos compatibility flag</span>
+<span class="go">d delete a partition</span>
+<span class="go">l list known partition types</span>
+<span class="go">m print this menu</span>
+<span class="go">n add a new partition</span>
+<span class="go">o create a new empty DOS partition table</span>
+<span class="go">p print the partition table</span>
+<span class="go">q quit without saving changes</span>
+<span class="go">s create a new empty Sun disklabel</span>
+<span class="go">t change a partition's system id</span>
+<span class="go">u change display/entry units</span>
+<span class="go">v verify the partition table</span>
+<span class="go">w write table to disk and exit</span>
+<span class="go">x extra functionality (experts only)</span>
+</pre></div>
+</td></tr></table><p>First, we need to create a new disk <em>partition table</em>. This is done by
+entering <tt class="docutils literal">o</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> Command (m for help): o</span>
+<span class="go"> Building a new DOS disklabel with disk identifier 0xa8e8538a.</span>
+<span class="go"> Changes will remain in memory only, until you decide to write them.</span>
+<span class="go"> After that, of course, the previous content won't be recoverable.</span>
+
+<span class="go"> Warning: invalid flag 0x0000 of partition table 4 will be corrected by</span>
+<span class="go">w(rite)</span>
+</pre></div>
+</td></tr></table><p>Next, we'll create our first <em>primary</em> partition, the boot partition, at
+2048 blocks offset, 100MB in size.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> Command (m for help): n</span>
+<span class="go"> Partition type:</span>
+<span class="go"> p primary (0 primary, 0 extended, 4 free)</span>
+<span class="go"> e extended</span>
+<span class="go"> Select (default p): p</span>
+<span class="go"> Partition number (1-4, default 1): 1</span>
+<span class="go"> First sector (2048-16777215, default 2048): 2048</span>
+<span class="go"> Last sector, +sectors or +size{K,M,G} (2048-16777215, default</span>
+<span class="go">16777215): +100M</span>
+</pre></div>
+</td></tr></table><p>By using the relative number <tt class="docutils literal">+100M</tt>, we save ourselves some trouble
+of having to do math to figure out how many sectors we need.</p>
+<p>We can see what we have so far, by using the <tt class="docutils literal">p</tt> command:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Command (m for help): p</span>
+
+<span class="go">Disk arch-latest-rpi2.img: 8589 MB, 8589934592 bytes</span>
+<span class="go">255 heads, 63 sectors/track, 1044 cylinders, total 16777216 sectors</span>
+<span class="go">Units = sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disk identifier: 0xa8e8538a</span>
+
+<span class="go">Device Boot Start End Blocks Id System</span>
+<span class="go">arch-latest-rpi2.img1 2048 206847 102400 83 Linux</span>
+</pre></div>
+</td></tr></table><p>Next, we need to set the partition type (system id) by entering <tt class="docutils literal">t</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Command (m for help): t</span>
+<span class="go">Selected partition 1</span>
+<span class="go">Hex code (type L to list codes): L</span>
+
+<span class="go">0 Empty 24 NEC DOS 81 Minix / old Lin bf Solaris</span>
+<span class="go">1 FAT12 27 Hidden NTFS Win 82 Linux swap / So c1 DRDOS/sec (FAT-</span>
+<span class="go">2 XENIX root 39 Plan 9 83 Linux c4 DRDOS/sec (FAT-</span>
+<span class="go">3 XENIX usr 3c PartitionMagic 84 OS/2 hidden C: c6 DRDOS/sec (FAT-</span>
+<span class="go">4 FAT16 &lt;32M 40 Venix 80286 85 Linux extended c7 Syrinx</span>
+<span class="go">5 Extended 41 PPC PReP Boot 86 NTFS volume set da Non-FS data</span>
+<span class="go">6 FAT16 42 SFS 87 NTFS volume set db CP/M / CTOS / .</span>
+<span class="go">7 HPFS/NTFS/exFAT 4d QNX4.x 88 Linux plaintext de Dell Utility</span>
+<span class="go">8 AIX 4e QNX4.x 2nd part 8e Linux LVM df BootIt</span>
+<span class="go">9 AIX bootable 4f QNX4.x 3rd part 93 Amoeba e1 DOS access</span>
+<span class="go">a OS/2 Boot Manag 50 OnTrack DM 94 Amoeba BBT e3 DOS R/O</span>
+<span class="go">b W95 FAT32 51 OnTrack DM6 Aux 9f BSD/OS e4 SpeedStor</span>
+<span class="go">c W95 FAT32 (LBA) 52 CP/M a0 IBM Thinkpad hi eb BeOS fs</span>
+<span class="go">e W95 FAT16 (LBA) 53 OnTrack DM6 Aux a5 FreeBSD ee GPT</span>
+<span class="go">f W95 Ext'd (LBA) 54 OnTrackDM6 a6 OpenBSD ef EFI (FAT-12/16/</span>
+<span class="go">10 OPUS 55 EZ-Drive a7 NeXTSTEP f0 Linux/PA-RISC b</span>
+<span class="go">11 Hidden FAT12 56 Golden Bow a8 Darwin UFS f1 SpeedStor</span>
+<span class="go">12 Compaq diagnost 5c Priam Edisk a9 NetBSD f4 SpeedStor</span>
+<span class="go">14 Hidden FAT16 &lt;3 61 SpeedStor ab Darwin boot f2 DOS secondary</span>
+<span class="go">16 Hidden FAT16 63 GNU HURD or Sys af HFS / HFS+ fb VMware VMFS</span>
+<span class="go">17 Hidden HPFS/NTF 64 Novell Netware b7 BSDI fs fc VMware VMKCORE</span>
+<span class="go">18 AST SmartSleep 65 Novell Netware b8 BSDI swap fd Linux raid auto</span>
+<span class="go">1b Hidden W95 FAT3 70 DiskSecure Mult bb Boot Wizard hid fe LANstep</span>
+<span class="go">1c Hidden W95 FAT3 75 PC/IX be Solaris boot ff BBT</span>
+<span class="go">1e Hidden W95 FAT1 80 Old Minix</span>
+<span class="go">Hex code (type L to list codes): c</span>
+<span class="go">Changed system type of partition 1 to c (W95 FAT32 (LBA))</span>
+</pre></div>
+</td></tr></table><p>After the <tt class="docutils literal">t</tt> command, we opted to enter <tt class="docutils literal">L</tt> to see the list of
+possible codes. We then see that <tt class="docutils literal">W95 FAT32 (LBA)</tt> corresponds to the
+code <tt class="docutils literal">c</tt>.</p>
+<p>Now we can make our second primary partition for data storage, utilizing
+the rest of the disk. We again use the <tt class="docutils literal">n</tt> command:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> Command (m for help): n</span>
+<span class="go"> Partition type:</span>
+<span class="go"> p primary (1 primary, 0 extended, 3 free)</span>
+<span class="go"> e extended</span>
+<span class="go"> Select (default p): p</span>
+<span class="go"> Partition number (1-4, default 2): 2</span>
+<span class="go"> First sector (206848-16777215, default 206848):</span>
+<span class="go"> Using default value 206848</span>
+<span class="go"> Last sector, +sectors or +size{K,M,G} (206848-16777215, default</span>
+<span class="go">16777215):</span>
+<span class="go"> Using default value 16777215</span>
+</pre></div>
+</td></tr></table><p>We accepted the defaults for all of the prompts.</p>
+<p>Now, entering <tt class="docutils literal">p</tt> again, we can see the state of the partition table:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Command (m for help): p</span>
+
+<span class="go">Disk arch-latest-rpi2.img: 8589 MB, 8589934592 bytes</span>
+<span class="go">255 heads, 63 sectors/track, 1044 cylinders, total 16777216 sectors</span>
+<span class="go">Units = sectors of 1 \* 512 = 512 bytes</span>
+<span class="go">Sector size (logical/physical): 512 bytes / 512 bytes</span>
+<span class="go">I/O size (minimum/optimal): 512 bytes / 512 bytes</span>
+<span class="go">Disk identifier: 0xa8e8538a</span>
+
+<span class="go">Device Boot Start End Blocks Id System</span>
+<span class="go">arch-latest-rpi2.img1 2048 206847 102400 c W95 FAT32 (LBA)</span>
+<span class="go">arch-latest-rpi2.img2 206848 16777215 8285184 83 Linux</span>
+</pre></div>
+</td></tr></table><p>Now we can write out the table (<tt class="docutils literal">w</tt>), which will exit <tt class="docutils literal">fdisk</tt>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Command (m for help): w</span>
+<span class="go">The partition table has been altered!</span>
+
+<span class="go">WARNING: If you have created or modified any DOS 6.x</span>
+<span class="go">partitions, please see the fdisk manual page for additional</span>
+<span class="go">information.</span>
+<span class="go">Syncing disks.</span>
+</pre></div>
+</td></tr></table><p>Now we need to format the partitions. We'll use <tt class="docutils literal">kpartx</tt> to create
+block devices for us that we can format:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kpartx -av arch-latest-rpi2.img
+<span class="go">add map loop0p1 (252:0): 0 204800 linear /dev/loop0 2048</span>
+<span class="go">add map loop0p2 (252:1): 0 16570368 linear /dev/loop0 206848</span>
+</pre></div>
+</td></tr></table><p>As we saw earilier, the devices will show up in <tt class="docutils literal">/dev/mapper</tt>, as
+<tt class="docutils literal">/dev/mapper/loop0p1</tt> and <tt class="docutils literal">/dev/mapper/loop0p2</tt>.</p>
+<p>First we'll format the boot partition <tt class="docutils literal">loop0p1</tt>, as :</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo mkfs.vfat /dev/mapper/loop0p1
+<span class="go">mkfs.fat 3.0.26 (2014-03-07)</span>
+<span class="go">unable to get drive geometry, using default 255/63</span>
+</pre></div>
+</td></tr></table><p>Next the data partition, in ext4 format:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo mkfs.ext4 /dev/mapper/loop0p2
+<span class="go">mke2fs 1.42.9 (4-Feb-2014)</span>
+<span class="go">Discarding device blocks: done</span>
+<span class="go">Filesystem label=</span>
+<span class="go">OS type: Linux</span>
+<span class="go">Block size=4096 (log=2)</span>
+<span class="go">Fragment size=4096 (log=2)</span>
+<span class="go">Stride=0 blocks, Stripe width=0 blocks</span>
+<span class="go">518144 inodes, 2071296 blocks</span>
+<span class="go">103564 blocks (5.00%) reserved for the super user</span>
+<span class="go">First data block=0</span>
+<span class="go">Maximum filesystem blocks=2122317824</span>
+<span class="go">64 block groups</span>
+<span class="go">32768 blocks per group, 32768 fragments per group</span>
+<span class="go">8096 inodes per group</span>
+<span class="go">Superblock backups stored on blocks:</span>
+<span class="go">32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632</span>
+
+<span class="go">Allocating group tables: done</span>
+<span class="go">Writing inode tables: done</span>
+<span class="go">Creating journal (32768 blocks): done</span>
+<span class="go">Writing superblocks and filesystem accounting information: done</span>
+</pre></div>
+</td></tr></table><p>At this point we just need to mount the new filesystems, download the
+installation tarball and use <tt class="docutils literal">tar</tt> to extract and copy the files:</p>
+<p>First we'll grab the installation files:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+
+
+
+
+<span class="go">Next we'll mount the new filesystems:</span>
+</pre></div>
+</td></tr></table><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir arch-root arch-boot
+<span class="gp">$</span> sudo mount /dev/mapper/loop0p1 arch-boot
+<span class="gp">$</span> sudo mount /dev/mapper/loop0p2 arch-root
+</pre></div>
+</td></tr></table><p>And finally populate the disk image with the system files, and move the
+<tt class="docutils literal">boot</tt> directory to the boot partition:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo tar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C arch-root
+<span class="gp">$</span> sync
+<span class="gp">$</span> sudo mv arch-root/boot/<span class="se">\*</span> arch-boot/
+</pre></div>
+</td></tr></table><p>We're using a few somewhat less common parameters for <tt class="docutils literal">tar</tt>. Typically
+we'll use <tt class="docutils literal"><span class="pre">-xvf</span></tt> to tell <tt class="docutils literal">tar</tt> to extract (<tt class="docutils literal"><span class="pre">-x</span></tt>), be verbose
+(<tt class="docutils literal"><span class="pre">-v</span></tt>) and specify the file (<tt class="docutils literal"><span class="pre">-f</span></tt>). We've added the <tt class="docutils literal"><span class="pre">-p</span></tt> switch to
+preserve permissions. This is especially important with system files.</p>
+<p>The <tt class="docutils literal"><span class="pre">-C</span></tt> switch tells <tt class="docutils literal">tar</tt> to change to the <tt class="docutils literal"><span class="pre">arch-root</span></tt> directory
+before extraction, effectively extracting the files directly to the root
+filesystem.</p>
+<p><em>You may see some warnings about extended header keywords, these can be
+ignored.</em></p>
+<p>Now we just need to clean up (unmount, remove the loopback devs):</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo umount arch-root arch-boot
+<span class="gp">$</span> sudo kpartx -d arch-latest-rpi2.img
+</pre></div>
+</td></tr></table><p>Now we've got our own Arch disk image we can distribute, or copy onto SD
+cards. We can also mount it on the loopback and use PRoot to further
+configure it, as we did above with Raspbian.</p>
+</div>
+<div class="section" id="where-to-go-from-here">
+<h2 id="where-to-go-from-here"><a class="toc-backref" href="#id15">Where To Go From Here</a></h2>
+<p>With this basic workflow, we can do all sorts of interesting things. A
+few ideas:</p>
+<ul class="simple">
+<li>Distribute disk images pre-configured with applications we created.</li>
+<li>Pre-configure images and SD cards for use in classrooms, meetups,
+demos, etc.</li>
+<li>Set up a <a class="reference external" href="http://en.wikipedia.org/wiki/Cron">cron</a> job that runs
+nightly and creates a disk image with the latest packages.</li>
+<li>Build our own packages (either just create tarballs or use a tool
+like <a class="reference external" href="https://github.com/jordansissel/fpm">FPM</a>&nbsp;and build deb
+packages)&nbsp;for drivers and other software and save other folks the
+hassle of doing this themselves.</li>
+<li>Create rudimentary disk duplication setups for putting one image on a
+bunch of SD cards.</li>
+<li>Fix broken installs.</li>
+<li>Construct build and testing systems; integrate with tools like
+<a class="reference external" href="https://jenkins-ci.org/">Jenkins</a>.</li>
+</ul>
+<p>So there we go - now you can customize the Raspberry Pi operating system
+with impunity, on your favorite workstation or laptop machine. If you
+have any questions, corrections, or suggestions for ways to streamline
+the process, please leave a comment!</p>
+</div>
+
+  </div><!-- /.entry-content -->
+</section>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
+</body>
+</html>

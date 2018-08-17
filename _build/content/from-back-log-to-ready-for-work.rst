@@ -5,7 +5,7 @@ From Back Log To Ready For Work
 :category: Uncategorized
 :tags: agile, design, diagram, planning, scrum
 :slug: from-back-log-to-ready-for-work
-:status: published
+:status: draft
 
 |Image|
 
@@ -30,6 +30,5 @@ without a lot of verbiage to accompany it?
 
 As such, thoughts and comments are welcome.
 
-.. |Image| image:: {filename}/images/project-analysis-breakdown-thumb.png
+.. |Image| image:: {filename}/images/project-analysis-breakdown.png
    :width: 100%
-   :target: {filename}/images/project-analysis-breakdown.png

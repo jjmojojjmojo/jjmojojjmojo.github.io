@@ -4,6 +4,7 @@ WSGI and Paste Deploy: The Bare Necessities
 :author: lionfacelemonface
 :category: Uncategorized
 :slug: wsgi-and-paste-deploy-the-bare-necessities
+:status: draft
 
 Using paster to create layouts for various types of projects is great,
 especially when you need to get up and running quickly. The downside, is

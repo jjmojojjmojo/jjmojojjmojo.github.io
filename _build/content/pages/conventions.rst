@@ -6,6 +6,10 @@ Site-wide Conventions Explained
 :tags: about, conventions
 :slug: conventions
 
+This page contains an overview of conventions used in this website.
+
+.. PELICAN_END_SUMMARY
+
 Source Code Examples
 ====================
 

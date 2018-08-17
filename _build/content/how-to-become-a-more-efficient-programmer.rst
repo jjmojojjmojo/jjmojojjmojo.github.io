@@ -5,14 +5,8 @@ How To Become A More Efficient Programmer
 :category: culture, efficiency, programming
 :tags: minimal effort, software
 :slug: how-to-become-a-more-efficient-programmer
+:status: draft
 
-.. raw:: html
-
-   <div id="how-to-become-a-more-efficient-programmer" class="document">
-
-.. raw:: html
-
-   <div id="get-better-requirements-up-front" class="section">
 
 A few basic concepts I've found essential in getting great work done
 *fast*.
@@ -20,19 +14,12 @@ A few basic concepts I've found essential in getting great work done
 Get Better Requirements Up Front
 ================================
 
-As the tough questions. Focus on driving out uncertainty, and testing
+Ask the tough questions. Focus on driving out uncertainty, and testing
 assumptions.
 
 The more effective you are at doing this, the less trouble you will have
 down the road.
 
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="get-organized" class="section">
 
 Get Organized
 =============
@@ -43,28 +30,13 @@ maintain your project documents in as orderly a fashion as possible.
 This may mean using a lot of paper in a binder, keeping journals, or
 using project management software.
 
-Yes, it's extra work, but it's necessary to avoid miscommunications and
+Yes, it's extra work, but it's necessary to avoid miscommunication and
 prevent missed commitments (among other things).
 
 Keep the organizational work from bogging down your project by picking a
 method that's easy for you to get into.
 
 Then focus on getting really, really good at it.
-
-I like to draw diagrams in
-`LibreOffice <http://www.libreoffice.org/>`__, keep prose in
-`ReStructuredText <http://docutils.sourceforge.net/rst.html>`__, and
-organize my work in SCM like `git <http://git-scm.com/>`__ or a CMS like
-`Plone <http://plone.org/>`__. It doesn't matter, as long as it's
-something you can do with minimal effort.
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="get-sign-off" class="section">
 
 Get Sign Off
 ============
@@ -78,14 +50,6 @@ stakeholders.
 
 Worst case, they sign off without reading it, and you have 'rear-end
 coverage' in the event expectations aren't met.
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="break-down-the-walls" class="section">
 
 Break Down The Walls
 ====================
@@ -102,13 +66,6 @@ the most:
 
 Overall, it means a shorter time to 'done', and happier stakeholders.
 
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="work-iteratively" class="section">
 
 Work Iteratively
 ================
@@ -133,14 +90,6 @@ refinements. The end result will be highly refined, well vetted units of
 code that can more effectively be replaced or reworked.
 
 *Lather, rinse, repeat.*
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="utilize-design-patterns" class="section">
 
 Utilize Design Patterns
 =======================
@@ -169,14 +118,6 @@ work - and sometimes, they're not called 'design patterns'.  For
 example, check out this repository of `Enterprise Data
 Models <http://www.databaseanswers.org/data_models/>`__.
 
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="communicate-effectively" class="section">
-
 Communicate Effectively
 =======================
 
@@ -196,14 +137,6 @@ reading them. But remember, this isn't about *spin* - it's about simple
 communication. Find ways to do it effectively, regardless of the
 underlying message, and you will get things done faster.
 
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div id="find-your-community" class="section">
-
 Find Your Community
 ===================
 
@@ -220,11 +153,11 @@ be one of the biggest efficiencies you can gain as a programmer.
 Find a community of similar individuals. This may mean other developers
 at your organization, local user groups, IRC channels - be creative. The
 similarities might be surprising - usually that means similar languages,
-industries, domains, platforms, but that's not the case all of the time.
-Don't be afraid to seek out non-technical connections.
+industries, domains, or platforms, but that's not the case all of the time.
+Don't be afraid to seek out *non-technical* connections.
 
 Keep in touch with coworkers from past jobs. Utilize social media,
-`IRC <http://freenode.net/>`__\ and sites like
+`IRC <http://freenode.net/>`__ and sites like
 `StackOverflow <http://stackoverflow.com/>`__ to present questions to a
 broad audience.
 
@@ -233,11 +166,3 @@ frequently. Answer other people's questions on IRC. Building a
 reputation for being helpful will help you get help more... um...
 *helpfully*. The more help you can get, the less time you'll spend in
 mental quagmires, and the more efficient you can become.
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   </div>

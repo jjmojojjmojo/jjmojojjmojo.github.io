@@ -1,57 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>The Collected Works of Jjmojojjmojo</title>
-        <meta charset="utf-8" />
-        
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-
-
-
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of Jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/advanced-boot-scripting.html" rel="bookmark"
-         title="Permalink to Advanced Boot Scripting">Advanced Boot Scripting</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2015-04-11T15:07:00-04:00">
-      Sat 11 April 2015
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/advanced-boot-scripting.html" rel="bookmark" title="Permalink to Advanced Boot Scripting">Advanced Boot Scripting</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-08-08T13:34:00-04:00">
+      Wed 08 August 2018
     </time>
-    <address class="vcard author">
-      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a class="toc-href" href="#making-boot-faster" title="Making Boot Faster">Making Boot Faster</a></li><li><a class="toc-href" href="#a-simple-script" title="A Simple Script">A Simple Script</a></li><li><a class="toc-href" href="#twitter-api-tokens" title="Twitter API Tokens">Twitter API Tokens</a></li><li><a class="toc-href" href="#quick-note-development-deviations" title="Quick Note: Development Deviations">Quick Note: Development Deviations</a></li><li><a class="toc-href" href="#the-script-version-1" title="The Script: Version 1">The Script: Version 1</a></li><li><a class="toc-href" href="#distributioninstallation-mark-1" title="Distribution/Installation: Mark 1">Distribution/Installation: Mark 1</a></li><li><a class="toc-href" href="#a-not-so-simple-script" title="A Not-So-Simple Script">A Not-So-Simple Script</a></li><li><a class="toc-href" href="#distributioninstallation-mark-2" title="Distribution/Installation, Mark 2">Distribution/Installation, Mark 2</a></li><li><a class="toc-href" href="#adding-better-metatdata-fleshing-out-our-buildboot" title="Adding better metatdata, fleshing out our build.boot">Adding better metatdata, fleshing out our build.boot</a></li><li><a class="toc-href" href="#building-your-own-maven-repository" title="Building Your Own Maven Repository">Building Your Own Maven Repository</a></li></ul></div>
-    </div>
-    <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
+<address class="vcard author">
+      By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a class="toc-href" href="#making-boot-faster" title="Making Boot Faster">Making Boot Faster</a></li><li><a class="toc-href" href="#a-simple-script" title="A Simple Script">A Simple Script</a></li><li><a class="toc-href" href="#twitter-api-tokens" title="Twitter API Tokens">Twitter API Tokens</a></li><li><a class="toc-href" href="#quick-note-development-deviations" title="Quick Note: Development Deviations">Quick Note: Development Deviations</a></li><li><a class="toc-href" href="#the-script-version-1" title="The Script: Version 1">The Script: Version 1</a></li><li><a class="toc-href" href="#distributioninstallation-mark-1" title="Distribution/Installation: Mark 1">Distribution/Installation: Mark 1</a></li><li><a class="toc-href" href="#a-not-so-simple-script" title="A Not-So-Simple Script">A Not-So-Simple Script</a></li><li><a class="toc-href" href="#distributioninstallation-mark-2" title="Distribution/Installation, Mark 2">Distribution/Installation, Mark 2</a></li><li><a class="toc-href" href="#appendix-getting-rid-of-log4j-notices" title="Appendix: Getting Rid Of Log4J Notices">Appendix: Getting Rid Of Log4J Notices</a></li></ul></div>
+</div>
+<div class="entry-content status-published">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<!-- emoji for some reason - better to do this since I can replace these with -->
+<!-- icons or whatever I want) -->
+<p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
 <a class="reference external" href="https://github.com/boot-clj/boot">boot</a> is an all-around useful tool
 for building clojure applications, but one feature in particular has
-proven a <em>adjuncti finalum</em>*: boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">clojure
-scripting</a>. This
+proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#id2" id="id1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">clojure scripting</a>. This
 elevates clojure to the same high productivity of scripting languages
 (like my personal favorite, Python), but bakes in dependency management
 and other goodies. This allows the user to build complexity iteratively,
@@ -62,57 +59,79 @@ easily develop and distribute applications and tools. There's also
 discussion about getting your jars into
 <a class="reference external" href="http://clojars.org">Clojars</a>, and setting up a simple bare-minimum
 <a class="reference external" href="http://maven.apache.org/index.html">Maven</a> repository.</p>
-<div class="admonition admonition-edit">
-<p class="first admonition-title">Edit</p>
-<p class="last">I originally had "<em>interfectorem pluma</em>" to represent "killer
-feature" in Latin, however thanks to danielsmulewicz in #hoplon
-reminding me how stupid Google Translate can be, I consulted a
-Latin-&gt;English dictionary and Wikipedia to attempt an uneducated, but
-better Latin equivalent. I mention it here because it's all extremely
-funny, as <em>interfectorem pluma</em> literally translates to something like
-"feather murderer". In my amateur approach <em>adjuncti finalum</em> literally
-translates to something like "characteristic of the ultimate goal",
-which, if even remotely correct, is pretty accurate.</p>
-</div>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label"/><col/></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td>I originally had "<em>interfectorem pluma</em>" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as <em>interfectorem pluma</em> literally translates to something like "feather murderer". In my amateur approach <em>adjuncti finalum</em> literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate.</td></tr>
+</tbody>
+</table>
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As I've covered before</a>,
-boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases">boot executable</a>. Here's arecap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, have wget, and have sudo privileges):</p>
+boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases">boot executable</a>. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
-<span class="gp">$</span> mv boot.sh boot <span class="o">&amp;&amp;</span> chmod a+x boot <span class="o">&amp;&amp;</span> sudo mv boot /usr/local/bin
-<span class="gp">$</span> boot -u
+<span class="gp">$</span> mkdir -p ~/bin
+<span class="gp">$</span> mv boot.sh boot <span class="o">&amp;&amp;</span> chmod a+x boot <span class="o">&amp;&amp;</span> mv boot ~/bin/
+
+<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">"export PATH=\$PATH:\$HOME/bin"</span> &gt;&gt; ~/.bash_profile
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin
 </pre></div>
-<p>Note that we are also instructing boot to update itself. This is useful if you've used boot in the past - the executable and the core boot libraries are distributed separately.</p>
+<div class="explanation section">
+<h3>Explanation</h3>
+<div class="docutils container">
+</div>
+<p>First we need to download the boot executable script. The .sh extension indicates it's a shell script.</p>
+<p>Then a directory is created with <code>mkdir</code> for personal executables (binaries, hence <code>bin</code>). We use the <code>-p</code> flag to tell <code>mkdir</code> that any intermediary directories should be created. <code>-p</code> also silences any errors for already-existing directories.</p>
+<p>The tilde <code>~</code> is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely <code>/home/jjmojojjmojo</code>. But on some systems, it will be <code>/var/users/jjmojojjmojo</code>. On MacOS, home directories are in <code>/Users</code>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory">this wikipedia article</a> for more information.</p>
+<p>Finally, we string a few commands together using <code>&amp;&amp;</code>. <code>&amp;&amp;</code> will execute the following command if the preceding one succeeds (has a 0 return value). Here's what each part does:</p>
+<ol class="arabic simple">
+<li>We rename (move) the <code>boot.sh</code> to <code>boot</code>. This way we can type <code>boot</code> instead of <code>boot.sh</code> to execute boot commands later on.</li>
+<li>We change the <em>mode</em> of the <code>boot</code> script to include <em>execute</em> for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say <code>chmod 755</code>) only modifies the execute bit for each class. <a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm">More info</a>.</li>
+<li>Finally, we move the <code>boot</code> script to our personal <code>~/bin</code> directory, so the shell can find it when we set that up in the next step.</li>
+</ol>
+<p>Then we need to update our <code>$PATH</code> environment variable so the shell can find our new executable <tt class="docutils literal">boot</tt>.</p>
+<p>The shell looks for executables in a variable called <code>$PATH</code>. <code>$PATH</code> is a list of directories, that are searched in sequential order.</p>
+<p>We can get the shell to find our <code>boot</code> script by adding our personal bin directory to the end of that variable. <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)">More info</a>.</p>
+<p>By adding an <code>export</code> command to the end of our <code>~/.bash_profile</code>, we can ensure this modification to our shell happens every time we log in, or start our terminal app. Other environments, and shells have different files that are used this way.</p>
+<p>We accomplish this by using the <code>echo</code> command. <code>echo</code> sends data to the terminal output (stdout). We redirect that output to be appended to <code>~/.bash_profile</code>, using two greater-than symbols (<code>&gt;&gt;</code>). <a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html">More info</a>.</p>
+<p>Note that we escape the dollar signs in the <code>$PATH</code> and <code>$HOME</code> variables. This prevents the shell from expanding the current value for those variables before adding the <code>export</code> to <code>~/.bash_profile</code>.</p>
+<p>Finally, we make the change take effect in our current shell by running the export (without the escaped dollar signs).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Depending on your distribution, and shell, the way to make this change permanent may be different. Most shells read a special file in your home directory. Look for files like <code>~/.bashrc</code>, <code>~/.profile</code>, etc.</p>
+</div>
+</div>
+<p>For good measure, lets ask boot to update itself:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> boot -u
+</pre></div>
 </div>
 <div class="section" id="making-boot-faster">
 <h2 id="making-boot-faster">Making Boot Faster</h2>
 <p>Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into <tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt> or similar other files for your particular shell. See the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options">JVM-Options</a> page in the boot documentation for details, and other ways to incorporate these settings into your projects:</p>
-<div class="highlight"><pre><span></span><span class="go">export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation XX:TieredStopAtLevel=1 -Xverify:none"</span>
+<div class="highlight"><pre><span></span><span class="go">export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"</span>
 </pre></div>
 </div>
 <div class="section" id="a-simple-script">
 <h2 id="a-simple-script">A Simple Script</h2>
-<p>For this article, we'll start with an example of a useful application that grabs the most recent tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys">Nihilist Arby's</a> twitter feed. A great addition to your <a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29">MOTD</a> to de-motivate users overzealous about the fact that they have SSH privileges to your machine.</p>
+<p>For this article, we'll start with an example of a useful application that grabs the most recent tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys">Nihilist Arby's</a> twitter feed. A great addition to your <a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29">MOTD</a> to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀</p>
 </div>
 <div class="section" id="twitter-api-tokens">
 <h2 id="twitter-api-tokens">Twitter API Tokens</h2>
-<p>Before we begin, set up an application and <a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens">obtain a consumer key</a>&nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to read only. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.</p>
+<p>Before we begin, set up an application and <a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens">obtain a consumer key</a>&nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to <em>read only</em>. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.</p>
 </div>
 <div class="section" id="quick-note-development-deviations">
 <h2 id="quick-note-development-deviations">Quick Note: Development Deviations</h2>
 <p>Since we're not building anything right now, or utilizing the task infrastructure, we don't need a <tt class="docutils literal">build.boot</tt> file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run <tt class="docutils literal">boot repl</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
-<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]])</span>
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
 </pre></div>
-</td></tr></table><p>Alternatively, we can pre-load dependencies on the command line when we run the repl task:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot -d twitter-api:0.7.8 repl
+</td></tr></table></div></div><p>Alternatively, we can pre-load dependencies on the command line when we run the <tt class="docutils literal">repl</tt> task:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> boot -d twitter-api:1.8.0 repl
 </pre></div>
 </div>
 <div class="section" id="the-script-version-1">
 <h2 id="the-script-version-1">The Script: Version 1</h2>
 <p>For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -140,7 +159,7 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 26
 27
 28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
-<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
 
 <span class="p">(</span><span class="nf">use</span> <span class="o">'</span><span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
 &nbsp;&nbsp;&nbsp;&nbsp; <span class="o">'</span><span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
@@ -158,49 +177,56 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
  &nbsp; <span class="p">(</span><span class="nf">statuses-user-timeline</span>
  &nbsp;&nbsp;&nbsp; <span class="ss">:oauth-creds</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">make-oauth-creds</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR API KEY ID]"</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR API KEY]"</span><span class="p">)</span>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER KEY]"</span>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
  &nbsp;&nbsp;&nbsp; <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="nv">exception-print</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="nv">exception-print</span><span class="p">)</span>
  &nbsp;&nbsp;&nbsp; <span class="ss">:params</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist\_arbys"</span>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="ss">:count</span> <span class="mi">2</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table><p>Making this script executable, it can be run on the command line. The
+</td></tr></table></div></div><p>Making this script executable, it can be run on the command line. The
 result will be the last tweet. I named my script <tt class="docutils literal">downer</tt>, but you can
 name it however you'd like:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> chmod +x downer
 <span class="gp">$</span> ./downer
 <span class="go">Rip it to shreds. Put it on a bun. Slather it in horsey sauce. Watch them line up to gorge. Feeding pigs to pigs. Arbys: a flat circle.</span>
 </pre></div>
-<p>You may see some output on stderr about some missing logging libraries. For now, these can be ignored.</p>
-<p>Lets take a quick look at the script's main components:</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You may see some output on stderr about some missing logging libraries. For now, these can be ignored. See <a class="reference internal" href="#appendix-getting-rid-of-log4j-notices">Appendix: Getting Rid Of Log4J Notices</a>.</p>
+</div>
+<div class="explanation section">
+<h3>Explanation</h3>
+<div class="docutils container">
+</div>
 <ul>
 <li><p class="first">The first 2 lines are what make this a boot script. The <tt class="docutils literal"><span class="pre">set-env!</span></tt> function and general information about environments can be found in the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment">boot documentation</a>.</p>
-<p>First we have the "<a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a>" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having <tt class="docutils literal">/bin/env</tt> available in the same location on most systems, to figure out where boot is. Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a>.</p>
+<p>First we have the "<a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a>" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having <tt class="docutils literal">/bin/env</tt> available in the same location on most systems, to figure out where boot is.</p>
+<p>Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a>.</p>
 </li>
 <li><p class="first">lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called <tt class="docutils literal">boot.user</tt>. You can alternatively load external code using the <tt class="docutils literal">ns</tt> form. The example code could be replaced thusly:</p>
-</li>
-</ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
 6
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boot.user</span>
-<span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
+  <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
 
-<span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
+  <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
 </pre></div>
-</td></tr></table><ul class="simple">
-<li>Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</li>
+</td></tr></table></div></div></li>
+<li><p class="first">Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</p>
+</li>
 </ul>
+</div>
 </div>
 <div class="section" id="distribution-installation-mark-1">
 <h2 id="distributioninstallation-mark-1">Distribution/Installation: Mark 1</h2>
@@ -218,7 +244,7 @@ name it however you'd like:</p>
 <p>This is handled quite simply by utilizing boot's <tt class="docutils literal"><span class="pre">:source-paths</span></tt> environment option, and a little refactoring.</p>
 <p>We'll construct a directory named <tt class="docutils literal">src</tt>, and create a <tt class="docutils literal">last_tweet.clj</tt> file. In it, we'll declare a new namespace, last-tweet, and move the code there.</p>
 <p><tt class="docutils literal">src/last_tweet.clj</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -241,12 +267,14 @@ name it however you'd like:</p>
 21
 22
 23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">last-tweet</span>
-<span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
-<span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
-<span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">last-tweet</span>
+  <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
+        <span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
+
+  <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">printer</span>
   <span class="p">[</span><span class="nv">response</span><span class="p">]</span>
@@ -255,20 +283,24 @@ name it however you'd like:</p>
 <span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
   <span class="p">[]</span>
   <span class="p">(</span><span class="nf">statuses-user-timeline</span>
-  <span class="ss">:oauth-creds</span>
-     <span class="p">(</span><span class="nf">make-oauth-creds</span>
-       <span class="s">"[YOUR API KEY ID]"</span>
-       <span class="s">"[YOUR API KEY]"</span><span class="p">)</span>
- <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
-             <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
+    <span class="ss">:oauth-creds</span>
+       <span class="p">(</span><span class="nf">make-oauth-creds</span>
+         <span class="s">"[YOUR CONSUMER KEY]"</span>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
+    <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
+                 <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
                  <span class="nv">exception-print</span>
                  <span class="nv">exception-print</span><span class="p">)</span>
- <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
-          <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
+    <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
+             <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table><p>This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed <tt class="docutils literal"><span class="pre">-main</span></tt> to <tt class="docutils literal"><span class="pre">last-tweet</span></tt>.</p>
+</td></tr></table></div></div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Our namespace has a dash (-) in it - this isn't supported in clojure file names. So instead, we use an underscore (_) in the name of the file.</p>
+</div>
+<p>This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed <tt class="docutils literal"><span class="pre">-main</span></tt> to <tt class="docutils literal"><span class="pre">last-tweet</span></tt>.</p>
 <p>Here is the new <tt class="docutils literal">downer</tt> script:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -279,7 +311,7 @@ name it however you'd like:</p>
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
 <span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]]</span>
+  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
   <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">last-tweet</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">last-tweet</span><span class="p">]])</span>
@@ -288,40 +320,38 @@ name it however you'd like:</p>
   <span class="p">[]</span>
   <span class="p">(</span><span class="nf">last-tweet</span><span class="p">))</span>
 </pre></div>
-</td></tr></table><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
+</td></tr></table></div></div><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
 <p>We can add many namespaces to the <tt class="docutils literal">src</tt> directory. We can also add other source paths - the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> directive is a <a class="reference external" href="http://clojure.org/data_structures#toc24">hash set</a>.</p>
 <p>Now we can refactor the&nbsp;<tt class="docutils literal"><span class="pre">last-tweet/last-tweet</span></tt> function to take credentials and the twitter account to get a tweet from as arguments:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
-  <span class="s">"Print the last tweet from a given twitter account"</span>
-  <span class="p">[</span><span class="nv">account</span> <span class="nv">secret-id</span> <span class="nv">secret-key</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">creds</span> <span class="p">(</span><span class="nf">make-oauth-creds</span> <span class="nv">secret-id</span> <span class="nv">secret-key</span><span class="p">)</span>
-        <span class="nv">callback</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
-                   <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
-                   <span class="nv">exception-print</span>
-                   <span class="nv">exception-print</span><span class="p">)]</span>
-    <span class="p">(</span><span class="nf">statuses-user-timeline</span>
-      <span class="ss">:oauth-creds</span> <span class="nv">creds</span>
-      <span class="ss">:callbacks</span> <span class="nv">callback</span>
-      <span class="ss">:params</span>
-        <span class="p">{</span><span class="ss">:screen-name</span> <span class="nv">account</span>
-         <span class="ss">:count</span> <span class="mi">1</span><span class="p">})))</span>
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
+  <span class="p">[</span><span class="nv">account</span> <span class="nv">consumer-id</span> <span class="nv">consumer-secret</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">statuses-user-timeline</span>
+    <span class="ss">:oauth-creds</span>
+       <span class="p">(</span><span class="nf">make-oauth-creds</span>
+         <span class="nv">consumer-id</span>
+         <span class="nv">consumer-secret</span><span class="p">)</span>
+    <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
+                 <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
+                 <span class="nv">exception-print</span>
+                 <span class="nv">exception-print</span><span class="p">)</span>
+    <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="nv">account</span>
+             <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
+</td></tr></table></div></div><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
 <p>Now we can utilize boot's extremely useful <tt class="docutils literal">defclifn</tt> macro and boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">task option DSL</a>&nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -351,7 +381,7 @@ name it however you'd like:</p>
 28
 29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
 <span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]]</span>
+  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
   <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">require</span>
@@ -361,25 +391,28 @@ name it however you'd like:</p>
 <span class="p">(</span><span class="nf">cli/defclifn</span> <span class="nv">-main</span>
   <span class="s">"Prints the last tweet from the given account. Requires twitter user app</span>
 <span class="s">  authentication tokens. The authentication tokens can be set using the</span>
-<span class="s">  command-line options below, or in the TWITTER_KEY and TWITTER_KEY_ID</span>
+<span class="s">  command-line options below, or in the TWITTER_ID and TWITTER_SECRET</span>
 <span class="s">  environment variables.</span>
 
 <span class="s">  USAGE: downer [options] [twitter account]"</span>
 
-  <span class="p">[</span><span class="nv">k</span> <span class="nv">secret-key</span> <span class="nv">KEY</span> <span class="nb">str </span><span class="s">"Secret key from Twitter"</span>
-   <span class="nv">i</span> <span class="nv">secret-key-id</span> <span class="nv">KEYID</span> <span class="nb">str </span><span class="s">"Secret key id from Twitter"</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">account</span> <span class="p">(</span><span class="nb">get </span><span class="nv">*args*</span> <span class="mi">0</span> <span class="s">"nihilist_arbys"</span><span class="p">)</span>
-        <span class="nv">secret-key</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_KEY"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:secret-key</span> <span class="nv">*opts*</span><span class="p">))</span>
-        <span class="nv">secret-key-id</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_KEY_ID"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:secret-key-id</span> <span class="nv">*opts*</span><span class="p">))]</span>
+  <span class="p">[</span><span class="nv">k</span> <span class="nv">consumer-id</span> <span class="nv">ID</span> <span class="nb">str </span><span class="s">"Consumer id from Twitter"</span>
+   <span class="nv">i</span> <span class="nv">consumer-secret</span> <span class="nv">SECRET</span> <span class="nb">str </span><span class="s">"Consumer secret from Twitter"</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">account</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">*args*</span> <span class="mi">0</span> <span class="s">"nihilist_arbys"</span><span class="p">)</span>
+        <span class="nv">consumer-id</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_ID"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:consumer-id</span> <span class="nv">*opts*</span><span class="p">))</span>
+        <span class="nv">consumer-secret</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_SECRET"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:consumer-secret</span> <span class="nv">*opts*</span><span class="p">))]</span>
 
-    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">secret-key</span><span class="p">)</span> <span class="p">(</span><span class="nb">nil? </span><span class="nv">secret-key-id</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-id</span><span class="p">)</span> <span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-secret</span><span class="p">))</span>
       <span class="p">(</span><span class="nb">println </span><span class="s">"ERROR: you must provide twitter credentials. Try -h"</span><span class="p">)</span>
       <span class="p">(</span><span class="nf">last-tweet</span>
         <span class="nv">account</span>
-        <span class="nv">secret-key-id</span>
-        <span class="nv">secret-key</span><span class="p">))))</span>
+        <span class="nv">consumer-id</span>
+        <span class="nv">consumer-secret</span><span class="p">))))</span>
 </pre></div>
-</td></tr></table><p>A few notes:</p>
+</td></tr></table></div></div><div class="explanation section">
+<h3>Explanation</h3>
+<div class="docutils container">
+</div>
 <ul class="simple">
 <li>The docstring for the function is used as the "usage" message when the user passes the <tt class="docutils literal"><span class="pre">-h</span></tt> flag.</li>
 <li>The task option DSL allows for <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#types">a pre-processing step</a> to be defined for each value. In this case, we used <tt class="docutils literal">str</tt>, which treats each argument as a string. This can be changed to one of many very useful options, including keywords, symbols, files (which take a path and return a java.io object) and many more, including <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#complex-options">complex compound values</a>.</li>
@@ -387,27 +420,28 @@ name it however you'd like:</p>
 <li>The use of environment variables as alternatives to CLI options is  illustrated here. It's very useful for deployment of more complex    applications, and keeps sensitive information out of the process list.</li>
 <li>We've added some error handling to give the user a nice message if they neglect to set their credentials.</li>
 </ul>
+</div>
 <p>Now we can see command-line output:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> ./downer
 <span class="go">ERROR: you must provide twitter credentials. Try -h</span>
 </pre></div>
 <p>The output of <tt class="docutils literal">./downer <span class="pre">-h</span></tt>:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> ./downer -h
-<span class="go">Prints the last tweet from the given account. Requires twitter user app authentication tokens.</span>
-
-<span class="go">The authentication tokens can be set using the command-line options below, or in the TWITTER_KEY and TWITTER_KEY_ID environment variables.</span>
-
+<span class="go">Prints the last tweet from the given account. Requires twitter user app</span>
+<span class="go">authentication tokens. The authentication tokens can be set using the</span>
+<span class="go">command-line options below, or in the TWITTER_ID and TWITTER_SECRET</span>
+<span class="go">environment variables.</span>
 
 <span class="go">USAGE: downer [options] [twitter account]</span>
 
 <span class="go">Options:</span>
-<span class="go"> -h, --help Print this help info.</span>
-<span class="go"> -k, --secret-key KEY Set secret key from Twitter to KEY.</span>
-<span class="go"> -i, --secret-key-id KEYID Set secret key id from Twitter to KEYID.</span>
+<span class="go">  -h, --help                    Print this help info.</span>
+<span class="go">  -k, --consumer-id ID          ID sets consumer id from Twitter.</span>
+<span class="go">  -i, --consumer-secret SECRET  SECRET sets consumer secret from Twitter.</span>
 </pre></div>
 <p>We set the environment variables, and try getting the last post from a different, possibly more depressing account:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">export</span> TWITTER<span class="se">\_</span>KEY<span class="se">\_</span>ID<span class="o">=</span><span class="s2">"XXXXXXXXXXXXXXXXX"</span>
-<span class="gp">$</span> <span class="nb">export</span> TWITTER<span class="se">\_</span>KEY<span class="o">=</span><span class="s2">"YYYYYYYYYYYYYYYYYYYYYYYYY"</span>
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">export</span> <span class="nv">TWITTER_ID</span><span class="o">=</span><span class="s2">"XXXXXXXXXXXXXXXXX"</span>
+<span class="gp">$</span> <span class="nb">export</span> <span class="nv">TWITTER_SECRET</span><span class="o">=</span><span class="s2">"YYYYYYYYYYYYYYYYYYYYYYYYY"</span>
 <span class="gp">$</span> ./downer jjmojojjmojo
 <span class="go">FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk</span>
 </pre></div>
@@ -423,440 +457,63 @@ name it however you'd like:</p>
 <p>The first option is sub-optimal. It can be made somewhat easier with help from <a class="reference external" href="https://github.com/jordansissel/fpm">fpm</a>, but it's still a bit cumbersome. The real beauty of boot scripting is we don't have to bother with complex installation procedures.</p>
 <p>We can leverage the power of java jar files (which are just zip files under the hood) to contain our source code and other artifacts.</p>
 <p>This makes the jar file the best path. Once the jar is installed into a maven repository the script can reach, the script can once again be distributed as a simple stand-alone text file.</p>
-<p>We can use boot for this. <em>That's what it does.</em></p>
-<div class="section" id="compiling-a-library-jar">
-<h3>Compiling A Library Jar</h3>
-<p>For a jar file to be installable via maven (which is what boot and the clojure ecosystem uses under the hood), it must contain a pom.xml file. This file will declare the project version, the dependencies and other metadata.</p>
-<p>We can construct a jar file from our source code just using the command line, or we can <a class="reference external" href="https://lionfacelemonface.wordpress.com/2015/01/17/boot-getting-started-with-clojure-in-10-minutes/#build.boot">wrap it up in a build.boot file in a custom task.</a></p>
-<p>Here's the basic command to get our last tweet jar:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> boot -d org.clojure/clojure:1.6.0 <span class="se">\</span>
-       -d boot/core:2.0.0-rc12 <span class="se">\</span>
-       -d twitter-api:0.7.8 <span class="se">\</span>
-       -s src/ <span class="se">\</span>
-       aot -a <span class="se">\</span>
-       pom -p last-tweet -v <span class="m">1</span>.0.0 <span class="se">\</span>
-       jar
-</pre></div>
-</td></tr></table><p>Looking in the <tt class="docutils literal">target</tt> directory, we can see our jar file:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ls target/*.jar
-<span class="go">last-tweet-1.0.0.jar</span>
-</pre></div>
-<p>We have several options for distribution, now that we have a jar file, each one takes advantage of the <a class="reference external" href="https://maven.apache.org/">Apache Maven</a> ecosystem:</p>
-<ol class="arabic simple">
-<li>We can send the jar file along with the script to the user, and they
-can install it with boot.</li>
-<li>We can set up our own maven repository&nbsp;and upload the jar to that,
-then provide access to the user.</li>
-<li>We can send the jar file to a public repository like
-<a class="reference external" href="https://clojars.org/">clojars</a>.</li>
-<li>We can upload the file to S3, and provide credentials to our user.</li>
-</ol>
+<p>We can use boot for this. <em>That's what it does!</em></p>
+<p>Check out all you ever wanted to know about making jar files and distributing them in <a class="reference external" href="/drafts/making-jars-with-boot.html">the unoffical followup to this post.</a>.</p>
 </div>
-<div class="section" id="wait-why-not-distribute-a-self-contained-jar">
-<h3>Wait, Why Not Distribute A Self-Contained Jar?</h3>
-<p>We could move the CLI logic into our last-tweet namespace, and get rid of the boot script altogether. We could add the "uber" task and bundle all of our dependencies into a single, stand-alone, self-contained jar file that could be distributed (via maven as described above) without any external dependencies besides a JVM (the user won't even&nbsp;need&nbsp;boot or clojure).</p>
-<p>This process is covered in some detail <a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">here</a>.</p>
-<p>There's nothing inherently wrong with this practice. In fact, it's a good idea to seriously consider it when deciding how to deploy an application.</p>
-<p>But when writing boot scripts, it can be very useful to allow the user to change things in the script, or encourage them to write new scripts that use the underlying code in new ways.</p>
-<p>It helps to start looking at a boot script much like we would any other shell script - consider <em>composing</em> calls to external code instead of implementing and containing it internally.</p>
-<p>This concept coupled with the "it just works" approach of boot makes distributing core code as library dependencies of particular interest.
-You can make changes to your library code and distribute it once, and when your users run their boot script it will automatically update.</p>
-<p>On the other side of that coin, you have less worry about breaking existing scripts "in the wild". &nbsp;Users can pin the version of your library to a specific number and avoid automatic updates altogether.</p>
-<p>It amounts to an extremely elegant way of constructing tools.</p>
-</div>
-<div class="section" id="script-modifications">
-<h3>Script Modifications</h3>
-<p>To use an external jar instead of our bundled-in code, we just need to omit the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> environment directive, and add our jar into the <tt class="docutils literal">:dependencies</tt> list.</p>
-<p>Here are the changes to the <tt class="docutils literal"><span class="pre">(set-env!)</span></tt> call:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]</span>
-  <span class="p">[</span><span class="nv">last-tweet</span> <span class="s">"LATEST"</span><span class="p">]])</span>
-</pre></div>
-</td></tr></table><p>Note that we're not pinning the version to a particular release, instead specifying the special keyword <tt class="docutils literal">LATEST</tt> to signal that we always want the latest. This is helpful when distributing jar files that are updated frequently while the boot script is not.</p>
-<p>However, be careful not to rely on this too heavily. If the API in the library falls too far out of sync with the script, users will get errors.</p>
-</div>
-<div class="section" id="installing-a-jar-with-boot">
-<h3>Installing A Jar With Boot</h3>
-<p>Boot provides the install task, which can install jars built with a pipeline of tasks, or a specific jar with the -f option.</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot install -f target/last-tweet-1.0.0.jar
-</pre></div>
-<p>Now we can run our script and it will use the locally installed jar:</p>
+<div class="section" id="appendix-getting-rid-of-log4j-notices">
+<h2 id="appendix-getting-rid-of-log4j-notices">Appendix: Getting Rid Of Log4J Notices</h2>
+<p>You may have noticed that you get a bunch of warning messages when running our code:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> ./downer jjmojojjmojo
-<span class="go">RT @adzerk: 3 ways for vendors to keep mobile ad tech lean - "be easy to work with" should be a no brainer http://t.co/P3yrKH74WW @blp101 v&hellip;</span>
+<span class="go">SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".</span>
+<span class="go">SLF4J: Defaulting to no-operation (NOP) logger implementation</span>
+<span class="go">SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span>
+<span class="go">FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk</span>
 </pre></div>
-<p>This is the easiest way to get jars working with boot, but it's the least flexible. Every time you make a change to your code, you need to create a new version of your jar and distribute it to all of your users, and they will need to install it.</p>
+<p><tt class="docutils literal">SLF4J</tt> is the <a class="reference external" href="https://www.slf4j.org/">Simple Logging Facade For Java</a>. It
+allows for <em>deployment-time</em> configuration of logging in an application. This
+means you build your app against the <tt class="docutils literal">SLF4J</tt> API, and when you deploy your
+application at some later time, you can use whatever logging back-end you want.
+This is a huge deal for most apps, but in our case, a simple CLI tool that grabs
+a tweet, it's probably nothing we really need to care about.</p>
+<p>The error concerns <tt class="docutils literal">SLF4J</tt> trying to find a logging back-end, and failing to find
+one. It's looking for the default backend, named <tt class="docutils literal">StaticLoggerBinder</tt>. So we
+have to fix this to get the warnings to dissapear.</p>
+<p>The <a class="reference external" href="http://www.slf4j.org/codes.html#StaticLoggerBinder">link provided in the output</a> tells us what needs to be done:</p>
+<blockquote>
+This warning message is reported when the org.slf4j.impl.StaticLoggerBinder class could not be loaded into memory. This happens when no appropriate SLF4J binding could be found on the class path. Placing one (and only one) of slf4j-nop.jar slf4j-simple.jar, slf4j-log4j12.jar, slf4j-jdk14.jar or logback-classic.jar on the class path should solve the problem.</blockquote>
+<p>To do this for our project, we just need to add a backend to our dependencies in <tt class="docutils literal">build.boot</tt>.</p>
+<p>Since we don't need logging for our project, we'll choose the <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt> back-end.</p>
+<p>To figure out exactly what the dependency specification looks like, we can search in the <a class="reference external" href="https://search.maven.org/">Maven Central Repository</a>.</p>
+<div class="figure align-center" style="width: 85%">
+<a href="/images/fullsize/maven-search.jpg"><a href="/images/fullsize/fullsize/maven-search.jpg"><img alt="" sizes="" src="/images/fullsize/fullsize/maven-search.jpg" srcset="/images/fullsize/responsive/maven-search-1000.jpg 1000w,/images/fullsize/responsive/maven-search-800.jpg 800w,/images/fullsize/responsive/maven-search-400.jpg 400w,/images/fullsize/responsive/maven-search-200.jpg 200w"/></a></a>
+<p class="caption">Screen grab of Maven Central search results for 'slf4j-nop'</p>
 </div>
-<div class="section" id="uploading-to-clojars">
-<h3>Uploading To Clojars</h3>
-<p><a class="reference external" href="https://clojars.org/">Clojars</a> provides a public maven repository for the greater Clojure community.</p>
-<p>There isn't much in the way of documentation for using boot with clojars, but there is a <a class="reference external" href="https://github.com/ato/clojars-web/wiki/tutorial">tutorial</a>, and a handy tool called <a class="reference external" href="https://github.com/adzerk-oss/bootlaces">bootlaces</a> that provides a couple of wrapper boot tasks to make the process more seamless.</p>
-<p>Alas, neither of these things goes far enough to help the brand new boot user who wants to make use of clojars for their libraries. Very little is explained, and the tutorial is leiningen-centric.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">There is also an excellent write up of the process (also linegien-centric but it covers GPG and signing your jars) by Michael Peterson over at <a class="reference external" href="http://thornydev.blogspot.com/2013/03/signing-and-promoting-your-clojure.html">ThornyDev</a> including links to the rationale for signing packages.</p>
+<p>From the screen grab above, we can derive the dependency specification: <tt class="docutils literal"><span class="pre">[group-id/artifact-id</span> "version"]</tt>.</p>
+<p>As such, in our case, our spec will be <tt class="docutils literal"><span class="pre">[org.slf4j/slf4j-nop</span> <span class="pre">"1.8.0-beta2"]</span></tt>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>We might want to be weary of using beta code, even if it isn't important to our project.</p>
+<p class="last">To find the latest <em>stable</em> version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is <tt class="docutils literal">1.7.25</tt>.</p>
 </div>
-<p>So lets go over the process in detail, from the ground up. Admittedly, this is probably best left for a separate blog post, but as clojars is a great service and something any clojurist should be equipped to participate in - once you've got a handle on how it works "the hard way", you are free to use bootlaces or derive your own workflow. It slots in nicely with the next section, where we build our own maven repository.</p>
-<p>In preparation for pushing your jar to clojars, you'll first need to install <a class="reference external" href="https://www.gnupg.org/">GPG</a>.</p>
-<p>GPG will be used to sign jar files to ensure they are not tampered with by malicious third parties.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a comprehensive introduction, see <a class="reference external" href="http://www.dewinter.com/gnupg_howto/english/GPGMiniHowto.html">The GPG Mini HOWTO</a>.*</p>
-</div>
-<p>GPG can be installed via the downloads located at <a class="reference external" href="https://www.gnupg.org/download/index.html">gnupg.org</a>, or using your preferred package manager.</p>
-<p>MacOs users can use homebrew (<tt class="docutils literal">brew install gpg</tt>), or MacPorts (<tt class="docutils literal">sudo port install gpg</tt>).</p>
-<p>We'll need to generate our key, if we've never used GPG before:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> gpg --gen-key
-</pre></div>
-<p>You will be asked many questions. For most, you can specify the default suggested by gpg (press ENTER). Take note of the e-mail address that you use for your key, it will be the identifier for your new key in your keyring.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It's a good idea to specify a pass-phrase. If you decide not to, you can just enter an empty pass-phrase when prompted.</p>
-</div>
-<p>Now that we've generated our key, we can see it using <tt class="docutils literal">gpg <span class="pre">--list-keys</span></tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg --list-keys
-<span class="go">/Users/jj/.gnupg/pubring.gpg</span>
-<span class="go">----------------------------</span>
-<span class="go">pub 2048R/5A36EA7C 2015-05-21</span>
-<span class="go">uid Josh Johnson &lt;[THE EMAIL YOU PROVIDED]&gt;</span>
-<span class="go">sub 2048R/6C662B47 2015-05-21</span>
-</pre></div>
-</td></tr></table><p>Next, we need to <a class="reference external" href="https://clojars.org/register">sign up for a clojars account.</a> Ignore the SSH key entry. We will need to generate a text-based "ASCII-armored" version of our public GPG key to paste into the corresponding text box in the form. This is accomplished with the <tt class="docutils literal">gpg</tt> command:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> gpg --armor --export <span class="o">[</span>THE EMAIL YOU PROVIDED<span class="o">]</span> code
-<span class="go">-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
-<span class="go">[KEY CONTENT HERE]</span>
-<span class="go">-----END PGP PUBLIC KEY BLOCK-----</span>
-</pre></div>
-<p>Copy everything from <tt class="docutils literal"><span class="pre">-----BEGIN</span> PGP PUBLIC KEY <span class="pre">BLOCK-----</span></tt> to <tt class="docutils literal"><span class="pre">-----END</span> PGP PUBLIC KEY <span class="pre">BLOCK-----</span></tt>, <em>inclusive</em>.</p>
-<p>Once you have your account set up, the next thing to do is set up a new repository in our <tt class="docutils literal">build.boot</tt> file:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]]</span>
-          <span class="ss">:repositories</span>
-             <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span>
-               <span class="p">[</span><span class="s">"clojars-upload"</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">"https://clojars.org/repo"</span>
-                                  <span class="ss">:username</span> <span class="s">"[YOUR USERNAME]"</span>
-                                  <span class="ss">:password</span> <span class="s">"[YOUR PASSWORD]"</span><span class="p">}]))</span>
-</pre></div>
-</td></tr></table><p><strong>WARNING:</strong> <em>You will want to source your username and password from an environment variable, or some other place, like a local config file. We're putting them here for the sake of simplicity, but this is not a sound practice!</em></p>
-<p>We've provided a <em>function</em> to set the environment property <tt class="docutils literal">:repositories</tt>. This allows us to update the list of repositories instead of replacing it.</p>
-<p>We're ready to upload our jar. This can be done, as before, with use <tt class="docutils literal">push</tt> boot task:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot push -f target/last-tweet-1.0.0.jar -g -k <span class="o">[</span>THE EMAIL FOR YOUR KEY<span class="o">]</span> -r clojars-upload
-</pre></div>
-<p>Taking a look at clojars, we will see our new jar file has been uploaded!</p>
-<p>However, it's missing a lot of key information - things that weren't so important when we were building a jar for our own use, but are <strong>very</strong> important when distributing software to a public repository.</p>
-<p>In the next section, we'll fix this, but also use the power of boot to make our workflow easier.</p>
-</div>
-</div>
-<div class="section" id="adding-better-metatdata-fleshing-out-our-build-boot">
-<h2 id="adding-better-metatdata-fleshing-out-our-buildboot">Adding better metatdata, fleshing out our <tt class="docutils literal">build.boot</tt></h2>
-<p>We've constructed a library jar, and have successfully uploaded it to clojars. However, at this point we cannot build and distribute boot scripts that depend on our library. Clojars has a "promotion" process that protects users from seeing jars that do not have essential metadata.</p>
-<p>Let's rebuild our jar with a URL, a license, and a proper description:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot -d org.clojure/clojure:1.6.0 <span class="se">\</span>
-       -d boot/core:2.0.0-rc12 <span class="se">\</span>
-       -d twitter-api:0.7.8 <span class="se">\</span>
-       -s src/ <span class="se">\</span>
-       aot -a <span class="se">\</span>
-       pom -p last-tweet<span class="se">\</span>
-       -v <span class="m">1</span>.0.0 <span class="se">\</span>
-       -u <span class="s2">"https://lionfacelemonface.wordpress.com/2015/04/11/advanced-boot-scripting/"</span><span class="se">\</span>
-       -d <span class="s2">"Demo project for advanced boot scripting blog post"</span><span class="se">\</span>
-       jar
-</pre></div>
-<p>Now, this is getting a bit (more) unwieldy. It's better if we put this information into our <tt class="docutils literal">build.boot</tt> file. We'll still use the command line for now, as opposed to building our own boot tasks, but we'll set these properties as default options. This way, we are free to construct our build pipeline as we see fit, but we don't have to specify all of these lengthy parameters on the command line.</p>
-<p>We will be able to override these values if we desire, using command line arguments as before.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span>
-    <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]</span>
-      <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.6.0"</span><span class="p">]</span>
-      <span class="p">[</span><span class="nv">boot/core</span> <span class="s">"2.0.0"</span><span class="p">]]</span>
-  <span class="ss">:source-dirs</span> <span class="o">#</span><span class="p">{</span><span class="s">"src/"</span><span class="p">}</span>
-  <span class="ss">:repositories</span>
-     <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="p">[</span><span class="s">"clojars-upload"</span>
-               <span class="p">{</span><span class="ss">:url</span> <span class="s">"https://clojars.org/repo"</span>
-                <span class="ss">:username</span> <span class="s">"[YOUR USERNAME]"</span>
-                <span class="ss">:password</span> <span class="s">"[YOUR PASSWORD]"</span><span class="p">}]))</span>
-
-<span class="p">(</span><span class="nf">task-options!</span>
-  <span class="nv">pom</span> <span class="p">{</span><span class="ss">:project</span> <span class="ss">'last-tweet</span>
-       <span class="ss">:url</span> <span class="s">"https://lionfacelemonface.wordpress.com/2015/04/11/advanced-boot-scripting/"</span>
-       <span class="ss">:version</span> <span class="s">"1.0.1"</span>
-       <span class="ss">:description</span> <span class="s">"Demo project for advanced boot scripting blog post."</span>
-       <span class="ss">:license</span> <span class="p">{</span><span class="s">"MIT License"</span> <span class="s">"http://opensource.org/licenses/mit-license.php"</span><span class="p">}}</span>
-  <span class="nv">aot</span> <span class="p">{</span><span class="ss">:all</span> <span class="nv">true</span><span class="p">}</span>
-  <span class="nv">push</span> <span class="p">{</span><span class="ss">:gpg-sign</span> <span class="nv">true</span>
-        <span class="ss">:repo</span> <span class="s">"clojars-upload"</span>
-        <span class="ss">:gpg-user-id</span> <span class="s">"[EMAIL ASSOCIATED WITH YOUR KEY]"</span>
-        <span class="ss">:gpg-passphrase</span> <span class="s">"[YOUR PASSPHRASE]"</span><span class="p">})</span>
-</pre></div>
-</td></tr></table><p>This is a lot of stuff, so lets walk through the new concepts line by line:</p>
-<p>Lines 1-4 invokes the <tt class="docutils literal"><span class="pre">set-env!</span></tt> function to declare the dependencies we require to be included in our jar. These correspond to the <tt class="docutils literal"><span class="pre">-d</span></tt> options in the command line we used earlier.</p>
-<p>Line 5 specifies the source directories. We previously specified our source directory with the <tt class="docutils literal"><span class="pre">-s</span></tt> command-line option.</p>
-<p>Lines 6-10 update the repositories list with our clojars destination and credentials, as we implemented earlier.</p>
-<p>For general explanation of these environment modifying lines, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment">Boot Environment</a>, in the Boot Wiki.</p>
-<p>The rest of the file represents settings that are passed to boot tasks.</p>
-<p>Generally speaking, these correspond 1:1 with the command line options, but are expected to be pre-processed into clojure data objects.</p>
-<p>You can figure out the exact key to set for each value using the <tt class="docutils literal"><span class="pre">-h</span></tt> switch. For example, the help text for the <tt class="docutils literal">pom</tt> task, looks like this:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot pom -h
-<span class="go">Create project pom.xml file.</span>
-
-<span class="go">The project and version must be specified to make a pom.xml.</span>
-
-<span class="go">Options:</span>
-<span class="go"> -h, --help Print this help info.</span>
-<span class="go"> -p, --project SYM Set the project id (eg. foo/bar) to SYM.</span>
-<span class="go"> -v, --version VER Set the project version to VER.</span>
-<span class="go"> -d, --description DESC Set the project description to DESC.</span>
-<span class="go"> -u, --url URL Set the project homepage url to URL.</span>
-<span class="go"> -l, --license NAME:URL Conj [NAME URL] onto the project license map.</span>
-<span class="go"> -s, --scm KEY=VAL Conj [KEY VAL] onto the project scm map (KEY in url, tag).</span>
-</pre></div>
-<p>And we can see that the <tt class="docutils literal"><span class="pre">-d</span></tt> command line option corresponds to the``:description`` key passed to <tt class="docutils literal"><span class="pre">task-options!</span></tt>.</p>
-<p>Of particular interest to us are the <tt class="docutils literal"><span class="pre">--project</span></tt> and <tt class="docutils literal"><span class="pre">--license</span></tt> options - these are not specified as simple strings.</p>
-<p>The <tt class="docutils literal"><span class="pre">--project</span></tt> option is converted to a clojure <em>symbol</em>, as hinted at by the <tt class="docutils literal">SYM</tt> placeholder variable. To verify this, we need to look at the <a class="reference external" href="https://github.com/boot-clj/boot/blob/master/boot/core/src/boot/task/built_in.clj#L27">source for the task</a>, and read the task-option DSL:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">"Create project pom.xml file.</span>
-<span class="s">The project and version must be specified to make a pom.xml."</span>
-
-<span class="p">[</span><span class="nv">p</span> <span class="nb">project </span><span class="nv">SYM</span> <span class="nv">sym</span> <span class="s">"The project id (eg. foo/bar)."</span>
- <span class="nv">v</span> <span class="nv">version</span> <span class="nv">VER</span> <span class="nb">str </span><span class="s">"The project version."</span>
- <span class="nv">d</span> <span class="nv">description</span> <span class="nv">DESC</span> <span class="nb">str </span><span class="s">"The project description."</span>
- <span class="nv">u</span> <span class="nv">url</span> <span class="nv">URL</span> <span class="nb">str </span><span class="s">"The project homepage url."</span>
- <span class="nv">l</span> <span class="nv">license</span> <span class="nv">NAME</span><span class="ss">:URL</span> <span class="p">{</span><span class="nb">str </span><span class="nv">str</span><span class="p">}</span> <span class="s">"The project license map."</span>
- <span class="nv">s</span> <span class="nv">scm</span> <span class="nv">KEY=VAL</span> <span class="p">{</span><span class="nv">kw</span> <span class="nv">str</span><span class="p">}</span> <span class="s">"The project scm map (KEY in url, tag)."</span><span class="p">]</span>
-</pre></div>
-</td></tr></table><p>Here we see in the 4th column, the handling directive for each command line option. In the case of the <tt class="docutils literal"><span class="pre">--project</span></tt> option, the <tt class="docutils literal">sym</tt> specification casts the value from the command line into a symbol.</p>
-<p>The <tt class="docutils literal"><span class="pre">--license</span></tt> is specificed as <tt class="docutils literal">{str str}</tt>, indicating it is a <em>mapping</em>. On the command line, a colon is used to separate the key of the map from its value. Additional <tt class="docutils literal"><span class="pre">--license</span></tt> command line options will conjoin into a single map. As such, in <tt class="docutils literal"><span class="pre">task-options!</span></tt>, a map is expected.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a comprehensive explanation of the various options, see the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">Task Options DSL</a> page in the Boot Wiki.</p>
-</div>
-<p>The rest of the options are simply strings. A few, such as the <tt class="docutils literal"><span class="pre">-a</span></tt>, or <tt class="docutils literal">:all</tt> parameter to the <tt class="docutils literal">aot</tt> task, are flags, and are specified with a boolean value.</p>
-<p>One last note: the version of our project has to be incremented every time that we change the metadata in our jar file. This is important to note since the output jar will be named differently. If you try to upload a jar with the same version as a previous upload, it will fail with an "Access Denied" error.</p>
-<p>Now we can rebuild and redeploy our jar. Since we're chaining the boot tasks, the <tt class="docutils literal">push</tt> task knows to look for jar files to upload in the working file set, so we don't have to specify the path.</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot aot pom jar push
-</pre></div>
-<p>These tasks can be simply composed into a custom boot task. This is left as an exercise for the reader, but with the following caveat:</p>
-<p><em>Once you've uploaded a jar to clojars, there's no automatic or simple way to get it removed.</em></p>
-<p>You can open an issue in github to ask for a deletion (details <a class="reference external" href="https://github.com/ato/clojars-web/wiki/Contact">here</a>), but it's considered bad form.</p>
-<p>As such, <em>please be careful what you upload!</em>. Make sure that you're running tests, and doing verifications on your jar files before you push them out for mass consumption.</p>
-<p>It's a good idea to work those sorts of checks into any custom tasks that you put together.</p>
-</div>
-<div class="section" id="building-your-own-maven-repository">
-<h2 id="building-your-own-maven-repository">Building Your Own Maven Repository</h2>
-<p>Maven handles resolving dependencies in the Java ecosystem. In maven terms, a repository is where you store artifacts, chiefly jar files. It's what boot uses under the hood to resolve and store dependencies.</p>
-<p>Maven repositories are relatively&nbsp;simple. If you've been using boot, you already have one, located in <tt class="docutils literal"><span class="pre">~/.m2</span></tt>.</p>
-<p>If you take a look you'll see how the files are laid out:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ls -la ~/.m2/repository/
-<span class="go">total 0</span>
-<span class="go">drwxr-xr-x 41 jj staff 1394 Apr 5 10:50 .</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:46 ..</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 alandipert</span>
-<span class="go">drwxr-xr-x 7 jj staff 238 Apr 1 09:46 boot</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 byte-streams</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 cheshire</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-http</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-http-lite</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-jgit</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 10:49 clj-oauth</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-stacktrace</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-tuple</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clj-yaml</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 clojure-complete</span>
-<span class="go">drwxr-xr-x 7 jj staff 238 Apr 1 10:49 com</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 commons-codec</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 commons-fileupload</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 commons-io</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:46 commons-logging</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 10:49 crouton</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 fs</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 10:49 http</span>
-<span class="go">drwxr-xr-x 4 jj staff 136 Apr 1 12:46 io</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 javax</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 javazoom</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 jline</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 5 10:50 last-tweet</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 mvxcvi</span>
-<span class="go">drwxr-xr-x 4 jj staff 136 Apr 1 09:47 net</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 3 08:20 opencv</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 3 09:52 opencv-native</span>
-<span class="go">drwxr-xr-x 14 jj staff 476 Apr 1 10:49 org</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 potemkin</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 primitive-math</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 reply</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 riddley</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 ring</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 slingshot</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 tigris</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 09:47 trptcolin</span>
-<span class="go">drwxr-xr-x 3 jj staff 102 Apr 1 10:49 twitter-api</span>
-</pre></div>
-<p>Note the <tt class="docutils literal"><span class="pre">last-tweet</span></tt> directory - this is where boot put our jar file when we installed it in the last section.</p>
-<p>A maven repository is this directory structure, accessible from one of a plethora of different protocols. This includes the file system,&nbsp;HTTP, WebDAV, even directly from S3.</p>
-<p>We'll build a repository that we use the file system to write to (we could also use SFTP if this were a remote system), and provide HTTP access for a read-only use.</p>
-<p>Boot doesn't currently contain any tools to do this sort of work, so we'll need to install maven.</p>
-<p>This is fairly simple, we just need to download the tarball, and unzip it. We can then put its <tt class="docutils literal">bin</tt> directory into our $PATH so it's available (note this will need to go into your <tt class="docutils literal">.bash_profile</tt> or similar location to make the change "stick"):</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ wget   http://apache.mirrors.hoobly.com/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
-$ tar -xvf apache-maven-3.3.3-bin.tar.gz
-$ export PATH="$PWD/apache-maven-3.3.3/bin:$PATH"
-$ which mvn
-...path to the mvn executable
-</pre></div>
-</td></tr></table><p><em>See `the download page &lt;https://maven.apache.org/download.cgi&gt;`__ for alternative mirrors and formats.</em></p>
-<p>If you are using OS X, you can install maven via homebrew:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> brew install maven
-</pre></div>
-<p>To construct a new maven repository, we just need to install our jar to it:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> mvn deploy:deploy-file <span class="se">\</span>
- -DpomFile<span class="o">=</span>target/META-INF/maven/last-tweet/last-tweet/pom.xml <span class="se">\</span>
- -Dfile<span class="o">=</span>target/last-tweet-1.0.0.jar <span class="se">\</span>
- -DrepositoryId<span class="o">=</span>local-repo <span class="se">\</span>
- -Durl<span class="o">=</span><span class="s2">"file:///</span><span class="nv">$PWD</span><span class="s2">/my-maven-repo"</span>
-</pre></div>
-<p>As a first pass, we can use the <tt class="docutils literal"><span class="pre">file://</span></tt> protocol to load the jar from our new repository. We'll need to remove the file from our local repository first:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> rm -rf ~/.m2/repository/last-tweet
-</pre></div>
-<p>Then we can add the new repository to our <tt class="docutils literal">downer</tt> script:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>So now, our <tt class="docutils literal"><span class="pre">set-env!</span></tt> call looks like this (using the latest stable version of <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt>):</p>
+<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
- <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]</span>
-                 <span class="p">[</span><span class="nv">last-tweet</span> <span class="s">"LATEST"</span><span class="p">]]</span>
- <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="o">'</span><span class="p">[</span><span class="s">"my-maven-repo"</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">"file://[full-path-to-your-repo]"</span><span class="p">}]))</span>
+  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]</span>
+                  <span class="p">[</span><span class="nv">org.slf4j/slf4j-nop</span> <span class="s">"1.7.25"</span><span class="p">]]</span>
+  <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 </pre></div>
-</td></tr></table><p>We use <tt class="docutils literal">conj</tt> here to preserve the baked-in defaults.</p>
-<p>When we run <tt class="docutils literal">downer</tt> now, we'll see an ever-so-slight pause and a blank line to indicate the jar is being found and copied. We can then verify that it was used by checking <tt class="docutils literal"><span class="pre">~/.m2/repository</span></tt>:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ./downer
-<span class="gp">$</span> ls -l ~/.m2/repository
-<span class="go">...</span>
-<span class="go">last-tweet</span>
-<span class="go">...</span>
-</pre></div>
-<p>To share this repository, we have many options, but we're going to do the simplest for our introductory purposes: set up <a class="reference external" href="http://nginx.org/">nginx</a> to serve our repository to the public.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Any web server will work, as long as it generates directory listings.</p>
+</td></tr></table></div></div><p>After rebuilding our jar, or running our boot script again, we'll see the <tt class="docutils literal">SLF4J</tt> warnings have disapeared.</p>
 </div>
-<p>First, we need to install nginx. There are <a class="reference external" href="http://nginx.org/en/download.html">packages available for most operating systems</a>, and it's in <a class="reference external" href="http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/">homebrew for folks using OS X</a>.</p>
-<p>Since the location of the nginx configuration is variable depending on what operating system you're using, we'll make a bare-minimum configuration and pass it to nginx, called <tt class="docutils literal">nginx.conf</tt>:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">events</span> <span class="p">{</span>
-   <span class="kn">worker_connections</span> <span class="mi">1024</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">http</span> <span class="p">{</span>
-   <span class="kn">default_type</span> <span class="s">application/octet-stream</span><span class="p">;</span>
-   <span class="kn">server</span> <span class="p">{</span>
-     <span class="kn">listen</span> <span class="mi">8080</span><span class="p">;</span>
-     <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-         <span class="kn">root</span> <span class="s">[FULL</span> <span class="s">PATH</span> <span class="s">TO</span> <span class="s">YOUR</span> <span class="s">REPOSITORY]</span><span class="p">;</span>
-         <span class="kn">autoindex</span> <span class="no">on</span><span class="p">;</span>
-     <span class="p">}</span>
-   <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You will want to better fine-tune the web server in a "production" deployment, this is just a bare-minimum example to get you going.</p>
-</div>
-<p>We can then start up nginx:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> nginx -c nginx.conf
-</pre></div>
-<p>Nginx will run in the background. Now you can open a browser to <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a>, and see your repository.</p>
-<p>We can now configure the boot script to use this repository in the same manner we used the file path earlier:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"0.7.8"</span><span class="p">]</span>
-                  <span class="p">[</span><span class="nv">last-tweet</span> <span class="s">"LATEST"</span><span class="p">]]</span>
-  <span class="ss">:repositories</span> <span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%</span> <span class="o">'</span><span class="p">[</span><span class="s">"my-maven-repo"</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">"http://localhost:8080"</span><span class="p">}]))</span>
-</pre></div>
-</td></tr></table><p>And we can test it in the same way as before:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> rm -rf ~/.m2/repository/last-tweet
-<span class="gp">$</span> ./downer
-<span class="gp">$</span> ls -l ~/.m2/repository
-<span class="go">...</span>
-<span class="go">last-tweet</span>
-<span class="go">...</span>
-</pre></div>
-<p>To shut down nginx, we use the <tt class="docutils literal"><span class="pre">-s</span></tt> switch:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> nginx -s stop
-</pre></div>
-<p>From here, you can construct fairly complex maven systems. Maven supports HTTP authentication, so you can present your repository to the world and limit access. You can use WebDAV to make the HTTP-side of the repository read and write.</p>
-<p>Outside of the HTTP front-end, you can settle on the <tt class="docutils literal"><span class="pre">file://</span></tt> protocol and put the repository on a shared drive, and ensure each user has it mounted to the same location.</p>
-<p>SFTP is an option for read/write of a remote system, using SSH for authentication (works with keys).</p>
-</div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved.</div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

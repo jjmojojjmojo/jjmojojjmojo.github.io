@@ -3,7 +3,7 @@
 <head>
         <title>The Collected Works of Jjmojojjmojo</title>
         <meta charset="utf-8" />
-        
+        <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
         <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
         <script src="/theme/js/zepto.min.js"></script>
@@ -15,6 +15,7 @@
                 <ul id="menu">
                     <li><a href="/pages/about.html">About</a></li>
                     <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
                     <li><a href="/categories.html">Categories</a></li>
                     <li><a href="/tags.html">Tags</a></li>
                 </ul>
@@ -25,32 +26,43 @@
                 </span>
         </header><!-- /#banner -->
         <div id="content-wrapper">
+<h1>Recent Articles</h1>
 <section id="content">
 <h2>Articles in the <em>Tutorial</em> category</h2>
 
-<ol id="post-list">
-        <li><article class="hentry">
+        <article class="hentry">
                 <header> <h2 class="entry-title"><a href="/advanced-boot-scripting.html" rel="bookmark" title="Permalink to Advanced Boot Scripting">Advanced Boot Scripting</a></h2> </header>
                 <footer class="post-info">
-                    <time class="published" datetime="2015-04-11T15:07:00-04:00"> Sat 11 April 2015 </time>
+                    <time class="published" datetime="2018-08-08T13:34:00-04:00"> Wed 08 August 2018 </time>
                     <address class="vcard author">By
-                        <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+                        <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
                     </address>
                 </footer><!-- /.post-info -->
-                <div class="entry-content"> <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
+                <div class="entry-content"> <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<!-- emoji for some reason - better to do this since I can replace these with -->
+<!-- icons or whatever I want) -->
+<p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
 <a class="reference external" href="https://github.com/boot-clj/boot">boot</a> is an all-around useful tool
 for building clojure applications, but one feature in particular has
-proven a <em>adjuncti finalum</em>*: boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">clojure
-scripting</a>. This
+proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#id2" id="id1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">clojure scripting</a>. This
 elevates clojure to the same high productivity of scripting languages
-(like my personal favorite, Python), but bakes …</p> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
+(like my personal favorite, Python), but bakes in dependency management
+and other goodies. This allows the user to build complexity iteratively,
+in a straight-forward manner (verses generating a bunch of boiler plate
+project code and building a package). This article explores boot
+scripting further, illustrating how boot can be used to quickly and
+easily develop and distribute applications and tools. There's also
+discussion about getting your jars into
+<a class="reference external" href="http://clojars.org">Clojars</a>, and setting up a simple bare-minimum
+<a class="reference external" href="http://maven.apache.org/index.html">Maven</a> repository.</p>
+ </div><!-- /.entry-content -->
+        </article>
+<!-- /#posts-list -->
 </section><!-- /#content -->
         </div>
         <footer id="contentinfo" class="body">
             <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved.</div>
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
             </div>
         </footer>
         <script src="/theme/js/main.js"></script>

@@ -9,6 +9,7 @@
             {{page.toc}}
         </div>
     {% endif %}
+    <div class="status-{{ page.status }}">
     {{ page.content }}
 
 	{% if page.modified %}
@@ -16,4 +17,5 @@
 		Last updated: {{ page.locale_modified }}
 		</p>
 	{% endif %}
+	</div>
 {% endblock %}

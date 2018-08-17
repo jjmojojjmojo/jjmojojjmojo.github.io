@@ -44,7 +44,6 @@ class Explanation(BaseAdmonition):
         text = '\n'.join(self.content)
         
         # add explanation header
-        print(self.arguments)
         try:
             title = self.arguments[0]
         except IndexError:

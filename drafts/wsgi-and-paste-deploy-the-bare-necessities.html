@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/wsgi-and-paste-deploy-the-bare-necessities.html" rel="bookmark"
+         title="Permalink to WSGI and Paste Deploy: The Bare Necessities">WSGI and Paste Deploy: The Bare Necessities</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2011-03-30T17:03:00-04:00">
+      Wed 30 March 2011
+    </time>
+    <address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href="#prerequisites" title="Prerequisites">Prerequisites</a></li><li><a class="toc-href" href="#environment" title="Environment">Environment</a></li><li><a class="toc-href" href="#bare-minimum-egg" title="Bare-Minimum Egg">Bare-Minimum Egg</a></li><li><a class="toc-href" href="#bare-minimum-wsgi-app" title="Bare-Minimum WSGI App">Bare-Minimum WSGI App</a></li><li><a class="toc-href" href="#pastedeploy-configuration-application" title="PasteDeploy Configuration - Application">PasteDeploy Configuration - Application</a></li><li><a class="toc-href" href="#glue-application" title="Glue - Application">Glue - Application</a></li><li><a class="toc-href" href="#install-the-egg" title="Install the Egg">Install the Egg</a></li><li><a class="toc-href" href="#starting-the-server" title="Starting The Server">Starting The Server</a></li><li><a class="toc-href" href="#pastedeploy-configuration-middleware" title="PasteDeploy Configuration - Middleware">PasteDeploy Configuration - Middleware</a></li><li><a class="toc-href" href="#glue-middleware" title="Glue - Middleware">Glue - Middleware</a></li><li><a class="toc-href" href="#conclusion" title="Conclusion">Conclusion</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+  <div class="entry-content status-draft">
+    <p>Using paster to create layouts for various types of projects is great,
+especially when you need to get up and running quickly. The downside, is
+that that sometimes the hand-holding, even along with some <a class="reference external" href="http://docs.pylonsproject.org/docs/pyramid.html">amazing
+documentation</a>,
+doesn't give you the whole story.</p>
+<p>I'm in the planning stages for a new project, and although I'm still on
+the fence as to what we'll use to develop it, I'm sweet on
+<a class="reference external" href="http://pylonsproject.org/">Pyramid</a>. However, I'm also a WSGI n00b,
+and haven't used the paste stack for anything beyond building plone
+buildouts and archetypes boilerplate. That means that
+<a class="reference external" href="http://pythonpaste.org/deploy/">PasteDeploy</a> is not in my playbook.
+There are some great <a class="reference external" href="http://pythonpaste.org/script/">PasteScript</a>
+templates provided by the Pyramid project to get started quickly, but I
+didn't see any good explanation of <em>why</em> the files were created, and how
+they actually worked, even in the super-awesome Pyramid docs.</p>
+<p><em>Disclaimer: I didn't look that hard. :P</em></p>
+<p>So, to ease my pain, I got back to basics. I started with a fresh egg,
+the PasteDeploy documentation and <a class="reference external" href="http://www.python.org/dev/peps/pep-0333/">PEP
+333</a>. I came up with the
+absolute, bare-minimum code, setup, and config necessary to produce a
+functioning (albeit boring) WSGI application, and the necessary glue to
+run it via PasteDeploy.</p>
+<p>If you're the type that doesn't need much explaination and just want to
+look at the code, go <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/pastedeploy-minimal/trunk">right to the
+source</a>
+(<a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/checkout">checkout
+instructions</a>)</p>
+<div class="section" id="prerequisites">
+<h2 id="prerequisites">Prerequisites</h2>
+<p>You'll need, at minimum, a modern version of python (I used the 2.6
+version that ships with Debian Squeeze),
+<a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>, and some way to
+<a class="reference external" href="http://pypi.python.org/pypi/pip">install virtualenv</a>.</p>
+<p>I'll leave getting virtualenv installed as an exercise for the reader :)</p>
+<p>I'm going to assume you're in a Linux environment in the few times we
+need to interact with the operating system. As far as I know, this
+should work on any operating system Python runs on, but as always, your
+mileage may vary.</p>
+</div>
+<div class="section" id="environment">
+<h2 id="environment">Environment</h2>
+<pre class="literal-block">
+$ virtualenv fun-minimal-wsgi
+$ cd fun-minimal-wsgi
+$ source bin/activate
+(fun-minimal-wsgi)$ easy_install PasteScript PasteDeploy
+</pre>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line-block">
+<div class="line">If for some reason you're not familiar with virtualenv (and if you're
+a python developer, you really should be, it's great), these commands:</div>
+</div>
+</div>
+<ol class="arabic simple">
+<li>Sets up a sandbox python environment (but will use system packages if
+they exist and haven't been overridden locally)</li>
+<li>Puts you into that environment</li>
+<li>Installs PasteDeploy</li>
+</ol>
+<p>To get out of the environment, you can type <tt class="docutils literal">deactivate</tt>:</p>
+<pre class="literal-block">
+(fun-minimal-wsgi)$ deactivate
+</pre>
+</div>
+<div class="section" id="bare-minimum-egg">
+<h2 id="bare-minimum-egg">Bare-Minimum Egg</h2>
+<p>We'll store our WSGI code in a simple python egg, that is
+setuptools-enabled (pretty much the standard). This requires a couple of
+directories, and some special files (I based this off of output of the
+PasteScript 'basic_namespace' template, for details about what this
+means, see <a class="reference external" href="http://peak.telecommunity.com/DevCenter/setuptools">the setuptools
+docs</a>).</p>
+<div class="line-block">
+<div class="line">Here's what the layout looks like:</div>
+</div>
+<pre class="literal-block">
+fun-minimal-wsgi\
+--&gt; minimal\
+-----&gt; minimal\
+---------&gt; __init__.py
+-----&gt; setup.py
+</pre>
+<p>Here's a quick list of commands to create an empty version of that
+layout (assume that we're still in the <tt class="docutils literal"><span class="pre">fun-minimal-wsgi</span></tt> directory):</p>
+<pre class="literal-block">
+(fun-minimal-wsgi)$ mkdir minimal
+(fun-minimal-wsgi)$ touch minimal/setup.py
+(fun-minimal-wsgi)$ mkdir minimal/minimal
+(fun-minimal-wsgi)$ touch minimal/minimal/__init__.py
+</pre>
+<p>The basic idea here is we have an egg source directory <tt class="docutils literal">minimal</tt>,
+containing a <tt class="docutils literal">setup.py</tt> file, used to install and configure it, and a
+singular package, also called <tt class="docutils literal">minimal</tt> (coincidentally... what it's
+named is not a requirement of setuptools).</p>
+<p>Now for the contents of <tt class="docutils literal">setup.py</tt>:</p>
+<pre class="literal-block">
+from setuptools import setup, find_packages
+import os
+
+version = '1.0'
+
+setup(name='minimal',
+      version=version,
+      description="",
+      long_description="""
+         Very, very minimal example of a WSGI application and middleware.
+      """,
+      # Get more strings from
+      # http://pypi.python.org/pypi?:action=list_classifiers
+      classifiers=[
+        "Programming Language :: Python",
+        ],
+      keywords='',
+      author='Josh Johnson',
+      author_email='none of your beeswax@somehost.com',
+      url='http://lionfacelemonface.wordpress.com',
+      license='BSD',
+      include_package_data=True,
+      packages=['minimal',],
+      zip_safe=False,
+      install_requires=[
+          'setuptools',
+      ],
+      entry_points="""
+      """,
+      )
+</pre>
+<p>This is, at its bare minimum, all you need to say you've got an egg. :)</p>
+<p>You could run <tt class="docutils literal">python setup.py develop</tt> and start using it in your
+virtual environment (but don't yet), not that it does anything yet :)</p>
+</div>
+<div class="section" id="bare-minimum-wsgi-app">
+<h2 id="bare-minimum-wsgi-app">Bare-Minimum WSGI App</h2>
+<p>This code goes into <tt class="docutils literal">minimal/minimal/__init__.py</tt>. This is right out
+of PEP 333, with a couple of changes to take out any logic, and show all
+of the possible ways to create a WSGI app, and WSGI middleware.</p>
+<pre class="literal-block">
+# simple_app and AppClass are right out of PEP 333
+def simple_app(environ, start_response):
+    """Simplest possible application object"""
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/plain')]
+    start_response(status, response_headers)
+    return ['Hello world!\n']
+
+class AppClass:
+    """Produce the same output, but using a class
+
+    (Note: 'AppClass' is the "application" here, so calling it
+    returns an instance of 'AppClass', which is then the iterable
+    return value of the "application callable" as required by
+    the spec.
+
+    If we wanted to use *instances* of 'AppClass' as application
+    objects instead, we would have to implement a '__call__'
+    method, which would be invoked to execute the application,
+    and we would need to create an instance for use by the
+    server or gateway.
+    """
+
+    def __init__(self, environ, start_response):
+        self.environ = environ
+        self.start_response = start_response
+
+    def __iter__(self):
+        status = '200 OK'
+        response_headers = [('Content-type', 'text/plain')]
+        self.start_response(status, response_headers)
+        yield "Hello world!\n"
+
+# not in PEP 333, but mentioned in the comments to AppClass
+class AlternateAppClass:
+    def __call__(self, environ, start_response):
+        status = '200 OK'
+        response_headers = [('Content-type', 'text/plain')]
+        start_response(status, response_headers)
+        return ['Hello world!\n']
+
+class MinimalMiddleware:
+    """
+    Bare-minimum, doesn't do anything at all, middleware.
+    """
+    def __init__(self, application):
+        self.application = application
+
+    def __call__(self, environ, start_response):
+        return self.application(environ, start_response)
+
+class SimpleMiddleware:
+    """
+    Takes a prefix, and appends it to each line in the response.
+    """
+    def __init__(self, application, prefix):
+        self.application = application
+        self.prefix = prefix
+
+    def __call__(self, environ, start_response):
+        response = self.application(environ, start_response)
+        return ['%s %s' % (self.prefix, s) for s in response]
+</pre>
+<div class="line-block">
+<div class="line"><br/></div>
+<div class="line-block">
+<div class="line">Read PEP 333 for full explainations, but here's the gist:</div>
+</div>
+</div>
+<p><strong>WSGI apps</strong> are super simple. At minimum, they're a simple function
+(<tt class="docutils literal">simple_app</tt>), and at their most complex, a simple that implements
+the iterator protocol (<tt class="docutils literal">AppClass</tt>). The function, or the <tt class="docutils literal">__call__</tt>
+method (in the case of <tt class="docutils literal">AppClass</tt>, <tt class="docutils literal">__init__</tt> is standing in for
+<tt class="docutils literal">__call__</tt>) take a '<tt class="docutils literal">start_response</tt>' callable and a dictionary
+with environment information (think CGI variables). They then use the
+callable to set the necessary response code and headers (in our case
+'200 OK' and 'Content-Type: text/plain'), then return an iterable, where
+each member is a line in the output to send to the browser.</p>
+<p>The <tt class="docutils literal">AppClass</tt> example is probably a good way to implement a WSGI app
+class, but it's not the simplest. What's required is a callable, so any
+object that implements a <tt class="docutils literal">__call__</tt> method and returns an iterable.
+<tt class="docutils literal">AppClass</tt> implements the iterator protocol and short-circuits the
+need for instantiation. For the sake of clarity and throughness, I added
+the <tt class="docutils literal">AlternateAppClass</tt> class to illustrate this.</p>
+<p>We'll see the functional difference later when it's being wired up for
+use by PasteDeploy.</p>
+<p><strong>WSGI Middleware</strong> works like a bucket-brigade. An application object
+is passed from middleware class to middleware class until all are
+called. The middleware is instantiated with an application object, and
+when called is expected to return a response. I've included a simplified
+minimal implementation (<tt class="docutils literal">MinimalMiddleware</tt>), and an implementation
+that manipulates the request before returning it (SimpleMiddleware).</p>
+<p><strong>Note:</strong> In the event that you're trying to jump ahead, this code might
+not run out of the box. I'm allowing a configuration option to be passed
+to <tt class="docutils literal">SimpleMiddleware</tt>, and since it's required, it would fail.</p>
+</div>
+<div class="section" id="pastedeploy-configuration-application">
+<h2 id="pastedeploy-configuration-application">PasteDeploy Configuration - Application</h2>
+<div class="line-block">
+<div class="line">Now for the server part. You'll need to call this file something
+useful and put it somewhere you can get to (I've put it in the egg,
+<tt class="docutils literal">minimal/minimal.ini</tt>).</div>
+</div>
+<pre class="literal-block">
+[app:main]
+use = egg:minimal
+
+[server:main]
+use = egg:Paste#http
+host = 0.0.0.0
+port = 6543
+</pre>
+<p>This does two things. It tells PasteDeploy to look in the egg called
+'minimal' for an 'app-factory' <em>entry point</em> called <em>main</em> (more on this
+in a bit). It then configures the server.</p>
+</div>
+<div class="section" id="glue-application">
+<h2 id="glue-application">Glue - Application</h2>
+<p>Before we can run the server we have to do three things: create an
+application factory, add the entry point specified in <tt class="docutils literal">minimal.ini</tt>,
+and then install the egg.</p>
+<p>The factory is simply a callable that returns a WSGI application. We'll
+add this to <tt class="docutils literal">minimal/minimal/__init__.py</tt>.</p>
+<pre class="literal-block">
+...
+def main(global_config, **settings):
+    # settings comes from paste deploy, whatever values were in the section of the
+    # deployment config file
+    if settings.get('use_class', False):
+        return AppClass
+    elif settings.get('use_alt_class', False):
+        return AlternateAppClass()
+    else:
+        return simple_app
+...
+</pre>
+<p>An application factory, for PasteDeploy, is a callable that takes a
+config object (the contents of the whole config file), and any number of
+keyword arguments, which correspond to the other options mentioned in
+the config file (in our case, had we put <tt class="docutils literal">toggle = True</tt> in
+<tt class="docutils literal">[app:main]</tt>, that argument would be passed along to our factory)</p>
+<p>I've added a few config options that the factory can respond to, to make
+it easy to try out the different ways of implementing the same WSGI
+application.</p>
+<p>Now for the entry point, the real glue that ties PasteDeploy with our
+code.</p>
+<div class="line-block">
+<div class="line">We'll add the following to <tt class="docutils literal">setup.py</tt> in the call to <tt class="docutils literal">setup()</tt>:</div>
+</div>
+<pre class="literal-block">
+...
+      entry_points="""
+      [paste.app_factory]
+      main = minimal:main
+      """,
+...
+</pre>
+<p>Note that <tt class="docutils literal">minimal:main</tt> maps directly to the <tt class="docutils literal">main()</tt> function we
+created as our application factory. Had we named it something else, or
+if we wanted to provide multiple app factories for whatever reason, we
+could specify them one after the other, the name of the entry point
+(what we'd reference in <tt class="docutils literal">minimal.ini</tt>), and a path to the function.
+The name <tt class="docutils literal">main</tt> is just the default, and used as a
+convention/convienence. Here are some other examples:</p>
+<ul class="simple">
+<li>Put <tt class="docutils literal">use = egg:minimal#otherapp</tt> in <tt class="docutils literal">minimal.ini</tt>, and
+<tt class="docutils literal">otherapp = minimal:some_other_function_in_init</tt> in <tt class="docutils literal">setup.py</tt></li>
+<li>Put <tt class="docutils literal">use = egg:minimal#main</tt> in <tt class="docutils literal">minimal.ini</tt>, and
+<tt class="docutils literal">main = minimal.some_package:other_function</tt> in <tt class="docutils literal">setup.py</tt></li>
+<li>Put <tt class="docutils literal">use = egg:minimal#other</tt> in <tt class="docutils literal">minimal.ini</tt>, and
+<tt class="docutils literal">main = minimal.some_package.package_deeper:other_function</tt> in
+<tt class="docutils literal">setup.py</tt></li>
+</ul>
+<p>You get the idea.</p>
+</div>
+<div class="section" id="install-the-egg">
+<h2 id="install-the-egg">Install the Egg</h2>
+<p>We'll want to install this in <em>develop</em> mode, so changes to the code
+will be reflected as soon as they are made.</p>
+<p><strong>Note:</strong> entry points are only updated when the egg is installed, so
+you'll have to repeat this procedure every time you make a change to
+them in your egg.</p>
+<p><em>Make sure you've activated your virtual environment before you do
+this!</em></p>
+<pre class="literal-block">
+(fun-minimal-wsgi)$ cd minimal
+(fun-minimal-wsgi)$ python setup.py develop
+(fun-minimal-wsgi)$ cd ..
+</pre>
+</div>
+<div class="section" id="starting-the-server">
+<h2 id="starting-the-server">Starting The Server</h2>
+<p>Now we should be able to start the server using the <tt class="docutils literal">paster serve</tt>
+command.</p>
+<pre class="literal-block">
+(fun-minimal-wsgi)$ paster serve minimal/minimal.ini --reload
+</pre>
+<p>You can now navigate to <a class="reference external" href="http://127.0.0.1:6543">http://127.0.0.1:6543</a> and you should see 'hello
+world'</p>
+<p>Since we specified <tt class="docutils literal"><span class="pre">--reload</span></tt>, we should be able to make changes to
+the application code and <tt class="docutils literal">minimal.ini</tt> and the server will reload for
+us (remember the note about entry points though).</p>
+</div>
+<div class="section" id="pastedeploy-configuration-middleware">
+<h2 id="pastedeploy-configuration-middleware">PasteDeploy Configuration - Middleware</h2>
+<p>Things will change a little bit now:</p>
+<pre class="literal-block">
+[app:minimal_app]
+use = egg:minimal
+
+[filter:middleware]
+use = egg:minimal
+prefix = yikes:
+
+[pipeline:main]
+pipeline =
+    middleware
+    minimal_app
+...
+</pre>
+<p>Here we changed the <tt class="docutils literal">[app:main]</tt> heading to an easy-to-refer-to name.
+We then defined the middleware part (middleware is called 'filters' in
+PasteDeploy configs), and a <tt class="docutils literal">pipeline</tt>, which links up the middleware
+and the application.</p>
+<p>The middleware specified here is also called 'main'.</p>
+<p>Note we've also specified a parameter to the middleware. If we didn't
+need to, we could have just used <tt class="docutils literal">egg:minimal</tt> in the
+<tt class="docutils literal">[pipeline:main]</tt> section, in replace of <tt class="docutils literal">[middleware]</tt></p>
+<p><strong>Note:</strong> This will break your running server instance, since we are
+referring to a filter factory that doesn't exist.</p>
+</div>
+<div class="section" id="glue-middleware">
+<h2 id="glue-middleware">Glue - Middleware</h2>
+<p>Now to make the middleware work. We'll need to a new entry point to
+<tt class="docutils literal">minimal/setup.py</tt>, so it now looks like this:</p>
+<pre class="literal-block">
+...
+      entry_points="""
+      [paste.app_factory]
+      main = minimal:main
+
+      [paste.filter_factory]
+      main = minimal:middleware
+      """,
+...
+</pre>
+<p>Again, the name of the entry point is not significant, and <tt class="docutils literal">main</tt> is
+used as the default so we don't have to specify it in the ini file.</p>
+<p>Now for the filter factory in <tt class="docutils literal">minimal/minimal/__init__.py</tt>:</p>
+<pre class="literal-block">
+...
+# middleware factory for paste deploy
+def middleware(global_config, **settings):
+    prefix = settings.get('prefix', 'Booyeah:')
+
+    def factory(app):
+        return SimpleMiddleware(app, prefix)
+
+    return factory
+</pre>
+<p>Here, we're using the <tt class="docutils literal">SimpleMiddleware</tt> class, and finally
+utilizing/providing the <tt class="docutils literal">prefix</tt> parameter.</p>
+<p>Now we can re-install the egg (to get the new entry point) and restart
+the server.</p>
+<pre class="literal-block">
+(fun-minimal-wsgi)$ cd minimal
+(fun-minimal-wsgi)$ python setup.py develop
+(fun-minimal-wsgi)$ cd ..
+(fun-minimal-wsgi)$ paster serve minimal/minimal.ini --reload
+</pre>
+<p>Now, visiting <a class="reference external" href="http://127.0.0.1:6543">http://127.0.0.1:6543</a> will look a little different.</p>
+<p>The same middleware can be added to the pipeline multiple times as well,
+try adding another copy of <tt class="docutils literal">middleware</tt> to <tt class="docutils literal">[pipeline:main]</tt> and see
+what happens. You could also add another section referencing the same
+filter factory, but call it something else, and use a different setting
+for the prefix.</p>
+</div>
+<div class="section" id="conclusion">
+<h2 id="conclusion">Conclusion</h2>
+<p>So, this helped me understand how WSGI works, and how PasteDeploy is
+used to serve it. This is the foundation of what Pylons, TurboGears and
+Pyramid use, and so it's important to understand to help understand the
+mentality behind everything else these frameworks do.</p>
+<p>Please feel free to comment! Any feedback is appreciated, this was
+primarily a learning exercise for me :)</p>
+</div>
+
+  </div><!-- /.entry-content -->
+</section>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
+</body>
+</html>

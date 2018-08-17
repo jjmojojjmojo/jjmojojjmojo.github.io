@@ -4,7 +4,7 @@ Building A DNS Sandbox
 :author: lionfacelemonface
 :category: Uncategorized
 :slug: building-a-dns-sandbox
-:status: published
+:status: draft
 
 I'm developing some automation around DNS. Its imperative that I don't
 break anything that might impact any users. This post documents the

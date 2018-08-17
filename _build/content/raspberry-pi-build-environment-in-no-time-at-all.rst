@@ -4,6 +4,7 @@ Raspberry Pi Build Environment In No Time At All
 :author: lionfacelemonface
 :category: arch, linux, raspberrypi, tutorials, ubuntu
 :slug: raspberry-pi-build-environment-in-no-time-at-all
+:status: draft
 
 Leveraging `PRoot <http://proot.me/>`__ and `qemu <www.qemu.org>`__,
 it's easy to configure Raspberry Pi's, build and install packages,

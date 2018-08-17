@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content">
+{% block content_title %}
+<h1>All Pages</h1>
+{% endblock %}
+
+<ol id="page-list">
+{% for page in pages %}
+  <li>
+    <article class="hentry">
+      <header>
+          <h2 class="entry-title"><a href="{{ SITEURL }}/{{ page.url }}" rel="bookmark" title="Permalink to {{ page.title|striptags }}">{{ page.title }}</a></h2> 
+      </header>
+      <div class="entry-content">
+          {{ page.summary }} 
+      </div>
+    </article>
+  </li>
+{% endfor %}
+</ol>
+</section>
+{% endblock content %}

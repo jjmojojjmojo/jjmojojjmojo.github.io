@@ -37,12 +37,18 @@
     </address>
     {% endif %}
   </footer><!-- /.post-info -->
-  <div class="entry-content">
-    {% if article.toc %}
+  {% if article.toc %}
     <div>
         {{article.toc}}
     </div>
-    {% endif %}
+  {% endif %}
+  {% if article.status == "draft" %}
+  <div class="warning">
+  <h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+  {% endif %}
+  <div class="entry-content status-{{ article.status }}">
     {{ article.content }}
   </div><!-- /.entry-content -->
 </section>
