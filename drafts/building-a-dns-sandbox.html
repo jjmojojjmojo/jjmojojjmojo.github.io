@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>The Collected Works of jjmojojjmojo</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+
+
+
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<section class="body" id="content">
-<header>
-<h2 class="entry-title">
-<a href="/drafts/building-a-dns-sandbox.html" rel="bookmark" title="Permalink to Building A DNS Sandbox">Building A DNS Sandbox</a></h2>
-</header>
-<footer class="post-info">
-<time class="published" datetime="2013-12-26T13:53:00-05:00">
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/building-a-dns-sandbox.html" rel="bookmark"
+         title="Permalink to Building A DNS Sandbox">Building A DNS Sandbox</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2013-12-26T13:53:00-05:00">
       Thu 26 December 2013
     </time>
-<address class="vcard author">
+    <address class="vcard author">
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-</address>
-</footer><!-- /.post-info -->
-<div>
-<div id="toc"><ul><li><a class="toc-href" href="#use-case" title="Use Case">Use Case</a></li><li><a class="toc-href" href="#coming-soon" title="Coming Soon">Coming Soon</a></li><li><a class="toc-href" href="#server-setup" title="Server Setup">Server Setup</a></li><li><a class="toc-href" href="#zone-files" title="Zone Files">Zone Files</a></li><li><a class="toc-href" href="#configuration" title="Configuration">Configuration</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#using-your-sandbox" title="Using Your Sandbox">Using Your Sandbox</a></li></ul></div>
-</div>
-<div class="warning">
-<h2>WARNING</h2>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href="#use-case" title="Use Case">Use Case</a></li><li><a class="toc-href" href="#coming-soon" title="Coming Soon">Coming Soon</a></li><li><a class="toc-href" href="#server-setup" title="Server Setup">Server Setup</a></li><li><a class="toc-href" href="#zone-files" title="Zone Files">Zone Files</a></li><li><a class="toc-href" href="#configuration" title="Configuration">Configuration</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#using-your-sandbox" title="Using Your Sandbox">Using Your Sandbox</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
-<div class="entry-content status-draft">
-<p>I'm developing some automation around DNS. Its imperative that I don't
+  <div class="entry-content status-draft">
+    <p>I'm developing some automation around DNS. Its imperative that I don't
 break anything that might impact any users. This post documents the
 process I went through to build a DNS sandbox, and serves as a
 crash-course in DNS, which is, like most technology that's been around
@@ -254,9 +260,9 @@ our forward zone file.</p>
 <tt class="docutils literal"><span class="pre">in-addr.arpa</span></tt> domain is special; used for reverse lookups. The
 numbers before the top level domain are simply the subnet octets,
 reversed (<tt class="docutils literal">192.168.0</tt> becomes <tt class="docutils literal">0.168.192</tt>).</p>
-<p></p><p>Remember, this serves as shorthand for defining the entry records
+<p><p>Remember, this serves as shorthand for defining the entry records
 below the SOA.</p>
-</li>
+</p></li>
 <li><p class="first">Line 12 is the required NS record, pointing at the one that we set up
 an A record for in the forward zone file.</p>
 </li>
@@ -447,14 +453,15 @@ sandbox DNS server</div>
 <p>Ubuntu:
 <a class="reference external" href="http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/">http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/</a></p>
 </div>
-</div><!-- /.entry-content -->
+
+  </div><!-- /.entry-content -->
 </section>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

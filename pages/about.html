@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>About This Site</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
+        <title>About This Site</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<h1>About This Site</h1>
-<div class="contents">
-<div id="toc"><ul><li><a class="toc-href" href="#what-are-all-these-words" title="What Are All These WORDS?">What Are All These WORDS?</a></li><li><a class="toc-href" href="#about-the-author" title="About The Author">About The Author</a></li><li><a class="toc-href" href="#about-the-site" title="About The Site">About The Site</a></li><li><a class="toc-href" href="#copyright-license-etc" title="Copyright, License, Etc">Copyright, License, Etc</a></li><li><a class="toc-href" href="#want-to-use-content-for-something" title="Want To Use Content For Something?">Want To Use Content For Something?</a></li></ul></div>
-</div>
-<div class="status-published">
-<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+    <h1>About This Site</h1>
+    
+        <div class="contents">
+            <div id="toc"><ul><li><a class="toc-href" href="#what-are-all-these-words" title="What Are All These WORDS?">What Are All These WORDS?</a></li><li><a class="toc-href" href="#about-the-author" title="About The Author">About The Author</a></li><li><a class="toc-href" href="#about-the-site" title="About The Site">About The Site</a></li><li><a class="toc-href" href="#copyright-license-etc" title="Copyright, License, Etc">Copyright, License, Etc</a></li><li><a class="toc-href" href="#want-to-use-content-for-something" title="Want To Use Content For Something?">Want To Use Content For Something?</a></li></ul></div>
+        </div>
+    <div class="status-published">
+    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>Everything you ever wanted to know about this website <em>and more</em>.</p>
+
 <div class="section" id="what-are-all-these-words">
 <h2 id="what-are-all-these-words">What Are All These <em>WORDS</em>?</h2>
 <p>This website is a creative outlet of <strong>Josh Johnson</strong>: writer, programmer, technology enthusiast... and 🦄 <em>iconoclast</em> 🦄?</p>
@@ -93,7 +96,7 @@
 <p>The book icon <object class="align-middle" data="/images/book-open.svg" type="image/svg+xml">OPEN_BOOK_ICON</object> is clickable - if you click it, the explanation is hidden. You can click the <object class="align-middle" data="/images/book.svg" type="image/svg+xml">CLOSED_BOOK_ICON</object> icon to open it back up.</p>
 <p>The state of each explanation is stored in your browser, if its supported. You can control the data stored, as well as close or open all explanations on the <a class="reference external" href="{filename}/config.html">settings page</a>. You can get there quickly on any page in the site by clicking the gear icon in the right side of the header.</p>
 <p>Code samples are syntax-highlighted for easier readability. They are rendered using my favorite terminal font, <a class="reference external" href="http://levien.com/type/myfonts/inconsolata.html">Inconsolata</a>. Here's an example of some random code:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -103,7 +106,7 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </pre></div>
-</td></tr></table></div><p>If you would like to use different colors for the highlighting, you can also change the style sheet over in the <a class="reference external" href="{filename}/config.html">settings page</a>.</p>
+</td></tr></table><p>If you would like to use different colors for the highlighting, you can also change the style sheet over in the <a class="reference external" href="{filename}/config.html">settings page</a>.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">Please <a class="reference external" href="/pages/contact.html">let me know</a> if you have any trouble with the code examples, especially with regards to the font choice or syntax highlighting. I'm happy to add options to change fonts and additional style sheets to accomodate your needs.</p>
@@ -145,13 +148,15 @@
 <p>If you are interested in using the content provided in this website for any purpose, please <a class="reference external" href="/pages/contact.html">contact Josh Johnson</a>. I'm very open to licensing my content or working with you to create new content for your purposes.</p>
 <p>I have a preference toward licensing content for open-source organizations and folks doing public good. If you fall under that heading, I encourage you to reach out.</p>
 </div>
-</div>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+
+
+	</div>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

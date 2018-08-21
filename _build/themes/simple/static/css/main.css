@@ -1,13 +1,20 @@
-/* general styles */
+/* trying to fix a problem with monospace fonts in tables rendering bigger */
+body, html {
+  -ms-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
 
+/* general styles */
 body {
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 110%;
     margin-top: 1vw;
     margin-left: 1.5vw;
     margin-right: 1.5vw;
     margin-bottom: 1vw;
     background-color: #FFFFFF;
+    font-size: 1em;
 }
 
 #content-wrapper {
@@ -193,13 +200,14 @@ dt {
 }
 
 @font-face {
-    font-family: Inconsolata;
-    src: url("/theme/inconsolata.woff");
+    font-family: "Inconsolata";
+    src: url("/theme/inconsolata.woff") format("woff");
 }
 
 pre {
     font-family: Inconsolata, monospace;
-    line-height: 125%
+    line-height: 125%;
+    font-size: 1em;
 }
 
 /* custom explanation tag */

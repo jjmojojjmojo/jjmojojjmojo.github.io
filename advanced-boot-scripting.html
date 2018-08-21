@@ -3,7 +3,7 @@
 <head>
 <title>The Collected Works of jjmojojjmojo</title>
 <meta charset="utf-8"/>
-<meta content="width=device-width" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
 <link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
 <script src="/theme/js/zepto.min.js"></script>
@@ -122,16 +122,16 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 <div class="section" id="quick-note-development-deviations">
 <h2 id="quick-note-development-deviations">Quick Note: Development Deviations</h2>
 <p>Since we're not building anything right now, or utilizing the task infrastructure, we don't need a <tt class="docutils literal">build.boot</tt> file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run <tt class="docutils literal">boot repl</tt>:</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
 </pre></div>
-</td></tr></table></div></div><p>Alternatively, we can pre-load dependencies on the command line when we run the <tt class="docutils literal">repl</tt> task:</p>
+</td></tr></table></div><p>Alternatively, we can pre-load dependencies on the command line when we run the <tt class="docutils literal">repl</tt> task:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> boot -d twitter-api:1.8.0 repl
 </pre></div>
 </div>
 <div class="section" id="the-script-version-1">
 <h2 id="the-script-version-1">The Script: Version 1</h2>
 <p>For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -187,7 +187,7 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="ss">:count</span> <span class="mi">2</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table></div></div><p>Making this script executable, it can be run on the command line. The
+</td></tr></table></div><p>Making this script executable, it can be run on the command line. The
 result will be the last tweet. I named my script <tt class="docutils literal">downer</tt>, but you can
 name it however you'd like:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> chmod +x downer
@@ -208,7 +208,7 @@ name it however you'd like:</p>
 <p>Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a>.</p>
 </li>
 <li><p class="first">lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called <tt class="docutils literal">boot.user</tt>. You can alternatively load external code using the <tt class="docutils literal">ns</tt> form. The example code could be replaced thusly:</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -222,7 +222,7 @@ name it however you'd like:</p>
 
   <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
 </pre></div>
-</td></tr></table></div></div></li>
+</td></tr></table></div></li>
 <li><p class="first">Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</p>
 </li>
 </ul>
@@ -244,7 +244,7 @@ name it however you'd like:</p>
 <p>This is handled quite simply by utilizing boot's <tt class="docutils literal"><span class="pre">:source-paths</span></tt> environment option, and a little refactoring.</p>
 <p>We'll construct a directory named <tt class="docutils literal">src</tt>, and create a <tt class="docutils literal">last_tweet.clj</tt> file. In it, we'll declare a new namespace, last-tweet, and move the code there.</p>
 <p><tt class="docutils literal">src/last_tweet.clj</tt>:</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -294,13 +294,13 @@ name it however you'd like:</p>
     <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
              <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table></div></div><div class="admonition note">
+</td></tr></table></div><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Our namespace has a dash (-) in it - this isn't supported in clojure file names. So instead, we use an underscore (_) in the name of the file.</p>
 </div>
 <p>This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed <tt class="docutils literal"><span class="pre">-main</span></tt> to <tt class="docutils literal"><span class="pre">last-tweet</span></tt>.</p>
 <p>Here is the new <tt class="docutils literal">downer</tt> script:</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -320,10 +320,10 @@ name it however you'd like:</p>
   <span class="p">[]</span>
   <span class="p">(</span><span class="nf">last-tweet</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div></div><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
+</td></tr></table></div><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
 <p>We can add many namespaces to the <tt class="docutils literal">src</tt> directory. We can also add other source paths - the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> directive is a <a class="reference external" href="http://clojure.org/data_structures#toc24">hash set</a>.</p>
 <p>Now we can refactor the&nbsp;<tt class="docutils literal"><span class="pre">last-tweet/last-tweet</span></tt> function to take credentials and the twitter account to get a tweet from as arguments:</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
 14
 15
 16
@@ -349,9 +349,9 @@ name it however you'd like:</p>
     <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="nv">account</span>
              <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
-</td></tr></table></div></div><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
+</td></tr></table></div><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
 <p>Now we can utilize boot's extremely useful <tt class="docutils literal">defclifn</tt> macro and boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">task option DSL</a>&nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -409,7 +409,7 @@ name it however you'd like:</p>
         <span class="nv">consumer-id</span>
         <span class="nv">consumer-secret</span><span class="p">))))</span>
 </pre></div>
-</td></tr></table></div></div><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -485,7 +485,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 <p>Since we don't need logging for our project, we'll choose the <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt> back-end.</p>
 <p>To figure out exactly what the dependency specification looks like, we can search in the <a class="reference external" href="https://search.maven.org/">Maven Central Repository</a>.</p>
 <div class="figure align-center" style="width: 85%">
-<a href="/images/fullsize/maven-search.jpg"><a href="/images/fullsize/fullsize/maven-search.jpg"><img alt="" sizes="" src="/images/fullsize/fullsize/maven-search.jpg" srcset="/images/fullsize/responsive/maven-search-1000.jpg 1000w,/images/fullsize/responsive/maven-search-800.jpg 800w,/images/fullsize/responsive/maven-search-400.jpg 400w,/images/fullsize/responsive/maven-search-200.jpg 200w"/></a></a>
+<a href="/images/fullsize/maven-search.jpg"><img alt="" sizes="" src="/images/fullsize/maven-search.jpg" srcset="/images/responsive/maven-search-1000.jpg 1000w,/images/responsive/maven-search-800.jpg 800w,/images/responsive/maven-search-400.jpg 400w,/images/responsive/maven-search-200.jpg 200w"/></a>
 <p class="caption">Screen grab of Maven Central search results for 'slf4j-nop'</p>
 </div>
 <p>From the screen grab above, we can derive the dependency specification: <tt class="docutils literal"><span class="pre">[group-id/artifact-id</span> "version"]</tt>.</p>
@@ -496,7 +496,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 <p class="last">To find the latest <em>stable</em> version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is <tt class="docutils literal">1.7.25</tt>.</p>
 </div>
 <p>So now, our <tt class="docutils literal"><span class="pre">set-env!</span></tt> call looks like this (using the latest stable version of <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt>):</p>
-<div class="highlight-wrapper"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
@@ -504,7 +504,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
                   <span class="p">[</span><span class="nv">org.slf4j/slf4j-nop</span> <span class="s">"1.7.25"</span><span class="p">]]</span>
   <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 </pre></div>
-</td></tr></table></div></div><p>After rebuilding our jar, or running our boot script again, we'll see the <tt class="docutils literal">SLF4J</tt> warnings have disapeared.</p>
+</td></tr></table></div><p>After rebuilding our jar, or running our boot script again, we'll see the <tt class="docutils literal">SLF4J</tt> warnings have disapeared.</p>
 </div>
 </div><!-- /.entry-content -->
 </section>
