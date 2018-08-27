@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<meta content="tutorial" name="tags"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
+</head>
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/circuitpython-state-part-1.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 1: Setup">State And Events In CircuitPython: Part 1: Setup</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-08-27T13:01:00-04:00">
+      Mon 27 August 2018
+    </time>
+<address class="vcard author">
+      By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#the-project-the-platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo-project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions-keeping-the-code-simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion-and-whats-next" next="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
+</div>
+<div class="entry-content status-published">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<!-- emoji for some reason - better to do this since I can replace these with -->
+<!-- icons or whatever I want) -->
+<p>This is the first article in a series that explores concepts of <em>state</em> in CircuitPython.</p>
+<p>In this installment, we discuss the platform we're using (both CircuitPython and the Adafruit M0/M4 boards that support it), and build a simple circuit for demonstration purposes. We'll also talk a bit about <em>abstraction</em>.</p>
+<p>This series is intended for people who are new to Python, programming, and/or microcontrollers, so there's an effort to explain things as thoroughly as possible. However, experience with basic Python would be helpful.</p>
+<div class="section" id="the-project-the-platform">
+<h2 id="the-project-the-platform">The Project, The Platform</h2>
+<p>All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.</p>
+<p>I found the answer in <a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing">capacative touch</a>. This is the same technology behind modern cellphones and touchscreens.</p>
+<p>I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch">7 touch capable pins</a> <em>and</em> they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do <a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction">some insanely cool stuff</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The M4 boards <strong>do not</strong> support capacitive touch.</p>
+</div>
+<p>These boards also provide power management either built-in or it can be <a class="reference external" href="https://www.adafruit.com/product/2124">easily added</a>. It makes it easy to build a portable project that runs off of batteries, but still can be powered from the USB port (and in the case of a rechargable LiPoly battery pack, the USB port can be used to charge it as well).</p>
+<p>What makes these boards a really killer platform for hobby projects is that the M0/M4 series also support <strong>CircuitPython</strong>, Adafruit's fork of MicroPython for these particular ARM controllers. It's <em>Python</em>, and one of the languages I'm most comfortable with.</p>
+<p>Besides my personal preference, Python is a great language for learning, rapid prototyping, and general computing.</p>
+<p>CircuitPython is being developed with the express goal of making MicroPython more accessible to new programmers. Because of this, it diverges a bit from MicroPython. MicroPython has already diverged a bit from standard Python as well.</p>
+<p>The differences aren't significant enough to hinder people new to Python and/or microcontrollers, but if you already know MicroPython, or Python it might be a bit of an adjustment.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The full list of differences:</p>
+<ul class="last simple">
+<li><a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/#differences-from-micropython">CircuitPython vs MicroPython</a></li>
+<li><a class="reference external" href="https://docs.micropython.org/en/latest/pyboard/genrst/index.html">MicroPython vs Python</a></li>
+</ul>
+</div>
+<p>That aside, this is a really exciting platform. It stands to provide a gateway for non-programmers to get into computer science and electrical engineering. It's a great time to be alive!</p>
+<p>It's not all 🌈's and 🦄's though. In spite of generally being a great platform, CircuitPython has some limitations, that everyone should be aware of. A much more powerful processor is required to run any flavor of MicroPython. Even with more power, the interpreted nature of Python makes code run, overall, slower than comparable compiled Arduino code.</p>
+<p>Because a Python interpreter has to be constructed to execute Python code, the platform is also very RAM (<a class="reference external" href="https://en.wikipedia.org/wiki/Random-access_memory">random access memory</a>) intensive. RAM is a precious resource on any microcontroller, and CircuitPython eats up a lot of working memory before our program even runs. People experienced with microcontrollers will be used to dealing with this, but because of the interpreter, you're at a disadvantage before your code is even loaded. Programs will start to run out of memory when they approach 150-200 lines of code. That includes external libraries. That's not a lot to work with.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">We'll cover ways of reducing our memory footprint in this article. It's actually not as bad as it might seem.</p>
+</div>
+<p>Further, Python code, especially raw text, takes up a lot of space in another precious resource, <em>flash memory</em>. This is where our program code is stored. Again, this is nothing shocking if we've done any embedded development before, but using Python puts us at a bit of a disadvantage - our code can only be compiled down to an intermediary format, it can't be turned into compact machine code, so we have a lot less space to work with.</p>
+<p>Beyond this, Adafruit has made it pretty clear that CircuitPython is geared toward <em>beginners</em>, and as such their priorities for adding features and the general design of the platform has that audience at the forefront. This can cause some frustration if you want to use a MicroPython or Arduino feature that hasn't been ported to CircuitPython, access an on-board peripheral or use an external IC/breakout board that Adafruit doesn't yet support.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This sounds way more dire than it is, and is changing all the time. CircuitPython is still relatively new and is under constant development. 💖 Adafruit has done an amazing job of supporting the onboard peripherals and the chips and breakout boards they sell in CircuitPython.</p>
+<p class="last">I don't want to downplay what they've accomplished, but if you are coming from other MicroPython boards or the Arduino, or you aspire to build projects that use the full capacity of your microcontroller, you should be aware of what you're getting into.</p>
+</div>
+<p>With all that in mind, I'm happy to say Adafruit has done a great job overcoming the worst of these limitations with their M0 boards. Using the ARM based processors means much faster processor cycles - the M0 runs at 48Mhz, the M4 at 120Mhz (verses 8Mhz or 16Mhz for most common Arduino-compatible boards). There's a slowdown running Python on these boards, but for most applications it won't even be remotely noticeable.</p>
+<p>These chips have a large amount of RAM to begin with, 32kb for the M0 and a whopping <em>192kb</em> for the M4 (compared to 2Kb for most common/classic Arduino chips).</p>
+<p>To address the issue of flash memory, Adafruit provides the <em>express</em> series of M0/M4 boards - they add in 2MB of extra flash memory that <em>just works</em> for storing Python code (you can use it as general storage as well).</p>
+<p>In practice, with the right development boards, the advantages of CircuitPython far outweigh the downsides. In exchange for slightly more expensive components, limited low-level accessibility, and sometimes having to write less-than-elegant Python, we get an incredibly powerful platform for rapid prototyping. I've been using it for a few months now and have found it to be exceedingly capable.</p>
+<p>What makes most of these concerns completely moot is that Adafruit's CircuitPython-compatible boards fully support the Arduino IDE. So if we can't work within the limitations of CircuitPython, we can always switch to the Arduino tooling, and unlock the full potential of the M0/M4 chips.</p>
+</div>
+<div class="section" id="audience">
+<h2 id="audience">Audience</h2>
+<p>This guide is written for people who know basic Python, and have done rudimentary things with microcontrollers, like control LEDs and read from momentary switches.</p>
+<p>It doesn't assume you are a Python expert, or have done anything too elaborate with microcontrollers - but it will expose you to some advanced concepts.</p>
+<p>It's a good idea to work through <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">Adafruit's "Welcome To CircuitPython"</a> guide before trying to dig into the topics covered here, but it's not necessary.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">It wouldn't hurt to also work through <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials">CircuitPython Essentials</a> as well!</p>
+</div>
+<p>This series tries to dive really deep into details when exploring the concepts behind the code being developed. There are line-by-line explanations of each code example. So don't be afraid to give this guide a shot, even if you're really new to microcontrollers.</p>
+<p>Please feel free to <a class="reference external" href="/pages/contact.html">contact the author</a> with questions, corrections, or suggestions on how to make this series more accessible!</p>
+</div>
+<div class="section" id="demo-project">
+<h2 id="demo-project">Demo Project</h2>
+<p>To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.</p>
+<p>It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.</p>
+<div class="centered docutils container">
+<a href="/images/fullsize/circuitplayground-express-closeup-neopixel-marked.jpg"><img alt="" sizes="(min-width: 2120.0px) 400px,(min-width: 1696.0px) 320px,(min-width: 1272.0px) 240px,(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/circuitplayground-express-closeup-neopixel-marked.jpg" srcset="/images/responsive/circuitplayground-express-closeup-neopixel-marked-2000.jpg 2000w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-1600.jpg 1600w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-1200.jpg 1200w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-1000.jpg 1000w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-800.jpg 800w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-400.jpg 400w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/itsybitsy-m0-express-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 2120.0px) 400px,(min-width: 1272.0px) 240px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/itsybitsy-m0-express-closeup-dotstar-marked.jpg" srcset="/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-2000.jpg 2000w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-1200.jpg 1200w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-800.jpg 800w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-400.jpg 400w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/trinket-m0-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 2120.0px) 400px,(min-width: 1272.0px) 240px,(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/trinket-m0-closeup-dotstar-marked.jpg" srcset="/images/responsive/trinket-m0-closeup-dotstar-marked-2000.jpg 2000w,/images/responsive/trinket-m0-closeup-dotstar-marked-1200.jpg 1200w,/images/responsive/trinket-m0-closeup-dotstar-marked-1000.jpg 1000w,/images/responsive/trinket-m0-closeup-dotstar-marked-800.jpg 800w,/images/responsive/trinket-m0-closeup-dotstar-marked-400.jpg 400w,/images/responsive/trinket-m0-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 2120.0px) 400px,(min-width: 1272.0px) 240px,(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg" srcset="/images/responsive/gemma-m0-closeup-dotstar-marked-2000.jpg 2000w,/images/responsive/gemma-m0-closeup-dotstar-marked-1200.jpg 1200w,/images/responsive/gemma-m0-closeup-dotstar-marked-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-dotstar-marked-800.jpg 800w,/images/responsive/gemma-m0-closeup-dotstar-marked-400.jpg 400w,/images/responsive/gemma-m0-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">On the CircuitPlayground, even the buttons are already integrated!</p>
+</div>
+<p>The features of the demo project are as follows:</p>
+<dl class="docutils">
+<dt>Phase 1:</dt>
+<dd><ul class="first last simple">
+<li>One button will control the rate of blink of the red LED.</li>
+<li>The other button will turn the red LED on or off - it will not affect the blink rate.</li>
+</ul>
+</dd>
+<dt>Phase 2:</dt>
+<dd><ul class="first last simple">
+<li>The functionality of Phase 1 will continue, except the RGB LED will blink as well. The "rate button" will change the blink rate of both LEDs.</li>
+<li>Pressing both buttons will change the color of the RGB LED.</li>
+</ul>
+</dd>
+<dt>Phase 3:</dt>
+<dd><ul class="first last simple">
+<li>Functionality of Phase 2 will persist, except holding the other button will determine if the rate button is changing the blink rate of the RGB LED or the red LED. If it's held, the RGB LED rate is changed. If It's not held, the red LED rate is changed.</li>
+</ul>
+</dd>
+</dl>
+<p>This is a fairly simple project but because of the complex button logic, it will really put our state and event code through its paces.</p>
+</div>
+<div class="section" id="materials">
+<h2 id="materials">Materials</h2>
+<p>If you'd like to follow along, you will need the following items:</p>
+<ul class="simple">
+<li>A CircuitPython-capable development board (M0/M4 series, express recommended).</li>
+<li>Two momentary switches (buttons).</li>
+<li>A micro-USB cable.</li>
+<li>Connectors (jumper cables, alligator clips, solid-core wire; specifics will depend on which board you are using).</li>
+<li>A breadboard.</li>
+</ul>
+<p>You can get all of these items from Adafruit, <a class="reference external" href="https://www.adafruit.com/wishlists/467781">here's a list</a>.</p>
+<p>I've also sourced them and similar ones from Mouser, to give you some idea of possible substitutions: <a class="reference external" href="https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=b9d0704608">shared cart</a>.</p>
+<p>Amazon resellers will generally carry most of these things, even the Adafruit boards. It's a good idea to shop around, since there's a large gradient between cost, available options, shipping, and quality.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>I do not do affiliate links and do not endorse any particular storefront.</strong></p>
+<p>My point in providing saved carts and wishlists is to help you find what you need.</p>
+<p class="last">💖 That said, if given the opportunity, I will go on about Adafruit's quality and fast shipping, and this is based soley on my personal experiences with their online store and products. 🦄 💖</p>
+</div>
+<div class="section" id="the-development-board">
+<h3>The Development Board</h3>
+<p>Any of the M0 or M4 based boards <a class="reference external" href="https://www.adafruit.com/category/957">sold by Adafruit</a> should be compatible with the code in this article.</p>
+<p>I am fortunate to own, in part due to recent attendance at PyCon 2018, <em>four</em> examples of the M0 boards, and have tested the code on each:</p>
+<a href="/images/fullsize/nonblocking-m0-boards-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-m0-boards-2.jpg" srcset="/images/responsive/nonblocking-m0-boards-2-2500.jpg 2500w,/images/responsive/nonblocking-m0-boards-2-2000.jpg 2000w,/images/responsive/nonblocking-m0-boards-2-1800.jpg 1800w,/images/responsive/nonblocking-m0-boards-2-1600.jpg 1600w,/images/responsive/nonblocking-m0-boards-2-1200.jpg 1200w,/images/responsive/nonblocking-m0-boards-2-1000.jpg 1000w,/images/responsive/nonblocking-m0-boards-2-800.jpg 800w,/images/responsive/nonblocking-m0-boards-2-400.jpg 400w,/images/responsive/nonblocking-m0-boards-2-200.jpg 200w" style="width: 80%;"/></a>
+<p>From left to right, we have
+the <a class="reference external" href="https://www.adafruit.com/product/3333">CircuitPlayground Express</a>,
+the <a class="reference external" href="https://www.adafruit.com/product/3727">ItsyBitsy M0 Express</a>,
+the <a class="reference external" href="https://www.adafruit.com/product/3500">Trinket M0</a>,
+and the <a class="reference external" href="https://www.adafruit.com/product/3500">GEMMA M0</a>. There's also a <a class="reference external" href="https://en.wikipedia.org/wiki/Quarter_(United_States_coin)">quarter</a> for scale. On the whole, these things are <em>tiny</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<a href="/images/fullsize/gemma-m0-closeup-obverse.jpg"><img alt="" class="align-right" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-obverse.jpg" srcset="/images/responsive/gemma-m0-closeup-obverse-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-obverse-800.jpg 800w,/images/responsive/gemma-m0-closeup-obverse-400.jpg 400w,/images/responsive/gemma-m0-closeup-obverse-200.jpg 200w" style="width: 20%;"/></a>
+<p>The GEMMA M0 I have is a special edition that was included in the SWAG bag at PyCon 2018 in Cleveland Ohio. It's functionally identical to the GEMMA you get from the Adafruit shop but it's a different color and has a special Pycon 2018 marking on the back.</p>
+<p class="last">There was not a lot of fanfare about it, but I did find a <a class="reference external" href="https://www.youtube.com/watch?v=71eAnJeQu2U">video by Dan Bader</a> talking about it, and a great <a class="reference external" href="https://bigl.es/friday-fun-adafruit-gemma-m0-and-neopixels/">blog post by Les Pounder</a> putting it through its paces.</p>
+</div>
+<p>Which board should you use? It depends on your application, as each board has it's strengths.</p>
+<p>The GEMMA, for example, is designed for wearable tech projects - it has a battery hookup and power regulator, as well as an on/off switch. The Trinket is absolutely lilliputian in its scale and a farily basic board. Both the GEMMA and Trinket have limited pins available. The ItsyBitsy and CircuitPlayground, being express boards, have extra flash memory. The CircuitPlayground has wearable features like the GEMMA, but it has a million nifty peripherals built in. It exposes a relatively small number of pins. In contrast, the ItsyBitsy is fairly barebones like the Trinket but has a <em>lot</em> of pins available.</p>
+<p>The <a class="reference external" href="https://www.adafruit.com/category/946">Feather boards</a> (not pictured) have a ton of great built-in peripherals provide a standard platform for expansion boards called "<a class="reference external" href="https://www.adafruit.com/category/945">wings</a>". They are a great, super-compact alternative to the old-school Arduino and Arduino Shield platform. I have an ESP8266-based Feather and one based on the ATmega32u4 with bluetooth LE, and really like the platform.</p>
+<p>Speaking of Arudino shields, Adafruit also makes an M0 board that's in the same form factor as the original Arduino, called the <a class="reference external" href="https://learn.adafruit.com/adafruit-metro-m0-express-designed-for-circuitpython">Metro M0 Express</a>. If you've already invested in a lot of Arduino shields, this is the board for you.</p>
+<p>In any case, <strong>I would highly recommend doing any initial development on the CircuitPlayground Express</strong>. It has a dizzying array of peripherals built in, plus battery and power regulation, along with a large number of easy-to-work-with pads - it's appropriate for wearable projects as well as more traditional applications. It's easy to migrate to a smaller/less featureful board when a project starts to really come together.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If your budget allows, and especially if you are just starting out, I'd suggest springing for the <a class="reference external" href="https://www.adafruit.com/product/2769">Circuit Playground Express Advanced Pack</a>. I had a couple of M0 boards and a lot of miscellaneous breakout boards before I picked up this kit, and I wish I had started with it instead.</p>
+<p class="last">It gives you everything you need to explore the possibilities of the platform (save maybe some wire and a breadboard or two), without having to solder anything!</p>
+</div>
+<p>A few things to keep in mind with regard to the "lilypad" style boards (GEMMA, CircuitPlayground; so-called after one of the first "wearable" platforms, <a class="reference external" href="https://store.arduino.cc/usa/lilypad-arduino-main-board">The Adruino LilyPad</a>) verses the "standard" ones (Trinket, ItsyBitsy):</p>
+<ul class="simple">
+<li>Lilypad-style boards do not require any soldering or other assembly - you can just unpack them, plug in a USB cable, and start coding. You will typically use alligator clips, or conductive thread, to connect them to other components.</li>
+<li>Standard boards will require some soldering. You'll either have to solder wires directly to the pin pads on the perimeter of the board, or use the provided headers.</li>
+<li>You can, however, solder things to the lilypad-style pads for a sturdier connection.</li>
+</ul>
+</div>
+<div class="section" id="connectors">
+<h3>Connectors</h3>
+<p>Here's an overview of the sorts of connectors used in the demo circuits below, and the sort of things to look for when buying kits or stocking out your workbench.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There are many ways to connect components to microcontrollers! This is just a sampling of some common ones, and the ones I used in the various demo circuits illustrated below.</p>
+</div>
+<div class="section" id="jumper-wires">
+<h4>Jumper Wires</h4>
+<p>The most common way to connect components in projects like ours is to use "jumper" wire - the term refers to the fact that the wire shorts (jumps) two points.</p>
+<p>These are essential when working with breadboards.</p>
+<p>You can make your own jumper wires using cut and stripped lengths of wire. The best to use for breadboard work is 22-gauge insulated wire, but anything that's conductive and between 18 and 24-guage should work.</p>
+<a href="/images/fullsize/solid-core-jumper-wires.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/solid-core-jumper-wires.jpg" srcset="/images/responsive/solid-core-jumper-wires-2500.jpg 2500w,/images/responsive/solid-core-jumper-wires-2000.jpg 2000w,/images/responsive/solid-core-jumper-wires-1800.jpg 1800w,/images/responsive/solid-core-jumper-wires-1600.jpg 1600w,/images/responsive/solid-core-jumper-wires-1200.jpg 1200w,/images/responsive/solid-core-jumper-wires-1000.jpg 1000w,/images/responsive/solid-core-jumper-wires-800.jpg 800w,/images/responsive/solid-core-jumper-wires-400.jpg 400w,/images/responsive/solid-core-jumper-wires-200.jpg 200w" style="width: 80%;"/></a>
+<p>You can also buy "pre-made" jumpers. These are usually flexible stranded wire with "boots" or plastic shields covering the ends. They come in various lengths, colors, and combinations of "genders". "Female" refers to receptive connectors, and "male" refers to protruding ones.</p>
+<p>For most projects (including this one), "male-to-male" wires are the go-to form.</p>
+<a href="/images/fullsize/premade-jumper-wires-organized.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/premade-jumper-wires-organized.jpg" srcset="/images/responsive/premade-jumper-wires-organized-2500.jpg 2500w,/images/responsive/premade-jumper-wires-organized-2000.jpg 2000w,/images/responsive/premade-jumper-wires-organized-1800.jpg 1800w,/images/responsive/premade-jumper-wires-organized-1600.jpg 1600w,/images/responsive/premade-jumper-wires-organized-1200.jpg 1200w,/images/responsive/premade-jumper-wires-organized-1000.jpg 1000w,/images/responsive/premade-jumper-wires-organized-800.jpg 800w,/images/responsive/premade-jumper-wires-organized-400.jpg 400w,/images/responsive/premade-jumper-wires-organized-200.jpg 200w" style="width: 80%;"/></a>
+<p>Jumper wires will be required for any of the demo circuits for the ItsyBitsy or the Trinket. The GEMMA and CircuitPlayground will require other connectors, since they have those lilly-pad-style pads instead of standard pins.</p>
+<p>Eventually, you'll collect many of these lengths of wire, and will want to show them off, maybe by keeping them in a special drawer. 😀</p>
+<a href="/images/fullsize/nonblocking-lengths-of-wire.jpg"><img alt="" class="align-center" sizes="(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-lengths-of-wire.jpg" srcset="/images/responsive/nonblocking-lengths-of-wire-400.jpg 400w,/images/responsive/nonblocking-lengths-of-wire-200.jpg 200w" style="width: 80%;"/></a>
+</div>
+<div class="section" id="alligator-clips">
+<h4>Alligator Clips</h4>
+<p>"Alligator" clips are called that because the spring-loaded connectors look sort of like an aligator's head. They come in many lengths and colors.</p>
+<p>You can use alligator clips to connect anything conductive.</p>
+<p>Alligator clips are essential for prototyping and general use of the "lilypad" style boards, like the GEMMA and CircuitPlayground.</p>
+<p>In the demo circuits below, standard alligator clips aren't used, but they're a good addition to your toolbox, especially if you have one of the "lilypad" style boards.</p>
+<a href="/images/fullsize/aligator-clips.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/aligator-clips.jpg" srcset="/images/responsive/aligator-clips-2500.jpg 2500w,/images/responsive/aligator-clips-2000.jpg 2000w,/images/responsive/aligator-clips-1800.jpg 1800w,/images/responsive/aligator-clips-1600.jpg 1600w,/images/responsive/aligator-clips-1200.jpg 1200w,/images/responsive/aligator-clips-1000.jpg 1000w,/images/responsive/aligator-clips-800.jpg 800w,/images/responsive/aligator-clips-400.jpg 400w,/images/responsive/aligator-clips-200.jpg 200w" style="width: 80%;"/></a>
+</div>
+<div class="section" id="alligator-clip-to-jumper-wire">
+<h4>Alligator Clip To Jumper Wire</h4>
+<p>This is a variant connector that combines a alligator-style clip to a flexible jumper cable. They also come in different "genders".</p>
+<p>We'll be using some of these in the "alligator-to-male" variety for the GEMMA version of the demo circuit.</p>
+<a href="/images/fullsize/aligator-to-jumper.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/aligator-to-jumper.jpg" srcset="/images/responsive/aligator-to-jumper-2500.jpg 2500w,/images/responsive/aligator-to-jumper-2000.jpg 2000w,/images/responsive/aligator-to-jumper-1800.jpg 1800w,/images/responsive/aligator-to-jumper-1600.jpg 1600w,/images/responsive/aligator-to-jumper-1200.jpg 1200w,/images/responsive/aligator-to-jumper-1000.jpg 1000w,/images/responsive/aligator-to-jumper-800.jpg 800w,/images/responsive/aligator-to-jumper-400.jpg 400w,/images/responsive/aligator-to-jumper-200.jpg 200w" style="width: 80%;"/></a>
+</div>
+</div>
+<div class="section" id="the-demo-circuit">
+<h3>The Demo Circuit</h3>
+<p>There are different ways you can set up buttons to work with the various M0 boards (save the CircuitPlayground, since it has them built-in), but for this article we'll use a breadboard and jumper wires.</p>
+<p>The circuit ties one side of each button to ground, and then the other side to a pin on the board. This means that the buttons will read "LOW" when pressed. We'll use a "pull up" resistor to keep the high voltage from "floating". The resistor is built in to the microcontroller, so we can just turn them on in software.</p>
+<p>I chose this approach for a few key reasons:</p>
+<ul class="simple">
+<li>It keeps the component count down - you don't need anything but the buttons and some wire. The other way of hooking up the buttons, where the button is tied to 3V, would require a resistor for each button. Most microcontrollers have pull up resistors built in these days, otherwise we'd also need an additional resistor for each pin as well.</li>
+<li>It's safer, since we're connecting the buttons, and ultimately the microcontroller pins, to <em>ground</em> instead of a live current. We can't do much, if any, damage if we misconfigure the pins in software, or the button is damaged (this is why we need the resistors if we were to wire the buttons up the other way).</li>
+<li>It's the most commonly used approach in the vast majority of tutorials and documentation these days, because of the previous two points. If you've used momentary switches with a microcontroller before, you're likely already familiar with this type of circuit.</li>
+</ul>
+<p>The trade off is that the button logic seems inverted compared to what common sense would dictate: when we press the button, it reads "LOW", and when it's not pressed, it reads "HIGH".</p>
+<p>The CircuitPlayground Express is wired in the reverse configuration, and requires a pull-<em>down</em> resistor turned on in software. The logic is also inverted to be "correct". This was done this way to make teaching easier with the board, but it adds an inconsistency in my little platoon of M0 development boards. This will be dealt with below, when we explore <em>abstraction</em>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last"><a class="reference external" href="https://en.wikipedia.org/wiki/Limor_Fried">Lady Ada</a> wrote a <a class="reference external" href="http://www.ladyada.net/learn/arduino/lesson5.html">classic tutorial</a> on the subject of wiring buttons to digital inputs. It explains everything, including the concept of "floating" really well. Highly recommended reading.</p>
+</div>
+<p>I've used three different kinds of breadboards I had on hand, and mixed up the kinds of connectors a bit to illustrate some different ways of wiring up the buttons.</p>
+<div class="section" id="gemma-m0">
+<h4>Gemma M0</h4>
+<a href="/images/fullsize/nonblocking-gemma-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-gemma-demo-circuit.jpg" srcset="/images/responsive/nonblocking-gemma-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-gemma-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-gemma-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-gemma-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-gemma-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-gemma-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-gemma-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-gemma-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-gemma-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
+<p>With the Gemma, I used a "mini" breadboard. These breadboards are split into two halves by the screw holes at the top and bottom, and the "trench" in the middle. The tie points are connected in groups of five, running left to right. I've installed the buttons such that they straddle the trench. This was necessary because of a little plastic bit that sticks out between the pins.</p>
+<p>I wanted to make sure I had easy access to the buttons, so I put all of the jumper connections on the left side. On the right side, I made a little ground "bus" by tying together the rows where I needed to connect the buttons to ground with some solid-core wire. I tied the ground jumper/alligator clip to the "bus" using a little piece of wire over the screw hole.</p>
+<p>I clipped the black alligator clip to ground, the white one (button "A") to "D1" (also marked "A0" if you use it as an analog pin), and the yellow clip/button to "D0" ("A2").</p>
+</div>
+<div class="section" id="itsybitsy-m0-express">
+<h4>ItsyBitsy M0 Express</h4>
+<a href="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg" srcset="/images/responsive/nonblocking-itsybitsy-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-itsybitsy-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-itsybitsy-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
+<p>For the ItsyBitsy, I used a full-sized breadboard. On these breadboards, they have a similar split and trench down the middle. They also have a long bus on each side (top and bottom in this picture) marked negative and positive. Each group of tie points are connected. We've used them to run power from the ItsyBitsy to the rest of the board.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The buses can be removed and multiple breadboards can be connected to form larger areas to work with.</p>
+</div>
+<p>For ease of access, I've tied the left and right power rails together using some solid-core wire (far left). This isn't necessary for this project (we're only tying things to ground and pins on the ItsyBitsy), but it's a useful setup so I added it for demonstration purposes.</p>
+<p>I've seated the ItsyBitsy, fitted with the supplied headers, into the top of the breadboard (row one, on the far right). I've tied it's 3V pin (positive 3.3 volts) to the top positive bus rail, and its G pin (negative, ground) to the negative rail on the bottom.</p>
+<p>Because of the connections on the far left, all of the rails are live and connected like one big bus.</p>
+<p>I've connected the buttons to ground on the top rail (rows 21, and 28).</p>
+<p>I've connected button "A" (the grey button, white wire, row 23) to pin 11 on the ItsyBitsy (row 6 - "D11" in software).</p>
+<p>I've connected button "B" (the yellow button, yellow wire, row 30) to pin 7 on the ItsyBitsy (row 9 - "D9" in software).</p>
+</div>
+<div class="section" id="trinket-m0">
+<h4>Trinket M0</h4>
+<a href="/images/fullsize/nonblocking-trinket-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-trinket-demo-circuit.jpg" srcset="/images/responsive/nonblocking-trinket-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-trinket-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-trinket-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-trinket-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-trinket-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-trinket-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-trinket-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-trinket-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-trinket-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
+<p>For the Trinket, I used a standard "half-sized" breadboard. It's just like the "full sized" on I used for the ItsyBitsy, but it's... half the size 🤔.</p>
+<p>For this circuit, I used pre-made jumper wires exclusively.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>It's a little messier using all jumpers, but it's really easy to change things up. In fact, I originally had the buttons wired to pins on the other side of the Trinket, but it was hard to see what was going on in the pictures. It was trivial to rearrange things to make it easier to see what's what.</p>
+<p class="last">It's always a good idea to use jumper wires to start a project, and as things take shape, slowly replace them with solid-core wires. 🦄</p>
+</div>
+<p>I seated the Trinket with attached headers on row 1 (far right). I tied its ground ('Gnd' pin) to the left ground rail (-, in this picture it's on the top).</p>
+<p>The buttons are tied to ground on the left side (rows 13 and 19).</p>
+<p>The "A" button (grey, white jumper) is attached to pin "~1" (row 3, "D1" in software - this pin can also be an analog output, that's why it's marked with a tilde).</p>
+<p>The "B" button (yellow, yellow jumper) is tied to pin 2 (row 4, "D2" in software).</p>
+</div>
+<div class="section" id="circuitplaground-express-problem-child">
+<h4>CircuitPlaground Express: Problem Child</h4>
+<p>Doing things this way with the standard boards presents a problem with our rockstar board: the CircuitPlayground Express has its buttons wired in the other manner. They require a pull-<em>down</em> resistor turned on in software, and will read "HIGH" when pressed.</p>
+<p>Further, the pin assignments are different for every single board, and the boards differ in what kind of RGB LED they have onboard. In the next section, we'll address these minor differences with some clever Python code and the power of <em>abstraction</em>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="abstractions-keeping-the-code-simple">
+<h2 id="abstractions-keeping-the-code-simple">Abstractions: Keeping The Code Simple</h2>
+<p>Because there are minor differences between the different boards, we're going to abstact them away using a python module. We'll call it <tt class="docutils literal">setup.py</tt>.</p>
+<p>In programming, <em>abstraction</em> is providing an indirect way to work with something. That something might be code, concepts, a service like a database, or something physical like different development boards, as we're abstracting here.</p>
+<p>Abstraction helps by providing a single, simplified <em>interface</em> to do things that may have a lot of complexity.</p>
+<p>For example, instead of building an abstraction module like we're doing below, we could have a bunch of <tt class="docutils literal">if</tt> statements that, given we have a way to figure out what board we're running our code on, set up the right pins or pixels for us.</p>
+<p>Something like this:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># psuedo code!</span>
+
+<span class="k">if</span> <span class="n">itsy</span><span class="o">-</span><span class="n">bitsy</span><span class="p">:</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">dotstar</span>
+  <span class="n">use</span> <span class="n">pins</span> <span class="n">D7</span> <span class="ow">and</span> <span class="n">D11</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
+<span class="k">elif</span> <span class="n">circuit</span><span class="o">-</span><span class="n">playground</span><span class="p">:</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">neopixel</span>
+  <span class="n">use</span> <span class="n">pins</span> <span class="n">D4</span> <span class="ow">and</span> <span class="n">D5</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
+<span class="k">elif</span> <span class="n">trinket</span><span class="p">:</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">dotstar</span>
+  <span class="n">use</span> <span class="n">pins</span> <span class="n">D1</span> <span class="ow">and</span> <span class="n">D2</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
+<span class="k">elif</span> <span class="n">gemma</span><span class="p">:</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">dotstar</span>
+  <span class="n">use</span> <span class="n">pins</span> <span class="n">D0</span> <span class="ow">and</span> <span class="n">D1</span>
+  <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
+</pre></div>
+</td></tr></table></div><p>The problem with this approach is that, besides being messy, it's adding a lot of extra places where our code could break. And every new board you want to use adds more complexity.</p>
+<p>But more importantly, you have to know <em>every detail</em> of <em>every board</em> you might use. Maybe someone wants to use our code and their LED is on pin 3. Maybe they are using touch pads instead of buttons. Maybe there's some new-fangled RGB LED product (we'll call them SunSpots&trade; 😉) that someone wants to use.</p>
+<p>If we have this chain of <tt class="docutils literal">if</tt>'s, its up to <em>us</em> to add in support for these different ways of doing what we want to do.</p>
+<p>In an abstraction, we decide on a standard way of accessing the code, or <em>interface</em>. That means we decide that variables and functions will be named a certain way. Functions will take certain parameters and return specific kinds of values.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Like many terms in technology, <em>interface</em> has multiple meanings in different contexts.</p>
+<p>We're using the term in the sense of an <a class="reference external" href="https://en.wikipedia.org/wiki/Application_programming_interface">application programming interface</a>, usually abbreviated as <em>API</em>.</p>
+<p class="last">Be careful when searching 😀.</p>
+</div>
+<p>Another term for this, that you'll hear used sometimes in computer science, is <em>contract</em>. I think that describes what the abstraction does a bit more concisely - you are saying to someone who wants to use your code "I promise that you can rely on my code working this way", and the user is saying "I agree to do things your way".</p>
+<p>As long as the code for each board follows the contract, and anyone using the board-specific code does so through the interface, everything works in an interchangeable way.</p>
+<p>I like to think about the interface in terms of the actual variables and functions you use, and the contract as the understanding of what inputs and outputs the interface uses, as well as the things the interface does when you call the functions or access the variables:</p>
+<a href="/images/fullsize/abstraction-explained-1.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/abstraction-explained-1.jpg" srcset="/images/responsive/abstraction-explained-1-2500.jpg 2500w,/images/responsive/abstraction-explained-1-2000.jpg 2000w,/images/responsive/abstraction-explained-1-1800.jpg 1800w,/images/responsive/abstraction-explained-1-1600.jpg 1600w,/images/responsive/abstraction-explained-1-1200.jpg 1200w,/images/responsive/abstraction-explained-1-1000.jpg 1000w,/images/responsive/abstraction-explained-1-800.jpg 800w,/images/responsive/abstraction-explained-1-400.jpg 400w,/images/responsive/abstraction-explained-1-200.jpg 200w" style="width: 80%;"/></a>
+<p>For this simple abstraction, I've decided to make five Python objects that define our interface:</p>
+<ul class="simple">
+<li>A pixel object (<tt class="docutils literal">rgb</tt>)</li>
+<li>The built-in RED LED, represented by a <tt class="docutils literal">DigitalInOut</tt> object (<tt class="docutils literal">led</tt>)</li>
+<li>2 buttons, represented by <tt class="docutils literal">DigitalInOut</tt> objects (<tt class="docutils literal">a_button</tt>, <tt class="docutils literal">b_button</tt>)</li>
+<li>A function that returns the value of a button (<tt class="docutils literal">check()</tt>).</li>
+</ul>
+<p>These are the bits of code used by the demo project that will be different from board to board.</p>
+<p>We'll put them into a Python module called <tt class="docutils literal">setup</tt>. Python modules are usually just Python files, so we'll store our abstraction in a file called <tt class="docutils literal">setup.py</tt>.</p>
+<p>To use our abstraction, we just need to <tt class="docutils literal">import setup</tt> and then we can access, for example, <tt class="docutils literal">setup.rgb</tt> to mess with the RGB pixel. That actual variable might be a NeoPixel. It might be a DotStar. It might be something we've never heard of (like a SunSpot&trade;). It could be wired to any pin, configured any way. It doesn't matter. As long as that <tt class="docutils literal">rgb</tt> object works the same way (has the same interface) as a DotStar or NeoPixel, it complies with the <em>contract</em> and everything works:</p>
+<a href="/images/fullsize/abstraction-explained-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/abstraction-explained-2.jpg" srcset="/images/responsive/abstraction-explained-2-2500.jpg 2500w,/images/responsive/abstraction-explained-2-2000.jpg 2000w,/images/responsive/abstraction-explained-2-1800.jpg 1800w,/images/responsive/abstraction-explained-2-1600.jpg 1600w,/images/responsive/abstraction-explained-2-1200.jpg 1200w,/images/responsive/abstraction-explained-2-1000.jpg 1000w,/images/responsive/abstraction-explained-2-800.jpg 800w,/images/responsive/abstraction-explained-2-400.jpg 400w,/images/responsive/abstraction-explained-2-200.jpg 200w" style="width: 80%;"/></a>
+<p>🦄 There's even a nested abstraction here. Adafruit has already abstracted the pixel code away for us, by giving the <tt class="docutils literal">DotStar</tt> and <tt class="docutils literal">NeoPixel</tt> classes the same interface. So we can interact with a string of NeoPixels in the same way we can interact with a string of DotStars.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If someone wanted to use a different kind of RGB LED (SunSpots&trade;), as long they adhere to the interface of the abstraction Adafruit has provided, our code will still work. In fact, the SunSpots&trade; library would work <em>anywhere</em> <tt class="docutils literal">DotStar</tt> or <tt class="docutils literal">NeoPixel</tt> are used.</p>
+</div>
+<p>Now anyone who wants to follow this article, but maybe has a <a class="reference external" href="https://store.micropython.org/product/PYBv1.1">pyboard</a> or an <a class="reference external" href="https://www.espressif.com/en/products/hardware/esp8266ex/overview">ESP8266</a>-based board can follow along without having to constantly adapt the code to their situation. All they have to do is write a <tt class="docutils literal">setup.py</tt> module and make sure it has the expected objects.</p>
+<p>So here's the code for each of the boards I have.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using a board that has a built-in NeoPixel, but <em>isn't</em> a CircuitPlayground, use the DotStar code, but replace the DotStar lines (lines 3, 8 and 9) with the NeoPixel code from the CircuitPlayground example.</p>
+</div>
+<div class="section" id="for-the-circuitplayground">
+<h3>For the CircuitPlayground</h3>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as setup.py</span>
+<span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">neopixel</span>
+<span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
+
+<span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
+<span class="n">led</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
+
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="n">a_button</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D4</span><span class="p">)</span>
+<span class="n">a_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
+<span class="n">a_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">DOWN</span>
+
+<span class="n">b_button</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D5</span><span class="p">)</span>
+<span class="n">b_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
+<span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">DOWN</span>
+
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h4>Explanation</h4>
+<div class="docutils container">
+</div>
+<p>This file will need to be saved on your <tt class="docutils literal">CIRCUITPY</tt> drive as <tt class="docutils literal">setup.py</tt>.</p>
+<p><strong>Lines 2-4</strong> import external libraries needed for this module to function.</p>
+<p>The <tt class="docutils literal">board</tt> library contains variables that are related to your specific development board. It contains all of the pin assignments, including some handy aliases for the built-in components (like the <tt class="docutils literal">board.NEOPIXEL</tt> variable used on <strong>line 9</strong>).</p>
+<p>The <tt class="docutils literal">neopixel</tt> library gives us a way to control the 10 RGB LEDs that surround the CircuitPlayground. Depending on how your CircuitPython was installed, you may have to install this library yourself. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
+<p>The basics of the <tt class="docutils literal">neopixel</tt> library, specifically for this board, are disucessed in the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-neopixel">documentation</a>.</p>
+<p>NeoPixels are a hugely cool peripheral, and you are not limited to just using the ones on your CircuitPlayground Express. Check out the <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels">NeoPixel &Uuml;berguide</a> for comprehensive information about them.</p>
+<p>On <strong>line 4</strong>, we import a few things from the <tt class="docutils literal">digitalio</tt> library. This library contains classes, variables and functions useful for reading and writing to digital pins (buttons, LEDs, etc). We're only importing the objects that we need to set up the buttons and built-in LED, <tt class="docutils literal">DigitalInOut</tt>, <tt class="docutils literal">Direction</tt>, and <tt class="docutils literal">Pull</tt>. Their purpose will be explained shortly.</p>
+<p><strong>Lines 6 and 7</strong> set up the built-in red LED. It's attached to digital pin 13, so we pass <tt class="docutils literal">board.D13</tt> to the <tt class="docutils literal">DigitalInOut</tt> constructor. On <strong>Line 7</strong>, we set the <em>direction</em> of the pin to be an <em>output</em> - this means the pin is only going to be used for sending information, on in this case, sending power to the pin to turn on the LED.</p>
+<p><tt class="docutils literal">led</tt> is now a <tt class="docutils literal">DigitalInOut</tt> object we can write to by setting its <tt class="docutils literal">value</tt> attribute to a boolean value (<tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>).</p>
+<p><strong>Lines 9 and 10</strong> configure the NeoPixel. We call the NeoPixel object simply <tt class="docutils literal">rgb</tt> to keep it as generic as possible. When we call the NeoPixel constructor, <tt class="docutils literal">neopixel.NeoPixel</tt>, we pass the pin where our pixels are installed (<tt class="docutils literal">board.NEOPIXEL</tt>), and the number of pixels we want to illuminate. We have 10 pixels available, but since we are mimicking a board with just one built-in, we pass <tt class="docutils literal">1</tt> to the constructor.</p>
+<p>On <strong>Line 10</strong> we set the brightness of the pixel to <tt class="docutils literal">0.3</tt>. The brightness is a float between <tt class="docutils literal">0</tt> and <tt class="docutils literal">1.0</tt>. These pixels are <em>incredibly</em> bright, feel free to lower this to <tt class="docutils literal">0.1</tt> if <tt class="docutils literal">0.3</tt> is too intense, or increase it if you want to really light up your life. 😀</p>
+<p><strong>Lines 12-14</strong> and <strong>lines 16-18</strong> set up our buttons. In the case of the CircuitPlayground, these are the built-in buttons, and need a pull-down resistor turned on to function. The pins are supplied via the <tt class="docutils literal">board</tt> module. The direction is set just like the <tt class="docutils literal">led</tt> on <strong>line 6</strong>, but in this case the direction is set to <tt class="docutils literal">Direction.INPUT</tt>, because these are pins to be <em>read</em> from, instead of written to. Finally on <strong>lines 14 and 18</strong>, we enable the pull-down resistor using the <tt class="docutils literal">pull</tt> property and the <tt class="docutils literal">Pull</tt> object from the <tt class="docutils literal">digitalio</tt> module.</p>
+<p>Finally, on <strong>lines 20-24</strong>, we define a function called <tt class="docutils literal">check()</tt>. The purpose of this function is to abstract away the differences between how these various boards are wired up. In the case of the CircuitPlayground, the onboard buttons are wired in the "sane" manner such that pressing the button causes the pin to read <tt class="docutils literal">True</tt>, and not pressing the button, causes the pin to read <tt class="docutils literal">False</tt>. This is the opposite of how the other boards are configured.</p>
+<p>This function will always return <tt class="docutils literal">True</tt> if the button is pressed, and <tt class="docutils literal">False</tt> if it's not, regardless of how the buttons are set up.</p>
+<p><tt class="docutils literal">check()</tt> takes a single parameter, <tt class="docutils literal">token</tt>, which is used to indicate which button you want to check the value of. It's a simple string - when it's set to "A", <tt class="docutils literal">check()</tt> returns the value of the "A" button (<tt class="docutils literal">button_a</tt>), and when it's set to "B", <tt class="docutils literal">check()</tt> returns the value of the "B" button (<tt class="docutils literal">button_b</tt>).</p>
+</div>
+</div>
+<div class="section" id="for-the-other-boards-with-dotstars">
+<h3>For the other boards with DotStars</h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be sure to change the pin numbers to reflect how you wired up your buttons.</p>
+</div>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as setup.py</span>
+<span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">adafruit_dotstar</span>
+<span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
+
+<span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
+<span class="n">led</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
+
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">adafruit_dotstar</span><span class="o">.</span><span class="n">DotStar</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">APA102_SCK</span><span class="p">,</span> <span class="n">board</span><span class="o">.</span><span class="n">APA102_MOSI</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="n">a_button</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D4</span><span class="p">)</span>
+<span class="n">a_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
+<span class="n">a_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">UP</span>
+
+<span class="n">b_button</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D3</span><span class="p">)</span>
+<span class="n">b_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
+<span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">UP</span>
+
+<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h4>Explanation</h4>
+<div class="docutils container">
+</div>
+<p>This file will need to be saved on your <tt class="docutils literal">CIRCUITPY</tt> drive as <tt class="docutils literal">setup.py</tt>.</p>
+<p><strong>Lines 2-4</strong> import external libraries needed for this module to function.</p>
+<p>The <tt class="docutils literal">board</tt> library contains variables that are related to your specific development board. It contains all of the pin assignments, including some handy aliases for the built-in components (like the <tt class="docutils literal">board.APA102_SCK</tt> variable used on <strong>line 9</strong>).</p>
+<p>The <tt class="docutils literal">adafruit_dotstar</tt> module provides a way to control DotStars. DotStars are like NeoPixels, but use a different protocol. The differences are explained on <a class="reference external" href="https://learn.adafruit.com/adafruit-dotstar-leds/overview">the DotStar LED docuemntation page</a>.</p>
+<p>You will have to install the <tt class="docutils literal">adafruit_dotstar</tt> library. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
+<p>The details of working with the DotStar library in CircuitPython is covered in <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-dotstar">the CircuitPython DotStar section</a> of the CircuitPython Essentials document.</p>
+<p>On <strong>line 4</strong>, we import a few things from the <tt class="docutils literal">digitalio</tt> library. This library contains classes, variables and functions useful for reading and writing to digital pins (buttons, LEDs, etc). We're only importing the objects that we need to set up the buttons and built-in LED, <tt class="docutils literal">DigitalInOut</tt>, <tt class="docutils literal">Direction</tt>, and <tt class="docutils literal">Pull</tt>. Their purpose will be explained shortly.</p>
+<p><strong>Lines 6 and 7</strong> set up the built-in red LED. It's attached to digital pin 13, so we pass <tt class="docutils literal">board.D13</tt> to the <tt class="docutils literal">DigitalInOut</tt> constructor. On <strong>Line 7</strong>, we set the <em>direction</em> of the pin to be an <em>output</em> - this means the pin is only going to be used for sending information, on in this case, sending power to the pin to turn on the LED.</p>
+<p><tt class="docutils literal">led</tt> is now a <tt class="docutils literal">DigitalInOut</tt> object we can write to by setting its <tt class="docutils literal">value</tt> attribute to a boolean value (<tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>).</p>
+<p><strong>Lines 9 and 10</strong> configure the DotStar. We call the DotStar object simply <tt class="docutils literal">rgb</tt> to keep it as generic as possible. DotStars are connected via <a class="reference external" href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface">SPI</a>, so they require two pins to be specified in the constructor. We use the <tt class="docutils literal">board</tt> library to provide the two built-in pins that are pre-wired to all built-in DotStars, <tt class="docutils literal">board.APA102_SCK</tt> and <tt class="docutils literal">board.APA102_MOSI</tt>. Finally we pass <tt class="docutils literal">1</tt> to the constructor, to let the library know we are only controlling the single DotStar.</p>
+<p>On <strong>Line 10</strong> we set the brightness of the pixel to <tt class="docutils literal">0.3</tt>. The brightness is a float between <tt class="docutils literal">0</tt> and <tt class="docutils literal">1.0</tt>. These pixels are <em>incredibly</em> bright, feel free to lower this to <tt class="docutils literal">0.1</tt> if <tt class="docutils literal">0.3</tt> is too intense, or increase it if you want to really light up your life. 😀</p>
+<p><strong>Lines 12-14</strong> and <strong>lines 16-18</strong> set up our buttons. The pins are supplied via the <tt class="docutils literal">board</tt> module. The direction is set just like the <tt class="docutils literal">led</tt> on <strong>line 6</strong>, but in this case the direction is set to <tt class="docutils literal">Direction.INPUT</tt>, because these are pins to be <em>read</em> from, instead of written to. On these boards, we've wired all of the buttons so they connect to ground when pressed, so we have to use a pull up resistor so they function properly (<strong>lines 14 and 18</strong>) . This also means that our logic will be inverted relative to other wirirings (and common sense) - when the button is pressed, the pin will read <tt class="docutils literal">False</tt>, and when it's not pressed, it will read <tt class="docutils literal">True</tt>.</p>
+<p>Finally, on <strong>lines 20-24</strong>, we define a function called <tt class="docutils literal">check()</tt>. The purpose of this function is to abstract away the differences between how these various boards are wired up. On <strong>lines 22 and 24</strong>, we use the <tt class="docutils literal">not</tt> operator to negate whatever we got from the button pin. This normalizes the output between these boards, and boards like the CircuitPlayground that are wired in the opposite manner.</p>
+<p>This function will always return <tt class="docutils literal">True</tt> if the button is pressed, and <tt class="docutils literal">False</tt> if it's not, regardless of how the buttons are set up.</p>
+<p><tt class="docutils literal">check()</tt> takes a single parameter, <tt class="docutils literal">token</tt>, which is used to indicate which button you want to check the value of. It's a simple string - when it's set to "A", <tt class="docutils literal">check()</tt> returns the value of the "A" button (<tt class="docutils literal">button_a</tt>), and when it's set to "B", <tt class="docutils literal">check()</tt> returns the value of the "B" button (<tt class="docutils literal">button_b</tt>).</p>
+</div>
+</div>
+<div class="section" id="how-it-works">
+<h3>How It Works</h3>
+<p>To use this in our other code (<tt class="docutils literal">code.py</tt>), we just need to use Python's <tt class="docutils literal">import</tt> statement:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+</pre></div>
+</td></tr></table></div><p>Now, in our code, we use the <tt class="docutils literal">led</tt> variable to turn the red LED on/off, and use <tt class="docutils literal">rgb</tt> to control the NeoPixel/DotStar. We will use the <tt class="docutils literal">check()</tt> function to see if a button is being pressed, like this:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A has been pressed"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A has not been pressed"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B has been pressed"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B has not been pressed"</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div></div>
+</div>
+<div class="section" id="testing">
+<h2 id="testing">Testing</h2>
+<p>Before digging into state and other fun stuff, its a good idea to run some super simple code to ensure that everything is wired up properly. I've written some minimalistic code you can use to verify everything is set up.</p>
+<p>What this code does is turn the on the onboard LED when button "A" is pressed, and the RGB LED (either a dotstar for the ItsyBitsy, Trinket, or GEMMA boards, or a NeoPixel in the case of the CircuitPlayground) when button "B" is pressed.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">For details about controlling the onboard RGB LEDs, see <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-internal-rgb-led">Adafruit's excellent documentation on the subject</a>.</p>
+</div>
+<p>Before running this code, make sure you've copied the proper RGB LED library over to your board, in the <tt class="docutils literal">lib</tt> folder.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you aren't familiar with this process, check out the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries</a> section of the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">"Welcome To CircuitPython"</a> guide.</p>
+</div>
+<p>Also make sure you have created a <tt class="docutils literal">setup.py</tt> module, as explained in <a class="reference internal" href="#abstractions-keeping-the-code-simple">the last section</a>.</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h3>Explanation</h3>
+<div class="docutils container">
+</div>
+<ul class="simple">
+<li><strong>Lines 1 and 2</strong> import the necessary external objects and modules we need.</li>
+<li>The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/shared-bindings/time/__init__.html">time</a> module provides functions related to the passage of time, usually in terms of seconds.</li>
+<li><strong>Line 4</strong> starts off the standard "main loop" where our code runs.</li>
+<li>On <strong>Line 5</strong>, we set the value of the <tt class="docutils literal">led</tt> object, or the red LED wired to pin 13, to whatever the value of the "A" button happens to be at that moment. If the value is <tt class="docutils literal">True</tt> (the button is pressed), the LED will turn on. If it's <tt class="docutils literal">False</tt> (the button is not pressed), the LED will turn off.</li>
+</ul>
+<p><strong>Lines 7-10</strong> have a similar function to line 5, except that the RGB LEDs are not simple on/off devices. They must have a color of some kind written to them, usually a tuple of three integers, each ranging from 0 to 255. Each integer in the tuple corresponds to a red, green, and blue LED element in the pixel (respectively), and sets its intensity level.</p>
+<p>The NeoPixel and DotStar libraries provide an interface such that you can treat the pixel object like a standard Python list. This is how we are able to write a color to the first pixel using list indexing on <strong>lines 8 and 10</strong>.</p>
+<p>In the case of <strong>line 10</strong>, we're writing "black" to the pixel by setting the red, green and blue values to 0 (by passing the tuple <tt class="docutils literal">(0, 0, 0)</tt>). This has the effect of turning it off, in the same way that setting the <tt class="docutils literal">led.value</tt> property to <tt class="docutils literal">False</tt> turns the red LED on pin 13 off.</p>
+<p>Finally on <strong>line 12</strong>, we call <tt class="docutils literal">time.sleep()</tt> to pause the program for 0.2 seconds. This provides simple button debouncing (much more about button bounce will be discussed in the rest of this article, stay tuned).</p>
+</div>
+<p>Here's a short video demonstrating the test code and demo circuit on each of the boards I have:</p>
+<div class="video-container">
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4"/>
+<p>Your browser doesn't support HTML5 video. Here is
+          a <a href="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
+</video>
+</div></div>
+<div class="section" id="conclusion-and-what-s-next">
+<h2 id="conclusion-and-whats-next">Conclusion And What's Next</h2>
+<p>In this installment, we've discussed some details about the CircuitPython platform, and built out a circuit for experimentation, taking advantage of some of the built-in components we've got at our disposal.</p>
+<p>We have developed a rudimentary API: we've written code that uses abstraction to make it easy to write code that will run on many development boards.</p>
+<p>We've hinted at "state" and "events" but have yet to really define what they are.</p>
+<p>In the next article, we'll dive deep into both state and events, framed around one of the most common problems in electronics (especially hobby electronics): <strong>button "de-bouncing"</strong>.</p>
+<p>We'll solve the problem of button "bounce" (as well as define what it actually is), and dive into some more practical code. We'll explore some patterns that are the basis for handling a whole slew of issues that face us as microcontroller programmers.</p>
+</div>
+</div><!-- /.entry-content -->
+</section>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
+</body>
+</html>

@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Testing!</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
+        <title>Testing!</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<h1>Testing!</h1>
-<div class="contents">
-<div id="toc"><ul><li><a class="toc-href" href="#emojis" title="Emojis">Emojis</a></li><li><a class="toc-href" href="#admonitions" title="Admonitions">Admonitions</a></li><li><a class="toc-href" href="#codeexplanation" title="Code/Explanation">Code/Explanation</a></li><li><a class="toc-href" href="#images" title="Images">Images</a></li><li><a class="toc-href" href="#line-blocks" title="Line Blocks">Line Blocks</a></li></ul></div>
-</div>
-<div class="status-published">
-<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+    <h1>Testing!</h1>
+    
+        <div class="contents">
+            <div id="toc"><ul><li><a class="toc-href" href="#emojis" title="Emojis">Emojis</a></li><li><a class="toc-href" href="#admonitions" title="Admonitions">Admonitions</a></li><li><a class="toc-href" href="#codeexplanation" title="Code/Explanation">Code/Explanation</a></li><li><a class="toc-href" href="#images" title="Images">Images</a></li><li><a class="toc-href" href="#line-blocks" title="Line Blocks">Line Blocks</a></li></ul></div>
+        </div>
+    <div class="status-hidden">
+    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>This page exists for testing the style and post-processing of the site outside of actual content.</p>
+<!-- PELICAN_END_SUMMARY -->
 <div class="section" id="emojis">
 <h2 id="emojis">Emojis</h2>
 <p>I've experimented with using various emojis in my text. Here's what they look like:</p>
@@ -65,7 +68,7 @@
 </div>
 <div class="section" id="code-explanation">
 <h2 id="codeexplanation">Code/Explanation</h2>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -111,7 +114,7 @@
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -179,13 +182,15 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+
+
+	</div>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

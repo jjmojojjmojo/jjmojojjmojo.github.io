@@ -5,7 +5,7 @@ Testing!
 :category: testing
 :tags: testing
 :slug: testing
-:status: draft
+:status: hidden
 
 .. include:: ../../emojis.rst
 

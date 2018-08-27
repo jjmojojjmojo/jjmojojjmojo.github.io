@@ -89,7 +89,7 @@ First, I've added "explanation" sections liberally throughout the site. They loo
     
 The book icon |OPEN_BOOK_ICON| is clickable - if you click it, the explanation is hidden. You can click the |CLOSED_BOOK_ICON| icon to open it back up.
 
-The state of each explanation is stored in your browser, if its supported. You can control the data stored, as well as close or open all explanations on the `settings page <{filename}/config.html>`__. You can get there quickly on any page in the site by clicking the gear icon in the right side of the header.
+The state of each explanation is stored in your browser, if its supported. You can control the data stored, as well as close or open all explanations on the `settings page </pages/settings.html>`__. You can get there quickly on any page in the site by clicking the gear icon in the right side of the header.
 
 .. |CLOSED_BOOK_ICON| image:: {filename}/images/book.svg
    :align: middle
@@ -108,7 +108,7 @@ Code samples are syntax-highlighted for easier readability. They are rendered us
             print("%s: %s" % (key, kwargs[key]))
             
     
-If you would like to use different colors for the highlighting, you can also change the style sheet over in the `settings page <{filename}/config.html>`__. 
+If you would like to use different colors for the highlighting, you can also change the style sheet over in the `settings page </pages/settings.html>`__. 
 
 .. tip::
     

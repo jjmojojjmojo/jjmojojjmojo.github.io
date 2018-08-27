@@ -1,4 +1,4 @@
-:status: draft
+:status: hidden
 
 This is only a test
 ===================
