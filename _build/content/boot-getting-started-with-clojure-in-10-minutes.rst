@@ -132,6 +132,7 @@ In our case, we'll use our home directory:
 Then we need to update our :code:`$PATH` environment variable so the shell can find our new executable boot:
     
 .. code-block:: console
+   :linenos: none
    
    $ echo "export PATH=\$PATH:\$HOME/bin" >> ~/.bash_profile
    $ export PATH=$PATH:$HOME/bin
