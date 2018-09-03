@@ -1,7 +1,7 @@
 State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World
 ###################################################################################
-:date: 2018-09-01 15:07
-:author: lionfacelemonface
+:date: 2018-09-01 10:07
+:author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
 :slug: circuitpython-state-part-2
@@ -9,13 +9,11 @@ State And Events In CircuitPython: Part 2: Exploring State And Debouncing The Wo
 
 .. include:: ../emojis.rst
 
-In this part of the series, we're going to really dig into what *state* actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. Then, we'll use what we've learned to go further, tracking changes in state as *events* that we can respond to with code.
+In this part of the series, we're going to really dig into what *state* actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. 
 
 But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: "noisy" buttons and how to make them "un-noisy", commonly referred to as "debouncing". 
 
-We'll talk about how to fix the problem with blocking (and what blocking is, and why its bad).
-
-We'll use debouncing as a backdrop to apply what we're learning about state and events, by solving the problem *without blocking*.
+We'll talk about fixing the problem in the worst, but maybe easiest way: by *blocking*. We'll also talk about why it's bad.
 
 .. PELICAN_END_SUMMARY
 
@@ -65,7 +63,7 @@ The two types of inputs are noisy for different reasons, but the problem is the 
 
 .. note::
     
-    This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" `below <Using State To Avoid Blocking_>`__ - the physical stuff we're discussing here is also affected by the timing of processor cycles. 
+    This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" `in the next installment <{filename}/circuitpython-state-3.rst#using-state-to-avoid-blocking>`__ - the physical stuff we're discussing here is also affected by the timing of processor cycles. 
     
     The two overly-simplified subjects are very complexly related |grin|.
     
@@ -82,7 +80,7 @@ Where you think you can use a logical check of a pin's status (``if pin.value``)
    
    For an in-depth analysis of *button* bounce and possible solutions, check out `A Guide To Debouncing <http://www.ganssle.com/debouncing.htm>`__ from the `Ganssle Group <http://www.ganssle.com/>`__. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.
 
-Maybe for some applications, like turning on an LED only while a button is pressed (maybe you're building a visual telegraph machine?), it's not really a problem. But if pressing that button has *side effects* it can be really, really bad.
+Maybe for some applications, like turning on an LED only while a button is pressed, it's not really a problem. But if pressing that button has *side effects* it can be really, really bad.
 
 What are *side effects*? These are changes that occur *outside* of the code that is executing, *because* of the code. Typically, this means we're altering data outside of our scope (function, method, module, instance, etc), but it can also mean that we're doing something in the "real world", outside of the *computer*. Altering a global variable would be a side effect, as would turning on an LED. These side effects are pretty innocuous, but imagine the side effect is something like writing data to a file. If things aren't kosher, we might write bad data or corrupt something. What about triggering a relay to turn on or off a piece of dangerous machinery, or sensitive equipment? That could cause physical damage to the equipment, or even hurt someone. 
 
@@ -109,13 +107,28 @@ The easiest way to deal with all of these issues, and the most common seen in "g
 
 "Blocking" is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.
 
+.. note::
+    
+    Code can block for lots of reasons. Input and output (aka *IO* or *I/O*) are the main sources of blocking code - CircuitPython is really efficient in how it reads from or writes to digital pins (*inputs* or *outputs* to digital pins), but there's still the possibility of blocking when we do. It's just normally so quick that you don't notice it.
+    
+    In your own code, it's usually easy to see where you might be blocking, but there can be blocking code lurking in the libraries that you use. Sometimes it's necessary due to the hardware or some protocols that are in use, but sometimes it's possible to accomplish the same functionality without blocking.
+    
+    This is one of many reasons it's a good idea to comfortable reading Python (and C/C++, if you can) so you can dig into the source code for libraries.
+    
+    This way you can see any potential problems before your project is too far along, and refactor things (your code or the library) if the blocking is going to cause you grief. 
+    
+    You will also *learn a lot*, the people who work on CircuitPython and contribute libraries are seriously smart and do some great work |sparkleheart|.
+    
+    And maybe you'll find a better way to do something and contribute it back to the community! |unicorn|
+    
+
 We've already seen some code that blocks in the `testing <{filename}/circuitpython-state-1.rst#testing>`__ section of the first article in this series. We're using a Python function called ``time.sleep()``. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.
 
 In the testing code, we block for ``0.2`` seconds. This amount is considered "standard" for button debouncing. It's an arbitrary amount, suggested by a lot of articles and papers that tackle the problem. It was derived by experimenting with many buttons, actually tracking their voltage as a waveform on an oscilloscope - the output on the scope in these experiments looks a lot like the contrived example we saw above. 
 
 The amount of time it takes for the signal, generated by most buttons, to look more like the ideal square wave in the first chart is around 0.2 seconds.
 
-There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when *you* press a button, 0.2 seconds is about how long it takes you to feel confident that you've pressed the button.
+There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when *you* press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.
 
 .. tip::
     
@@ -145,7 +158,7 @@ This can severely hamper our projects, especially as we graduate from simple "bl
 
 We have to do *everything* every 0.2 seconds when we block like this. Again, for something simple like our testing code, this is not a big deal. But imagine you are building a video game console, like the `Arduboy <https://arduboy.com/>`__. 0.2 seconds is an *eternity* when playing a video game. Your user will get frustrated really quickly - or be able to hit every enemy because they're essentially moving in slow-motion. Every frame has to be drawn, every input has to be read, every sprite has to be updated only when the code stops blocking, every 0.2 seconds.
 
-There's another tragic aspect to this: those 48 million cycles we have at our disposal are being *completely wasted* while we block. We are throwing away processor cycles we could be using to do work.
+There's another tragic aspect to this: those 48 million cycles we have at our disposal are being *completely wasted* while we block. We are throwing away processor cycles we could be using to do work. |heartbreak|
 
 Ok, so by now you're thoroughly convinced blocking is bad news. So what can we do instead to debounce our inputs?
 
@@ -193,7 +206,7 @@ For example, water has three common states (referred to as *phases*): gas (steam
    :width: 80%
    :align: center
 
-State is a kind of abstraction that refers to bundles of attributes of something at a given time. Various factors can cause those attributes to change - when that happens the state *transitions* from one to the other.
+State is a kind of abstraction that refers to bundles of properties (or *attributes*) of something at a given time. Various factors can cause those attributes to change. When that happens the state *transitions* from one state to another.
 
 For example, when water is brought to its boiling point of 100° C (212° F), it transitions into a gas. It becomes less dense, and given the opportunity, it will disperse throughout a space. 
 
@@ -203,7 +216,7 @@ The same is true for water condensing, melting, or freezing - the state changes 
 
 .. tip::
     
-    In programming, "properties" and "attributes" are often used interchangeably.
+    In programming, "properties" and "attributes" are often used interchangeably. We're settling on the term "attributes", since that's the term most commonly used in Python when talking about classes (which we'll get to later).
 
 Water has multiple attributes in each state. We could record each of those attributes numerically - the temperature, the volume, the density - even attributes that are more binary (true/false) like "solid" and "liquid". Keep this in the back of your mind for now.
 
@@ -373,11 +386,14 @@ Since the dictionary is self-contained, we only have to worry about conflicts be
     
     .. code-block:: python
         
+        balls = 2
         balls_lost = 1
         balls_used = 3
         balls_caught = 0
         
         # -- VS --
+        
+        balls = 2
         
         baseballs = {
             'caught_by_fans': 0,
@@ -386,7 +402,7 @@ Since the dictionary is self-contained, we only have to worry about conflicts be
         }
         
         # or even
-        
+        balls = 2
         equipment = {
             'balls': {
                 'caught_by_fans': 0,
@@ -398,13 +414,17 @@ Since the dictionary is self-contained, we only have to worry about conflicts be
             'shoes': 13
         }
     
-    As you can see, modeling the data this way gives us a lot more flexibility, and even sets us up for modeling more complex things, like the total amount of equipment used in the game.
+    As you can see, modeling the data this way gives us a lot more flexibility.
+    
+    It sets us up for modeling more complex things, like the total amount of equipment used in the game. 
+    
+    The context makes simpler variable and key names make more sense. ``equipment['balls']['lost']`` has more contextual information than ``balls_lost``.
         
     This is all very basic Python stuff, but I want to make sure you're thinking about different ways to model your data. It's one of the foundations to writing well-behaved, easy-to-read code and something you usually learn over time. Thinking about it critically now, if you're a newer programmer, gives you a big head start on becoming a great engineer. |sparkleheart|
         
 Dictionaries are limited in that they are strictly mappings of some key to some value. There are times when you will need to add more functionality, or reproduce a data structure multiple times. That's where *classes* come in. 
 
-A *class*, in the simplest terms, is a data structure that contains variables (called *attributes* or *properties*), and functions (called *methods*).
+A *class*, in the simplest terms, is a data structure that contains **variables** (called *attributes* in Python, you may see them referred to as *properties* as well), and **functions** (called *methods*).
 
 What makes classes special is that they are used as a blueprint for creating new objects. You define what your class looks like once, and then create *instances* of your class that store your data. 
 
@@ -553,6 +573,13 @@ Now lets look at how we can work this concept into a microcontroller project. We
 
 Conclusions And What's Next
 ===========================
-In this installment of the series, we've learned a lot about what state is, and how to model it in Python.
 
-In the next article, we'll actually apply what we've learned to debounce buttons without blocking, and a whole lot more. 
+In this installment of the series, we've learned a lot about what state is, and how to model it in Python. We've modeled state using single variables, complex data structures, and classes.
+
+We've discussed a problem that we can solve with state, button debouncing.
+
+In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.
+
+.. tip::
+    
+    Good news! You don't have to wait, `part 3 is up now! <{filename}/circuitpython-state-3.rst>`__

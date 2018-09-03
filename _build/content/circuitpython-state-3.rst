@@ -1,11 +1,11 @@
-State And Events In CircuitPython: Part 3: State And Microcontrollers
-#####################################################################
+State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)
+#########################################################################################
 :date: 2018-09-01 15:07
 :author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
-:slug: circuitpython-state-part-x
-:status: draft
+:slug: circuitpython-state-part-3
+:status: published
 
 .. include:: ../emojis.rst
 
@@ -13,23 +13,39 @@ In this part of the series, we'll apply what we've learned about state to our si
 
 Not only will we debounce some buttons *without blocking*, we'll use state to more efficiently control some LEDs.
 
-We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code.
+We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of *event detection* |rainbow| .
+
+All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.
 
 .. PELICAN_END_SUMMARY
 
-State And Microcontrollers
-==========================
+Revisiting Old Friends
+======================
 
-Lets start by applying state tracking to our `testing  code <{filename}/circuitpython-state-1.rst#testing>`__ from the first part of this series. Recall that to test our board, we set up a simple project that has the following functionality:
+Lets start by applying state tracking to our `testing  code <{filename}/circuitpython-state-1.rst#testing>`__ from the first part of this series. 
+
+For reference, here's one of the example circuits, using the Trinket M0 (see `the demo circuit section in part 1 <{filename}/circuitpython-state-1.rst#the-demo-circuit>`__ for references using other boards):
+
+.. image:: {filename}/images/nonblocking-trinket-demo-circuit.png
+   :width: 80%
+   :align: center
+
+We have two buttons, and two LEDs - one is the standard red LED on pin 13, the other is a built-in RGB LED, either a NeoPixel or DotStar.
+   
+Recall that to test our board, we set up a simple project that has the following functionality:
 
 * While button "A" is pressed, the built-in red LED lights up.
-* While button "B" is pressed, the built-in NeoPixel or DotStar lights up in white.
+* While button "B" is pressed, the built-in NeoPixel or DotStar lights up, in white.
 
 We'll extend this a little bit and:
 
 * Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a *different color*.
 
-To make this work, here is the state we have to track:
+We can improve upon the code by building on the concepts of *state* we learned about in the `previous post <{filename}/circuitpython-state-2.rst>`__. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. |unicorn|
+
+Lets start by refactoring our original code to work just as it did, but using state.
+
+Here are the global state attributes we will need to track:
 
 * the value of button "A"
 * the value of button "B"
@@ -37,13 +53,11 @@ To make this work, here is the state we have to track:
 * should the RGB LED be on or off?
 * what color should the RGB LED be?
 
-First, lets refactor our original testing code to work as it did, but using state.
-
-We'll start by simply using multiple variables to hold various state values. You will see how convoluted this can get:
+Since this is a first pass, let's start by simply using multiple variables to hold various state values.
 
 .. tip::
     
-    Remember this code is assuming you have created a ``setup.py`` file as explained `in the previous article <{filename}/circuitpython-state-1.rst#abstractions-keeping-the-code-simple>`__.
+    Remember this code is assuming you have created a ``setup.py`` file as explained `part 1 <{filename}/circuitpython-state-1.rst#abstractions-keeping-the-code-simple>`__.
     
     
 
@@ -105,20 +119,30 @@ We'll start by simply using multiple variables to hold various state values. You
     Finally, on **line 38**, we sleep for 0.2 seconds to debounce the buttons.
     
 
+Managing State: A Three-Phase Process
+=====================================
+
 Before we go much further, lets draw an important distinction. Unlike a physical scoreboard at a baseball stadium, which acts as part of the experience of watching the game, our state merely *reflects* our reality. 
 
 The way we work with state is to alter it either *because* something happened (say, a button was pressed, much like scoring a point in a game), or to *cause* something to happen (this is different; like lighting up an LED, or changing a NeoPixel's color).
 
-State and reality are related, and so we state interacts with reality in three passes. First, state is assessed - input pins are read, sensors are queried. The state object is updated to reflect what was observed in real life. 
+After some thought and experimentation, I've settled on a three-phase process for handling state in a microcontroller project.
 
-The second pass involves looking at the state object and changing the state based solely on the current values, since something happened during the first pass that requires the state to change. For example, a button's state value has changed, so we need to update the state variable that tells us whether an LED should be on or off.
+Before we start (maybe this is phase 0, or -1? |thinking| ), we establish the *default* state. This is how we want things to look when the development board boots up. So buttons would be in the "unpressed" state (``False``), an LED might be initially "off", and so on. In the example code, we do this on **lines 11-15**.
 
-The final pass reconciles the state object with reality. This is where you would buzz a piezo speaker, update a display, or turn on an LED. These are considered *side effects* - when we execute code, like setting a digital pin to ``True``, our code has had effects outside of its scope. 
+Then, in the first phase, real life is *assessed* (checked, or read) - input pins are read, sensors are queried. The state objects are updated to reflect what was observed in real life. This is where we detect that a button has been pressed. In our code above, this is happening on **line 18 and 19**.
+
+The second phase is strictly internal - no interactions with real life will happen. In this phase we *reconsider* the state. Did we read something in the first phase that indicates we need to take some sort of action? Is there cleanup or accounting that has to happen? This is where we would do that in our code. Most of the time, it means we'll be getting ready for the next phase, implementing logic like "if button A has been pressed, then the LED must be turned on". But instead of turning the LED on, we're just updating the LED's state object.
+
+In the example above, this phase is happening on **lines 21 thru 29**. We look at the values stored in ``button_a_state`` and ``button_b_state`` and change the state variables for our LEDs, ``led_state`` and ``rgb_state`` accordingly.
+
+The final pass *reconciles* the state object with reality. Our code looks at the state variables, and then causes any additional *side effects*. This is where we'll actually turn on the LEDs. In the example, this happens on **line 33-38**. 
 
 .. note:: 
    
    In this case, and for our purposes, the side effects usually affect the physical state of our project (the LED lights up). But in programming, side effects can be anything, and usually affect other parts of our code or our data.
    
+At that point we hit the end of the ``while`` loop, and start over again. 
 
 Here's a diagram showing how it works:
 
@@ -126,11 +150,25 @@ Here's a diagram showing how it works:
    :width: 80%
    :align: center
 
-.. tip::
-   For our simple example, we can shortcut some of these steps (for example, just directly set the value of the led to that of its button). But it's good to think about things in this multiple-pass manner, since it makes more complex things much easier to reason about.
-   
+For our simple example, we could shortcut some of these steps. An obvious shortcut would be to directly set the value of the red LED to that of the "A" button: ``led.value = check("A")``. 
 
-We need to add our "different color" feature. Before we do that, lets refactor our state variables into a class:
+But it's important to keep the phases separate when we can. The phases represent logical ways to group code, and as we get more sophisticated, the separation will come in handy. 
+
+Further, the phases are separated in terms of interacting with reality. This is important from a performance standpoint - reading from a sensor or writing to an output can be blocking sometimes. Keeping that code separate from our internal logic helps keep things moving smoothly. Changing variables is fast. If we mix these kinds of code up, we can get somewhat choppy interactions. 
+
+There's a more pressing performance consideration however. It can be hard to visualize, but often the different phases will end up happening many cycles apart, not all at once, as it appears. By keeping the phases separate, we can do one phase, say assessing real life, in one cycle, and then 10 cycles later do the reconsideration phase, and it could be 100 cycles until we are able to reconcile with real life again.
+
+We also incidentally end up separating multiple sub-phases: we'll read button "A" in one cycle, then 20 cycles later read button "B". We'll update state for button "B" 3 cycles later, and update the state for button "A" 30 cycles later.
+
+*Inbetween all these gaps*, we are able to handle other state phases, and sub-phases. It all interleaves, sort of like the teeth in a zipper, or cars merging on a highway.
+
+This all appears instantaneous for us, even giving the appearance of different lines of code running simultaneously, since cycles are millionths of a second long. 
+
+An RGB LED Of A Different Color: Getting Classy
+===============================================
+Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.
+
+But first, lets refactor our code to use a class to manage state.
 
 .. code-block:: python
     
@@ -214,9 +252,13 @@ We need to add our "different color" feature. Before we do that, lets refactor o
    In our main loop on **lines 17-41**, the logic is exactly the same as before, except we are accessing attributes of our ``state`` object.
    
 
-Interacting with the one ``state`` object is a lot cleaner than dealing with five separate variables. But what's really cool about using a class like this is that we can give our ``state`` object its own *functionality*.
+Interacting with the one ``state`` object is a lot cleaner than dealing with five separate variables. But what's really cool about using a class like this is that we can give our ``state`` object its own unique *functionality*.
 
-To illustrate this, we'll add a method to the ``State`` class that generates a totally *random* color, and assigns it to the ``color`` state attribute:
+Lets illustrate this by taking the "different" from our requirement of a "different color" quite literally. 
+
+We'll add a method to the ``State`` class that generates a totally **random** color. 
+
+The method will then assign it to the ``color`` state attribute.
 
 .. code-block:: python
     
@@ -321,12 +363,15 @@ Now, we can change the logic in our main loop to use the new ``State.random_colo
     * We call the ``random_color()`` method on **line 42**, so now we get a new color every time the button is not pressed.
     
     * We've added some debugging helpers, ``print()`` calls, on **lines 32 and 38**. This way when watching the Python console, we can see what's going on, and keep an eye on how our state is changing.
-    
+ 
+Using a method in this way keeps the state-related code with the state-related data. This is a good example of *encapsulation*. Since we have no other need to generate random colors, beyond changing our state, putting it in the class gets it out of the way of the rest of the main loop logic. 
 
-A few notes:
+This also helps preserve the separation of our phases working with state that we outlined above.
 
-* With every loop, if the "b" button is not pressed, we call ``state.random_color()``. This means the color of the pixel is always changing, even when the RGB pixel isn't illuminated. This is sub-optimal. We never want to do work when we don't have to. We'll address this situation in the next section when we start dealing with *events*.
-* There's an added ``print()`` each time the state changes. This serves two purposes. First, it can be hard to see LEDs working in the video below, so I'll also demonstrate with a screen grab of Mu's console. Second, there are times when we'll be doing things repetitively and not realize it. If we're triggering some action more often then we intend to, it could be a bug. Calling ``print()`` will let us see this in the console, even if we can't see it in our hardware. 
+**A few notes:**
+
+* With every loop, we call ``state.random_color()`` whenever the "B" button is not being pressed. This means the color of the pixel is always changing, even when the RGB pixel isn't illuminated. This is sub-optimal. We never want to do work when we don't have to. We'll address this situation in the next section when we start dealing with *events*.
+* There's an added ``print()`` each time the state changes. This serves two purposes. First, it can be hard to see LEDs working in the video below, so I'll also demonstrate with a screen grab of `Mu's <https://codewith.mu/>`__ console. Second, there are times when we'll be doing things repetitively and not realize it. Remember how our code gets interleaved like cars merging? If we're triggering some action more often then we intend to, or in an unexpected order, it could be a bug. Calling ``print()`` will let us see this in the console, even if we can't see it in our hardware. 
 
 Here's a video of this code running on my Trinket M0:
 
@@ -341,7 +386,7 @@ Here's a video of this code running on my Trinket M0:
    </div>
    
 
-Before we move on, lets *refactor* our code again, but just a little bit. Since ``State`` is our keeper of state for our project, lets move **all** of the code that changes state into to a method of the ``State`` class:
+Before we move on, lets *refactor* our code yet again, but this time, just a little bit. Since ``State`` is our keeper of state for our project, lets move **all** of the code that changes state into to a method of the ``State`` class:
 
 .. code-block:: python
     
@@ -409,12 +454,23 @@ Before we move on, lets *refactor* our code again, but just a little bit. Since 
     We've added a call to ``state.update()`` on **line 44**, to invoke the code that we moved into the ``update()`` method.
     
 
-Now the ``State`` class is truly the authority for all things state-related. In OOP terms, it's *fully encapsulated*. Note how simplistic our main loop is becoming. This is good! Since we've factored the work of updating the state object into the ``State`` class, it tidies things up a lot. Code that is concerned with state stays with the state instance. So our main loop can focus on things that are more relevant to the core functionality of our project - in this case, inspecting the state and affecting change in the real world (blinking the LEDs).
+Now the ``State`` class is truly the authority for all things state-related. In OOP terms, it's *fully encapsulated*. 
+
+Note how simplistic our main loop is becoming. This is good! |unicorn| Since we've factored the work of updating the state object into the ``State`` class, it tidies things up a lot. Code that is concerned with state stays with the class, along with the state data. 
+
+Our main loop can focus on things that are more relevant to the core functionality of our project - in this case, inspecting the state and affecting change in the real world (blinking the LEDs).
+
+Another thing that using a class gives us, that we aren't taking advantage of just yet, is that we can now create multiple instances of the ``State`` class, and deal with multiple groups of similar state data, if we needed to. This will make more sense if we think about it in terms of encapsulating state and state methods for say, each button, or each LED - since we have more than one of each, we could have a new ``LEDState`` or ``ButtonState`` class that just deals with generic state for LEDs or buttons, and create an instance for each button and/or LED that we have.
+
+.. tip::
+    
+    We will be doing something along these lines in a future installment of this series. Stay tuned!
+    
 
 Now that we've explored what state is, and looked at how we can write code to deal with it, we have opened ourselves up to some really neat possibilities. But since we're using ``time.sleep()``, our code is still *blocking*, and we're still limited by that. The next step is to utilize our new understanding of state to debounce our buttons *without* blocking.
 
-Using State To Avoid Blocking
------------------------------
+Unblocking Our Debouncing: Using State To Avoid Blocking
+========================================================
 The next step is to get rid of that blocking code. This is another thing our ``State`` class can handle for us. 
 
 As discussed earlier, the reason why we block is to keep our code from running too fast. This keeps our signals from our buttons smooth, avoiding bouncing.  
@@ -425,13 +481,16 @@ Earlier we likened it to reducing the *sampling frequency* of our input - we're 
 
 This is a textbook use case for the state concept we've been exploring. 
 
-If we store some sort of time reference in our state object, when can then track the passage of time from cycle to cycle. It's okay that this code runs millions of times a second - we will inspect the state object and only act when enough time has passed.
+If we store some sort of time reference in our state object, when can then track the passage of time from cycle to cycle. It's okay that this code runs millions of times a second - we will inspect the state object every time (which is fast and doesn't block) and only act when enough time has passed (which is usually fast but could block sometimes - and the side effects might be bad).
 
-In fact, this can give us much more granularity, and our code can be much more responsive, beyond not blocking - we're now working at the full resolution made possible by the processor. And the best part, we are able to perform tasks while we wait for the time to pass!
+In fact, this can give us much more granularity, and our code can be much more responsive, beyond not blocking - we're now working at the full resolution made possible by the processor. And the best part, we are able to perform tasks while we wait for the time to pass.
 
-The basic process is to first mark a starting time in our state object, and then, every loop, compare that mark to the current time - when we see that 0.2 seconds have passed, we can then act.
+The State-Time Continuum
+------------------------
 
-The time we last looked at the clock is a *new state attribute*. 
+The basic process is to first mark a starting time in our state object, and then, every loop, compare that mark to the current time - when we see that enough seconds (0.2 to match our blocking code) have passed, then we can act.
+
+The time we last looked at the clock will be stored as a new state attribute. We'll use the methods of our state object to handle time-related calculations.
 
 But maybe we're getting ahead of ourselves a bit. How exactly do we track passing time? Most microcontrollers don't have true built-in clocks like PCs.
 
@@ -439,7 +498,20 @@ Most computers have what's called a "`real-time clock <https://en.wikipedia.org/
 
 While we can get microcontrollers with RTCs built in, and as add-on boards (Adafruit has several in their shop that have `CircuitPython support <https://learn.adafruit.com/adafruit-pcf8523-real-time-clock/rtc-with-circuitpython>`__), they are typically reserved for applications where "clock time" is necessary - for example, a digital alarm clock, or logging sensor data. 
 
-Luckily, microcontrollers are in themselves a sort of *pseudo-clock*, because they operate on a regular processor cycle. 
+.. tip::
+    
+    RTCs aren't the only way you can get precise time in an electronic device.
+    
+    * Cellphones can get the current time from the cell carrier. If you are using some kind of cellular modem in your project, you can ask it for the current date/time with a specific command.
+    
+    * Other GPS-enabled electronics can get the time from the GPS signal. Again, if you are using one of these modules in your project, you can get this information too.
+    
+    * If a device has internet access, it can calculate the current time via `NTP <https://en.wikipedia.org/wiki/Network_Time_Protocol>`__.
+    
+    * In most countries, there is a `radio broadcast that transmits the current time <https://en.wikipedia.org/wiki/Radio_clock>`__, often from a highly accurate source like an `atomic clock <https://en.wikipedia.org/wiki/Atomic_clock>`__. If you can find the right ICs (`it looks like you may have to salvage one from an old clock <https://www.kb6nu.com/how-to-build-a-wwvb-receiver/>`__) or figure out how to receive the signal, you can use it as a reliable clock source. Assuming `your government isn't like mine, trying to stop broadcasting it to save money <https://hackaday.com/2018/08/20/what-will-you-do-if-wwvb-goes-silent/>`__. |heartbreak|
+    
+
+Luckily, microcontrollers are in themselves actually a sort of clock, because they operate on a regular processor cycle.
 
 The processor cycles are fixed to a specific rate. For example, our M0 board "clocks" at 48 megahertz (*48,000,000* cycles per second). That's because every second, the processor scans the part of its memory where your program code lives, and executes the instructions it finds *fourty-eight million times*. 
 
@@ -467,15 +539,18 @@ We could do this tracking and math ourselves, but there's a function in the ``ti
 
 Now, let's take advantage of this in our code. 
 
+Making Time Work For Us
+-----------------------
+
 First, we'll need to add a new attribute to our ``State`` class. It will represent the last time we looked at the clock, or *checked in* with the processor. As such, we'll call it ``checkin``. 
 
 We'll set the initial value of ``checkin`` to the value of ``time.monotonic()``. By doing this in the constructor (``__init__()``), we are calling ``time.monotonic()`` when we create the ``state`` instance from the ``State`` class. So the initial value of ``state.checkin`` will be the number of seconds from when the board was powered on, until that line of code is executed. It's a safe default that gives us something to compare to.
 
-We'll look at ``checkin`` every loop, and see if the current value of ``time.monotonic()`` is at least 0.2 seconds larger - if this is true, it would mean that 0.2 seconds have elapsed. 
+We'll look at ``checkin`` every loop, and see if the current value of ``time.monotonic()`` is at least 0.2 seconds larger - if this is true, it would mean that 0.2 seconds have elapsed. It's super simple and non-blocking.
 
 At that point we can update our state - the reading from the button should be stable.
 
-Finally, we need to set ``checkin`` to the new value of ``time.monotonic()``, to mark the last time we checked the clock, and the cycle can start all over again.
+As a last step, we need to set ``checkin`` to the new value of ``time.monotonic()``, to mark the last time we checked the clock, and the cycle can start all over again.
 
 .. code-block:: python
     
@@ -548,15 +623,65 @@ Finally, we need to set ``checkin`` to the new value of ``time.monotonic()``, to
     * On **Line 14**, the new ``checkin`` attribute is established, and its default value is set to ``time.monotonic()`` - so it will be a float of the number of seconds since the board was powered on (roughly). The specific default value will be the number of seconds since the board was powered on *when the class is instantiated* on **line 46**. As discussed above, this gives us a reference point for debouncing. 
     
     * The ``update()`` method has been altered to both utilize the ``checkin`` attribute to only change the state every 0.2 seconds (**line 24**), and update the ``checkin`` value after its done doing that (**line 41**).
-           
 
-We've introduced a new concept beyond the addition of tracking time. Note the addtion of a variable in the class, defined outside of any methods, called ``_debounce``. 
+This code handles debouncing our buttons and doesn't block. |unicorn| We keep things clean by letting the ``State`` class handle tracking the time.
 
-``_debounce`` is a *class attribute*, meaning that it belongs to the ``State`` class, and not to the instance object created from ``State``, even though we can access it from the instance (``self._debounce`` in our methods, or ``state._debounce`` in our main code). 
+Aside: Class Attributes And Privacy
+-----------------------------------
+
+In this iteration of the code, we've introduced a new concept beyond the addition of tracking time. Note the addition of a new variable in the class, defined outside of any methods, called ``_debounce`` (**line 6**). 
+
+``_debounce`` is a *class attribute*, meaning that it belongs to the ``State`` class, and not to the instance object created from ``State``. We can access it from the instance (``self._debounce`` in our methods, or ``state._debounce`` in our main code).
 
 By making ``_debounce`` a class attribute, we are indicating to anyone who uses our class that we don't intend for the value to be changed. However, if we were to change it, we would do so by accessing it as ``State._debounce``. What's really interesting is that changing ``State._debounce`` would change *all* of the instances of ``State`` too.
 
-There's some nuance to it, but generally speaking, we use class attributes like this when we want to set a value that will rarely, if ever, change. We're using it here like a configuration setting. You can change it in the code, or change it at runtime and affect any instances of ``State`` that exist, or will be created after the change.
+.. warning::
+    
+    If you *set* a class variable via the instance, Python thinks you are trying to make a new instance variable, and will essentially disconnect the instance's version of the class variable from the class.
+    
+    This is the expected behavior we're discussing above:
+    
+    .. code-block:: pycon
+       :linenos: none
+       
+       >>> class Test:
+       ...:    _class_attr = "X"
+       ...:
+       >>> inst1 = Test()
+       >>> inst1._class_attr
+       "X"
+       >>> Test._class_attr = "Y"
+       >>> inst1._class_attr
+       "Y"
+       >>> inst2 = Test()
+       >>> inst2._class_attr
+       "Y"
+        
+        
+    This is what happens when you set a class attribute on an instance:
+    
+    .. code-block:: pycon
+       :linenos: none
+       
+       >>> class Test:
+       ...:    _class_attr = "X"
+       ...:
+       >>> inst1 = Test()
+       >>> inst1._class_attr = "Y"
+       >>> Test._class_attr
+       "X"
+       >>> inst1._class_attr
+       "Y"
+       >>> Test._class_attr = "Z"
+       >>> inst1._class_attr
+       "Y"
+       >>> inst2 = Test()
+       >>> inst2._class_attr
+       "Z"
+     
+    This can cause very subtle bugs that are hard to track down. 
+
+As noted in the warning above, there's some nuance to it, but generally speaking, we use class attributes like this when we want to set a value that will rarely, if ever, change. We're using it here like a configuration setting. You can change it in the code, or change it at runtime (``State._debounce = 0.1``, not ``state._debounce = 0.1``) and it will affect any instances of ``State`` that exist, or will be created after the change.
 
 .. tip::
    
@@ -573,6 +698,8 @@ There's something else noteworthy about ``_debounce``. We've prefixed it with an
    
    Since the concept of "privacy" in Python is merely a convention, it's better to express it not as "hidden" or "forbidden", but more so "an attribute name that I can't promise won't change, so don't count on it being there". 
    
+Demo And Conclusion
+-------------------
 
 The changes are pretty subtle, but here's another video showing this version running on my Trinket M0:
    
@@ -596,13 +723,14 @@ What that means is we want to detect when a button's state has changed from ``Tr
 
 What we want to do is called *event detection*.
 
-Events
-------
+Diving Into Events
+==================
+
 In order to avoid calling ``random_color()`` every single time we update our state, whether the "b" button was pressed or not, we need to decide when the best time to call ``random_color()`` is. For this example, we were calling ``random_color()`` when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time). 
 
 So when should we do it, to avoid calling ``random_color()`` too frequently?
 
-Think about how a button works. When you press it, the pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". These are two separate *events* - **press** and **release**. 
+Think about how a button, technically a "momentary switch", works. When you press it, the microcontroller pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". We can think about these situations as two separate *events* - **press** and **release**. 
 
 * **Press** happens when the button changes from "LOW" to "HIGH" - it wasn't pressed, and now it is. 
 
@@ -610,7 +738,7 @@ Think about how a button works. When you press it, the pin reads "HIGH" until yo
 
 In Python, that means the *press* event happens when a pin's ``value`` attribute used to read ``False``, and now it reads ``True``. A *release* event happens when a pin's ``value`` used to read ``True`` and now it's ``False``. 
 
-We know what the previous value was because we've stored in it our ``state`` object. We can use that to detect the change in state.
+We know what the previous value was because we've stored in it our ``state`` object. We can use that to detect the change in state by just comparing the current real-life value with the last value we recorded in the state object.
 
 The basic logic looks like this:
 
@@ -620,7 +748,7 @@ The basic logic looks like this:
 
 Now that we can act *only* when the button transitions from one state to the other, we can call ``random_color()`` in a more logical place, like right before we change the RGB pixel's state, when the button is pressed. We could also just do it when the button is released, more in line with the original logic. 
 
-Here's our code again, with the ``random_color()`` call wrapped inside of a *press* event:
+Here's our code again, with the ``random_color()`` call wrapped inside of logic that detects a *press* event:
 
 .. code-block:: python
     
@@ -711,13 +839,13 @@ Here's our code again, with the ``random_color()`` call wrapped inside of a *pre
     
 We're now set up to handle even more events, like button holds, and double-clicks. Or even complex events involving multiple buttons (think chords on a piano or "ctrl-c" on a computer keyboard).
 
-If you've done any programming in the past with GUIs, or front-end web application development, this concept may seem very familiar. It's very similar to how mouse and keyboard events are handled in these environments. 
+If you've done any programming in the past with GUIs, or front-end web application development, this concept may seem very familiar. It's similar to how mouse and keyboard events are handled in these environments. |thinking|
 
 But don't be distracted by this! An event is not inherently tied to human interaction. An event can be *anything*. If a change in state can be detected, we can call it an event, and take action when it happens (or, we can *handle* the event). 
 
-Imagine you have some environmental sensors. You can detect UV index, brightness of light, temperature, and relative humidity.
+Imagine you have some environmental sensors. Say you can detect UV index, brightness of light, temperature, and relative humidity.
 
-All of the following would be examples of events:
+All of the following might be examples of events you could detect:
 
 * The temperature increases by 10 degrees Fahrenheit. 
 * The humidity drops by 20%.
@@ -726,7 +854,9 @@ All of the following would be examples of events:
 * There is very little light falling on the light sensor - *it's probably night time*.
 * It was nighttime, but now it's not, *it's probably sunrise*. 
 
-You get the idea. All of these events would be handled by some code: change the color of a status LED, write a log message, send an SMS reminding you to put on some sunscreen, put the CPU into "low power" mode, etc. 
+And you could probably think of a lot more! 
+
+All of these events would be handled by some code: change the color of a status LED, write a log message, send an SMS reminding you to put on some sunscreen, put the CPU into "low power" mode, and so on. If you can detect the event, based on changes in state, you can handle it, taking necessary action.
 
 You gain a lot of insight when you start to look at coding a microcontroller project as a problem of *managing state*. Then you can think about changes in state as triggering *events*. You can *handle* those events with code. Very complex problems become very easy to reason about, and easier to debug.
 
@@ -734,26 +864,27 @@ State: Considerations
 =====================
 There are many benefits to modeling our project code around state:
 
-* We have ultimate flexibility. When it comes to debouncing buttons or otherwise detecting events, we can avoid blocking. Generally speaking, managing state lets us decide what data care about, and define our own events based on what the state object looks like.
-* We can separate our concerns. Instead of mixing complex logic and interacting with components and peripherals, we can do one, then the other.
-* We have good transparency. It's obvious what data we care about, since it's all wrapped up in the state object. Using a global state object, we can inspect the state anywhere in our code.
+* We have ultimate flexibility. When it comes to debouncing buttons or otherwise detecting events, we can avoid blocking. Generally speaking, managing state lets us decide what data we care about, and we can define our own events based on what's important to our project.
+* We can separate our concerns. Instead of mixing complex logic and interacting with components and peripherals, we can do one, then the other. This makes our code cleaner, less bug prone, and better performing.
+* We have good transparency. By looking at the class definition, it's obvious what data we care about. 
+* At the same time, we can treat state objects as if they were *opaque*. We can interact with them without being concerned about the fine details about how events are detected or data is stored.
 * The code can be factored in such a way that it is very simple to reason about. With a few rules attached to the state variables, we can condense a complex series of if/else statements into just a few that are easy to wrap our heads around.
-* Events are easy to detect, since we have a record of what things looked like in the past.
+* Events become possible to detect, since we're tracking state over time.
 
-This is great, but there are some drawbacks:
+This is all great, but there are some drawbacks:
 
 * We will ultimately end up using more memory. This isn't too big of a concern on a beefy platform like the M0/M4 boards, but we still have limits to how much memory we can use and have to remain conscious of this. 
 
-This is especially true for CircuitPython and hobbyists like us - we will often rely heavily on 3rd party libraries, and every line of code we add to our project eats up a small amount of memory.
+  This is especially true for CircuitPython and hobbyists like us - we will often rely heavily on 3rd party libraries, and every line of code we add to our project eats up a small amount of memory.
 
-.. tip::
-   
-   There is an excellent article series over on `Hackaday <https://hackaday.com/2015/12/09/embed-with-elliot-debounce-your-noisy-buttons-part-i/>`__ that covers debouncing in depth and illustrates a solution for the Arduino platform that is *extremely* memory efficient. Something like this could be adapted to CircuitPython if our state keeping variable got to be too memory intensive.
-   
-.. note::
-    
-    We will be covering techniques for reducing our memory footprint at the end of this series. Stay tuned!
-    
+  .. tip::
+     
+     There is an excellent article series over on `Hackaday <https://hackaday.com/2015/12/09/embed-with-elliot-debounce-your-noisy-buttons-part-i/>`__ that covers debouncing in depth and illustrates a solution for the Arduino platform that is *extremely* memory efficient. Something like this could be adapted to CircuitPython if our state keeping variable got to be too memory intensive.
+     
+  .. note::
+      
+      We will be covering techniques for reducing our memory footprint at the end of this series. Stay tuned!
+  
 
 * The timing is likely to be *ever-so-slightly* inaccurate. While processor cycles are very consistent, counting them tends to be less accurate over time (this is called "clock drift"). This is aggravated by the math being done - counting millions of cycles, dividing that by seconds, then rounding will cause further errors over time.
 * There can still be blocking code, and aspects of Python (like `the GIL <https://wiki.python.org/moin/GlobalInterpreterLock>`__) that can further throw off your timing, especially when your code is running for long periods of time (days). 
@@ -767,11 +898,11 @@ So there are things to be concerned about, but nothing that detracts from the ut
     
     
 Conclusions And What's Next
----------------------------
+===========================
 So, now we know what a great tool state is, and how to wield it like a pro.
 
 And building on that, we've explored the fundamentals of events, and we can think about things like pressing a button as a series of state changes. We can detect these changes and take action.
 
 As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky |grin|. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! |sparkleheart|
 
-In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code.
+In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code, in preparation for building the more complex project described in `part 1 <{filename}/circuitpython-state-1.rst>`__.

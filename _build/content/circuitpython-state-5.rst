@@ -4,7 +4,7 @@ State And Events In CircuitPython: Part 4: Example Application
 :author: lionfacelemonface
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
-:slug: circuitpython-state-part-4
+:slug: circuitpython-state-part-5
 :status: draft
 
 .. include:: ../emojis.rst

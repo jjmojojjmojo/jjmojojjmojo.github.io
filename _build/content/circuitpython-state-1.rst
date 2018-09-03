@@ -694,3 +694,8 @@ We've hinted at "state" and "events" but have yet to really define what they are
 In the next article, we'll dive deep into both state and events, framed around one of the most common problems in electronics (especially hobby electronics): **button "de-bouncing"**. 
 
 We'll solve the problem of button "bounce" (as well as define what it actually is), and dive into some more practical code. We'll explore some patterns that are the basis for handling a whole slew of issues that face us as microcontroller programmers. 
+
+.. tip::
+    
+    Part 2 is now complete! `Go on to Part 2 <{filename}/circuitpython-state-2.rst>`__
+    
