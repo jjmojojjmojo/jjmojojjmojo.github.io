@@ -178,6 +178,9 @@ for path in os.scandir(PATH):
             images = soup.select("section img")
             
             for image in images:
+                if image.get("srcset"):
+                    print("WARNING: IMAGE ALREADY PROCESSED?")
+                    continue
                 
                 # TODO: catch off-site image links
                 # TODO: detect if the image already is wrapped in an A tag

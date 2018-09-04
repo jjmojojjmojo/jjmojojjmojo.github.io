@@ -61,6 +61,15 @@ PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 # AUTHOR_FEED_ATOM = None
 # AUTHOR_FEED_RSS = None
 
+CATEGORY_FEED_ATOM = 'feeds/%s.atom'
+FEED_ALL_ATOM = 'feeds/all.atom'
+AUTHOR_FEED_ATOM = 'feeds/%s.atom'
+
+
+CATEGORY_FEED_RSS = 'feeds/%s.rss'
+AUTHOR_FEED_RSS = 'feeds/%s.rss'
+FEED_ALL_RSS = 'feeds/all.rss'
+
 DISPLAY_PAGES_ON_MENU = False
 
 # Blogroll
