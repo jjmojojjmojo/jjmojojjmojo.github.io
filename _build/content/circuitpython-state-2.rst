@@ -3,7 +3,7 @@ State And Events In CircuitPython: Part 2: Exploring State And Debouncing The Wo
 :date: 2018-09-01 10:07
 :author: jjmojojjmojo
 :category: tutorial
-:tags: tutorial; circuitpython; hardware; state;
+:tags: circuitpython; python; hardware; state;
 :slug: circuitpython-state-part-2
 :status: published
 

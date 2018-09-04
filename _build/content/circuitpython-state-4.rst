@@ -3,7 +3,7 @@ State And Events In CircuitPython: Part 4: A Generic State Dispatcher
 :date: 2018-06-11 15:07
 :author: lionfacelemonface
 :category: tutorial
-:tags: tutorial; circuitpython; hardware; state;
+:tags: circuitpython; python; hardware; state;
 :slug: circuitpython-state-part-4
 :status: draft
 

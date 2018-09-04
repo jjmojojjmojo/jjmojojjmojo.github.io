@@ -2,8 +2,8 @@ Boot: Getting Started With Clojure In < 10 Minutes
 ##################################################
 :date: 2018-08-01 11:41
 :author: jjmojojjmojo
-:category: tutorials
-:tags: boot, clojure
+:category: tutorial
+:tags: boot, clojure, classics
 :slug: boot-getting-started-with-clojure-in-10-minutes
 :status: published
 

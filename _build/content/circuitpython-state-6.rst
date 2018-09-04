@@ -3,7 +3,7 @@ State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memo
 :date: 2018-06-11 15:07
 :author: lionfacelemonface
 :category: tutorial
-:tags: tutorial; circuitpython; hardware; state;
+:tags: tutorial; circuitpython; python; hardware; state;
 :slug: circuitpython-state-addendum
 :status: draft
 

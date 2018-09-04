@@ -61,14 +61,16 @@ PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 # AUTHOR_FEED_ATOM = None
 # AUTHOR_FEED_RSS = None
 
-CATEGORY_FEED_ATOM = 'feeds/%s.atom'
+CATEGORY_FEED_ATOM = 'feeds/category.%s.atom'
 FEED_ALL_ATOM = 'feeds/all.atom'
-AUTHOR_FEED_ATOM = 'feeds/%s.atom'
+AUTHOR_FEED_ATOM = 'feeds/author.%s.atom'
+TAG_FEED_ATOM = 'feeds/tag.%s.atom'
 
 
-CATEGORY_FEED_RSS = 'feeds/%s.rss'
-AUTHOR_FEED_RSS = 'feeds/%s.rss'
+CATEGORY_FEED_RSS = 'feeds/category.%s.rss'
+AUTHOR_FEED_RSS = 'feeds/author.%s.rss'
 FEED_ALL_RSS = 'feeds/all.rss'
+TAG_FEED_RSS = 'feeds/tag.%s.rss'
 
 DISPLAY_PAGES_ON_MENU = False
 
@@ -90,11 +92,17 @@ TOC = {
 }
 
 TAG_DESCRIPTIONS = {
-    'clojure': "Articles relating to the Clojure programming language."
+    'clojure': "Articles relating to the Clojure programming language.",
+    'python': "The Python programming language",
+    'boot': "The Boot build tool for Clojure",
+    'classics': "Revised articles from my old blog",
+    'circuitpython': "Adafruit's port of MicroPython for their M0/M4 development boards",
+    'hardware': "Electronics projects and articles dealing with physical technology",
+    'state': "The concept of 'state' in terms of tracking changes in data over time"    
 }
 
 CATEGORY_DESCRIPTIONS = {
-    'tutorials': "How-tos, introductions, walk-throughs."
+    'tutorial': "How-tos, introductions, walk-throughs."
 }
 
 STATIC_PATHS = ['images', 'files', 'js', 'videos']

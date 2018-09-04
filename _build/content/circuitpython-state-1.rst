@@ -3,7 +3,7 @@ State And Events In CircuitPython: Part 1: Setup
 :date: 2018-08-27 13:01
 :author: jjmojojjmojo
 :category: tutorial
-:tags: tutorial; circuitpython; hardware; state;
+:tags: circuitpython; python; hardware; state;
 :slug: circuitpython-state-part-1
 :status: published
 

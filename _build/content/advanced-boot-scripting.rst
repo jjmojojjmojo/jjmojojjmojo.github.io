@@ -2,7 +2,8 @@ Advanced Boot Scripting
 #######################
 :date: 2018-08-08 13:34
 :author: jjmojojjmojo
-:category: tutorials
+:category: tutorial
+:tags: clojure; boot; classics
 :slug: advanced-boot-scripting
 :status: published
 
