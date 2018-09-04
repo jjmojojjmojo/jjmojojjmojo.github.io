@@ -1,0 +1,1487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - tutorials</title><link href="/" rel="alternate"></link><link href="/feeds/tutorials.atom.xml" rel="self"></link><id>/</id><updated>2018-08-08T13:34:00-04:00</updated><entry><title>Advanced Boot Scripting</title><link href="/advanced-boot-scripting.html" rel="alternate"></link><published>2018-08-08T13:34:00-04:00</published><updated>2018-08-08T13:34:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-08:/advanced-boot-scripting.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
+&lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot&lt;/a&gt; is an all-around useful tool
+for building clojure applications, but one feature in particular has
+proven a &lt;em&gt;adjuncti finalum&lt;/em&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[*]&lt;/a&gt; : boot lets you do &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;clojure scripting&lt;/a&gt;. This
+elevates clojure to the same high productivity of scripting languages
+(like my personal favorite, Python), but bakes in dependency management
+and other goodies. This allows the user to build complexity iteratively,
+in a straight-forward manner (verses generating a bunch of boiler plate
+project code and building a package). This article explores boot
+scripting further, illustrating how boot can be used to quickly and
+easily develop and distribute applications and tools. There's also
+discussion about getting your jars into
+&lt;a class="reference external" href="http://clojars.org"&gt;Clojars&lt;/a&gt;, and setting up a simple bare-minimum
+&lt;a class="reference external" href="http://maven.apache.org/index.html"&gt;Maven&lt;/a&gt; repository.&lt;/p&gt;
+</summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
+&lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot&lt;/a&gt; is an all-around useful tool
+for building clojure applications, but one feature in particular has
+proven a &lt;em&gt;adjuncti finalum&lt;/em&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[*]&lt;/a&gt; : boot lets you do &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;clojure scripting&lt;/a&gt;. This
+elevates clojure to the same high productivity of scripting languages
+(like my personal favorite, Python), but bakes in dependency management
+and other goodies. This allows the user to build complexity iteratively,
+in a straight-forward manner (verses generating a bunch of boiler plate
+project code and building a package). This article explores boot
+scripting further, illustrating how boot can be used to quickly and
+easily develop and distribute applications and tools. There's also
+discussion about getting your jars into
+&lt;a class="reference external" href="http://clojars.org"&gt;Clojars&lt;/a&gt;, and setting up a simple bare-minimum
+&lt;a class="reference external" href="http://maven.apache.org/index.html"&gt;Maven&lt;/a&gt; repository.&lt;/p&gt;
+
+&lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
+&lt;colgroup&gt;&lt;col class="label"/&gt;&lt;col/&gt;&lt;/colgroup&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[*]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I originally had "&lt;em&gt;interfectorem pluma&lt;/em&gt;" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&amp;gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as &lt;em&gt;interfectorem pluma&lt;/em&gt; literally translates to something like "feather murderer". In my amateur approach &lt;em&gt;adjuncti finalum&lt;/em&gt; literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="section" id="setup"&gt;
+&lt;h2 id="setup"&gt;Setup&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As I've covered before&lt;/a&gt;,
+boot is easy to install. All you need is a JDK and the &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;boot executable&lt;/a&gt;. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
+&lt;span class="gp"&gt;$&lt;/span&gt; mkdir -p ~/bin
+&lt;span class="gp"&gt;$&lt;/span&gt; mv boot.sh boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod a+x boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mv boot ~/bin/
+
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=\$PATH:\$HOME/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;First we need to download the boot executable script. The .sh extension indicates it's a shell script.&lt;/p&gt;
+&lt;p&gt;Then a directory is created with &lt;code&gt;mkdir&lt;/code&gt; for personal executables (binaries, hence &lt;code&gt;bin&lt;/code&gt;). We use the &lt;code&gt;-p&lt;/code&gt; flag to tell &lt;code&gt;mkdir&lt;/code&gt; that any intermediary directories should be created. &lt;code&gt;-p&lt;/code&gt; also silences any errors for already-existing directories.&lt;/p&gt;
+&lt;p&gt;The tilde &lt;code&gt;~&lt;/code&gt; is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely &lt;code&gt;/home/jjmojojjmojo&lt;/code&gt;. But on some systems, it will be &lt;code&gt;/var/users/jjmojojjmojo&lt;/code&gt;. On MacOS, home directories are in &lt;code&gt;/Users&lt;/code&gt;. See &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory"&gt;this wikipedia article&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;Finally, we string a few commands together using &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;. &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; will execute the following command if the preceding one succeeds (has a 0 return value). Here's what each part does:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;We rename (move) the &lt;code&gt;boot.sh&lt;/code&gt; to &lt;code&gt;boot&lt;/code&gt;. This way we can type &lt;code&gt;boot&lt;/code&gt; instead of &lt;code&gt;boot.sh&lt;/code&gt; to execute boot commands later on.&lt;/li&gt;
+&lt;li&gt;We change the &lt;em&gt;mode&lt;/em&gt; of the &lt;code&gt;boot&lt;/code&gt; script to include &lt;em&gt;execute&lt;/em&gt; for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say &lt;code&gt;chmod 755&lt;/code&gt;) only modifies the execute bit for each class. &lt;a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm"&gt;More info&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Finally, we move the &lt;code&gt;boot&lt;/code&gt; script to our personal &lt;code&gt;~/bin&lt;/code&gt; directory, so the shell can find it when we set that up in the next step.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then we need to update our &lt;code&gt;$PATH&lt;/code&gt; environment variable so the shell can find our new executable &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;The shell looks for executables in a variable called &lt;code&gt;$PATH&lt;/code&gt;. &lt;code&gt;$PATH&lt;/code&gt; is a list of directories, that are searched in sequential order.&lt;/p&gt;
+&lt;p&gt;We can get the shell to find our &lt;code&gt;boot&lt;/code&gt; script by adding our personal bin directory to the end of that variable. &lt;a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)"&gt;More info&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By adding an &lt;code&gt;export&lt;/code&gt; command to the end of our &lt;code&gt;~/.bash_profile&lt;/code&gt;, we can ensure this modification to our shell happens every time we log in, or start our terminal app. Other environments, and shells have different files that are used this way.&lt;/p&gt;
+&lt;p&gt;We accomplish this by using the &lt;code&gt;echo&lt;/code&gt; command. &lt;code&gt;echo&lt;/code&gt; sends data to the terminal output (stdout). We redirect that output to be appended to &lt;code&gt;~/.bash_profile&lt;/code&gt;, using two greater-than symbols (&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;). &lt;a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html"&gt;More info&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note that we escape the dollar signs in the &lt;code&gt;$PATH&lt;/code&gt; and &lt;code&gt;$HOME&lt;/code&gt; variables. This prevents the shell from expanding the current value for those variables before adding the &lt;code&gt;export&lt;/code&gt; to &lt;code&gt;~/.bash_profile&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, we make the change take effect in our current shell by running the export (without the escaped dollar signs).&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Depending on your distribution, and shell, the way to make this change permanent may be different. Most shells read a special file in your home directory. Look for files like &lt;code&gt;~/.bashrc&lt;/code&gt;, &lt;code&gt;~/.profile&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;For good measure, lets ask boot to update itself:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -u
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="making-boot-faster"&gt;
+&lt;h2 id="making-boot-faster"&gt;Making Boot Faster&lt;/h2&gt;
+&lt;p&gt;Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_profile&lt;/span&gt;&lt;/tt&gt; or similar other files for your particular shell. See the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options"&gt;JVM-Options&lt;/a&gt; page in the boot documentation for details, and other ways to incorporate these settings into your projects:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="a-simple-script"&gt;
+&lt;h2 id="a-simple-script"&gt;A Simple Script&lt;/h2&gt;
+&lt;p&gt;For this article, we'll start with an example of a useful application that grabs the most recent tweet from the &lt;a class="reference external" href="https://twitter.com/nihilist_arbys"&gt;Nihilist Arby's&lt;/a&gt; twitter feed. A great addition to your &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29"&gt;MOTD&lt;/a&gt; to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="twitter-api-tokens"&gt;
+&lt;h2 id="twitter-api-tokens"&gt;Twitter API Tokens&lt;/h2&gt;
+&lt;p&gt;Before we begin, set up an application and &lt;a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens"&gt;obtain a consumer key&lt;/a&gt;&amp;nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to &lt;em&gt;read only&lt;/em&gt;. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="quick-note-development-deviations"&gt;
+&lt;h2 id="quick-note-development-deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
+&lt;p&gt;Since we're not building anything right now, or utilizing the task infrastructure, we don't need a &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run &lt;tt class="docutils literal"&gt;boot repl&lt;/tt&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Alternatively, we can pre-load dependencies on the command line when we run the &lt;tt class="docutils literal"&gt;repl&lt;/tt&gt; task:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -d twitter-api:1.8.0 repl
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-script-version-1"&gt;
+&lt;h2 id="the-script-version-1"&gt;The Script: Version 1&lt;/h2&gt;
+&lt;p&gt;For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.oauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.api.restful&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.handlers&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import &lt;/span&gt;&lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:text&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;[]&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER KEY]"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER SECRET]"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="nv"&gt;exception-print&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:params&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Making this script executable, it can be run on the command line. The
+result will be the last tweet. I named my script &lt;tt class="docutils literal"&gt;downer&lt;/tt&gt;, but you can
+name it however you'd like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; chmod +x downer
+&lt;span class="gp"&gt;$&lt;/span&gt; ./downer
+&lt;span class="go"&gt;Rip it to shreds. Put it on a bun. Slather it in horsey sauce. Watch them line up to gorge. Feeding pigs to pigs. Arbys: a flat circle.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;You may see some output on stderr about some missing logging libraries. For now, these can be ignored. See &lt;a class="reference internal" href="#appendix-getting-rid-of-log4j-notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;The first 2 lines are what make this a boot script. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; function and general information about environments can be found in the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment"&gt;boot documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First we have the "&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29"&gt;shebang&lt;/a&gt;" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having &lt;tt class="docutils literal"&gt;/bin/env&lt;/tt&gt; available in the same location on most systems, to figure out where boot is.&lt;/p&gt;
+&lt;p&gt;Then we declare our sole dependency on &lt;a class="reference external" href="https://github.com/adamwynne/twitter-api"&gt;twitter-api&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called &lt;tt class="docutils literal"&gt;boot.user&lt;/tt&gt;. You can alternatively load external code using the &lt;tt class="docutils literal"&gt;ns&lt;/tt&gt; form. The example code could be replaced thusly:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;ns &lt;/span&gt;&lt;span class="nv"&gt;boot.user&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:use&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.oauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.api.restful&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.handlers&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:import&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Lines 11-28 are the "meat" of the program. Boot will execute the first  &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function that it finds in a script. For details about what the code is doing, see the &lt;a class="reference external" href="https://github.com/adamwynne/twitter-api"&gt;twitter-api&lt;/a&gt; and the &lt;a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline"&gt;twitter restful api&lt;/a&gt;    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="distribution-installation-mark-1"&gt;
+&lt;h2 id="distributioninstallation-mark-1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
+&lt;p&gt;The real beauty of this boot script we have, is that it is a self-contained entity. We can send it to anyone who has boot and a JDK installed. They can place the script anywhere they like. Dependencies are automatically downloaded the first time its run.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="a-not-so-simple-script"&gt;
+&lt;h2 id="a-not-so-simple-script"&gt;A Not-So-Simple Script&lt;/h2&gt;
+&lt;p&gt;Boot scripting provides a natural progression from "just a script" to "full-blown application".&lt;/p&gt;
+&lt;p&gt;Boot scripts contain all of the functions needed to run, but this poses some problems:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;as functionality grows, the script can quickly&amp;nbsp;become unruly&lt;/li&gt;
+&lt;li&gt;because of the way boot encapsulates the running code, it can be difficult to debug.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The solution to both of these problems is to move code into other files, and use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function in your boot script to invoke that code.&lt;/p&gt;
+&lt;p&gt;This is handled quite simply by utilizing boot's &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; environment option, and a little refactoring.&lt;/p&gt;
+&lt;p&gt;We'll construct a directory named &lt;tt class="docutils literal"&gt;src&lt;/tt&gt;, and create a &lt;tt class="docutils literal"&gt;last_tweet.clj&lt;/tt&gt; file. In it, we'll declare a new namespace, last-tweet, and move the code there.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;src/last_tweet.clj&lt;/tt&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;ns &lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:use&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.oauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.api.restful&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.handlers&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:import&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:text&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;
+  &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
+    &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
+         &lt;span class="s"&gt;"[YOUR CONSUMER KEY]"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER SECRET]"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
+                 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;
+                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="ss"&gt;:params&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;
+             &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Our namespace has a dash (-) in it - this isn't supported in clojure file names. So instead, we use an underscore (_) in the name of the file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;last-tweet&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Here is the new &lt;tt class="docutils literal"&gt;downer&lt;/tt&gt; script:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt;
+  &lt;span class="p"&gt;[]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&amp;nbsp;for some additional refactoring to make things more flexible.&lt;/p&gt;
+&lt;p&gt;We can add many namespaces to the &lt;tt class="docutils literal"&gt;src&lt;/tt&gt; directory. We can also add other source paths - the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; directive is a &lt;a class="reference external" href="http://clojure.org/data_structures#toc24"&gt;hash set&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now we can refactor the&amp;nbsp;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;last-tweet/last-tweet&lt;/span&gt;&lt;/tt&gt; function to take credentials and the twitter account to get a tweet from as arguments:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;account&lt;/span&gt; &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="nv"&gt;consumer-secret&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
+    &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
+         &lt;span class="nv"&gt;consumer-id&lt;/span&gt;
+         &lt;span class="nv"&gt;consumer-secret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
+                 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;
+                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="ss"&gt;:params&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="nv"&gt;account&lt;/span&gt;
+             &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;We've gone from a hard-coded function to one that is more general-purpose.&lt;/p&gt;
+&lt;p&gt;Now we can utilize boot's extremely useful &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro and boot's &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;task option DSL&lt;/a&gt;&amp;nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;
+  &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
+  &lt;span class="s"&gt;"Prints the last tweet from the given account. Requires twitter user app&lt;/span&gt;
+&lt;span class="s"&gt;  authentication tokens. The authentication tokens can be set using the&lt;/span&gt;
+&lt;span class="s"&gt;  command-line options below, or in the TWITTER_ID and TWITTER_SECRET&lt;/span&gt;
+&lt;span class="s"&gt;  environment variables.&lt;/span&gt;
+
+&lt;span class="s"&gt;  USAGE: downer [options] [twitter account]"&lt;/span&gt;
+
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="nv"&gt;ID&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;"Consumer id from Twitter"&lt;/span&gt;
+   &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;SECRET&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;"Consumer secret from Twitter"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;account&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nth &lt;/span&gt;&lt;span class="nv"&gt;*args*&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;"TWITTER_ID"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-id&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;"TWITTER_SECRET"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nil? &lt;/span&gt;&lt;span class="nv"&gt;consumer-id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nil? &lt;/span&gt;&lt;span class="nv"&gt;consumer-secret&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"ERROR: you must provide twitter credentials. Try -h"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;last-tweet&lt;/span&gt;
+        &lt;span class="nv"&gt;account&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-id&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-secret&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The docstring for the function is used as the "usage" message when the user passes the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag.&lt;/li&gt;
+&lt;li&gt;The task option DSL allows for &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#types"&gt;a pre-processing step&lt;/a&gt; to be defined for each value. In this case, we used &lt;tt class="docutils literal"&gt;str&lt;/tt&gt;, which treats each argument as a string. This can be changed to one of many very useful options, including keywords, symbols, files (which take a path and return a java.io object) and many more, including &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#complex-options"&gt;complex compound values&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;There are two special variables that are provided by the &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt;   macro: &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt;. &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; contains all of the processed options as defined in the argument list, in the form of a map. &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt; contains all other values passed on the command line, as a vector. We use the &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt; variable to allow the user an intuitive way to override the default twitter account.&lt;/li&gt;
+&lt;li&gt;The use of environment variables as alternatives to CLI options is  illustrated here. It's very useful for deployment of more complex    applications, and keeps sensitive information out of the process list.&lt;/li&gt;
+&lt;li&gt;We've added some error handling to give the user a nice message if they neglect to set their credentials.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;Now we can see command-line output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer
+&lt;span class="go"&gt;ERROR: you must provide twitter credentials. Try -h&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The output of &lt;tt class="docutils literal"&gt;./downer &lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer -h
+&lt;span class="go"&gt;Prints the last tweet from the given account. Requires twitter user app&lt;/span&gt;
+&lt;span class="go"&gt;authentication tokens. The authentication tokens can be set using the&lt;/span&gt;
+&lt;span class="go"&gt;command-line options below, or in the TWITTER_ID and TWITTER_SECRET&lt;/span&gt;
+&lt;span class="go"&gt;environment variables.&lt;/span&gt;
+
+&lt;span class="go"&gt;USAGE: downer [options] [twitter account]&lt;/span&gt;
+
+&lt;span class="go"&gt;Options:&lt;/span&gt;
+&lt;span class="go"&gt;  -h, --help                    Print this help info.&lt;/span&gt;
+&lt;span class="go"&gt;  -k, --consumer-id ID          ID sets consumer id from Twitter.&lt;/span&gt;
+&lt;span class="go"&gt;  -i, --consumer-secret SECRET  SECRET sets consumer secret from Twitter.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We set the environment variables, and try getting the last post from a different, possibly more depressing account:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"XXXXXXXXXXXXXXXXX"&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"YYYYYYYYYYYYYYYYYYYYYYYYY"&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
+&lt;span class="go"&gt;FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="distribution-installation-mark-2"&gt;
+&lt;h2 id="distributioninstallation-mark-2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
+&lt;p&gt;Pulling some of the code out into a separate file has made our little script cleaner, but now distributing the file is slightly more complicated, since we have to provide the script access to the code we factored out.&lt;/p&gt;
+&lt;p&gt;There are several ways to handle this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Distribute the source code via git, or a tarball. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; environment parameter can be changed if needed to point to a proper location such as &lt;tt class="docutils literal"&gt;/opt/downer&lt;/tt&gt;, or &lt;tt class="docutils literal"&gt;/usr/local/lib/downer&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;Build a library jar file. The jar file can be installed into a local maven repository, or a public one like &lt;a class="reference external" href="https://clojars.org/"&gt;clojars&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first option is sub-optimal. It can be made somewhat easier with help from &lt;a class="reference external" href="https://github.com/jordansissel/fpm"&gt;fpm&lt;/a&gt;, but it's still a bit cumbersome. The real beauty of boot scripting is we don't have to bother with complex installation procedures.&lt;/p&gt;
+&lt;p&gt;We can leverage the power of java jar files (which are just zip files under the hood) to contain our source code and other artifacts.&lt;/p&gt;
+&lt;p&gt;This makes the jar file the best path. Once the jar is installed into a maven repository the script can reach, the script can once again be distributed as a simple stand-alone text file.&lt;/p&gt;
+&lt;p&gt;We can use boot for this. &lt;em&gt;That's what it does!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="appendix-getting-rid-of-log4j-notices"&gt;
+&lt;h2 id="appendix-getting-rid-of-log4j-notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
+&lt;p&gt;You may have noticed that you get a bunch of warning messages when running our code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
+&lt;span class="go"&gt;SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".&lt;/span&gt;
+&lt;span class="go"&gt;SLF4J: Defaulting to no-operation (NOP) logger implementation&lt;/span&gt;
+&lt;span class="go"&gt;SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.&lt;/span&gt;
+&lt;span class="go"&gt;FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; is the &lt;a class="reference external" href="https://www.slf4j.org/"&gt;Simple Logging Facade For Java&lt;/a&gt;. It
+allows for &lt;em&gt;deployment-time&lt;/em&gt; configuration of logging in an application. This
+means you build your app against the &lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; API, and when you deploy your
+application at some later time, you can use whatever logging back-end you want.
+This is a huge deal for most apps, but in our case, a simple CLI tool that grabs
+a tweet, it's probably nothing we really need to care about.&lt;/p&gt;
+&lt;p&gt;The error concerns &lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; trying to find a logging back-end, and failing to find
+one. It's looking for the default backend, named &lt;tt class="docutils literal"&gt;StaticLoggerBinder&lt;/tt&gt;. So we
+have to fix this to get the warnings to dissapear.&lt;/p&gt;
+&lt;p&gt;The &lt;a class="reference external" href="http://www.slf4j.org/codes.html#StaticLoggerBinder"&gt;link provided in the output&lt;/a&gt; tells us what needs to be done:&lt;/p&gt;
+&lt;blockquote&gt;
+This warning message is reported when the org.slf4j.impl.StaticLoggerBinder class could not be loaded into memory. This happens when no appropriate SLF4J binding could be found on the class path. Placing one (and only one) of slf4j-nop.jar slf4j-simple.jar, slf4j-log4j12.jar, slf4j-jdk14.jar or logback-classic.jar on the class path should solve the problem.&lt;/blockquote&gt;
+&lt;p&gt;To do this for our project, we just need to add a backend to our dependencies in &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Since we don't need logging for our project, we'll choose the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;slf4j-nop&lt;/span&gt;&lt;/tt&gt; back-end.&lt;/p&gt;
+&lt;p&gt;To figure out exactly what the dependency specification looks like, we can search in the &lt;a class="reference external" href="https://search.maven.org/"&gt;Maven Central Repository&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 85%"&gt;
+&lt;img alt="" src="/images/maven-search.png"/&gt;
+&lt;p class="caption"&gt;Screen grab of Maven Central search results for 'slf4j-nop'&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;From the screen grab above, we can derive the dependency specification: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[group-id/artifact-id&lt;/span&gt; "version"]&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;As such, in our case, our spec will be &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="pre"&gt;"1.8.0-beta2"]&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;We might want to be weary of using beta code, even if it isn't important to our project.&lt;/p&gt;
+&lt;p class="last"&gt;To find the latest &lt;em&gt;stable&lt;/em&gt; version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is &lt;tt class="docutils literal"&gt;1.7.25&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;So now, our &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; call looks like this (using the latest stable version of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;slf4j-nop&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="s"&gt;"1.7.25"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;After rebuilding our jar, or running our boot script again, we'll see the &lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; warnings have disapeared.&lt;/p&gt;
+&lt;/div&gt;
+</content></entry><entry><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="alternate"></link><published>2018-08-01T11:41:00-04:00</published><updated>2018-08-01T11:41:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</id><summary type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+
+&lt;div class="section" id="overview-for-the-unititated"&gt;
+&lt;h2 id="overview-for-the-unititated"&gt;Overview For The Unititated&lt;/h2&gt;
+&lt;p&gt;For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.&lt;/p&gt;
+&lt;p&gt;Clojure is a &lt;em&gt;functional programming language&lt;/em&gt; in the style of Common Lisp. "Functional" in this sense means that functions are first-class objects; code and data are peers. Data is &lt;em&gt;immutable&lt;/em&gt; - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.&lt;/p&gt;
+&lt;p&gt;Functional languages, especially in the Lisp-style are &lt;em&gt;expressive&lt;/em&gt; and, linguistically speaking, &lt;em&gt;simple&lt;/em&gt;. The original Lisp, invented in 1958 by John McCarthy at M.I.T., was expressed in seven functions and two special forms - the language, in total, contained just &lt;em&gt;nine elements&lt;/em&gt;, and was fully Touring-complete. By comparison, the current version (3.5) of Python has 30+ keywords, plus special elements such as mathematical operators and colons - and that's merely the language itself, that doesn't include idioms or conventions.&lt;/p&gt;
+&lt;p&gt;What this adds up to is a vast reduction in "incidental complexity" - complexities that creep into code because of the limitations, or expectations, of our languages. Contrast incidental complexity with "essential complexity", or complexities that our code would not function without. Lisp-like languages stay out of your way.&lt;/p&gt;
+&lt;p&gt;In terms of Clojure, we are blessed with a very concise, easy to reason about syntax that gives us incredible flexibility. We are also provided with a robust standard library.&lt;/p&gt;
+&lt;p&gt;Clojure was designed with concurrency in mind, from its inception. This makes advanced use of threads and multiple processes simple and quite accessible, not to mention &lt;em&gt;safe&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Clojure is a general language specification. It has been implemented for the Java Virtual Machine (JVM), JavaScript, and
+the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nuances, but the core language and library is the same - as you move from a Java environment  to a .Net one or onto front-end browser development, your Clojure skills will convey.&lt;/p&gt;
+&lt;p&gt;This tutorial focuses on using Clojure with the JVM. This requires the installation of a Java Development Kit (JDK). It's really the only hard prerequisite.&lt;/p&gt;
+&lt;p&gt;Java applications are typically distributed as JAR files - simple Zipped archives of compiled source code. We will be using Boot to compile and package some example applications.&lt;/p&gt;
+&lt;div class="section" id="about-boot"&gt;
+&lt;h3&gt;About Boot&lt;/h3&gt;
+&lt;p&gt;Boot is a relatively new build tool for Clojure. It succeeds where others have been found wanting. This is because it embodies core Clojure philosophies, in particular the aforementioned reduction in &lt;em&gt;incidental complexity&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;If you have read some other Clojure tutorials or books, you will likely have been introduced to Leiningen. Leiningen is the defacto standard Clojure build tool. Its functionality overlaps with Boot's, but the approach is very different.&lt;/p&gt;
+&lt;p&gt;Leiningen provides some special conventions and a domain-specific language (DSL) to drive the build and development processes. Boot, on the other hand, is purely functional. With the exception of some isolation mechanisms implemented under the hood, Boot works just like any other Clojure library. Extending Boot is as simple as writing any other Clojure code. Leiningen requires that you implement some complex APIs to extend it.&lt;/p&gt;
+&lt;p&gt;My personal favorite feature of Boot, which I believe makes it not only a superior build tool, but an all-around killer utility even outside the build problem space, is &lt;em&gt;scripting&lt;/em&gt;. Clojure is a compiled language, so the concept of Clojure scripts is not baked in. However, Boot, using the same conventions as you would use to manage a build process, gives us the ability to write scripts.&lt;/p&gt;
+&lt;p&gt;These scripts work just like shell scripts, with a few key exceptions:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;They are written entirely in Clojure.&lt;/li&gt;
+&lt;li&gt;They can have dependencies on Clojure libraries that are resolved at runtime.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This means you can distribute Boot scripts in the same manner as Python or Bash scripts - except dependencies are handled automatically.&lt;/p&gt;
+&lt;p&gt;This concept is explored in the sister post to this one, &lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;Boot: Getting Started With Clojure In 10 Minutes&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="installation-development-setup"&gt;
+&lt;h3&gt;Installation/Development Setup&lt;/h3&gt;
+&lt;p&gt;The command-line examples assume a unix-like environment, and are to be run within a terminal. The bash shell was used. Examples have been tested on Ubuntu Linux and MacOs.&lt;/p&gt;
+&lt;p&gt;However, the principals should be transferable to any Linux, BSD or similar operating system.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Clojure is supported in the Microsoft Windows operating system. The author hopes to expand this tutorial to cover Windows sometime in the future.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Clojure doesn't need to be installed, in the typical sense. Clojure is distributed as a JAR file, and so Boot is able to download it and use it as its standard operating procedure.&lt;/p&gt;
+&lt;p&gt;Behind the scenes, &lt;a class="reference external" href="https://maven.apache.org/"&gt;Maven&lt;/a&gt; is used to manage JARs. The public maven repositories are utilized for Java dependencies, and &lt;a class="reference external" href="http://clojars.org/"&gt;clojars&lt;/a&gt; is used for clojure ones.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conventions"&gt;
+&lt;h3&gt;Conventions&lt;/h3&gt;
+&lt;p&gt;See &lt;a class="reference external" href="/pages/conventions.html"&gt;Site-wide Conventions Explained&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="prerequisites"&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;You will need the following:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;em&gt;A JDK installed&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Really, that's it. &lt;a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html"&gt;Sun's JDK&lt;/a&gt; or &lt;a class="reference external" href="http://openjdk.java.net/"&gt;OpenJDK&lt;/a&gt; will work. Use the newest version.&lt;/p&gt;
+&lt;p&gt;In addition, you'll need a way to download things. Feel free to use your browser. The examples below use &lt;a class="reference external" href="https://www.gnu.org/software/wget/"&gt;wget&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you're on Linux or Mac OS, you'll also need root access via &lt;a class="reference external" href="http://www.sudo.ws/"&gt;sudo&lt;/a&gt; - this is not a hard requirement but allows you to install boot for everyone on your machine to use.&lt;/p&gt;
+&lt;p&gt;There's an expectation that you know basic &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;, and examples try not to be too clever. For a good introduction, check out &lt;a class="reference external" href="http://www.braveclojure.com"&gt;Clojure For The Brave and True&lt;/a&gt;, specifically &lt;a class="reference external" href="http://www.braveclojure.com/do-things/"&gt;Do Things: a Clojure Crash Course&lt;/a&gt;. If you need help with specific forms used, the &lt;a class="reference external" href="http://clojure.org/documentation"&gt;Clojure Community Documentation&lt;/a&gt; is extremely helpful, especially the &lt;a class="reference external" href="http://clojure.org/cheatsheet"&gt;Clojure Cheat Sheet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It may be helpful to give the &lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot readme&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki"&gt;wiki documentation&lt;/a&gt; a read.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;For questions about boot or clojure,&lt;/strong&gt; &lt;a class="reference external" href="http://clojurians.net/"&gt;The Clojurians Slack&lt;/a&gt; &lt;strong&gt;is the defacto place to go to converse with clojure rockstars and other newbs alike.&lt;/strong&gt;&lt;/p&gt;
+&lt;p class="last"&gt;&lt;strong&gt;If slack isn't your jam,&lt;/strong&gt; &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Internet_Relay_Chat"&gt;IRC&lt;/a&gt; &lt;strong&gt;is another great way to get in touch with clojure folks. Come join us on&lt;/strong&gt; &lt;a class="reference external" href="https://freenode.net/"&gt;freenode&lt;/a&gt;, &lt;strong&gt;in #hoplon.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="dales-la-bota-give-em-the-boot-installation"&gt;
+&lt;h2 id="dales-la-bota-give-em-the-boot-installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://boot-clj.com/"&gt;Boot&lt;/a&gt; is '&lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;installed&lt;/a&gt;' by simply downloading an &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;executable file&lt;/a&gt; and putting it somewhere where you can execute it.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;For more options, see &lt;a class="reference internal" href="#appendix-alternative-install-methods"&gt;Appendix: Alternative Install Methods&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;In our case, we'll use our home directory:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
+&lt;span class="gp"&gt;$&lt;/span&gt; mkdir -p ~/bin
+&lt;span class="gp"&gt;$&lt;/span&gt; mv boot.sh boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod a+x boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mv boot ~/bin/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;First we need to download the boot executable script. The .sh extension indicates it's a shell script.&lt;/p&gt;
+&lt;p&gt;Then a directory is created with &lt;code&gt;mkdir&lt;/code&gt; for personal executables (binaries, hence &lt;code&gt;bin&lt;/code&gt;). We use the &lt;code&gt;-p&lt;/code&gt; flag to tell &lt;code&gt;mkdir&lt;/code&gt; that any intermediary directories should be created. &lt;code&gt;-p&lt;/code&gt; also silences any errors for already-existing directories.&lt;/p&gt;
+&lt;p&gt;The tilde &lt;code&gt;~&lt;/code&gt; is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely &lt;code&gt;/home/jjmojojjmojo&lt;/code&gt;. But on some systems, it will be &lt;code&gt;/var/users/jjmojojjmojo&lt;/code&gt;. On MacOS, home directories are in &lt;code&gt;/Users&lt;/code&gt;. See &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory"&gt;this wikipedia article&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;Finally, we string a few commands together using &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;. &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; will execute the following command if the preceding one succeeds (has a 0 return value). Here's what each part does:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;We rename (move) the &lt;code&gt;boot.sh&lt;/code&gt; to &lt;code&gt;boot&lt;/code&gt;. This way we can type &lt;code&gt;boot&lt;/code&gt; instead of &lt;code&gt;boot.sh&lt;/code&gt; to execute boot commands later on.&lt;/li&gt;
+&lt;li&gt;We change the &lt;em&gt;mode&lt;/em&gt; of the &lt;code&gt;boot&lt;/code&gt; script to include &lt;em&gt;execute&lt;/em&gt; for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say &lt;code&gt;chmod 755&lt;/code&gt;) only modifies the execute bit for each class. &lt;a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm"&gt;More info&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Finally, we move the &lt;code&gt;boot&lt;/code&gt; script to our personal &lt;code&gt;~/bin&lt;/code&gt; directory, so the shell can find it when we set that up in the next step.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;p&gt;Then we need to update our &lt;code&gt;$PATH&lt;/code&gt; environment variable so the shell can find our new executable boot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=\$PATH:\$HOME/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;The shell looks for executables in a variable called &lt;code&gt;$PATH&lt;/code&gt;. &lt;code&gt;$PATH&lt;/code&gt; is a list of directories, that are searched in sequential order.&lt;/p&gt;
+&lt;p&gt;We can get the shell to find our &lt;code&gt;boot&lt;/code&gt; script by adding our personal bin directory to the end of that variable. &lt;a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)"&gt;More info&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By adding an &lt;code&gt;export&lt;/code&gt; command to the end of our &lt;code&gt;~/.bash_profile&lt;/code&gt;, we can ensure this modification to our shell happens every time we log in, or start our terminal app. Other environments, and shells have different files that are used this way.&lt;/p&gt;
+&lt;p&gt;We accomplish this by using the &lt;code&gt;echo&lt;/code&gt; command. &lt;code&gt;echo&lt;/code&gt; sends data to the terminal output (stdout). We redirect that output to be appended to &lt;code&gt;~/.bash_profile&lt;/code&gt;, using two greater-than symbols (&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;). &lt;a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html"&gt;More info&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note that we escape the dollar signs in the &lt;code&gt;$PATH&lt;/code&gt; and &lt;code&gt;$HOME&lt;/code&gt; variables. This prevents the shell from expanding the current value for those variables before adding the &lt;code&gt;export&lt;/code&gt; to &lt;code&gt;~/.bash_profile&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, we make the change take effect in our current shell by running the export (without the escaped dollar signs).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;Depending on your distribution, and shell, the way to make this change permanent may be different. Most shells read a special file in your home directory. Look for files like &lt;code&gt;~/.bashrc&lt;/code&gt;, &lt;code&gt;~/.profile&lt;/code&gt;, etc.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The real magic happens when boot is run. Boot sets everything up in a &lt;tt class="docutils literal"&gt;.boot&lt;/tt&gt; directory in your home folder. Without having any code to execute yet, you can trigger this by simply asking boot for help:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -h
+&lt;span class="go"&gt;Downloading https://github.com/boot-clj/boot/releases/download/2.7.2/boot.jar...&lt;/span&gt;
+&lt;span class="go"&gt;Running for the first time, BOOT_VERSION not set: updating to latest.&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving clojure-1.8.0.pom from https://repo1.maven.org/maven2/ (8k)&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving oss-parent-7.pom from https://repo1.maven.org/maven2/ (5k)&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving maven-metadata.xml from https://repo.clojars.org/&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving boot-2.7.2.pom from https://repo.clojars.org/ (2k)&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving boot-2.7.2.jar from https://repo.clojars.org/ (3k)&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving clojure-1.8.0.jar from https://repo1.maven.org/maven2/ (3538k)&lt;/span&gt;
+&lt;span class="gp"&gt;#&lt;/span&gt;http://boot-clj.com
+&lt;span class="gp"&gt;#&lt;/span&gt;Wed May &lt;span class="m"&gt;09&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt;:19:27 EDT &lt;span class="m"&gt;2018&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_NAME=org.clojure/clojure&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_VERSION=2.7.2&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_VERSION=1.8.0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;If you have previously installed boot, it's a good idea to run boot's self-update (&lt;code&gt;boot -u&lt;/code&gt;) before continuing:&lt;/p&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -u
+&lt;span class="go"&gt;Retrieving boot-2.7.0.jar from https://clojars.org/repo/&lt;/span&gt;
+&lt;span class="gp"&gt;#&lt;/span&gt;http://boot-clj.com
+&lt;span class="gp"&gt;#&lt;/span&gt;Wed Dec &lt;span class="m"&gt;14&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;:53:20 EST &lt;span class="m"&gt;2016&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_NAME=org.clojure/clojure&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_VERSION=1.7.0&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_VERSION=2.7.0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;div class="section" id="let-s-play-with-clojure"&gt;
+&lt;h3&gt;Let's Play With Clojure&lt;/h3&gt;
+&lt;div class="section" id="the-repl"&gt;
+&lt;h4&gt;The REPL&lt;/h4&gt;
+&lt;p&gt;Clojure utilizes a concept called a &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop"&gt;REPL&lt;/a&gt; (&lt;strong&gt;R&lt;/strong&gt;ead, &lt;strong&gt;E&lt;/strong&gt;valuate, &lt;strong&gt;P&lt;/strong&gt;rint, &lt;strong&gt;L&lt;/strong&gt;oop). REPLs allow you to interactively run code and experiment.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot repl
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;Boot's &lt;tt class="docutils literal"&gt;repl&lt;/tt&gt; task downloads a bunch of dependencies. Don't be alarmed if a bunch of text scrolls by the first time you run &lt;tt class="docutils literal"&gt;boot repl&lt;/tt&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Boot then provides you with a prompt, where you can play around:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;nREPL&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt; &lt;span class="nv"&gt;started&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;port&lt;/span&gt; &lt;span class="mi"&gt;62443&lt;/span&gt; &lt;span class="nv"&gt;on&lt;/span&gt; &lt;span class="nv"&gt;host&lt;/span&gt; &lt;span class="mf"&gt;127.0&lt;/span&gt;&lt;span class="nv"&gt;.0.1&lt;/span&gt; &lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;nrepl&lt;/span&gt;&lt;span class="ss"&gt;://127.0.0.1:62443&lt;/span&gt;
+&lt;span class="nv"&gt;REPL-y&lt;/span&gt; &lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="nv"&gt;.7&lt;/span&gt;, &lt;span class="nv"&gt;nREPL&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="nv"&gt;.12&lt;/span&gt;
+&lt;span class="nv"&gt;Clojure&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="nv"&gt;.0&lt;/span&gt;
+&lt;span class="nv"&gt;Java&lt;/span&gt; &lt;span class="nv"&gt;HotSpot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;TM&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="nv"&gt;-Bit&lt;/span&gt; &lt;span class="nv"&gt;Server&lt;/span&gt; &lt;span class="nv"&gt;VM&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="nv"&gt;.0_92-b14&lt;/span&gt;
+        &lt;span class="nv"&gt;Exit&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;Control+D&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;quit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;Commands&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/help&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;Docs&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;doc &lt;/span&gt;&lt;span class="nv"&gt;function-name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;find-doc &lt;/span&gt;&lt;span class="s"&gt;"part-of-name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;Find&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;find-name&lt;/span&gt; &lt;span class="s"&gt;"part-of-name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;Source&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;source&lt;/span&gt; &lt;span class="nv"&gt;function-name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="nv"&gt;Javadoc&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;javadoc&lt;/span&gt; &lt;span class="nv"&gt;java-object-or-class-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;Examples&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;clojuredocs.org&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojuredocs&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="nv"&gt;cdoc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/clojuredocs&lt;/span&gt; &lt;span class="nv"&gt;name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/clojuredocs&lt;/span&gt; &lt;span class="s"&gt;"ns-here"&lt;/span&gt; &lt;span class="s"&gt;"name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nv"&gt;java.lang.ArithmeticException&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;Divide&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;zero&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;The first few lines provide some basic information:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Line 1: &lt;a class="reference external" href="https://github.com/clojure/tools.nrepl"&gt;nREPL&lt;/a&gt; is a service that allows you to connect to a repl using a remote client.&lt;/li&gt;
+&lt;li&gt;Line 2: &lt;a class="reference external" href="https://github.com/trptcolin/reply"&gt;REPL-y&lt;/a&gt; is an alternative to the built-in REPL that has some nice features.&lt;/li&gt;
+&lt;li&gt;Line 3: We're using Clojure 1.8.&lt;/li&gt;
+&lt;li&gt;Line 4: This is the particular JVM in use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Line's 5 through 14 are some helpful forms and functions you can use inside the REPL.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;boot.user=&amp;gt;&lt;/code&gt; prompt tells us that we are in a special &lt;a class="reference external" href="https://clojure.org/reference/namespaces"&gt;namespace&lt;/a&gt;, set up for us by boot.&lt;/p&gt;
+&lt;p&gt;On line 15, we're doing a simple addition of some integers. When you press enter after typing some code, the result is printed below.&lt;/p&gt;
+&lt;p&gt;On line 17, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the &lt;a class="reference external" href="https://clojuredocs.org/clojure.repl/pst"&gt;pst&lt;/a&gt; (&lt;em&gt;print stack trace&lt;/em&gt;) form:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nv"&gt;java.lang.ArithmeticException&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;Divide&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;zero&lt;/span&gt;
+
+&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pst&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="nv"&gt;clojure.core/eval&lt;/span&gt;                          &lt;span class="nv"&gt;core.clj&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3105&lt;/span&gt;
+         &lt;span class="nv"&gt;...&lt;/span&gt;
+&lt;span class="nv"&gt;boot.user/eval1532&lt;/span&gt;  &lt;span class="nv"&gt;boot.user3203296763858150787.clj&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;    &lt;span class="mi"&gt;1&lt;/span&gt;
+         &lt;span class="nv"&gt;...&lt;/span&gt;
+&lt;span class="nv"&gt;java.lang.ArithmeticException&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;Divide&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;zero&lt;/span&gt;
+&lt;span class="nv"&gt;nil&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="a-simple-clojure-function"&gt;
+&lt;h4&gt;A Simple Clojure Function&lt;/h4&gt;
+&lt;p&gt;Here's a simple Clojure function that prints the &lt;a class="reference external" href="http://www.mathsisfun.com/numbers/fibonacci-sequence.html"&gt;Fibonacci sequence&lt;/a&gt; to a given number of digits:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;This is a basic clojure function definition. It uses &lt;a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#multi-arity-functions"&gt;multiple airties&lt;/a&gt;. This is how you provide multiple different ways to call the same function.&lt;/p&gt;
+&lt;p&gt;Note how on line 2 and line 4 we specify two different argument lists. The first is for calling the function the typical way (providing the maximum number of levels), the second is used for recursion - the &lt;tt class="docutils literal"&gt;pair&lt;/tt&gt; argument is a sequence containing the previous and current number in the sequence.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Line 1: The opening of the function definition.&lt;/li&gt;
+&lt;li&gt;Line 2: The first airty - one single argument named &lt;tt class="docutils literal"&gt;n&lt;/tt&gt;. The maximum number of levels.&lt;/li&gt;
+&lt;li&gt;Line 3: Recursion - if only one argument is passed, call &lt;tt class="docutils literal"&gt;fib&lt;/tt&gt; again, but with 0 and 1 (the first numbers in the Fibonacci sequence) to get things started.&lt;/li&gt;
+&lt;li&gt;Line 4: The second airty - two argunments: &lt;tt class="docutils literal"&gt;pair&lt;/tt&gt; a sequence containin two integers representing the previous and current numbers in the sequence, and &lt;tt class="docutils literal"&gt;n&lt;/tt&gt;, the maximum number of levels.&lt;/li&gt;
+&lt;li&gt;Line 5: print the previous number to &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)"&gt;standard out&lt;/a&gt;. We're using the &lt;a class="reference external" href="https://clojuredocs.org/clojure.core/print"&gt;print&lt;/a&gt; function here to avoid adding a line break after the number so they'll all print to the console on the same line.&lt;/li&gt;
+&lt;li&gt;Line 6: the &lt;a class="reference external" href="https://clojuredocs.org/clojure.core/if"&gt;if&lt;/a&gt; form  is used to check if we've hit the maximum number of levels yet. We subtract one from &lt;tt class="docutils literal"&gt;n&lt;/tt&gt; every iteration, so when it's equal to 1, it's time to stop.&lt;/li&gt;
+&lt;li&gt;Line 7: &lt;em&gt;True condition.&lt;/em&gt; Recurse, this time passing a vector containing the current number, and the sum of the current and previous number. The second parameter is the maximum level minus one.&lt;/li&gt;
+&lt;li&gt;Line 8: &lt;em&gt;False condition.&lt;/em&gt; The end of the requested sequence. Use the &lt;a class="reference external" href="https://clojuredocs.org/clojure.core/println"&gt;println&lt;/a&gt; function with no arguments to print a final line break.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;You can paste this into your REPL and try it out:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="ss"&gt;'boot.user/fib&lt;/span&gt;
+&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt; &lt;span class="mi"&gt;34&lt;/span&gt; &lt;span class="mi"&gt;55&lt;/span&gt;
+&lt;span class="nv"&gt;nil&lt;/span&gt;
+&lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;exit&lt;/span&gt;
+&lt;span class="nv"&gt;Bye&lt;/span&gt; &lt;span class="nb"&gt;for &lt;/span&gt;&lt;span class="nv"&gt;now!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;You can copy the prompts along with the code, the REPL will ignore them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="boot-scripts"&gt;
+&lt;h4&gt;Boot Scripts&lt;/h4&gt;
+&lt;p&gt;Boot also works as a &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;scripting platform&lt;/a&gt; - you can construct applications, specifying dependencies, and parse command-line arguments.&lt;/p&gt;
+&lt;p&gt;We can transform that function into a command-line tool using the power of boot scripting. Assume this file is called &lt;code&gt;fib.boot&lt;/code&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"Printing fibonacci sequence up to "&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;"numbers"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Integer/parseInt&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;The primary differences betweent a boot script and the bare boot function we wrote earlier:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;A boot script is a shell script, and so it needs a line to indicate which interpreter is required to parse the contents. This is known as a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)"&gt;shebang&lt;/a&gt; or 'hashbang' line. (Line 1.)&lt;/li&gt;
+&lt;li&gt;A boot script requires a &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function to be defined. This function is invoked by boot when the script is run. (Line 12.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The shebang line has to be a 'full' path (not relative) to the executable.&lt;/p&gt;
+&lt;p&gt;In our shebang line, on line 1, we're using a (mostly) ubiquitous tool called &lt;tt class="docutils literal"&gt;env&lt;/tt&gt;, that looks for the given argument (&lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;) in the directories specified in the &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt; environment variable of the current user. This way, we don't have to hard code the location of the boot tool, since it can vary.&lt;/p&gt;
+&lt;p&gt;For example,  in this article we've installed boot in &lt;tt class="docutils literal"&gt;~/bin&lt;/tt&gt;. In my case that expands to &lt;tt class="docutils literal"&gt;/Users/jj/bin&lt;/tt&gt;, but in yours, it might be &lt;tt class="docutils literal"&gt;/home/joecool/bin&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;/var/home/bethrulz&lt;/tt&gt;. The location for home directories varies by operating system and more often than not, we will have different user names.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;The &lt;tt class="docutils literal"&gt;~&lt;/tt&gt; shortcut for &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt; is not expanded in shebang lines.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Or, you may have installed boot globally into &lt;tt class="docutils literal"&gt;/usr/local/bin&lt;/tt&gt; or any number of other possible system locations depending on a lot of factors. Using &lt;tt class="docutils literal"&gt;env&lt;/tt&gt; is a handy way to remove that complexity.&lt;/p&gt;
+&lt;p&gt;Lines 3-10 are the same Fibonacci sequence we used before.&lt;/p&gt;
+&lt;p&gt;Line 12 provides an &lt;em&gt;entry point&lt;/em&gt;, a function that boot will invoke when the script is run. The name &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; is required by boot. The argument list uses the &lt;tt class="docutils literal"&gt;&amp;amp;&lt;/tt&gt; special form to collect a variable number of arguments into a single sequence named &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; (a function that does this is called a &lt;a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#variadic-functions"&gt;variadic function&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Boot passes the function a variable number of strings . Each string is text that was provided by the user in the console while invoking the script (typically referred to 'command-line arguments' or 'command-line options').&lt;/p&gt;
+&lt;p&gt;For example, if an imaginary command-line tool called &lt;tt class="docutils literal"&gt;boo&lt;/tt&gt; is executed with "hello world, welcome to the thunder dome", like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boo hello world, welcome to the thunder dome
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The content of &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; will be&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"hello"&lt;/span&gt; &lt;span class="s"&gt;"world,"&lt;/span&gt; &lt;span class="s"&gt;"welcome"&lt;/span&gt; &lt;span class="s"&gt;"to"&lt;/span&gt; &lt;span class="s"&gt;"the"&lt;/span&gt; &lt;span class="s"&gt;"thunder"&lt;/span&gt; &lt;span class="s"&gt;"dome"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is something the shell does. It can be avoided by surrounding the arguments with double quotes, like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boo &lt;span class="s2"&gt;"hello world, welcome"&lt;/span&gt; &lt;span class="s2"&gt;"to the thunder dome"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this case, &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; is a vector containing two elements:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"hello world, welcome"&lt;/span&gt; &lt;span class="s"&gt;"to the thunder dome"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It's important to note that the shell can do other things with arguments that may be unexpected. The ins and outs of shells are outside the scope of this tutorial (and can vary from shell to shell), but here are a couple of common ones that might be useful or trip you up:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;strong&gt;Glob Expansion.&lt;/strong&gt; Shells help you out by replacing special patterns with matching filenames, so you can pass a bunch of paths to a command line tool without having to type them all out. &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Glob_(programming)"&gt;More info&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environment Variable Expansion.&lt;/strong&gt; Shells understand inline variables and will expand them before running your command line tool. Common useful environment variables include &lt;tt class="docutils literal"&gt;$HOME&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;$SHELL&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;$PWD&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Subshell Execution.&lt;/strong&gt; Shells can execute commands for you and pass the results on to your command line script.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Because of these things, it's good to be conscious of which characters are used to make use of these special features, and how to escape them so you don't get unexpected arguments passed to your scripts. This will vary depending on your shell - &lt;a class="reference external" href="https://www.safaribooksonline.com/library/view/learning-the-bash/1565923472/ch01s09.html"&gt;take a look at a chapter from a book on learning bash&lt;/a&gt; to get an idea of what you need to look out for.&lt;/p&gt;
+&lt;p&gt;On line 13, we extract the first member of &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; to pass as the maximum number of Fibonacci iterations.&lt;/p&gt;
+&lt;p&gt;Line 14 prints some informatio to the user to let them know what's going on.&lt;/p&gt;
+&lt;p&gt;On line 15, the &lt;tt class="docutils literal"&gt;fib&lt;/tt&gt; is finally executed, passing the limit provided by the user on the command line.&lt;/p&gt;
+&lt;p&gt;We need to convert the limit to an integer for use by our &lt;tt class="docutils literal"&gt;fib&lt;/tt&gt; function. This is accomplished using the Java &lt;tt class="docutils literal"&gt;Integer.ParseInt()&lt;/tt&gt; function.&lt;/p&gt;
+&lt;p&gt;It may seem odd that we invoke a Java function here, but this is common practice in Clojure, since we are usually running on the JVM. It's referred to as &lt;a class="reference external" href="https://clojure.org/reference/java_interop"&gt;Java interop&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Next, we make the script executable:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; chmod u+x fib.boot
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;We're again utilizing the &lt;tt class="docutils literal"&gt;chmod&lt;/tt&gt; command to make a file executable. Here, we use the shorthand mode specification (see the man page &lt;a class="reference external" href="https://linux.die.net/man/1/chmod"&gt;online&lt;/a&gt; or you can type &lt;tt class="docutils literal"&gt;man chmod&lt;/tt&gt; in your console for specifics), instead of using octal numbers (like &lt;tt class="docutils literal"&gt;755&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;u+x&lt;/tt&gt; means "&lt;em&gt;add&lt;/em&gt; whatever bits are necessary to allow the &lt;strong&gt;u&lt;/strong&gt;ser to e&lt;strong&gt;x&lt;/strong&gt;ecute this file". This leaves any other bits untouched.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Now you can run the script:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./fib.boot &lt;span class="m"&gt;10&lt;/span&gt;
+&lt;span class="go"&gt;Printing fibonacci sequence up to 10 numbers&lt;/span&gt;
+&lt;span class="go"&gt;0 1 1 2 3 5 8 13 21 34&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div class="section" id="dependencies"&gt;
+&lt;h4&gt;Dependencies&lt;/h4&gt;
+&lt;p&gt;The script can declare dependencies, which will be downloaded as needed when the script is run. Here, we'll show the use of an external dependency: we can write a new Fibonacci sequence that exploits an the fact that numbers in the sequence are related to each other by approximately the &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Golden_ratio"&gt;golden ratio&lt;/a&gt; (ca 1.62), as noted by Kepler, and derived from &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula"&gt;Binets Formula&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio"&gt;Wikipedia page&lt;/a&gt; is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.&lt;/p&gt;
+&lt;p class="last"&gt;If you happen upon this and can shed some light on the subject, please &lt;a class="reference external" href="/pages/contact.html"&gt;drop me a line&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called &lt;a class="reference external" href="https://github.com/clojure/math.numeric-tower"&gt;math.numeric-tower&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;In actuality, the required functionality is present, you just need to use some &lt;a class="reference external" href="http://stackoverflow.com/a/25098576"&gt;existing Java libraries&lt;/a&gt; to make it work. I admit this is a bit of a strain, but it illustrates the use of external dependencies in boot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt; &lt;span class="nv"&gt;expt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fibgolden&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;cli-arg&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt; &lt;span class="nv"&gt;cli-arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Integer/parseInt&lt;/span&gt; &lt;span class="nv"&gt;cli-arg&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;"numbers"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;Line 3 illustrates how to add a dependency to a boot script.&lt;/p&gt;
+&lt;p&gt;Boot has the concept of an &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment"&gt;environment&lt;/a&gt;. The environment represents the current working environment of the JVM during the execution of boot scripts or tasks.&lt;/p&gt;
+&lt;p&gt;On Line 3 we manipulate the environment using the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; function.&lt;/p&gt;
+&lt;p&gt;Note that this function ends with an exclamation point (!), or &lt;em&gt;bang&lt;/em&gt;. Data structures in Clojure are not normally &lt;em&gt;mutable&lt;/em&gt; (they can't be changed, only transformed into new ones). But in some cases it's required. So clojurists have established a convention to suffix a function name with an exclamation point to indicate that the function mutates data, or otherwise has side effects.&lt;/p&gt;
+&lt;p&gt;The environment is represented as a mapping, and so we use symbols to access and change its members. The &lt;tt class="docutils literal"&gt;:dependencies&lt;/tt&gt; key tells boot which libraries to look for.&lt;/p&gt;
+&lt;p&gt;Dependencies are first sourced from &lt;a class="reference external" href="https://clojars.org/"&gt;clojars&lt;/a&gt;, then the &lt;a class="reference external" href="https://maven.apache.org/repository/"&gt;Maven central repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The format for specifying dependencies is the same that &lt;a class="reference external" href="https://leiningen.org/"&gt;Leiningen&lt;/a&gt; uses - a vector containing a package specifier (often containing an organizational part, like &lt;tt class="docutils literal"&gt;org.clojure&lt;/tt&gt; in our script), and a version. Clojars uses &lt;a class="reference external" href="https://semver.org/"&gt;semantic versioning&lt;/a&gt;, so there are 3 numbers: a major revision (breaks existing APIs), a feature revision (API stays the same), and patch revision (for non-breaking bug fixes).&lt;/p&gt;
+&lt;p&gt;Note that the list of dependencies is behind a &lt;a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote"&gt;var quote&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;On line 5, the library is brought into our namespace using &lt;a class="reference external" href="https://clojuredocs.org/clojure.core/require"&gt;require&lt;/a&gt;. (For more information about namespaces and libraries, &lt;em&gt;Clojure For The Brave and True&lt;/em&gt;'s &lt;a class="reference external" href="https://www.braveclojure.com/organization/"&gt;organization&lt;/a&gt; chapter goes into some great detail. We've used the &lt;tt class="docutils literal"&gt;:refer&lt;/tt&gt; parameter to just import one function, &lt;tt class="docutils literal"&gt;round&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;On line 7, we pre-calculate the golden ratio and define a variable named &lt;tt class="docutils literal"&gt;phi&lt;/tt&gt; (the greek letter phi [&amp;phi;] is used to represent the golden ratio in equations).&lt;/p&gt;
+&lt;p&gt;Lines 9-19 define our new, golden ratio-based Fibonacci sequence function. It performs basically the same way, except that it's single-airity.&lt;/p&gt;
+&lt;p&gt;Some interesting concepts introduced in this new function:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;This is not a recursive function in the usual sense. Instead, we use the &lt;tt class="docutils literal"&gt;loop&lt;/tt&gt; function and &lt;tt class="docutils literal"&gt;recur&lt;/tt&gt; macro. This is the way looping (like you'd use &lt;tt class="docutils literal"&gt;for&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;while&lt;/tt&gt; in other languages) works in Clojure. For more details on how they work, check out &lt;a class="reference external" href="https://clojurebridge.github.io/community-docs/docs/clojure/recur/"&gt;this ClojureBridge article&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;On line 11, we use &lt;tt class="docutils literal"&gt;do&lt;/tt&gt; to group multiple expressions (printing and recursing) into a single branch of an &lt;tt class="docutils literal"&gt;if&lt;/tt&gt;. This comes in handy a lot, but be careful not to overuse it - if you are doing too much in a conditional branch, it may be better to factor that code out into its own function.&lt;/li&gt;
+&lt;li&gt;On line 14 and 17, we use &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string "math" or interpolation features.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On lines 22 and 23, we process the command line argument. Variables that are unpacked by &lt;tt class="docutils literal"&gt;let&lt;/tt&gt; are processed in order, so we can refer to them right away. We take advantage of this to first extract the argument on line 22, then provide a sane default (10) in the event that the user didn't provide a value. We also go ahead and convert the argument to an integer using Java interop as we did in the previous version.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;We've added a sane default for the single command-line argument, but otherwise aren't doing any input validation. We'll address this in a shallow way in the next section, when we use Boot's &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;argument DSL&lt;/a&gt;, but it's always something to keep in mind.&lt;/p&gt;
+&lt;p&gt;As such, the current script doesn't handle:&lt;/p&gt;
+&lt;blockquote class="last"&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Negative numbers (it stops after the initial iteration)&lt;/li&gt;
+&lt;li&gt;Large numbers - Java's &lt;tt class="docutils literal"&gt;Integer&lt;/tt&gt; has a maximum size (the exact size varies by platform). After fairly few iterations it will hit this number and stop getting larger (it used to throw a stack trace for me, so YMMV). On the computer I'm using at the time of writing, I get repeating values if I pass anything larger than 94 to &lt;tt class="docutils literal"&gt;fib.boot&lt;/tt&gt;.&lt;/li&gt;
+&lt;li&gt;Non-integers. If you pass a float (say, 2.45), or anything that &lt;tt class="docutils literal"&gt;Integer/parseInt&lt;/tt&gt; can't work with, it will throw an exception.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;p&gt;When you run this code the first time, you'll notice boot tells you that it has downloaded some new jars:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./fib.boot &lt;span class="m"&gt;10&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving clojure-1.4.0.jar from http://clojars.org/repo/&lt;/span&gt;
+&lt;span class="go"&gt;Retrieving math.numeric-tower-0.0.4.jar from http://repo1.maven.org/maven2/&lt;/span&gt;
+&lt;span class="go"&gt;Printing fibonacci sequence up to 10 numbers&lt;/span&gt;
+&lt;span class="go"&gt;0 1 1 2 3 5 8 13 21 34&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like "flags" (true/false toggles like &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-n&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--without-module-x&lt;/span&gt;&lt;/tt&gt;), collected values (like passing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-vvv&lt;/span&gt;&lt;/tt&gt; to increase verbosity), even complex subcommands (like &lt;tt class="docutils literal"&gt;git merge&lt;/tt&gt;).&lt;/p&gt;
+&lt;p&gt;Luckily, we can borrow a macro from boot.core that lets us specify CLI options using a robust syntax. For the full syntax, check out &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, we'll let the user choose which implementation they'd like to use, and utilize the task &lt;a class="reference external" href="http://martinfowler.com/books/dsl.html"&gt;DSL&lt;/a&gt; to do some simple command line options:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
+   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fibgolden&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
+   &lt;span class="s"&gt;"Print a Fibonacci sequence to stdout using one of two algorithms."&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;"Use the golden mean to calculate"&lt;/span&gt;
+    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;"Quantity of numbers to generate. Defaults to 10"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:number&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;"[golden]"&lt;/span&gt; &lt;span class="s"&gt;"[recursive]"&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;"numbers:"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fibgolden&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;This version of the script splices together what we've done in previous examples. We have the recursive &lt;tt class="docutils literal"&gt;fib&lt;/tt&gt; function on lines 10-16, and the golden ratio-based function on lines 18-28. We've renamed the golden ration-based function to &lt;tt class="docutils literal"&gt;fibgolden&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;On line 6, we require the boot command line utility &lt;tt class="docutils literal"&gt;boot.cli&lt;/tt&gt;. We pass the &lt;tt class="docutils literal"&gt;:as&lt;/tt&gt; parameter to &lt;tt class="docutils literal"&gt;require&lt;/tt&gt; in order to give the library a different name in our namespace. We do this just to keep things a bit more tidy (and illustrate this feature!).&lt;/p&gt;
+&lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function on line 30 is chiefly the same, except that we use the &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro from &lt;tt class="docutils literal"&gt;boot.cli&lt;/tt&gt; instead of the special &lt;tt class="docutils literal"&gt;defn&lt;/tt&gt; form.&lt;/p&gt;
+&lt;p&gt;The string on line 31 will be used in the usage description when the user provides the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; command line argument.&lt;/p&gt;
+&lt;p&gt;The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the "option DSL" that is discussed in &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The command line arguments are extracted and used to populate a special &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; map that will be automatically in scope of your function.&lt;/p&gt;
+&lt;p&gt;Line 32 defines a &lt;em&gt;boolean&lt;/em&gt; command line argument, or a &lt;em&gt;flag&lt;/em&gt;. If the argument is provided, the value will be &lt;tt class="docutils literal"&gt;true&lt;/tt&gt;, otherwise, it will be &lt;tt class="docutils literal"&gt;false&lt;/tt&gt;. We are using this argument to let the user change algorithms used to generate their requested Fibonacci sequence.&lt;/p&gt;
+&lt;p&gt;The first value is the "short form" of the option, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-g&lt;/span&gt;&lt;/tt&gt;. The second is the "long form" &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--golden&lt;/span&gt;&lt;/tt&gt; and also the name of the argument in the &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; map (without the dashes). Next we specify the type of the argument, &lt;tt class="docutils literal"&gt;bool&lt;/tt&gt;, short for &lt;em&gt;boolean&lt;/em&gt;, or a true/false value. The &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.&lt;/p&gt;
+&lt;p&gt;On the next line, we define another command-line option, this time one that takes a value. This is how the user will tell us how many numbers to generate.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;Due to how boot uses the CLI macro, it does not support &lt;em&gt;positional&lt;/em&gt; arguments, like we used in our earlier scripts.&lt;/p&gt;
+&lt;p class="last"&gt;However another tool, like &lt;a class="reference external" href="https://github.com/clojure/tools.cli"&gt;tools.cli&lt;/a&gt; serves a similar purpose and has positional argument support, but is not as nice of an interface.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;In this case, we use &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-n&lt;/span&gt;&lt;/tt&gt; as the short form, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--number&lt;/span&gt;&lt;/tt&gt; as the name/long form, and &lt;tt class="docutils literal"&gt;int&lt;/tt&gt; as the type. The next form is used as the placeholder when printing the usage information.&lt;/p&gt;
+&lt;p&gt;The last differences of note are on line 34 and 35.&lt;/p&gt;
+&lt;p&gt;On line 34, we set a default for the number of Fibonacci numbers to generate, by utilizing a special feature of symbols - you can use them as a function, passing a map as the first parameter. This looks up the value for that symbol in the mapping. You can pass a second parameter, which will be returned if the symbol isn't a key in the map - essentially a default value.&lt;/p&gt;
+&lt;p&gt;Finally, line 35 sets a variable called &lt;tt class="docutils literal"&gt;note&lt;/tt&gt; using the &lt;tt class="docutils literal"&gt;if&lt;/tt&gt; form - if the user has passed &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-g&lt;/span&gt;&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;golden&lt;/tt&gt; is true, then we'll print &lt;tt class="docutils literal"&gt;[golden]&lt;/tt&gt; to indicate the golden ratio-based function is in use. Otherwise, we'll print &lt;tt class="docutils literal"&gt;[recursive]&lt;/tt&gt; to indicate the standard recursive function is in use.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Now you can see what options are available, and tell the script what to do:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./fib.boot -h
+&lt;span class="go"&gt;Print a fibonacci sequence to stdout using one of two algorithms.&lt;/span&gt;
+
+&lt;span class="go"&gt;Options:&lt;/span&gt;
+&lt;span class="go"&gt; -h, --help Print this help info.&lt;/span&gt;
+&lt;span class="go"&gt; -g, --golden Use the golden mean to calculate&lt;/span&gt;
+&lt;span class="go"&gt; -n, --number NUMBER Set quantity of numbers to generate. Defaults to 10.&lt;/span&gt;
+
+&lt;span class="gp"&gt;$&lt;/span&gt; ./fib.boot
+&lt;span class="go"&gt; [recursive] Printing fibonacci sequence up to 10 numbers:&lt;/span&gt;
+&lt;span class="go"&gt; 0 1 1 2 3 5 8 13 21 34&lt;/span&gt;
+
+&lt;span class="gp"&gt;$&lt;/span&gt; ./fib.boot -g -n &lt;span class="m"&gt;20&lt;/span&gt;
+&lt;span class="go"&gt; [golden] Printing fibonacci sequence up to 20 numbers:&lt;/span&gt;
+&lt;span class="go"&gt; 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 611 990 1604 2598 4209&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="working-at-the-pickle-factory-packing-java-jars-and-more-complex-projects"&gt;
+&lt;h3&gt;Working At The Pickle Factory (Packing Java Jars and More Complex Projects)&lt;/h3&gt;
+&lt;p&gt;Now that we've got a basic feel for Clojure and using boot, we can build a project, that creates a library with an entry point that we can use and distribute as a jar file. This opens the doors to being able to deploy web applications, build libraries to share, and distribute standalone application bundles.&lt;/p&gt;
+&lt;div class="section" id="project-structure"&gt;
+&lt;h4&gt;Project Structure&lt;/h4&gt;
+&lt;p&gt;First, we need to create a project structure. This will help us keep things organized, and fit in with the way Clojure handles namespaces and files. We'll put our source code in &lt;tt class="docutils literal"&gt;src&lt;/tt&gt;, and create a new namespace, called &lt;tt class="docutils literal"&gt;fib.core&lt;/tt&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; mkdir -p src/fib
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;In &lt;tt class="docutils literal"&gt;src/fib/core.clj&lt;/tt&gt;, we'll declare our new namespace:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;ns &lt;/span&gt;&lt;span class="nv"&gt;fib.core&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:require&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+             &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:gen-class&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
+   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fibgolden&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
+   &lt;span class="s"&gt;"Print a Fibonacci sequence to stdout using one of two algorithms."&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;"Use the golden mean to calculate"&lt;/span&gt;
+    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;"Quantity of numbers to generate. Defaults to 10"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:number&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;"[golden]"&lt;/span&gt; &lt;span class="s"&gt;"[recursive]"&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;"numbers:"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fibgolden&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h5&gt;Explanation&lt;/h5&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;Our module is identical to our boot script, except for the following:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;On line 1 we declare a &lt;a class="reference external" href="https://clojure.org/reference/namespaces"&gt;namespace&lt;/a&gt; (&lt;a class="reference external" href="https://www.braveclojure.com/organization/"&gt;more info&lt;/a&gt;). &lt;tt class="docutils literal"&gt;ns&lt;/tt&gt; allows us to bring in libraries using the &lt;tt class="docutils literal"&gt;:require&lt;/tt&gt; parameter (line 2). The syntax is just like the &lt;tt class="docutils literal"&gt;require&lt;/tt&gt; function, except that you don't have to prefix the module name with a &lt;a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote"&gt;var quote&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:gen-class&lt;/span&gt;&lt;/tt&gt; parameter to tell clojure to generate proper Java classes for our namespace when compiling. This allows us to use our compiled jar file like any old Java jar. &lt;a class="reference external" href="https://clojure.org/reference/compilation"&gt;More info&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To build our jar, there are a handful of steps:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Download our dependencies.&lt;/li&gt;
+&lt;li&gt;Compile our clojure code ahead of time (aka &lt;a class="reference external" href="http://clojure.org/compilation"&gt;AOT&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Add a &lt;a class="reference external" href="http://maven.apache.org/pom.html"&gt;POM&lt;/a&gt; file describing our project and the version.&lt;/li&gt;
+&lt;li&gt;Scan all of our dependencies and add them to the fileset to be put into the jar.&lt;/li&gt;
+&lt;li&gt;Build the jar, specifying a module containing a -main function to run when the jar is invoked.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Helpfully, boot provides built-in functionality to do this for us. Each step is implemented as a boot &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Tasks"&gt;task&lt;/a&gt;. Tasks act as a pipeline: the result of each can influence the next.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -d org.clojure/clojure &lt;span class="se"&gt;\&lt;/span&gt;
+       -d boot/core &lt;span class="se"&gt;\&lt;/span&gt;
+       -d boot/base &lt;span class="se"&gt;\&lt;/span&gt;
+       -d org.clojure/math.numeric-tower:0.0.4 &lt;span class="se"&gt;\&lt;/span&gt;
+       -s src/ &lt;span class="se"&gt;\&lt;/span&gt;
+       aot -a &lt;span class="se"&gt;\&lt;/span&gt;
+       pom -p fib -v &lt;span class="m"&gt;1&lt;/span&gt;.0.0 &lt;span class="se"&gt;\&lt;/span&gt;
+       uber &lt;span class="se"&gt;\&lt;/span&gt;
+       jar -m fib.core &lt;span class="se"&gt;\&lt;/span&gt;
+       target
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;A brief explanation of each task and command line options:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Line 1-4:&lt;/strong&gt; the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-d&lt;/span&gt;&lt;/tt&gt; option specifies a dependency. Here we list   Clojure itself, &lt;tt class="docutils literal"&gt;boot.core&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;boot.base&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;math.numeric-tower&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 5:&lt;/strong&gt; &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-s&lt;/span&gt;&lt;/tt&gt; specifies a source directory to look into for &lt;tt class="docutils literal"&gt;.clj&lt;/tt&gt; files.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 6:&lt;/strong&gt; this is the AOT task, that compiles all of the &lt;tt class="docutils literal"&gt;.clj&lt;/tt&gt; files for us. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-a&lt;/span&gt;&lt;/tt&gt; flag tells the task to compile everything it finds.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 7:&lt;/strong&gt; the POM task. This task adds project information to the jar. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-p&lt;/span&gt;&lt;/tt&gt; option specifies the project name, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-v&lt;/span&gt;&lt;/tt&gt; is the version.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 8:&lt;/strong&gt; the uber task collects the dependencies so they can be baked into the jar file. This makes the jar big (huge really), but it ends up being self-contained.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 9:&lt;/strong&gt; the jar task. This is the task that actually generates the jar file. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-m&lt;/span&gt;&lt;/tt&gt; option specifies which module has the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Line 10:&lt;/strong&gt; the &lt;code&gt;target&lt;/code&gt; task. This task writes out the product of the other tasks to the target directory (&lt;code&gt;./target&lt;/code&gt; by default).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Running the above command, produces output something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ boot -d "org.clojure/clojure" \
+       -d "boot/core" \
+       -d "boot/base" \
+       -d "org.clojure/math.numeric-tower:0.0.4" \
+       -s src/ \
+       aot -a \
+       pom -p fib -v 1.0.0 \
+       uber \
+       jar -m fib.core \
+       target
+
+Retrieving core-2.0.0-rc8.pom from https://repo.clojars.org/ (3k)
+Retrieving pod-2.0.0-rc8.pom from https://repo.clojars.org/ (4k)
+Retrieving core-2.0.0-rc8.jar from https://repo.clojars.org/ (671k)
+Retrieving pod-2.0.0-rc8.jar from https://repo.clojars.org/ (878k)
+Classpath conflict: org.clojure/clojure version 1.7.0 already loaded, NOT loading version 1.6.0
+Compiling 1/1 fib.core...
+Adding uberjar entries...
+Writing fib-1.0.0.jar...
+Writing target dir(s)...
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point, there is a file named &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;fib-1.0.0.jar&lt;/span&gt;&lt;/tt&gt; in the &lt;tt class="docutils literal"&gt;target&lt;/tt&gt; directory. We can use the &lt;tt class="docutils literal"&gt;java&lt;/tt&gt; command to run it:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; java -jar target/fib-1.0.0.jar
+&lt;span class="go"&gt;[recursive] Printing fibonacci sequence up to 10 numbers:&lt;/span&gt;
+&lt;span class="go"&gt;0 1 1 2 3 5 8 13 21 34&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; java -jar target/fib-1.0.0.jar -g -n &lt;span class="m"&gt;20&lt;/span&gt;
+&lt;span class="go"&gt;[golden] Printing Fibonacci sequence up to 20 numbers:&lt;/span&gt;
+&lt;span class="go"&gt;0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;You can send this file to a friend, and they can use it too.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;At time of writing, the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag, that usually displays help info, is not working in the jar file. I think it's because the &lt;tt class="docutils literal"&gt;java&lt;/tt&gt; command is "swallowing" it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="introducing-build-boot"&gt;
+&lt;h3&gt;Introducing build.boot&lt;/h3&gt;
+&lt;p&gt;At this point we have a project and can build a standalone jar file from it. This is great, but long command lines are prone to error. Boot provides a mechanism for defining your own tasks and setting the command line options in a single file, named &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt;. Here's a &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; that configures boot in a manner equivalent to the command line switches above:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src/"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;task-options!&lt;/span&gt;
+  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;'fib&lt;/span&gt;
+       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;"1.0.0"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;'fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;aot&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:all&lt;/span&gt; &lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
+&lt;h4&gt;Explanation&lt;/h4&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; is analogous to a &lt;tt class="docutils literal"&gt;Makefile&lt;/tt&gt; or &lt;a class="reference external" href="https://ant.apache.org/"&gt;Apache Ant&lt;/a&gt; build file - it acts a a robust configuration file with declarative syntax that tells the build tools what to do.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; was introduced earlier, here's the new concepts introduced:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;We have to specify the precise versions of our dependencies here - this might seem tedious, but it's best to &lt;em&gt;always&lt;/em&gt; do this, even with things we take for granted like clojure itself and boot. This way, our code will always be explicitly telling any users which versions its compatible with, and we won't get any surprises.&lt;/p&gt;
+&lt;p&gt;Most of the time, you'll know the version number you're using from clojars, but for boot and clojure itself, it might have been a while since you isntalled, and you may not remember.&lt;/p&gt;
+&lt;p&gt;To find out the boot and clojure version number, we can ask &lt;tt class="docutils literal"&gt;boot&lt;/tt&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -V
+&lt;span class="gp"&gt;#&lt;/span&gt;http://boot-clj.com
+&lt;span class="gp"&gt;#&lt;/span&gt;Tue May &lt;span class="m"&gt;15&lt;/span&gt; &lt;span class="m"&gt;14&lt;/span&gt;:27:28 EDT &lt;span class="m"&gt;2018&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_NAME=org.clojure/clojure&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_CLOJURE_VERSION=1.8.0&lt;/span&gt;
+&lt;span class="go"&gt;BOOT_VERSION=2.7.2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; setting is using a neat built-in data structure called a &lt;a class="reference external" href="https://clojure.org/reference/data_structures#Sets"&gt;hash set&lt;/a&gt;. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;On line 7, we use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;task-options!&lt;/span&gt;&lt;/tt&gt; macro to take the place of specifying task options on the command line. The keys for each setting correspond to the "long form" of the given option. You can see these using the built-in help:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot pom -h
+
+&lt;span class="go"&gt;Create project pom.xml file.&lt;/span&gt;
+
+&lt;span class="go"&gt;The project and version must be specified to make a pom.xml.&lt;/span&gt;
+
+&lt;span class="go"&gt;Options:&lt;/span&gt;
+&lt;span class="go"&gt;  -h, --help                   Print this help info.&lt;/span&gt;
+&lt;span class="go"&gt;  -p, --project SYM            SYM sets the project id (eg. foo/bar).&lt;/span&gt;
+&lt;span class="go"&gt;  -v, --version VER            VER sets the project version.&lt;/span&gt;
+&lt;span class="go"&gt;  -d, --description DESC       DESC sets the project description.&lt;/span&gt;
+&lt;span class="go"&gt;  -c, --classifier STR         STR sets the project classifier.&lt;/span&gt;
+&lt;span class="go"&gt;  -P, --packaging STR          STR sets the project packaging type, i.e. war, pom.&lt;/span&gt;
+&lt;span class="go"&gt;  -u, --url URL                URL sets the project homepage url.&lt;/span&gt;
+&lt;span class="go"&gt;  -s, --scm KEY=VAL            Conj [KEY VAL] onto the project scm map (KEY is one of url, tag, connection, developerConnection).&lt;/span&gt;
+&lt;span class="go"&gt;  -l, --license NAME:URL       Conj [NAME URL] onto the map {name url} of project licenses.&lt;/span&gt;
+&lt;span class="go"&gt;  -o, --developers NAME:EMAIL  Conj [NAME EMAIL] onto the map {name email} of project developers.&lt;/span&gt;
+&lt;span class="go"&gt;  -D, --dependencies SYM:VER   Conj [SYM VER] onto the project dependencies vector (overrides boot env dependencies).&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-v&lt;/span&gt;&lt;/tt&gt; parameter corresponds to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--version&lt;/span&gt;&lt;/tt&gt;, and &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-p&lt;/span&gt;&lt;/tt&gt; to &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--project&lt;/span&gt;&lt;/tt&gt;. Hence we use &lt;tt class="docutils literal"&gt;:version&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;:project&lt;/tt&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;task-options!&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;You will have to use a little intutition to figure out what &lt;em&gt;data type&lt;/em&gt; the command wants, or you can always look at &lt;a class="reference external" href="https://github.com/boot-clj/boot/blob/de1b9876b4485b23b25614dd4b4a528d0931ccda/boot/core/src/boot/task/built_in.clj#L534"&gt;the source&lt;/a&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;core/deftask&lt;/span&gt; &lt;span class="nv"&gt;pom&lt;/span&gt;
+  &lt;span class="s"&gt;"Create project pom.xml file.&lt;/span&gt;
+&lt;span class="s"&gt;  The project and version must be specified to make a pom.xml.&lt;/span&gt;
+&lt;span class="s"&gt;  Note that if you want to install some other artifact along with the main one,&lt;/span&gt;
+&lt;span class="s"&gt;  for instance the classic sources or javadoc artifact, you have to add the&lt;/span&gt;
+&lt;span class="s"&gt;  classifier to your pom.xml, which translates to adding :classifier to this&lt;/span&gt;
+&lt;span class="s"&gt;  task."&lt;/span&gt;
+
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="nb"&gt;project &lt;/span&gt;&lt;span class="nv"&gt;SYM&lt;/span&gt;           &lt;span class="nv"&gt;sym&lt;/span&gt;           &lt;span class="s"&gt;"The project id (eg. foo/bar)."&lt;/span&gt;
+   &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="nv"&gt;version&lt;/span&gt; &lt;span class="nv"&gt;VER&lt;/span&gt;           &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project version."&lt;/span&gt;
+   &lt;span class="nv"&gt;d&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt; &lt;span class="nv"&gt;DESC&lt;/span&gt;      &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project description."&lt;/span&gt;
+   &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="nv"&gt;classifier&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;        &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project classifier."&lt;/span&gt;
+   &lt;span class="nv"&gt;P&lt;/span&gt; &lt;span class="nv"&gt;packaging&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;         &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project packaging type, i.e. war, pom"&lt;/span&gt;
+   &lt;span class="nv"&gt;u&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt; &lt;span class="nv"&gt;URL&lt;/span&gt;               &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project homepage url."&lt;/span&gt;
+   &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="nv"&gt;scm&lt;/span&gt; &lt;span class="nv"&gt;KEY=VAL&lt;/span&gt;           &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;kw&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;      &lt;span class="s"&gt;"The project scm map (KEY is one of url, tag, connection, developerConnection)."&lt;/span&gt;
+   &lt;span class="nv"&gt;l&lt;/span&gt; &lt;span class="nv"&gt;license&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:URL&lt;/span&gt;      &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;"The map {name url} of project licenses."&lt;/span&gt;
+   &lt;span class="nv"&gt;o&lt;/span&gt; &lt;span class="nv"&gt;developers&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:EMAIL&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;"The map {name email} of project developers."&lt;/span&gt;
+   &lt;span class="nv"&gt;D&lt;/span&gt; &lt;span class="nv"&gt;dependencies&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER&lt;/span&gt;  &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;   &lt;span class="s"&gt;"The project dependencies vector (overrides boot env dependencies)."&lt;/span&gt;
+   &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;parent&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER=PATH&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="s"&gt;"The project dependency vector of the parent project, path included."&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;On line 9, we see that the &lt;tt class="docutils literal"&gt;project&lt;/tt&gt; argument is a symbol - this is why we prefix it with a var quote in &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;With &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; in the current directory, you can now run the tasks like this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot aot pom uber jar target
+&lt;span class="go"&gt;Compiling fib.core...&lt;/span&gt;
+&lt;span class="go"&gt;Writing pom.xml and pom.properties...&lt;/span&gt;
+&lt;span class="go"&gt;Adding uberjar entries...&lt;/span&gt;
+&lt;span class="go"&gt;Writing fib-1.0.0.jar...&lt;/span&gt;
+&lt;span class="go"&gt;Writing target dir(s)...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;The convenience of &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; one step further, we can chain the tasks we want to use into our own task, using the &lt;tt class="docutils literal"&gt;deftask&lt;/tt&gt; macro:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src/"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;task-options!&lt;/span&gt;
+  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;'fib&lt;/span&gt;
+       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;"1.0.0"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;'fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;aot&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:all&lt;/span&gt; &lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;deftask&lt;/span&gt; &lt;span class="nv"&gt;build&lt;/span&gt;
+ &lt;span class="s"&gt;"Create a standalone jar file that computes Fibonacci sequences."&lt;/span&gt;
+ &lt;span class="p"&gt;[]&lt;/span&gt;
+ &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;aot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;uber&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;jar&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;target&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now, we can just run &lt;tt class="docutils literal"&gt;boot build&lt;/tt&gt; to make our standalone jar file. You'll also see your task show up in the help output:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -h
+&lt;span class="go"&gt;...&lt;/span&gt;
+&lt;span class="go"&gt;build Create a standalone jar file that computes Fibonacci sequences.&lt;/span&gt;
+&lt;span class="go"&gt;...&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; boot build
+&lt;span class="go"&gt;Compiling fib.core...&lt;/span&gt;
+&lt;span class="go"&gt;Writing pom.xml and pom.properties...&lt;/span&gt;
+&lt;span class="go"&gt;Adding uberjar entries...&lt;/span&gt;
+&lt;span class="go"&gt;Writing fib-1.0.0.jar...&lt;/span&gt;
+&lt;span class="go"&gt;Writing target dir(s)...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div class="section" id="where-to-go-from-here"&gt;
+&lt;h3&gt;Where To Go From Here&lt;/h3&gt;
+&lt;p&gt;At this point we've touched most of the awesomeness that boot gives us. With these basic tools, there's all sorts of interesting things we can do next. Here are some ideas:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Use boot instead of a "typical" scripting language for systems automation.&lt;/li&gt;
+&lt;li&gt;Distribute single &lt;code&gt;.boot&lt;/code&gt; files containing entire applications.&lt;/li&gt;
+&lt;li&gt;Build WAR files and use other &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Community-Tasks"&gt;boot tasks provided by the community&lt;/a&gt;to do all sorts of cool things, like &lt;a class="reference external" href="https://github.com/mathias/boot-sassc"&gt;compile SASS     templates&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/adzerk/boot-beanstalk"&gt;deploy to Amazon Elastic Beanstalk&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Write your own, specialized tasks to help streamline complex build     processes - boot can replace (or augment) tools like     &lt;a class="reference external" href="http://ant.apache.org/"&gt;ant&lt;/a&gt; and     &lt;a class="reference external" href="http://www.gnu.org/software/make/"&gt;make&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="appendix-alternative-install-methods"&gt;
+&lt;h2 id="appendix-alternative-install-methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
+&lt;p&gt;Recent versions of boot are now available for homebrew, nix, and docker. More details &lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="boot"></category><category term="clojure"></category></entry></feed>

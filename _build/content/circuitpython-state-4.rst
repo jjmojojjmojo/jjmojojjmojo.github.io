@@ -1,4 +1,4 @@
-State And Events In CircuitPython: Part 3: A Generic State Dispatcher
+State And Events In CircuitPython: Part 4: A Generic State Dispatcher
 #####################################################################
 :date: 2018-06-11 15:07
 :author: lionfacelemonface
@@ -8,6 +8,88 @@ State And Events In CircuitPython: Part 3: A Generic State Dispatcher
 :status: draft
 
 .. include:: ../emojis.rst
+
+This is the **fourth** part of a multi-part series exploring the concept of state, what it can do for you (like non-blocking button debounce) and how to track it in CircuitPython.
+
+In this part, we'll take the object-oriented bull by the horns and implement a **fully encapsulated event dispatcher**. 
+
+Building on what we've learned previously, we'll create a lightweight, reusable class that can detect button events and call code we associate with a given event at runtime. 
+
+.. tip::
+    
+    Since we're pretty deep into the series now, I've set up a `landing page <{filename}/pages/circuitpython-state.rst>`__ |sparkleheart|. Check it out if you'd like to catch up or review previous installments.
+    
+
+
+.. PELICAN_END_SUMMARY
+
+A Brief Review
+==============
+Let's recap and summarize what we've learned so far.
+
+What is state?
+--------------
+
+| **State** is a collection of values, that we call **attributes**, that represent the status or phase of our project at a given time. 
+
+Remember the analogies we used:
+
+* Matter has state (but in physics they are usually called "phases"). Water has different properties (attributes) when it's liquid, when it's steam, or when it's ice.
+  
+  Matter has multiple attributes when it's in a certain state, and new attributes can emerge. 
+  
+  For example, when water is "steam", not only is its temperature attribute at 100° C, can freely fill an open space. It becomes less dense. When water is "ice", it's temperature attribute is below 0° C, but it also forms crystals, and becomes more dense. 
+  
+  Steam and ice can both be used to do physical work, but they act in very different manners and have very different applications.
+  
+* Simple state can be thought of like a simple scorecard from a gymnastics match. One value, stored once for a given event and participant. 
+  
+* Other kinds of state, especially global state, can be thought of like a scoreboard at a stadium. 
+      
+  The values change over time, and we just look at the scoreboard to see what the current state is.
+
+Remember how we mapped those analogies to our electronics projects:
+
+* We track the state of physical things, like buttons and LEDs
+* We also track values that we need to affect physical things, like the random color we generated for the RGB LED.
+* We used a global state **object**, defined in the ``State`` class, to work with those values.
+
+Recall the **three phases of working with state**:
+
+.. image:: {filename}/images/nonblocking-state-flowchart.png
+   :width: 60%
+   :align: center
+
+* We start by establishing **default** state.
+* Then, we **assess** real life.
+* Next, we **reconsider** the state values.
+* Finally, we **reconcile** the state values with real life again.
+* `Lather, rinse, and repeat <https://en.wikipedia.org/wiki/Lather,_rinse,_repeat>`__ (or *assess*, *reconsider*, *reconcile* and *loop*) |grin| .
+   
+How Do We Model State
+---------------------
+
+| Since state is a **collection of data**, we can use any Python data type, or combination of types to model and track it.
+
+We explored using simple variables, dictionaries, lists of dictionaries, and finally **classes**.
+
+Remember that classes give us a few interesting features that make them especially attractive:
+
+* Classes are like **blueprints** for our data. We can define what the structure looks like once, and use that structure over and over, when we make **instances**.
+* Classes can have **methods** that let us give our data it's own unique functionality.
+* Classes are **encapsulated**, so we can keep all of our state processing code with our state data, and out of the way of our other code.
+
+.. tip::
+    
+    In this installment of the series, we'll dig into some of the more advanced things you can do with classes in Python. When we start utilizing these aspects, classes really start to shine. |unicorn|
+    
+We Can Track Changes In State (Events)
+--------------------------------------
+boo
+
+Event Dispatch In A Nutshell
+============================
+
 
 A Generic State Dispatcher
 ==========================
@@ -169,7 +251,7 @@ So, to quantify our event, a *hold* occurs when:
 * The event continues to occur every 0.4 seconds until a *release* event occurs.
 
 The Code
---------
+========
 As mentioned earlier, Python allows functions to be passed around like any other value. We can leverage that fact to make a dispatcher that is very flexible.
 
 In the code below, we pass a series of predefined functions to our dispatcher constructor that it will use to determine what the current value of the button is, and call when each type of event is detected.
@@ -361,6 +443,9 @@ We can opt to skip certain events by passing ``None`` to the constructor for the
    You may also want to consider removing events, such as *hold*, if you aren't using them in your project.
    
 
+Events Across Multiple Buttons
+==============================
+
 When transitioning our ``State`` class to our generic event dispatcher, we lost the ability to track both buttons. 
 
 The utility of using a class for our dispatcher code starts to really shine as we use more buttons - all we need to do is create a ``ButtonDispatch`` instance for each button. 
@@ -465,6 +550,9 @@ In practice, most code will look more like this:
    </div>
             
 But in the event that we really need to handle many buttons in an efficient way (imagine building a 101 key keyboard), we can consolidate handlers such that a single function can handle the same event for many buttons. We just need to differentiate between buttons when the handler is dispatched.
+
+Consolidating Handlers
+======================
 
 To address that, we can add a *token* to the ``ButtonDispatch`` class that each instance stores, identifying which button caused an event. The token gets passed to the event functions. Since the token indicates which button was pressed, the event function can take different action depending on which button invoked it.
 
@@ -616,6 +704,8 @@ This is a common pattern in programming, a form of `message passing <https://en.
 
 You may also have noticed that you can press both buttons *simultaneously*. The events are not actually firing at the same time, however, they are firing one after the other. It just happens so quickly that they appear to be simultaneous.
 
+Muti-Button Events
+==================
 This is a great accomplishment, and will work well for even quite complex projects. However, we have painted ourselves into a corner of sorts. We can fire two different events when buttons are pressed at the same time, but we can't see the state of one button from the event of the others. This becomes problematic if we want one button to affect the actions of another. 
 
 You may have run into an application of this problem: holding down one button makes the meaning of another button change. Here's an example from an old digital alarm clock:
@@ -679,7 +769,8 @@ When this extra complexity is necessary, it's best to separate the state of each
 This will allow for more complex behaviors, like holding one button and pressing the other.
 
 A Quick Note About Getters and Setters
---------------------------------------
+======================================
+
 The code below introduces the concept from object-oriented programming called *getters* and *setters*. 
 
 The basic idea is that, instead of accessing a property of an object directly, you set up a method to retrieve the value (*get* it), and to store the value (*set* it). 
@@ -792,7 +883,7 @@ Here's how you'd work with it in the console:
 So internally, we're storing the day of the week as an integer, but when you access ``day_of_week``, it returns a string. If we want to set the day of the week, we provide a string and it is translated into a integer for internal storage. We are able to add some error handling in the setter, that we wouldn't be able to do easily if we weren't using one.
 
 Dispatch Using A Global State Object
-------------------------------------
+====================================
 Now that we understand how getters and setters work, we can use them to provide a simple way of accessing the external global state:
 
 .. code-block:: python
