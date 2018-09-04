@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>The Collected Works of jjmojojjmojo - tutorials</title><link>/</link><description></description><lastBuildDate>Wed, 08 Aug 2018 13:34:00 -0400</lastBuildDate><item><title>Advanced Boot Scripting</title><link>/advanced-boot-scripting.html</link><description>&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
+&lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot&lt;/a&gt; is an all-around useful tool
+for building clojure applications, but one feature in particular has
+proven a &lt;em&gt;adjuncti finalum&lt;/em&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[*]&lt;/a&gt; : boot lets you do &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;clojure scripting&lt;/a&gt;. This
+elevates clojure to the same high productivity of scripting languages
+(like my personal favorite, Python), but bakes in dependency management
+and other goodies. This allows the user to build complexity iteratively,
+in a straight-forward manner (verses generating a bunch of boiler plate
+project code and building a package). This article explores boot
+scripting further, illustrating how boot can be used to quickly and
+easily develop and distribute applications and tools. There's also
+discussion about getting your jars into
+&lt;a class="reference external" href="http://clojars.org"&gt;Clojars&lt;/a&gt;, and setting up a simple bare-minimum
+&lt;a class="reference external" href="http://maven.apache.org/index.html"&gt;Maven&lt;/a&gt; repository.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 08 Aug 2018 13:34:00 -0400</pubDate><guid isPermaLink="false">tag:None,2018-08-08:/advanced-boot-scripting.html</guid></item><item><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link>/boot-getting-started-with-clojure-in-10-minutes.html</link><description>&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 01 Aug 2018 11:41:00 -0400</pubDate><guid isPermaLink="false">tag:None,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</guid><category>boot</category><category>clojure</category></item></channel></rss>
