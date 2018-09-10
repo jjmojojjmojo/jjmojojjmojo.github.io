@@ -11,8 +11,4 @@ The best way to reach me is to direct message me on twitter, my handle is `@jjmo
 
 You can also reach out on the `freenode IRC network <https://freenode.net/>`__, I hang out in #blitzen. My screen name is also jjmojojjmojo.
 
-.. tip:: 
-    
-    More contact methods are in the works! Stay tuned.
-    
-
+You can e-mail me at `jjmojojjmojo@gmail.com <mailto:jjmojojjmojo@gmail.com>`__.
