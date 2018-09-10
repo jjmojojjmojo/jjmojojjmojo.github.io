@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>The Collected Works of jjmojojjmojo</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
-        <link href="/feeds/category.tutorial.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
-        <link href="/feeds/category.tutorial.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
-
-
-    <meta name="tags" content="circuitpython" />
-    <meta name="tags" content="python" />
-    <meta name="tags" content="hardware" />
-    <meta name="tags" content="state" />
-
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="python" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/circuitpython-state-part-3.html" rel="bookmark"
-         title="Permalink to State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)">State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2018-09-01T15:07:00-04:00">
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/circuitpython-state-part-3.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)">State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-09-01T15:07:00-04:00">
       Sat 01 September 2018
     </time>
-    <address class="vcard author">
+<address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content status-published">
-    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+</address>
+</footer><!-- /.post-info -->
+<div class="entry-content status-published">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>In this part of the series, we'll apply what we've learned about state to our simple <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing code from part one</a>.</p>
 <p>Not only will we debounce some buttons <em>without blocking</em>, we'll use state to more efficiently control some LEDs.</p>
 <p>We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of <em>event detection</em> 🌈 .</p>
 <p>All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.</p>
-
 <div class="section" id="revisiting-old-friends">
 <h2>Revisiting Old Friends</h2>
 <p>Lets start by applying state tracking to our <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing  code</a> from the first part of this series.</p>
 <p>For reference, here's one of the example circuits, using the Trinket M0 (see <a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit">the demo circuit section in part 1</a> for references using other boards):</p>
-<img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;" />
+<a href="/images/fullsize/nonblocking-trinket-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-trinket-demo-circuit.jpg" srcset="/images/responsive/nonblocking-trinket-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-trinket-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-trinket-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-trinket-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-trinket-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-trinket-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-trinket-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-trinket-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-trinket-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>We have two buttons, and two LEDs - one is the standard red LED on pin 13, the other is a built-in RGB LED, either a NeoPixel or DotStar.</p>
 <p>Recall that to test our board, we set up a simple project that has the following functionality:</p>
 <ul class="simple">
-<li>While button &quot;A&quot; is pressed, the built-in red LED lights up.</li>
-<li>While button &quot;B&quot; is pressed, the built-in NeoPixel or DotStar lights up, in white.</li>
+<li>While button "A" is pressed, the built-in red LED lights up.</li>
+<li>While button "B" is pressed, the built-in NeoPixel or DotStar lights up, in white.</li>
 </ul>
 <p>We'll extend this a little bit and:</p>
 <ul class="simple">
-<li>Every time button &quot;B&quot; is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a <em>different color</em>.</li>
+<li>Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a <em>different color</em>.</li>
 </ul>
 <p>We can improve upon the code by building on the concepts of <em>state</em> we learned about in the <a class="reference external" href="/circuitpython-state-part-2.html">previous post</a>. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄</p>
 <p>Lets start by refactoring our original code to work just as it did, but using state.</p>
 <p>Here are the global state attributes we will need to track:</p>
 <ul class="simple">
-<li>the value of button &quot;A&quot;</li>
-<li>the value of button &quot;B&quot;</li>
+<li>the value of button "A"</li>
+<li>the value of button "B"</li>
 <li>should the LED be on or off?</li>
 <li>should the RGB LED be on or off?</li>
 <li>what color should the RGB LED be?</li>
@@ -91,7 +84,7 @@
 <p class="first admonition-title">Tip</p>
 <p class="last">Remember this code is assuming you have created a <tt class="docutils literal">setup.py</tt> file as explained <a class="reference external" href="/circuitpython-state-part-1.html#abstractions-keeping-the-code-simple">part 1</a>.</p>
 </div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -145,8 +138,8 @@
 <span class="n">rgb_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">button_a_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-    <span class="n">button_b_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="n">button_a_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+    <span class="n">button_b_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">button_a_state</span><span class="p">:</span>
         <span class="n">led_state</span> <span class="o">=</span> <span class="bp">True</span>
@@ -167,7 +160,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -185,9 +178,9 @@
 <p>Before we go much further, lets draw an important distinction. Unlike a physical scoreboard at a baseball stadium, which acts as part of the experience of watching the game, our state merely <em>reflects</em> our reality.</p>
 <p>The way we work with state is to alter it either <em>because</em> something happened (say, a button was pressed, much like scoring a point in a game), or to <em>cause</em> something to happen (this is different; like lighting up an LED, or changing a NeoPixel's color).</p>
 <p>After some thought and experimentation, I've settled on a three-phase process for handling state in a microcontroller project.</p>
-<p>Before we start (maybe this is phase 0, or -1? 🤔 ), we establish the <em>default</em> state. This is how we want things to look when the development board boots up. So buttons would be in the &quot;unpressed&quot; state (<tt class="docutils literal">False</tt>), an LED might be initially &quot;off&quot;, and so on. In the example code, we do this on <strong>lines 11-15</strong>.</p>
+<p>Before we start (maybe this is phase 0, or -1? 🤔 ), we establish the <em>default</em> state. This is how we want things to look when the development board boots up. So buttons would be in the "unpressed" state (<tt class="docutils literal">False</tt>), an LED might be initially "off", and so on. In the example code, we do this on <strong>lines 11-15</strong>.</p>
 <p>Then, in the first phase, real life is <em>assessed</em> (checked, or read) - input pins are read, sensors are queried. The state objects are updated to reflect what was observed in real life. This is where we detect that a button has been pressed. In our code above, this is happening on <strong>line 18 and 19</strong>.</p>
-<p>The second phase is strictly internal - no interactions with real life will happen. In this phase we <em>reconsider</em> the state. Did we read something in the first phase that indicates we need to take some sort of action? Is there cleanup or accounting that has to happen? This is where we would do that in our code. Most of the time, it means we'll be getting ready for the next phase, implementing logic like &quot;if button A has been pressed, then the LED must be turned on&quot;. But instead of turning the LED on, we're just updating the LED's state object.</p>
+<p>The second phase is strictly internal - no interactions with real life will happen. In this phase we <em>reconsider</em> the state. Did we read something in the first phase that indicates we need to take some sort of action? Is there cleanup or accounting that has to happen? This is where we would do that in our code. Most of the time, it means we'll be getting ready for the next phase, implementing logic like "if button A has been pressed, then the LED must be turned on". But instead of turning the LED on, we're just updating the LED's state object.</p>
 <p>In the example above, this phase is happening on <strong>lines 21 thru 29</strong>. We look at the values stored in <tt class="docutils literal">button_a_state</tt> and <tt class="docutils literal">button_b_state</tt> and change the state variables for our LEDs, <tt class="docutils literal">led_state</tt> and <tt class="docutils literal">rgb_state</tt> accordingly.</p>
 <p>The final pass <em>reconciles</em> the state object with reality. Our code looks at the state variables, and then causes any additional <em>side effects</em>. This is where we'll actually turn on the LEDs. In the example, this happens on <strong>line 33-38</strong>.</p>
 <div class="admonition note">
@@ -196,12 +189,12 @@
 </div>
 <p>At that point we hit the end of the <tt class="docutils literal">while</tt> loop, and start over again.</p>
 <p>Here's a diagram showing how it works:</p>
-<img alt="" class="align-center" src="/images/nonblocking-state-flowchart.png" style="width: 80%;" />
-<p>For our simple example, we could shortcut some of these steps. An obvious shortcut would be to directly set the value of the red LED to that of the &quot;A&quot; button: <tt class="docutils literal">led.value = <span class="pre">check(&quot;A&quot;)</span></tt>.</p>
+<a href="/images/fullsize/nonblocking-state-flowchart.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-flowchart.jpg" srcset="/images/responsive/nonblocking-state-flowchart-2500.jpg 2500w,/images/responsive/nonblocking-state-flowchart-2000.jpg 2000w,/images/responsive/nonblocking-state-flowchart-1800.jpg 1800w,/images/responsive/nonblocking-state-flowchart-1600.jpg 1600w,/images/responsive/nonblocking-state-flowchart-1200.jpg 1200w,/images/responsive/nonblocking-state-flowchart-1000.jpg 1000w,/images/responsive/nonblocking-state-flowchart-800.jpg 800w,/images/responsive/nonblocking-state-flowchart-400.jpg 400w,/images/responsive/nonblocking-state-flowchart-200.jpg 200w" style="width: 80%;"/></a>
+<p>For our simple example, we could shortcut some of these steps. An obvious shortcut would be to directly set the value of the red LED to that of the "A" button: <tt class="docutils literal">led.value = <span class="pre">check("A")</span></tt>.</p>
 <p>But it's important to keep the phases separate when we can. The phases represent logical ways to group code, and as we get more sophisticated, the separation will come in handy.</p>
 <p>Further, the phases are separated in terms of interacting with reality. This is important from a performance standpoint - reading from a sensor or writing to an output can be blocking sometimes. Keeping that code separate from our internal logic helps keep things moving smoothly. Changing variables is fast. If we mix these kinds of code up, we can get somewhat choppy interactions.</p>
 <p>There's a more pressing performance consideration however. It can be hard to visualize, but often the different phases will end up happening many cycles apart, not all at once, as it appears. By keeping the phases separate, we can do one phase, say assessing real life, in one cycle, and then 10 cycles later do the reconsideration phase, and it could be 100 cycles until we are able to reconcile with real life again.</p>
-<p>We also incidentally end up separating multiple sub-phases: we'll read button &quot;A&quot; in one cycle, then 20 cycles later read button &quot;B&quot;. We'll update state for button &quot;B&quot; 3 cycles later, and update the state for button &quot;A&quot; 30 cycles later.</p>
+<p>We also incidentally end up separating multiple sub-phases: we'll read button "A" in one cycle, then 20 cycles later read button "B". We'll update state for button "B" 3 cycles later, and update the state for button "A" 30 cycles later.</p>
 <p><em>Inbetween all these gaps</em>, we are able to handle other state phases, and sub-phases. It all interleaves, sort of like the teeth in a zipper, or cars merging on a highway.</p>
 <p>This all appears instantaneous for us, even giving the appearance of different lines of code running simultaneously, since cycles are millionths of a second long.</p>
 </div>
@@ -209,7 +202,7 @@
 <h2>An RGB LED Of A Different Color: Getting Classy</h2>
 <p>Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.</p>
 <p>But first, lets refactor our code to use a class to manage state.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -261,14 +254,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
     <span class="c1"># first pass: check real life</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="c1"># second pass: assess state</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
@@ -291,7 +284,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -301,9 +294,9 @@
 <p>First, it can be used to return valid Python code that could be used to recreate your object.</p>
 <p>The other purpose to provide a quick glance into what data the object holds - in this case it doesn't have to be valid Python - we indicate that we're using this purpose by wrapping our return value in angle brackets (<tt class="docutils literal">&lt;&gt;</tt>).</p>
 <p>Every standard Python data type implements this method. Its what you see when you just evaluate an object:</p>
-<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
-<span class="go">[1, 2, &#39;three&#39;, 4, 6, 9]</span>
+<span class="go">[1, 2, 'three', 4, 6, 9]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
 <span class="go">&lt;Buttons: False/False, LED: False, RGB: False, Color: (255, 255, 255)&gt;</span>
@@ -318,10 +311,10 @@
 <p>In our main loop on <strong>lines 17-41</strong>, the logic is exactly the same as before, except we are accessing attributes of our <tt class="docutils literal">state</tt> object.</p>
 </div>
 <p>Interacting with the one <tt class="docutils literal">state</tt> object is a lot cleaner than dealing with five separate variables. But what's really cool about using a class like this is that we can give our <tt class="docutils literal">state</tt> object its own unique <em>functionality</em>.</p>
-<p>Lets illustrate this by taking the &quot;different&quot; from our requirement of a &quot;different color&quot; quite literally.</p>
+<p>Lets illustrate this by taking the "different" from our requirement of a "different color" quite literally.</p>
 <p>We'll add a method to the <tt class="docutils literal">State</tt> class that generates a totally <strong>random</strong> color.</p>
 <p>The method will then assign it to the <tt class="docutils literal">color</tt> state attribute.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -365,13 +358,13 @@
        <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
 <span class="c1"># -- snip --</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -381,7 +374,7 @@
 <p>So every time the <tt class="docutils literal">random_color()</tt> method is called, a new random color is generated and stored in the state object.</p>
 </div>
 <p>Now, we can change the logic in our main loop to use the new <tt class="docutils literal">State.random_color()</tt> method to generate a random color.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -452,24 +445,24 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
     <span class="c1"># update the state</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="c1"># take action - change the state</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;LED: on&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"LED: on"</span><span class="p">)</span>
         <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;RGB on. Color: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
         <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
@@ -485,7 +478,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -499,18 +492,18 @@
 <p>This also helps preserve the separation of our phases working with state that we outlined above.</p>
 <p><strong>A few notes:</strong></p>
 <ul class="simple">
-<li>With every loop, we call <tt class="docutils literal">state.random_color()</tt> whenever the &quot;B&quot; button is not being pressed. This means the color of the pixel is always changing, even when the RGB pixel isn't illuminated. This is sub-optimal. We never want to do work when we don't have to. We'll address this situation in the next section when we start dealing with <em>events</em>.</li>
+<li>With every loop, we call <tt class="docutils literal">state.random_color()</tt> whenever the "B" button is not being pressed. This means the color of the pixel is always changing, even when the RGB pixel isn't illuminated. This is sub-optimal. We never want to do work when we don't have to. We'll address this situation in the next section when we start dealing with <em>events</em>.</li>
 <li>There's an added <tt class="docutils literal">print()</tt> each time the state changes. This serves two purposes. First, it can be hard to see LEDs working in the video below, so I'll also demonstrate with a screen grab of <a class="reference external" href="https://codewith.mu/">Mu's</a> console. Second, there are times when we'll be doing things repetitively and not realize it. Remember how our code gets interleaved like cars merging? If we're triggering some action more often then we intend to, or in an unexpected order, it could be a bug. Calling <tt class="docutils literal">print()</tt> will let us see this in the console, even if we can't see it in our hardware.</li>
 </ul>
 <p>Here's a video of this code running on my Trinket M0:</p>
 <div class="video-container">
-    <video controls>
-       <source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
-       <p>Your browser doesn't support HTML5 video. Here is
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
+<p>Your browser doesn't support HTML5 video. Here is
           a <a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
-    </video>
+</source></video>
 </div><p>Before we move on, lets <em>refactor</em> our code yet again, but this time, just a little bit. Since <tt class="docutils literal">State</tt> is our keeper of state for our project, lets move <strong>all</strong> of the code that changes state into to a method of the <tt class="docutils literal">State</tt> class:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -583,24 +576,24 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;LED on&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;RGB on. Color: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
@@ -618,7 +611,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -650,8 +643,8 @@
 <p>The basic process is to first mark a starting time in our state object, and then, every loop, compare that mark to the current time - when we see that enough seconds (0.2 to match our blocking code) have passed, then we can act.</p>
 <p>The time we last looked at the clock will be stored as a new state attribute. We'll use the methods of our state object to handle time-related calculations.</p>
 <p>But maybe we're getting ahead of ourselves a bit. How exactly do we track passing time? Most microcontrollers don't have true built-in clocks like PCs.</p>
-<p>Most computers have what's called a &quot;<a class="reference external" href="https://en.wikipedia.org/wiki/Real-time_clock">real-time clock</a>&quot;, or RTC. It's typically an integrated circuit that counts time in a highly accurate way using some sort of oscillating crystal. A battery is used to keep power to the IC so that it won't loose track of time, especially when the PC is powered off.</p>
-<p>While we can get microcontrollers with RTCs built in, and as add-on boards (Adafruit has several in their shop that have <a class="reference external" href="https://learn.adafruit.com/adafruit-pcf8523-real-time-clock/rtc-with-circuitpython">CircuitPython support</a>), they are typically reserved for applications where &quot;clock time&quot; is necessary - for example, a digital alarm clock, or logging sensor data.</p>
+<p>Most computers have what's called a "<a class="reference external" href="https://en.wikipedia.org/wiki/Real-time_clock">real-time clock</a>", or RTC. It's typically an integrated circuit that counts time in a highly accurate way using some sort of oscillating crystal. A battery is used to keep power to the IC so that it won't loose track of time, especially when the PC is powered off.</p>
+<p>While we can get microcontrollers with RTCs built in, and as add-on boards (Adafruit has several in their shop that have <a class="reference external" href="https://learn.adafruit.com/adafruit-pcf8523-real-time-clock/rtc-with-circuitpython">CircuitPython support</a>), they are typically reserved for applications where "clock time" is necessary - for example, a digital alarm clock, or logging sensor data.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>RTCs aren't the only way you can get precise time in an electronic device.</p>
@@ -663,10 +656,10 @@
 </ul>
 </div>
 <p>Luckily, microcontrollers are in themselves actually a sort of clock, because they operate on a regular processor cycle.</p>
-<p>The processor cycles are fixed to a specific rate. For example, our M0 board &quot;clocks&quot; at 48 megahertz (<em>48,000,000</em> cycles per second). That's because every second, the processor scans the part of its memory where your program code lives, and executes the instructions it finds <em>fourty-eight million times</em>.</p>
+<p>The processor cycles are fixed to a specific rate. For example, our M0 board "clocks" at 48 megahertz (<em>48,000,000</em> cycles per second). That's because every second, the processor scans the part of its memory where your program code lives, and executes the instructions it finds <em>fourty-eight million times</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The chips in these CircuitPython boards, the ATSAMD21 and ATSAMD51, have a built-in <em>oscillator</em>. They have circuitry in the chips that can generate a regular pulse that can be used for clocking the processor. Not all microcontrollers have these. You'll often see a little oblong silver cylinder on the board (a <a class="reference external" href="https://en.wikipedia.org/wiki/Crystal_oscillator">crystal oscillator</a>) - this is the real &quot;clock&quot; in that situation.</p>
+<p>The chips in these CircuitPython boards, the ATSAMD21 and ATSAMD51, have a built-in <em>oscillator</em>. They have circuitry in the chips that can generate a regular pulse that can be used for clocking the processor. Not all microcontrollers have these. You'll often see a little oblong silver cylinder on the board (a <a class="reference external" href="https://en.wikipedia.org/wiki/Crystal_oscillator">crystal oscillator</a>) - this is the real "clock" in that situation.</p>
 <p class="last">The processor runs at the frequency of the outboard oscillator. In the case of the M0/M4 chips, if you are building a development board, you can choose to use an external oscillator or choose one of several built-in to the chip.</p>
 </div>
 <p>That cycle is very reliable, so it's possible to track it, and with some math, convert cycles to seconds passing over time.</p>
@@ -689,7 +682,7 @@
 <p>We'll look at <tt class="docutils literal">checkin</tt> every loop, and see if the current value of <tt class="docutils literal">time.monotonic()</tt> is at least 0.2 seconds larger - if this is true, it would mean that 0.2 seconds have elapsed. It's super simple and non-blocking.</p>
 <p>At that point we can update our state - the reading from the button should be stable.</p>
 <p>As a last step, we need to set <tt class="docutils literal">checkin</tt> to the new value of <tt class="docutils literal">time.monotonic()</tt>, to mark the last time we checked the clock, and the cycle can start all over again.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -770,17 +763,17 @@
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;LED on&quot;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-                <span class="err">﻿</span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;RGB on. Color: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+                <span class="err">﻿</span><span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
@@ -789,7 +782,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
@@ -805,7 +798,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -828,34 +821,34 @@
 <p>If you <em>set</em> a class variable via the instance, Python thinks you are trying to make a new instance variable, and will essentially disconnect the instance's version of the class variable from the class.</p>
 <p>This is the expected behavior we're discussing above:</p>
 <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
-<span class="go">...:    _class_attr = &quot;X&quot;</span>
+<span class="go">...:    _class_attr = "X"</span>
 <span class="go">...:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;X&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Test</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">&quot;Y&quot;</span>
+<span class="go">"X"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Test</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">"Y"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;Y&quot;</span>
+<span class="go">"Y"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst2</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst2</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;Y&quot;</span>
+<span class="go">"Y"</span>
 </pre></div>
 <p>This is what happens when you set a class attribute on an instance:</p>
 <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
-<span class="go">...:    _class_attr = &quot;X&quot;</span>
+<span class="go">...:    _class_attr = "X"</span>
 <span class="go">...:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">&quot;Y&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">"Y"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Test</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;X&quot;</span>
+<span class="go">"X"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;Y&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Test</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">&quot;Z&quot;</span>
+<span class="go">"Y"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Test</span><span class="o">.</span><span class="n">_class_attr</span> <span class="o">=</span> <span class="s2">"Z"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst1</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;Y&quot;</span>
+<span class="go">"Y"</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst2</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">inst2</span><span class="o">.</span><span class="n">_class_attr</span>
-<span class="go">&quot;Z&quot;</span>
+<span class="go">"Z"</span>
 </pre></div>
 <p class="last">This can cause very subtle bugs that are hard to track down.</p>
 </div>
@@ -869,19 +862,19 @@
 <p class="first admonition-title">Note</p>
 <p>In Python, private attributes and methods are simply a <em>convention</em>. You shouldn't peek, but if you do, things will still work. The underscore is just a signal to other programmers that you don't intend the attribute to be used outside of the class.</p>
 <p>In other languages, this is not the case - an attribute declared private will not be accessible <em>at all</em> outside of the class - it's like it doesn't exist.</p>
-<p class="last">Since the concept of &quot;privacy&quot; in Python is merely a convention, it's better to express it not as &quot;hidden&quot; or &quot;forbidden&quot;, but more so &quot;an attribute name that I can't promise won't change, so don't count on it being there&quot;.</p>
+<p class="last">Since the concept of "privacy" in Python is merely a convention, it's better to express it not as "hidden" or "forbidden", but more so "an attribute name that I can't promise won't change, so don't count on it being there".</p>
 </div>
 </div>
 <div class="section" id="demo-and-conclusion">
 <h3>Demo And Conclusion</h3>
 <p>The changes are pretty subtle, but here's another video showing this version running on my Trinket M0:</p>
 <div class="video-container">
-    <video controls>
-       <source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
-       <p>Your browser doesn't support HTML5 video. Here is
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
+<p>Your browser doesn't support HTML5 video. Here is
           a <a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
-    </video>
-</div><p>At this point we've &quot;unblocked&quot; our code, and crafted a really clean way of working with state.</p>
+</source></video>
+</div><p>At this point we've "unblocked" our code, and crafted a really clean way of working with state.</p>
 <p>There is a small flaw here, as touched on earlier. The <tt class="docutils literal">random_color()</tt> method is being called nearly every 0.2 seconds, whether the button has been pressed or not. This is better than the first version of the code, where it was running almost every single loop, but it's still unnecessary.</p>
 <p>What we want, is for the color to change only once, when you stop pressing the button. Or even when you first press it, before the <tt class="docutils literal">rgb</tt> state attribute is set to <tt class="docutils literal">True</tt>.</p>
 <p>What that means is we want to detect when a button's state has changed from <tt class="docutils literal">True</tt> to <tt class="docutils literal">False</tt>, or <tt class="docutils literal">False</tt> to <tt class="docutils literal">True</tt>, and then take action.</p>
@@ -890,20 +883,20 @@
 </div>
 <div class="section" id="diving-into-events">
 <h2>Diving Into Events</h2>
-<p>In order to avoid calling <tt class="docutils literal">random_color()</tt> every single time we update our state, whether the &quot;b&quot; button was pressed or not, we need to decide when the best time to call <tt class="docutils literal">random_color()</tt> is. For this example, we were calling <tt class="docutils literal">random_color()</tt> when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time).</p>
+<p>In order to avoid calling <tt class="docutils literal">random_color()</tt> every single time we update our state, whether the "b" button was pressed or not, we need to decide when the best time to call <tt class="docutils literal">random_color()</tt> is. For this example, we were calling <tt class="docutils literal">random_color()</tt> when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time).</p>
 <p>So when should we do it, to avoid calling <tt class="docutils literal">random_color()</tt> too frequently?</p>
-<p>Think about how a button, technically a &quot;momentary switch&quot;, works. When you press it, the microcontroller pin reads &quot;HIGH&quot; until you remove your finger (or &quot;release&quot; the button). Then it reads &quot;LOW&quot;. We can think about these situations as two separate <em>events</em> - <strong>press</strong> and <strong>release</strong>.</p>
+<p>Think about how a button, technically a "momentary switch", works. When you press it, the microcontroller pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". We can think about these situations as two separate <em>events</em> - <strong>press</strong> and <strong>release</strong>.</p>
 <ul class="simple">
-<li><strong>Press</strong> happens when the button changes from &quot;LOW&quot; to &quot;HIGH&quot; - it wasn't pressed, and now it is.</li>
-<li><strong>Release</strong> happens when the button changes from &quot;HIGH&quot; to &quot;LOW&quot; - it <em>was</em> pressed, and now <em>it isn't</em>.</li>
+<li><strong>Press</strong> happens when the button changes from "LOW" to "HIGH" - it wasn't pressed, and now it is.</li>
+<li><strong>Release</strong> happens when the button changes from "HIGH" to "LOW" - it <em>was</em> pressed, and now <em>it isn't</em>.</li>
 </ul>
 <p>In Python, that means the <em>press</em> event happens when a pin's <tt class="docutils literal">value</tt> attribute used to read <tt class="docutils literal">False</tt>, and now it reads <tt class="docutils literal">True</tt>. A <em>release</em> event happens when a pin's <tt class="docutils literal">value</tt> used to read <tt class="docutils literal">True</tt> and now it's <tt class="docutils literal">False</tt>.</p>
 <p>We know what the previous value was because we've stored in it our <tt class="docutils literal">state</tt> object. We can use that to detect the change in state by just comparing the current real-life value with the last value we recorded in the state object.</p>
 <p>The basic logic looks like this:</p>
-<img alt="" class="align-center" src="/images/basic-button-event-logic.png" style="width: 80%;" />
+<a href="/images/fullsize/basic-button-event-logic.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/basic-button-event-logic.jpg" srcset="/images/responsive/basic-button-event-logic-2500.jpg 2500w,/images/responsive/basic-button-event-logic-2000.jpg 2000w,/images/responsive/basic-button-event-logic-1800.jpg 1800w,/images/responsive/basic-button-event-logic-1600.jpg 1600w,/images/responsive/basic-button-event-logic-1200.jpg 1200w,/images/responsive/basic-button-event-logic-1000.jpg 1000w,/images/responsive/basic-button-event-logic-800.jpg 800w,/images/responsive/basic-button-event-logic-400.jpg 400w,/images/responsive/basic-button-event-logic-200.jpg 200w" style="width: 80%;"/></a>
 <p>Now that we can act <em>only</em> when the button transitions from one state to the other, we can call <tt class="docutils literal">random_color()</tt> in a more logical place, like right before we change the RGB pixel's state, when the button is pressed. We could also just do it when the button is released, more in line with the original logic.</p>
 <p>Here's our code again, with the <tt class="docutils literal">random_color()</tt> call wrapped inside of logic that detects a <em>press</em> event:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -987,7 +980,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">random_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Generating random color&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Generating random color"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span>
              <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
              <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
@@ -996,11 +989,11 @@
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
 
             <span class="c1"># b button was pressed</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;B button pressed&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1009,19 +1002,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;LED on&quot;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;RGB on. Color: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
@@ -1037,19 +1030,19 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
 <p>This is a major shift in how our code works, but it's accomplished with a very minor change.</p>
-<p>On <em>line 31</em>, we compare the current physical state of the button with the value we've stored in our state object. If it's changed from &quot;not pressed&quot; (<tt class="docutils literal">self.button_b</tt> is <tt class="docutils literal">False</tt>) to &quot;pressed&quot; (<tt class="docutils literal"><span class="pre">check(&quot;B&quot;)</span></tt> returns <tt class="docutils literal">True</tt>), then we've detected the <em>press</em> event.</p>
+<p>On <em>line 31</em>, we compare the current physical state of the button with the value we've stored in our state object. If it's changed from "not pressed" (<tt class="docutils literal">self.button_b</tt> is <tt class="docutils literal">False</tt>) to "pressed" (<tt class="docutils literal"><span class="pre">check("B")</span></tt> returns <tt class="docutils literal">True</tt>), then we've detected the <em>press</em> event.</p>
 <p>We only change the color to a new random one (call <tt class="docutils literal">self.random_color()</tt>, <strong>line 33</strong>) when the button state has changed, instead of calling it whenever the button is being pressed.</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">This shares a similarity to the time-tracking code we are using for button debounce: we're storing a state value at one point in time, and then comparing it to something that can change. With debounce, it was the elpased time, with our event detection, it's the state of the button.</p>
 </div>
-<p>We're now set up to handle even more events, like button holds, and double-clicks. Or even complex events involving multiple buttons (think chords on a piano or &quot;ctrl-c&quot; on a computer keyboard).</p>
+<p>We're now set up to handle even more events, like button holds, and double-clicks. Or even complex events involving multiple buttons (think chords on a piano or "ctrl-c" on a computer keyboard).</p>
 <p>If you've done any programming in the past with GUIs, or front-end web application development, this concept may seem very familiar. It's similar to how mouse and keyboard events are handled in these environments. 🤔</p>
 <p>But don't be distracted by this! An event is not inherently tied to human interaction. An event can be <em>anything</em>. If a change in state can be detected, we can call it an event, and take action when it happens (or, we can <em>handle</em> the event).</p>
 <p>Imagine you have some environmental sensors. Say you can detect UV index, brightness of light, temperature, and relative humidity.</p>
@@ -1063,7 +1056,7 @@
 <li>It was nighttime, but now it's not, <em>it's probably sunrise</em>.</li>
 </ul>
 <p>And you could probably think of a lot more!</p>
-<p>All of these events would be handled by some code: change the color of a status LED, write a log message, send an SMS reminding you to put on some sunscreen, put the CPU into &quot;low power&quot; mode, and so on. If you can detect the event, based on changes in state, you can handle it, taking necessary action.</p>
+<p>All of these events would be handled by some code: change the color of a status LED, write a log message, send an SMS reminding you to put on some sunscreen, put the CPU into "low power" mode, and so on. If you can detect the event, based on changes in state, you can handle it, taking necessary action.</p>
 <p>You gain a lot of insight when you start to look at coding a microcontroller project as a problem of <em>managing state</em>. Then you can think about changes in state as triggering <em>events</em>. You can <em>handle</em> those events with code. Very complex problems become very easy to reason about, and easier to debug.</p>
 </div>
 <div class="section" id="state-considerations">
@@ -1090,7 +1083,7 @@
 <p class="last">We will be covering techniques for reducing our memory footprint at the end of this series. Stay tuned!</p>
 </div>
 </li>
-<li><p class="first">The timing is likely to be <em>ever-so-slightly</em> inaccurate. While processor cycles are very consistent, counting them tends to be less accurate over time (this is called &quot;clock drift&quot;). This is aggravated by the math being done - counting millions of cycles, dividing that by seconds, then rounding will cause further errors over time.</p>
+<li><p class="first">The timing is likely to be <em>ever-so-slightly</em> inaccurate. While processor cycles are very consistent, counting them tends to be less accurate over time (this is called "clock drift"). This is aggravated by the math being done - counting millions of cycles, dividing that by seconds, then rounding will cause further errors over time.</p>
 </li>
 <li><p class="first">There can still be blocking code, and aspects of Python (like <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">the GIL</a>) that can further throw off your timing, especially when your code is running for long periods of time (days).</p>
 </li>
@@ -1110,15 +1103,14 @@
 <p>As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖</p>
 <p>In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code, in preparation for building the more complex project described in <a class="reference external" href="/circuitpython-state-part-1.html">part 1</a>.</p>
 </div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

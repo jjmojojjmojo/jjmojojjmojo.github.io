@@ -80,7 +80,7 @@ Currently, it does the following:
 * Alters the HTML of all image tags to make them responsive (adds ``srcset`` and ``sizes``), pointing to the resized copies.
 * Wraps all source code listings in an extra div so overflow on narrower devices can scroll.
 
-The main script is ``responsive_postprocess.py``. It requires the Wand ImageMagick library (and ImageMagick to be installed) and piexif.
+The main script is ``responsive_postprocess.py``. It requires the Wand ImageMagick library (and ImageMagick to be installed), lxml, and piexif.
 
 After generating the HTML, run ``responsive_postprocess.py`` from the ``_build`` directory::
     

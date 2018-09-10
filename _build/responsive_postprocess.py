@@ -250,6 +250,10 @@ for path in os.scandir(PATH):
             # work properly
             code_blocks = soup.select(".highlighttable")
             for block in code_blocks:
+                if "highlight-wrapper" in block.parent.get("class", []):
+                    print("ALREADY VISITED CODE BLOCK")
+                    continue
+                
                 div = soup.new_tag("div")
                 div["class"] = "highlight-wrapper"
                 block.wrap(div)
