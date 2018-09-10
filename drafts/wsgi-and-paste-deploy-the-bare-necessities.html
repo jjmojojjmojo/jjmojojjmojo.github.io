@@ -48,9 +48,6 @@
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
     </address>
   </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#prerequisites" title="Prerequisites">Prerequisites</a></li><li><a class="toc-href" href="#environment" title="Environment">Environment</a></li><li><a class="toc-href" href="#bare-minimum-egg" title="Bare-Minimum Egg">Bare-Minimum Egg</a></li><li><a class="toc-href" href="#bare-minimum-wsgi-app" title="Bare-Minimum WSGI App">Bare-Minimum WSGI App</a></li><li><a class="toc-href" href="#pastedeploy-configuration-application" title="PasteDeploy Configuration - Application">PasteDeploy Configuration - Application</a></li><li><a class="toc-href" href="#glue-application" title="Glue - Application">Glue - Application</a></li><li><a class="toc-href" href="#install-the-egg" title="Install the Egg">Install the Egg</a></li><li><a class="toc-href" href="#starting-the-server" title="Starting The Server">Starting The Server</a></li><li><a class="toc-href" href="#pastedeploy-configuration-middleware" title="PasteDeploy Configuration - Middleware">PasteDeploy Configuration - Middleware</a></li><li><a class="toc-href" href="#glue-middleware" title="Glue - Middleware">Glue - Middleware</a></li><li><a class="toc-href" href="#conclusion" title="Conclusion">Conclusion</a></li></ul></div>
-    </div>
   <div class="warning">
   <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
@@ -84,7 +81,7 @@ source</a>
 (<a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/checkout">checkout
 instructions</a>)</p>
 <div class="section" id="prerequisites">
-<h2 id="prerequisites">Prerequisites</h2>
+<h2>Prerequisites</h2>
 <p>You'll need, at minimum, a modern version of python (I used the 2.6
 version that ships with Debian Squeeze),
 <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>, and some way to
@@ -96,7 +93,7 @@ should work on any operating system Python runs on, but as always, your
 mileage may vary.</p>
 </div>
 <div class="section" id="environment">
-<h2 id="environment">Environment</h2>
+<h2>Environment</h2>
 <pre class="literal-block">
 $ virtualenv fun-minimal-wsgi
 $ cd fun-minimal-wsgi
@@ -104,7 +101,7 @@ $ source bin/activate
 (fun-minimal-wsgi)$ easy_install PasteScript PasteDeploy
 </pre>
 <div class="line-block">
-<div class="line"><br/></div>
+<div class="line"><br /></div>
 <div class="line-block">
 <div class="line">If for some reason you're not familiar with virtualenv (and if you're
 a python developer, you really should be, it's great), these commands:</div>
@@ -122,7 +119,7 @@ they exist and haven't been overridden locally)</li>
 </pre>
 </div>
 <div class="section" id="bare-minimum-egg">
-<h2 id="bare-minimum-egg">Bare-Minimum Egg</h2>
+<h2>Bare-Minimum Egg</h2>
 <p>We'll store our WSGI code in a simple python egg, that is
 setuptools-enabled (pretty much the standard). This requires a couple of
 directories, and some special files (I based this off of output of the
@@ -160,18 +157,18 @@ version = '1.0'
 
 setup(name='minimal',
       version=version,
-      description="",
-      long_description="""
+      description=&quot;&quot;,
+      long_description=&quot;&quot;&quot;
          Very, very minimal example of a WSGI application and middleware.
-      """,
+      &quot;&quot;&quot;,
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
+        &quot;Programming Language :: Python&quot;,
         ],
       keywords='',
       author='Josh Johnson',
-      author_email='none of your beeswax@somehost.com',
+      author_email='none of your beeswax&#64;somehost.com',
       url='http://lionfacelemonface.wordpress.com',
       license='BSD',
       include_package_data=True,
@@ -180,8 +177,8 @@ setup(name='minimal',
       install_requires=[
           'setuptools',
       ],
-      entry_points="""
-      """,
+      entry_points=&quot;&quot;&quot;
+      &quot;&quot;&quot;,
       )
 </pre>
 <p>This is, at its bare minimum, all you need to say you've got an egg. :)</p>
@@ -189,25 +186,25 @@ setup(name='minimal',
 virtual environment (but don't yet), not that it does anything yet :)</p>
 </div>
 <div class="section" id="bare-minimum-wsgi-app">
-<h2 id="bare-minimum-wsgi-app">Bare-Minimum WSGI App</h2>
+<h2>Bare-Minimum WSGI App</h2>
 <p>This code goes into <tt class="docutils literal">minimal/minimal/__init__.py</tt>. This is right out
 of PEP 333, with a couple of changes to take out any logic, and show all
 of the possible ways to create a WSGI app, and WSGI middleware.</p>
 <pre class="literal-block">
 # simple_app and AppClass are right out of PEP 333
 def simple_app(environ, start_response):
-    """Simplest possible application object"""
+    &quot;&quot;&quot;Simplest possible application object&quot;&quot;&quot;
     status = '200 OK'
     response_headers = [('Content-type', 'text/plain')]
     start_response(status, response_headers)
     return ['Hello world!\n']
 
 class AppClass:
-    """Produce the same output, but using a class
+    &quot;&quot;&quot;Produce the same output, but using a class
 
-    (Note: 'AppClass' is the "application" here, so calling it
+    (Note: 'AppClass' is the &quot;application&quot; here, so calling it
     returns an instance of 'AppClass', which is then the iterable
-    return value of the "application callable" as required by
+    return value of the &quot;application callable&quot; as required by
     the spec.
 
     If we wanted to use *instances* of 'AppClass' as application
@@ -215,7 +212,7 @@ class AppClass:
     method, which would be invoked to execute the application,
     and we would need to create an instance for use by the
     server or gateway.
-    """
+    &quot;&quot;&quot;
 
     def __init__(self, environ, start_response):
         self.environ = environ
@@ -225,7 +222,7 @@ class AppClass:
         status = '200 OK'
         response_headers = [('Content-type', 'text/plain')]
         self.start_response(status, response_headers)
-        yield "Hello world!\n"
+        yield &quot;Hello world!\n&quot;
 
 # not in PEP 333, but mentioned in the comments to AppClass
 class AlternateAppClass:
@@ -236,9 +233,9 @@ class AlternateAppClass:
         return ['Hello world!\n']
 
 class MinimalMiddleware:
-    """
+    &quot;&quot;&quot;
     Bare-minimum, doesn't do anything at all, middleware.
-    """
+    &quot;&quot;&quot;
     def __init__(self, application):
         self.application = application
 
@@ -246,9 +243,9 @@ class MinimalMiddleware:
         return self.application(environ, start_response)
 
 class SimpleMiddleware:
-    """
+    &quot;&quot;&quot;
     Takes a prefix, and appends it to each line in the response.
-    """
+    &quot;&quot;&quot;
     def __init__(self, application, prefix):
         self.application = application
         self.prefix = prefix
@@ -258,7 +255,7 @@ class SimpleMiddleware:
         return ['%s %s' % (self.prefix, s) for s in response]
 </pre>
 <div class="line-block">
-<div class="line"><br/></div>
+<div class="line"><br /></div>
 <div class="line-block">
 <div class="line">Read PEP 333 for full explainations, but here's the gist:</div>
 </div>
@@ -291,7 +288,7 @@ not run out of the box. I'm allowing a configuration option to be passed
 to <tt class="docutils literal">SimpleMiddleware</tt>, and since it's required, it would fail.</p>
 </div>
 <div class="section" id="pastedeploy-configuration-application">
-<h2 id="pastedeploy-configuration-application">PasteDeploy Configuration - Application</h2>
+<h2>PasteDeploy Configuration - Application</h2>
 <div class="line-block">
 <div class="line">Now for the server part. You'll need to call this file something
 useful and put it somewhere you can get to (I've put it in the egg,
@@ -311,7 +308,7 @@ port = 6543
 in a bit). It then configures the server.</p>
 </div>
 <div class="section" id="glue-application">
-<h2 id="glue-application">Glue - Application</h2>
+<h2>Glue - Application</h2>
 <p>Before we can run the server we have to do three things: create an
 application factory, add the entry point specified in <tt class="docutils literal">minimal.ini</tt>,
 and then install the egg.</p>
@@ -345,10 +342,10 @@ code.</p>
 </div>
 <pre class="literal-block">
 ...
-      entry_points="""
+      entry_points=&quot;&quot;&quot;
       [paste.app_factory]
       main = minimal:main
-      """,
+      &quot;&quot;&quot;,
 ...
 </pre>
 <p>Note that <tt class="docutils literal">minimal:main</tt> maps directly to the <tt class="docutils literal">main()</tt> function we
@@ -370,7 +367,7 @@ convention/convienence. Here are some other examples:</p>
 <p>You get the idea.</p>
 </div>
 <div class="section" id="install-the-egg">
-<h2 id="install-the-egg">Install the Egg</h2>
+<h2>Install the Egg</h2>
 <p>We'll want to install this in <em>develop</em> mode, so changes to the code
 will be reflected as soon as they are made.</p>
 <p><strong>Note:</strong> entry points are only updated when the egg is installed, so
@@ -385,7 +382,7 @@ this!</em></p>
 </pre>
 </div>
 <div class="section" id="starting-the-server">
-<h2 id="starting-the-server">Starting The Server</h2>
+<h2>Starting The Server</h2>
 <p>Now we should be able to start the server using the <tt class="docutils literal">paster serve</tt>
 command.</p>
 <pre class="literal-block">
@@ -398,7 +395,7 @@ the application code and <tt class="docutils literal">minimal.ini</tt> and the s
 us (remember the note about entry points though).</p>
 </div>
 <div class="section" id="pastedeploy-configuration-middleware">
-<h2 id="pastedeploy-configuration-middleware">PasteDeploy Configuration - Middleware</h2>
+<h2>PasteDeploy Configuration - Middleware</h2>
 <p>Things will change a little bit now:</p>
 <pre class="literal-block">
 [app:minimal_app]
@@ -426,18 +423,18 @@ need to, we could have just used <tt class="docutils literal">egg:minimal</tt> i
 referring to a filter factory that doesn't exist.</p>
 </div>
 <div class="section" id="glue-middleware">
-<h2 id="glue-middleware">Glue - Middleware</h2>
+<h2>Glue - Middleware</h2>
 <p>Now to make the middleware work. We'll need to a new entry point to
 <tt class="docutils literal">minimal/setup.py</tt>, so it now looks like this:</p>
 <pre class="literal-block">
 ...
-      entry_points="""
+      entry_points=&quot;&quot;&quot;
       [paste.app_factory]
       main = minimal:main
 
       [paste.filter_factory]
       main = minimal:middleware
-      """,
+      &quot;&quot;&quot;,
 ...
 </pre>
 <p>Again, the name of the entry point is not significant, and <tt class="docutils literal">main</tt> is
@@ -472,7 +469,7 @@ filter factory, but call it something else, and use a different setting
 for the prefix.</p>
 </div>
 <div class="section" id="conclusion">
-<h2 id="conclusion">Conclusion</h2>
+<h2>Conclusion</h2>
 <p>So, this helped me understand how WSGI works, and how PasteDeploy is
 used to serve it. This is the foundation of what Pylons, TurboGears and
 Pyramid use, and so it's important to understand to help understand the

@@ -2,52 +2,90 @@
 JJMOJOJJMOJO Blog
 =================
 
-This repository contains the source and HTML for my blog. 
+This repository contains the source and HTML for my blog. It is written mostly in ReStructuredText, and converted to HTML using Pelican.
+
+The HTML output is located in *this* directory. The source code and build tools are located in ``_build``.
+
+Development Setup
+=================
+
+This blog was developed using Python 3.6.
+
+If you wish to rebuild the source or work on the content, you will need to install the dependencies in ``requirements.txt``. 
+
+This can be done in a virtual environment (recommended, I use virtualenv), or system-wide.
+
+Here's how you would do things with virtualenv::
+    
+    $ virutalenv .
+    $ source bin/activate
+    $ pip install -r requirements.txt
+    
+Third-Party Plugins
+===================
+This site uses a couple of third-party pelican plugins. They are installed via git submodules. This was done to keep the code fresh, but also to avoid any problems with viral licensing (pelican-toc is GPL licensed).
+
 
 Building
 ========
-To build, go into the ``_build`` directory and run ``make html``. The output will be put into *this* directory (the root of the repo).
-
-Dev Setup
-=========
-If you wanted to build a local copy of this blog, you'd first need to install pelican. It was developed using python 3.6.
-
-A virtualenv is recommended.
-
-There is are a few external plugins used, that you will have to add yourself. 
-
-One is GPL licensed, and I didn't want to have to GPL my entire blog. I'm also not a lawyer, so that may not be entirely true, but it's better to be safe than sorry.
-
-After cloning this repository, you will then want to clone the pelican-toc repo into _build/plugins/pelican_toc::
+The HTML is built using make. Once you've activated the virtual environment, enter the ``_build`` diretory, run ``make html``. It's a good idea to turn debugging on most of the time. The process looks like this::
     
-    $ git clone git@github.com:ingwinlu/pelican_toc.git _build/plugins/pelican-toc
-    
-Then you will need to install pelican-toc's one dependency, bs4 (Beautiful Soup)::
-    
-    $ pip install bs4
-    
-The ``summary`` plugin is part of the Pelican community's `plugin repo <https://github.com/getpelican/pelican-plugins>`__. To install it, check out the repo to a known location (I'm using ``~/Projects/pelican-plugins``), and copy the ``summary.py`` file over to the ``plugins`` directory::
-    
-    $ cp ~/Projects/pelican-plugins/summary/summary.py ./_build/plugins/
-    
-    
-Notes
-=====
-
-Web Server
-----------
-.. code:: console
-    
+    $ source bin/activate
     $ cd _build
-    $ pip install gunicorn webob
+    $ make DEBUG=1 html
+    
+Development Services
+====================
+Pelican comes with a development server that will serve the content and automatically regenerate it when files are changed. 
+
+I had some problems with it, so I use a combination of a WSGI app I built, based on webob.FileApp, and watchmedo to accomplish the same thing.
+
+The webserver provides directory listings (useful for looking at the drafts folder). Since it's a WSGI app, you can run it in any WSGI server. Gunicorn is included in ``requirements.txt``.
+
+To run the webserver::
+    
+    $ source bin/activate
+    $ cd _build
     $ gunicorn wsgi:app
     
+The server listens on localhost, port 8000 by default.
 
-Watchmedo
----------
-
-.. code:: console
+To monitor the files with watchmedo::
     
+    $ source bin/activate
     $ cd _build
     $ watchmedo shell-command -c "make DEBUG=1 html" -p "*.rst;*.html;*.js;*.css;*.py" -W -R -D .
     
+    
+.. note::
+    
+    The command-line options for watchmedo forget multiple events. So if you save a file while the site is being built, that event will be ignored.
+    
+
+
+Post-Processing Script
+======================
+
+.. warning::
+    
+    This script is **experimental**.
+    
+I've added a script that does some post-processing, chiefly to make the site more responsive on different devices. 
+
+Currently, it does the following:
+
+* Collect all full-size images, converts them to JPEG
+* Cleans the exif data, adds copyright notice
+* Creates multiple resized copies of each image.
+* Alters the HTML of all image tags to make them responsive (adds ``srcset`` and ``sizes``), pointing to the resized copies.
+* Wraps all source code listings in an extra div so overflow on narrower devices can scroll.
+
+The main script is ``responsive_postprocess.py``. It requires the Wand ImageMagick library (and ImageMagick to be installed) and piexif.
+
+After generating the HTML, run ``responsive_postprocess.py`` from the ``_build`` directory::
+    
+    $ source bin/activate
+    $ cd _build
+    $ python responsive_postprocess.py
+    
+Note that every time the build runs, the HTML files will need to be reprocessed.

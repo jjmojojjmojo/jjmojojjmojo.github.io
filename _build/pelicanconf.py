@@ -41,7 +41,7 @@ AUTHOR = 'jjmojojjmojo'
 SITENAME = 'The Collected Works of jjmojojjmojo'
 SITEURL = ''
 
-PLUGIN_PATHS = ["plugins"]
+PLUGIN_PATHS = ["plugins", "pelican-plugins"]
 PLUGINS = ["explanation", "pelican_toc", "summary"]
 
 PATH = 'content'

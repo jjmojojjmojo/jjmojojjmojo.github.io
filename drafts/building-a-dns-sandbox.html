@@ -48,9 +48,6 @@
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
     </address>
   </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#use-case" title="Use Case">Use Case</a></li><li><a class="toc-href" href="#coming-soon" title="Coming Soon">Coming Soon</a></li><li><a class="toc-href" href="#server-setup" title="Server Setup">Server Setup</a></li><li><a class="toc-href" href="#zone-files" title="Zone Files">Zone Files</a></li><li><a class="toc-href" href="#configuration" title="Configuration">Configuration</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#using-your-sandbox" title="Using Your Sandbox">Using Your Sandbox</a></li></ul></div>
-    </div>
   <div class="warning">
   <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
@@ -62,7 +59,7 @@ process I went through to build a DNS sandbox, and serves as a
 crash-course in DNS, which is, like most technology that's been around
 since the dawn of time, a lot simpler than it seems at first glance.</p>
 <div class="section" id="use-case">
-<h2 id="use-case">Use Case</h2>
+<h2>Use Case</h2>
 <p>When a new machine is brought up, I need to register it with my internal
 DNS server. The DNS server doesn't allow remote updating, and there's no
 DHCP server in play (for the record, I'm bringing up machines in AWS). I
@@ -85,7 +82,7 @@ of a laboratory setting.</p>
 </div>
 </div>
 <div class="section" id="coming-soon">
-<h2 id="coming-soon">Coming Soon</h2>
+<h2>Coming Soon</h2>
 <p>There are a lot of features of DNS that this setup doesn't take into
 account. I'm planning on following up this post as I add the following
 to my sandbox setup (suggestions for other things are welcome!)</p>
@@ -99,7 +96,7 @@ the changes propagate to <em>n</em> number of servers.</li>
 </ul>
 </div>
 <div class="section" id="server-setup">
-<h2 id="server-setup">Server Setup</h2>
+<h2>Server Setup</h2>
 <p>I started with stock Ubuntu 12.04 server instance.</p>
 <p>I installed bind9 using apt, and created a couple of directories for log
 and zone files.</p>
@@ -110,7 +107,7 @@ and zone files.</p>
 </pre></div>
 </div>
 <div class="section" id="zone-files">
-<h2 id="zone-files">Zone Files</h2>
+<h2>Zone Files</h2>
 <div class="section" id="basics">
 <h3>Basics</h3>
 <p>See: <a class="reference external" href="http://www.zytrax.com/books/dns/ch8">http://www.zytrax.com/books/dns/ch8</a></p>
@@ -121,7 +118,7 @@ subdomains relative to an FDQN do not (e.g. my, www).</li>
 <li>Zone files have an <em>origin</em> - a base added to every name in the file.
 The origin is defined using the $ORIGIN directive (see:
 <a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#directives">http://www.zytrax.com/books/dns/ch8/#directives</a>)</li>
-<li>The @ symbol is used as a shortcut for $ORIGIN.</li>
+<li>The &#64; symbol is used as a shortcut for $ORIGIN.</li>
 <li>Each zone file is referenced in the named.conf file (see
 <a class="reference external" href="#configuration">Configuration</a> below for details)</li>
 <li>The name of the file itself is immaterial - there are many standards
@@ -154,14 +151,14 @@ but is recommended.</p>
 </dl>
 <p>Our domain name is <em>example.test</em>.</p>
 <div class="line-block">
-<div class="line">[code language="text"]</div>
+<div class="line">[code language=&quot;text&quot;]</div>
 <div class="line-block">
 <div class="line">$ORIGIN example.test.</div>
 <div class="line">$TTL 1h</div>
 </div>
 </div>
 <div class="line-block">
-<div class="line">@ IN SOA ns.example.test. hostmaster.example.test. (</div>
+<div class="line">&#64; IN SOA ns.example.test. hostmaster.example.test. (</div>
 <div class="line-block">
 <div class="line">20131226000 ; serial number</div>
 <div class="line">1d ; refresh</div>
@@ -171,7 +168,7 @@ but is recommended.</p>
 <div class="line">)</div>
 </div>
 </div>
-<p>@ NS ns</p>
+<p>&#64; NS ns</p>
 <div class="line-block">
 <div class="line">ns A 127.0.0.1</div>
 <div class="line-block">
@@ -190,11 +187,11 @@ the other areas.</p>
 <li><p>Lines 4-10 are the
 <a class="reference external" href="http://www.zytrax.com/books/dns/ch8/soa.html">SOA</a>.</p>
 </li>
-<li><p>On line 5, We use @ to stand in for the $ORIGIN directive defined on
+<li><p>On line 5, We use &#64; to stand in for the $ORIGIN directive defined on
 line 1. We specifify the authoritative server (<tt class="docutils literal">ns.example.test.</tt>),
 which we will define in an A record later. Finally, we specify the
 e-mail address of a person responsible for this zone, replacing the at
-symbol (@) with a period.</p>
+symbol (&#64;) with a period.</p>
 </li>
 <li><p>Line 5 contains the serial number. This will need to be incremented
 every time we make a change. In this example, I'm starting with the
@@ -202,7 +199,7 @@ current date and 000, so we'll get 999 updates before we have to
 increment the date.</p>
 </li>
 <li><p>Line 12 is a requirement of Bind - we must specify at least one NS
-record for our DNS server. The @ symbol is used again here to avoid
+record for our DNS server. The &#64; symbol is used again here to avoid
 typing the origin again. The hostname for the NS record is <tt class="docutils literal">ns</tt>, which
 means <tt class="docutils literal">ns.example.test</tt>, defined in an A record on line 14.</p>
 </li>
@@ -221,7 +218,7 @@ across the two zones.</p>
 <li><p>Finally on line 16, we have an example of a CNAME record. This aliases
 the name <tt class="docutils literal">alt.example.test</tt> to <tt class="docutils literal">box1.example.test</tt>, and ultimately
 resolves to <tt class="docutils literal">192.168.0.1</tt>.</p>
-</li></ul></div>
+</li></div>
 <div class="section" id="reverse-lookup">
 <h3>Reverse Lookup</h3>
 <dl class="docutils">
@@ -233,14 +230,14 @@ resolves to <tt class="docutils literal">192.168.0.1</tt>.</p>
 <p>We're setting up reverse lookups for the 192.168.0.x subnet (CIDR
 192.168.0.0/24).</p>
 <div class="line-block">
-<div class="line">[code language="text"]</div>
+<div class="line">[code language=&quot;text&quot;]</div>
 <div class="line-block">
 <div class="line">$ORIGIN 0.168.192.in-addr.arpa.</div>
 <div class="line">$TTL 1h</div>
 </div>
 </div>
 <div class="line-block">
-<div class="line">@ IN SOA ns.example.test hostmaster.example.test (</div>
+<div class="line">&#64; IN SOA ns.example.test hostmaster.example.test (</div>
 <div class="line-block">
 <div class="line">20131226000 ; serial number</div>
 <div class="line">1d ; refresh</div>
@@ -266,7 +263,7 @@ numbers before the top level domain are simply the subnet octets,
 reversed (<tt class="docutils literal">192.168.0</tt> becomes <tt class="docutils literal">0.168.192</tt>).</p>
 <p><p>Remember, this serves as shorthand for defining the entry records
 below the SOA.</p>
-</p></li>
+</li>
 <li><p class="first">Line 12 is the required NS record, pointing at the one that we set up
 an A record for in the forward zone file.</p>
 </li>
@@ -277,27 +274,27 @@ an A record for in the forward zone file.</p>
 </div>
 </div>
 <div class="section" id="configuration">
-<h2 id="configuration">Configuration</h2>
+<h2>Configuration</h2>
 <p>In the default ubuntu setup, local configuration is handled in
 <tt class="docutils literal">/etc/bind/named.conf.local</tt> (this is just simply included into
 <tt class="docutils literal">/etc/bind/named.conf</tt>).</p>
 <p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch7/">http://www.zytrax.com/books/dns/ch7/</a> for details about the
 <tt class="docutils literal">named.conf</tt> format and what the directives mean.</p>
 <div class="line-block">
-<div class="line">[code language="text"]</div>
+<div class="line">[code language=&quot;text&quot;]</div>
 <div class="line-block">
-<div class="line">zone "example.test." {</div>
+<div class="line">zone &quot;example.test.&quot; {</div>
 <div class="line">type master;</div>
-<div class="line">file "/etc/bind/zones/example.test";</div>
+<div class="line">file &quot;/etc/bind/zones/example.test&quot;;</div>
 <div class="line">allow-update { none; };</div>
 <div class="line">};</div>
 </div>
 </div>
 <div class="line-block">
-<div class="line">zone "0.168.192.in-addr.arpa." {</div>
+<div class="line">zone &quot;0.168.192.in-addr.arpa.&quot; {</div>
 <div class="line-block">
 <div class="line">type master;</div>
-<div class="line">file "/etc/bind/zones/0.168.192.in-addr.arpa";</div>
+<div class="line">file &quot;/etc/bind/zones/0.168.192.in-addr.arpa&quot;;</div>
 <div class="line">allow-update { none; };</div>
 <div class="line">};</div>
 </div>
@@ -306,7 +303,7 @@ an A record for in the forward zone file.</p>
 <div class="line">logging{</div>
 <div class="line-block">
 <div class="line">channel simple_log {</div>
-<div class="line">file "/var/log/named/bind.log" versions 3 size 5m;</div>
+<div class="line">file &quot;/var/log/named/bind.log&quot; versions 3 size 5m;</div>
 <div class="line">severity debug;</div>
 <div class="line">print-time yes;</div>
 <div class="line">print-severity yes;</div>
@@ -320,10 +317,10 @@ an A record for in the forward zone file.</p>
 </div>
 </div>
 <ul class="simple">
-<li>Lines 1-5 set up our forward zone "example.test.". Note that
+<li>Lines 1-5 set up our forward zone &quot;example.test.&quot;. Note that
 <tt class="docutils literal"><span class="pre">allow-update</span></tt> is set to <tt class="docutils literal">none</tt>. This simplifies our
 configuration and prevents updates to this zone from other servers.</li>
-<li>Lines 7-11 set up the reverse zone "0.168.192.in-addr.arpa.".</li>
+<li>Lines 7-11 set up the reverse zone &quot;0.168.192.in-addr.arpa.&quot;.</li>
 <li>Lines 13-24 set up simple (and verbose) logging to
 <tt class="docutils literal">/var/log/named/bind.log</tt>. See
 <a class="reference external" href="http://www.zytrax.com/books/dns/ch7/logging.html">http://www.zytrax.com/books/dns/ch7/logging.html</a> for details about
@@ -331,7 +328,7 @@ the setting here.</li>
 </ul>
 </div>
 <div class="section" id="testing">
-<h2 id="testing">Testing</h2>
+<h2>Testing</h2>
 <div class="section" id="configuration-syntax-check">
 <h3>Configuration Syntax Check</h3>
 <p>We can use the <tt class="docutils literal"><span class="pre">named-checkzone</span></tt> utility to verify our zone file
@@ -375,19 +372,19 @@ more info.</p>
 <h5>Forward Lookup</h5>
 <p>The A record:</p>
 <pre class="literal-block">
-$ dig @127.0.0.1 box1.example.test +short
+$ dig &#64;127.0.0.1 box1.example.test +short
 192.168.0.1
 </pre>
 <p>The CNAME:</p>
 <pre class="literal-block">
-$ dig @127.0.0.1 alt.example.test +short
+$ dig &#64;127.0.0.1 alt.example.test +short
 192.168.0.1
 </pre>
 </div>
 <div class="section" id="id2">
 <h5>Reverse Lookup</h5>
 <pre class="literal-block">
-$ dig @127.0.0.1 -x 192.168.0.1 +short
+$ dig &#64;127.0.0.1 -x 192.168.0.1 +short
 box1.example.test.0.168.192.in-addr.arpa.
 </pre>
 </div>
@@ -430,7 +427,7 @@ Address:    127.0.0.1#53
 </div>
 </div>
 <div class="section" id="using-your-sandbox">
-<h2 id="using-your-sandbox">Using Your Sandbox</h2>
+<h2>Using Your Sandbox</h2>
 <div class="line-block">
 <div class="line">Now that the DNS sandbox is built and working correctly, you may want
 to add it</div>

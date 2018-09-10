@@ -48,9 +48,6 @@
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
     </address>
   </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#table-of-contents" title="Table Of Contents">Table Of Contents</a></li><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a class="toc-href" href="#working-with-a-disk-image" title="Working With A Disk Image">Working With A Disk Image</a></li><li><a class="toc-href" href="#working-with-an-existing-disk" title="Working With An Existing Disk">Working With An Existing Disk</a></li><li><a class="toc-href" href="#basic-configurationpackage-installation" title="Basic Configuration/Package Installation">Basic Configuration/Package Installation</a></li><li><a class="toc-href" href="#compiling-for-the-rpi" title="Compiling For The RPi">Compiling For The RPi</a></li><li><a class="toc-href" href="#umount-and-clean-up" title="Umount and Clean Up">Umount and Clean Up</a></li><li><a class="toc-href" href="#writing-a-disk-image-to-an-sd-card" title="Writing a Disk Image to an SD Card">Writing a Disk Image to an SD Card</a></li><li><a class="toc-href" href="#extra-credit-making-our-own-disk-image" title="Extra Credit: Making our own disk image">Extra Credit: Making our own disk image</a></li><li><a class="toc-href" href="#where-to-go-from-here" title="Where To Go From Here">Where To Go From Here</a></li></ul></div>
-    </div>
   <div class="warning">
   <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
@@ -68,7 +65,7 @@ of the <a class="reference external" href="https://www.raspberrypi.org/blog/page
 its an even more exciting platform. I've documented what I've been using
 to make my workflow more productive.</p>
 <div class="section" id="table-of-contents">
-<h2 id="table-of-contents"><a class="toc-backref" href="#id1">Table Of Contents</a></h2>
+<h2><a class="toc-backref" href="#id1">Table Of Contents</a></h2>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
@@ -95,13 +92,13 @@ to make my workflow more productive.</p>
 </div>
 </div>
 <div class="section" id="setup">
-<h2 id="setup"><a class="toc-backref" href="#id2">Setup</a></h2>
+<h2><a class="toc-backref" href="#id2">Setup</a></h2>
 <p>We'll use a Linux machine. Below are setup instructions for
 <a class="reference external" href="http://www.ubuntu.com/">Ubuntu</a> and
 <a class="reference external" href="https://www.archlinux.org/">Arch</a>. I prefer Arch for desktop and
 personal work, I use <a class="reference external" href="https://www.debian.org/">Debian</a> or Ubuntu for
 production deployments.</p>
-<p>Arch Linux is a great "tinkerer's" distribution - if you haven't used it
+<p>Arch Linux is a great &quot;tinkerer's&quot; distribution - if you haven't used it
 before it's worth checking out. It's <a class="reference external" href="http://archlinuxarm.org/">great on the Raspberry Pi</a>.</p>
 <p>Debian and Ubuntu have some differences, but share the same base and use
 the same package management system
@@ -120,7 +117,7 @@ any Linux should work).</li>
 We'll learn how to work with raw disk images and how to copy disk images to SD cards.</li>
 <li><a class="reference external" href="http://www.qemu.org">QEMU</a>, an emulator system, and it's <a class="reference external" href="http://en.wikipedia.org/wiki/ARM_architecture">ARM processor</a> support (the Raspberry Pi uses an ARM processor).</li>
 <li><a class="reference external" href="http://proot.me/">PRoot</a>&nbsp;- a convenience tool that makes it
-easy&nbsp;to mount a "foreign" filesystem and run commands inside of it
+easy&nbsp;to mount a &quot;foreign&quot; filesystem and run commands inside of it
 without booting.</li>
 <li>A way to create disk images, and mount them like physical devices.</li>
 </ul>
@@ -137,13 +134,13 @@ to work with Linux systems is via virtualization.
 <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> is available for most
 platforms and is easy to work with.</p>
 <p>The virtualbox documentation can walk you through the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html">installation of VirtualBox and creating your first virtual machine</a>.</p>
-<p>When working with an SD card, you'll might want to follow instructions for "<a class="reference external" href="https://www.virtualbox.org/manual/ch09.html#rawdisk">Access to entire physical hard disk</a>" to make
+<p>When working with an SD card, you'll might want to follow instructions for &quot;<a class="reference external" href="https://www.virtualbox.org/manual/ch09.html#rawdisk">Access to entire physical hard disk</a>&quot; to make
 the card accessible to the virtual machine. As an alternative, you could
 use a USB SD card reader, and <a class="reference external" href="https://www.virtualbox.org/manual/ch03.html#settings-usb">usb pass-thru</a>&nbsp;to
 present not the disk to the virtual machine, but the entire USB device,
 and let the virtual machine deal with mounting it.</p>
 <p>Both of these approaches can be (very) error prone, but provide the most
-"native" way of working.</p>
+&quot;native&quot; way of working.</p>
 <p>Instead I'd&nbsp;recommend installing&nbsp;<a class="reference external" href="https://www.virtualbox.org/manual/ch04.html">guest additions</a>.&nbsp;With guest
 additions installed in your virtual machine, you can use the <a class="reference external" href="https://www.virtualbox.org/manual/ch04.html#sharedfolders">shared folders feature</a>
 of VirtualBox. This makes it easy to copy disk images created in your
@@ -160,7 +157,7 @@ VirtualBox VMs is to set up <a class="reference external" href="https://www.samb
 virtual machine and share a folder over a <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">host-only network</a>
 (or I'll use <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_bridged">bridged networking</a>&nbsp;so
 I can connect to it from any machine on my LAN) - I'd consider this a
-more "advanced" approach but I've had more consistent results for
+more &quot;advanced&quot; approach but I've had more consistent results for
 day-to-day work than using guest additions or mounting host disks.
 However, for the simple task of just copying disk images back and forth
 to the virtual machine, the shared folders feature should suffice.</p>
@@ -240,12 +237,12 @@ package installation.</p>
 </td></tr></table><p>First, we install the following packages:</p>
 <dl class="docutils">
 <dt>qemu</dt>
-<dd>QEMU emulator &ndash; allows us to run RaspberryPi executables</dd>
+<dd>QEMU emulator – allows us to run RaspberryPi executables</dd>
 <dt>kpartx</dt>
 <dd>Helper tool that wraps a handful of tasks required for creating
 loopback devices into a single action.</dd>
 <dt>pv</dt>
-<dd>Pipeline middleware that shows a progress bar (we&rsquo;ll be using it to
+<dd>Pipeline middleware that shows a progress bar (we’ll be using it to
 make copying disk images with dd a little easier for the impatient)</dd>
 </dl>
 <p>Then, we install PRoot by downloading the binary from
@@ -258,7 +255,7 @@ examples below.</p>
 </div>
 </div>
 <div class="section" id="working-with-a-disk-image">
-<h2 id="working-with-a-disk-image"><a class="toc-backref" href="#id7">Working With A Disk Image</a></h2>
+<h2><a class="toc-backref" href="#id7">Working With A Disk Image</a></h2>
 <p>A disk (in the Raspberry Pi's case, we're talking about an SD card) is
 just an arrangement of blocks for data storage. On top of those blocks
 is a description of how files are represented in those blocks, or a
@@ -362,10 +359,10 @@ descriptive directories for mount points:</p>
 <span class="gp">$</span> sudo mount /dev/mapper/loop0p2 raspbian-root
 </pre></div>
 </td></tr></table><p>At this point we can go to the next section where we will run PRoot and
-start doing things "inside" the disk image.</p>
+start doing things &quot;inside&quot; the disk image.</p>
 </div>
 <div class="section" id="working-with-an-existing-disk">
-<h2 id="working-with-an-existing-disk"><a class="toc-backref" href="#id8">Working With An Existing Disk</a></h2>
+<h2><a class="toc-backref" href="#id8">Working With An Existing Disk</a></h2>
 <p>We can use PRoot with an existing disk (SD card) as well. The first step
 is to insert the disk into your computer. Your operating system will
 likely automatically boot it. We also need to find out which device the
@@ -421,7 +418,7 @@ verify this, we'll again use <tt class="docutils literal">fdisk <span class="pre
 <span class="go">/dev/sdb2 122880 6399999 6277120 3G 83 Linux</span>
 </pre></div>
 </td></tr></table><p>Here we see that <tt class="docutils literal">/dev/sdb1</tt> is 56 megabytes in size, and is of type
-"W95 FAT32 (LBA)". This is typically indicative of a RasbperryPi boot
+&quot;W95 FAT32 (LBA)&quot;. This is typically indicative of a RasbperryPi boot
 partition, so <tt class="docutils literal">/dev/sdb1</tt> is our boot partition, and <tt class="docutils literal">/dev/sdb2</tt> is
 our root partition.</p>
 <p>We can use the existing mounts that the operating system set up
@@ -468,7 +465,7 @@ to configure, compile and/or install things - but this time we'll be
 working directly on the SD card instead of inside of a disk image.</p>
 </div>
 <div class="section" id="basic-configuration-package-installation">
-<h2 id="basic-configurationpackage-installation"><a class="toc-backref" href="#id9">Basic Configuration/Package Installation</a></h2>
+<h2><a class="toc-backref" href="#id9">Basic Configuration/Package Installation</a></h2>
 <p>Now that we've got either a disk image or a physical disk mounted, we
 can run commands within those filesystems using PRoot.</p>
 <div class="admonition note">
@@ -476,7 +473,7 @@ can run commands within those filesystems using PRoot.</p>
 <p class="last">The following command line switches worked for me, but took some experimentation to figure out. Please take some time to read <a class="reference external" href="http://proot.me/">the PRoot documentation</a> so you understand exactly what the switches mean.</p>
 </div>
 <p>We can run any command directly (like say, <tt class="docutils literal"><span class="pre">apt-get</span></tt>) but it's useful
-to be able to "log in" to the disk image (run a shell), and then perform
+to be able to &quot;log in&quot; to the disk image (run a shell), and then perform
 our tasks:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> sudo proot -q qemu-arm -S raspbian-root -b raspbian-boot:/boot
@@ -486,7 +483,7 @@ our tasks:</p>
 <tt class="docutils literal"><span class="pre">-q</span></tt> switch wraps every command in the <tt class="docutils literal"><span class="pre">qemu-arm</span></tt> emulator program,
 making it possible to run code compiled for the RaspberryPi's ARM
 processor. The <tt class="docutils literal"><span class="pre">-S</span></tt> parameter sets the directory that will be the
-"root" - essentially that means that <tt class="docutils literal"><span class="pre">raspbian-root</span></tt> will map to
+&quot;root&quot; - essentially that means that <tt class="docutils literal"><span class="pre">raspbian-root</span></tt> will map to
 <tt class="docutils literal">/</tt>. <tt class="docutils literal"><span class="pre">-S</span></tt> also fakes the root user (id 0), and adds some protections
 for us in the event we've mixed in files from our host system that we
 don't want the disk image code to modify. <tt class="docutils literal"><span class="pre">-b</span></tt> splices in additional
@@ -495,9 +492,9 @@ kernel images and other boot-related stuff gets installed. This isn't
 entirely necessary, but its useful for system upgrades and making
 changes to boot settings. Finally, we tell PRoot which command to run,
 in this case, <tt class="docutils literal">/bin/bash</tt>, the BASH shell.</p>
-<p>Now that we're "in" the disk image, we can update and install new
+<p>Now that we're &quot;in&quot; the disk image, we can update and install new
 packages.</p>
-<p>Since root is not a "normal" user in the default Rasbian installation,
+<p>Since root is not a &quot;normal&quot; user in the default Rasbian installation,
 the path needs to be adjusted:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/sbin:/sbin:/bin:/usr/local/sbin
 </pre></div>
@@ -537,11 +534,11 @@ settings, see <a class="reference external" href="https://www.raspberrypi.org/do
 14
 15
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> adduser jj
-<span class="go">Adding user `jj' ...</span>
-<span class="go">Adding new group `jj' (1004) ...</span>
-<span class="go">Adding new user `jj' (1001) with group `jj' ...</span>
-<span class="go">Creating home directory `/home/jj' ...</span>
-<span class="go">Copying files from `/etc/skel' ...</span>
+<span class="go">Adding user `jj&#39; ...</span>
+<span class="go">Adding new group `jj&#39; (1004) ...</span>
+<span class="go">Adding new user `jj&#39; (1001) with group `jj&#39; ...</span>
+<span class="go">Creating home directory `/home/jj&#39; ...</span>
+<span class="go">Copying files from `/etc/skel&#39; ...</span>
 <span class="go">Enter new UNIX password:</span>
 <span class="go">Retype new UNIX password:</span>
 <span class="go">passwd: password updated successfully</span>
@@ -582,18 +579,18 @@ image, these scripts aren't run.</li>
 </ul>
 </div>
 <div class="section" id="compiling-for-the-rpi">
-<h2 id="compiling-for-the-rpi"><a class="toc-backref" href="#id10">Compiling For The RPi</a></h2>
+<h2><a class="toc-backref" href="#id10">Compiling For The RPi</a></h2>
 <p>Raspbian comes with most of the tools we'll need (in particular, the
 <tt class="docutils literal"><span class="pre">build-essential</span></tt> package). Lets build and install the <a class="reference external" href="http://nginx.org/">nginx web server</a> - a relatively easy to build package.</p>
 <p>If you've never compiled software on Linux before, most (but not
 all!)&nbsp;source code&nbsp;packages are provided as tarballs, and include some
 scripts that help you build the software in what's known as the
-"configure, make, make install" (or CMMI) procedure.</p>
+&quot;configure, make, make install&quot; (or CMMI) procedure.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For a great explanation (with examples you can follow to
 build your own CMMI package), <a class="reference external" href="https://twitter.com/georgebrock">George Brocklehurst</a> wrote an excellent
-article explaining the details behind CMMI called "<a class="reference external" href="https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install">The magic behind configure, make, make install</a>".</p>
+article explaining the details behind CMMI called &quot;<a class="reference external" href="https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install">The magic behind configure, make, make install</a>&quot;.</p>
 </div>
 <p>First we'll need to obtain the nginx tarball:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -700,8 +697,8 @@ rewrite module, so we can re-run <tt class="docutils literal">./configure</tt> w
 <p>However, it's useful to understand how to track down dependencies like
 this, and rewriting is a pretty killer feature of any http server, so
 lets install the dependency.</p>
-<p>The configure script mentions the "PCRE library". PCRE stands for "Perl
-Compatible Regular Expressions". <a class="reference external" href="http://www.perl.org/">Perl</a> is a
+<p>The configure script mentions the &quot;PCRE library&quot;. PCRE stands for &quot;Perl
+Compatible Regular Expressions&quot;. <a class="reference external" href="http://www.perl.org/">Perl</a> is a
 classical systems language that has hard-core text processing
 capabilities. It's particularly known for its <a class="reference external" href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> support
 and syntax. The Perl regular expression syntax is so useful in fact,
@@ -860,18 +857,18 @@ probably what we want, we can find out by installing it:</p>
 <span class="go">+ sha1 library is not found</span>
 <span class="go">+ using system zlib library</span>
 
-<span class="go">nginx path prefix: "/usr/local/nginx"</span>
-<span class="go">nginx binary file: "/usr/local/nginx/sbin/nginx"</span>
-<span class="go">nginx configuration prefix: "/usr/local/nginx/conf"</span>
-<span class="go">nginx configuration file: "/usr/local/nginx/conf/nginx.conf"</span>
-<span class="go">nginx pid file: "/usr/local/nginx/logs/nginx.pid"</span>
-<span class="go">nginx error log file: "/usr/local/nginx/logs/error.log"</span>
-<span class="go">nginx http access log file: "/usr/local/nginx/logs/access.log"</span>
-<span class="go">nginx http client request body temporary files: "client\_body\_temp"</span>
-<span class="go">nginx http proxy temporary files: "proxy\_temp"</span>
-<span class="go">nginx http fastcgi temporary files: "fastcgi\_temp"</span>
-<span class="go">nginx http uwsgi temporary files: "uwsgi\_temp"</span>
-<span class="go">nginx http scgi temporary files: "scgi\_temp"</span>
+<span class="go">nginx path prefix: &quot;/usr/local/nginx&quot;</span>
+<span class="go">nginx binary file: &quot;/usr/local/nginx/sbin/nginx&quot;</span>
+<span class="go">nginx configuration prefix: &quot;/usr/local/nginx/conf&quot;</span>
+<span class="go">nginx configuration file: &quot;/usr/local/nginx/conf/nginx.conf&quot;</span>
+<span class="go">nginx pid file: &quot;/usr/local/nginx/logs/nginx.pid&quot;</span>
+<span class="go">nginx error log file: &quot;/usr/local/nginx/logs/error.log&quot;</span>
+<span class="go">nginx http access log file: &quot;/usr/local/nginx/logs/access.log&quot;</span>
+<span class="go">nginx http client request body temporary files: &quot;client\_body\_temp&quot;</span>
+<span class="go">nginx http proxy temporary files: &quot;proxy\_temp&quot;</span>
+<span class="go">nginx http fastcgi temporary files: &quot;fastcgi\_temp&quot;</span>
+<span class="go">nginx http uwsgi temporary files: &quot;uwsgi\_temp&quot;</span>
+<span class="go">nginx http scgi temporary files: &quot;scgi\_temp&quot;</span>
 </pre></div>
 </td></tr></table><p>The library was found, the error is gone, and so now we can proceed with
 compilation.</p>
@@ -904,7 +901,7 @@ aware of space limitations.</p>
 </div>
 </div>
 <div class="section" id="umount-and-clean-up">
-<h2 id="umount-and-clean-up"><a class="toc-backref" href="#id12">Umount and Clean Up</a></h2>
+<h2><a class="toc-backref" href="#id12">Umount and Clean Up</a></h2>
 <p>Once we've gotten our disk image configured as we like, we need to
 un-mount it.</p>
 <p>First, we need to exit the bash shell we started with PRoot, then we'll
@@ -962,7 +959,7 @@ This is accomplished with <tt class="docutils literal">kpartx <span class="pre">
 card and insert it into a Raspberry Pi.</p>
 </div>
 <div class="section" id="writing-a-disk-image-to-an-sd-card">
-<h2 id="writing-a-disk-image-to-an-sd-card"><a class="toc-backref" href="#id13">Writing a Disk Image to an SD Card</a></h2>
+<h2><a class="toc-backref" href="#id13">Writing a Disk Image to an SD Card</a></h2>
 <p>We'll use the <tt class="docutils literal">dd</tt> command, which writes raw blocks of data from one
 block device to another, to copy the disk image we made into an SD card.</p>
 <div class="admonition note">
@@ -1029,7 +1026,7 @@ yet installed an OS.</p>
 <span class="go">/dev/sdb3 31225856 31291391 65536 32M 83 Linux</span>
 </pre></div>
 </td></tr></table><p><tt class="docutils literal">fdisk</tt> tells us that this is a 16GB drive. The exact amount cited by
-some drive manufacturers is not in "real" gigabytes, an exponent of
+some drive manufacturers is not in &quot;real&quot; gigabytes, an exponent of
 2[<a class="reference external" href="#gb">*</a>] but in billions of bytes - note the byte count:
 16,021,192,704.</p>
 <p>We can see the three partitions, and what format they are in. The small
@@ -1135,8 +1132,8 @@ as part of the call to sudo, and not what we want to run as root.</p>
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp"> $</span> ls -l <span class="m">2015</span>-02-16-raspbian-wheezy.img
 <span class="go"> -rw-r--r-- 1 jj jj 3276800000 Apr 18 07:58</span>
 <span class="go">2015-02-16-raspbian-wheezy.img</span>
-<span class="gp"> $</span> sudo sh -c <span class="s2">"dd if=2015-02-16-raspbian-wheezy.img bs=4M \   pv</span>
-<span class="go">--size=3276800000 \   dd of=/dev/sdb"</span>
+<span class="gp"> $</span> sudo sh -c <span class="s2">&quot;dd if=2015-02-16-raspbian-wheezy.img bs=4M \   pv</span>
+<span class="go">--size=3276800000 \   dd of=/dev/sdb&quot;</span>
 <span class="go"> 613MiB 0:02:31 [4.22MiB/s] [===========&gt; ] 19% ETA 0:10:04</span>
 <span class="gp"> #</span> <span class="nb">exit</span>
 </pre></div>
@@ -1196,7 +1193,7 @@ boot.</p>
 1,073,741,824 bytes)</em></p>
 </div>
 <div class="section" id="extra-credit-making-our-own-disk-image">
-<h2 id="extra-credit-making-our-own-disk-image"><a class="toc-backref" href="#id14">Extra Credit: Making our own disk image</a></h2>
+<h2><a class="toc-backref" href="#id14">Extra Credit: Making our own disk image</a></h2>
 <p>Some distributions, such as Arch, don't distribute disk images, but
 instead distribute tarballs of files. They let you set up the disk
 however you want, then copy the files over to install the operating
@@ -1257,7 +1254,7 @@ until we instruct <tt class="docutils literal">fdisk</tt> to do so:</p>
 <span class="go">OSF disklabel</span>
 <span class="go"> Building a new DOS disklabel with disk identifier 0x152a22d4.</span>
 <span class="go"> Changes will remain in memory only, until you decide to write them.</span>
-<span class="go"> After that, of course, the previous content won't be recoverable.</span>
+<span class="go"> After that, of course, the previous content won&#39;t be recoverable.</span>
 </pre></div>
 </td></tr></table><p>Warning: invalid flag 0x0000 of partition table 4 will be corrected by
 w(rite)</p>
@@ -1296,7 +1293,7 @@ device with no partitions. If you need help, as indicated, you can type
 <span class="go">p print the partition table</span>
 <span class="go">q quit without saving changes</span>
 <span class="go">s create a new empty Sun disklabel</span>
-<span class="go">t change a partition's system id</span>
+<span class="go">t change a partition&#39;s system id</span>
 <span class="go">u change display/entry units</span>
 <span class="go">v verify the partition table</span>
 <span class="go">w write table to disk and exit</span>
@@ -1313,7 +1310,7 @@ entering <tt class="docutils literal">o</tt>:</p>
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> Command (m for help): o</span>
 <span class="go"> Building a new DOS disklabel with disk identifier 0xa8e8538a.</span>
 <span class="go"> Changes will remain in memory only, until you decide to write them.</span>
-<span class="go"> After that, of course, the previous content won't be recoverable.</span>
+<span class="go"> After that, of course, the previous content won&#39;t be recoverable.</span>
 
 <span class="go"> Warning: invalid flag 0x0000 of partition table 4 will be corrected by</span>
 <span class="go">w(rite)</span>
@@ -1412,7 +1409,7 @@ of having to do math to figure out how many sectors we need.</p>
 <span class="go">b W95 FAT32 51 OnTrack DM6 Aux 9f BSD/OS e4 SpeedStor</span>
 <span class="go">c W95 FAT32 (LBA) 52 CP/M a0 IBM Thinkpad hi eb BeOS fs</span>
 <span class="go">e W95 FAT16 (LBA) 53 OnTrack DM6 Aux a5 FreeBSD ee GPT</span>
-<span class="go">f W95 Ext'd (LBA) 54 OnTrackDM6 a6 OpenBSD ef EFI (FAT-12/16/</span>
+<span class="go">f W95 Ext&#39;d (LBA) 54 OnTrackDM6 a6 OpenBSD ef EFI (FAT-12/16/</span>
 <span class="go">10 OPUS 55 EZ-Drive a7 NeXTSTEP f0 Linux/PA-RISC b</span>
 <span class="go">11 Hidden FAT12 56 Golden Bow a8 Darwin UFS f1 SpeedStor</span>
 <span class="go">12 Compaq diagnost 5c Priam Edisk a9 NetBSD f4 SpeedStor</span>
@@ -1569,7 +1566,7 @@ installation tarball and use <tt class="docutils literal">tar</tt> to extract an
 
 
 
-<span class="go">Next we'll mount the new filesystems:</span>
+<span class="go">Next we&#39;ll mount the new filesystems:</span>
 </pre></div>
 </td></tr></table><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1604,7 +1601,7 @@ cards. We can also mount it on the loopback and use PRoot to further
 configure it, as we did above with Raspbian.</p>
 </div>
 <div class="section" id="where-to-go-from-here">
-<h2 id="where-to-go-from-here"><a class="toc-backref" href="#id15">Where To Go From Here</a></h2>
+<h2><a class="toc-backref" href="#id15">Where To Go From Here</a></h2>
 <p>With this basic workflow, we can do all sorts of interesting things. A
 few ideas:</p>
 <ul class="simple">

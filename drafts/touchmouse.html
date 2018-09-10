@@ -51,9 +51,6 @@
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
     </address>
   </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#overview" title="Overview">Overview</a></li><li><a class="toc-href" href="#requirements" title="Requirements">Requirements</a></li><li><a class="toc-href" href="#materials-list" title="Materials List">Materials List</a></li><li><a class="toc-href" href="#the-touchmouse-project-the-touch-board" title="The Touchmouse Project: The Touch Board">The Touchmouse Project: The Touch Board</a></li><li><a class="toc-href" href="#the-overlay" title="The Overlay">The Overlay</a></li><li><a class="toc-href" href="#wiring-circuitplayground" title="Wiring - CircuitPlayground">Wiring - CircuitPlayground</a></li><li><a class="toc-href" href="#wiring-itsybitsy" title="Wiring - ItsyBitsy">Wiring - ItsyBitsy</a></li><li><a class="toc-href" href="#getting-fancy-gamma-correction-for-neopixels" title="Getting Fancy: Gamma Correction For Neopixels">Getting Fancy: Gamma Correction For Neopixels</a></li><li><a class="toc-href" href="#bringing-it-all-together" title="Bringing It All Together">Bringing It All Together</a></li><li><a class="toc-href" href="#code-that-prevents-errant-pad-activation" title="Code That Prevents Errant Pad Activation">Code That Prevents Errant Pad Activation</a></li><li><a class="toc-href" href="#adding-in-mouse-actions" title="Adding In Mouse Actions">Adding In Mouse Actions</a></li><li><a class="toc-href" href="#code" title="Code">Code</a></li></ul></div>
-    </div>
   <div class="warning">
   <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
@@ -68,16 +65,16 @@
 <p>This article chronicles my first-pass in designing and building a touch-based device that takes the place of the mouse buttons and scroll wheel.</p>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="overview">
-<h2 id="overview">Overview</h2>
+<h2>Overview</h2>
 </div>
 <div class="section" id="requirements">
-<h2 id="requirements">Requirements</h2>
+<h2>Requirements</h2>
 </div>
 <div class="section" id="materials-list">
-<h2 id="materials-list">Materials List</h2>
+<h2>Materials List</h2>
 </div>
 <div class="section" id="the-touchmouse-project-the-touch-board">
-<h2 id="the-touchmouse-project-the-touch-board">The Touchmouse Project: The Touch Board</h2>
+<h2>The Touchmouse Project: The Touch Board</h2>
 <p>While the touch inputs can be anything conductive, fruit, pieces of metal, even a bare wire works, or you can just just the pins or pads on the microcontroller. However, this is a great use for copper foil tape with conductive adhesive.</p>
 <p>I have two widths, 2 inch and 1/4 inch. I use the 2 inch to make large touch pads, and the 1/4 inch to run traces from the pads to the edges of the substrate so the alligator clips can clip on securely.</p>
 <p>Alternatively, you could solder wires between the traces or pads and the microcontroller, but we should reserve this for when we're building our final project.</p>
@@ -95,19 +92,19 @@
 <p>It may take some trial and error to choose a substrate that fits your application.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">The "end game" for these sort of user interfaces is to use printed circuit board (PCB) material  - copper clad fiberglass (most commonly the type designated 'FR4'). You can use an acid etching process in concert with a laser printer (or even permanent marker) and do this yourself, or you can use a low-run PCB manufacturing service to do the work for you.</p>
+<p class="last">The &quot;end game&quot; for these sort of user interfaces is to use printed circuit board (PCB) material  - copper clad fiberglass (most commonly the type designated 'FR4'). You can use an acid etching process in concert with a laser printer (or even permanent marker) and do this yourself, or you can use a low-run PCB manufacturing service to do the work for you.</p>
 </div>
 <div class="section" id="mockup">
 <h3>Mockup</h3>
 <p>I initially mocked up my touch pads using green masking tape. In laying out the pads, the primary goal is to put the touch-sensitive areas in logical and convenient locations. Secondarily, they can't be too close together, or we can get crosstalk between the pads. The final concern is placement of the leads that connect to the microcontroller.</p>
 <p>It's important that the leads won't be accidentally grazed by our hands. We also don't want them to be awkwardly placed - our microcontroller board needs to comfortably connect and, especially in the case of this project, it needs to be visible.</p>
-<img alt="" src="/images/touchmouse-prototype-front.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-prototype-front.png" style="width: 80%;" />
 <p>As you can see in the photograph, I've set up 4 touch pads. The two larger ones on the left (yellow) and right (green) will be left and right mouse clicks, respectively. We'll also trigger a middle click if both pads are touched at the same time.</p>
 <p>The two middle pads will emulate the scroll wheel on a typical mouse. The top pad (blue) will scroll up, and the bottom (white) will scroll down.</p>
 <p>I settled on connecting the leads to the top edge of the panel. This works well for the scroll up, left and right pads, but we'll need to run a trace to connect the scroll down pad to the top edge.</p>
 <p>We could run the trace on the front side of the panel - we have room under the right or left click pads after all. This isn't the best idea though. When we add more conductive material to a pad, even if it's for the sake of connecting it to our microcontroller, we are essentially making the pad <em>bigger</em>. Even the alligator clips we're using will become part of each of our pads. So it's possible that we'd accidentally graze the trace when touching the click pads, inadvertently sending a scroll command to the computer when we're trying to click. This is especially possible (and problematic!) when we're trying to do something like a click-drag.</p>
 <p>So what I did to avoid this was run the trace on the obverse side of the panel:</p>
-<img alt="" src="/images/touchmouse-prototype-back.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-prototype-back.png" style="width: 80%;" />
 <p>Note that I was careful to avoid crossing the left click pad on the other side of the panel. This is to ensure we don't accidentally activate both pads. Capacative touch is pretty amazing in that it works even at a slight distance. We can take advantage of this to do some cool things, like creating a grid of touch inputs using a limited number of pins, but it's not what we want here.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
@@ -117,49 +114,49 @@
 </div>
 </div>
 <div class="section" id="the-overlay">
-<h2 id="the-overlay">The Overlay</h2>
+<h2>The Overlay</h2>
 <p>I opted to create an overlay for the touch pads.</p>
 <p>This gives us the opportunity to add more visual indicators as to where the pads are, and what each pad does. It also prevents tarnishing of the pads from oils in your skin.</p>
 <p>I ended up using it as the guide for applying the conductive materials as well.</p>
 <p>I used some light cardstock that I had on hand. I cut the cardstock with a utility knife and a straight edge and glued the pieces together with a glue stick.</p>
-<img alt="" src="/images/touchmouse-overlay-tools.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-overlay-tools.png" style="width: 80%;" />
 <p>Here's the finished product, laying on top of the masking tape mock-up:</p>
-<img alt="" src="/images/touchmouse-overlay.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-overlay.png" style="width: 80%;" />
 <p>After making sure everything lined up properly, I took a final finishing touch and ran the overlay through my trusty Scotch TL901 laminator.</p>
-<img alt="" src="/images/touchmouse-laminator.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-laminator.png" style="width: 80%;" />
 <p>I laminated the overlay for a couple of reasons. First, it will make the overlay more durable - it will be water-proof, so it will resist spills and can easily be cleaned by wiping it down with a damp cloth.</p>
 <p>Second, it adds a little bit of extra insulation - my hands are a bit shaky, and the little bit of extra buffer makes my touches more accurate (we'll dig into that more a bit later).</p>
 <p>Finally, it allows me to use water soluble markers to add notes or legends to my overlays, that can be easily changed.</p>
-<img alt="" src="/images/touchmouse-overlay-laminated-markedup.png" style="width: 80%;"/>
-<p>I used Staedtler Lumocolor "correctable" markers, but there are other brands, like the Expo&reg; Vis-a-vis&reg;. They work a lot like dry-erase markers, except they are a bit more durable. They resist minor friction well. They are erasable with water.</p>
+<img alt="" src="/images/touchmouse-overlay-laminated-markedup.png" style="width: 80%;" />
+<p>I used Staedtler Lumocolor &quot;correctable&quot; markers, but there are other brands, like the Expo® Vis-a-vis®. They work a lot like dry-erase markers, except they are a bit more durable. They resist minor friction well. They are erasable with water.</p>
 <p>When I was younger they were the mainstay of any teacher using an overhead projector. The color markers are transparent, so the color shows through when back-lit.</p>
 <p>They also work great as semi-permanent markings for whiteboards.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">If you need something more durable but still temporary, you can use a <em>china marker</em>. These are wax crayons used for marking pottery (that's where "china" in the name comes from). They erase from a smooth surface with alcohol (hand sanitizer works great in a pinch).</p>
+<p class="last">If you need something more durable but still temporary, you can use a <em>china marker</em>. These are wax crayons used for marking pottery (that's where &quot;china&quot; in the name comes from). They erase from a smooth surface with alcohol (hand sanitizer works great in a pinch).</p>
 </div>
 <div class="section" id="the-pads">
 <h3>The Pads</h3>
 <p>Before I laminated it, I used my overlay as a guide to lay out the front pads on the panel:</p>
-<img alt="" src="/images/touchmouse-overlay-lineup.png" style="width: 80%;"/>
-<p>Then I cut my pads out of 2" copper foil tape, using the same stright edge and utility knife, and laid them out to make sure everything was OK:</p>
-<img alt="" src="/images/touchmouse-overlay-front-mockup.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-overlay-lineup.png" style="width: 80%;" />
+<p>Then I cut my pads out of 2&quot; copper foil tape, using the same stright edge and utility knife, and laid them out to make sure everything was OK:</p>
+<img alt="" src="/images/touchmouse-overlay-front-mockup.png" style="width: 80%;" />
 <p>Copper foil tape has a paper backing. Once everything looked good I removed it, and applied it to the panel. I used my overlay again as a guide:</p>
-<img alt="" src="/images/touchmouse-overlay-and-front-pads.png" style="width: 80%;"/>
-<p>The copper is pretty pure, so it's malleable - it's pretty easy to "nudge" if you need to, but it's also easy to tear, so be careful.</p>
+<img alt="" src="/images/touchmouse-overlay-and-front-pads.png" style="width: 80%;" />
+<p>The copper is pretty pure, so it's malleable - it's pretty easy to &quot;nudge&quot; if you need to, but it's also easy to tear, so be careful.</p>
 <p>You will want to lightly burnish the foil with a fingernail or bone folder just to ensure good adhesion. This is especially important if you are layering the foil over something conductive (for example, other layers of copper foil tape).</p>
-<p>Next, I held the panel up to a lamp and marked where the pads were so I could apply the copper trace on the back side that takes the "scroll down" pad and brings it up to the top edge:</p>
-<img alt="" src="/images/touchmouse-overlay-lineup-back-trace.png" style="width: 80%;"/>
-<p>I cut pieces of 1/4" copper foil tape for the main part of the trace, and I found a piece of scrap from the other pads to use for connecting the back of the panel to the "scroll down" pad on the front:</p>
-<img alt="" src="/images/touchmouse-back-trace-mockup.png" style="width: 80%;"/>
-<p>I ran the tape as close to the edge as I could without touching it, and then up on the right side far away from the "left click" pad.</p>
-<p>When I applied the tape to the back panel, I had two problems. I was a little bit short, since I wanted to wrap the 1/4" tape around the top to the front side so I could see it easily for connecting an alligator clip. The other problem is that I tore the tape a little bit running the trace up to the top.</p>
+<p>Next, I held the panel up to a lamp and marked where the pads were so I could apply the copper trace on the back side that takes the &quot;scroll down&quot; pad and brings it up to the top edge:</p>
+<img alt="" src="/images/touchmouse-overlay-lineup-back-trace.png" style="width: 80%;" />
+<p>I cut pieces of 1/4&quot; copper foil tape for the main part of the trace, and I found a piece of scrap from the other pads to use for connecting the back of the panel to the &quot;scroll down&quot; pad on the front:</p>
+<img alt="" src="/images/touchmouse-back-trace-mockup.png" style="width: 80%;" />
+<p>I ran the tape as close to the edge as I could without touching it, and then up on the right side far away from the &quot;left click&quot; pad.</p>
+<p>When I applied the tape to the back panel, I had two problems. I was a little bit short, since I wanted to wrap the 1/4&quot; tape around the top to the front side so I could see it easily for connecting an alligator clip. The other problem is that I tore the tape a little bit running the trace up to the top.</p>
 <p>The solution to both problems was to cut up some more scrap foil and apply it to the problem areas:</p>
-<img alt="" src="/images/touchmouse-back-trace-patch.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-back-trace-patch.png" style="width: 80%;" />
 <p>I was sure to burnish the foil down securely.</p>
-<img alt="" src="/images/touchmouse-back-trace-complete.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-back-trace-complete.png" style="width: 80%;" />
 <p>Here's what the pads look like from the front, now that everything is complete:</p>
-<img alt="" src="/images/touchmouse-overlay-front-complete.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-overlay-front-complete.png" style="width: 80%;" />
 </div>
 <div class="section" id="testing">
 <h3>Testing</h3>
@@ -168,27 +165,27 @@
 <p class="first admonition-title">Tip</p>
 <p class="last">For some more detail and how to get into continuity mode on several multimeters, <a class="reference external" href="https://learn.adafruit.com/multimeters/continuity">Adafruit has a nice article</a> you should check out.</p>
 </div>
-<p>First, we'll change our multitester into continuity or "diode test" mode:</p>
-<img alt="" src="/images/touchmouse-testing-pads.png" style="width: 80%;"/>
-<p>When there is no continuity (a.k.a. "open loop"), the meter will read 1. Otherwise, it will show the voltage running between the leads. It takes a second or two to settle down, and in the case of a short circuit (if you touch the leads together, or touch them to the same piece of metal), you'll see a very low number.</p>
+<p>First, we'll change our multitester into continuity or &quot;diode test&quot; mode:</p>
+<img alt="" src="/images/touchmouse-testing-pads.png" style="width: 80%;" />
+<p>When there is no continuity (a.k.a. &quot;open loop&quot;), the meter will read 1. Otherwise, it will show the voltage running between the leads. It takes a second or two to settle down, and in the case of a short circuit (if you touch the leads together, or touch them to the same piece of metal), you'll see a very low number.</p>
 <p>It's not important which lead is used where in this case - we're just checking if there's continuity, so polarity doesn't factor in.</p>
 <p>Here's a video showing how I tested the pads. Note that I also checked to be sure the pads weren't accidentally connected, by touching one probe to one pad and the other to a separate one.</p>
 <div class="video-container">
-<video controls="">
-<source src="/images/IMG_6777.webm" type="video/webm"/>
-<p>Your browser doesn't support HTML5 video. Here is
+    <video controls>
+       <source src="/images/IMG_6777.webm" type="video/webm">
+       <p>Your browser doesn't support HTML5 video. Here is
           a <a href="/images/IMG_6777.webm">link to the video</a> instead.</p>
-</video>
-</div><p>The most important test is the "scroll down" pad, since that's the most likely pad to be messed up given it's a series of separate layered pieces of foil, that run over quite a bit of distance. I placed one lead on the pad, and the other on the spot where I intend to hook up the aligator clip. As you can see from the video, there's a solid connection there.</p>
+    </video>
+</div><p>The most important test is the &quot;scroll down&quot; pad, since that's the most likely pad to be messed up given it's a series of separate layered pieces of foil, that run over quite a bit of distance. I placed one lead on the pad, and the other on the spot where I intend to hook up the aligator clip. As you can see from the video, there's a solid connection there.</p>
 </div>
 <div class="section" id="finishing-up">
 <h3>Finishing Up</h3>
 <p>I used a couple of wide rubber bands to hold the overlay onto the touch panel. This secures the overlay well, and also provides a non-slip surface to keep the panel from sliding around during use.</p>
-<img alt="" src="/images/touchmouse-overlay-final.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-overlay-final.png" style="width: 80%;" />
 </div>
 </div>
 <div class="section" id="wiring-circuitplayground">
-<h2 id="wiring-circuitplayground">Wiring - CircuitPlayground</h2>
+<h2>Wiring - CircuitPlayground</h2>
 <p>Since the neopixels, DAC, and speaker are all built in to the CircuitPlayground, wiring it up is really simple - we just need to connect the aligator clips to the pads on the CircuitPlayground.</p>
 <p>We can use any pads marked A1-A7 (A0 will be used to drive the speaker).</p>
 <div class="admonition warning">
@@ -198,7 +195,7 @@
 <p class="last">Second, and this is specific to our project, the touch pads are calibrated when the board first boots up. We want to let it do that properly.</p>
 </div>
 <p>I've evenly spaced the connections around the CircuitPlayground to reduce stress on the clips. My aligator clips are a bit long, so I also had to twirl the leads a bit so the CircuitPlayground was as close to the touch panel as possible.</p>
-<img alt="" src="/images/touchmouse-circuitplayground-wiring.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-circuitplayground-wiring.png" style="width: 80%;" />
 <p>In close-up, you can see that I've connected the alligator clips as follows:</p>
 <ul class="simple">
 <li>Scroll Down, white, is connected to A7.</li>
@@ -206,7 +203,7 @@
 <li>Scroll Up, blue, is connected to A1.</li>
 <li>Right Click, green, is connected to A3.</li>
 </ul>
-<img alt="" src="/images/touchmouse-circuitplayground-wiring-closeup.png" style="width: 80%;"/>
+<img alt="" src="/images/touchmouse-circuitplayground-wiring-closeup.png" style="width: 80%;" />
 <div class="section" id="testing-touch-pads">
 <h3>Testing - Touch Pads</h3>
 <p>To ensure everything is hooked up correctly, we'll run some testing code. This is the bare minimum code needed to work with touch interfaces.</p>
@@ -245,16 +242,16 @@
 
 <span class="err">﻿</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">scroll_down</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Scroll down pressed"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scroll down pressed&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">left_click</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Left click pressed"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left click pressed&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">scroll_up</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Scroll up pressed"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scroll up pressed&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">right_click</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Right click pressed"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right click pressed&quot;</span><span class="p">)</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
@@ -267,7 +264,7 @@
 <h3>Testing - Neopixels</h3>
 <p>Now that the basic touch interface is built and working, we can verify the neopixels are functional.</p>
 <p>In the CircuitPlayground, the neopixel ring is wired to digital pin 17, but we will use the safer <tt class="docutils literal">board.NEOPIXEL</tt> object that CircuitPython provides - this also makes porting our code a little easier, but bare in mind that on Adafruit's  CircuitPython boards, <tt class="docutils literal">board.NEOPIXEL</tt> maps to a single onboard neopixel used for status.</p>
-<p>This is bare-minimum code to verify all 10 built-in neopixels are working. It also shows off the very clever list-like interface that the <tt class="docutils literal">NeoPixel</tt> object provies, and gives you visual confirmation of the <em>order</em> that the pixels are addressed. In the case of the CircuitPlayground, the first neopixel is to the left of the micro-USB jack, just below the green "on" LED.</p>
+<p>This is bare-minimum code to verify all 10 built-in neopixels are working. It also shows off the very clever list-like interface that the <tt class="docutils literal">NeoPixel</tt> object provies, and gives you visual confirmation of the <em>order</em> that the pixels are addressed. In the case of the CircuitPlayground, the first neopixel is to the left of the micro-USB jack, just below the green &quot;on&quot; LED.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -322,7 +319,7 @@
 <p class="last">So, this would be the best way to test this, given it doesn't require any external files. However, we're going to use WAV files in our final project, so it's more prudent to create a slightly more realistic testing scenario.</p>
 </div>
 <p>The first thing we'll need to do is procure a couple of properly-formatted WAV files to play. The requirements and process are described <a class="reference external" href="https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/convert-files">here</a>. I've found some files from <a class="reference external" href="http://www.freesound.org">freesound.org</a>, and converted them to the right format.</p>
-<p><a class="reference external" href="/images/coin.wav">This</a> file is an "8-bit coin sound". Before running the code below, copy it to the root folder of the CircuitPlayground.</p>
+<p><a class="reference external" href="/images/coin.wav">This</a> file is an &quot;8-bit coin sound&quot;. Before running the code below, copy it to the root folder of the CircuitPlayground.</p>
 <p>This code will play that sound once when the board first boots:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -349,16 +346,16 @@
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="n">filename</span> <span class="o">=</span> <span class="s2">"coin.wav"</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;coin.wav&quot;</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">"playing file "</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;playing file &quot;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
 </pre></div>
 </td></tr></table><div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">The example code on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#playing-audio-files">Adafruit site</a> blocks - this isn't necessary, it's just so they can log "finished" after the wav is complete. The <tt class="docutils literal">audioio</tt> library is non-blocking.</p>
+<p class="last">The example code on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#playing-audio-files">Adafruit site</a> blocks - this isn't necessary, it's just so they can log &quot;finished&quot; after the wav is complete. The <tt class="docutils literal">audioio</tt> library is non-blocking.</p>
 </div>
 <p>Here's what it looks/sounds like:</p>
 <div class="video-container">
@@ -425,19 +422,19 @@ functionality.</p>
 </div>
 </div>
 <div class="section" id="wiring-itsybitsy">
-<h2 id="wiring-itsybitsy">Wiring - ItsyBitsy</h2>
+<h2>Wiring - ItsyBitsy</h2>
 </div>
 <div class="section" id="getting-fancy-gamma-correction-for-neopixels">
-<h2 id="getting-fancy-gamma-correction-for-neopixels">Getting Fancy: Gamma Correction For Neopixels</h2>
+<h2>Getting Fancy: Gamma Correction For Neopixels</h2>
 <p>Given that capacative touch doesn't provide any tactile feedback, I want to give
 the user other forms of feedback. The first is visual.</p>
 <p>To do so, I'm using LEDs, namely <em>NeoPixels</em>. We've got 10 built in to the
 CircuitPlayground, and they are easy to add to other platforms.</p>
 <p>NeoPixels, AdaFruit's brand of addressable LEDs, are composed of three (or four, in the case of RGBW pixels) micro-sized LED elements, attached to a tiny microcontroller, housed in a surface-mount package.</p>
-<p>They operate in a manner very similar to "traditional" RGB LEDs, in that they have a common power supply, a red, green, and blue LED element, and each LED element can be controlled independently. Pulse-width-modulation is possible as well, but in the case of NeoPixels, the PWM of each LED element is controlled by the onboard microcontroller. NeoPixels also provide a means of communication such that they only require one wire to connect to a microcontroller (besides ground and power), and can be daisy-chained practically to infinity, yet stll individually addressed. This greatly simplifies adding them to a project - where adding a single RGB LED would require 3 digital, PWM-capable inputs, adding a string of, say, 10, or several dozen, NeoPixels only requires <em>one pin</em>.</p>
+<p>They operate in a manner very similar to &quot;traditional&quot; RGB LEDs, in that they have a common power supply, a red, green, and blue LED element, and each LED element can be controlled independently. Pulse-width-modulation is possible as well, but in the case of NeoPixels, the PWM of each LED element is controlled by the onboard microcontroller. NeoPixels also provide a means of communication such that they only require one wire to connect to a microcontroller (besides ground and power), and can be daisy-chained practically to infinity, yet stll individually addressed. This greatly simplifies adding them to a project - where adding a single RGB LED would require 3 digital, PWM-capable inputs, adding a string of, say, 10, or several dozen, NeoPixels only requires <em>one pin</em>.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">Adafruit has an amazing, comprehensive <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels">NeoPixels &Uuml;berguide</a> that is <strong>required reading</strong> if you plan to do much work with these little marvels.</p>
+<p class="last">Adafruit has an amazing, comprehensive <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels">NeoPixels Überguide</a> that is <strong>required reading</strong> if you plan to do much work with these little marvels.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -532,11 +529,11 @@ CircuitPlayground, and they are easy to add to other platforms.</p>
 <span class="n">pixels</span><span class="p">[::]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fancy_red</span><span class="p">,</span> <span class="n">fancy_ornangeish_red</span><span class="p">,</span> <span class="n">fancy_orange</span><span class="p">,</span> <span class="n">fancy_yellow</span><span class="p">,</span> <span class="n">fancy_green</span><span class="p">,</span> <span class="n">fancy_bluegreen</span><span class="p">,</span> <span class="n">fancy_blue</span><span class="p">,</span> <span class="n">fancy_indigo</span><span class="p">,</span> <span class="n">fancy_violet</span><span class="p">,</span> <span class="n">fancy_white</span><span class="p">)</span>
 </pre></div>
 </td></tr></table><p>The colors are about the same brightness, but the colors are much more true to
-our intent - this is epseically apparent in the "in-between" colors like
-"orangeish red", blue green, and indigo.</p>
+our intent - this is epseically apparent in the &quot;in-between&quot; colors like
+&quot;orangeish red&quot;, blue green, and indigo.</p>
 </div>
 <div class="section" id="bringing-it-all-together">
-<h2 id="bringing-it-all-together">Bringing It All Together</h2>
+<h2>Bringing It All Together</h2>
 <p>At this point we have all of the elements worked out.</p>
 <p>We have:
 * A well engineered state and event dispatch pattern
@@ -673,44 +670,44 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span>
 
 <span class="n">pads</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"down"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
-    <span class="s2">"left"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
-    <span class="s2">"up"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
-    <span class="s2">"right"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
+    <span class="s2">&quot;down&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
+    <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
+    <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
+    <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">pads</span><span class="p">[</span><span class="n">token</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
 
 <span class="err">﻿</span><span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Up press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling up&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling down&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left release&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right release&quot;</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -770,48 +767,48 @@ our intent - this is epseically apparent in the "in-between" colors like
 50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># ... snip ...</span>
 
 <span class="k">def</span> <span class="nf">click_sound</span><span class="p">():</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="s2">"click.wav"</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Playing sound {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;click.wav&quot;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Playing sound {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
     <span class="n">a</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Up press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling up&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling down&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left release&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right release&quot;</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -833,7 +830,7 @@ our intent - this is epseically apparent in the "in-between" colors like
 <li>Only update objects when necessary</li>
 <li>Drop features</li>
 <li>Offload to external boards (e.g. use the audioFX board instead of onboard audio playback). Can we also use a smaller/cheaper board like the Gemma or trinket to do some of the stuff, like running the neopixels and communicate over SPI or I2C?</li>
-<li>Switch to Arduino (CircuitPython is designed for "beginners", if we're having memory issues it may be a sign that we have "grown out" of the platform).</li>
+<li>Switch to Arduino (CircuitPython is designed for &quot;beginners&quot;, if we're having memory issues it may be a sign that we have &quot;grown out&quot; of the platform).</li>
 </ul>
 </div>
 <div class="section" id="code-with-neopixels-and-sound">
@@ -988,14 +985,14 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="n">mouse</span> <span class="o">=</span> <span class="n">Mouse</span><span class="p">()</span>
 <span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"click.wav"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;click.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="n">pads</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"down"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
-    <span class="s2">"left"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
-    <span class="s2">"up"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
-    <span class="s2">"right"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
+    <span class="s2">&quot;down&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
+    <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
+    <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
+    <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="n">black</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1031,42 +1028,42 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">up_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Up press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">down_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling up&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling down&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">left_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left release&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">right_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right release&quot;</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -1081,9 +1078,9 @@ our intent - this is epseically apparent in the "in-between" colors like
 </td></tr></table></div>
 </div>
 <div class="section" id="code-that-prevents-errant-pad-activation">
-<h2 id="code-that-prevents-errant-pad-activation">Code That Prevents Errant Pad Activation</h2>
+<h2>Code That Prevents Errant Pad Activation</h2>
 <p>I noticed that sometimes, when I was pressing a certain touch pad my finger would graze another pad, causing an errant press event.</p>
-<p>To fix this, I added the concept of a "lock" attribute in the <tt class="docutils literal">State</tt> class. When the <tt class="docutils literal">state.lock</tt> attribute is <tt class="docutils literal">True</tt>, press events are not acted upon.</p>
+<p>To fix this, I added the concept of a &quot;lock&quot; attribute in the <tt class="docutils literal">State</tt> class. When the <tt class="docutils literal">state.lock</tt> attribute is <tt class="docutils literal">True</tt>, press events are not acted upon.</p>
 <p>It was a simple 2 line change in <tt class="docutils literal">ButtonDispatch</tt>:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1189,11 +1186,11 @@ our intent - this is epseically apparent in the "in-between" colors like
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">&quot;{}_holding&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
 
     <span class="nd">@holding.setter</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">&quot;{}_holding&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1204,7 +1201,7 @@ our intent - this is epseically apparent in the "in-between" colors like
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span>  <span class="s2">"&lt;{} Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">&quot;&lt;{} Check: {}, State: {} Checkin: {}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -1442,14 +1439,14 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="n">mouse</span> <span class="o">=</span> <span class="n">Mouse</span><span class="p">()</span>
 <span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"click.wav"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;click.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
 <span class="n">pads</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"down"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
-    <span class="s2">"left"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
-    <span class="s2">"up"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
-    <span class="s2">"right"</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
+    <span class="s2">&quot;down&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A7</span><span class="p">),</span>
+    <span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">),</span>
+    <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">),</span>
+    <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="n">black</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1492,35 +1489,35 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="n">up_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Up press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">up_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down release&quot;</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">down_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Down release&quot;</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling up&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Scrolling down&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">both_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">middle_stripes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Both press"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Both press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
@@ -1529,11 +1526,11 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">else</span><span class="p">:</span>
         <span class="n">left_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">click_sound</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Left release&quot;</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
@@ -1543,18 +1540,18 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">else</span><span class="p">:</span>
         <span class="n">right_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">click_sound</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right press&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Right release&quot;</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">down_release</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="n">up_release</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">down_release</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="n">up_release</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
 <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -1568,13 +1565,13 @@ our intent - this is epseically apparent in the "in-between" colors like
 </pre></div>
 </td></tr></table></div>
 <div class="section" id="adding-in-mouse-actions">
-<h2 id="adding-in-mouse-actions">Adding In Mouse Actions</h2>
+<h2>Adding In Mouse Actions</h2>
 <div class="section" id="acellerated-scrolling">
 <h3>Acellerated Scrolling</h3>
 </div>
 </div>
 <div class="section" id="code">
-<h2 id="code">Code</h2>
+<h2>Code</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
@@ -1731,7 +1728,7 @@ our intent - this is epseically apparent in the "in-between" colors like
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_threshold</span><span class="p">:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s2">"time to run latch for "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;time to run latch for &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">])</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">current</span>
@@ -1743,7 +1740,7 @@ our intent - this is epseically apparent in the "in-between" colors like
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">]()</span>
 
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s2">"Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Latching &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
@@ -1755,7 +1752,7 @@ our intent - this is epseically apparent in the "in-between" colors like
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]()</span>
 
-                    <span class="k">print</span><span class="p">(</span><span class="s2">"Un-Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Un-Latching &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 

@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>The Collected Works of jjmojojjmojo</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
-<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta content="boot" name="tags"/>
-<meta content="clojure" name="tags"/>
-<meta content="classics" name="tags"/>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+        <link href="/feeds/category.tutorial.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
+        <link href="/feeds/category.tutorial.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
+
+
+    <meta name="tags" content="boot" />
+    <meta name="tags" content="clojure" />
+    <meta name="tags" content="classics" />
+
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<section class="body" id="content">
-<header>
-<h2 class="entry-title">
-<a href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="bookmark" title="Permalink to Boot: Getting Started With Clojure In &lt; 10 Minutes">Boot: Getting Started With Clojure In &lt; 10 Minutes</a></h2>
-</header>
-<footer class="post-info">
-<time class="published" datetime="2018-08-01T11:41:00-04:00">
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="bookmark"
+         title="Permalink to Boot: Getting Started With Clojure In < 10 Minutes">Boot: Getting Started With Clojure In &lt; 10 Minutes</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-08-01T11:41:00-04:00">
       Wed 01 August 2018
     </time>
-<address class="vcard author">
+    <address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
-</address>
-</footer><!-- /.post-info -->
-<div>
-<div id="toc"><ul><li><a class="toc-href" href="#overview-for-the-unititated" title="Overview For The Unititated">Overview For The Unititated</a></li><li><a class="toc-href" href="#prerequisites" title="Prerequisites">Prerequisites</a></li><li><a boot="" class="toc-href" em="" href="#dales-la-bota-give-em-the-boot-installation" installation="" the="" title="&iexcl;Dales la Bota! (Give ">&iexcl;Dales la Bota! (Give 'em The Boot!) - Installation</a></li><li><a class="toc-href" href="#appendix-alternative-install-methods" title="Appendix: Alternative Install Methods">Appendix: Alternative Install Methods</a></li></ul></div>
-</div>
-<div class="entry-content status-published">
-<p>With the power of <a class="reference external" href="http://boot-clj.com/">boot</a>, it's possible to go from "never used java before" to budding <a class="reference external" href="http://clojure.org/">Clojure</a>-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.</p>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content status-published">
+    <p>With the power of <a class="reference external" href="http://boot-clj.com/">boot</a>, it's possible to go from &quot;never used java before&quot; to budding <a class="reference external" href="http://clojure.org/">Clojure</a>-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.</p>
+
 <div class="section" id="overview-for-the-unititated">
-<h2 id="overview-for-the-unititated">Overview For The Unititated</h2>
+<h2>Overview For The Unititated</h2>
 <p>For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.</p>
-<p>Clojure is a <em>functional programming language</em> in the style of Common Lisp. "Functional" in this sense means that functions are first-class objects; code and data are peers. Data is <em>immutable</em> - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.</p>
+<p>Clojure is a <em>functional programming language</em> in the style of Common Lisp. &quot;Functional&quot; in this sense means that functions are first-class objects; code and data are peers. Data is <em>immutable</em> - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.</p>
 <p>Functional languages, especially in the Lisp-style are <em>expressive</em> and, linguistically speaking, <em>simple</em>. The original Lisp, invented in 1958 by John McCarthy at M.I.T., was expressed in seven functions and two special forms - the language, in total, contained just <em>nine elements</em>, and was fully Touring-complete. By comparison, the current version (3.5) of Python has 30+ keywords, plus special elements such as mathematical operators and colons - and that's merely the language itself, that doesn't include idioms or conventions.</p>
-<p>What this adds up to is a vast reduction in "incidental complexity" - complexities that creep into code because of the limitations, or expectations, of our languages. Contrast incidental complexity with "essential complexity", or complexities that our code would not function without. Lisp-like languages stay out of your way.</p>
+<p>What this adds up to is a vast reduction in &quot;incidental complexity&quot; - complexities that creep into code because of the limitations, or expectations, of our languages. Contrast incidental complexity with &quot;essential complexity&quot;, or complexities that our code would not function without. Lisp-like languages stay out of your way.</p>
 <p>In terms of Clojure, we are blessed with a very concise, easy to reason about syntax that gives us incredible flexibility. We are also provided with a robust standard library.</p>
 <p>Clojure was designed with concurrency in mind, from its inception. This makes advanced use of threads and multiple processes simple and quite accessible, not to mention <em>safe</em>.</p>
 <p>Clojure is a general language specification. It has been implemented for the Java Virtual Machine (JVM), JavaScript, and
@@ -93,7 +97,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 </div>
 <div class="section" id="prerequisites">
-<h2 id="prerequisites">Prerequisites</h2>
+<h2>Prerequisites</h2>
 <p>You will need the following:</p>
 <ul class="simple">
 <li><em>A JDK installed</em>.</li>
@@ -110,20 +114,20 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 </div>
 <div class="section" id="dales-la-bota-give-em-the-boot-installation">
-<h2 id="dales-la-bota-give-em-the-boot-installation"><em>&iexcl;Dales la Bota!</em> (Give 'em The <em>Boot</em>!) - <em>Installation</em></h2>
+<h2><em>¡Dales la Bota!</em> (Give 'em The <em>Boot</em>!) - <em>Installation</em></h2>
 <p><a class="reference external" href="http://boot-clj.com/">Boot</a> is '<a class="reference external" href="https://github.com/boot-clj/boot#install">installed</a>' by simply downloading an <a class="reference external" href="https://github.com/boot-clj/boot/releases">executable file</a> and putting it somewhere where you can execute it.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For more options, see <a class="reference internal" href="#appendix-alternative-install-methods">Appendix: Alternative Install Methods</a>.</p>
 </div>
 <p>In our case, we'll use our home directory:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
 <span class="gp">$</span> mkdir -p ~/bin
 <span class="gp">$</span> mv boot.sh boot <span class="o">&amp;&amp;</span> chmod a+x boot <span class="o">&amp;&amp;</span> mv boot ~/bin/
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -138,7 +142,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </ol>
 </div>
 <p>Then we need to update our <code>$PATH</code> environment variable so the shell can find our new executable boot:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">"export PATH=\$PATH:\$HOME/bin"</span> &gt;&gt; ~/.bash_profile
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;export PATH=\$PATH:\$HOME/bin&quot;</span> &gt;&gt; ~/.bash_profile
 <span class="gp">$</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin
 </pre></div>
 <div class="explanation section">
@@ -189,14 +193,14 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <div class="section" id="the-repl">
 <h4>The REPL</h4>
 <p>Clojure utilizes a concept called a <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> (<strong>R</strong>ead, <strong>E</strong>valuate, <strong>P</strong>rint, <strong>L</strong>oop). REPLs allow you to interactively run code and experiment.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> boot repl
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> boot repl
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+</td></tr></table><div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">Boot's <tt class="docutils literal">repl</tt> task downloads a bunch of dependencies. Don't be alarmed if a bunch of text scrolls by the first time you run <tt class="docutils literal">boot repl</tt>.</p>
 </div>
 <p>Boot then provides you with a prompt, where you can play around:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -221,20 +225,20 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
         <span class="nv">Exit</span><span class="err">:</span> <span class="nv">Control+D</span> <span class="nb">or </span><span class="p">(</span><span class="nf">exit</span><span class="p">)</span> <span class="nb">or </span><span class="p">(</span><span class="nf">quit</span><span class="p">)</span>
     <span class="nv">Commands</span><span class="err">:</span> <span class="p">(</span><span class="nf">user/help</span><span class="p">)</span>
         <span class="nv">Docs</span><span class="err">:</span> <span class="p">(</span><span class="nb">doc </span><span class="nv">function-name-here</span><span class="p">)</span>
-              <span class="p">(</span><span class="nb">find-doc </span><span class="s">"part-of-name-here"</span><span class="p">)</span>
-<span class="nv">Find</span> <span class="nv">by</span> <span class="nv">Name</span><span class="err">:</span> <span class="p">(</span><span class="nf">find-name</span> <span class="s">"part-of-name-here"</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">find-doc </span><span class="s">&quot;part-of-name-here&quot;</span><span class="p">)</span>
+<span class="nv">Find</span> <span class="nv">by</span> <span class="nv">Name</span><span class="err">:</span> <span class="p">(</span><span class="nf">find-name</span> <span class="s">&quot;part-of-name-here&quot;</span><span class="p">)</span>
       <span class="nv">Source</span><span class="err">:</span> <span class="p">(</span><span class="nf">source</span> <span class="nv">function-name-here</span><span class="p">)</span>
      <span class="nv">Javadoc</span><span class="err">:</span> <span class="p">(</span><span class="nf">javadoc</span> <span class="nv">java-object-or-class-here</span><span class="p">)</span>
     <span class="nv">Examples</span> <span class="nv">from</span> <span class="nv">clojuredocs.org</span><span class="err">:</span> <span class="p">[</span><span class="nv">clojuredocs</span> <span class="nb">or </span><span class="nv">cdoc</span><span class="p">]</span>
               <span class="p">(</span><span class="nf">user/clojuredocs</span> <span class="nv">name-here</span><span class="p">)</span>
-              <span class="p">(</span><span class="nf">user/clojuredocs</span> <span class="s">"ns-here"</span> <span class="s">"name-here"</span><span class="p">)</span>
+              <span class="p">(</span><span class="nf">user/clojuredocs</span> <span class="s">&quot;ns-here&quot;</span> <span class="s">&quot;name-here&quot;</span><span class="p">)</span>
 <span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span>
 <span class="mi">15</span>
 <span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nb">/ </span><span class="mi">10</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="nv">java.lang.ArithmeticException</span><span class="err">:</span> <span class="nv">Divide</span> <span class="nv">by</span> <span class="nv">zero</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -249,7 +253,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>The <code>boot.user=&gt;</code> prompt tells us that we are in a special <a class="reference external" href="https://clojure.org/reference/namespaces">namespace</a>, set up for us by boot.</p>
 <p>On line 15, we're doing a simple addition of some integers. When you press enter after typing some code, the result is printed below.</p>
 <p>On line 17, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the <a class="reference external" href="https://clojuredocs.org/clojure.repl/pst">pst</a> (<em>print stack trace</em>) form:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -271,12 +275,12 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <span class="nv">java.lang.ArithmeticException</span><span class="err">:</span> <span class="nv">Divide</span> <span class="nv">by</span> <span class="nv">zero</span>
 <span class="nv">nil</span>
 </pre></div>
-</td></tr></table></div></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="a-simple-clojure-function">
 <h4>A Simple Clojure Function</h4>
 <p>Here's a simple Clojure function that prints the <a class="reference external" href="http://www.mathsisfun.com/numbers/fibonacci-sequence.html">Fibonacci sequence</a> to a given number of digits:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -284,15 +288,15 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 6
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span>
-&nbsp; <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
-&nbsp; <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">" "</span><span class="p">)</span>
-&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">println</span><span class="p">))))</span>
+  <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
+  <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">println</span><span class="p">))))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -310,7 +314,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </ul>
 </div>
 <p>You can paste this into your REPL and try it out:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -327,18 +331,18 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
    <span class="o">#</span><span class="nv">_=&gt;</span>     <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
    <span class="o">#</span><span class="nv">_=&gt;</span>   <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
-   <span class="o">#</span><span class="nv">_=&gt;</span>     <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">" "</span><span class="p">)</span>
+   <span class="o">#</span><span class="nv">_=&gt;</span>     <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
    <span class="o">#</span><span class="nv">_=&gt;</span>     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
    <span class="o">#</span><span class="nv">_=&gt;</span>       <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
    <span class="o">#</span><span class="nv">_=&gt;</span>       <span class="p">(</span><span class="nf">println</span><span class="p">))))</span>
-<span class="o">#</span><span class="ss">'boot.user/fib</span>
+<span class="o">#</span><span class="ss">&#39;boot.user/fib</span>
 <span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nf">fib</span> <span class="mi">10</span><span class="p">)</span>
 <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">8</span> <span class="mi">13</span> <span class="mi">21</span> <span class="mi">34</span> <span class="mi">55</span>
 <span class="nv">nil</span>
 <span class="nv">boot.user=&gt;</span> <span class="nv">exit</span>
 <span class="nv">Bye</span> <span class="nb">for </span><span class="nv">now!</span>
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+</td></tr></table><div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">You can copy the prompts along with the code, the REPL will ignore them.</p>
 </div>
@@ -347,7 +351,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <h4>Boot Scripts</h4>
 <p>Boot also works as a <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">scripting platform</a> - you can construct applications, specifying dependencies, and parse command-line arguments.</p>
 <p>We can transform that function into a command-line tool using the power of boot scripting. Assume this file is called <code>fib.boot</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -364,20 +368,20 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span>
- &nbsp; <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
- &nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
- &nbsp; <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
- &nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">" "</span><span class="p">))</span>
- &nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">println</span><span class="p">))))</span>
+   <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
+     <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
+   <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
+     <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
+     <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">println</span><span class="p">))))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
- &nbsp; <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">limit</span> <span class="p">(</span><span class="nb">first </span><span class="nv">args</span><span class="p">)]</span>
- &nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">println </span><span class="s">"Printing fibonacci sequence up to "</span> <span class="nv">limit</span> <span class="s">"numbers"</span><span class="p">)</span>
- &nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nf">Integer/parseInt</span> <span class="nv">limit</span><span class="p">))))</span>
+   <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">limit</span> <span class="p">(</span><span class="nb">first </span><span class="nv">args</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Printing fibonacci sequence up to &quot;</span> <span class="nv">limit</span> <span class="s">&quot;numbers&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nf">Integer/parseInt</span> <span class="nv">limit</span><span class="p">))))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -397,17 +401,17 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>Lines 3-10 are the same Fibonacci sequence we used before.</p>
 <p>Line 12 provides an <em>entry point</em>, a function that boot will invoke when the script is run. The name <tt class="docutils literal"><span class="pre">-main</span></tt> is required by boot. The argument list uses the <tt class="docutils literal">&amp;</tt> special form to collect a variable number of arguments into a single sequence named <tt class="docutils literal">args</tt> (a function that does this is called a <a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#variadic-functions">variadic function</a>).</p>
 <p>Boot passes the function a variable number of strings . Each string is text that was provided by the user in the console while invoking the script (typically referred to 'command-line arguments' or 'command-line options').</p>
-<p>For example, if an imaginary command-line tool called <tt class="docutils literal">boo</tt> is executed with "hello world, welcome to the thunder dome", like this:</p>
+<p>For example, if an imaginary command-line tool called <tt class="docutils literal">boo</tt> is executed with &quot;hello world, welcome to the thunder dome&quot;, like this:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> boo hello world, welcome to the thunder dome
 </pre></div>
 <p>The content of <tt class="docutils literal">args</tt> will be</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="s">"hello"</span> <span class="s">"world,"</span> <span class="s">"welcome"</span> <span class="s">"to"</span> <span class="s">"the"</span> <span class="s">"thunder"</span> <span class="s">"dome"</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s">&quot;hello&quot;</span> <span class="s">&quot;world,&quot;</span> <span class="s">&quot;welcome&quot;</span> <span class="s">&quot;to&quot;</span> <span class="s">&quot;the&quot;</span> <span class="s">&quot;thunder&quot;</span> <span class="s">&quot;dome&quot;</span><span class="p">]</span>
 </pre></div>
 <p>This is something the shell does. It can be avoided by surrounding the arguments with double quotes, like this:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boo <span class="s2">"hello world, welcome"</span> <span class="s2">"to the thunder dome"</span>
+<div class="highlight"><pre><span></span><span class="gp">$</span> boo <span class="s2">&quot;hello world, welcome&quot;</span> <span class="s2">&quot;to the thunder dome&quot;</span>
 </pre></div>
 <p>In this case, <tt class="docutils literal">args</tt> is a vector containing two elements:</p>
-<div class="highlight"><pre><span></span><span class="p">[</span><span class="s">"hello world, welcome"</span> <span class="s">"to the thunder dome"</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="s">&quot;hello world, welcome&quot;</span> <span class="s">&quot;to the thunder dome&quot;</span><span class="p">]</span>
 </pre></div>
 <p>It's important to note that the shell can do other things with arguments that may be unexpected. The ins and outs of shells are outside the scope of this tutorial (and can vary from shell to shell), but here are a couple of common ones that might be useful or trip you up:</p>
 <ul class="simple">
@@ -430,16 +434,16 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <div class="docutils container">
 </div>
 <p>We're again utilizing the <tt class="docutils literal">chmod</tt> command to make a file executable. Here, we use the shorthand mode specification (see the man page <a class="reference external" href="https://linux.die.net/man/1/chmod">online</a> or you can type <tt class="docutils literal">man chmod</tt> in your console for specifics), instead of using octal numbers (like <tt class="docutils literal">755</tt>).</p>
-<p><tt class="docutils literal">u+x</tt> means "<em>add</em> whatever bits are necessary to allow the <strong>u</strong>ser to e<strong>x</strong>ecute this file". This leaves any other bits untouched.</p>
+<p><tt class="docutils literal">u+x</tt> means &quot;<em>add</em> whatever bits are necessary to allow the <strong>u</strong>ser to e<strong>x</strong>ecute this file&quot;. This leaves any other bits untouched.</p>
 </div>
 <p>Now you can run the script:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> ./fib.boot <span class="m">10</span>
 <span class="go">Printing fibonacci sequence up to 10 numbers</span>
 <span class="go">0 1 1 2 3 5 8 13 21 34</span>
 </pre></div>
-</td></tr></table></div></div>
+</td></tr></table></div>
 <div class="section" id="dependencies">
 <h4>Dependencies</h4>
 <p>The script can declare dependencies, which will be downloaded as needed when the script is run. Here, we'll show the use of an external dependency: we can write a new Fibonacci sequence that exploits an the fact that numbers in the sequence are related to each other by approximately the <a class="reference external" href="http://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a> (ca 1.62), as noted by Kepler, and derived from <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula">Binets Formula</a>.</p>
@@ -448,12 +452,12 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio">Wikipedia page</a> is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.</p>
 <p class="last">If you happen upon this and can shed some light on the subject, please <a class="reference external" href="/pages/contact.html">drop me a line</a>!</p>
 </div>
-<p>Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called <a class="reference external" href="https://github.com/clojure/math.numeric-tower">math.numeric-tower</a>.</p>
+<p>Rounding makes it all work, but rounding isn't &quot;baked in&quot; to Clojure, so we'll use an external library to do it for us, called <a class="reference external" href="https://github.com/clojure/math.numeric-tower">math.numeric-tower</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In actuality, the required functionality is present, you just need to use some <a class="reference external" href="http://stackoverflow.com/a/25098576">existing Java libraries</a> to make it work. I admit this is a bit of a strain, but it illustrates the use of external dependencies in boot.</p>
 </div>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -480,9 +484,9 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 25
 26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
 
-<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">"0.0.4"</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">&quot;0.0.4&quot;</span><span class="p">]])</span>
 
-<span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">clojure.math.numeric-tower</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">round</span> <span class="nv">sqrt</span> <span class="nv">expt</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.math.numeric-tower</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">round</span> <span class="nv">sqrt</span> <span class="nv">expt</span><span class="p">]])</span>
 
 <span class="p">(</span><span class="k">def </span><span class="nv">phi</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span>
 
@@ -491,21 +495,21 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">counter</span> <span class="mi">0</span><span class="p">]</span>
      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">counter</span> <span class="mi">0</span><span class="p">)</span>
        <span class="p">(</span><span class="nf">do</span>
-         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span><span class="p">))</span>
+         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="mi">3</span><span class="p">))</span>
      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">round</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nf">expt</span> <span class="nv">phi</span> <span class="nv">counter</span><span class="p">)</span> <span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">)))]</span>
-       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">" "</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt; </span><span class="nv">counter</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">counter</span> <span class="mi">1</span><span class="p">)))))))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">cli-arg</span> <span class="p">(</span><span class="nb">first </span><span class="nv">args</span><span class="p">)</span>
          <span class="nv">limit</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">cli-arg</span><span class="p">)</span> <span class="mi">10</span> <span class="p">(</span><span class="nf">Integer/parseInt</span> <span class="nv">cli-arg</span><span class="p">))]</span>
-     <span class="p">(</span><span class="nb">println </span><span class="s">"Printing Fibonacci sequence up to"</span> <span class="nv">limit</span> <span class="s">"numbers"</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Printing Fibonacci sequence up to&quot;</span> <span class="nv">limit</span> <span class="s">&quot;numbers&quot;</span><span class="p">)</span>
      <span class="p">(</span><span class="nf">fib</span> <span class="nv">limit</span><span class="p">)</span>
      <span class="p">(</span><span class="nf">println</span><span class="p">)))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -518,13 +522,13 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>The format for specifying dependencies is the same that <a class="reference external" href="https://leiningen.org/">Leiningen</a> uses - a vector containing a package specifier (often containing an organizational part, like <tt class="docutils literal">org.clojure</tt> in our script), and a version. Clojars uses <a class="reference external" href="https://semver.org/">semantic versioning</a>, so there are 3 numbers: a major revision (breaks existing APIs), a feature revision (API stays the same), and patch revision (for non-breaking bug fixes).</p>
 <p>Note that the list of dependencies is behind a <a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote">var quote</a>.</p>
 <p>On line 5, the library is brought into our namespace using <a class="reference external" href="https://clojuredocs.org/clojure.core/require">require</a>. (For more information about namespaces and libraries, <em>Clojure For The Brave and True</em>'s <a class="reference external" href="https://www.braveclojure.com/organization/">organization</a> chapter goes into some great detail. We've used the <tt class="docutils literal">:refer</tt> parameter to just import one function, <tt class="docutils literal">round</tt>.</p>
-<p>On line 7, we pre-calculate the golden ratio and define a variable named <tt class="docutils literal">phi</tt> (the greek letter phi [&phi;] is used to represent the golden ratio in equations).</p>
+<p>On line 7, we pre-calculate the golden ratio and define a variable named <tt class="docutils literal">phi</tt> (the greek letter phi [φ] is used to represent the golden ratio in equations).</p>
 <p>Lines 9-19 define our new, golden ratio-based Fibonacci sequence function. It performs basically the same way, except that it's single-airity.</p>
 <p>Some interesting concepts introduced in this new function:</p>
 <ul class="simple">
 <li>This is not a recursive function in the usual sense. Instead, we use the <tt class="docutils literal">loop</tt> function and <tt class="docutils literal">recur</tt> macro. This is the way looping (like you'd use <tt class="docutils literal">for</tt> or <tt class="docutils literal">while</tt> in other languages) works in Clojure. For more details on how they work, check out <a class="reference external" href="https://clojurebridge.github.io/community-docs/docs/clojure/recur/">this ClojureBridge article</a>.</li>
 <li>On line 11, we use <tt class="docutils literal">do</tt> to group multiple expressions (printing and recursing) into a single branch of an <tt class="docutils literal">if</tt>. This comes in handy a lot, but be careful not to overuse it - if you are doing too much in a conditional branch, it may be better to factor that code out into its own function.</li>
-<li>On line 14 and 17, we use <tt class="docutils literal">str</tt> to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string "math" or interpolation features.</li>
+<li>On line 14 and 17, we use <tt class="docutils literal">str</tt> to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string &quot;math&quot; or interpolation features.</li>
 </ul>
 <p>On lines 22 and 23, we process the command line argument. Variables that are unpacked by <tt class="docutils literal">let</tt> are processed in order, so we can refer to them right away. We take advantage of this to first extract the argument on line 22, then provide a sane default (10) in the event that the user didn't provide a value. We also go ahead and convert the argument to an integer using Java interop as we did in the previous version.</p>
 </div>
@@ -541,7 +545,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </blockquote>
 </div>
 <p>When you run this code the first time, you'll notice boot tells you that it has downloaded some new jars:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -551,10 +555,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <span class="go">Printing fibonacci sequence up to 10 numbers</span>
 <span class="go">0 1 1 2 3 5 8 13 21 34</span>
 </pre></div>
-</td></tr></table></div><p>The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like "flags" (true/false toggles like <tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--without-module-x</span></tt>), collected values (like passing <tt class="docutils literal"><span class="pre">-vvv</span></tt> to increase verbosity), even complex subcommands (like <tt class="docutils literal">git merge</tt>).</p>
+</td></tr></table><p>The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like &quot;flags&quot; (true/false toggles like <tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--without-module-x</span></tt>), collected values (like passing <tt class="docutils literal"><span class="pre">-vvv</span></tt> to increase verbosity), even complex subcommands (like <tt class="docutils literal">git merge</tt>).</p>
 <p>Luckily, we can borrow a macro from boot.core that lets us specify CLI options using a robust syntax. For the full syntax, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">the documentation</a>.</p>
 <p>Here, we'll let the user choose which implementation they'd like to use, and utilize the task <a class="reference external" href="http://martinfowler.com/books/dsl.html">DSL</a> to do some simple command line options:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -595,10 +599,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 39
 40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
 
-<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">"0.0.4"</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">&quot;0.0.4&quot;</span><span class="p">]])</span>
 
-<span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">clojure.math.numeric-tower</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">expt</span> <span class="nv">round</span> <span class="nv">sqrt</span><span class="p">]])</span>
-<span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">boot.cli</span> <span class="ss">:as</span> <span class="nv">cli</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.math.numeric-tower</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">expt</span> <span class="nv">round</span> <span class="nv">sqrt</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">boot.cli</span> <span class="ss">:as</span> <span class="nv">cli</span><span class="p">])</span>
 
 <span class="p">(</span><span class="k">def </span><span class="nv">phi</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span>
 
@@ -606,7 +610,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
      <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
    <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
-      <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">" "</span><span class="p">))</span>
+      <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
       <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)))))</span>
 
@@ -615,26 +619,26 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">counter</span> <span class="mi">0</span><span class="p">]</span>
      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">counter</span> <span class="mi">0</span><span class="p">)</span>
        <span class="p">(</span><span class="nf">do</span>
-         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span><span class="p">))</span>
+         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="mi">3</span><span class="p">))</span>
      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">round</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nf">expt</span> <span class="nv">phi</span> <span class="nv">counter</span><span class="p">)</span> <span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">)))]</span>
-       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">" "</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt; </span><span class="nv">counter</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">counter</span> <span class="mi">1</span><span class="p">)))))))</span>
 
 <span class="p">(</span><span class="nf">cli/defclifn</span> <span class="nv">-main</span>
-   <span class="s">"Print a Fibonacci sequence to stdout using one of two algorithms."</span>
-   <span class="p">[</span><span class="nv">g</span> <span class="nv">golden</span> <span class="nv">bool</span> <span class="s">"Use the golden mean to calculate"</span>
-    <span class="nv">n</span> <span class="nv">number</span> <span class="nv">NUMBER</span> <span class="nb">int </span><span class="s">"Quantity of numbers to generate. Defaults to 10"</span><span class="p">]</span>
+   <span class="s">&quot;Print a Fibonacci sequence to stdout using one of two algorithms.&quot;</span>
+   <span class="p">[</span><span class="nv">g</span> <span class="nv">golden</span> <span class="nv">bool</span> <span class="s">&quot;Use the golden mean to calculate&quot;</span>
+    <span class="nv">n</span> <span class="nv">number</span> <span class="nv">NUMBER</span> <span class="nb">int </span><span class="s">&quot;Quantity of numbers to generate. Defaults to 10&quot;</span><span class="p">]</span>
    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">n</span> <span class="p">(</span><span class="ss">:number</span> <span class="nv">*opts*</span> <span class="mi">10</span><span class="p">)</span>
-         <span class="nv">note</span> <span class="p">(</span><span class="k">if </span><span class="nv">golden</span> <span class="s">"[golden]"</span> <span class="s">"[recursive]"</span><span class="p">)]</span>
-     <span class="p">(</span><span class="nb">println </span><span class="nv">note</span> <span class="s">"Printing Fibonacci sequence up to"</span> <span class="nv">n</span> <span class="s">"numbers:"</span><span class="p">)</span>
+         <span class="nv">note</span> <span class="p">(</span><span class="k">if </span><span class="nv">golden</span> <span class="s">&quot;[golden]&quot;</span> <span class="s">&quot;[recursive]&quot;</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nb">println </span><span class="nv">note</span> <span class="s">&quot;Printing Fibonacci sequence up to&quot;</span> <span class="nv">n</span> <span class="s">&quot;numbers:&quot;</span><span class="p">)</span>
      <span class="p">(</span><span class="k">if </span><span class="nv">golden</span>
        <span class="p">(</span><span class="nf">fibgolden</span> <span class="nv">n</span><span class="p">)</span>
        <span class="p">(</span><span class="nf">fib</span> <span class="nv">n</span><span class="p">)))</span>
      <span class="p">(</span><span class="nf">println</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -642,10 +646,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>On line 6, we require the boot command line utility <tt class="docutils literal">boot.cli</tt>. We pass the <tt class="docutils literal">:as</tt> parameter to <tt class="docutils literal">require</tt> in order to give the library a different name in our namespace. We do this just to keep things a bit more tidy (and illustrate this feature!).</p>
 <p>The <tt class="docutils literal"><span class="pre">-main</span></tt> function on line 30 is chiefly the same, except that we use the <tt class="docutils literal">defclifn</tt> macro from <tt class="docutils literal">boot.cli</tt> instead of the special <tt class="docutils literal">defn</tt> form.</p>
 <p>The string on line 31 will be used in the usage description when the user provides the <tt class="docutils literal"><span class="pre">-h</span></tt> command line argument.</p>
-<p>The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the "option DSL" that is discussed in <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">the documentation</a>.</p>
+<p>The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the &quot;option DSL&quot; that is discussed in <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">the documentation</a>.</p>
 <p>The command line arguments are extracted and used to populate a special <tt class="docutils literal">*opts*</tt> map that will be automatically in scope of your function.</p>
 <p>Line 32 defines a <em>boolean</em> command line argument, or a <em>flag</em>. If the argument is provided, the value will be <tt class="docutils literal">true</tt>, otherwise, it will be <tt class="docutils literal">false</tt>. We are using this argument to let the user change algorithms used to generate their requested Fibonacci sequence.</p>
-<p>The first value is the "short form" of the option, <tt class="docutils literal"><span class="pre">-g</span></tt>. The second is the "long form" <tt class="docutils literal"><span class="pre">--golden</span></tt> and also the name of the argument in the <tt class="docutils literal">*opts*</tt> map (without the dashes). Next we specify the type of the argument, <tt class="docutils literal">bool</tt>, short for <em>boolean</em>, or a true/false value. The <tt class="docutils literal">defclifn</tt> macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.</p>
+<p>The first value is the &quot;short form&quot; of the option, <tt class="docutils literal"><span class="pre">-g</span></tt>. The second is the &quot;long form&quot; <tt class="docutils literal"><span class="pre">--golden</span></tt> and also the name of the argument in the <tt class="docutils literal">*opts*</tt> map (without the dashes). Next we specify the type of the argument, <tt class="docutils literal">bool</tt>, short for <em>boolean</em>, or a true/false value. The <tt class="docutils literal">defclifn</tt> macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.</p>
 <p>On the next line, we define another command-line option, this time one that takes a value. This is how the user will tell us how many numbers to generate.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -682,10 +686,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <div class="section" id="project-structure">
 <h4>Project Structure</h4>
 <p>First, we need to create a project structure. This will help us keep things organized, and fit in with the way Clojure handles namespaces and files. We'll put our source code in <tt class="docutils literal">src</tt>, and create a new namespace, called <tt class="docutils literal">fib.core</tt>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir -p src/fib
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir -p src/fib
 </pre></div>
-</td></tr></table></div><p>In <tt class="docutils literal">src/fib/core.clj</tt>, we'll declare our new namespace:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+</td></tr></table><p>In <tt class="docutils literal">src/fib/core.clj</tt>, we'll declare our new namespace:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -733,7 +737,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="p">([</span><span class="nv">n</span><span class="p">]</span>
      <span class="p">(</span><span class="nf">fib</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">n</span><span class="p">))</span>
    <span class="p">([</span><span class="nv">pair</span>, <span class="nv">n</span><span class="p">]</span>
-      <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">" "</span><span class="p">))</span>
+      <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nb">first </span><span class="nv">pair</span><span class="p">)</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
       <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&gt; </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">(</span><span class="nf">fib</span> <span class="p">[(</span><span class="nb">second </span><span class="nv">pair</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply + </span><span class="nv">pair</span><span class="p">)]</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)))))</span>
 
@@ -742,26 +746,26 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">counter</span> <span class="mi">0</span><span class="p">]</span>
      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">counter</span> <span class="mi">0</span><span class="p">)</span>
        <span class="p">(</span><span class="nf">do</span>
-         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span> <span class="mi">1</span> <span class="s">" "</span><span class="p">))</span>
+         <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="mi">0</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span> <span class="mi">1</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="mi">3</span><span class="p">))</span>
      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">f</span> <span class="p">(</span><span class="nf">round</span> <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nf">expt</span> <span class="nv">phi</span> <span class="nv">counter</span><span class="p">)</span> <span class="p">(</span><span class="nf">sqrt</span> <span class="mi">5</span><span class="p">)))]</span>
-       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">" "</span><span class="p">))</span>
+       <span class="p">(</span><span class="nb">print </span><span class="p">(</span><span class="nb">str </span><span class="nv">f</span> <span class="s">&quot; &quot;</span><span class="p">))</span>
        <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt; </span><span class="nv">counter</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span>
          <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">counter</span> <span class="mi">1</span><span class="p">)))))))</span>
 
 <span class="p">(</span><span class="nf">cli/defclifn</span> <span class="nv">-main</span>
-   <span class="s">"Print a Fibonacci sequence to stdout using one of two algorithms."</span>
-   <span class="p">[</span><span class="nv">g</span> <span class="nv">golden</span> <span class="nv">bool</span> <span class="s">"Use the golden mean to calculate"</span>
-    <span class="nv">n</span> <span class="nv">number</span> <span class="nv">NUMBER</span> <span class="nb">int </span><span class="s">"Quantity of numbers to generate. Defaults to 10"</span><span class="p">]</span>
+   <span class="s">&quot;Print a Fibonacci sequence to stdout using one of two algorithms.&quot;</span>
+   <span class="p">[</span><span class="nv">g</span> <span class="nv">golden</span> <span class="nv">bool</span> <span class="s">&quot;Use the golden mean to calculate&quot;</span>
+    <span class="nv">n</span> <span class="nv">number</span> <span class="nv">NUMBER</span> <span class="nb">int </span><span class="s">&quot;Quantity of numbers to generate. Defaults to 10&quot;</span><span class="p">]</span>
    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">n</span> <span class="p">(</span><span class="ss">:number</span> <span class="nv">*opts*</span> <span class="mi">10</span><span class="p">)</span>
-         <span class="nv">note</span> <span class="p">(</span><span class="k">if </span><span class="nv">golden</span> <span class="s">"[golden]"</span> <span class="s">"[recursive]"</span><span class="p">)]</span>
-     <span class="p">(</span><span class="nb">println </span><span class="nv">note</span> <span class="s">"Printing Fibonacci sequence up to"</span> <span class="nv">n</span> <span class="s">"numbers:"</span><span class="p">)</span>
+         <span class="nv">note</span> <span class="p">(</span><span class="k">if </span><span class="nv">golden</span> <span class="s">&quot;[golden]&quot;</span> <span class="s">&quot;[recursive]&quot;</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nb">println </span><span class="nv">note</span> <span class="s">&quot;Printing Fibonacci sequence up to&quot;</span> <span class="nv">n</span> <span class="s">&quot;numbers:&quot;</span><span class="p">)</span>
      <span class="p">(</span><span class="k">if </span><span class="nv">golden</span>
        <span class="p">(</span><span class="nf">fibgolden</span> <span class="nv">n</span><span class="p">)</span>
        <span class="p">(</span><span class="nf">fib</span> <span class="nv">n</span><span class="p">)))</span>
      <span class="p">(</span><span class="nf">println</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
@@ -780,7 +784,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <li>Build the jar, specifying a module containing a -main function to run when the jar is invoked.</li>
 </ol>
 <p>Helpfully, boot provides built-in functionality to do this for us. Each step is implemented as a boot <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Tasks">task</a>. Tasks act as a pipeline: the result of each can influence the next.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -800,7 +804,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
        jar -m fib.core <span class="se">\</span>
        target
 </pre></div>
-</td></tr></table></div><p>A brief explanation of each task and command line options:</p>
+</td></tr></table><p>A brief explanation of each task and command line options:</p>
 <blockquote>
 <p><strong>Line 1-4:</strong> the <tt class="docutils literal"><span class="pre">-d</span></tt> option specifies a dependency. Here we list   Clojure itself, <tt class="docutils literal">boot.core</tt>, <tt class="docutils literal">boot.base</tt> and <tt class="docutils literal"><span class="pre">math.numeric-tower</span></tt>.</p>
 <p><strong>Line 5:</strong> <tt class="docutils literal"><span class="pre">-s</span></tt> specifies a source directory to look into for <tt class="docutils literal">.clj</tt> files.</p>
@@ -811,10 +815,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p><strong>Line 10:</strong> the <code>target</code> task. This task writes out the product of the other tasks to the target directory (<code>./target</code> by default).</p>
 </blockquote>
 <p>Running the above command, produces output something like this:</p>
-<div class="highlight"><pre><span></span>$ boot -d "org.clojure/clojure" \
-       -d "boot/core" \
-       -d "boot/base" \
-       -d "org.clojure/math.numeric-tower:0.0.4" \
+<div class="highlight"><pre><span></span>$ boot -d &quot;org.clojure/clojure&quot; \
+       -d &quot;boot/core&quot; \
+       -d &quot;boot/base&quot; \
+       -d &quot;org.clojure/math.numeric-tower:0.0.4&quot; \
        -s src/ \
        aot -a \
        pom -p fib -v 1.0.0 \
@@ -833,7 +837,7 @@ Writing fib-1.0.0.jar...
 Writing target dir(s)...
 </pre></div>
 <p>At this point, there is a file named <tt class="docutils literal"><span class="pre">fib-1.0.0.jar</span></tt> in the <tt class="docutils literal">target</tt> directory. We can use the <tt class="docutils literal">java</tt> command to run it:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -845,17 +849,17 @@ Writing target dir(s)...
 <span class="go">[golden] Printing Fibonacci sequence up to 20 numbers:</span>
 <span class="go">0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181</span>
 </pre></div>
-</td></tr></table></div><p>You can send this file to a friend, and they can use it too.</p>
+</td></tr></table><p>You can send this file to a friend, and they can use it too.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">At time of writing, the <tt class="docutils literal"><span class="pre">-h</span></tt> flag, that usually displays help info, is not working in the jar file. I think it's because the <tt class="docutils literal">java</tt> command is "swallowing" it.</p>
+<p class="last">At time of writing, the <tt class="docutils literal"><span class="pre">-h</span></tt> flag, that usually displays help info, is not working in the jar file. I think it's because the <tt class="docutils literal">java</tt> command is &quot;swallowing&quot; it.</p>
 </div>
 </div>
 </div>
 <div class="section" id="introducing-build-boot">
 <h3>Introducing build.boot</h3>
 <p>At this point we have a project and can build a standalone jar file from it. This is great, but long command lines are prone to error. Boot provides a mechanism for defining your own tasks and setting the command line options in a single file, named <tt class="docutils literal">build.boot</tt>. Here's a <tt class="docutils literal">build.boot</tt> that configures boot in a manner equivalent to the command line switches above:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -865,19 +869,19 @@ Writing target dir(s)...
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">"0.0.4"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">boot/core</span> <span class="s">"2.7.2"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">boot/base</span> <span class="s">"2.7.2"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
-          <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src/"</span><span class="p">})</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">&quot;0.0.4&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">boot/core</span> <span class="s">&quot;2.7.2&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">boot/base</span> <span class="s">&quot;2.7.2&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.8.0&quot;</span><span class="p">]]</span>
+          <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">&quot;src/&quot;</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">task-options!</span>
-  <span class="nv">pom</span> <span class="p">{</span><span class="ss">:project</span> <span class="ss">'fib</span>
-       <span class="ss">:version</span> <span class="s">"1.0.0"</span><span class="p">}</span>
-  <span class="nv">jar</span> <span class="p">{</span><span class="ss">:main</span> <span class="ss">'fib.core</span><span class="p">}</span>
+  <span class="nv">pom</span> <span class="p">{</span><span class="ss">:project</span> <span class="ss">&#39;fib</span>
+       <span class="ss">:version</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">}</span>
+  <span class="nv">jar</span> <span class="p">{</span><span class="ss">:main</span> <span class="ss">&#39;fib.core</span><span class="p">}</span>
   <span class="nv">aot</span> <span class="p">{</span><span class="ss">:all</span> <span class="nv">true</span><span class="p">})</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -895,9 +899,9 @@ Writing target dir(s)...
 <span class="go">BOOT_VERSION=2.7.2</span>
 </pre></div>
 </li>
-<li><p class="first">The <tt class="docutils literal"><span class="pre">:source-paths</span></tt> setting is using a neat built-in data structure called a <a class="reference external" href="https://clojure.org/reference/data_structures#Sets">hash set</a>. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.</p>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">:source-paths</span></tt> setting is using a neat built-in data structure called a <a class="reference external" href="https://clojure.org/reference/data_structures#Sets">hash set</a>. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or &quot;dumb&quot; sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.</p>
 </li>
-<li><p class="first">On line 7, we use the <tt class="docutils literal"><span class="pre">task-options!</span></tt> macro to take the place of specifying task options on the command line. The keys for each setting correspond to the "long form" of the given option. You can see these using the built-in help:</p>
+<li><p class="first">On line 7, we use the <tt class="docutils literal"><span class="pre">task-options!</span></tt> macro to take the place of specifying task options on the command line. The keys for each setting correspond to the &quot;long form&quot; of the given option. You can see these using the built-in help:</p>
 <blockquote>
 <div class="highlight"><pre><span></span><span class="gp">$</span> boot pom -h
 
@@ -920,7 +924,7 @@ Writing target dir(s)...
 </pre></div>
 <p>As you can see, the <tt class="docutils literal"><span class="pre">-v</span></tt> parameter corresponds to <tt class="docutils literal"><span class="pre">--version</span></tt>, and <tt class="docutils literal"><span class="pre">-p</span></tt> to <tt class="docutils literal"><span class="pre">--project</span></tt>. Hence we use <tt class="docutils literal">:version</tt> and <tt class="docutils literal">:project</tt> in <tt class="docutils literal"><span class="pre">task-options!</span></tt>.</p>
 <p>You will have to use a little intutition to figure out what <em>data type</em> the command wants, or you can always look at <a class="reference external" href="https://github.com/boot-clj/boot/blob/de1b9876b4485b23b25614dd4b4a528d0931ccda/boot/core/src/boot/task/built_in.clj#L534">the source</a>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -942,33 +946,33 @@ Writing target dir(s)...
 20
 21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">...</span>
 <span class="p">(</span><span class="nf">core/deftask</span> <span class="nv">pom</span>
-  <span class="s">"Create project pom.xml file.</span>
+  <span class="s">&quot;Create project pom.xml file.</span>
 <span class="s">  The project and version must be specified to make a pom.xml.</span>
 <span class="s">  Note that if you want to install some other artifact along with the main one,</span>
 <span class="s">  for instance the classic sources or javadoc artifact, you have to add the</span>
 <span class="s">  classifier to your pom.xml, which translates to adding :classifier to this</span>
-<span class="s">  task."</span>
+<span class="s">  task.&quot;</span>
 
-  <span class="p">[</span><span class="nv">p</span> <span class="nb">project </span><span class="nv">SYM</span>           <span class="nv">sym</span>           <span class="s">"The project id (eg. foo/bar)."</span>
-   <span class="nv">v</span> <span class="nv">version</span> <span class="nv">VER</span>           <span class="nb">str </span>          <span class="s">"The project version."</span>
-   <span class="nv">d</span> <span class="nv">description</span> <span class="nv">DESC</span>      <span class="nb">str </span>          <span class="s">"The project description."</span>
-   <span class="nv">c</span> <span class="nv">classifier</span> <span class="nv">STR</span>        <span class="nb">str </span>          <span class="s">"The project classifier."</span>
-   <span class="nv">P</span> <span class="nv">packaging</span> <span class="nv">STR</span>         <span class="nb">str </span>          <span class="s">"The project packaging type, i.e. war, pom"</span>
-   <span class="nv">u</span> <span class="nv">url</span> <span class="nv">URL</span>               <span class="nb">str </span>          <span class="s">"The project homepage url."</span>
-   <span class="nv">s</span> <span class="nv">scm</span> <span class="nv">KEY=VAL</span>           <span class="p">{</span><span class="nv">kw</span> <span class="nv">str</span><span class="p">}</span>      <span class="s">"The project scm map (KEY is one of url, tag, connection, developerConnection)."</span>
-   <span class="nv">l</span> <span class="nv">license</span> <span class="nv">NAME</span><span class="ss">:URL</span>      <span class="p">{</span><span class="nb">str </span><span class="nv">str</span><span class="p">}</span>     <span class="s">"The map {name url} of project licenses."</span>
-   <span class="nv">o</span> <span class="nv">developers</span> <span class="nv">NAME</span><span class="ss">:EMAIL</span> <span class="p">{</span><span class="nb">str </span><span class="nv">str</span><span class="p">}</span>     <span class="s">"The map {name email} of project developers."</span>
-   <span class="nv">D</span> <span class="nv">dependencies</span> <span class="nv">SYM</span><span class="ss">:VER</span>  <span class="p">[[</span><span class="nv">sym</span> <span class="nv">str</span><span class="p">]]</span>   <span class="s">"The project dependencies vector (overrides boot env dependencies)."</span>
-   <span class="nv">a</span> <span class="nv">parent</span> <span class="nv">SYM</span><span class="ss">:VER=PATH</span> <span class="p">[</span><span class="nv">sym</span> <span class="nb">str </span><span class="nv">str</span><span class="p">]</span> <span class="s">"The project dependency vector of the parent project, path included."</span><span class="p">]</span>
+  <span class="p">[</span><span class="nv">p</span> <span class="nb">project </span><span class="nv">SYM</span>           <span class="nv">sym</span>           <span class="s">&quot;The project id (eg. foo/bar).&quot;</span>
+   <span class="nv">v</span> <span class="nv">version</span> <span class="nv">VER</span>           <span class="nb">str </span>          <span class="s">&quot;The project version.&quot;</span>
+   <span class="nv">d</span> <span class="nv">description</span> <span class="nv">DESC</span>      <span class="nb">str </span>          <span class="s">&quot;The project description.&quot;</span>
+   <span class="nv">c</span> <span class="nv">classifier</span> <span class="nv">STR</span>        <span class="nb">str </span>          <span class="s">&quot;The project classifier.&quot;</span>
+   <span class="nv">P</span> <span class="nv">packaging</span> <span class="nv">STR</span>         <span class="nb">str </span>          <span class="s">&quot;The project packaging type, i.e. war, pom&quot;</span>
+   <span class="nv">u</span> <span class="nv">url</span> <span class="nv">URL</span>               <span class="nb">str </span>          <span class="s">&quot;The project homepage url.&quot;</span>
+   <span class="nv">s</span> <span class="nv">scm</span> <span class="nv">KEY=VAL</span>           <span class="p">{</span><span class="nv">kw</span> <span class="nv">str</span><span class="p">}</span>      <span class="s">&quot;The project scm map (KEY is one of url, tag, connection, developerConnection).&quot;</span>
+   <span class="nv">l</span> <span class="nv">license</span> <span class="nv">NAME</span><span class="ss">:URL</span>      <span class="p">{</span><span class="nb">str </span><span class="nv">str</span><span class="p">}</span>     <span class="s">&quot;The map {name url} of project licenses.&quot;</span>
+   <span class="nv">o</span> <span class="nv">developers</span> <span class="nv">NAME</span><span class="ss">:EMAIL</span> <span class="p">{</span><span class="nb">str </span><span class="nv">str</span><span class="p">}</span>     <span class="s">&quot;The map {name email} of project developers.&quot;</span>
+   <span class="nv">D</span> <span class="nv">dependencies</span> <span class="nv">SYM</span><span class="ss">:VER</span>  <span class="p">[[</span><span class="nv">sym</span> <span class="nv">str</span><span class="p">]]</span>   <span class="s">&quot;The project dependencies vector (overrides boot env dependencies).&quot;</span>
+   <span class="nv">a</span> <span class="nv">parent</span> <span class="nv">SYM</span><span class="ss">:VER=PATH</span> <span class="p">[</span><span class="nv">sym</span> <span class="nb">str </span><span class="nv">str</span><span class="p">]</span> <span class="s">&quot;The project dependency vector of the parent project, path included.&quot;</span><span class="p">]</span>
 <span class="nv">...</span>
 </pre></div>
-</td></tr></table></div><p>On line 9, we see that the <tt class="docutils literal">project</tt> argument is a symbol - this is why we prefix it with a var quote in <tt class="docutils literal">build.boot</tt>.</p>
+</td></tr></table><p>On line 9, we see that the <tt class="docutils literal">project</tt> argument is a symbol - this is why we prefix it with a var quote in <tt class="docutils literal">build.boot</tt>.</p>
 </blockquote>
 </li>
 </ul>
 </div>
 <p>With <tt class="docutils literal">build.boot</tt> in the current directory, you can now run the tasks like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -980,8 +984,8 @@ Writing target dir(s)...
 <span class="go">Writing fib-1.0.0.jar...</span>
 <span class="go">Writing target dir(s)...</span>
 </pre></div>
-</td></tr></table></div><p>The convenience of <tt class="docutils literal">build.boot</tt> one step further, we can chain the tasks we want to use into our own task, using the <tt class="docutils literal">deftask</tt> macro:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+</td></tr></table><p>The convenience of <tt class="docutils literal">build.boot</tt> one step further, we can chain the tasks we want to use into our own task, using the <tt class="docutils literal">deftask</tt> macro:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -996,25 +1000,25 @@ Writing target dir(s)...
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">"0.0.4"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">boot/core</span> <span class="s">"2.7.2"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">boot/base</span> <span class="s">"2.7.2"</span><span class="p">]</span>
-                           <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
-          <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src/"</span><span class="p">})</span>
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">&#39;</span><span class="p">[[</span><span class="nv">org.clojure/math.numeric-tower</span> <span class="s">&quot;0.0.4&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">boot/core</span> <span class="s">&quot;2.7.2&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">boot/base</span> <span class="s">&quot;2.7.2&quot;</span><span class="p">]</span>
+                           <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.8.0&quot;</span><span class="p">]]</span>
+          <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">&quot;src/&quot;</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">task-options!</span>
-  <span class="nv">pom</span> <span class="p">{</span><span class="ss">:project</span> <span class="ss">'fib</span>
-       <span class="ss">:version</span> <span class="s">"1.0.0"</span><span class="p">}</span>
-  <span class="nv">jar</span> <span class="p">{</span><span class="ss">:main</span> <span class="ss">'fib.core</span><span class="p">}</span>
+  <span class="nv">pom</span> <span class="p">{</span><span class="ss">:project</span> <span class="ss">&#39;fib</span>
+       <span class="ss">:version</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">}</span>
+  <span class="nv">jar</span> <span class="p">{</span><span class="ss">:main</span> <span class="ss">&#39;fib.core</span><span class="p">}</span>
   <span class="nv">aot</span> <span class="p">{</span><span class="ss">:all</span> <span class="nv">true</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">deftask</span> <span class="nv">build</span>
- <span class="s">"Create a standalone jar file that computes Fibonacci sequences."</span>
+ <span class="s">&quot;Create a standalone jar file that computes Fibonacci sequences.&quot;</span>
  <span class="p">[]</span>
  <span class="p">(</span><span class="nb">comp </span><span class="p">(</span><span class="nf">aot</span><span class="p">)</span> <span class="p">(</span><span class="nf">pom</span><span class="p">)</span> <span class="p">(</span><span class="nf">uber</span><span class="p">)</span> <span class="p">(</span><span class="nf">jar</span><span class="p">)</span> <span class="p">(</span><span class="nf">target</span><span class="p">)))</span>
 </pre></div>
-</td></tr></table></div><p>Now, we can just run <tt class="docutils literal">boot build</tt> to make our standalone jar file. You'll also see your task show up in the help output:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+</td></tr></table><p>Now, we can just run <tt class="docutils literal">boot build</tt> to make our standalone jar file. You'll also see your task show up in the help output:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -1034,12 +1038,12 @@ Writing target dir(s)...
 <span class="go">Writing fib-1.0.0.jar...</span>
 <span class="go">Writing target dir(s)...</span>
 </pre></div>
-</td></tr></table></div></div>
+</td></tr></table></div>
 <div class="section" id="where-to-go-from-here">
 <h3>Where To Go From Here</h3>
 <p>At this point we've touched most of the awesomeness that boot gives us. With these basic tools, there's all sorts of interesting things we can do next. Here are some ideas:</p>
 <ul class="simple">
-<li>Use boot instead of a "typical" scripting language for systems automation.</li>
+<li>Use boot instead of a &quot;typical&quot; scripting language for systems automation.</li>
 <li>Distribute single <code>.boot</code> files containing entire applications.</li>
 <li>Build WAR files and use other <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Community-Tasks">boot tasks provided by the community</a>to do all sorts of cool things, like <a class="reference external" href="https://github.com/mathias/boot-sassc">compile SASS     templates</a> and <a class="reference external" href="https://github.com/adzerk/boot-beanstalk">deploy to Amazon Elastic Beanstalk</a>.</li>
 <li>Write your own, specialized tasks to help streamline complex build     processes - boot can replace (or augment) tools like     <a class="reference external" href="http://ant.apache.org/">ant</a> and     <a class="reference external" href="http://www.gnu.org/software/make/">make</a>.</li>
@@ -1047,17 +1051,18 @@ Writing target dir(s)...
 </div>
 </div>
 <div class="section" id="appendix-alternative-install-methods">
-<h2 id="appendix-alternative-install-methods">Appendix: Alternative Install Methods</h2>
+<h2>Appendix: Alternative Install Methods</h2>
 <p>Recent versions of boot are now available for homebrew, nix, and docker. More details <a class="reference external" href="https://github.com/boot-clj/boot#install">here</a>.</p>
 </div>
-</div><!-- /.entry-content -->
+
+  </div><!-- /.entry-content -->
 </section>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

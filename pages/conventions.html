@@ -30,14 +30,11 @@
         <div id="content-wrapper">
     <h1>Site-wide Conventions Explained</h1>
     
-        <div class="contents">
-            <div id="toc"><ul><li><a class="toc-href" href="#source-code-examples" title="Source Code Examples">Source Code Examples</a></li><li><a class="toc-href" href="#explainations" title="Explainations">Explainations</a></li></ul></div>
-        </div>
     <div class="status-published">
     <p>This page contains an overview of conventions used in this website.</p>
 
 <div class="section" id="source-code-examples">
-<h2 id="source-code-examples">Source Code Examples</h2>
+<h2>Source Code Examples</h2>
 <p>Code examples and command-line interactions are provided with syntax-highlighting and line numbers.</p>
 <div class="section" id="example-1-clojure-code">
 <h3>Example 1, clojure code</h3>
@@ -63,7 +60,7 @@
 </div>
 </div>
 <div class="section" id="explainations">
-<h2 id="explainations">Explainations</h2>
+<h2>Explainations</h2>
 <p>Where applicable, each example is discussed in great detail below it - these explanations are hidden by default so as not to distract from the flow of the article, when such discussion would be a distraction:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -73,7 +70,7 @@
     <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </pre></div>
 </td></tr></table><div class="explanation section">
 <h3>Explanation</h3>
@@ -98,16 +95,16 @@
 <span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
 <span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
 <span class="gp">... </span>       <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="gp">... </span>           <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="gp">... </span>           <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">&quot;boo&quot;</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-<span class="gr">TypeError</span>: <span class="n">some_function() missing 1 required positional argument: 'arg2'</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">)</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">some_function() missing 1 required positional argument: &#39;arg2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">&quot;boo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">)</span>
 <span class="go">boo</span>
 <span class="go">foo</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="n">kw1</span><span class="o">=</span><span class="s2">"value 1"</span><span class="p">,</span> <span class="n">kw4</span><span class="o">=</span><span class="s2">"value 5"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">&quot;boo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">kw1</span><span class="o">=</span><span class="s2">&quot;value 1&quot;</span><span class="p">,</span> <span class="n">kw4</span><span class="o">=</span><span class="s2">&quot;value 5&quot;</span><span class="p">)</span>
 <span class="go">boo</span>
 <span class="go">foo</span>
 <span class="go">kw4: value 5</span>

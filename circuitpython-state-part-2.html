@@ -1,87 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>The Collected Works of jjmojojjmojo</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
-<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta content="circuitpython" name="tags"/>
-<meta content="python" name="tags"/>
-<meta content="hardware" name="tags"/>
-<meta content="state" name="tags"/>
+          <title>The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+        <link href="/feeds/category.tutorial.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
+        <link href="/feeds/category.tutorial.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
+
+
+    <meta name="tags" content="circuitpython" />
+    <meta name="tags" content="python" />
+    <meta name="tags" content="hardware" />
+    <meta name="tags" content="state" />
+
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<section class="body" id="content">
-<header>
-<h2 class="entry-title">
-<a href="/circuitpython-state-part-2.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World">State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</a></h2>
-</header>
-<footer class="post-info">
-<time class="published" datetime="2018-09-01T10:07:00-04:00">
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/circuitpython-state-part-2.html" rel="bookmark"
+         title="Permalink to State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World">State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-09-01T10:07:00-04:00">
       Sat 01 September 2018
     </time>
-<address class="vcard author">
+    <address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
-</address>
-</footer><!-- /.post-info -->
-<div>
-<div id="toc"><ul><li><a class="toc-href" href="#a-use-case-for-state-debouncing-buttons" title="A Use Case For State: Debouncing Buttons">A Use Case For State: Debouncing Buttons</a></li><li><a class="toc-href" href="#blocking-one-not-great-solution" title="Blocking: One (not great) Solution">Blocking: One (not great) Solution</a></li><li><a class="toc-href" href="#debouncing-options" title="Debouncing Options">Debouncing Options</a></li><li><a class="toc-href" href="#basics-of-state" title="Basics Of State">Basics Of State</a></li><li><a class="toc-href" href="#score-keeping-is-tracking-state" title="Score Keeping Is Tracking State">Score Keeping Is Tracking State</a></li><li><a class="toc-href" href="#global-state-and-a-better-analogy" title="Global State And A Better Analogy">Global State And A Better Analogy</a></li><li><a class="toc-href" href="#conclusions-and-whats-next" next="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
-</div>
-<div class="entry-content status-published">
-<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content status-published">
+    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>In this part of the series, we're going to really dig into what <em>state</em> actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures.</p>
-<p>But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: "noisy" buttons and how to make them "un-noisy", commonly referred to as "debouncing".</p>
+<p>But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: &quot;noisy&quot; buttons and how to make them &quot;un-noisy&quot;, commonly referred to as &quot;debouncing&quot;.</p>
 <p>We'll talk about fixing the problem in the worst, but maybe easiest way: by <em>blocking</em>. We'll also talk about why it's bad.</p>
+
 <div class="section" id="a-use-case-for-state-debouncing-buttons">
-<h2 id="a-use-case-for-state-debouncing-buttons">A Use Case For State: Debouncing Buttons</h2>
-<p>Most electronics projects will have to deal with "bouncy" inputs, buttons in particular.</p>
-<p>"Bounce", in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type">boolean</a> value - it's either "on" or "off". It's "HIGH" or "LOW", <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
-<p>In reality, these values refer to <em>a voltage</em>, or <em>the lack of a voltage</em>. For our M0/M4 boards, that voltage is 3.3 volts. When the voltage is at 3.3 volts (plus/minus some wiggle room), the pin will read <tt class="docutils literal">True</tt> or "HIGH". The voltage is "on".</p>
-<p>When there's no voltage (plus or minus some wiggle room), the pin will read <tt class="docutils literal">False</tt> or "LOW". The voltage is "off".</p>
+<h2>A Use Case For State: Debouncing Buttons</h2>
+<p>Most electronics projects will have to deal with &quot;bouncy&quot; inputs, buttons in particular.</p>
+<p>&quot;Bounce&quot;, in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type">boolean</a> value - it's either &quot;on&quot; or &quot;off&quot;. It's &quot;HIGH&quot; or &quot;LOW&quot;, <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
+<p>In reality, these values refer to <em>a voltage</em>, or <em>the lack of a voltage</em>. For our M0/M4 boards, that voltage is 3.3 volts. When the voltage is at 3.3 volts (plus/minus some wiggle room), the pin will read <tt class="docutils literal">True</tt> or &quot;HIGH&quot;. The voltage is &quot;on&quot;.</p>
+<p>When there's no voltage (plus or minus some wiggle room), the pin will read <tt class="docutils literal">False</tt> or &quot;LOW&quot;. The voltage is &quot;off&quot;.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">I'm putting terms like "HIGH", "LOW", "on", and "off" in quotes, and the python booleans, <tt class="docutils literal">False</tt> and <tt class="docutils literal">True</tt> in monotype for a reason: these terms are all mere <em>representations</em> of what a pin is doing. There's an abstraction at work behind the scenes. I want to use terms that you will see in tutorials and documentation, but you shouldn't take them for granted. What they really are, under the covers, will vary depending on the context. These terms are really just convenient ways for human beings to reason about what the microprocessor is doing.</p>
+<p class="last">I'm putting terms like &quot;HIGH&quot;, &quot;LOW&quot;, &quot;on&quot;, and &quot;off&quot; in quotes, and the python booleans, <tt class="docutils literal">False</tt> and <tt class="docutils literal">True</tt> in monotype for a reason: these terms are all mere <em>representations</em> of what a pin is doing. There's an abstraction at work behind the scenes. I want to use terms that you will see in tutorials and documentation, but you shouldn't take them for granted. What they really are, under the covers, will vary depending on the context. These terms are really just convenient ways for human beings to reason about what the microprocessor is doing.</p>
 </div>
 <p>An ideal button being pressed and released might look something like this, if we graphed the voltage over time:</p>
-<a href="/images/fullsize/nonblocking-button-bounce-ideal.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-button-bounce-ideal.jpg" srcset="/images/responsive/nonblocking-button-bounce-ideal-2500.jpg 2500w,/images/responsive/nonblocking-button-bounce-ideal-2000.jpg 2000w,/images/responsive/nonblocking-button-bounce-ideal-1800.jpg 1800w,/images/responsive/nonblocking-button-bounce-ideal-1600.jpg 1600w,/images/responsive/nonblocking-button-bounce-ideal-1200.jpg 1200w,/images/responsive/nonblocking-button-bounce-ideal-1000.jpg 1000w,/images/responsive/nonblocking-button-bounce-ideal-800.jpg 800w,/images/responsive/nonblocking-button-bounce-ideal-400.jpg 400w,/images/responsive/nonblocking-button-bounce-ideal-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-button-bounce-ideal.png" style="width: 80%;" />
 <p>The problem is that you will rarely ever get such straightforward readings. You'll instead get what looks like many pressings in quick succession:</p>
-<a href="/images/fullsize/nonblocking-button-bounce-reality.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-button-bounce-reality.jpg" srcset="/images/responsive/nonblocking-button-bounce-reality-2500.jpg 2500w,/images/responsive/nonblocking-button-bounce-reality-2000.jpg 2000w,/images/responsive/nonblocking-button-bounce-reality-1800.jpg 1800w,/images/responsive/nonblocking-button-bounce-reality-1600.jpg 1600w,/images/responsive/nonblocking-button-bounce-reality-1200.jpg 1200w,/images/responsive/nonblocking-button-bounce-reality-1000.jpg 1000w,/images/responsive/nonblocking-button-bounce-reality-800.jpg 800w,/images/responsive/nonblocking-button-bounce-reality-400.jpg 400w,/images/responsive/nonblocking-button-bounce-reality-200.jpg 200w" style="width: 80%;"/></a>
-<p>What causes this? It's due to the realities of turning physical interactions into digital signals: when a button is pressed, a piece of metal crosses two contacts, completing a circuit. The microcontroller has an internal threshold that decides how much current constitutes "on" (or "HIGH"), and how much constitutes "off" (or "LOW") - the aforementioned "wiggle room". That threshold can be shockingly large - sometimes what you would think is a "weak" signal, the microcontroller interprets as "HIGH".</p>
+<img alt="" class="align-center" src="/images/nonblocking-button-bounce-reality.png" style="width: 80%;" />
+<p>What causes this? It's due to the realities of turning physical interactions into digital signals: when a button is pressed, a piece of metal crosses two contacts, completing a circuit. The microcontroller has an internal threshold that decides how much current constitutes &quot;on&quot; (or &quot;HIGH&quot;), and how much constitutes &quot;off&quot; (or &quot;LOW&quot;) - the aforementioned &quot;wiggle room&quot;. That threshold can be shockingly large - sometimes what you would think is a &quot;weak&quot; signal, the microcontroller interprets as &quot;HIGH&quot;.</p>
 <p>Then there's the buttons themselves. Most buttons are composed of two pieces of metal that are separated by a physical gap (represented by the red lines in the charts above). When you press the button, the metal pieces are brought into physical contact, causing current to flow through them as if they were a solid conductive element (like a continuous piece of wire or a copper trace on a PCB).</p>
 <p>Since electricity <em>really</em> wants to flow, if given sufficient current and a short enough distance, it will jump through the air. When this happens inside of a button, it causes current to flow momentarily before the contacts are fully in contact, which can cause a spike in the current being read from the microcontroller pin.</p>
-<p>Further, inconsistencies in the metal due to manufacturing or wear can cause multiple subsequent spikes to be sent to the microcontroller prior to the most "solid" one. Even when continually holding down a button, the strength of the signal can vary quite a bit over time. Sometimes it varies enough to be noticed by the microprocessor.</p>
+<p>Further, inconsistencies in the metal due to manufacturing or wear can cause multiple subsequent spikes to be sent to the microcontroller prior to the most &quot;solid&quot; one. Even when continually holding down a button, the strength of the signal can vary quite a bit over time. Sometimes it varies enough to be noticed by the microprocessor.</p>
 <p>As the button is released, the same issues happen <em>again</em>.</p>
 <p>In the case of a capacitive input, the capacitance that is increased by the user interacting with it is detectable long before the user has contacted the pad. It's not always possible to determine precisely when someone has contacted the pad, or we're just detecting a change in capacitance because someone is simply near it (we can use this to our advantage in some applications). There's also potential issues with interference that can make the signal more noisy than it should be.</p>
 <p>The two types of inputs are noisy for different reasons, but the problem is the same.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="/circuitpython-state-part-3.html#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
+<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of &quot;clocking&quot; <a class="reference external" href="/circuitpython-state-part-3.html#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
 <p>The two overly-simplified subjects are very complexly related 😀.</p>
-<p>A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
+<p>A good (but a bit of a feet-first dive) discussion of how the &quot;clock&quot; works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
 <p>I also recommend a book like <em>Code: The Hidden Language of Computer Hardware and Software</em> by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.</p>
 <p class="last">This is stuff that is important to understand, but you don't need any depth of knowledge of it to accomplish what we set out to do in this series.</p>
 </div>
@@ -91,22 +95,22 @@
 <p class="last">For an in-depth analysis of <em>button</em> bounce and possible solutions, check out <a class="reference external" href="http://www.ganssle.com/debouncing.htm">A Guide To Debouncing</a> from the <a class="reference external" href="http://www.ganssle.com/">Ganssle Group</a>. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.</p>
 </div>
 <p>Maybe for some applications, like turning on an LED only while a button is pressed, it's not really a problem. But if pressing that button has <em>side effects</em> it can be really, really bad.</p>
-<p>What are <em>side effects</em>? These are changes that occur <em>outside</em> of the code that is executing, <em>because</em> of the code. Typically, this means we're altering data outside of our scope (function, method, module, instance, etc), but it can also mean that we're doing something in the "real world", outside of the <em>computer</em>. Altering a global variable would be a side effect, as would turning on an LED. These side effects are pretty innocuous, but imagine the side effect is something like writing data to a file. If things aren't kosher, we might write bad data or corrupt something. What about triggering a relay to turn on or off a piece of dangerous machinery, or sensitive equipment? That could cause physical damage to the equipment, or even hurt someone.</p>
+<p>What are <em>side effects</em>? These are changes that occur <em>outside</em> of the code that is executing, <em>because</em> of the code. Typically, this means we're altering data outside of our scope (function, method, module, instance, etc), but it can also mean that we're doing something in the &quot;real world&quot;, outside of the <em>computer</em>. Altering a global variable would be a side effect, as would turning on an LED. These side effects are pretty innocuous, but imagine the side effect is something like writing data to a file. If things aren't kosher, we might write bad data or corrupt something. What about triggering a relay to turn on or off a piece of dangerous machinery, or sensitive equipment? That could cause physical damage to the equipment, or even hurt someone.</p>
 <p>So it's not just about having clean code that's less bug-prone (the main concern for most programs). Since we're programming an electronic device that interacts with the real world, we have to be especially conscious about side effects, since they could have real-world consequences.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">Wikipedia has a pretty good <a class="reference external" href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">article about side effects</a> if you want to read more.</p>
 </div>
-<p>There's more to it than just noisy buttons, though. There are other "bouncy" signals that aren't quite as chaotic as button bounce, but need to be dealt with in the same way. This could be digital temperature readings from a <a class="reference external" href="https://en.wikipedia.org/wiki/Thermocouple">thermocouple</a> module (like <a class="reference external" href="https://www.adafruit.com/product/269">this one</a>), or an analog signal derived from the changing resistance of a <a class="reference external" href="https://en.wikipedia.org/wiki/Photoresistor">photoresistor</a>. Button bounce is the most common kind of "noise" you may have to deal with, but it's definitely not the only kind you'll run into in your projects.</p>
+<p>There's more to it than just noisy buttons, though. There are other &quot;bouncy&quot; signals that aren't quite as chaotic as button bounce, but need to be dealt with in the same way. This could be digital temperature readings from a <a class="reference external" href="https://en.wikipedia.org/wiki/Thermocouple">thermocouple</a> module (like <a class="reference external" href="https://www.adafruit.com/product/269">this one</a>), or an analog signal derived from the changing resistance of a <a class="reference external" href="https://en.wikipedia.org/wiki/Photoresistor">photoresistor</a>. Button bounce is the most common kind of &quot;noise&quot; you may have to deal with, but it's definitely not the only kind you'll run into in your projects.</p>
 <p>But there's something else to consider: our goal is, ultimately, to have <em>meaningful</em> signals. We want to only trigger side effects when necessary. You press the button, the LED turns on. Once we account for the noise, we're really close to that goal. However, there's one more obstacle in our way: the manner in which our code is being run by our development board.</p>
-<p>Our microcontroller code runs in a "main loop". In CircuitPython, that's usually a <tt class="docutils literal">while True:</tt> block. Inside of that block, we process inputs, do side effects, etc.</p>
+<p>Our microcontroller code runs in a &quot;main loop&quot;. In CircuitPython, that's usually a <tt class="docutils literal">while True:</tt> block. Inside of that block, we process inputs, do side effects, etc.</p>
 <p>CircuitPython runs that loop <em>as fast as it possibly can</em>.</p>
-<p>This means that your main loop is executing many <em>thousands</em> of times per second. If you check a pin or sensors status every loop, even if the button or sensor is fully "debounced", your code will still get called many, many times. A perfectly clean signal will <strong>still</strong> trigger your code to run over and over and over. If there are side effects, they will be run over and over and over as well.</p>
+<p>This means that your main loop is executing many <em>thousands</em> of times per second. If you check a pin or sensors status every loop, even if the button or sensor is fully &quot;debounced&quot;, your code will still get called many, many times. A perfectly clean signal will <strong>still</strong> trigger your code to run over and over and over. If there are side effects, they will be run over and over and over as well.</p>
 </div>
 <div class="section" id="blocking-one-not-great-solution">
-<h2 id="blocking-one-not-great-solution">Blocking: One (not great) Solution</h2>
-<p>The easiest way to deal with all of these issues, and the most common seen in "getting started" tutorials, is to "sleep" the processor for a few fractions of a second before checking an input's value. In programming, we use the term <em>block</em> to describe this sort of behavior.</p>
-<p>"Blocking" is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.</p>
+<h2>Blocking: One (not great) Solution</h2>
+<p>The easiest way to deal with all of these issues, and the most common seen in &quot;getting started&quot; tutorials, is to &quot;sleep&quot; the processor for a few fractions of a second before checking an input's value. In programming, we use the term <em>block</em> to describe this sort of behavior.</p>
+<p>&quot;Blocking&quot; is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Code can block for lots of reasons. Input and output (aka <em>IO</em> or <em>I/O</em>) are the main sources of blocking code - CircuitPython is really efficient in how it reads from or writes to digital pins (<em>inputs</em> or <em>outputs</em> to digital pins), but there's still the possibility of blocking when we do. It's just normally so quick that you don't notice it.</p>
@@ -117,31 +121,31 @@
 <p class="last">And maybe you'll find a better way to do something and contribute it back to the community! 🦄</p>
 </div>
 <p>We've already seen some code that blocks in the <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing</a> section of the first article in this series. We're using a Python function called <tt class="docutils literal">time.sleep()</tt>. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.</p>
-<p>In the testing code, we block for <tt class="docutils literal">0.2</tt> seconds. This amount is considered "standard" for button debouncing. It's an arbitrary amount, suggested by a lot of articles and papers that tackle the problem. It was derived by experimenting with many buttons, actually tracking their voltage as a waveform on an oscilloscope - the output on the scope in these experiments looks a lot like the contrived example we saw above.</p>
+<p>In the testing code, we block for <tt class="docutils literal">0.2</tt> seconds. This amount is considered &quot;standard&quot; for button debouncing. It's an arbitrary amount, suggested by a lot of articles and papers that tackle the problem. It was derived by experimenting with many buttons, actually tracking their voltage as a waveform on an oscilloscope - the output on the scope in these experiments looks a lot like the contrived example we saw above.</p>
 <p>The amount of time it takes for the signal, generated by most buttons, to look more like the ideal square wave in the first chart is around 0.2 seconds.</p>
-<p>There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when <em>you</em> press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.</p>
+<p>There's also a psychological aspect to it. 0.2 seconds has a good &quot;feel&quot; to it - when <em>you</em> press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>Look at this number as a <em>starting point</em> when debouncing buttons. You should feel free to experiment with other values in your projects - do what feels right for you and works best for your requirements! There are times when a more sensitive button is more appropriate (like in a video game), and times when a <em>less</em> sensitive button is required (like when your users are kids or people with limited mobility).</p>
-<p>The buttons you use will impact this interval as well. More "quality" buttons will be less noisy, and can handle a shorter interval.</p>
+<p>The buttons you use will impact this interval as well. More &quot;quality&quot; buttons will be less noisy, and can handle a shorter interval.</p>
 <p class="last">In any case, be creative, and experiment to find the right values for your use cases. It also doesn't hurt to recruit some friends or family to test your project for you.</p>
 </div>
 <p>So by blocking, we are only checking the status of the button <em>5 times</em> every second, instead of <em>48 million times</em> every second. 🤔</p>
 <p>This effectively smoothes out the signal from our input pins, by reducing the number of times per second that we check the status of the button. Another way to state this is we've <em>reduced the sample frequency</em> of our input. The noisy parts of a button's press and release cycle happen in very, very short bursts, so by reducing the sample frequency, we clean the signal of that noise.</p>
-<p>This works for other inputs too - if we have a really sensitive sensor that is constantly "wiggling" its reading up and down, sampling its value less frequently will give us more stable data to work with.</p>
-<p>Now that blocking code is in place, we can consider the button fully "debounced".</p>
+<p>This works for other inputs too - if we have a really sensitive sensor that is constantly &quot;wiggling&quot; its reading up and down, sampling its value less frequently will give us more stable data to work with.</p>
+<p>Now that blocking code is in place, we can consider the button fully &quot;debounced&quot;.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The actual number of times your code runs is limited by many things, and even in an ideal situation, it will likely never <em>actually</em> run 48 million times per second. It might get close, 30 million, 10 million... It's still <strong>a lot</strong>.</p>
 </div>
 <p>The problem, as you will recall, is that while code is blocking, <em>nothing else is happening</em>.</p>
-<p>This can severely hamper our projects, especially as we graduate from simple "blinky" first steps and get into more complex applications. As we add more buttons, and additional types of sensors, we can't react to user input or changes in sensor reading while we're waiting for a button to stop bouncing. We can't update our outputs either. We can't refresh an LCD display, play a sound,  toggle an LED -- <em>nothing</em>.</p>
+<p>This can severely hamper our projects, especially as we graduate from simple &quot;blinky&quot; first steps and get into more complex applications. As we add more buttons, and additional types of sensors, we can't react to user input or changes in sensor reading while we're waiting for a button to stop bouncing. We can't update our outputs either. We can't refresh an LCD display, play a sound,  toggle an LED -- <em>nothing</em>.</p>
 <p>We have to do <em>everything</em> every 0.2 seconds when we block like this. Again, for something simple like our testing code, this is not a big deal. But imagine you are building a video game console, like the <a class="reference external" href="https://arduboy.com/">Arduboy</a>. 0.2 seconds is an <em>eternity</em> when playing a video game. Your user will get frustrated really quickly - or be able to hit every enemy because they're essentially moving in slow-motion. Every frame has to be drawn, every input has to be read, every sprite has to be updated only when the code stops blocking, every 0.2 seconds.</p>
 <p>There's another tragic aspect to this: those 48 million cycles we have at our disposal are being <em>completely wasted</em> while we block. We are throwing away processor cycles we could be using to do work. 💔</p>
 <p>Ok, so by now you're thoroughly convinced blocking is bad news. So what can we do instead to debounce our inputs?</p>
 </div>
 <div class="section" id="debouncing-options">
-<h2 id="debouncing-options">Debouncing Options</h2>
+<h2>Debouncing Options</h2>
 <p>We have a few viable options:</p>
 <ol class="arabic simple">
 <li>For buttons, we can use an <a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit">R/C filter circuit</a> to clean the input (a.k.a. <em>hardware debouncing</em>).</li>
@@ -149,14 +153,14 @@
 <li>We can use <a class="reference external" href="https://www.sparkfun.com/tutorials/326">interrupts</a>.</li>
 <li>We can create a data structure that tracks the status over time (or <strong>state</strong>), of our inputs.</li>
 </ol>
-<p>Hardware debouncing is only really useful in situations where the debouncing needs to be <em>rock solid</em>. It requires more components, which increases the cost (more of an issue in industry) and introduces more complexity (more of an issue for us as hobbyists). But even with really solid hardware debouncing, we <em>still</em> need to be concerned with the realities of reading a digital input. Remember, what feels like a momentary press for a human being is an event that lasts many many processor cycles - the signal may be "clean", but we still have to be careful not to take action every single time we notice that clean signal reads "HIGH".</p>
+<p>Hardware debouncing is only really useful in situations where the debouncing needs to be <em>rock solid</em>. It requires more components, which increases the cost (more of an issue in industry) and introduces more complexity (more of an issue for us as hobbyists). But even with really solid hardware debouncing, we <em>still</em> need to be concerned with the realities of reading a digital input. Remember, what feels like a momentary press for a human being is an event that lasts many many processor cycles - the signal may be &quot;clean&quot;, but we still have to be careful not to take action every single time we notice that clean signal reads &quot;HIGH&quot;.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">R/C ciruits might be overkill for button debouncing, but they are fundamental building blocks of electronics. You should spend some time reading about them and building some, you won't regret it.</p>
 </div>
 <p>Specialized button debouncing ICs are rare and tend to be expensive (the expensive part is again more a problem for industry, but the rare part is a big deal for us as hobbyists). For analog sensors, an IC like an <a class="reference external" href="https://en.wikipedia.org/wiki/Analog-to-digital_converter">analog-to-digital converter</a> could theoretically be used to reduce the sample frequency of a noisy input. We could even program another microcontroller to do debouncing for us.</p>
-<p>Again, these solutions are more expensive and add complexity. And <em>yet again</em> we still have to be conscious of the fact that even a "clean" signal will be read many, many times per second by our main loop.</p>
-<p>Interrupts are extremely cool - you can configure the processor such that when a pin reads "HIGH", it triggers the execution of a predetermined chunk of code. The ATSAMD21 processor in our M0 boards allow for interrupts on nearly every pin. However, interrupt functionality is not currently exposed in CircuitPython 💔, so it's a non-starter for us.</p>
+<p>Again, these solutions are more expensive and add complexity. And <em>yet again</em> we still have to be conscious of the fact that even a &quot;clean&quot; signal will be read many, many times per second by our main loop.</p>
+<p>Interrupts are extremely cool - you can configure the processor such that when a pin reads &quot;HIGH&quot;, it triggers the execution of a predetermined chunk of code. The ATSAMD21 processor in our M0 boards allow for interrupts on nearly every pin. However, interrupt functionality is not currently exposed in CircuitPython 💔, so it's a non-starter for us.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>If you are interested, Adafruit has a <a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-2/overview">nice guide to interrupts on the Arduino platform</a> available.</p>
@@ -166,31 +170,31 @@
 <p>In the next section, we'll start from the ground up and really dig into what state is all about. We'll see how it's ideal for cleaning inputs, and also how it opens up some really useful pattens for making our code cleaner and more reliable.</p>
 </div>
 <div class="section" id="basics-of-state">
-<h2 id="basics-of-state">Basics Of State</h2>
+<h2>Basics Of State</h2>
 <p>Let's start with basic definitions. <em>State</em> is simply the status or phase of something at a given time. It's how you would describe something that can <em>transition</em>, over time, from one <em>state</em> to another.</p>
 <p>For example, water has three common states (referred to as <em>phases</em>): gas (steam), solid (ice), liquid (usually just called <em>water</em>).</p>
-<a href="/images/fullsize/nonblocking-states-of-water.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-states-of-water.jpg" srcset="/images/responsive/nonblocking-states-of-water-2500.jpg 2500w,/images/responsive/nonblocking-states-of-water-2000.jpg 2000w,/images/responsive/nonblocking-states-of-water-1800.jpg 1800w,/images/responsive/nonblocking-states-of-water-1600.jpg 1600w,/images/responsive/nonblocking-states-of-water-1200.jpg 1200w,/images/responsive/nonblocking-states-of-water-1000.jpg 1000w,/images/responsive/nonblocking-states-of-water-800.jpg 800w,/images/responsive/nonblocking-states-of-water-400.jpg 400w,/images/responsive/nonblocking-states-of-water-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-states-of-water.png" style="width: 80%;" />
 <p>State is a kind of abstraction that refers to bundles of properties (or <em>attributes</em>) of something at a given time. Various factors can cause those attributes to change. When that happens the state <em>transitions</em> from one state to another.</p>
-<p>For example, when water is brought to its boiling point of 100&deg; C (212&deg; F), it transitions into a gas. It becomes less dense, and given the opportunity, it will disperse throughout a space.</p>
-<p>Another way to say this is that water's <em>temperature attribute</em> has changed to a value above 100&deg;, and so the <em>state</em> has <em>transitioned</em> to "steam". Now that it's in the "steam" state, there are other attributes that have changed besides the temperature (its density, for one), and it has new attributes - it can do new things, like fill a space.</p>
+<p>For example, when water is brought to its boiling point of 100° C (212° F), it transitions into a gas. It becomes less dense, and given the opportunity, it will disperse throughout a space.</p>
+<p>Another way to say this is that water's <em>temperature attribute</em> has changed to a value above 100°, and so the <em>state</em> has <em>transitioned</em> to &quot;steam&quot;. Now that it's in the &quot;steam&quot; state, there are other attributes that have changed besides the temperature (its density, for one), and it has new attributes - it can do new things, like fill a space.</p>
 <p>The same is true for water condensing, melting, or freezing - the state changes as water's attributes change, and new attributes emerge.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">In programming, "properties" and "attributes" are often used interchangeably. We're settling on the term "attributes", since that's the term most commonly used in Python when talking about classes (which we'll get to later).</p>
+<p class="last">In programming, &quot;properties&quot; and &quot;attributes&quot; are often used interchangeably. We're settling on the term &quot;attributes&quot;, since that's the term most commonly used in Python when talking about classes (which we'll get to later).</p>
 </div>
-<p>Water has multiple attributes in each state. We could record each of those attributes numerically - the temperature, the volume, the density - even attributes that are more binary (true/false) like "solid" and "liquid". Keep this in the back of your mind for now.</p>
+<p>Water has multiple attributes in each state. We could record each of those attributes numerically - the temperature, the volume, the density - even attributes that are more binary (true/false) like &quot;solid&quot; and &quot;liquid&quot;. Keep this in the back of your mind for now.</p>
 <p>Lets look at another example, this time from a area of life that lives and breathes metrics: <strong>sports</strong>.</p>
 </div>
 <div class="section" id="score-keeping-is-tracking-state">
-<h2 id="score-keeping-is-tracking-state">Score Keeping Is Tracking State</h2>
+<h2>Score Keeping Is Tracking State</h2>
 <p>Keeping score during a sporting event is a way of tracking state. A performance happens, a ball is hit, a race ends, and the score is recorded.</p>
 <p>Here's a common type of simple scoreboard for sports like gymnastics:</p>
-<a href="/images/fullsize/nonblocking-state-examples-01.jpg"><img alt="" class="align-center" sizes="(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-01.jpg" srcset="/images/responsive/nonblocking-state-examples-01-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-01-800.jpg 800w,/images/responsive/nonblocking-state-examples-01-400.jpg 400w,/images/responsive/nonblocking-state-examples-01-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-state-examples-01.png" style="width: 80%;" />
 <p>It's a single score, from a single judge. This scoreboard scores from 1-10, with fractional values down to hundredths of a point. This score is 9.70.</p>
 <p>If we modeled the scoreboard in Python, we could use a single variable to store the score:</p>
-<a href="/images/fullsize/nonblocking-state-examples-02.jpg"><img alt="" class="align-center" sizes="(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-02.jpg" srcset="/images/responsive/nonblocking-state-examples-02-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-02-800.jpg 800w,/images/responsive/nonblocking-state-examples-02-400.jpg 400w,/images/responsive/nonblocking-state-examples-02-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-state-examples-02.png" style="width: 80%;" />
 <p>Here, we simply name the variable <tt class="docutils literal">score</tt>. If we were modeling a real gymnastics match, we might want to differentiate between different scores, since there will be one for each judge, and each participant:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -212,14 +216,14 @@
 <span class="n">entrant3_judge2</span> <span class="o">=</span> <span class="mf">9.99</span>
 <span class="n">entrant3_judge3</span> <span class="o">=</span> <span class="mf">9.98</span>
 </pre></div>
-</td></tr></table></div><p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics! What if we wanted to track how these values change over time?</p>
+</td></tr></table><p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics! What if we wanted to track how these values change over time?</p>
 <p>We can simplify and generalize things a bit by using Python's built-in data structures.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview">simple guide</a>.</p>
 </div>
 <p>There are many, many ways to model a match like this, here's just one using lists and dictionaries:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -240,49 +244,49 @@
 19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">matches</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span>
         <span class="p">{</span>
-         <span class="s2">"judge1"</span><span class="p">:</span> <span class="mf">9.70</span><span class="p">,</span>
-         <span class="s2">"judge2"</span><span class="p">:</span> <span class="mf">9.45</span><span class="p">,</span>
-         <span class="s2">"judge3"</span><span class="p">:</span> <span class="mf">10.0</span>
+         <span class="s2">&quot;judge1&quot;</span><span class="p">:</span> <span class="mf">9.70</span><span class="p">,</span>
+         <span class="s2">&quot;judge2&quot;</span><span class="p">:</span> <span class="mf">9.45</span><span class="p">,</span>
+         <span class="s2">&quot;judge3&quot;</span><span class="p">:</span> <span class="mf">10.0</span>
         <span class="p">},</span>
         <span class="p">{</span>
-         <span class="s2">"judge1"</span><span class="p">:</span> <span class="mf">8.75</span><span class="p">,</span>
-         <span class="s2">"judge2"</span><span class="p">:</span> <span class="mf">9.00</span><span class="p">,</span>
-         <span class="s2">"judge3"</span><span class="p">:</span> <span class="mf">8.80</span>
+         <span class="s2">&quot;judge1&quot;</span><span class="p">:</span> <span class="mf">8.75</span><span class="p">,</span>
+         <span class="s2">&quot;judge2&quot;</span><span class="p">:</span> <span class="mf">9.00</span><span class="p">,</span>
+         <span class="s2">&quot;judge3&quot;</span><span class="p">:</span> <span class="mf">8.80</span>
         <span class="p">},</span>
         <span class="p">{</span>
-         <span class="s2">"judge1"</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
-         <span class="s2">"judge2"</span><span class="p">:</span> <span class="mf">9.99</span><span class="p">,</span>
-         <span class="s2">"judge3"</span><span class="p">:</span> <span class="mf">9.98</span>
+         <span class="s2">&quot;judge1&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+         <span class="s2">&quot;judge2&quot;</span><span class="p">:</span> <span class="mf">9.99</span><span class="p">,</span>
+         <span class="s2">&quot;judge3&quot;</span><span class="p">:</span> <span class="mf">9.98</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
-</td></tr></table></div><p>To access the second judge's score for the third entrant in the first match (remember list indexes start with 0):</p>
-<div class="highlight"><pre><span></span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="s2">"judge2"</span><span class="p">]</span>
+</td></tr></table><p>To access the second judge's score for the third entrant in the first match (remember list indexes start with 0):</p>
+<div class="highlight"><pre><span></span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;judge2&quot;</span><span class="p">]</span>
 </pre></div>
 <p>So that works for modeling something like a gymnastics match, where you have somewhat similar data, but it is recorded multiple times.</p>
-<p>A class might be better, since we can model what a "match" or an "entrant" looks like <em>once</em>, and then make new instances as our tournament progresses (we'll talk about classes in depth shortly).</p>
+<p>A class might be better, since we can model what a &quot;match&quot; or an &quot;entrant&quot; looks like <em>once</em>, and then make new instances as our tournament progresses (we'll talk about classes in depth shortly).</p>
 </div>
 <div class="section" id="global-state-and-a-better-analogy">
-<h2 id="global-state-and-a-better-analogy">Global State And A Better Analogy</h2>
+<h2>Global State And A Better Analogy</h2>
 <p>In a microcontroller project, we're dealing more with what might be called <em>global state</em> - a single group of attributes that are used by the whole project. We need to track our buttons, digital pins and sensors in one place, and use the values throughout our project. It would be best to have a <em>single source of truth</em>, or one place to look for information about what state our project is in.</p>
 <p>With the gymnastics example, we've covered capturing multiple states, and we've stored them in multiple places (either individual variables or a more complex structure, but each score is separate).</p>
 <p>In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.</p>
 <p>A better analogy that more closely models our requirements is the <a class="reference external" href="https://en.wikipedia.org/wiki/Scoreboard">scoreboard</a> from a team-based sport. A sports arena/field will typically have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.</p>
 <p>Here's a contrived example of a typical scoreboard from an American baseball stadium:</p>
-<a href="/images/fullsize/nonblocking-state-examples-03.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-03.jpg" srcset="/images/responsive/nonblocking-state-examples-03-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-03-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-03-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-03-800.jpg 800w,/images/responsive/nonblocking-state-examples-03-400.jpg 400w,/images/responsive/nonblocking-state-examples-03-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-state-examples-03.png" style="width: 80%;" />
 <p>It has various regions with indicators, usually lights, and numbers representing the state of the game. Each one represents an independent piece of important information. That information changes as the game progresses. Outs are made, points (runs) are scored by each team, innings go by (there are 9 in a typical baseball game). Other bits of data are recorded too - <em>balls</em>, <em>strikes</em>, <em>outs</em>. These are used to move the game along in various ways.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">The nuances and rules for American baseball are not relevant to our discussion. However, if you aren't familiar with the game, and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball">wikipedia article</a> is the place to start.</p>
 </div>
 <p>We can model a scoreboard as a series of individual variables, like we did initially for the gymnastics match:</p>
-<a href="/images/fullsize/nonblocking-state-examples-04.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-04.jpg" srcset="/images/responsive/nonblocking-state-examples-04-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-04-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-04-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-04-800.jpg 800w,/images/responsive/nonblocking-state-examples-04-400.jpg 400w,/images/responsive/nonblocking-state-examples-04-200.jpg 200w" style="width: 80%;"/></a>
+<img alt="" class="align-center" src="/images/nonblocking-state-examples-04.png" style="width: 80%;" />
 <p>This is totally viable, and cleaner than doing the same thing for a gymnastics tournament. Since a baseball game changes state over time instead of accumulating multiple scores, having simple global variables for each state attribute we care about makes sense.</p>
 <p>There are alternative ways of modeling global state like this, however. The two primary ones are: using a <em>dictionary</em> and using a <em>class</em>.</p>
 <p>A dictionary in Python is a key-value mapping, also known as an <em>associative array</em>, <em>hash</em>, or <em>hashmap</em>. We worked with these earlier in the gymnastics example.</p>
 <p>Data is stored by name in a simple table. Here's what our scoreboard looks like as a dictionary:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -290,22 +294,22 @@
 6
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">scoreboard</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"ball"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"out"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"strike"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">"guest_score"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">"inning"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">"home_score"</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="s2">&quot;ball&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;out&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;strike&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;guest_score&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">&quot;inning&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;home_score&quot;</span><span class="p">:</span> <span class="mi">10</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table></div><p>We access the various values like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+</td></tr></table><p>We access the various values like this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">outs</span> <span class="o">=</span> <span class="n">scoreboard</span><span class="p">[</span><span class="s2">"out"</span><span class="p">]</span>
-<span class="n">scoreboard</span><span class="p">[</span><span class="s2">"inning"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">scoreboard</span><span class="p">[</span><span class="s2">"guest_score"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">outs</span> <span class="o">=</span> <span class="n">scoreboard</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">]</span>
+<span class="n">scoreboard</span><span class="p">[</span><span class="s2">&quot;inning&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">scoreboard</span><span class="p">[</span><span class="s2">&quot;guest_score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
 </pre></div>
-</td></tr></table></div><p>So we have a single, global state variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
+</td></tr></table><p>So we have a single, global state variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
 <p>This has the advantage over using a series of variables in that it is more compact, but flexible - we're only using up one variable name, and the names of our state attributes can be almost anything - words with spaces, dashes, even other objects.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -315,12 +319,12 @@
 <p>Since the dictionary is self-contained, we only have to worry about conflicts between key names within it - we don't have to be concerned with what's going on in the rest of the code.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>I admit this example is a bit contrived. You may be thinking "well, why can't we just name it <tt class="docutils literal">baseballs</tt> or <tt class="docutils literal">balls_used</tt> and call it a day?"</p>
+<p>I admit this example is a bit contrived. You may be thinking &quot;well, why can't we just name it <tt class="docutils literal">baseballs</tt> or <tt class="docutils literal">balls_used</tt> and call it a day?&quot;</p>
 <p>This is true, and would be a totally acceptable solution. But keeping all of your variables separate in the same scope can get really messy over time.</p>
 <p>As the project progresses, say you also need to track baseballs lost, and baseballs that were caught by fans. Again, you could add more global variables with names like <tt class="docutils literal">balls_caught</tt>, and <tt class="docutils literal">balls_lost</tt>. But now we have 4 variables. Some are related (referring to actual baseballs) and one is completely different (<tt class="docutils literal">balls</tt>, referring to a kind of score that affects the progress of the game).</p>
 <p>Its a good idea to think about how you can group similar data together. This reduces the contortions you will have to go through to come up with names, makes the code cleaner, and makes the data model make more sense.</p>
 <p>We've already decided to use a dictionary for the game state, so we can do the same to track this equipment-related information:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -356,25 +360,25 @@
 <span class="n">balls</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="n">baseballs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'caught_by_fans'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s1">'lost'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">'used'</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="s1">&#39;caught_by_fans&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;lost&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;used&#39;</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}</span>
 
 <span class="c1"># or even</span>
 <span class="n">balls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">equipment</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'balls'</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">'caught_by_fans'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">'lost'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">'used'</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="s1">&#39;balls&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;caught_by_fans&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;lost&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;used&#39;</span><span class="p">:</span> <span class="mi">3</span>
     <span class="p">},</span>
-    <span class="s1">'bats'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s1">'athletic_cups'</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-    <span class="s1">'shoes'</span><span class="p">:</span> <span class="mi">13</span>
+    <span class="s1">&#39;bats&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;athletic_cups&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="s1">&#39;shoes&#39;</span><span class="p">:</span> <span class="mi">13</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table></div><p>As you can see, modeling the data this way gives us a lot more flexibility.</p>
+</td></tr></table><p>As you can see, modeling the data this way gives us a lot more flexibility.</p>
 <p>It sets us up for modeling more complex things, like the total amount of equipment used in the game.</p>
 <p>The context makes simpler variable and key names make more sense. <tt class="docutils literal"><span class="pre">equipment['balls']['lost']</span></tt> has more contextual information than <tt class="docutils literal">balls_lost</tt>.</p>
 <p class="last">This is all very basic Python stuff, but I want to make sure you're thinking about different ways to model your data. It's one of the foundations to writing well-behaved, easy-to-read code and something you usually learn over time. Thinking about it critically now, if you're a newer programmer, gives you a big head start on becoming a great engineer. 💖</p>
@@ -391,10 +395,10 @@
 <p>For our purposes, classes provide a way of reasoning about state in a self-contained manner. The class contains all of our state variables as <em>attributes</em>, and it has <em>methods</em> that provide functionality. We can extend the class if we need to, and can even use it to handle global state for multiple, similar parts of our project.</p>
 <p>Attributes are like our state variables - just data that's being stored.</p>
 <p>Methods are just functions that are part of a class. What sets them apart is their context. Put simply, a <em>function</em> runs within the Python <em>module</em> where its defined. A <em>method</em> runs within the instance of the <em>class</em> where it was defined.</p>
-<p>Another important distinction is that methods <em>always</em> take an extra parameter, that, by convention, we call <tt class="docutils literal">self</tt>. That parameter contains the <em>instance</em> that the method is being called on. An instance is essentially an "active" copy of the class. Using architecture as an analogy, if the class is the <em>blueprint</em>, the instance would be the <em>building</em>.</p>
+<p>Another important distinction is that methods <em>always</em> take an extra parameter, that, by convention, we call <tt class="docutils literal">self</tt>. That parameter contains the <em>instance</em> that the method is being called on. An instance is essentially an &quot;active&quot; copy of the class. Using architecture as an analogy, if the class is the <em>blueprint</em>, the instance would be the <em>building</em>.</p>
 <p>What it means, in practical terms, is having the instance passed as an argument gives your method access to the data and other methods that the instance contains. Inside of a method, you normally wouldn't know which instance the method was being called on. <tt class="docutils literal">self</tt> gives us that bridge from the class to the instance.</p>
 <p>Here's a simple example of a class that represents our baseball scoreboard:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -420,8 +424,8 @@
 24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ScoreBoard</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"guest"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">"home"</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="s2">&quot;guest&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;home&quot;</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">=</span> <span class="mi">1</span>
@@ -431,30 +435,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="nf">tied</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"home"</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"guest"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">&quot;guest&quot;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">next_inning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tied</span><span class="p">():</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Game is over"</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Game is over&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
 <p>Since we've added some behavior that reflects some of the basic rules of the game of baseball, some brief explanations of what we're modeling are in order before we dig into the code.</p>
 <p>In baseball, there are nine <em>innings</em>. The teams switch sides every inning. An inning lasts until three outs are scored.</p>
-<p>If the score is tied during the last inning, the game is said to be in "extra innings" and the game continues on until three more outs are scored, and the score is no longer tied.</p>
-<p>This code represents a fairly basic example of a Python class. The <tt class="docutils literal">next_inning()</tt> method drives the game forward - every time it's called, it checks the number of outs and the score and increases the inning number if necessary. It also handles the concept of "extra innings" and overtime due to a tie.</p>
+<p>If the score is tied during the last inning, the game is said to be in &quot;extra innings&quot; and the game continues on until three more outs are scored, and the score is no longer tied.</p>
+<p>This code represents a fairly basic example of a Python class. The <tt class="docutils literal">next_inning()</tt> method drives the game forward - every time it's called, it checks the number of outs and the score and increases the inning number if necessary. It also handles the concept of &quot;extra innings&quot; and overtime due to a tie.</p>
 <p>We've modeled it this way because it's similar to the state management code we'll be writing below.</p>
 <p><strong>Line 1</strong> sets the name of the class.</p>
 <p>Every method defined in the class will be passed at least one parameter, <tt class="docutils literal">self</tt>. <tt class="docutils literal">self</tt> is a reference to the current instance of the class.</p>
 <p><strong>Lines 2-12</strong> define the <em>constructor</em> of the class, which is always named <tt class="docutils literal">__init__()</tt>. This method is called only once, when the class instance is initially created.</p>
-<p>In Python, a class method name surrounded by two underscores on each side is considered "magic" - it has special meaning, like how this method is the constructor.</p>
+<p>In Python, a class method name surrounded by two underscores on each side is considered &quot;magic&quot; - it has special meaning, like how this method is the constructor.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>Magic methods are a extremely useful feature of Python, and are worth researching fully.</p>
@@ -465,7 +469,7 @@
 <p>Instance methods are methods that operate on an instance of a class. A reference to the instance is passed to all instance methods, named <tt class="docutils literal">self</tt>. We call them <em>instance</em> methods to differentiate them from <em>class methods</em>. Class attributes are explained a bit later on in this article. The thing to know about class <em>methods</em> is that instead of the first parameter being a reference to the <em>instance</em>, its a reference to the <em>class</em>.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">Most of the time you won't have to deal with class methods. In fact, to use them, you must decorate a method with the special <tt class="docutils literal">@classmethod</tt> decorator.</p>
+<p class="last">Most of the time you won't have to deal with class methods. In fact, to use them, you must decorate a method with the special <tt class="docutils literal">&#64;classmethod</tt> decorator.</p>
 </div>
 <p><tt class="docutils literal">tied()</tt> will returns <tt class="docutils literal">True</tt> if the game is tied, and <tt class="docutils literal">False</tt> if not.</p>
 <p><tt class="docutils literal">next_inning()</tt> advances the inning, and ends the game when we reach inning number 9. That is, unless its a tied game, then it sets <tt class="docutils literal">self.extra_innings</tt> to <tt class="docutils literal">True</tt>, and continues counting.</p>
@@ -480,8 +484,8 @@
 <span class="go"> 2</span>
 <span class="go"> &gt;&gt;&gt; board.tie()</span>
 <span class="go"> False</span>
-<span class="go"> &gt;&gt;&gt; board.scores["guest"] = 8</span>
-<span class="go"> &gt;&gt;&gt; board.scores["home"] = 8</span>
+<span class="go"> &gt;&gt;&gt; board.scores[&quot;guest&quot;] = 8</span>
+<span class="go"> &gt;&gt;&gt; board.scores[&quot;home&quot;] = 8</span>
 <span class="go"> &gt;&gt;&gt; board.tie()</span>
 <span class="go"> True</span>
 <span class="go"> &gt;&gt;&gt; board.next_inning()</span>
@@ -496,7 +500,7 @@
 <span class="go"> 10</span>
 <span class="go"> &gt;&gt;&gt; board.extra_innings</span>
 <span class="go"> True</span>
-<span class="go"> &gt;&gt;&gt; board.scores["home"] = 9</span>
+<span class="go"> &gt;&gt;&gt; board.scores[&quot;home&quot;] = 9</span>
 <span class="go"> &gt;&gt;&gt; board.next_inning()</span>
 <span class="go"> Game is over</span>
 </pre></div>
@@ -506,11 +510,11 @@
 <p>We have an example of some complex logic using a combination of instance attributes and methods: when we call the <tt class="docutils literal">next_inning()</tt> method, we have some logic to check if the game is tied (using the <tt class="docutils literal">tied()</tt> method) at the 10th inning. If it is, the <tt class="docutils literal">extra_innings</tt> flag is set to <tt class="docutils literal">True</tt>. Otherwise, the game is over.</p>
 <p>So using instance methods and attributes, <tt class="docutils literal">extra_innings()</tt> acts to alter the instance attributes.</p>
 <p>This is something special that classes give us over other ways of modeling state. We have a fully <em>encapsulated</em> state object - everything we do with state, and all the data we care about, lives inside that object, represented by the <tt class="docutils literal">ScoreBoard</tt> class, in its attributes. We perform operations on those attributes using the class' methods.</p>
-<p>We can treat an instance of the <tt class="docutils literal">ScoreBoard</tt> class as a "black box" - we don't need to know the intimate details of how it works to interact with it.</p>
+<p>We can treat an instance of the <tt class="docutils literal">ScoreBoard</tt> class as a &quot;black box&quot; - we don't need to know the intimate details of how it works to interact with it.</p>
 <p>Now lets look at how we can work this concept into a microcontroller project. We'll start by bringing things back to basics.</p>
 </div>
 <div class="section" id="conclusions-and-what-s-next">
-<h2 id="conclusions-and-whats-next">Conclusions And What's Next</h2>
+<h2>Conclusions And What's Next</h2>
 <p>In this installment of the series, we've learned a lot about what state is, and how to model it in Python. We've modeled state using single variables, complex data structures, and classes.</p>
 <p>We've discussed a problem that we can solve with state, button debouncing.</p>
 <p>In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.</p>
@@ -519,14 +523,15 @@
 <p class="last">Good news! You don't have to wait, <a class="reference external" href="/circuitpython-state-part-3.html">part 3 is up now!</a></p>
 </div>
 </div>
-</div><!-- /.entry-content -->
+
+  </div><!-- /.entry-content -->
 </section>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>
