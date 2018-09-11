@@ -47,3 +47,27 @@ Copyright:
     © 2010 Paramount Pictures. All rights reserved.
 Obtained:
     08/02/2018
+    
+.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png
+   :figwidth: 40%
+
+Source:
+    TV Series, *Parks And Recreation* Season 3, Episode 1, "Go Big Or Go Home". Screen capture.
+Copyright:
+    © 2011 NBC Studios, Inc. All Rights Reserved.
+Obtained:
+    09/10/2018
+    
+.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg
+   :figwidth: 20%
+   
+Source:
+    TV Series, *Parks And Recreation*. Season 7, Episode 7, "Save JJ's" Episode 707. Promotional photo. 
+Pictured: 
+    (l-r) Nick Offerman as Ron Swanson, Amy Poehler as Leslie Knope 
+Photo by: 
+    Colleen Hayes/NBC
+Copyright:
+    © 2014 NBC Studios, Inc. All Rights Reserved.
+Source:
+    Internet Movie Database, https://www.imdb.com/title/tt1266020/mediaviewer/rm3859807232

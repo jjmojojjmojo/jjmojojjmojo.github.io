@@ -18,3 +18,4 @@
 .. |copyright| unicode:: U+00A9 .. COPYRIGHT SIGN
 
 .. |sparkleheart| unicode:: U+1F496 .. SPARKLING HEART
+.. |heart| unicode:: U+2764 U+FE0F .. HEART

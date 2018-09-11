@@ -46,6 +46,9 @@
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#revisiting-old-friends" title="Revisiting Old Friends">Revisiting Old Friends</a></li><li><a class="toc-href" href="#managing-state-a-three-phase-process" title="Managing State: A Three-Phase Process">Managing State: A Three-Phase Process</a></li><li><a class="toc-href" href="#an-rgb-led-of-a-different-color-getting-classy" title="An RGB LED Of A Different Color: Getting Classy">An RGB LED Of A Different Color: Getting Classy</a></li><li><a class="toc-href" href="#unblocking-our-debouncing-using-state-to-avoid-blocking" title="Unblocking Our Debouncing: Using State To Avoid Blocking">Unblocking Our Debouncing: Using State To Avoid Blocking</a></li><li><a class="toc-href" href="#diving-into-events" title="Diving Into Events">Diving Into Events</a></li><li><a class="toc-href" href="#state-considerations" title="State: Considerations">State: Considerations</a></li><li><a class="toc-href" href="#conclusions-and-whats-next" next="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
+</div>
 <div class="entry-content status-published">
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
@@ -55,7 +58,7 @@
 <p>We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of <em>event detection</em> 🌈 .</p>
 <p>All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.</p>
 <div class="section" id="revisiting-old-friends">
-<h2>Revisiting Old Friends</h2>
+<h2 id="revisiting-old-friends">Revisiting Old Friends</h2>
 <p>Lets start by applying state tracking to our <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing  code</a> from the first part of this series.</p>
 <p>For reference, here's one of the example circuits, using the Trinket M0 (see <a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit">the demo circuit section in part 1</a> for references using other boards):</p>
 <a href="/images/fullsize/nonblocking-trinket-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-trinket-demo-circuit.jpg" srcset="/images/responsive/nonblocking-trinket-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-trinket-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-trinket-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-trinket-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-trinket-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-trinket-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-trinket-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-trinket-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-trinket-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
@@ -174,7 +177,7 @@
 </div>
 </div>
 <div class="section" id="managing-state-a-three-phase-process">
-<h2>Managing State: A Three-Phase Process</h2>
+<h2 id="managing-state-a-three-phase-process">Managing State: A Three-Phase Process</h2>
 <p>Before we go much further, lets draw an important distinction. Unlike a physical scoreboard at a baseball stadium, which acts as part of the experience of watching the game, our state merely <em>reflects</em> our reality.</p>
 <p>The way we work with state is to alter it either <em>because</em> something happened (say, a button was pressed, much like scoring a point in a game), or to <em>cause</em> something to happen (this is different; like lighting up an LED, or changing a NeoPixel's color).</p>
 <p>After some thought and experimentation, I've settled on a three-phase process for handling state in a microcontroller project.</p>
@@ -199,7 +202,7 @@
 <p>This all appears instantaneous for us, even giving the appearance of different lines of code running simultaneously, since cycles are millionths of a second long.</p>
 </div>
 <div class="section" id="an-rgb-led-of-a-different-color-getting-classy">
-<h2>An RGB LED Of A Different Color: Getting Classy</h2>
+<h2 id="an-rgb-led-of-a-different-color-getting-classy">An RGB LED Of A Different Color: Getting Classy</h2>
 <p>Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.</p>
 <p>But first, lets refactor our code to use a class to manage state.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -498,10 +501,10 @@
 <p>Here's a video of this code running on my Trinket M0:</p>
 <div class="video-container">
 <video controls="">
-<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
+<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4"/>
 <p>Your browser doesn't support HTML5 video. Here is
           a <a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
-</source></video>
+</video>
 </div><p>Before we move on, lets <em>refactor</em> our code yet again, but this time, just a little bit. Since <tt class="docutils literal">State</tt> is our keeper of state for our project, lets move <strong>all</strong> of the code that changes state into to a method of the <tt class="docutils literal">State</tt> class:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -630,7 +633,7 @@
 <p>Now that we've explored what state is, and looked at how we can write code to deal with it, we have opened ourselves up to some really neat possibilities. But since we're using <tt class="docutils literal">time.sleep()</tt>, our code is still <em>blocking</em>, and we're still limited by that. The next step is to utilize our new understanding of state to debounce our buttons <em>without</em> blocking.</p>
 </div>
 <div class="section" id="unblocking-our-debouncing-using-state-to-avoid-blocking">
-<h2>Unblocking Our Debouncing: Using State To Avoid Blocking</h2>
+<h2 id="unblocking-our-debouncing-using-state-to-avoid-blocking">Unblocking Our Debouncing: Using State To Avoid Blocking</h2>
 <p>The next step is to get rid of that blocking code. This is another thing our <tt class="docutils literal">State</tt> class can handle for us.</p>
 <p>As discussed earlier, the reason why we block is to keep our code from running too fast. This keeps our signals from our buttons smooth, avoiding bouncing.</p>
 <p>Another way to look at it is that we've introduced the passage of <em>time</em> into our main loop. We're fixing our code to run at an interval of 0.2 seconds, so we can wait until a button is completely pressed or released before we act, and so that our code won't run over and over without reason.</p>
@@ -870,10 +873,10 @@
 <p>The changes are pretty subtle, but here's another video showing this version running on my Trinket M0:</p>
 <div class="video-container">
 <video controls="">
-<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
+<source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4"/>
 <p>Your browser doesn't support HTML5 video. Here is
           a <a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
-</source></video>
+</video>
 </div><p>At this point we've "unblocked" our code, and crafted a really clean way of working with state.</p>
 <p>There is a small flaw here, as touched on earlier. The <tt class="docutils literal">random_color()</tt> method is being called nearly every 0.2 seconds, whether the button has been pressed or not. This is better than the first version of the code, where it was running almost every single loop, but it's still unnecessary.</p>
 <p>What we want, is for the color to change only once, when you stop pressing the button. Or even when you first press it, before the <tt class="docutils literal">rgb</tt> state attribute is set to <tt class="docutils literal">True</tt>.</p>
@@ -882,7 +885,7 @@
 </div>
 </div>
 <div class="section" id="diving-into-events">
-<h2>Diving Into Events</h2>
+<h2 id="diving-into-events">Diving Into Events</h2>
 <p>In order to avoid calling <tt class="docutils literal">random_color()</tt> every single time we update our state, whether the "b" button was pressed or not, we need to decide when the best time to call <tt class="docutils literal">random_color()</tt> is. For this example, we were calling <tt class="docutils literal">random_color()</tt> when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time).</p>
 <p>So when should we do it, to avoid calling <tt class="docutils literal">random_color()</tt> too frequently?</p>
 <p>Think about how a button, technically a "momentary switch", works. When you press it, the microcontroller pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". We can think about these situations as two separate <em>events</em> - <strong>press</strong> and <strong>release</strong>.</p>
@@ -1060,7 +1063,7 @@
 <p>You gain a lot of insight when you start to look at coding a microcontroller project as a problem of <em>managing state</em>. Then you can think about changes in state as triggering <em>events</em>. You can <em>handle</em> those events with code. Very complex problems become very easy to reason about, and easier to debug.</p>
 </div>
 <div class="section" id="state-considerations">
-<h2>State: Considerations</h2>
+<h2 id="state-considerations">State: Considerations</h2>
 <p>There are many benefits to modeling our project code around state:</p>
 <ul class="simple">
 <li>We have ultimate flexibility. When it comes to debouncing buttons or otherwise detecting events, we can avoid blocking. Generally speaking, managing state lets us decide what data we care about, and we can define our own events based on what's important to our project.</li>
@@ -1097,7 +1100,7 @@
 </div>
 </div>
 <div class="section" id="conclusions-and-what-s-next">
-<h2>Conclusions And What's Next</h2>
+<h2 id="conclusions-and-whats-next">Conclusions And What's Next</h2>
 <p>So, now we know what a great tool state is, and how to wield it like a pro.</p>
 <p>And building on that, we've explored the fundamentals of events, and we can think about things like pressing a button as a series of state changes. We can detect these changes and take action.</p>
 <p>As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖</p>

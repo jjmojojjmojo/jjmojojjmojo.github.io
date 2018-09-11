@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Testing!</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+<title>Testing!</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-    <h1>Testing!</h1>
-    
-    <div class="status-hidden">
-    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<h1>Testing!</h1>
+<div class="contents">
+<div id="toc"><ul><li><a class="toc-href" href="#emojis" title="Emojis">Emojis</a></li><li><a class="toc-href" href="#admonitions" title="Admonitions">Admonitions</a></li><li><a class="toc-href" href="#codeexplanation" title="Code/Explanation">Code/Explanation</a></li><li><a class="toc-href" href="#images" title="Images">Images</a></li><li><a class="toc-href" href="#line-blocks" title="Line Blocks">Line Blocks</a></li></ul></div>
+</div>
+<div class="status-hidden">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>This page exists for testing the style and post-processing of the site outside of actual content.</p>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="emojis">
-<h2>Emojis</h2>
+<h2 id="emojis">Emojis</h2>
 <p>I've experimented with using various emojis in my text. Here's what they look like:</p>
 <p>😀 - general smile</p>
 <p>💔 - broken heart</p>
@@ -47,11 +48,11 @@
 <p>🦄 - unicorn</p>
 <p>😭 - crying face</p>
 <p>🐭 - mouse face</p>
-<p>™ - trademark - should be right up against text™.</p>
+<p>&trade; - trademark - should be right up against text&trade;.</p>
 <p>💖 - sparkling heart</p>
 </div>
 <div class="section" id="admonitions">
-<h2>Admonitions</h2>
+<h2 id="admonitions">Admonitions</h2>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This is a warning.</p>
@@ -66,8 +67,8 @@
 </div>
 </div>
 <div class="section" id="code-explanation">
-<h2>Code/Explanation</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<h2 id="codeexplanation">Code/Explanation</h2>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -108,12 +109,12 @@
 <span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">DOWN</span>
 
 <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span>
-    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -133,32 +134,32 @@
 </div>
 </div>
 <div class="section" id="images">
-<h2>Images</h2>
+<h2 id="images">Images</h2>
 <p>These images should be responsive. We can link to the original PNG version, and a bunch of responsive variants will be made, and the HTML will be replaced with the proper responsive image HTML. The image should also link to a full-sized version.</p>
 <div class="section" id="images-in-a-container">
 <h3>Images in a container</h3>
 <div class="centered docutils container">
-<img alt="" src="/images/circuitplayground-express-closeup-neopixel-marked.png" style="width: 20%;" />
-<img alt="" src="/images/itsybitsy-m0-express-closeup-dotstar-marked.png" style="width: 20%;" />
-<img alt="" src="/images/trinket-m0-closeup-dotstar-marked.png" style="width: 20%;" />
-<img alt="" src="/images/gemma-m0-closeup-dotstar-marked.png" style="width: 20%;" />
+<img alt="" src="/images/circuitplayground-express-closeup-neopixel-marked.png" style="width: 20%;"/>
+<img alt="" src="/images/itsybitsy-m0-express-closeup-dotstar-marked.png" style="width: 20%;"/>
+<img alt="" src="/images/trinket-m0-closeup-dotstar-marked.png" style="width: 20%;"/>
+<img alt="" src="/images/gemma-m0-closeup-dotstar-marked.png" style="width: 20%;"/>
 </div>
 </div>
 <div class="section" id="images-on-their-own">
 <h3>Images on their own</h3>
-<img alt="" class="align-center" src="/images/aligator-clips.png" style="width: 80%;" />
-<img alt="" class="align-center" src="/images/nonblocking-lengths-of-wire.png" style="width: 50%;" />
+<img alt="" class="align-center" src="/images/aligator-clips.png" style="width: 80%;"/>
+<img alt="" class="align-center" src="/images/nonblocking-lengths-of-wire.png" style="width: 50%;"/>
 </div>
 <div class="section" id="figures">
 <h3>Figures</h3>
 <div class="figure" style="width: 80%">
-<img alt="" src="/images/basic-button-event-logic.png" />
+<img alt="" src="/images/basic-button-event-logic.png"/>
 <p class="caption">This is the caption for this figure.</p>
 </div>
 </div>
 </div>
 <div class="section" id="line-blocks">
-<h2>Line Blocks</h2>
+<h2 id="line-blocks">Line Blocks</h2>
 <div class="line-block">
 <div class="line">this is a line block</div>
 </div>
@@ -181,15 +182,13 @@
 </div>
 </div>
 </div>
-
-
-	</div>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

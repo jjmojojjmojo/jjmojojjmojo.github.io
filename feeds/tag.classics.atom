@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - classics</title><link href="/" rel="alternate"></link><link href="/feeds/tag.classics.atom" rel="self"></link><id>/</id><updated>2018-08-08T13:34:00-04:00</updated><entry><title>Advanced Boot Scripting</title><link href="/advanced-boot-scripting.html" rel="alternate"></link><published>2018-08-08T13:34:00-04:00</published><updated>2018-08-08T13:34:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-08:/advanced-boot-scripting.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - classics</title><link href="/" rel="alternate"></link><link href="/feeds/tag.classics.atom" rel="self"></link><id>/</id><updated>2018-09-10T09:00:00-04:00</updated><entry><title>The Johnson Pyramid Of Programmer Greatness</title><link href="/johnson-pyramid-of-programmer-greatness.html" rel="alternate"></link><published>2018-09-10T09:00:00-04:00</published><updated>2018-09-10T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-10:/johnson-pyramid-of-programmer-greatness.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;img alt="" class="align-right" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
+&lt;p&gt;A few years ago, inspired by the TV sitcom &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;, I fired up Adobe Illustrator and put together an infographic that highlights my personal philosophy about what makes a great software engineer, &lt;em&gt;The Johnson Pyramid Of Programmer Greatness&lt;/em&gt;. This is the latest version.&lt;/p&gt;
+&lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
+</summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;img alt="" class="align-right" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
+&lt;p&gt;A few years ago, inspired by the TV sitcom &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;, I fired up Adobe Illustrator and put together an infographic that highlights my personal philosophy about what makes a great software engineer, &lt;em&gt;The Johnson Pyramid Of Programmer Greatness&lt;/em&gt;. This is the latest version.&lt;/p&gt;
+&lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
+
+&lt;div class="section" id="seeing-myself-in-the-tv-people"&gt;
+&lt;h2 id="seeing-myself-in-the-tv-people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg"/&gt;
+&lt;p class="caption"&gt;Ron Swanson (Nick Offerman) and Leslie Knope (Amy Poehler), or, "what Josh's brain looks like inside".&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;There's a TV sitcom that aired on &lt;a class="reference external" href="https://en.wikipedia.org/wiki/NBC"&gt;NBC&lt;/a&gt; in the US from 2009-2015 called &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;. It's filmed in the style of a documentary, like &lt;a class="reference external" href="https://en.wikipedia.org/wiki/The_Office_(UK_TV_series)"&gt;The Office&lt;/a&gt;, but they didn't take the format too literally.&lt;/p&gt;
+&lt;p&gt;The series centers around a parks and recreation department in a fictitious town in Indiana. The main character is &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Leslie_Knope"&gt;Leslie Knope&lt;/a&gt;, a deputy director who believes in government and is really upbeat and motivated. She's played by &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Amy_Poehler"&gt;Amy Poehler&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Her boss is sort of her counterpart, a self-proclaimed "libertarian" who's biggest dream is to eliminate all government spending. His name is &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Ron_Swanson"&gt;Ron Swanson&lt;/a&gt;, and he's portrayed by &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Nick_Offerman"&gt;Nick Offerman&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;While I've always enjoyed the show, these two characters, in particular, have always fascinated me. This is for a few reasons. First, they are very different people and yet get along really well. I love seeing that, it's reflective of really great relationships I've had, and it's something we sorely need more of in real life. ❤️&lt;/p&gt;
+&lt;p&gt;Second, they are both true individuals - they each march to the beat of their own drummer. I identify with that aspect, since I'm sort of weird too. 🦄&lt;/p&gt;
+&lt;p&gt;But more so, the two characters, in a small way, represent the dichotomy of my own personality.&lt;/p&gt;
+&lt;p&gt;Leslie is high energy, meticulous, and hyper-organized. She has strong, positive beliefs. I tend to be that way too. While technically a staunch realist, I tend to look at things in a positive light first, and find a lot of joy and wonder in the world.&lt;/p&gt;
+&lt;p&gt;Ron is a pragmatist at heart. He's blunt, and anti-social. He's an outdoorsman. A "mans-man" but not insensitive or bigoted. He does things his own way. Yet he will share his wisdom readily. He's a craftsman, and builds beautiful things without much celebration. I identify with Ron a lot when I'm building things, or mentoring.&lt;/p&gt;
+&lt;p&gt;That's me in a nutshell - optimistic and positive, bubbly, intensely excited about things I'm interested in. Yet I'm a quiet, matter-of-fact, pragmatic craftsman when I'm creating. Both sides of my personality work together when I'm sharing what I know, teaching, or writing documentation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-reference-explained"&gt;
+&lt;h2 id="the-reference-explained"&gt;The Reference Explained&lt;/h2&gt;
+&lt;p&gt;There was an episode where Ron was tasked with coaching a children's basketball team. Ron decided that the best way to make true champions of his kids was to indoctrinate them with wisdom of what makes a person truly great.&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png"/&gt;
+&lt;p class="caption"&gt;"Coach" Ron Swanson (Nick Offerman) presenting &lt;em&gt;The Swanson Pyramid Of Greatness&lt;/em&gt; to his team.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;He presented them with an infographic entitled &lt;em&gt;The Swanson Pyramid Of Greatness&lt;/em&gt;. In includes many true gems, real words to live by, such as:&lt;/p&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;strong&gt;CAPITALISM&lt;/strong&gt; God's way of determining who is smart, and who is poor.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;strong&gt;INTENSITY&lt;/strong&gt; Give 100%. Giving 110% is impossible. Only idiots recommend that.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;strong&gt;BUFFETS&lt;/strong&gt; Whenever available. Choose quantity over quality.&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;There's also a row that contains &lt;strong&gt;COW PROTEIN&lt;/strong&gt;, &lt;strong&gt;PIG PROTEIN&lt;/strong&gt;, &lt;strong&gt;CHICKEN PROTEIN&lt;/strong&gt;, &lt;strong&gt;DEER PROTEIN&lt;/strong&gt; along with &lt;strong&gt;ROMANTIC LOVE&lt;/strong&gt; and &lt;strong&gt;FISH PROTEIN (SPORT ONLY!)&lt;/strong&gt;. 😀&lt;/p&gt;
+&lt;p&gt;It's all very tongue-in-cheek, and a ridiculous thing to push onto kids just trying to get some exercise.&lt;/p&gt;
+&lt;p&gt;And that's what got me thinking - what sort of things would I put on such a pyramid, in a similar tongue-in-cheek style, that I might push on unsuspecting software engineers? I fired up Illustrator and got to work.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2 id="the-johnson-pyramid-of-programmer-greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
+&lt;p&gt;My interpretation of Ron Swanson's masterpiece is probably a little more serious than his was, but it's still intended to be a light-hearted take. It was designed in Adobe Illustrator, at full 24x48" poster size. I tweaked the dimensions a little bit to accommodate printing on standard letter/A4 paper, in landscape.&lt;/p&gt;
+&lt;p&gt;Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):&lt;/p&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 80%;"/&gt;
+&lt;p&gt;The original version used colors inspired by Ron's poster:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-classic.png" style="width: 80%;"/&gt;
+&lt;p&gt;I've also made a black-and-white version for easier printing with black-and-white laser printers:&lt;/p&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/black-and-white.png" style="width: 80%;"/&gt;
+&lt;p&gt;I've created PDF versions of each file, should you want to print in the best-possible quality:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-new.pdf"&gt;New Colorscheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-classic.pdf"&gt;Classic Colorscheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/black-and-white.pdf"&gt;Black and White&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In my pyramid, as in Ron's, the blocks of wisdom are arranged such that the least important concepts are lower on the pyramid. Now, you might argue that &lt;strong&gt;Caffeine&lt;/strong&gt; is less important than &lt;strong&gt;Attention To Detail&lt;/strong&gt;, and that's sort of the point. It's about the way &lt;em&gt;I&lt;/em&gt; feel about things, and how &lt;em&gt;you&lt;/em&gt; feel about things. It's designed to spark conversation. Like, maybe we should talk if &lt;strong&gt;Beer&lt;/strong&gt; is higher on your list than, say &lt;strong&gt;Process&lt;/strong&gt;... 🤔 The idea is that we're "busting the collective chops" of myself and my colleagues, with a gentle nudge toward what I've found to be the most useful over the years. It's all meant in good fun. 💖&lt;/p&gt;
+&lt;p&gt;That said, I think we will &lt;strong&gt;all&lt;/strong&gt; agree that &lt;strong&gt;J.F.D.I.&lt;/strong&gt; and &lt;strong&gt;Awesomeness&lt;/strong&gt; are of ultimate (and penultimate) importance! 😉&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="culture"></category><category term="humor"></category><category term="classics"></category></entry><entry><title>Advanced Boot Scripting</title><link href="/advanced-boot-scripting.html" rel="alternate"></link><published>2018-08-08T13:34:00-04:00</published><updated>2018-08-08T13:34:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-08:/advanced-boot-scripting.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
@@ -35,20 +103,20 @@ discussion about getting your jars into
 &lt;a class="reference external" href="http://maven.apache.org/index.html"&gt;Maven&lt;/a&gt; repository.&lt;/p&gt;
 
 &lt;table class="docutils footnote" frame="void" id="id2" rules="none"&gt;
-&lt;colgroup&gt;&lt;col class="label" /&gt;&lt;col /&gt;&lt;/colgroup&gt;
+&lt;colgroup&gt;&lt;col class="label"/&gt;&lt;col/&gt;&lt;/colgroup&gt;
 &lt;tbody valign="top"&gt;
-&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[*]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I originally had &amp;quot;&lt;em&gt;interfectorem pluma&lt;/em&gt;&amp;quot; to represent &amp;quot;killer feature&amp;quot; in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&amp;gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as &lt;em&gt;interfectorem pluma&lt;/em&gt; literally translates to something like &amp;quot;feather murderer&amp;quot;. In my amateur approach &lt;em&gt;adjuncti finalum&lt;/em&gt; literally translates to something like &amp;quot;characteristic of the ultimate goal&amp;quot;, which, if even remotely correct, is pretty accurate.&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="#id1"&gt;[*]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;I originally had "&lt;em&gt;interfectorem pluma&lt;/em&gt;" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&amp;gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as &lt;em&gt;interfectorem pluma&lt;/em&gt; literally translates to something like "feather murderer". In my amateur approach &lt;em&gt;adjuncti finalum&lt;/em&gt; literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate.&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;div class="section" id="setup"&gt;
-&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;h2 id="setup"&gt;Setup&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As I've covered before&lt;/a&gt;,
 boot is easy to install. All you need is a JDK and the &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;boot executable&lt;/a&gt;. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
 &lt;span class="gp"&gt;$&lt;/span&gt; mkdir -p ~/bin
 &lt;span class="gp"&gt;$&lt;/span&gt; mv boot.sh boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod a+x boot &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mv boot ~/bin/
 
-&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;export PATH=\$PATH:\$HOME/bin&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=\$PATH:\$HOME/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
 &lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="explanation section"&gt;
@@ -81,30 +149,30 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="making-boot-faster"&gt;
-&lt;h2&gt;Making Boot Faster&lt;/h2&gt;
+&lt;h2 id="making-boot-faster"&gt;Making Boot Faster&lt;/h2&gt;
 &lt;p&gt;Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_profile&lt;/span&gt;&lt;/tt&gt; or similar other files for your particular shell. See the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options"&gt;JVM-Options&lt;/a&gt; page in the boot documentation for details, and other ways to incorporate these settings into your projects:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;export BOOT_JVM_OPTIONS=&amp;quot;-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-simple-script"&gt;
-&lt;h2&gt;A Simple Script&lt;/h2&gt;
+&lt;h2 id="a-simple-script"&gt;A Simple Script&lt;/h2&gt;
 &lt;p&gt;For this article, we'll start with an example of a useful application that grabs the most recent tweet from the &lt;a class="reference external" href="https://twitter.com/nihilist_arbys"&gt;Nihilist Arby's&lt;/a&gt; twitter feed. A great addition to your &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29"&gt;MOTD&lt;/a&gt; to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="twitter-api-tokens"&gt;
-&lt;h2&gt;Twitter API Tokens&lt;/h2&gt;
+&lt;h2 id="twitter-api-tokens"&gt;Twitter API Tokens&lt;/h2&gt;
 &lt;p&gt;Before we begin, set up an application and &lt;a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens"&gt;obtain a consumer key&lt;/a&gt;&amp;nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to &lt;em&gt;read only&lt;/em&gt;. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="quick-note-development-deviations"&gt;
-&lt;h2&gt;Quick Note: Development Deviations&lt;/h2&gt;
+&lt;h2 id="quick-note-development-deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
 &lt;p&gt;Since we're not building anything right now, or utilizing the task infrastructure, we don't need a &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run &lt;tt class="docutils literal"&gt;boot repl&lt;/tt&gt;:&lt;/p&gt;
-&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Alternatively, we can pre-load dependencies on the command line when we run the &lt;tt class="docutils literal"&gt;repl&lt;/tt&gt; task:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot -d twitter-api:1.8.0 repl
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-script-version-1"&gt;
-&lt;h2&gt;The Script: Version 1&lt;/h2&gt;
+&lt;h2 id="the-script-version-1"&gt;The Script: Version 1&lt;/h2&gt;
 &lt;p&gt;For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
@@ -134,33 +202,33 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 26
 27
 28&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.oauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-     &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.api.restful&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-     &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-     &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.handlers&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.oauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.api.restful&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.handlers&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import &lt;/span&gt;&lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;import &lt;/span&gt;&lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt;
-  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:text&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:text&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;response&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt;
-   &lt;span class="p"&gt;[]&lt;/span&gt;
-   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
-     &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;quot;[YOUR CONSUMER KEY]&amp;quot;&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;quot;[YOUR CONSUMER SECRET]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-     &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
-                 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;
-                 &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-     &lt;span class="ss"&gt;:params&lt;/span&gt;
-       &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;nihilist_arbys&amp;quot;&lt;/span&gt;
-        &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;[]&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER KEY]"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER SECRET]"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="nv"&gt;exception-print&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:params&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Making this script executable, it can be run on the command line. The
 result will be the last tweet. I named my script &lt;tt class="docutils literal"&gt;downer&lt;/tt&gt;, but you can
@@ -179,7 +247,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p class="first"&gt;The first 2 lines are what make this a boot script. The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; function and general information about environments can be found in the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment"&gt;boot documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;First we have the &amp;quot;&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29"&gt;shebang&lt;/a&gt;&amp;quot; line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having &lt;tt class="docutils literal"&gt;/bin/env&lt;/tt&gt; available in the same location on most systems, to figure out where boot is.&lt;/p&gt;
+&lt;p&gt;First we have the "&lt;a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29"&gt;shebang&lt;/a&gt;" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having &lt;tt class="docutils literal"&gt;/bin/env&lt;/tt&gt; available in the same location on most systems, to figure out where boot is.&lt;/p&gt;
 &lt;p&gt;Then we declare our sole dependency on &lt;a class="reference external" href="https://github.com/adamwynne/twitter-api"&gt;twitter-api&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p class="first"&gt;lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called &lt;tt class="docutils literal"&gt;boot.user&lt;/tt&gt;. You can alternatively load external code using the &lt;tt class="docutils literal"&gt;ns&lt;/tt&gt; form. The example code could be replaced thusly:&lt;/p&gt;
@@ -198,18 +266,18 @@ name it however you'd like:&lt;/p&gt;
   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:import&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;twitter.callbacks.protocols&lt;/span&gt; &lt;span class="nv"&gt;SyncSingleCallback&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;Lines 11-28 are the &amp;quot;meat&amp;quot; of the program. Boot will execute the first  &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function that it finds in a script. For details about what the code is doing, see the &lt;a class="reference external" href="https://github.com/adamwynne/twitter-api"&gt;twitter-api&lt;/a&gt; and the &lt;a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline"&gt;twitter restful api&lt;/a&gt;    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.&lt;/p&gt;
+&lt;li&gt;&lt;p class="first"&gt;Lines 11-28 are the "meat" of the program. Boot will execute the first  &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function that it finds in a script. For details about what the code is doing, see the &lt;a class="reference external" href="https://github.com/adamwynne/twitter-api"&gt;twitter-api&lt;/a&gt; and the &lt;a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline"&gt;twitter restful api&lt;/a&gt;    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-1"&gt;
-&lt;h2&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
+&lt;h2 id="distributioninstallation-mark-1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
 &lt;p&gt;The real beauty of this boot script we have, is that it is a self-contained entity. We can send it to anyone who has boot and a JDK installed. They can place the script anywhere they like. Dependencies are automatically downloaded the first time its run.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-not-so-simple-script"&gt;
-&lt;h2&gt;A Not-So-Simple Script&lt;/h2&gt;
-&lt;p&gt;Boot scripting provides a natural progression from &amp;quot;just a script&amp;quot; to &amp;quot;full-blown application&amp;quot;.&lt;/p&gt;
+&lt;h2 id="a-not-so-simple-script"&gt;A Not-So-Simple Script&lt;/h2&gt;
+&lt;p&gt;Boot scripting provides a natural progression from "just a script" to "full-blown application".&lt;/p&gt;
 &lt;p&gt;Boot scripts contain all of the functions needed to run, but this poses some problems:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;as functionality grows, the script can quickly&amp;nbsp;become unruly&lt;/li&gt;
@@ -260,13 +328,13 @@ name it however you'd like:&lt;/p&gt;
   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;statuses-user-timeline&lt;/span&gt;
     &lt;span class="ss"&gt;:oauth-creds&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make-oauth-creds&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;quot;[YOUR CONSUMER KEY]&amp;quot;&lt;/span&gt;
-         &lt;span class="s"&gt;&amp;quot;[YOUR CONSUMER SECRET]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="s"&gt;"[YOUR CONSUMER KEY]"&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="s"&gt;"[YOUR CONSUMER SECRET]"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="ss"&gt;:callbacks&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;SyncSingleCallback.&lt;/span&gt;
                  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="nv"&gt;printer&lt;/span&gt; &lt;span class="nv"&gt;response-return-body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
                  &lt;span class="nv"&gt;exception-print&lt;/span&gt;
                  &lt;span class="nv"&gt;exception-print&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="ss"&gt;:params&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;nihilist_arbys&amp;quot;&lt;/span&gt;
+    &lt;span class="ss"&gt;:params&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:screen-name&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;
              &lt;span class="ss"&gt;:count&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="admonition note"&gt;
@@ -286,10 +354,10 @@ name it however you'd like:&lt;/p&gt;
  9
 10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
-  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt;
   &lt;span class="p"&gt;[]&lt;/span&gt;
@@ -356,29 +424,29 @@ name it however you'd like:&lt;/p&gt;
 28
 29&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
-  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;last-tweet&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
-  &lt;span class="s"&gt;&amp;quot;Prints the last tweet from the given account. Requires twitter user app&lt;/span&gt;
+  &lt;span class="s"&gt;"Prints the last tweet from the given account. Requires twitter user app&lt;/span&gt;
 &lt;span class="s"&gt;  authentication tokens. The authentication tokens can be set using the&lt;/span&gt;
 &lt;span class="s"&gt;  command-line options below, or in the TWITTER_ID and TWITTER_SECRET&lt;/span&gt;
 &lt;span class="s"&gt;  environment variables.&lt;/span&gt;
 
-&lt;span class="s"&gt;  USAGE: downer [options] [twitter account]&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;  USAGE: downer [options] [twitter account]"&lt;/span&gt;
 
-  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="nv"&gt;ID&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Consumer id from Twitter&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;SECRET&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Consumer secret from Twitter&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;account&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nth &lt;/span&gt;&lt;span class="nv"&gt;*args*&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;nihilist_arbys&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;TWITTER_ID&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-id&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;TWITTER_SECRET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="nv"&gt;ID&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;"Consumer id from Twitter"&lt;/span&gt;
+   &lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;SECRET&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;"Consumer secret from Twitter"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;account&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nth &lt;/span&gt;&lt;span class="nv"&gt;*args*&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;"nihilist_arbys"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-id&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;"TWITTER_ID"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-id&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="nv"&gt;consumer-secret&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;System/getenv&lt;/span&gt; &lt;span class="s"&gt;"TWITTER_SECRET"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:consumer-secret&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
 
     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nil? &lt;/span&gt;&lt;span class="nv"&gt;consumer-id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;nil? &lt;/span&gt;&lt;span class="nv"&gt;consumer-secret&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ERROR: you must provide twitter credentials. Try -h&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"ERROR: you must provide twitter credentials. Try -h"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;last-tweet&lt;/span&gt;
         &lt;span class="nv"&gt;account&lt;/span&gt;
         &lt;span class="nv"&gt;consumer-id&lt;/span&gt;
@@ -389,7 +457,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;div class="docutils container"&gt;
 &lt;/div&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;The docstring for the function is used as the &amp;quot;usage&amp;quot; message when the user passes the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag.&lt;/li&gt;
+&lt;li&gt;The docstring for the function is used as the "usage" message when the user passes the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag.&lt;/li&gt;
 &lt;li&gt;The task option DSL allows for &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#types"&gt;a pre-processing step&lt;/a&gt; to be defined for each value. In this case, we used &lt;tt class="docutils literal"&gt;str&lt;/tt&gt;, which treats each argument as a string. This can be changed to one of many very useful options, including keywords, symbols, files (which take a path and return a java.io object) and many more, including &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#complex-options"&gt;complex compound values&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;There are two special variables that are provided by the &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt;   macro: &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt;. &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; contains all of the processed options as defined in the argument list, in the form of a map. &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt; contains all other values passed on the command line, as a vector. We use the &lt;tt class="docutils literal"&gt;*args*&lt;/tt&gt; variable to allow the user an intuitive way to override the default twitter account.&lt;/li&gt;
 &lt;li&gt;The use of environment variables as alternatives to CLI options is  illustrated here. It's very useful for deployment of more complex    applications, and keeps sensitive information out of the process list.&lt;/li&gt;
@@ -415,14 +483,14 @@ name it however you'd like:&lt;/p&gt;
 &lt;span class="go"&gt;  -i, --consumer-secret SECRET  SECRET sets consumer secret from Twitter.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We set the environment variables, and try getting the last post from a different, possibly more depressing account:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;XXXXXXXXXXXXXXXXX&amp;quot;&lt;/span&gt;
-&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YYYYYYYYYYYYYYYYYYYYYYYYY&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"XXXXXXXXXXXXXXXXX"&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TWITTER_SECRET&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"YYYYYYYYYYYYYYYYYYYYYYYYY"&lt;/span&gt;
 &lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
 &lt;span class="go"&gt;FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-2"&gt;
-&lt;h2&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
+&lt;h2 id="distributioninstallation-mark-2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
 &lt;p&gt;Pulling some of the code out into a separate file has made our little script cleaner, but now distributing the file is slightly more complicated, since we have to provide the script access to the code we factored out.&lt;/p&gt;
 &lt;p&gt;There are several ways to handle this:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -436,10 +504,10 @@ name it however you'd like:&lt;/p&gt;
 &lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-getting-rid-of-log4j-notices"&gt;
-&lt;h2&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
+&lt;h2 id="appendix-getting-rid-of-log4j-notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
 &lt;p&gt;You may have noticed that you get a bunch of warning messages when running our code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
-&lt;span class="go"&gt;SLF4J: Failed to load class &amp;quot;org.slf4j.impl.StaticLoggerBinder&amp;quot;.&lt;/span&gt;
+&lt;span class="go"&gt;SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".&lt;/span&gt;
 &lt;span class="go"&gt;SLF4J: Defaulting to no-operation (NOP) logger implementation&lt;/span&gt;
 &lt;span class="go"&gt;SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.&lt;/span&gt;
 &lt;span class="go"&gt;FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk&lt;/span&gt;
@@ -460,36 +528,36 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 &lt;p&gt;Since we don't need logging for our project, we'll choose the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;slf4j-nop&lt;/span&gt;&lt;/tt&gt; back-end.&lt;/p&gt;
 &lt;p&gt;To figure out exactly what the dependency specification looks like, we can search in the &lt;a class="reference external" href="https://search.maven.org/"&gt;Maven Central Repository&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 85%"&gt;
-&lt;img alt="" src="/images/maven-search.png" /&gt;
+&lt;img alt="" src="/images/maven-search.png"/&gt;
 &lt;p class="caption"&gt;Screen grab of Maven Central search results for 'slf4j-nop'&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;From the screen grab above, we can derive the dependency specification: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[group-id/artifact-id&lt;/span&gt; &amp;quot;version&amp;quot;]&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;As such, in our case, our spec will be &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="pre"&gt;&amp;quot;1.8.0-beta2&amp;quot;]&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;From the screen grab above, we can derive the dependency specification: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[group-id/artifact-id&lt;/span&gt; "version"]&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;As such, in our case, our spec will be &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="pre"&gt;"1.8.0-beta2"]&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
 &lt;p&gt;We might want to be weary of using beta code, even if it isn't important to our project.&lt;/p&gt;
-&lt;p class="last"&gt;To find the latest &lt;em&gt;stable&lt;/em&gt; version of the libary, we can click on the &amp;quot;All&amp;quot; link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is &lt;tt class="docutils literal"&gt;1.7.25&lt;/tt&gt;.&lt;/p&gt;
+&lt;p class="last"&gt;To find the latest &lt;em&gt;stable&lt;/em&gt; version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is &lt;tt class="docutils literal"&gt;1.7.25&lt;/tt&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;So now, our &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;set-env!&lt;/span&gt;&lt;/tt&gt; call looks like this (using the latest stable version of &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;slf4j-nop&lt;/span&gt;&lt;/tt&gt;):&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
 4&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt;
-  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.7.25&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+  &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.slf4j/slf4j-nop&lt;/span&gt; &lt;span class="s"&gt;"1.7.25"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+  &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;After rebuilding our jar, or running our boot script again, we'll see the &lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; warnings have disapeared.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="clojure"></category><category term="boot"></category><category term="classics"></category></entry><entry><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="alternate"></link><published>2018-08-01T11:41:00-04:00</published><updated>2018-08-01T11:41:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</id><summary type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from &amp;quot;never used java before&amp;quot; to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from &amp;quot;never used java before&amp;quot; to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+</content><category term="clojure"></category><category term="boot"></category><category term="classics"></category></entry><entry><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="alternate"></link><published>2018-08-01T11:41:00-04:00</published><updated>2018-08-01T11:41:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</id><summary type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
 
 &lt;div class="section" id="overview-for-the-unititated"&gt;
-&lt;h2&gt;Overview For The Unititated&lt;/h2&gt;
+&lt;h2 id="overview-for-the-unititated"&gt;Overview For The Unititated&lt;/h2&gt;
 &lt;p&gt;For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.&lt;/p&gt;
-&lt;p&gt;Clojure is a &lt;em&gt;functional programming language&lt;/em&gt; in the style of Common Lisp. &amp;quot;Functional&amp;quot; in this sense means that functions are first-class objects; code and data are peers. Data is &lt;em&gt;immutable&lt;/em&gt; - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.&lt;/p&gt;
+&lt;p&gt;Clojure is a &lt;em&gt;functional programming language&lt;/em&gt; in the style of Common Lisp. "Functional" in this sense means that functions are first-class objects; code and data are peers. Data is &lt;em&gt;immutable&lt;/em&gt; - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.&lt;/p&gt;
 &lt;p&gt;Functional languages, especially in the Lisp-style are &lt;em&gt;expressive&lt;/em&gt; and, linguistically speaking, &lt;em&gt;simple&lt;/em&gt;. The original Lisp, invented in 1958 by John McCarthy at M.I.T., was expressed in seven functions and two special forms - the language, in total, contained just &lt;em&gt;nine elements&lt;/em&gt;, and was fully Touring-complete. By comparison, the current version (3.5) of Python has 30+ keywords, plus special elements such as mathematical operators and colons - and that's merely the language itself, that doesn't include idioms or conventions.&lt;/p&gt;
-&lt;p&gt;What this adds up to is a vast reduction in &amp;quot;incidental complexity&amp;quot; - complexities that creep into code because of the limitations, or expectations, of our languages. Contrast incidental complexity with &amp;quot;essential complexity&amp;quot;, or complexities that our code would not function without. Lisp-like languages stay out of your way.&lt;/p&gt;
+&lt;p&gt;What this adds up to is a vast reduction in "incidental complexity" - complexities that creep into code because of the limitations, or expectations, of our languages. Contrast incidental complexity with "essential complexity", or complexities that our code would not function without. Lisp-like languages stay out of your way.&lt;/p&gt;
 &lt;p&gt;In terms of Clojure, we are blessed with a very concise, easy to reason about syntax that gives us incredible flexibility. We are also provided with a robust standard library.&lt;/p&gt;
 &lt;p&gt;Clojure was designed with concurrency in mind, from its inception. This makes advanced use of threads and multiple processes simple and quite accessible, not to mention &lt;em&gt;safe&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Clojure is a general language specification. It has been implemented for the Java Virtual Machine (JVM), JavaScript, and
@@ -527,7 +595,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="prerequisites"&gt;
-&lt;h2&gt;Prerequisites&lt;/h2&gt;
+&lt;h2 id="prerequisites"&gt;Prerequisites&lt;/h2&gt;
 &lt;p&gt;You will need the following:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;em&gt;A JDK installed&lt;/em&gt;.&lt;/li&gt;
@@ -544,7 +612,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dales-la-bota-give-em-the-boot-installation"&gt;
-&lt;h2&gt;&lt;em&gt;¡Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id="dales-la-bota-give-em-the-boot-installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://boot-clj.com/"&gt;Boot&lt;/a&gt; is '&lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;installed&lt;/a&gt;' by simply downloading an &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;executable file&lt;/a&gt; and putting it somewhere where you can execute it.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
@@ -572,7 +640,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;p&gt;Then we need to update our &lt;code&gt;$PATH&lt;/code&gt; environment variable so the shell can find our new executable boot:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;export PATH=\$PATH:\$HOME/bin&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"export PATH=\$PATH:\$HOME/bin"&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
 &lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/bin
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="explanation section"&gt;
@@ -655,13 +723,13 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
         &lt;span class="nv"&gt;Exit&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="nv"&gt;Control+D&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;quit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="nv"&gt;Commands&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/help&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="nv"&gt;Docs&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;doc &lt;/span&gt;&lt;span class="nv"&gt;function-name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;find-doc &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;part-of-name-here&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="nv"&gt;Find&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;find-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;part-of-name-here&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;find-doc &lt;/span&gt;&lt;span class="s"&gt;"part-of-name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;Find&lt;/span&gt; &lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;find-name&lt;/span&gt; &lt;span class="s"&gt;"part-of-name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="nv"&gt;Source&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;source&lt;/span&gt; &lt;span class="nv"&gt;function-name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="nv"&gt;Javadoc&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;javadoc&lt;/span&gt; &lt;span class="nv"&gt;java-object-or-class-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="nv"&gt;Examples&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;clojuredocs.org&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojuredocs&lt;/span&gt; &lt;span class="nb"&gt;or &lt;/span&gt;&lt;span class="nv"&gt;cdoc&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/clojuredocs&lt;/span&gt; &lt;span class="nv"&gt;name-here&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/clojuredocs&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ns-here&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;name-here&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;user/clojuredocs&lt;/span&gt; &lt;span class="s"&gt;"ns-here"&lt;/span&gt; &lt;span class="s"&gt;"name-here"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="mi"&gt;15&lt;/span&gt;
 &lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -718,13 +786,13 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 6
 7
 8&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
-  &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-  &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
 &lt;h5&gt;Explanation&lt;/h5&gt;
@@ -761,11 +829,11 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
    &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;_=&amp;gt;&lt;/span&gt;       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
-&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="ss"&gt;&amp;#39;boot.user/fib&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="ss"&gt;'boot.user/fib&lt;/span&gt;
 &lt;span class="nv"&gt;boot.user=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt; &lt;span class="mi"&gt;34&lt;/span&gt; &lt;span class="mi"&gt;55&lt;/span&gt;
 &lt;span class="nv"&gt;nil&lt;/span&gt;
@@ -798,18 +866,18 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 15&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;fib&lt;/span&gt;
-   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-   &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Printing fibonacci sequence up to &amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;numbers&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Integer/parseInt&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+ &amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"Printing fibonacci sequence up to "&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;"numbers"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Integer/parseInt&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
 &lt;h5&gt;Explanation&lt;/h5&gt;
@@ -831,17 +899,17 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;p&gt;Lines 3-10 are the same Fibonacci sequence we used before.&lt;/p&gt;
 &lt;p&gt;Line 12 provides an &lt;em&gt;entry point&lt;/em&gt;, a function that boot will invoke when the script is run. The name &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; is required by boot. The argument list uses the &lt;tt class="docutils literal"&gt;&amp;amp;&lt;/tt&gt; special form to collect a variable number of arguments into a single sequence named &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; (a function that does this is called a &lt;a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#variadic-functions"&gt;variadic function&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Boot passes the function a variable number of strings . Each string is text that was provided by the user in the console while invoking the script (typically referred to 'command-line arguments' or 'command-line options').&lt;/p&gt;
-&lt;p&gt;For example, if an imaginary command-line tool called &lt;tt class="docutils literal"&gt;boo&lt;/tt&gt; is executed with &amp;quot;hello world, welcome to the thunder dome&amp;quot;, like this:&lt;/p&gt;
+&lt;p&gt;For example, if an imaginary command-line tool called &lt;tt class="docutils literal"&gt;boo&lt;/tt&gt; is executed with "hello world, welcome to the thunder dome", like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boo hello world, welcome to the thunder dome
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The content of &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; will be&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;world,&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;welcome&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;to&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;the&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;thunder&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;dome&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"hello"&lt;/span&gt; &lt;span class="s"&gt;"world,"&lt;/span&gt; &lt;span class="s"&gt;"welcome"&lt;/span&gt; &lt;span class="s"&gt;"to"&lt;/span&gt; &lt;span class="s"&gt;"the"&lt;/span&gt; &lt;span class="s"&gt;"thunder"&lt;/span&gt; &lt;span class="s"&gt;"dome"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is something the shell does. It can be avoided by surrounding the arguments with double quotes, like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boo &lt;span class="s2"&gt;&amp;quot;hello world, welcome&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;to the thunder dome&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boo &lt;span class="s2"&gt;"hello world, welcome"&lt;/span&gt; &lt;span class="s2"&gt;"to the thunder dome"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In this case, &lt;tt class="docutils literal"&gt;args&lt;/tt&gt; is a vector containing two elements:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello world, welcome&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;to the thunder dome&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"hello world, welcome"&lt;/span&gt; &lt;span class="s"&gt;"to the thunder dome"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It's important to note that the shell can do other things with arguments that may be unexpected. The ins and outs of shells are outside the scope of this tutorial (and can vary from shell to shell), but here are a couple of common ones that might be useful or trip you up:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -864,7 +932,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;div class="docutils container"&gt;
 &lt;/div&gt;
 &lt;p&gt;We're again utilizing the &lt;tt class="docutils literal"&gt;chmod&lt;/tt&gt; command to make a file executable. Here, we use the shorthand mode specification (see the man page &lt;a class="reference external" href="https://linux.die.net/man/1/chmod"&gt;online&lt;/a&gt; or you can type &lt;tt class="docutils literal"&gt;man chmod&lt;/tt&gt; in your console for specifics), instead of using octal numbers (like &lt;tt class="docutils literal"&gt;755&lt;/tt&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;tt class="docutils literal"&gt;u+x&lt;/tt&gt; means &amp;quot;&lt;em&gt;add&lt;/em&gt; whatever bits are necessary to allow the &lt;strong&gt;u&lt;/strong&gt;ser to e&lt;strong&gt;x&lt;/strong&gt;ecute this file&amp;quot;. This leaves any other bits untouched.&lt;/p&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;u+x&lt;/tt&gt; means "&lt;em&gt;add&lt;/em&gt; whatever bits are necessary to allow the &lt;strong&gt;u&lt;/strong&gt;ser to e&lt;strong&gt;x&lt;/strong&gt;ecute this file". This leaves any other bits untouched.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Now you can run the script:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
@@ -882,7 +950,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;p&gt;I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio"&gt;Wikipedia page&lt;/a&gt; is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.&lt;/p&gt;
 &lt;p class="last"&gt;If you happen upon this and can shed some light on the subject, please &lt;a class="reference external" href="/pages/contact.html"&gt;drop me a line&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;Rounding makes it all work, but rounding isn't &amp;quot;baked in&amp;quot; to Clojure, so we'll use an external library to do it for us, called &lt;a class="reference external" href="https://github.com/clojure/math.numeric-tower"&gt;math.numeric-tower&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called &lt;a class="reference external" href="https://github.com/clojure/math.numeric-tower"&gt;math.numeric-tower&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p class="last"&gt;In actuality, the required functionality is present, you just need to use some &lt;a class="reference external" href="http://stackoverflow.com/a/25098576"&gt;existing Java libraries&lt;/a&gt; to make it work. I admit this is a bit of a strain, but it illustrates the use of external dependencies in boot.&lt;/p&gt;
@@ -914,9 +982,9 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 25
 26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;0.0.4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt; &lt;span class="nv"&gt;expt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt; &lt;span class="nv"&gt;expt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -925,17 +993,17 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
-         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;-main&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;cli-arg&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
          &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt; &lt;span class="nv"&gt;cli-arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Integer/parseInt&lt;/span&gt; &lt;span class="nv"&gt;cli-arg&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Printing Fibonacci sequence up to&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;numbers&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt; &lt;span class="s"&gt;"numbers"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;println&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -952,13 +1020,13 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;p&gt;The format for specifying dependencies is the same that &lt;a class="reference external" href="https://leiningen.org/"&gt;Leiningen&lt;/a&gt; uses - a vector containing a package specifier (often containing an organizational part, like &lt;tt class="docutils literal"&gt;org.clojure&lt;/tt&gt; in our script), and a version. Clojars uses &lt;a class="reference external" href="https://semver.org/"&gt;semantic versioning&lt;/a&gt;, so there are 3 numbers: a major revision (breaks existing APIs), a feature revision (API stays the same), and patch revision (for non-breaking bug fixes).&lt;/p&gt;
 &lt;p&gt;Note that the list of dependencies is behind a &lt;a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote"&gt;var quote&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;On line 5, the library is brought into our namespace using &lt;a class="reference external" href="https://clojuredocs.org/clojure.core/require"&gt;require&lt;/a&gt;. (For more information about namespaces and libraries, &lt;em&gt;Clojure For The Brave and True&lt;/em&gt;'s &lt;a class="reference external" href="https://www.braveclojure.com/organization/"&gt;organization&lt;/a&gt; chapter goes into some great detail. We've used the &lt;tt class="docutils literal"&gt;:refer&lt;/tt&gt; parameter to just import one function, &lt;tt class="docutils literal"&gt;round&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;On line 7, we pre-calculate the golden ratio and define a variable named &lt;tt class="docutils literal"&gt;phi&lt;/tt&gt; (the greek letter phi [φ] is used to represent the golden ratio in equations).&lt;/p&gt;
+&lt;p&gt;On line 7, we pre-calculate the golden ratio and define a variable named &lt;tt class="docutils literal"&gt;phi&lt;/tt&gt; (the greek letter phi [&amp;phi;] is used to represent the golden ratio in equations).&lt;/p&gt;
 &lt;p&gt;Lines 9-19 define our new, golden ratio-based Fibonacci sequence function. It performs basically the same way, except that it's single-airity.&lt;/p&gt;
 &lt;p&gt;Some interesting concepts introduced in this new function:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;This is not a recursive function in the usual sense. Instead, we use the &lt;tt class="docutils literal"&gt;loop&lt;/tt&gt; function and &lt;tt class="docutils literal"&gt;recur&lt;/tt&gt; macro. This is the way looping (like you'd use &lt;tt class="docutils literal"&gt;for&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;while&lt;/tt&gt; in other languages) works in Clojure. For more details on how they work, check out &lt;a class="reference external" href="https://clojurebridge.github.io/community-docs/docs/clojure/recur/"&gt;this ClojureBridge article&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;On line 11, we use &lt;tt class="docutils literal"&gt;do&lt;/tt&gt; to group multiple expressions (printing and recursing) into a single branch of an &lt;tt class="docutils literal"&gt;if&lt;/tt&gt;. This comes in handy a lot, but be careful not to overuse it - if you are doing too much in a conditional branch, it may be better to factor that code out into its own function.&lt;/li&gt;
-&lt;li&gt;On line 14 and 17, we use &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string &amp;quot;math&amp;quot; or interpolation features.&lt;/li&gt;
+&lt;li&gt;On line 14 and 17, we use &lt;tt class="docutils literal"&gt;str&lt;/tt&gt; to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string "math" or interpolation features.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;On lines 22 and 23, we process the command line argument. Variables that are unpacked by &lt;tt class="docutils literal"&gt;let&lt;/tt&gt; are processed in order, so we can refer to them right away. We take advantage of this to first extract the argument on line 22, then provide a sane default (10) in the event that the user didn't provide a value. We also go ahead and convert the argument to an integer using Java interop as we did in the previous version.&lt;/p&gt;
 &lt;/div&gt;
@@ -985,7 +1053,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;span class="go"&gt;Printing fibonacci sequence up to 10 numbers&lt;/span&gt;
 &lt;span class="go"&gt;0 1 1 2 3 5 8 13 21 34&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like &amp;quot;flags&amp;quot; (true/false toggles like &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-n&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--without-module-x&lt;/span&gt;&lt;/tt&gt;), collected values (like passing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-vvv&lt;/span&gt;&lt;/tt&gt; to increase verbosity), even complex subcommands (like &lt;tt class="docutils literal"&gt;git merge&lt;/tt&gt;).&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like "flags" (true/false toggles like &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-n&lt;/span&gt;&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--without-module-x&lt;/span&gt;&lt;/tt&gt;), collected values (like passing &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-vvv&lt;/span&gt;&lt;/tt&gt; to increase verbosity), even complex subcommands (like &lt;tt class="docutils literal"&gt;git merge&lt;/tt&gt;).&lt;/p&gt;
 &lt;p&gt;Luckily, we can borrow a macro from boot.core that lets us specify CLI options using a robust syntax. For the full syntax, check out &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Here, we'll let the user choose which implementation they'd like to use, and utilize the task &lt;a class="reference external" href="http://martinfowler.com/books/dsl.html"&gt;DSL&lt;/a&gt; to do some simple command line options:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -1029,10 +1097,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 39
 40&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="nv"&gt;!/usr/bin/env&lt;/span&gt; &lt;span class="nv"&gt;boot&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;0.0.4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
-&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.math.numeric-tower&lt;/span&gt; &lt;span class="ss"&gt;:refer&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;round&lt;/span&gt; &lt;span class="nv"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot.cli&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -1040,7 +1108,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
    &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
 
@@ -1049,20 +1117,20 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
-         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
-   &lt;span class="s"&gt;&amp;quot;Print a Fibonacci sequence to stdout using one of two algorithms.&amp;quot;&lt;/span&gt;
-   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Use the golden mean to calculate&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Quantity of numbers to generate. Defaults to 10&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="s"&gt;"Print a Fibonacci sequence to stdout using one of two algorithms."&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;"Use the golden mean to calculate"&lt;/span&gt;
+    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;"Quantity of numbers to generate. Defaults to 10"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:number&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;[golden]&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;[recursive]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Printing Fibonacci sequence up to&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;numbers:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;"[golden]"&lt;/span&gt; &lt;span class="s"&gt;"[recursive]"&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;"numbers:"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fibgolden&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
@@ -1076,10 +1144,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;p&gt;On line 6, we require the boot command line utility &lt;tt class="docutils literal"&gt;boot.cli&lt;/tt&gt;. We pass the &lt;tt class="docutils literal"&gt;:as&lt;/tt&gt; parameter to &lt;tt class="docutils literal"&gt;require&lt;/tt&gt; in order to give the library a different name in our namespace. We do this just to keep things a bit more tidy (and illustrate this feature!).&lt;/p&gt;
 &lt;p&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-main&lt;/span&gt;&lt;/tt&gt; function on line 30 is chiefly the same, except that we use the &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro from &lt;tt class="docutils literal"&gt;boot.cli&lt;/tt&gt; instead of the special &lt;tt class="docutils literal"&gt;defn&lt;/tt&gt; form.&lt;/p&gt;
 &lt;p&gt;The string on line 31 will be used in the usage description when the user provides the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; command line argument.&lt;/p&gt;
-&lt;p&gt;The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the &amp;quot;option DSL&amp;quot; that is discussed in &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the "option DSL" that is discussed in &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL"&gt;the documentation&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The command line arguments are extracted and used to populate a special &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; map that will be automatically in scope of your function.&lt;/p&gt;
 &lt;p&gt;Line 32 defines a &lt;em&gt;boolean&lt;/em&gt; command line argument, or a &lt;em&gt;flag&lt;/em&gt;. If the argument is provided, the value will be &lt;tt class="docutils literal"&gt;true&lt;/tt&gt;, otherwise, it will be &lt;tt class="docutils literal"&gt;false&lt;/tt&gt;. We are using this argument to let the user change algorithms used to generate their requested Fibonacci sequence.&lt;/p&gt;
-&lt;p&gt;The first value is the &amp;quot;short form&amp;quot; of the option, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-g&lt;/span&gt;&lt;/tt&gt;. The second is the &amp;quot;long form&amp;quot; &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--golden&lt;/span&gt;&lt;/tt&gt; and also the name of the argument in the &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; map (without the dashes). Next we specify the type of the argument, &lt;tt class="docutils literal"&gt;bool&lt;/tt&gt;, short for &lt;em&gt;boolean&lt;/em&gt;, or a true/false value. The &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.&lt;/p&gt;
+&lt;p&gt;The first value is the "short form" of the option, &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-g&lt;/span&gt;&lt;/tt&gt;. The second is the "long form" &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;--golden&lt;/span&gt;&lt;/tt&gt; and also the name of the argument in the &lt;tt class="docutils literal"&gt;*opts*&lt;/tt&gt; map (without the dashes). Next we specify the type of the argument, &lt;tt class="docutils literal"&gt;bool&lt;/tt&gt;, short for &lt;em&gt;boolean&lt;/em&gt;, or a true/false value. The &lt;tt class="docutils literal"&gt;defclifn&lt;/tt&gt; macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.&lt;/p&gt;
 &lt;p&gt;On the next line, we define another command-line option, this time one that takes a value. This is how the user will tell us how many numbers to generate.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
@@ -1167,7 +1235,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
    &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;, &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;second &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply + &lt;/span&gt;&lt;span class="nv"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
 
@@ -1176,20 +1244,20 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;do&lt;/span&gt;
-         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;/ &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;expt&lt;/span&gt; &lt;span class="nv"&gt;phi&lt;/span&gt; &lt;span class="nv"&gt;counter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)))]&lt;/span&gt;
-       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;print &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;f&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;&amp;lt; &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;+ &lt;/span&gt;&lt;span class="nv"&gt;counter&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cli/defclifn&lt;/span&gt; &lt;span class="nv"&gt;-main&lt;/span&gt;
-   &lt;span class="s"&gt;&amp;quot;Print a Fibonacci sequence to stdout using one of two algorithms.&amp;quot;&lt;/span&gt;
-   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Use the golden mean to calculate&amp;quot;&lt;/span&gt;
-    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Quantity of numbers to generate. Defaults to 10&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+   &lt;span class="s"&gt;"Print a Fibonacci sequence to stdout using one of two algorithms."&lt;/span&gt;
+   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt; &lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="nv"&gt;bool&lt;/span&gt; &lt;span class="s"&gt;"Use the golden mean to calculate"&lt;/span&gt;
+    &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="nv"&gt;number&lt;/span&gt; &lt;span class="nv"&gt;NUMBER&lt;/span&gt; &lt;span class="nb"&gt;int &lt;/span&gt;&lt;span class="s"&gt;"Quantity of numbers to generate. Defaults to 10"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:number&lt;/span&gt; &lt;span class="nv"&gt;*opts*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;[golden]&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;[recursive]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
-     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Printing Fibonacci sequence up to&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;numbers:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+         &lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt; &lt;span class="s"&gt;"[golden]"&lt;/span&gt; &lt;span class="s"&gt;"[recursive]"&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;println &lt;/span&gt;&lt;span class="nv"&gt;note&lt;/span&gt; &lt;span class="s"&gt;"Printing Fibonacci sequence up to"&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="s"&gt;"numbers:"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;golden&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fibgolden&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fib&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
@@ -1245,10 +1313,10 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;p&gt;&lt;strong&gt;Line 10:&lt;/strong&gt; the &lt;code&gt;target&lt;/code&gt; task. This task writes out the product of the other tasks to the target directory (&lt;code&gt;./target&lt;/code&gt; by default).&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Running the above command, produces output something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ boot -d &amp;quot;org.clojure/clojure&amp;quot; \
-       -d &amp;quot;boot/core&amp;quot; \
-       -d &amp;quot;boot/base&amp;quot; \
-       -d &amp;quot;org.clojure/math.numeric-tower:0.0.4&amp;quot; \
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ boot -d "org.clojure/clojure" \
+       -d "boot/core" \
+       -d "boot/base" \
+       -d "org.clojure/math.numeric-tower:0.0.4" \
        -s src/ \
        aot -a \
        pom -p fib -v 1.0.0 \
@@ -1282,7 +1350,7 @@ Writing target dir(s)...
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;You can send this file to a friend, and they can use it too.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;At time of writing, the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag, that usually displays help info, is not working in the jar file. I think it's because the &lt;tt class="docutils literal"&gt;java&lt;/tt&gt; command is &amp;quot;swallowing&amp;quot; it.&lt;/p&gt;
+&lt;p class="last"&gt;At time of writing, the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-h&lt;/span&gt;&lt;/tt&gt; flag, that usually displays help info, is not working in the jar file. I think it's because the &lt;tt class="docutils literal"&gt;java&lt;/tt&gt; command is "swallowing" it.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1299,16 +1367,16 @@ Writing target dir(s)...
  8
  9
 10
-11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;0.0.4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2.7.2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2.7.2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;src/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+11&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src/"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;task-options!&lt;/span&gt;
-  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;fib&lt;/span&gt;
-       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;'fib&lt;/span&gt;
+       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;"1.0.0"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;'fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="nv"&gt;aot&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:all&lt;/span&gt; &lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;div class="explanation section"&gt;
@@ -1329,9 +1397,9 @@ Writing target dir(s)...
 &lt;span class="go"&gt;BOOT_VERSION=2.7.2&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; setting is using a neat built-in data structure called a &lt;a class="reference external" href="https://clojure.org/reference/data_structures#Sets"&gt;hash set&lt;/a&gt;. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or &amp;quot;dumb&amp;quot; sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.&lt;/p&gt;
+&lt;li&gt;&lt;p class="first"&gt;The &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;:source-paths&lt;/span&gt;&lt;/tt&gt; setting is using a neat built-in data structure called a &lt;a class="reference external" href="https://clojure.org/reference/data_structures#Sets"&gt;hash set&lt;/a&gt;. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p class="first"&gt;On line 7, we use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;task-options!&lt;/span&gt;&lt;/tt&gt; macro to take the place of specifying task options on the command line. The keys for each setting correspond to the &amp;quot;long form&amp;quot; of the given option. You can see these using the built-in help:&lt;/p&gt;
+&lt;li&gt;&lt;p class="first"&gt;On line 7, we use the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;task-options!&lt;/span&gt;&lt;/tt&gt; macro to take the place of specifying task options on the command line. The keys for each setting correspond to the "long form" of the given option. You can see these using the built-in help:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; boot pom -h
 
@@ -1376,24 +1444,24 @@ Writing target dir(s)...
 20
 21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;...&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;core/deftask&lt;/span&gt; &lt;span class="nv"&gt;pom&lt;/span&gt;
-  &lt;span class="s"&gt;&amp;quot;Create project pom.xml file.&lt;/span&gt;
+  &lt;span class="s"&gt;"Create project pom.xml file.&lt;/span&gt;
 &lt;span class="s"&gt;  The project and version must be specified to make a pom.xml.&lt;/span&gt;
 &lt;span class="s"&gt;  Note that if you want to install some other artifact along with the main one,&lt;/span&gt;
 &lt;span class="s"&gt;  for instance the classic sources or javadoc artifact, you have to add the&lt;/span&gt;
 &lt;span class="s"&gt;  classifier to your pom.xml, which translates to adding :classifier to this&lt;/span&gt;
-&lt;span class="s"&gt;  task.&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;  task."&lt;/span&gt;
 
-  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="nb"&gt;project &lt;/span&gt;&lt;span class="nv"&gt;SYM&lt;/span&gt;           &lt;span class="nv"&gt;sym&lt;/span&gt;           &lt;span class="s"&gt;&amp;quot;The project id (eg. foo/bar).&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="nv"&gt;version&lt;/span&gt; &lt;span class="nv"&gt;VER&lt;/span&gt;           &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;&amp;quot;The project version.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;d&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt; &lt;span class="nv"&gt;DESC&lt;/span&gt;      &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;&amp;quot;The project description.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="nv"&gt;classifier&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;        &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;&amp;quot;The project classifier.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;P&lt;/span&gt; &lt;span class="nv"&gt;packaging&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;         &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;&amp;quot;The project packaging type, i.e. war, pom&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;u&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt; &lt;span class="nv"&gt;URL&lt;/span&gt;               &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;&amp;quot;The project homepage url.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="nv"&gt;scm&lt;/span&gt; &lt;span class="nv"&gt;KEY=VAL&lt;/span&gt;           &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;kw&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;      &lt;span class="s"&gt;&amp;quot;The project scm map (KEY is one of url, tag, connection, developerConnection).&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;l&lt;/span&gt; &lt;span class="nv"&gt;license&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:URL&lt;/span&gt;      &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;&amp;quot;The map {name url} of project licenses.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;o&lt;/span&gt; &lt;span class="nv"&gt;developers&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:EMAIL&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;&amp;quot;The map {name email} of project developers.&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;D&lt;/span&gt; &lt;span class="nv"&gt;dependencies&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER&lt;/span&gt;  &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;   &lt;span class="s"&gt;&amp;quot;The project dependencies vector (overrides boot env dependencies).&amp;quot;&lt;/span&gt;
-   &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;parent&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER=PATH&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;The project dependency vector of the parent project, path included.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="nb"&gt;project &lt;/span&gt;&lt;span class="nv"&gt;SYM&lt;/span&gt;           &lt;span class="nv"&gt;sym&lt;/span&gt;           &lt;span class="s"&gt;"The project id (eg. foo/bar)."&lt;/span&gt;
+   &lt;span class="nv"&gt;v&lt;/span&gt; &lt;span class="nv"&gt;version&lt;/span&gt; &lt;span class="nv"&gt;VER&lt;/span&gt;           &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project version."&lt;/span&gt;
+   &lt;span class="nv"&gt;d&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt; &lt;span class="nv"&gt;DESC&lt;/span&gt;      &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project description."&lt;/span&gt;
+   &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="nv"&gt;classifier&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;        &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project classifier."&lt;/span&gt;
+   &lt;span class="nv"&gt;P&lt;/span&gt; &lt;span class="nv"&gt;packaging&lt;/span&gt; &lt;span class="nv"&gt;STR&lt;/span&gt;         &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project packaging type, i.e. war, pom"&lt;/span&gt;
+   &lt;span class="nv"&gt;u&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt; &lt;span class="nv"&gt;URL&lt;/span&gt;               &lt;span class="nb"&gt;str &lt;/span&gt;          &lt;span class="s"&gt;"The project homepage url."&lt;/span&gt;
+   &lt;span class="nv"&gt;s&lt;/span&gt; &lt;span class="nv"&gt;scm&lt;/span&gt; &lt;span class="nv"&gt;KEY=VAL&lt;/span&gt;           &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;kw&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;      &lt;span class="s"&gt;"The project scm map (KEY is one of url, tag, connection, developerConnection)."&lt;/span&gt;
+   &lt;span class="nv"&gt;l&lt;/span&gt; &lt;span class="nv"&gt;license&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:URL&lt;/span&gt;      &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;"The map {name url} of project licenses."&lt;/span&gt;
+   &lt;span class="nv"&gt;o&lt;/span&gt; &lt;span class="nv"&gt;developers&lt;/span&gt; &lt;span class="nv"&gt;NAME&lt;/span&gt;&lt;span class="ss"&gt;:EMAIL&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;     &lt;span class="s"&gt;"The map {name email} of project developers."&lt;/span&gt;
+   &lt;span class="nv"&gt;D&lt;/span&gt; &lt;span class="nv"&gt;dependencies&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER&lt;/span&gt;  &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;   &lt;span class="s"&gt;"The project dependencies vector (overrides boot env dependencies)."&lt;/span&gt;
+   &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;parent&lt;/span&gt; &lt;span class="nv"&gt;SYM&lt;/span&gt;&lt;span class="ss"&gt;:VER=PATH&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;sym&lt;/span&gt; &lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="s"&gt;"The project dependency vector of the parent project, path included."&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="nv"&gt;...&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;On line 9, we see that the &lt;tt class="docutils literal"&gt;project&lt;/tt&gt; argument is a symbol - this is why we prefix it with a var quote in &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt;.&lt;/p&gt;
@@ -1430,20 +1498,20 @@ Writing target dir(s)...
 13
 14
 15
-16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;0.0.4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2.7.2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2.7.2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.8.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
-          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;src/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+16&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/math.numeric-tower&lt;/span&gt; &lt;span class="s"&gt;"0.0.4"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/core&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;boot/base&lt;/span&gt; &lt;span class="s"&gt;"2.7.2"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                           &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;org.clojure/clojure&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+          &lt;span class="ss"&gt;:source-paths&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"src/"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;task-options!&lt;/span&gt;
-  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;fib&lt;/span&gt;
-       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;pom&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="ss"&gt;'fib&lt;/span&gt;
+       &lt;span class="ss"&gt;:version&lt;/span&gt; &lt;span class="s"&gt;"1.0.0"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="nv"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:main&lt;/span&gt; &lt;span class="ss"&gt;'fib.core&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="nv"&gt;aot&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:all&lt;/span&gt; &lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;deftask&lt;/span&gt; &lt;span class="nv"&gt;build&lt;/span&gt;
- &lt;span class="s"&gt;&amp;quot;Create a standalone jar file that computes Fibonacci sequences.&amp;quot;&lt;/span&gt;
+ &lt;span class="s"&gt;"Create a standalone jar file that computes Fibonacci sequences."&lt;/span&gt;
  &lt;span class="p"&gt;[]&lt;/span&gt;
  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;comp &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;aot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;uber&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;jar&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;target&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1473,7 +1541,7 @@ Writing target dir(s)...
 &lt;h3&gt;Where To Go From Here&lt;/h3&gt;
 &lt;p&gt;At this point we've touched most of the awesomeness that boot gives us. With these basic tools, there's all sorts of interesting things we can do next. Here are some ideas:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Use boot instead of a &amp;quot;typical&amp;quot; scripting language for systems automation.&lt;/li&gt;
+&lt;li&gt;Use boot instead of a "typical" scripting language for systems automation.&lt;/li&gt;
 &lt;li&gt;Distribute single &lt;code&gt;.boot&lt;/code&gt; files containing entire applications.&lt;/li&gt;
 &lt;li&gt;Build WAR files and use other &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Community-Tasks"&gt;boot tasks provided by the community&lt;/a&gt;to do all sorts of cool things, like &lt;a class="reference external" href="https://github.com/mathias/boot-sassc"&gt;compile SASS     templates&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/adzerk/boot-beanstalk"&gt;deploy to Amazon Elastic Beanstalk&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Write your own, specialized tasks to help streamline complex build     processes - boot can replace (or augment) tools like     &lt;a class="reference external" href="http://ant.apache.org/"&gt;ant&lt;/a&gt; and     &lt;a class="reference external" href="http://www.gnu.org/software/make/"&gt;make&lt;/a&gt;.&lt;/li&gt;
@@ -1481,7 +1549,7 @@ Writing target dir(s)...
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-alternative-install-methods"&gt;
-&lt;h2&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
+&lt;h2 id="appendix-alternative-install-methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
 &lt;p&gt;Recent versions of boot are now available for homebrew, nix, and docker. More details &lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="boot"></category><category term="clojure"></category><category term="classics"></category></entry></feed>

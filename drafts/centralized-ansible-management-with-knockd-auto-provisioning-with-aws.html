@@ -1,80 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>The Collected Works of jjmojojjmojo</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
-        <link href="/feeds/category.uncategorized.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
-        <link href="/feeds/category.uncategorized.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
-
-
-    <meta name="tags" content="amazon web services" />
-    <meta name="tags" content="ansible" />
-    <meta name="tags" content="aws" />
-    <meta name="tags" content="knockd" />
-    <meta name="tags" content="port knocking" />
-    <meta name="tags" content="python" />
-
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.uncategorized.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.uncategorized.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="amazon web services" name="tags"/>
+<meta content="ansible" name="tags"/>
+<meta content="aws" name="tags"/>
+<meta content="knockd" name="tags"/>
+<meta content="port knocking" name="tags"/>
+<meta content="python" name="tags"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/drafts/centralized-ansible-management-with-knockd-auto-provisioning-with-aws.html" rel="bookmark"
-         title="Permalink to Centralized Ansible Management With Knockd + Auto-provisioning with AWS">Centralized Ansible Management With Knockd + Auto-provisioning with AWS</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2014-04-23T06:47:00-04:00">
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/drafts/centralized-ansible-management-with-knockd-auto-provisioning-with-aws.html" rel="bookmark" title="Permalink to Centralized Ansible Management With Knockd + Auto-provisioning with AWS">Centralized Ansible Management With Knockd + Auto-provisioning with AWS</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2014-04-23T06:47:00-04:00">
       Wed 23 April 2014
     </time>
-    <address class="vcard author">
+<address class="vcard author">
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="warning">
-  <h2>WARNING</h2>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#ansible-a-push-model" title='Ansible - A "Push" Model'>Ansible - A "Push" Model</a></li><li><a class="toc-href" href="#port-knocking-for-fun-and-profit" title="Port Knocking For Fun And Profit">Port Knocking For Fun And Profit</a></li><li><a class="toc-href" href="#user-data-in-ec2" title="User Data In EC2">User Data In EC2</a></li><li><a class="toc-href" href="#auto-scalling" title="Auto Scalling">Auto Scalling</a></li><li><a class="toc-href" href="#ansilbe-knockd-centralized-on-demand-configuration" title="Ansilbe + Knockd = Centralized, On-Demand Configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</a></li><li><a class="toc-href" href="#making-it-automatic-with-user-data" title="Making It Automatic With User Data">Making It Automatic With User Data</a></li><li><a class="toc-href" href="#auto-scaling-and-user-data" title="Auto Scaling And User Data">Auto Scaling And User Data</a></li><li><a class="toc-href" href="#conclusions-and-next-steps" title="Conclusions And Next Steps">Conclusions And Next Steps</a></li></ul></div>
+</div>
+<div class="warning">
+<h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
-  <div class="entry-content status-draft">
-    <p>Ansible is a great tool. We've been using it at my job with a fair
+<div class="entry-content status-draft">
+<p>Ansible is a great tool. We've been using it at my job with a fair
 amount of success. When it was chosen, we didn't have a requirement for
 supporting Auto scaling groups in AWS. This offers a unique problem - we
 need machines to be able to essentially provision themselves when AWS
 brings them up. This has interesting implications outside of AWS as
 well. This article covers using the Ansible API to build just enough of
 a custom playbook runner to target a single machine at a time, and
-discusses how to wire it up to knockd, a &quot;port knocking&quot; server and
+discusses how to wire it up to knockd, a "port knocking" server and
 client, and finally how to use user data in AWS to execute this at boot
 - or any reboot.</p>
 <div class="section" id="ansible-a-push-model">
-<h2>Ansible - A &quot;Push&quot; Model</h2>
+<h2 id="ansible-a-push-model">Ansible - A "Push" Model</h2>
 <p>Ansible is a configuration management tool used in orchestration of
 large pieces of infrastructure. It's structured as a simple layer above
 SSH - but it's a very sophisticated piece of software. Bottom line, it
-uses SSH to &quot;push&quot; configuration out to remote servers - this differs
+uses SSH to "push" configuration out to remote servers - this differs
 from some other popular approaches (like Chef, Puppet and CFEngine)
 where an agent is run on each machine, and a centralized server manages
 communication with the agents. Check out <a class="reference external" href="http://www.ansible.com/how-ansible-works">How Ansible
@@ -84,8 +81,8 @@ detail.</p>
 nuances is beyond the scope of this article, but the primary
 disadvantage that Ansible has is one of it's strongest advantages: it's
 decentralized and doesn't require agent installation. The problem arises
-when you don't know your inventory (Ansible-speak for &quot;list of all your
-machines&quot;) beforehand. This can be mitigated with <a class="reference external" href="http://docs.ansible.com/intro_dynamic_inventory.html">inventory
+when you don't know your inventory (Ansible-speak for "list of all your
+machines") beforehand. This can be mitigated with <a class="reference external" href="http://docs.ansible.com/intro_dynamic_inventory.html">inventory
 plugins</a>.
 However, when you have to configure machines that are being spun up
 dynamically, that need to be configured quickly, the push model starts
@@ -94,7 +91,7 @@ to break down.</p>
 very useful python API for specialized cases.</p>
 </div>
 <div class="section" id="port-knocking-for-fun-and-profit">
-<h2>Port Knocking For Fun And Profit</h2>
+<h2 id="port-knocking-for-fun-and-profit">Port Knocking For Fun And Profit</h2>
 <p><a class="reference external" href="http://portknocking.org/">Port knocking</a> is a novel way of invoking
 code. It involves listening to the network at a very low level, and
 listening for <em>attempted</em> connections to a specific sequence of ports.
@@ -109,7 +106,7 @@ as limiting the number of times a client can invoke the knock sequence,
 by commenting out lines in a flat file.</p>
 </div>
 <div class="section" id="user-data-in-ec2">
-<h2>User Data In EC2</h2>
+<h2 id="user-data-in-ec2">User Data In EC2</h2>
 <p>EC2 has a really cool feature called <a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">user
 data</a>,
 that allows you to add some information to an instance upon boot. It
@@ -118,7 +115,7 @@ works with <a class="reference external" href="http://cloudinit.readthedocs.org/
 machine is first booted, or rebooted.</p>
 </div>
 <div class="section" id="auto-scalling">
-<h2>Auto Scalling</h2>
+<h2 id="auto-scalling">Auto Scalling</h2>
 <p>EC2 provides a mechanism for spinning up instances based on need (or
 really any arbitrary event). The <a class="reference external" href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html">AWS
 documentation</a>
@@ -127,7 +124,7 @@ sudden spikes in demand, or contracting your running instances during
 low-demand periods.</p>
 </div>
 <div class="section" id="ansilbe-knockd-centralized-on-demand-configuration">
-<h2>Ansilbe + Knockd = Centralized, On-Demand Configuration</h2>
+<h2 id="ansilbe-knockd-centralized-on-demand-configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</h2>
 <p>As mentioned earlier, Ansible provides a fairly robust API for use in
 your own scripts. Knockd can be used to invoke any shell command. Here's
 how I tied the two together.</p>
@@ -153,7 +150,7 @@ pure-python version installed when the headers are not available.</p>
 <p>You'll notice some information from the knockd package regarding how to
 enable it. Take note of this for final deployment, but we'll be running
 knockd manually during this proof-of-concept exercise.</p>
-<p>On the &quot;client&quot; machine, the one who is asking to be configured, you
+<p>On the "client" machine, the one who is asking to be configured, you
 need only install knockd. Again, the service isn't enabled by default,
 but the package provides the <tt class="docutils literal">knock</tt> command.</p>
 </div>
@@ -161,7 +158,7 @@ but the package provides the <tt class="docutils literal">knock</tt> command.</p
 <h3>EC2 Setup</h3>
 <p>We require a few things to be done in the EC2 console for this all to
 work.</p>
-<p>First, I created a keypair for use by the tool. I called &quot;bootstrap&quot;. I
+<p>First, I created a keypair for use by the tool. I called "bootstrap". I
 downloaded it onto a freshly set up instance I designated for this
 purpose.</p>
 <p>NOTE: It's important to set the permissions of the private key
@@ -170,7 +167,7 @@ correctly. They <strong>must</strong> be set to <tt class="docutils literal">060
 is to allow <em>all</em> ports from within the current subnet. This gives us
 maximum flexibility when assigning port knock sequences.</p>
 <p>Here's what it looks like:</p>
-<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png"><img alt="image0" src="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png?w=640" /></a>Depending on our circumstances, we would need to also open up
+<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png"><img alt="image0" src="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png?w=640"/></a>Depending on our circumstances, we would need to also open up
 UDP traffic as well (port knocks can be TCP or UDP based, or a
 combination within a sequence).</p>
 <p>For the sake of security, a limited range of a specific type of
@@ -185,11 +182,11 @@ have a fixed IP address on my connection.</p>
 <p>I wrote a simple python script that runs a given playbook against a
 given IP address:</p>
 <div class="line-block">
-<div class="line">[code language=&quot;python&quot;]</div>
+<div class="line">[code language="python"]</div>
 <div class="line-block">
-<div class="line">&quot;&quot;&quot;</div>
+<div class="line">"""</div>
 <div class="line">Script to run a given playbook against a specific host</div>
-<div class="line">&quot;&quot;&quot;</div>
+<div class="line">"""</div>
 </div>
 </div>
 <div class="line-block">
@@ -208,7 +205,7 @@ given IP address:</p>
 <div class="line-block">
 <div class="line">parser = argparse.ArgumentParser(</div>
 <div class="line-block">
-<div class="line">description=&quot;Run an ansible playbook against a specific host.&quot;</div>
+<div class="line">description="Run an ansible playbook against a specific host."</div>
 <div class="line">)</div>
 </div>
 </div>
@@ -216,40 +213,40 @@ given IP address:</p>
 <div class="line">parser.add_argument(</div>
 <div class="line-block">
 <div class="line">'host',</div>
-<div class="line">help=&quot;The IP address or hostname of the machine to run the playbook
-against.&quot;</div>
+<div class="line">help="The IP address or hostname of the machine to run the playbook
+against."</div>
 <div class="line">)</div>
 </div>
 </div>
 <div class="line-block">
 <div class="line">parser.add_argument(</div>
 <div class="line-block">
-<div class="line">&quot;-p&quot;,</div>
-<div class="line">&quot;--playbook&quot;,</div>
-<div class="line">default=&quot;default.yml&quot;,</div>
-<div class="line">metavar=&quot;PLAY_BOOK&quot;,</div>
-<div class="line">help=&quot;Specify path to a specific playbook to run.&quot;</div>
+<div class="line">"-p",</div>
+<div class="line">"--playbook",</div>
+<div class="line">default="default.yml",</div>
+<div class="line">metavar="PLAY_BOOK",</div>
+<div class="line">help="Specify path to a specific playbook to run."</div>
 <div class="line">)</div>
 </div>
 </div>
 <div class="line-block">
 <div class="line">parser.add_argument(</div>
 <div class="line-block">
-<div class="line">&quot;-c&quot;,</div>
-<div class="line">&quot;--config_file&quot;,</div>
-<div class="line">metavar=&quot;CONFIG_FILE&quot;,</div>
-<div class="line">default=&quot;./config.ini&quot;,</div>
-<div class="line">help=&quot;Specify path to a config file. Defaults to %(default)s.&quot;</div>
+<div class="line">"-c",</div>
+<div class="line">"--config_file",</div>
+<div class="line">metavar="CONFIG_FILE",</div>
+<div class="line">default="./config.ini",</div>
+<div class="line">help="Specify path to a config file. Defaults to %(default)s."</div>
 <div class="line">)</div>
 </div>
 </div>
 <div class="line-block">
 <div class="line">def run_playbook(host, playbook, user, key_file):</div>
 <div class="line-block">
-<div class="line">&quot;&quot;&quot;</div>
+<div class="line">"""</div>
 <div class="line">Run a given playbook against a specific host, with the given username</div>
 <div class="line">and private key file.</div>
-<div class="line">&quot;&quot;&quot;</div>
+<div class="line">"""</div>
 <div class="line">stats = callbacks.AggregateStats()</div>
 <div class="line">playbook_cb = callbacks.PlaybookCallbacks(verbose=utils.VERBOSITY)</div>
 <div class="line">runner_cb = callbacks.PlaybookRunnerCallbacks(stats,
@@ -272,9 +269,9 @@ verbose=utils.VERBOSITY)</div>
 </div>
 <p>pb.run()</p>
 <p>options = parser.parse_args()</p>
-<p>playbook = os.path.abspath(&quot;./playbooks/%s&quot; % options.playbook)</p>
+<p>playbook = os.path.abspath("./playbooks/%s" % options.playbook)</p>
 <div class="line-block">
-<div class="line">run_playbook(options.host, playbook, 'ubuntu', &quot;./bootstrap.pem&quot;)</div>
+<div class="line">run_playbook(options.host, playbook, 'ubuntu', "./bootstrap.pem")</div>
 <div class="line-block">
 <div class="line">[/code]</div>
 </div>
@@ -287,7 +284,7 @@ etc. These things are just hard coded in the call to run_playbook for
 this proof-of-concept implementation.</p>
 <p>The real heart of the script is the run_playbook function. Given a host
 (IP or hostname), a path to a playbook file (assumed to be relative to a
-&quot;playbooks&quot; directory), a user and a private key, it uses the Ansible
+"playbooks" directory), a user and a private key, it uses the Ansible
 API to run the playbook.</p>
 <p>This function represents the bare-minimum code required to apply a
 playbook to one or more hosts. It's surprisingly simple - and I've only
@@ -314,14 +311,14 @@ explaination of the playbook syntax):</p>
 </div>
 <p>It just installs and starts apache, does an <tt class="docutils literal"><span class="pre">apt-get</span> update</tt>, and
 drops a file into /tmp to give me a clue that it ran.</p>
-<p>Note that the <tt class="docutils literal">hosts:</tt> setting is set to &quot;all&quot; - this means that this
+<p>Note that the <tt class="docutils literal">hosts:</tt> setting is set to "all" - this means that this
 playbook will run regardless of the role or class of the machine. This
 is essential, since, again, the machines are unknown when they invoke
 this script.</p>
 <p>For the sake of simplicity, and to set a necessary environment variable,
 I wrapped the call to my script in a shell script:</p>
 <div class="line-block">
-<div class="line">[code language=&quot;bash&quot;]</div>
+<div class="line">[code language="bash"]</div>
 <div class="line-block">
 <div class="line">#!/bin/bash</div>
 <div class="line">export ANSIBLE_HOST_KEY_CHECKING=False</div>
@@ -336,7 +333,7 @@ user, to tell Ansible to not bother verifying host keys. This is
 required in this situation because the machines it talks to are unknown
 to it, since the script will be used to configure newly launched
 machines. We're also running the playbook unattended, so there's no one
-to say &quot;yes&quot; to accepting a new key.</p>
+to say "yes" to accepting a new key.</p>
 <p>The script also does some very rudimentary logging of all output from
 the playbook run - it creates logs for each host that it services, for
 easy debugging.</p>
@@ -374,7 +371,7 @@ machine that knocked.</p>
 <p>We just need to then do the knocking from a machine that's been
 provisioned with the bootstrap keypair.</p>
 <p>Here's what it looks like (these are all Ubuntu 12.04 LTS instances):</p>
-<p>On the &quot;server&quot; machine, the one with the ansible script:</p>
+<p>On the "server" machine, the one with the ansible script:</p>
 <pre class="literal-block">
 $  sudo knockd -vD
 config: new section: 'options'
@@ -387,7 +384,7 @@ ethernet interface detected
 Local IP: 172.31.31.48
 listening on eth0...
 </pre>
-<p>On the &quot;client&quot; machine, the one that wants to be provisioned:</p>
+<p>On the "client" machine, the one that wants to be provisioned:</p>
 <pre class="literal-block">
 $ knock 172.31.31.48 9000 9999
 </pre>
@@ -403,7 +400,7 @@ ansible: running command: /home/ubuntu/run.sh 172.31.24.211
 </div>
 </div>
 <div class="section" id="making-it-automatic-with-user-data">
-<h2>Making It Automatic With User Data</h2>
+<h2 id="making-it-automatic-with-user-data">Making It Automatic With User Data</h2>
 <p>Now that we have a way to configure machines on demand - the knock could
 happen at any time, from a cron job, executed via a distributed SSH
 client (like <a class="reference external" href="http://docs.fabfile.org/en/1.8/">fabric</a>), etc - we can
@@ -428,34 +425,34 @@ here</a>):</p>
 </div>
 </div>
 <p>User data can be edited at any time as long as an EC2 instance is in the
-&quot;stopped&quot; state. When launching a new instance, the field is hidden in
-Step 3, under &quot;Advanced Details&quot;:</p>
-<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png"><img alt="User Data Field" src="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png?w=640" /></a>Once this is established, you can use the &quot;launch
-more like this&quot; feature of the AWS console to replicate the user data.</p>
+"stopped" state. When launching a new instance, the field is hidden in
+Step 3, under "Advanced Details":</p>
+<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png"><img alt="User Data Field" src="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png?w=640"/></a>Once this is established, you can use the "launch
+more like this" feature of the AWS console to replicate the user data.</p>
 <p>This is also a prime use case for writing your own provisioning scripts
 (using something like <a class="reference external" href="http://boto.readthedocs.org/en/latest/">boto</a>)
 or using something a bit higher level, like
 <a class="reference external" href="https://aws.amazon.com/cloudformation/">CloudFormation</a>.</p>
 </div>
 <div class="section" id="auto-scaling-and-user-data">
-<h2>Auto Scaling And User Data</h2>
-<p>Auto Scaling is controlled via &quot;auto scaling groups&quot; and &quot;launch
-configuration&quot;. If you're not familiar these can sound like foreign
+<h2 id="auto-scaling-and-user-data">Auto Scaling And User Data</h2>
+<p>Auto Scaling is controlled via "auto scaling groups" and "launch
+configuration". If you're not familiar these can sound like foreign
 concepts, but they're quite simple.</p>
 <p>Auto Scaling Groups define how many instances will be maintained, and
 set up the events to scale up or down the number of instances in the
 group.</p>
 <p>Launch Configurations are nearly identical to the basic settings used
 when launching an EC2 instance, including user data. In fact, user data
-is entered in on Step 3 of the process, in the &quot;Advanced Details&quot;
+is entered in on Step 3 of the process, in the "Advanced Details"
 section, just like when spinning up a new EC2 instance.</p>
 <p>In this way, we can automatically configure machines that come up via
 auto scaling.</p>
 </div>
 <div class="section" id="conclusions-and-next-steps">
-<h2>Conclusions And Next Steps</h2>
+<h2 id="conclusions-and-next-steps">Conclusions And Next Steps</h2>
 <p>This proof of concept presents an exciting opportunity for people who
-use Ansible and have use cases that benefit from a &quot;pull&quot; model -
+use Ansible and have use cases that benefit from a "pull" model -
 without really changing anything about their setup.</p>
 <p>Here are a few miscellaneous notes, and some things to consider:</p>
 <ul class="simple">
@@ -463,36 +460,35 @@ without really changing anything about their setup.</p>
 is a <a class="reference external" href="http://portknocking.org/view/resources">huge amount of information available</a> to dig into the
 concept itself, and it's various implementations.</li>
 <li>The way the script is implemented, it's possible to have different
-knock sequences execute different playbooks. A &quot;poor-man's&quot; method of
+knock sequences execute different playbooks. A "poor-man's" method of
 differentiating hosts.</li>
 <li>The Ansible script could be coupled the AWS API to get more
 information about the particular host it's servicing. Imagine using a
-tag to set the &quot;class&quot; or &quot;role&quot; of the machine. The API could be
+tag to set the "class" or "role" of the machine. The API could be
 used to look up that information about the host, and apply playbooks
 accordingly. This could also be done with variables - the values that
-are &quot;punched in&quot; when a playbook is run. This means one source of
+are "punched in" when a playbook is run. This means one source of
 truth for configuration - just add the relevant bits to the right
 tags, and it just works.</li>
 <li>I tested this approach with an auto scaling group, but I've used a
 trivial playbook and only launched 10 machines at a time - it would
 be a good idea to test this approach with hundreds of machines and
-more complex plays - my &quot;free tier&quot; t1.micro instance handled this
-&quot;stampeding herd&quot; without a blink, but it's unclear how this really
+more complex plays - my "free tier" t1.micro instance handled this
+"stampeding herd" without a blink, but it's unclear how this really
 scales. <strong>If anyone gives this a try, please let me know how it went.</strong></li>
 <li>Custom callbacks could be used to enhance the script to send
 notifications when machines were launched, as well as more detailed
 logging.</li>
 </ul>
 </div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

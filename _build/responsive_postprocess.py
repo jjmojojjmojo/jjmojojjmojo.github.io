@@ -56,6 +56,23 @@ CONTENT_WIDTH_RATIO = 1.06      # used for guessing the viewport slot size
 
 CHANGE_WINDOW = timedelta(minutes=30)
 
+def extract_width_from_inline_style(tag):
+    """
+    Given a image tag, extract the width from an inline style.
+    
+    Will get the width from the parent div if it is a figure.
+    """
+    if "figure" in tag.parent.get("class", []):
+        tag = tag.parent
+    
+    matches = re.match("width:\s*([^;]*);", tag.get("style", ""))
+    
+    if matches:
+        return matches.group(1)
+    else: 
+        return None
+
+
 def calculate_width(image_tag, variant_width):
     """
     Given a BeautifulSoup Tag object, return a value corresponding
@@ -74,20 +91,14 @@ def calculate_width(image_tag, variant_width):
     TODO: test edge cases
     TODO: raise exception or otherwise notify when a malformed width is found.
     """
-    width = None
+    width = extract_width_from_inline_style(image_tag)
     
-    if image_tag.has_attr("width"):
+    if width is None and image_tag.has_attr("width"):
         width = image_tag["width"]
-    elif image_tag.has_attr("style"):
-        matches = re.match("width:\s*([^;]*);", image["style"])
-        if matches:
-            width = matches.group(1)
-    else:
         return width
-        
-    matches = re.match("(\d+)(em|%|px|vw|pt)?", width)
     
     try:
+        matches = re.match("(\d+)(em|%|px|vw|pt)?", width)
         if matches:
             width = int(matches.group(1))
             unit = matches.group(2)
@@ -100,8 +111,9 @@ def calculate_width(image_tag, variant_width):
             
         else:
             return None
-    except ValueError:
+    except (ValueError, TypeError):
         return None
+    
     
 
 def make_variant(source, width=None, force=False):
@@ -157,112 +169,128 @@ def make_variant(source, width=None, force=False):
             variant.format = "jpg"
             variant.save(filename=variant_path)
             
-    year = datetime.today().year
-    exif = {'0th': {33432: f"(c){year} Josh Johnson. All Rights Reserved.\0"}}
-    if orientation and mime != "image/png":
-        exif['0th'][274] = orientation
+    # year = datetime.today().year
+    # exif = {'0th': {33432: f"(c){year} Josh Johnson. All Rights Reserved.\0"}}
+    # if orientation and mime != "image/png":
+    #     exif['0th'][274] = orientation
         
-    piexif.remove(variant_path)
-    piexif.insert(piexif.dump(exif), variant_path)
+    # piexif.remove(variant_path)
+    # piexif.insert(piexif.dump(exif), variant_path)
             
     return variant_path 
     
-for path in os.scandir(PATH):
-    path = os.path.abspath(path)
-    
-    base, ext = os.path.splitext(path)
-    
-    if ext == ".html":
-        with open(path) as fp:
-            soup = BeautifulSoup(fp, 'lxml')
-            images = soup.select("section img")
-            
-            for image in images:
-                if image.get("srcset"):
-                    print("WARNING: IMAGE ALREADY PROCESSED?")
-                    continue
+def process_dir(basepath):
+    print(f"PROCESSING {basepath}...")
+    print("====================================")
+    print()
+    for path in os.scandir(basepath):
+        path = os.path.abspath(path)
+        
+        base, ext = os.path.splitext(path)
+        name = os.path.basename(path)
+        
+        
+        if os.path.isdir(path) and not name.startswith("_"):
+            process_dir(path)
+        
+        if ext == ".html":
+            print(f"Parsing {path}..")
+            with open(path) as fp:
+                soup = BeautifulSoup(fp, 'lxml')
+                images = soup.select("section img")
                 
-                # TODO: catch off-site image links
-                # TODO: detect if the image already is wrapped in an A tag
-                src_path = image["src"]
-                parent = os.path.dirname(path)
-                is_absolute = os.path.isabs(src_path)
-                
-                if image["src"].startswith("/"):
-                    parent = DOCUMENT_ROOT
-                    src_path = src_path[1:]
-                
-                image_path = os.path.normpath(os.path.join(parent, src_path))
-                
-                variants = {}
-                
-                last_modified = datetime.fromtimestamp(os.path.getmtime(image_path))
-                if datetime.now() - last_modified <= CHANGE_WINDOW:
-                    force = True
-                else:
-                    force = False
-                
-                for size in SIZES:
-                    variants[size] = make_variant(image_path, size, force=force)
-                
-                fullsize_link = os.path.relpath(variants[None], DOCUMENT_ROOT)
-                
-                if is_absolute:
-                    fullsize_link = os.path.join("/", fullsize_link)
-                
-                a_tag = soup.new_tag("a", href=fullsize_link)
-                
-                srcset = []
-                sizes = []
-                
-                for size, variant_path in variants.items():
-                    if size is None or variant_path is None:
+                for image in images:
+                    if image.get("srcset"):
+                        print("WARNING: IMAGE ALREADY PROCESSED?")
                         continue
                     
-                    src = os.path.relpath(variant_path, DOCUMENT_ROOT)
+                    if image["src"].startswith("http://") or image["src"].startswith("https://"):
+                        print("EXTERNAL LINK. Skipping")
+                        continue
+                    
+                    src_path = image["src"]
+                    parent = os.path.dirname(path)
+                    is_absolute = os.path.isabs(src_path)
+                    
+                    if image["src"].startswith("/"):
+                        parent = DOCUMENT_ROOT
+                        src_path = src_path[1:]
+                    
+                    image_path = os.path.normpath(os.path.join(parent, src_path))
+                    
+                    variants = {}
+                    
+                    last_modified = datetime.fromtimestamp(os.path.getmtime(image_path))
+                    if datetime.now() - last_modified <= CHANGE_WINDOW:
+                        force = True
+                    else:
+                        force = False
+                    
+                    for size in SIZES:
+                        variants[size] = make_variant(image_path, size, force=force)
+                    
+                    fullsize_link = os.path.relpath(variants[None], DOCUMENT_ROOT)
                     
                     if is_absolute:
-                        src = os.path.join("/", src)
+                        fullsize_link = os.path.join("/", fullsize_link)
                     
-                    srcset.append(f"{src} {size}w")
+                    a_tag = soup.new_tag("a", href=fullsize_link)
                     
-                    slot_width = calculate_width(image, size)
-                    if slot_width is not None:
-                        screen_width = size*CONTENT_WIDTH_RATIO
-                        sizes.append(f"(min-width: {screen_width}px) {slot_width}px")  
+                    srcset = []
+                    sizes = []
                     
-                
-                image["src"] = fullsize_link
-                image["srcset"]= ",".join(srcset)
-                image["sizes"] = ",".join(sizes)
-                
-                print(fullsize_link)
-                print("-----------------------")
-                print("SRCSET:")
-                [print(f"\t{x}") for x in srcset]
-                print("SIZES:")
-                [print(f"\t{x}") for x in sizes]
-                print("")
-                
-                image.wrap(a_tag)
-                
-            # wrap code blocks in a div so overflow will
-            # work properly
-            code_blocks = soup.select(".highlighttable")
-            for block in code_blocks:
-                if "highlight-wrapper" in block.parent.get("class", []):
-                    print("ALREADY VISITED CODE BLOCK")
-                    continue
-                
-                div = soup.new_tag("div")
-                div["class"] = "highlight-wrapper"
-                block.wrap(div)
-                
-        
-        temp_path = f"{base}.new{ext}"
-        
-        shutil.copy(path, temp_path)
-        with open(temp_path, "wb") as new_html:
-            new_html.write(soup.encode(formatter="html"))
+                    for size, variant_path in variants.items():
+                        if size is None or variant_path is None:
+                            continue
+                        
+                        src = os.path.relpath(variant_path, DOCUMENT_ROOT)
+                        
+                        if is_absolute:
+                            src = os.path.join("/", src)
+                        
+                        srcset.append(f"{src} {size}w")
+                        
+                        slot_width = calculate_width(image, size)
+                        if slot_width is not None:
+                            screen_width = size*CONTENT_WIDTH_RATIO
+                            sizes.append(f"(min-width: {screen_width}px) {slot_width}px")  
+                        
+                    
+                    image["src"] = fullsize_link
+                    image["srcset"]= ",".join(srcset)
+                    image["sizes"] = ",".join(sizes)
+                    
+                    print(fullsize_link)
+                    print("-----------------------")
+                    print("SRCSET:")
+                    [print(f"\t{x}") for x in srcset]
+                    print("SIZES:")
+                    [print(f"\t{x}") for x in sizes]
+                    print("")
+                    
+                    image.wrap(a_tag)
+                    
+                # wrap code blocks in a div so overflow will
+                # work properly
+                code_blocks = soup.select(".highlighttable")
+                for block in code_blocks:
+                    if "highlight-wrapper" in block.parent.get("class", []):
+                        print("ALREADY VISITED CODE BLOCK")
+                        continue
+                    
+                    div = soup.new_tag("div")
+                    div["class"] = "highlight-wrapper"
+                    block.wrap(div)
+                    
             
-        shutil.move(temp_path, path)
+            temp_path = f"{base}.new{ext}"
+            
+            shutil.copy(path, temp_path)
+            with open(temp_path, "wb") as new_html:
+                new_html.write(soup.encode(formatter="html"))
+                
+            shutil.move(temp_path, path)
+
+
+if __name__ == "__main__":
+    process_dir(PATH)

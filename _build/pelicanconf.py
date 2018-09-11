@@ -42,7 +42,7 @@ SITENAME = 'The Collected Works of jjmojojjmojo'
 SITEURL = ''
 
 PLUGIN_PATHS = ["plugins", "pelican-plugins"]
-PLUGINS = ["explanation", "pelican_toc", "summary"]
+PLUGINS = ["explanation", "pelican-toc", "summary"]
 
 PATH = 'content'
 
@@ -105,7 +105,7 @@ CATEGORY_DESCRIPTIONS = {
     'tutorial': "How-tos, introductions, walk-throughs."
 }
 
-STATIC_PATHS = ['images', 'files', 'js', 'videos']
+STATIC_PATHS = ['images', 'files', 'js', 'videos', 'attachments']
 
 TEMPLATE_PAGES = {'pages.html': 'pages/index.html'}
 

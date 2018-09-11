@@ -45,6 +45,9 @@
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a class="toc-href" href="#making-boot-faster" title="Making Boot Faster">Making Boot Faster</a></li><li><a class="toc-href" href="#a-simple-script" title="A Simple Script">A Simple Script</a></li><li><a class="toc-href" href="#twitter-api-tokens" title="Twitter API Tokens">Twitter API Tokens</a></li><li><a class="toc-href" href="#quick-note-development-deviations" title="Quick Note: Development Deviations">Quick Note: Development Deviations</a></li><li><a class="toc-href" href="#the-script-version-1" title="The Script: Version 1">The Script: Version 1</a></li><li><a class="toc-href" href="#distributioninstallation-mark-1" title="Distribution/Installation: Mark 1">Distribution/Installation: Mark 1</a></li><li><a class="toc-href" href="#a-not-so-simple-script" title="A Not-So-Simple Script">A Not-So-Simple Script</a></li><li><a class="toc-href" href="#distributioninstallation-mark-2" title="Distribution/Installation, Mark 2">Distribution/Installation, Mark 2</a></li><li><a class="toc-href" href="#appendix-getting-rid-of-log4j-notices" title="Appendix: Getting Rid Of Log4J Notices">Appendix: Getting Rid Of Log4J Notices</a></li></ul></div>
+</div>
 <div class="entry-content status-published">
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
@@ -70,7 +73,7 @@ discussion about getting your jars into
 </tbody>
 </table>
 <div class="section" id="setup">
-<h2>Setup</h2>
+<h2 id="setup">Setup</h2>
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As I've covered before</a>,
 boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases">boot executable</a>. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
@@ -110,21 +113,21 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 </pre></div>
 </div>
 <div class="section" id="making-boot-faster">
-<h2>Making Boot Faster</h2>
+<h2 id="making-boot-faster">Making Boot Faster</h2>
 <p>Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into <tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt> or similar other files for your particular shell. See the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options">JVM-Options</a> page in the boot documentation for details, and other ways to incorporate these settings into your projects:</p>
 <div class="highlight"><pre><span></span><span class="go">export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"</span>
 </pre></div>
 </div>
 <div class="section" id="a-simple-script">
-<h2>A Simple Script</h2>
+<h2 id="a-simple-script">A Simple Script</h2>
 <p>For this article, we'll start with an example of a useful application that grabs the most recent tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys">Nihilist Arby's</a> twitter feed. A great addition to your <a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29">MOTD</a> to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀</p>
 </div>
 <div class="section" id="twitter-api-tokens">
-<h2>Twitter API Tokens</h2>
+<h2 id="twitter-api-tokens">Twitter API Tokens</h2>
 <p>Before we begin, set up an application and <a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens">obtain a consumer key</a>&nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to <em>read only</em>. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.</p>
 </div>
 <div class="section" id="quick-note-development-deviations">
-<h2>Quick Note: Development Deviations</h2>
+<h2 id="quick-note-development-deviations">Quick Note: Development Deviations</h2>
 <p>Since we're not building anything right now, or utilizing the task infrastructure, we don't need a <tt class="docutils literal">build.boot</tt> file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run <tt class="docutils literal">boot repl</tt>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
 </pre></div>
@@ -133,7 +136,7 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 </pre></div>
 </div>
 <div class="section" id="the-script-version-1">
-<h2>The Script: Version 1</h2>
+<h2 id="the-script-version-1">The Script: Version 1</h2>
 <p>For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -233,11 +236,11 @@ name it however you'd like:</p>
 </div>
 </div>
 <div class="section" id="distribution-installation-mark-1">
-<h2>Distribution/Installation: Mark 1</h2>
+<h2 id="distributioninstallation-mark-1">Distribution/Installation: Mark 1</h2>
 <p>The real beauty of this boot script we have, is that it is a self-contained entity. We can send it to anyone who has boot and a JDK installed. They can place the script anywhere they like. Dependencies are automatically downloaded the first time its run.</p>
 </div>
 <div class="section" id="a-not-so-simple-script">
-<h2>A Not-So-Simple Script</h2>
+<h2 id="a-not-so-simple-script">A Not-So-Simple Script</h2>
 <p>Boot scripting provides a natural progression from "just a script" to "full-blown application".</p>
 <p>Boot scripts contain all of the functions needed to run, but this poses some problems:</p>
 <ul class="simple">
@@ -451,7 +454,7 @@ name it however you'd like:</p>
 </pre></div>
 </div>
 <div class="section" id="distribution-installation-mark-2">
-<h2>Distribution/Installation, Mark 2</h2>
+<h2 id="distributioninstallation-mark-2">Distribution/Installation, Mark 2</h2>
 <p>Pulling some of the code out into a separate file has made our little script cleaner, but now distributing the file is slightly more complicated, since we have to provide the script access to the code we factored out.</p>
 <p>There are several ways to handle this:</p>
 <ul class="simple">
@@ -465,7 +468,7 @@ name it however you'd like:</p>
 <p>Check out all you ever wanted to know about making jar files and distributing them in <a class="reference external" href="/drafts/making-jars-with-boot.html">the unoffical followup to this post.</a>.</p>
 </div>
 <div class="section" id="appendix-getting-rid-of-log4j-notices">
-<h2>Appendix: Getting Rid Of Log4J Notices</h2>
+<h2 id="appendix-getting-rid-of-log4j-notices">Appendix: Getting Rid Of Log4J Notices</h2>
 <p>You may have noticed that you get a bunch of warning messages when running our code:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> ./downer jjmojojjmojo
 <span class="go">SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".</span>

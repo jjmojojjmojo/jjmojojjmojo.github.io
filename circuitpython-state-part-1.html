@@ -46,6 +46,9 @@
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#the-project-the-platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo-project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions-keeping-the-code-simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion-and-whats-next" next="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
+</div>
 <div class="entry-content status-published">
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
@@ -54,7 +57,7 @@
 <p>In this installment, we discuss the platform we're using (both CircuitPython and the Adafruit M0/M4 boards that support it), and build a simple circuit for demonstration purposes. We'll also talk a bit about <em>abstraction</em>.</p>
 <p>This series is intended for people who are new to Python, programming, and/or microcontrollers, so there's an effort to explain things as thoroughly as possible. However, experience with basic Python would be helpful.</p>
 <div class="section" id="the-project-the-platform">
-<h2>The Project, The Platform</h2>
+<h2 id="the-project-the-platform">The Project, The Platform</h2>
 <p>All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.</p>
 <p>I found the answer in <a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing">capacative touch</a>. This is the same technology behind modern cellphones and touchscreens.</p>
 <p>I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch">7 touch capable pins</a> <em>and</em> they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do <a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction">some insanely cool stuff</a>.</p>
@@ -96,7 +99,7 @@
 <p>What makes most of these concerns completely moot is that Adafruit's CircuitPython-compatible boards fully support the Arduino IDE. So if we can't work within the limitations of CircuitPython, we can always switch to the Arduino tooling, and unlock the full potential of the M0/M4 chips.</p>
 </div>
 <div class="section" id="audience">
-<h2>Audience</h2>
+<h2 id="audience">Audience</h2>
 <p>This guide is written for people who know basic Python, and have done rudimentary things with microcontrollers, like control LEDs and read from momentary switches.</p>
 <p>It doesn't assume you are a Python expert, or have done anything too elaborate with microcontrollers - but it will expose you to some advanced concepts.</p>
 <p>It's a good idea to work through <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">Adafruit's "Welcome To CircuitPython"</a> guide before trying to dig into the topics covered here, but it's not necessary.</p>
@@ -108,7 +111,7 @@
 <p>Please feel free to <a class="reference external" href="/pages/contact.html">contact the author</a> with questions, corrections, or suggestions on how to make this series more accessible!</p>
 </div>
 <div class="section" id="demo-project">
-<h2>Demo Project</h2>
+<h2 id="demo-project">Demo Project</h2>
 <p>To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.</p>
 <p>It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.</p>
 <div class="centered docutils container">
@@ -144,7 +147,7 @@
 <p>This is a fairly simple project but because of the complex button logic, it will really put our state and event code through its paces.</p>
 </div>
 <div class="section" id="materials">
-<h2>Materials</h2>
+<h2 id="materials">Materials</h2>
 <p>If you'd like to follow along, you will need the following items:</p>
 <ul class="simple">
 <li>A CircuitPython-capable development board (M0/M4 series, express recommended).</li>
@@ -292,7 +295,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 </div>
 <div class="section" id="abstractions-keeping-the-code-simple">
-<h2>Abstractions: Keeping The Code Simple</h2>
+<h2 id="abstractions-keeping-the-code-simple">Abstractions: Keeping The Code Simple</h2>
 <p>Because there are minor differences between the different boards, we're going to abstact them away using a python module. We'll call it <tt class="docutils literal">setup.py</tt>.</p>
 <p>In programming, <em>abstraction</em> is providing an indirect way to work with something. That something might be code, concepts, a service like a database, or something physical like different development boards, as we're abstracting here.</p>
 <p>Abstraction helps by providing a single, simplified <em>interface</em> to do things that may have a lot of complexity.</p>
@@ -543,7 +546,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </td></tr></table></div></div>
 </div>
 <div class="section" id="testing">
-<h2>Testing</h2>
+<h2 id="testing">Testing</h2>
 <p>Before digging into state and other fun stuff, its a good idea to run some super simple code to ensure that everything is wired up properly. I've written some minimalistic code you can use to verify everything is set up.</p>
 <p>What this code does is turn the on the onboard LED when button "A" is pressed, and the RGB LED (either a dotstar for the ItsyBitsy, Trinket, or GEMMA boards, or a NeoPixel in the case of the CircuitPlayground) when button "B" is pressed.</p>
 <div class="admonition tip">
@@ -598,13 +601,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Here's a short video demonstrating the test code and demo circuit on each of the boards I have:</p>
 <div class="video-container">
 <video controls="">
-<source src="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4">
+<source src="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4"/>
 <p>Your browser doesn't support HTML5 video. Here is
           a <a href="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
-</source></video>
+</video>
 </div></div>
 <div class="section" id="conclusion-and-what-s-next">
-<h2>Conclusion And What's Next</h2>
+<h2 id="conclusion-and-whats-next">Conclusion And What's Next</h2>
 <p>In this installment, we've discussed some details about the CircuitPython platform, and built out a circuit for experimentation, taking advantage of some of the built-in components we've got at our disposal.</p>
 <p>We have developed a rudimentary API: we've written code that uses abstraction to make it easy to write code that will run on many development boards.</p>
 <p>We've hinted at "state" and "events" but have yet to really define what they are.</p>

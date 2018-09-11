@@ -86,6 +86,7 @@ body {
 
 .figure {
     border: 0.5em double #000000;
+    margin-bottom: 1em;
 }
 
 .figure img {
@@ -111,6 +112,12 @@ body {
     float: right;
     clear: left;
     margin-left: 1em;
+}
+
+.align-left {
+    float: left;
+    clear: right;
+    margin-right: 1em;
 }
 
 .align-middle {
@@ -258,6 +265,7 @@ pre {
 
 h1, h2, h3, h4, h5, h6, h7 {
     font-weight: bold;
+    clear: both;
 }
 
 #content-wrapper > h1:first-of-type, 

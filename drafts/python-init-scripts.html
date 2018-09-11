@@ -1,62 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>The Collected Works of jjmojojjmojo</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
-        <link href="/feeds/category.python.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
-        <link href="/feeds/category.python.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
-
-
-    <meta name="tags" content="init script" />
-    <meta name="tags" content="lsb" />
-    <meta name="tags" content="python" />
-
+<title>The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.python.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.python.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="init script" name="tags"/>
+<meta content="lsb" name="tags"/>
+<meta content="python" name="tags"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/drafts/python-init-scripts.html" rel="bookmark"
-         title="Permalink to Purely Python: LSB-Compliant Init Scripts">Purely Python: LSB-Compliant Init Scripts</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2009-12-29T08:44:00-05:00">
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/drafts/python-init-scripts.html" rel="bookmark" title="Permalink to Purely Python: LSB-Compliant Init Scripts">Purely Python: LSB-Compliant Init Scripts</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2009-12-29T08:44:00-05:00">
       Tue 29 December 2009
     </time>
-    <address class="vcard author">
+<address class="vcard author">
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="warning">
-  <h2>WARNING</h2>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#background" title="Background">Background</a></li><li><a class="toc-href" href="#so-why-python" title="So Why Python?">So Why Python?</a></li><li><a class="toc-href" href="#concepts" title="Concepts">Concepts</a></li><li><a class="toc-href" href="#script-requirements" title="Script Requirements">Script Requirements</a></li><li><a class="toc-href" href="#code-skeleton" title="Code Skeleton">Code Skeleton</a></li><li><a class="toc-href" href="#getting-fancy" title="Getting Fancy">Getting Fancy</a></li><li><a class="toc-href" href="#moving-forward" title="Moving Forward">Moving Forward</a></li></ul></div>
+</div>
+<div class="warning">
+<h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
-  <div class="entry-content status-draft">
-    <p>I've recently been writing a large number of Linux
+<div class="entry-content status-draft">
+<p>I've recently been writing a large number of Linux
 <a class="reference external" href="http://en.wikipedia.org/wiki/UNIX_System_V">Sys-V</a> style init
 scripts, to control how services are started upon system boot (or
 terminated upon shutdown).</p>
@@ -71,7 +68,7 @@ skeleton &lt;http://lionfacelemonface.wordpress.com/2009/12/29/python-init-scrip
 or `a real-world
 example &lt;http://lionfacelemonface.wordpress.com/2009/12/29/python-init-scripts/#aoe-init&gt;`__.</em></p>
 <div class="section" id="background">
-<h2>Background</h2>
+<h2 id="background">Background</h2>
 <p>Over the past few months, I've building a large hardware infrastructure.
 It's based on <a class="reference external" href="http://www.redhat.com/rhel/server/">Red Hat Enterprise Linux
 5</a>, and will make heavy use of
@@ -114,7 +111,7 @@ maintained, and your script will be safe from manipulation from package
 updates.</p>
 </div>
 <div class="section" id="so-why-python">
-<h2>So Why Python?</h2>
+<h2 id="so-why-python">So Why Python?</h2>
 <p>I chose Python as the scripting language here for a couple of reasons:</p>
 <ol class="arabic simple">
 <li>Python is readily available on both my host machines (RHEL depends
@@ -137,7 +134,7 @@ language like Python and a shell automation language like sh or bash.
 Depending on your perspective,</p>
 <pre class="literal-block">
 if [-e /some/file]; then
-     echo &quot;Hey you guys!&quot; 1&gt;&amp;2
+     echo "Hey you guys!" 1&gt;&amp;2
 fi
 </pre>
 <p>Might be easier to deal with than,</p>
@@ -145,35 +142,35 @@ fi
 import os, sys
 
 if os.path.exists('/some/file'):
-     print &gt;&gt; sys.stderr, &quot;Hey you guys!&quot;
+     print &gt;&gt; sys.stderr, "Hey you guys!"
 </pre>
 <p>Or, this</p>
 <pre class="literal-block">
 import os, sys
 
 if sys.argv[1] == 'start':
-    print &quot;Starting...&quot;
+    print "Starting..."
 elif sys.argv[1] == 'stop':
-    print &quot;Stopping...&quot;
+    print "Stopping..."
 elif sys.argv[1] == 'restart':
-    print &quot;Restarting...&quot;
+    print "Restarting..."
 else:
-    print &quot;Usage: %s [start|stop|restart]&quot; % (sys.argv[0])
+    print "Usage: %s [start|stop|restart]" % (sys.argv[0])
 </pre>
 <p>Verses this:</p>
 <pre class="literal-block">
-case &quot;$1&quot; in
+case "$1" in
        'start')
-       echo &quot;Starting...&quot;
+       echo "Starting..."
 ;;
        'stop')
-       echo &quot;Stopping...&quot;
+       echo "Stopping..."
 ;;
        'restart')
-       echo &quot;Restarting...&quot;
+       echo "Restarting..."
 ;;
        *)
-       echo &quot;Usage: $0 [start|stop|restart]&quot;
+       echo "Usage: $0 [start|stop|restart]"
 ;;
 esac
 </pre>
@@ -188,7 +185,7 @@ really great language for this purpose, and the process has proven to be
 relatively painless.</p>
 </div>
 <div class="section" id="concepts">
-<h2>Concepts</h2>
+<h2 id="concepts">Concepts</h2>
 <p>I won't go into deep detail here, since these concepts are better
 explained elsewhere, but here's a rundown of the concepts we're dealing
 with when creating Python-based init scripts:</p>
@@ -227,7 +224,7 @@ by the init system. This ensures they will start or shutdown in the
 proper order.</p>
 </div>
 <div class="section" id="script-requirements">
-<h2>Script Requirements</h2>
+<h2 id="script-requirements">Script Requirements</h2>
 <p>Because of common convention, LSB standards, and the nuance of the
 chkconfig command, any init script we write will have to meet the
 following requirements:</p>
@@ -245,7 +242,7 @@ supported, otherwise, restart the service if it's running</li>
 <li><strong>status</strong> - print the status of the service</li>
 </ul>
 <div class="line-block">
-<div class="line"><br /></div>
+<div class="line"><br/></div>
 <div class="line-block">
 <div class="line">And optionally support the following actions:</div>
 </div>
@@ -272,13 +269,13 @@ man page &lt;<a class="reference external" href="http://ss64.com/bash/chkconfig.
 <p>The <tt class="docutils literal">chkconfig:</tt> field indicates 3 space-separated values:</p>
 <ol class="arabic simple">
 <li>what runlevels you want the service to run at (no spaces; a single
-dash means &quot;don't start by default in any runlevels&quot;)</li>
+dash means "don't start by default in any runlevels")</li>
 <li>What order you'd like the service to <em>start</em></li>
 <li>What order you'd like the service to <em>shut down</em></li>
 </ol>
 <p>Note the orders are just <em>requests</em>, the LSB block (defined below)
 and other dependencies will dictate the final start/shutdown order.</p>
-<p><p>The <tt class="docutils literal">description:</tt> field describes what the service is. It can span
+<p></p><p>The <tt class="docutils literal">description:</tt> field describes what the service is. It can span
 multiple lines if you add a backslash before the carriage return, as
 illustrated above.</p>
 </li>
@@ -295,7 +292,7 @@ with at least the <tt class="docutils literal">Description</tt>, and <tt class="
 </pre>
 <p>The <tt class="docutils literal">Description</tt> serves the same purpose as the <tt class="docutils literal">chkconfig</tt>
 description (and they can be the same text).</p>
-<p>The <tt class="docutils literal">Provides</tt> field lists all of the &quot;boot facilities&quot; that this
+<p>The <tt class="docutils literal">Provides</tt> field lists all of the "boot facilities" that this
 service provides. This is used to set dependencies.</p>
 <p>Listing more than one can be useful if you are controlling multiple
 services, or replacing the standard init scripts (so you can specify
@@ -303,7 +300,7 @@ services, or replacing the standard init scripts (so you can specify
 services will not need to be altered).</p>
 <p>However, it's most likely you'll want to also add the
 <tt class="docutils literal"><span class="pre">Required-Start</span></tt> and <tt class="docutils literal"><span class="pre">Required-Stop</span></tt> fields as well. These fields
-list &quot;boot facilities&quot; that your service requires during startup and
+list "boot facilities" that your service requires during startup and
 shutdown.</p>
 <pre class="literal-block">
 ### BEGIN INIT INFO
@@ -315,30 +312,28 @@ shutdown.</p>
 </pre>
 <p>In this example, we're telling <tt class="docutils literal">chkconfig</tt> that our service mustn't
 start before nfs <em>and</em> ntpd have started.</p>
-<p><div class="line-block">
-<div class="line">There are also <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/facilname.html">some &quot;facilities&quot; that are
+<p></p><div class="line-block">
+<div class="line">There are also <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/facilname.html">some "facilities" that are
 in-specific</a>,
 and prefixed with a dollar sign. These include <tt class="docutils literal">$network</tt> and
 <tt class="docutils literal">$local_fs</tt>,</div>
 <div class="line-block">
-<div class="line">which represent &quot;the network is up&quot; and &quot;all local file systems
-are mounted&quot;, respectively.</div>
+<div class="line">which represent "the network is up" and "all local file systems
+are mounted", respectively.</div>
 </div>
 </div>
 </li>
 <li><p class="first">The script must write a file with the same name as the service to
 <tt class="docutils literal">/var/lock/subsys</tt>.</p>
-</p><p>I'm having trouble finding concrete explanation as to why this is a
-requirement. All I've been able to find is a <a class="reference external" href="http://www.redhat.com/magazine/008jun05/departments/tips_tricks/">Red Hat &quot;tips and
-tricks&quot;
+</li></ol></div><p>I'm having trouble finding concrete explanation as to why this is a
+requirement. All I've been able to find is a <a class="reference external" href="http://www.redhat.com/magazine/008jun05/departments/tips_tricks/">Red Hat "tips and
+tricks"
 entry</a>
 (scroll down).</p>
-<p><p>So I'm not sure if this is a hard requirement, a Red Hat requirement,
+<p></p><p>So I'm not sure if this is a hard requirement, a Red Hat requirement,
 or what, but it was part of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14">Coraid's init script
 shell</a>, and I
 don't see any harm, so I've included it here.</p>
-</li>
-</ol>
 <p>Some other things to keep in mind:</p>
 <ul>
 <li><p class="first">Best practice dictates that we put functions and such in external
@@ -362,12 +357,11 @@ application and return a relevant status code.</p>
 cleaver way of dealing with that, which I will describe below.</p>
 </li>
 </ul>
-</div>
 <div class="section" id="code-skeleton">
-<h2>Code Skeleton</h2>
+<h2 id="code-skeleton">Code Skeleton</h2>
 <p>Taking the above requirements into account, I've developed a code
 skeleton that contains all of the bits and pieces, plus an easy to use
-&quot;switchboard&quot; to control the whole thing.</p>
+"switchboard" to control the whole thing.</p>
 <pre class="literal-block">
 #!/usr/bin/python
 #
@@ -392,44 +386,44 @@ skeleton that contains all of the bits and pieces, plus an easy to use
 import sys, os, subprocess, re, time
 
 def lock():
-    &quot;&quot;&quot;
+    """
     Create the /var/lock/subsys file
-    &quot;&quot;&quot;
+    """
     open('/var/lock/subsys/my-service', 'w').close()
 
 def locked():
-    &quot;&quot;&quot;
+    """
     Return True if the lock file exists
-    &quot;&quot;&quot;
+    """
     return os.path.exists('/var/lock/subsys/my-service')
 
 def unlock():
-    &quot;&quot;&quot;
+    """
     Remove the /var/lock/subsys file
-    &quot;&quot;&quot;
+    """
     os.remove('/var/lock/subsys/my-service')
 
 def start():
-    &quot;&quot;&quot;
+    """
     Do whatever needs to be done.. this is where you start any applications,
     mount filesystems, etc.
-    &quot;&quot;&quot;
+    """
 
 def stop():
-    &quot;&quot;&quot;
+    """
     Shut everything down, clean up.
-    &quot;&quot;&quot;
+    """
 
 def restart():
-    &quot;&quot;&quot;
+    """
     Stop and then start
-    &quot;&quot;&quot;
+    """
     stop()
     lock()
     start()
 
 def status():
-    &quot;&quot;&quot;
+    """
     Print any relevant status info, and return a status code, an integer:
 
     0         program is running or service is OK
@@ -442,35 +436,35 @@ def status():
     150-199   reserved for application use
     200-254   reserved
 
-    &#64;see: http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/iniscrptact.html
-    &quot;&quot;&quot;
+    @see: http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/iniscrptact.html
+    """
     if not locked():
         # this is dubious! if you're controlling another process, you should check its
         # PID file or use some other means.. consider this an example
-        print &quot;STATUS: Program isn't running&quot;
+        print "STATUS: Program isn't running"
         return 3
     else:
-        print &quot;STATUS: Everything is A-OK&quot;
+        print "STATUS: Everything is A-OK"
         return 0
 
 def test():
-    &quot;&quot;&quot;
-    This is my way of &quot;unit testing&quot; the script. This function
+    """
+    This is my way of "unit testing" the script. This function
     calls each of actions, mimicking the switchboard below.
 
     It then verifies that the functions did what they were supposed to,
     and reports any problems to stderr.
 
-    &#64;TODO: this could be used to inspect the system (e.g. open a web page if this is
+    @TODO: this could be used to inspect the system (e.g. open a web page if this is
     a web server control script) instead of the script.
 
-    &#64;TODO: you'll need to also check for PID files and running processes!
-    &quot;&quot;&quot;
+    @TODO: you'll need to also check for PID files and running processes!
+    """
     # Since this will turn off the system when its complete,
     # I want to warn the user and give them the chance to opt out if they
     # chose this option by accident.
 
-    ok = raw_input(&quot;&quot;&quot;
+    ok = raw_input("""
 ******************
 TESTING MY SERVICE
 ******************
@@ -479,22 +473,22 @@ This will TURN OFF my-service after all the tests.
 
 This should only be done for testing and debugging purposes.
 
-Are you sure you want to do this? [Y/N]: &quot;&quot;&quot;
+Are you sure you want to do this? [Y/N]: """
     ).lower()
 
     if ok != 'y':
-        print &gt;&gt; sys.stderr, &quot;Aborting...&quot;
+        print &gt;&gt; sys.stderr, "Aborting..."
         return
 
-    print &quot;Writing Lock File...&quot;
+    print "Writing Lock File..."
     lock()
-    print &quot;Verifying lock file...&quot;
+    print "Verifying lock file..."
     if os.path.exists('/var/lock/subsys/my-service'):
-        print &quot;Lock file written...&quot;
+        print "Lock file written..."
     else:
-        print &gt;&gt; sys.stderr, &quot;ERROR: Lock file was NOT written&quot;
+        print &gt;&gt; sys.stderr, "ERROR: Lock file was NOT written"
 
-    print &quot;Starting...&quot;
+    print "Starting..."
     start()
     # Do stuff to check the start() function
     #
@@ -504,19 +498,19 @@ Are you sure you want to do this? [Y/N]: &quot;&quot;&quot;
     # output under different circumstances
     status()
 
-    print &quot;Stopping...&quot;
+    print "Stopping..."
     stop()
     # Do stuff to check the stop() function
     #
     #
 
-    print &quot;Removing lock file...&quot;
+    print "Removing lock file..."
     unlock()
 
     if os.path.exists('/var/lock/subsys/my-service'):
-        print &gt;&gt; sys.stderr, &quot;ERROR: Could not remove lock file&quot;
+        print &gt;&gt; sys.stderr, "ERROR: Could not remove lock file"
     else:
-        print &quot;Lock file removed successfully&quot;
+        print "Lock file removed successfully"
 
     # one more time to see what it looks like when the service off
     status()
@@ -525,10 +519,10 @@ Are you sure you want to do this? [Y/N]: &quot;&quot;&quot;
 # Main program switchboard - wrap everything in a try block to
 # ensure the right return code is sent to the shell, and keep things tidy.
 #
-# &#64;TODO: need to raise custom exception instead of ValueError, and
+# @TODO: need to raise custom exception instead of ValueError, and
 #        handle other exceptions better.
 #
-# &#64;TODO: put lock/unlock calls inside of start/stop?
+# @TODO: put lock/unlock calls inside of start/stop?
 if __name__ == '__main__':
     try:
         # if there's fewer than 2 options on the command line
@@ -562,14 +556,14 @@ if __name__ == '__main__':
         # calls to sys.exit() raise this error :(
         pass
     except (ValueError):
-        print &gt;&gt; sys.stderr, &quot;Usage: my-service [start|stop|restart|force-reload|status|test]&quot;
-        # return 2 for &quot;bad command line option&quot;
+        print &gt;&gt; sys.stderr, "Usage: my-service [start|stop|restart|force-reload|status|test]"
+        # return 2 for "bad command line option"
         sys.exit(2)
     except:
         # all other exceptions get caught here
         extype, value = sys.exc_info()[:2]
-        print &gt;&gt; sys.stderr, &quot;ERROR: %s (%s)&quot; % (extype, value)
-        # return 1 for &quot;general error&quot;
+        print &gt;&gt; sys.stderr, "ERROR: %s (%s)" % (extype, value)
+        # return 1 for "general error"
         sys.exit(1)
 </pre>
 <p>I've put this code skeleton into my <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/initscript/">google code
@@ -615,10 +609,10 @@ lrwxrwxrwx  1 root root   20 Dec 28 15:05 S01my-service -&gt; ../init.d/my-servi
 into that further.</p>
 </div>
 <div class="section" id="getting-fancy">
-<h2>Getting Fancy</h2>
+<h2 id="getting-fancy">Getting Fancy</h2>
 <div class="section" id="pretty-status">
 <h3>Pretty Status</h3>
-<p>The LSB specs call for a &quot;library&quot; of sorts that contains useful
+<p>The LSB specs call for a "library" of sorts that contains useful
 functions that help simplify init script creation. Most Linux
 distributions (or, at least the ones I'm dealing with here) include a
 variant, installed at <tt class="docutils literal">/etc/init.d/functions</tt>.</p>
@@ -645,25 +639,25 @@ SUCCESS_COLOR = '33[1;32m'
 NO_COLOR = '33[0m'
 
 def echo_success():
-    &quot;&quot;&quot;
-    Port of standard RHEL function, echos pretty colorized &quot;[  OK  ]&quot; after
+    """
+    Port of standard RHEL function, echos pretty colorized "[  OK  ]" after
     output
-    &quot;&quot;&quot;
-    print &quot;%s[  %sOK%s  ]&quot; % (MOVE_CURSOR, SUCCESS_COLOR, NO_COLOR)
+    """
+    print "%s[  %sOK%s  ]" % (MOVE_CURSOR, SUCCESS_COLOR, NO_COLOR)
 
 def echo_failure():
-    &quot;&quot;&quot;
-    Port of standard RHEL function, echos pretty colorized &quot;[FAILED]&quot; after
+    """
+    Port of standard RHEL function, echos pretty colorized "[FAILED]" after
     output
-    &quot;&quot;&quot;
-    print &quot;%s[%sFAILED%s]&quot; % (MOVE_CURSOR, FAILURE_COLOR, NO_COLOR)
+    """
+    print "%s[%sFAILED%s]" % (MOVE_CURSOR, FAILURE_COLOR, NO_COLOR)
 </pre>
 <p>Here's how they're used:</p>
 <pre class="literal-block">
 import sys
 
 def start():
-    print &quot;Starting...&quot;,
+    print "Starting...",
     # do stuff...
     echo_success()
 
@@ -672,19 +666,19 @@ try:
 except:
    echo_failure()
    extype, value = sys.exc_info()[:2]
-   print &gt;&gt; sys.stderr, &quot;ERROR: %s (%s)&quot; % (extype, value)
-   # return 1 for &quot;general error&quot;
+   print &gt;&gt; sys.stderr, "ERROR: %s (%s)" % (extype, value)
+   # return 1 for "general error"
    sys.exit(1)
 </pre>
-<p>Essentially, we're using the &quot;don't print a newline&quot; syntax for
+<p>Essentially, we're using the "don't print a newline" syntax for
 <tt class="docutils literal">print</tt>, and relying on the <tt class="docutils literal">echo_*</tt> functions to handle printing
 the newlines for us.</p>
 <p>If any exception is raised, the code immediately goes to the except
-clause, finishing the line with the &quot;FAILED&quot; notice, and then printing
+clause, finishing the line with the "FAILED" notice, and then printing
 the nature of the error to standard error.</p>
 </div>
 <div class="section" id="real-unit-testing">
-<h3>&quot;Real&quot; Unit Testing</h3>
+<h3>"Real" Unit Testing</h3>
 <p>My first full-blown init script involved mounting AoE LUNs on my SAN. I
 had trouble mounting them using the standard <tt class="docutils literal">fstab</tt> methods (even
 with <tt class="docutils literal">_netdev</tt> specified).</p>
@@ -702,16 +696,16 @@ of the shell commands, without actually executing them.</p>
 still don't) know how to accurately simulate an exception in a doctest.</p>
 <p>Then I had trouble getting my doctests to actually run. The usual
 <tt class="docutils literal">if __name__ == '__main__':</tt> idiom was already being used by the
-&quot;switchboard&quot; for the init script. This meant that the standard way of
+"switchboard" for the init script. This meant that the standard way of
 invoking the doctest module wouldn't work.</p>
 <p>I mucked around a bit and settled on adding another action to the
-script, called &quot;unittest&quot;. Using the <a class="reference external" href="http://docs.python.org/library/doctest.html">doctest
+script, called "unittest". Using the <a class="reference external" href="http://docs.python.org/library/doctest.html">doctest
 API</a>, I was able to run
 all the doctests, so that worked out well.</p>
 <p>When it came to overcoming the other problems, I was able to do so by
 running all of my system calls through a central function, I called
-<tt class="docutils literal">run()</tt>, and setting up some globals to switch on and off the &quot;test
-mode&quot; when the unittest action is called.</p>
+<tt class="docutils literal">run()</tt>, and setting up some globals to switch on and off the "test
+mode" when the unittest action is called.</p>
 <p><tt class="docutils literal">run()</tt> takes several arguments, and works with two global registries
 that establish test output and exceptions depending on what function is
 calling the <tt class="docutils literal">run()</tt> function. My unittest action sets up those globals
@@ -744,9 +738,9 @@ com)</p>
 # Author: Josh Johnson
 #
 # TODO: support LVM mounts, RAID arrays of etherd devices (may need to do other stuff before mounting)
-# TODO: add &quot;live test&quot; that parses the fstab-aoe, and verifies all the mounts
+# TODO: add "live test" that parses the fstab-aoe, and verifies all the mounts
 # TODO: replace sys.stderr.write with print &gt;&gt; sys.stderr
-# TODO: add &quot;reload&quot; action that refreshes and revalidates the aoe targets (and remounts mounted ones?)
+# TODO: add "reload" action that refreshes and revalidates the aoe targets (and remounts mounted ones?)
 #
 # chkconfig: - 99 01
 # description: Mount AoE targets at boot.
@@ -770,11 +764,11 @@ testing = False
 myfstab = '/etc/fstab-aoe'
 
 
-def parse_fstab(path=&quot;&quot;):
-    &quot;&quot;&quot;
+def parse_fstab(path=""):
+    """
     Parse the /etc/fstab-aoe file, return a structure.
 
-    &#64;TODO: parse options into a list?
+    @TODO: parse options into a list?
 
     &gt;&gt;&gt; mounts = parse_fstab()
     &gt;&gt;&gt; mounts[0]['file-system']
@@ -783,7 +777,7 @@ def parse_fstab(path=&quot;&quot;):
     'ext3'
     &gt;&gt;&gt; mounts[4]['options']
     'defaults,_netdev,noatime,bubba,data=journal'
-    &quot;&quot;&quot;
+    """
 
     if not path:
         path = myfstab
@@ -798,11 +792,11 @@ def parse_fstab(path=&quot;&quot;):
         line = line.strip()
 
         # skip comments/empty lines
-        if line == '' or line.startswith(&quot;#&quot;):
+        if line == '' or line.startswith("#"):
             continue
 
         info = {}
-        cols = re.split(&quot;\s+&quot;, line)
+        cols = re.split("\s+", line)
 
         info['file-system'] = cols[0]
         info['mount-point'] = cols[1]
@@ -818,21 +812,21 @@ def parse_fstab(path=&quot;&quot;):
     return _fstab
 
 def run(command, usetest='unknown', bypass_test=False, test_except=False):
-    &quot;&quot;&quot;
+    """
     Execute a command and return the output.
 
     If the global testing variable is set, the command isn't executed, just printed to stdout
     (no newline)
 
-    &#64;param command: list, the command and any arguments you want to pass
-    &#64;param usetest: string, used in conjunction with the global testing variable,
+    @param command: list, the command and any arguments you want to pass
+    @param usetest: string, used in conjunction with the global testing variable,
                     by the test() function below. Used as a reference for what fake output
                     you'd like to return.
-    &#64;param bypass_test: boolean, if True, still execute the command, even if testing is True
-    &#64;param test_except: boolean, set to True if you'd like to use the _except hash to test an exception
+    @param bypass_test: boolean, if True, still execute the command, even if testing is True
+    @param test_except: boolean, set to True if you'd like to use the _except hash to test an exception
 
-    &#64;TODO: should we always strip? maybe add as an option?
-    &#64;TODO: should we always split the command?
+    @TODO: should we always strip? maybe add as an option?
+    @TODO: should we always split the command?
 
 
 
@@ -844,10 +838,10 @@ def run(command, usetest='unknown', bypass_test=False, test_except=False):
     Traceback (most recent call last):
     ...
     KeyError
-    &quot;&quot;&quot;
+    """
     # little bit of code to help in unit testing
     if testing and not bypass_test:
-        print &quot; &quot;.join(command)
+        print " ".join(command)
         if usetest != 'unknown':
             if test_except:
                 raise _except[usetest]
@@ -863,47 +857,47 @@ def run(command, usetest='unknown', bypass_test=False, test_except=False):
 
 
 def load(interfaces=['eth1', 'eth0']):
-    &quot;&quot;&quot;
+    """
     Load the aoe module.
 
-    &#64;TODO: test for module prescence?
-    &#64;TODO: set some sort of timeout in the loop
+    @TODO: test for module prescence?
+    @TODO: set some sort of timeout in the loop
 
     &gt;&gt;&gt; load()
-    /sbin/modprobe aoe aoe_iflist=&quot;eth1 eth0&quot;
+    /sbin/modprobe aoe aoe_iflist="eth1 eth0"
     &gt;&gt;&gt; load(['eth1'])
-    /sbin/modprobe aoe aoe_iflist=&quot;eth1&quot;
-    &quot;&quot;&quot;
+    /sbin/modprobe aoe aoe_iflist="eth1"
+    """
     chk = run(['lsmod'])
 
     if re.search('^aoe', chk, re.MULTILINE):
-        print &gt;&gt; sys.stderr, &quot;Module already loaded&quot;
+        print &gt;&gt; sys.stderr, "Module already loaded"
         return
 
-    run(['/sbin/modprobe',  'aoe', 'aoe_iflist=&quot;%s&quot;' % ' '.join(interfaces)])
+    run(['/sbin/modprobe',  'aoe', 'aoe_iflist="%s"' % ' '.join(interfaces)])
 
     # don't return until it's loaded (/dev/etherd/discover exists)
 
     if not testing:
-        print &quot;Waiting for module to come up...&quot;
+        print "Waiting for module to come up..."
         while not os.path.exists('/dev/etherd/discover'):
             pass
-        print &quot;Module up.&quot;
+        print "Module up."
 
 
 def unload():
-    &quot;&quot;&quot;
+    """
     Unload the aoe module
 
-    &#64;TODO: set some sort of timeout in the loop
+    @TODO: set some sort of timeout in the loop
 
     &gt;&gt;&gt; unload()
     /sbin/rmmod aoe
-    &quot;&quot;&quot;
+    """
     chk = run(['lsmod'])
 
     if not re.search('^aoe', chk, re.MULTILINE):
-        print &gt;&gt; sys.stderr, &quot;Module not loaded&quot;
+        print &gt;&gt; sys.stderr, "Module not loaded"
         return
 
     run(['/sbin/rmmod', 'aoe'])
@@ -911,17 +905,17 @@ def unload():
     # don't return until it's unloaded (/dev/etherd/discover dissapears)
 
     if not testing:
-        print &quot;Waiting for module to come down...&quot;
+        print "Waiting for module to come down..."
         while os.path.exists('/dev/etherd/discover'):
             pass
-        print &quot;Module down.&quot;
+        print "Module down."
 
 
 def mount():
-    &quot;&quot;&quot;
+    """
     Mount all of the entries in /etc/fstab-aoe
 
-    &#64;TODO: verify mount points/etherd devices?
+    @TODO: verify mount points/etherd devices?
 
     &gt;&gt;&gt; import sys
     &gt;&gt;&gt; # capture stderr so we can test the exceptions too
@@ -939,7 +933,7 @@ def mount():
     Unable to mount aoe target /dev/etherd/e99.52 to /var/shares/miller-lab
     mount -t ext3 -o defaults,_netdev,noatime,data=journal /dev/etherd/e99.132 /var/backup/miller-lab
     Unable to mount aoe target /dev/etherd/e99.132 to /var/backup/miller-lab
-    &quot;&quot;&quot;
+    """
     mounts = parse_fstab()
 
     for mount in mounts:
@@ -950,16 +944,16 @@ def mount():
             run(command, 'mount', test_except=testing)
 
         except OSError:
-            sys.stderr.write(&quot;Unable to mount aoe target %(file-system)s to %(mount-point)s\n&quot; % mount)
+            sys.stderr.write("Unable to mount aoe target %(file-system)s to %(mount-point)s\n" % mount)
 
 
 
 
 def unmount():
-    &quot;&quot;&quot;
+    """
     Un-mount all of the entries in /etc/fstab-aoe
 
-    &#64;TODO: only unmount mounted entries?
+    @TODO: only unmount mounted entries?
 
     &gt;&gt;&gt; import sys
     &gt;&gt;&gt; # capture stderr so we can test the exceptions too
@@ -977,7 +971,7 @@ def unmount():
     Unable to unmount aoe target /dev/etherd/e99.52 from /var/shares/miller-lab
     umount /dev/etherd/e99.132
     Unable to unmount aoe target /dev/etherd/e99.132 from /var/backup/miller-lab
-    &quot;&quot;&quot;
+    """
     mounts = parse_fstab()
 
     for mount in mounts:
@@ -987,15 +981,15 @@ def unmount():
             run(command, 'unmount', test_except=testing)
 
         except OSError:
-            sys.stderr.write(&quot;Unable to unmount aoe target %(file-system)s from %(mount-point)s\n&quot; % mount)
+            sys.stderr.write("Unable to unmount aoe target %(file-system)s from %(mount-point)s\n" % mount)
 
 
 
 def lock():
-    &quot;&quot;&quot;
+    """
     Create the /var/lock/subsys/aoe-init file
 
-    &#64;TODO: catch exceptions
+    @TODO: catch exceptions
 
     &gt;&gt;&gt; lock()
     &gt;&gt;&gt; import os
@@ -1003,67 +997,67 @@ def lock():
     True
     &gt;&gt;&gt; os.remove('/var/lock/subsys/aoe-init')
 
-    &quot;&quot;&quot;
+    """
     open('/var/lock/subsys/aoe-init', 'w').close()
 
 def unlock():
-    &quot;&quot;&quot;
+    """
     Remove the /var/lock/subsys/aoe-init file
 
-    &#64;TODO: catch exceptions
+    @TODO: catch exceptions
 
     &gt;&gt;&gt; lock()
     &gt;&gt;&gt; unlock()
     &gt;&gt;&gt; import os
     &gt;&gt;&gt; os.path.exists('/var/lock/subsys/aoe-init')
     False
-    &quot;&quot;&quot;
+    """
     os.remove('/var/lock/subsys/aoe-init')
 
 
 def aoe_stat():
-    &quot;&quot;&quot;
+    """
     Get the current list of available aoe targets
-    &quot;&quot;&quot;
+    """
     return run(['/usr/sbin/aoe-stat'], 'aoe_stat')
 
 def aoe_version():
-    &quot;&quot;&quot;
+    """
     Get the current AoE driver and tools versions
-    &quot;&quot;&quot;
+    """
     return run(['/usr/sbin/aoe-version'], 'aoe_version')
 
 def aoe_discover():
-    &quot;&quot;&quot;
+    """
     Probe the SAN network for AoE targets
-    &quot;&quot;&quot;
+    """
     run(['/usr/sbin/aoe-discover'])
 
     # give aoe-discover a chance to do it's thing
     time.sleep(5)
 
 def mounted():
-    &quot;&quot;&quot;
+    """
     Return any mount entries for mounted AoE targets
 
-    &#64;TODO: parse mounts into structure
+    @TODO: parse mounts into structure
 
     &gt;&gt;&gt; mounted()
     /bin/mount
     ['/dev/etherd/e99.2 on /media/test type ext3 (rw,_netdev,noatime)']
-    &quot;&quot;&quot;
-    mounts = run(['/bin/mount'], 'mounted').split(&quot;\n&quot;)
+    """
+    mounts = run(['/bin/mount'], 'mounted').split("\n")
 
     aoe_mounts = []
 
     for mount in mounts:
-        if &quot;dev/etherd&quot; in mount:
+        if "dev/etherd" in mount:
             aoe_mounts.append(mount.strip())
 
     return aoe_mounts
 
 def status():
-    &quot;&quot;&quot;
+    """
     Check for the lock file, call the aoe version command, etc
 
     &gt;&gt;&gt; import sys
@@ -1089,19 +1083,19 @@ def status():
     /bin/mount
     /dev/etherd/e99.2 on /media/test type ext3 (rw,_netdev,noatime)
     &gt;&gt;&gt; unlock()
-    &quot;&quot;&quot;
+    """
     locked = os.path.exists('/var/lock/subsys/aoe-init')
 
     if not locked:
-        sys.stderr.write(&quot;WARNING: Lock file not found. Init script may not be functioning properly\n&quot;)
+        sys.stderr.write("WARNING: Lock file not found. Init script may not be functioning properly\n")
 
-    print &quot;AoE Version Information:&quot;
+    print "AoE Version Information:"
     print aoe_version()
     print
-    print &quot;Available AoE Targets:&quot;
+    print "Available AoE Targets:"
     print aoe_stat()
     print
-    print &quot;Mounted AoE Targets:&quot;
+    print "Mounted AoE Targets:"
 
     mounts = mounted()
 
@@ -1110,9 +1104,9 @@ def status():
 
 
 def unittest():
-    &quot;&quot;&quot;
+    """
     Run unit tests on this file.
-    &quot;&quot;&quot;
+    """
     import tempfile
     import doctest
 
@@ -1140,7 +1134,7 @@ def unittest():
 
     # test output for parsing functions
     _test = {}
-    _test['mounted'] = &quot;&quot;&quot;
+    _test['mounted'] = """
     /dev/mapper/Primary-Root on / type ext3 (rw)
     proc on /proc type proc (rw)
     sysfs on /sys type sysfs (rw)
@@ -1156,20 +1150,20 @@ def unittest():
     ocfs2_dlmfs on /dlm type ocfs2_dlmfs (rw)
     /dev/drbd1 on /vm type ocfs2 (rw,_netdev,noatime,heartbeat=local)
     /dev/etherd/e99.2 on /media/test type ext3 (rw,_netdev,noatime)
-    &quot;&quot;&quot;
+    """
 
-    _test['load'] = &quot;&quot;
-    _test['unload'] = &quot;&quot;
-    _test['mount'] = &quot;&quot;
-    _test['unmount'] = &quot;&quot;
-    _test['lock'] = &quot;&quot;
-    _test['aoe_stat'] = &quot;\te99.2        32.212GB  eth1,eth0 1024  up&quot;
-    _test['aoe_version'] = &quot;&quot;&quot;
+    _test['load'] = ""
+    _test['unload'] = ""
+    _test['mount'] = ""
+    _test['unmount'] = ""
+    _test['lock'] = ""
+    _test['aoe_stat'] = "\te99.2        32.212GB  eth1,eth0 1024  up"
+    _test['aoe_version'] = """
                   aoetools: 30
       installed aoe driver: 73
         running aoe driver: 73
-    &quot;&quot;&quot;
-    _test['unknown'] = &quot;&quot;
+    """
+    _test['unknown'] = ""
 
     # exceptions to test
     _except = {}
@@ -1181,40 +1175,40 @@ def unittest():
     this_module._test = _test
     this_module._except = _except
 
-    print &quot;Running unit tests for this init script...&quot;
+    print "Running unit tests for this init script..."
 
     doctest.testmod(this_module)
 
     print
-    print &quot;No output means the tests were successful. For more detail, call `aoe-init test -v`&quot;
+    print "No output means the tests were successful. For more detail, call `aoe-init test -v`"
 
     tmp.close()
 
 
 def test():
-    &quot;&quot;&quot;
+    """
     Do a sanity check to make sure we can load the module, parse the /etc/fstab-aoe
     file, mount the contents, then run the shutdown procedure.
 
-    &#64;TODO: unit test for this?
-    &quot;&quot;&quot;
+    @TODO: unit test for this?
+    """
 
-    ok = raw_input(&quot;\n*******************\nTESTING AOE SETUP\n*******************\n\nThis will turn off the aoe driver in your system.\n\nThis should only be done for testing and debugging purposes.\n\nAre you sure you want to do this? [Y/N]: &quot;).lower()
+    ok = raw_input("\n*******************\nTESTING AOE SETUP\n*******************\n\nThis will turn off the aoe driver in your system.\n\nThis should only be done for testing and debugging purposes.\n\nAre you sure you want to do this? [Y/N]: ").lower()
 
     if ok != 'y':
-        sys.stderr.write(&quot;Aborting...\n&quot;)
+        sys.stderr.write("Aborting...\n")
         return
 
     # check if there's an /etc/fstab-aoe
     if not os.path.exists('/etc/fstab-aoe'):
-        sys.stderr.write(&quot;ERROR: No /etc/fstab-aoe file found\n&quot;)
+        sys.stderr.write("ERROR: No /etc/fstab-aoe file found\n")
         return
 
     # try parsing it and check the entries
     fstab = parse_fstab('/etc/fstab-aoe')
 
     if len(fstab) == 0:
-        sys.stderr.write(&quot;ERROR: /etc/fstab-aoe doesn't contain any un-commented entries\n&quot;)
+        sys.stderr.write("ERROR: /etc/fstab-aoe doesn't contain any un-commented entries\n")
         return
 
 
@@ -1225,10 +1219,10 @@ def test():
     for _mount in fstab:
         # check for common errors
         if not os.path.exists(_mount['mount-point']):
-            sys.stderr.write(&quot;WARNING: %s does not exist\n&quot; % (_mount['mount-point']))
+            sys.stderr.write("WARNING: %s does not exist\n" % (_mount['mount-point']))
 
         if not os.path.exists(_mount['file-system']):
-            sys.stderr.write(&quot;WARNING: %s is not an existing device\n&quot; % (_mount['file-system']))
+            sys.stderr.write("WARNING: %s is not an existing device\n" % (_mount['file-system']))
 
 
     mount()
@@ -1238,27 +1232,27 @@ def test():
     unload()
     status()
 
-    print &quot;Testing /var/lock/subsys lock file...&quot;
+    print "Testing /var/lock/subsys lock file..."
 
-    if not os.path.exists(&quot;/var/lock/subsys/aoe-init&quot;):
-        print &gt;&gt; sys.stderr, &quot;ERROR: Lock file was NOT written&quot;
+    if not os.path.exists("/var/lock/subsys/aoe-init"):
+        print &gt;&gt; sys.stderr, "ERROR: Lock file was NOT written"
     else:
-        print &quot;Lock file written.&quot;
+        print "Lock file written."
 
     unlock()
 
-    if os.path.exists(&quot;/var/lock/subsys/aoe-init&quot;):
-        print &gt;&gt; sys.stderr, &quot;ERROR: Lock file was NOT deleted&quot;
+    if os.path.exists("/var/lock/subsys/aoe-init"):
+        print &gt;&gt; sys.stderr, "ERROR: Lock file was NOT deleted"
     else:
-        print &quot;Lock file deleted.&quot;
+        print "Lock file deleted."
 
 
 def refresh():
-    &quot;&quot;&quot;
+    """
     Attempt to reload and re-validate all of the aoe mounts on the system.
 
-    &#64;TODO: actually write this :)
-    &quot;&quot;&quot;
+    @TODO: actually write this :)
+    """
 
 
 # Main program switchboard
@@ -1285,18 +1279,18 @@ if __name__ == '__main__':
         elif action == 'test':
             test()
         elif action == 'refresh':
-            print &quot;Not currently implemented.&quot;
+            print "Not currently implemented."
         else:
             raise ValueError
 
 
     except (ValueError, IndexError):
-        sys.stderr.write(&quot;Usage: aoe-init [start|stop|status|refresh|test|unittest]\n&quot;)
+        sys.stderr.write("Usage: aoe-init [start|stop|status|refresh|test|unittest]\n")
 </pre>
 </div>
 </div>
 <div class="section" id="moving-forward">
-<h2>Moving Forward</h2>
+<h2 id="moving-forward">Moving Forward</h2>
 <p>There are a handful of items on my TODO list that I'd like to document
 here</p>
 <ul>
@@ -1352,19 +1346,18 @@ is still some cleanup that you need to do even if was never started.</p>
 <p>We also have to take into consideration that the process may have
 actually died as opposed to never been started.</p>
 <p>So generally speaking, I think the skeleton is OK the way it is, but
-I may &quot;fix&quot; this just so the end use isn't caught off guard by it.</p>
+I may "fix" this just so the end use isn't caught off guard by it.</p>
 </li>
 </ul>
 </div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>
