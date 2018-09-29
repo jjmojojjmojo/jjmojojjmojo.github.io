@@ -6,6 +6,14 @@ This repository contains the source and HTML for my blog. It is written mostly i
 
 The HTML output is located in *this* directory. The source code and build tools are located in ``_build``.
 
+
+Check-out Notes
+===============
+After the initial clone, you will have to run the following commands to get the sub-modules::
+	
+	$ git submodule init
+	$ git submodule update
+
 Development Setup
 =================
 

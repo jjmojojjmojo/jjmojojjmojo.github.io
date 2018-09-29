@@ -85,12 +85,401 @@ Remember that classes give us a few interesting features that make them especial
     
 We Can Track Changes In State (Events)
 --------------------------------------
-boo
 
-Event Dispatch In A Nutshell
-============================
+| An **event** is when state changes over time. We can **handle** events with code.
+
+State will change over time. We can detect those changes and take action. We call those changes *events* and when we take action, we refer to it as *handling an event*.
+
+We talked about events in terms of buttons: *press*, *release*, *hold*, but we also made it a point to talk about how any change in state can be an event: changes in readings from a sensor, changes in the time of day, and changes to multiple state attributes. What constitutes an event can be very complex.
+
+A New Demo Circuit
+==================
+We're going to be working with buttons and built-in LEDs, but in the next section we're going to be exploring events using other kinds of sensors, namely a *thermistor* and a *photocell*. We'll also be 
+
+Claiming Our Inheritance
+========================
+Once an event is detected, some action is taken. So far in this series, that action is code that lives right along with the event.
+
+Let's revisit with a new example. In this state class, we're going to track the value of a temperature sensor. When the temperature is between 0° and 15° C, the neopixel/dotstar will be illuminated blue. When it's between 16° and 25° C, the pixel will be illuminated green (indicating optimal temperature for human comfort, according to `wikipedia <https://en.wikipedia.org/wiki/Room_temperature>`__). If the temperature climbs above 25° C, the pixel will turn red, indicating that it's really hot.
+
+Here's some code that accomplishes that, using a state class in the style of previous examples:
+
+.. code-block:: python
+    
+    ﻿import board
+    import time
+    from setup import led, rgb, check
+    import adafruit_thermistor
+    
+    thermistor = adafruit_thermistor.Thermistor(board.TEMPERATURE, 10000.0, 10000.0, 25.0, 3950.0)
+    
+    class State:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.temperature = thermistor.temperature
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                self.temperature = thermistor.temperature
+                
+                if self.temperature < 15:
+                    self.color = (0, 0, 255)
+                elif 15 < self.temperature < 25:
+                    self.color = (0, 255, 0)
+                elif self.temperature > 25:
+                    self.color = (255, 0, 0)
+    
+    state = State()
+    
+    while True:
+        state.update()
+        
+        rgb[0] = state.color
+        
+So this is a pretty useful state class. We can imagine using it for other sensors. Anything that gives us readings we can translate to multiple colors can be represented with this class. We can copy and paste the code, and create new state classes for each sensor we want to support. 
+
+Let's do that, so we can light up a second LED with a color that corresponds to the intensity of the on-board photosensor.
+
+Note we've named the classes in a more descriptive way:
+
+.. code-block:: python
+    
+    ﻿import board
+    import time
+    from setup import led, rgb, check
+    import adafruit_thermistor
+    from simpleio import map_range
+    import analogio
+    
+    thermistor = adafruit_thermistor.Thermistor(board.TEMPERATURE, 10000.0, 10000.0, 25.0, 3950.0)
+    photocell = analogio.AnalogIn(board.LIGHT)
+    
+    class TemperatureStatus:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.temperature = round(thermistor.temperature)
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                print(self.temperature)
+                self.temperature = round(thermistor.temperature)
+                
+                if self.temperature <= 15:
+                    self.color = (0, 0, 255)
+                elif 15 < self.temperature <= 25:
+                    self.color = (0, 255, 0)
+                elif self.temperature > 25:
+                    self.color = (255, 0, 0)
+                    
+                self.checkin = time.monotonic()
+    
+    class LightStatus:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.amount = photocell.value
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                print(self.amount)
+                self.amount = photocell.value
+                    
+                self.checkin = time.monotonic()
+                
+            if self.amount < 20460:
+                self.color = (0, 0, 255)
+            elif 20460 < self.amount < 40920:
+                self.color = (0, 255, 0)
+            else:
+                self.color = (255, 0, 0)
+    
+    light = LightStatus()
+    temp = TemperatureStatus()
+    
+    while True:
+        light.update()
+        temp.update()
+        
+        rgb[0] = light.color
+        rgb[1] = temp.color
 
 
+But there is a better way, that lets us reuse as much code as possible.
+
+Object-oriented programming introduces us to the concept of *inheritance*. In the simplest terms, its a way to re-use common code in many classes. It's a bit like the Python interpreter is doing the copy and paste for you - you inherit from another class, and then edit the parts you want to change. 
+
+It's a concept that's best illustrated with an example. Lets refactor our classes to use inheritance. 
+
+The first step is to figure out what code is common to both "status" classes. 
+
+There are obvious things, like both classes have an ``update()`` method, ``checkin`` and ``color`` instance attributes, and a ``_debounce`` class attribute. 
+
+But some similarities require a bit of critical thought. Here are the less obvious things both classes have in common:
+
+* They both track the state of an analog signal. In the ``TemperatureStatus`` class, it's called ``temperature``. In the ``LightStatus`` class, it's called ``amount``. 
+* They both check a sensor for a value and update their state.
+* They both change color based on the state. 
+
+It's also important to think about what's different:
+
+* The ways that the analog signal is read is different. ``TemperatureStatus`` uses ``﻿thermistor.temperature``. ``LightStatus`` uses ``﻿photocell.value``.
+* ``TemperatureStatus`` has to convert the recorded value to an integer (note the use of ``round()``). ``LightStatus`` gets an integer from the ``photocell`` pin object.
+* In ``TemperatureStatus``, the color changes to blue below 15, green between 15 and 25, and red beyond 25.
+* In ``LightStatus``, the color changes to blue below ﻿20460, green between ﻿20460 and ﻿40920, and red above ﻿40920.
+
+We can think about the common and differing functionality in terms of actions - the status object reads the sensor, the status object updates the state, the status object changes the color. The way the status object does each of these things is slightly different. So we can factor that functionality from the ``update()`` method, into additional methods that ``update()`` can call.
+
+We'll put all of the common functionality into one *base class*. This base class will exist solely to be extended.
+
+.. note::
+    
+    This is, in practical terms, an **abstract base class** (or `abstract type <https://en.wikipedia.org/wiki/Abstract_type>`__). However, Python doesn't provide true abstract types. In languages that do, you *cannot* instantiate a class that is marked as abstract. It causes a syntax error. 
+    
+    In Python, there isn't a language-level concept of *abstract*, so you can instantiate "abstract" base classes without causing any direct errors (depending on how they are constructed, they may cause secondary errors though). 
+    
+    In the standard library, there is a module called `abc <https://docs.python.org/3/library/abc.html>`__ that uses `metaprogramming <https://en.wikipedia.org/wiki/Metaprogramming>`__ to implement functionality similar to true abstract types. It can be useful if you have a need to enforce the "abstractness" of a class like the one we're creating below. 
+    
+    |heartbreak| The ``abc`` module is not included in MicroPython or CircuitPython. There are other techniques you can use to get close, but not this module |heartbreak|
+    
+We'll call this new base class ``Status``:
+
+.. code-block:: python
+    
+    ﻿class Status:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.value = 0
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def read_input(self):
+            pass
+            
+        def set_color(self):
+            pass
+        
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                self.read_input()
+                self.set_color()
+                self.checkin = time.monotonic()
+                
+
+We've kept the common ``color`` and ``checkin`` attributes, but we've created a new, more generic common attribute called ``value``, that will store the last value read from the sensor. 
+
+Note the two new methods, ``read_input()`` and ``set_color()``. These handle the functionality that is different in each case. The way we update the state attribute and the way we decide what color the LED should be both differ between the temperature and light detecting classes. 
+
+.. tip::
+    
+    Since this is just a base class, we're not actually doing anything in these methods. We've employed the ``pass`` keyword to allow us to make a valid function that doesn't do anything (also known as a `no-op <https://en.wikipedia.org/wiki/NOP>`__). 
+    
+    Another, better way we can accomplish the same effect is have an empty method body, but add a `docstring <https://en.wikipedia.org/wiki/Docstring>`__. This has the added benefit of documenting what the method is supposed to do. 
+    
+    It looks something like this:
+    
+    .. code-block:: python
+        
+        def read_input(self):
+            """
+            This method reads a value from some kind of input and sets 
+            self.value. The exact value set is dependent on what set_color() 
+            needs to make its decision.
+            
+            Returns: None.
+            """
+            
+        def set_color(self):
+            """
+            Using self.value, this method will set self.color to an appropriate
+            value. 
+            
+            Returns: None.
+            """
+            
+    |unicorn| It's really best practice to use docstrings in every method, but we have to limit their use in CircuitPython because docstrings take up precious memory, especially when the code has not been compiled into bytecode.
+
+The ``update()``, and ``__init__()`` methods now contain all of the common logic that the two previous classes share. 
+
+``__init__()`` sets the default values of the instance attributes.
+
+``update()`` now calls ``read_input()`` and ``set_color()`` instead of directly reading the input object and using a series of ``if``/``else`` statements to set the color. 
+
+When we extend the ``Status`` class, we will write our own implementations for, or *overload*, the ``read_input()`` and ``set_color()`` methods. 
+
+Because of the way class inheritance works, the code that we overload will be executed in our class, and the code that we don't overload will be executed in the base class. So unless we write our own ``__init__()`` and ``update()`` methods, the code in the ``Status`` class will execute.
+
+Here's the completed code with the two derived classes fully implemented:
+
+.. code-block:: python
+    
+    ﻿import board
+    import time
+    from setup import led, rgb, check
+    import adafruit_thermistor
+    from simpleio import map_range
+    import analogio
+    
+    thermistor = adafruit_thermistor.Thermistor(board.TEMPERATURE, 10000.0, 10000.0, 25.0, 3950.0)
+    photocell = analogio.AnalogIn(board.LIGHT)
+    
+    class Status:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.value = 0
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def read_input(self):
+            pass
+            
+        def set_color(self):
+            pass
+        
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                self.read_input()
+                self.set_color()
+                self.checkin = time.monotonic()
+                
+    class TemperatureStatus(Status):
+        def read_input(self):
+            self.value = round(thermistor.temperature)
+            
+        def set_color(self):
+            if self.value <= 15:
+                self.color = (0, 0, 255)
+            elif 15 < self.value <= 25:
+                self.color = (0, 255, 0)
+            elif self.value > 25:
+                self.color = (255, 0, 0)
+    
+    class LightStatus(Status):
+        def read_input(self):
+            self.value = photocell.value
+            
+        def set_color(self):
+            if self.value < 20460:
+                self.color = (0, 0, 255)
+            elif 20460 < self.value < 40920:
+                self.color = (0, 255, 0)
+            else:
+                self.color = (255, 0, 0)
+    
+    light = LightStatus()
+    temp = TemperatureStatus()
+    
+    while True:
+        light.update()
+        temp.update()
+        
+        rgb[0] = light.color
+        rgb[1] = temp.color
+        
+There is one more enhancement we can make that illustrates why centralizing code in this way is beneficial. 
+
+Since the CircuitPlayground has a built-in slide switch, we can use it to turn the status lights on and off. Since we have a base class that both status classes are derived from, we can put the code *there* and the switch can control **both** status lights, or any more that we might make in the future! |unicorn|
+
+.. code-block:: python
+    
+    ﻿import board
+    import time
+    from setup import led, rgb, check
+    import adafruit_thermistor
+    from simpleio import map_range
+    import analogio
+    import digitalio
+    
+    thermistor = adafruit_thermistor.Thermistor(board.TEMPERATURE, 10000.0, 10000.0, 25.0, 3950.0)
+    photocell = analogio.AnalogIn(board.LIGHT)
+    switch = digitalio.DigitalInOut(board.SLIDE_SWITCH)
+    switch.switch_to_input(pull=digitalio.Pull.UP)
+    
+    class Status:
+        _debounce = 0.2
+        
+        def __init__(self):
+            self.value = 0
+            self.color = (0, 0, 0)
+            self.checkin = time.monotonic()
+            
+        def read_input(self):
+            pass
+            
+        def set_color(self):
+            pass
+        
+        def update(self):
+            if time.monotonic() - self.checkin > self._debounce:
+                print(self.value)
+                if not switch.value:
+                    self.read_input()
+                    self.set_color()
+                    self.checkin = time.monotonic()
+                else:
+                    self.color = (0, 0, 0)
+                
+    class TemperatureStatus(Status):
+        _debounce = 1.0
+        
+        def read_input(self):
+            self.value = round(thermistor.temperature)
+            
+        def set_color(self):
+            if self.value <= 15:
+                self.color = (0, 0, 255)
+            elif 15 < self.value <= 25:
+                self.color = (0, 255, 0)
+            elif self.value > 25:
+                self.color = (255, 0, 0)
+    
+    class LightStatus(Status):
+        def read_input(self):
+            self.value = photocell.value
+            
+        def set_color(self):
+            if self.value < 20460:
+                self.color = (0, 0, 255)
+            elif 20460 < self.value < 40920:
+                self.color = (0, 255, 0)
+            else:
+                self.color = (255, 0, 0)
+    
+    light = LightStatus()
+    temp = TemperatureStatus()
+    
+    while True:
+        light.update()
+        temp.update()
+        
+        rgb[0] = light.color
+        rgb[1] = temp.color
+
+This is quite clean, well-organized code. This pattern can be used anywhere that you need to track state for multiple, similar sensors that need to be handled differently.
+
+But lets refactor things again so that the code defines *events* for subclasses to *handle*.
+
+Event Planning: Not Just For Parties Anymore
+============================================
+There's a different way we can look at our current example code. Currently, in both status classes, we're changing the ``color`` state attribute right after we read from the input. 
+
+We can look at this from an *event detection* perspective, as we did for buttons in the last installment. 
+
+Instead of changing the ``color`` attribute every time we check the input, we can instead *only* change the color when the input's state has changed. We can even define different events based on the amount of change. 
+
+Here's one way to implement that:
+
+
+        
 A Generic State Dispatcher
 ==========================
 Having established a way of tracking state over time, and the concept of *events*, we can generalize the button logic into a *dispatcher* - code that detects the events and then dispatches to pre-defined *handlers*. In other words, it detects an event, and runs code for us.
