@@ -1,18 +1,19 @@
 Advice For New Programmers
 ##########################
-:date: 2018-06-15 15:07
-:author: lionfacelemonface
-:category: tutorial
+:date: 2018-09-29 15:07
+:author: jjmojojjmojo
+:category: musings
+:tags: advice, programming
 :slug: advice-for-new-programmers
-:status: draft 
+:status: published
 
 .. include:: ../emojis.rst
 
-I am a proud autodidact. I am *entirely* self taught. |thinking| |mortarboard| |heart| People like myself are not uncommon in the tech industry, but we have always been in the minority. Autodidacts represent industry outsiders. We are outsiders in contrast to the usual path: a computer science degree at a 4-year university. With the advent of coding bootcamps, better programming curriculum at 2-year colleges, and self-lead study, the number of outsiders is growing.
+I am a proud **autodidact**. That means I am *entirely* self taught. |thinking| |mortarboard| |heart| People like myself are not uncommon in the tech industry, but we have always been in the minority. Autodidacts represent *industry outsiders*, because we've diverged from the typical learning path: a degree at a four-year college. With the advent of "let's code" initiatives, coding boot camps, better programming curriculum at 2-year colleges, and easier self-lead study, the number and varieties of outsiders is growing every day. We need to stick together.
 
-There is a constant stream of new programmers, often without any sort of support system to help them along after they complete their training. Getting into this industry can be scary. So, I've put together some thoughts on what can help you get a good foothold, and excel. I've based this on on what helped me, and my personal observations over the years.
+We are a constant stream of new programmers, often without any sort of support system to help us along after we complete our training. Getting into this industry can be scary. So, for my fellow outsiders, I've put together some thoughts that will help you thrive and excel. I've based this on on what helped me, and my personal observations over the years.
 
-I've realized that the difficulty of getting established is real, even for people with a typical education. There's a sort of *innocence* that is impressed onto new graduates, and there aren't a lot of resources for them either. So this is for them too.
+However, I've realized that the difficulty of getting established is real, even for people with a typical education. There's a sort of *innocence* that is impressed onto new graduates, and there aren't a lot of resources for them either. So college grads, this is for you too.
 
 .. PELICAN_END_SUMMARY
 
@@ -278,7 +279,7 @@ It's all about having the right perspective. You have to see the good in what we
 
 If you happen to find yourself in a soul-crushing job that just can't make you happy, and you can't just leave it, change your perspective to find the fun in other ways. Take up a hobby, especially one that lets you flex your technological muscles. Buy a raspberry pi or an Arduino and make some LEDs flash. Get into 3d printing. Take up photography. 
 
-`Take some time to help people <Help People_>`__.
+`Take some time to help people <Help People_>`__. Give back to the community. Contribute to an open-source project.
 
 Build an app that solves some stupid problem in your life. It doesn't have to make money, it doesn't have to be elegant or refined, just let it all go and *code stuff*.
 
