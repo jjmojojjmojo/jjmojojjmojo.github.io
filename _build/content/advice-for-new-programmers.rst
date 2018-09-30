@@ -263,7 +263,7 @@ Now, that doesn't mean you have to live and breathe programming. It doesn't mean
 
 I'm talking about true, simple joy. And finding it in out of the way places.
 
-It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like your a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago. 
+It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like you're a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago. 
 
 It can come from looking at a piece of tech and not being able to stop smiling because you know how it works. Maybe you find it's just a *beautiful* engineering achievement. 
 
