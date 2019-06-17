@@ -20,3 +20,4 @@
 .. |sparkleheart| unicode:: U+1F496 .. SPARKLING HEART
 .. |heart| unicode:: U+2764 U+FE0F .. HEART
 .. |mortarboard| unicode:: U+1F393 .. MORTARBOARD GRADUATION CAP
+.. |cool| unicode:: U+1F60E .. SMILING FACE WITH SUNGLASSES

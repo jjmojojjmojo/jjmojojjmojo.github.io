@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Site-wide Conventions Explained - The Collected Works of jjmojojjmojo</title>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
-<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+        <title>Site-wide Conventions Explained - The Collected Works of jjmojojjmojo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<h1>Site-wide Conventions Explained</h1>
-<div class="contents">
-<div id="toc"><ul><li><a class="toc-href" href="#source-code-examples" title="Source Code Examples">Source Code Examples</a></li><li><a class="toc-href" href="#explainations" title="Explainations">Explainations</a></li></ul></div>
-</div>
-<div class="status-published">
-<p>This page contains an overview of conventions used in this website.</p>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+    <h1>Site-wide Conventions Explained</h1>
+    
+        <div class="contents">
+            <div id="toc"><ul><li><a class="toc-href" href="#source code examples" title="Source Code Examples">Source Code Examples</a></li><li><a class="toc-href" href="#explainations" title="Explainations">Explainations</a></li></ul></div>
+        </div>
+    <div class="status-published">
+    <p>This page contains an overview of conventions used in this website.</p>
+
 <div class="section" id="source-code-examples">
-<h2 id="source-code-examples">Source Code Examples</h2>
+<h2 id="source code examples">Source Code Examples</h2>
 <p>Code examples and command-line interactions are provided with syntax-highlighting and line numbers.</p>
 <div class="section" id="example-1-clojure-code">
 <h3>Example 1, clojure code</h3>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">add-it-up</span>
   <span class="p">[</span><span class="o">&amp;</span><span class="nv">args</span><span class="p">]</span>
   <span class="p">(</span><span class="nb">apply + </span><span class="nv">args</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div></div>
+</td></tr></table></div>
 <div class="section" id="example-2-command-line-interaction">
 <h3>Example 2, command-line interaction</h3>
 <div class="highlight"><pre><span></span><span class="gp">$</span> mkdir -p ~/newdir
@@ -62,7 +65,7 @@
 <div class="section" id="explainations">
 <h2 id="explainations">Explainations</h2>
 <p>Where applicable, each example is discussed in great detail below it - these explanations are hidden by default so as not to distract from the flow of the article, when such discussion would be a distraction:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -72,7 +75,7 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+</td></tr></table><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -113,13 +116,15 @@
 </div>
 <p>You can click on the book icon <object class="align-middle" data="/images/book.svg" type="image/svg+xml">CLOSED_BOOK_ICON</object> to show an explanation. Clicking on the open book icon <object class="align-middle" data="/images/book-open.svg" type="image/svg+xml">OPEN_BOOK_ICON</object> will close it.</p>
 </div>
-</div>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+
+
+	</div>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

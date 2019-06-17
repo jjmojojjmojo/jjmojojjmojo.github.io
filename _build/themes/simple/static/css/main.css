@@ -84,6 +84,20 @@ body {
     height: 2em;
 }
 
+/* roles */
+.underline {
+    text-decoration: underline;
+}
+
+.boldoblique {
+    font-weight: bold;
+    font-style: oblique;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
 .figure {
     border: 0.5em double #000000;
     margin-bottom: 1em;

@@ -13,7 +13,7 @@
 &lt;p&gt;However, I've realized that the difficulty of getting established is real, even for people with a typical education. There's a sort of &lt;em&gt;innocence&lt;/em&gt; that is impressed onto new graduates, and there aren't a lot of resources for them either. So college grads, this is for you too.&lt;/p&gt;
 
 &lt;div class="section" id="expectation-management"&gt;
-&lt;h2 id="expectation-management"&gt;Expectation Management&lt;/h2&gt;
+&lt;h2 id="expectation management"&gt;Expectation Management&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;People are lusty, excitable creatures. We are prone to fantastical elaborations and tend to see the world through rose-colored glasses.&lt;/div&gt;
 &lt;/div&gt;
@@ -36,7 +36,7 @@
 &lt;p&gt;This is what I mean about keeping personal expectations managed. It's important not to delude yourself. It &lt;em&gt;will&lt;/em&gt; get difficult, and when it does, it's helpful to be firmly rooted in reality.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-testing-profiling-and-debugging"&gt;
-&lt;h2 id="learn-testing-profiling-and-debugging"&gt;Learn Testing, Profiling And Debugging&lt;/h2&gt;
+&lt;h2 id="learn testing, profiling and debugging"&gt;Learn Testing, Profiling And Debugging&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;This can not be stressed enough: &lt;strong&gt;you have to know how to know what's wrong&lt;/strong&gt;.&lt;/div&gt;
 &lt;/div&gt;
@@ -50,7 +50,7 @@
 &lt;p&gt;If I were putting together a programming curriculum, I'd make testing and debugging the first thing my students would learn after basic syntax. Profiling would come later (once we have some complex, possibly poorly optimized code to work with), but would still be taught early. This is essential stuff that is often left out.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-the-scientific-method"&gt;
-&lt;h2 id="learn-the-scientific-method"&gt;Learn The Scientific Method&lt;/h2&gt;
+&lt;h2 id="learn the scientific method"&gt;Learn The Scientific Method&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;A methodical approach is key to writing good software.&lt;/div&gt;
 &lt;/div&gt;
@@ -74,7 +74,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mentor-every-day"&gt;
-&lt;h2 id="mentor-every-day"&gt;Mentor Every Day&lt;/h2&gt;
+&lt;h2 id="mentor every day"&gt;Mentor Every Day&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;The best way to really learn something is to teach it to someone else.&lt;/div&gt;
 &lt;/div&gt;
@@ -113,7 +113,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-a-new-language"&gt;
-&lt;h2 id="learn-a-new-language"&gt;Learn A New Language&lt;/h2&gt;
+&lt;h2 id="learn a new language"&gt;Learn A New Language&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;There's a lot to be gained by going through the process of learning a new language, besides adding a new skill to your resume.&lt;/div&gt;
 &lt;/div&gt;
@@ -125,7 +125,7 @@
 &lt;p&gt;Choosing which languages or paradigms to learn can be hard. There's a book called &lt;a class="reference external" href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks"&gt;"Seven Languages In Seven Weeks"&lt;/a&gt; by Bruce A. Tate that is a great starting point if you have trouble identifying languages to try on your own.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="work-for-free-with-conditions"&gt;
-&lt;h2 id="work-for-free-with-conditions"&gt;Work For Free - With Conditions&lt;/h2&gt;
+&lt;h2 id="work for free - with conditions"&gt;Work For Free - With Conditions&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;A great way to establish yourself and gain real-life experience is to do volunteer work. But don't let people take advantage of you.&lt;/div&gt;
 &lt;/div&gt;
@@ -149,7 +149,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="know-how-servers-and-virtualization-work"&gt;
-&lt;h2 id="know-how-servers-and-virtualization-work"&gt;Know How Servers And Virtualization Work&lt;/h2&gt;
+&lt;h2 id="know how servers and virtualization work"&gt;Know How Servers And Virtualization Work&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Deploying, running, and scaling your application is not someone else's problem. Even when it is.&lt;/div&gt;
 &lt;/div&gt;
@@ -193,14 +193,14 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="never-stop-having-fun"&gt;
-&lt;h2 id="never-stop-having-fun"&gt;Never Stop Having Fun&lt;/h2&gt;
+&lt;h2 id="never stop having fun"&gt;Never Stop Having Fun&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;When this work stops being fun, you need to adjust your perspective, or maybe just GTFO.&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;To really make it in this industry, you have to &lt;strong&gt;enjoy&lt;/strong&gt; what you do. People say that about all work. Personally, I don't think it's universally true, &lt;em&gt;except in tech&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Now, that doesn't mean you have to live and breathe programming. It doesn't mean you have to be all smiles and "nerdgasms" and "go-team", &lt;em&gt;while you're struggling to get some stupid project you hate finished at 11PM because sales are a bunch of jerks and your boss promised things he knew you couldn't deliver and you have this pain in your side that the doctor says is nothing but you're sure its something and your kids need braces and Slack is down and I don't know what to do...&lt;/em&gt; 😀&lt;/p&gt;
 &lt;p&gt;I'm talking about true, simple joy. And finding it in out of the way places.&lt;/p&gt;
-&lt;p&gt;It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like your a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago.&lt;/p&gt;
+&lt;p&gt;It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like you're a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago.&lt;/p&gt;
 &lt;p&gt;It can come from looking at a piece of tech and not being able to stop smiling because you know how it works. Maybe you find it's just a &lt;em&gt;beautiful&lt;/em&gt; engineering achievement.&lt;/p&gt;
 &lt;p&gt;The joy can be in finding colleagues that really seem to &lt;em&gt;get&lt;/em&gt; you. The work might suck but sometimes the people you work with make it worth it.&lt;/p&gt;
 &lt;p&gt;Maybe it's the smug feeling you get being twitter friends with the gal that invented "that thing" everyone uses, or having beers with that guy that made the thing everybody in your industry relies on but nobody at the family reunion has ever heard of.&lt;/p&gt;
@@ -214,7 +214,7 @@
 &lt;p&gt;But there is a time when you have to be honest with yourself. There's so much variation and opportunity in this field, that if you just can't find some way to have fun with it, you really should find another line of work. 💔&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="interviewing-work-the-coding-challenges"&gt;
-&lt;h2 id="interviewing-work-the-coding-challenges"&gt;Interviewing: Work The Coding Challenges&lt;/h2&gt;
+&lt;h2 id="interviewing: work the coding challenges"&gt;Interviewing: Work The Coding Challenges&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Sometimes you have to play the game to get by, even when you know its rigged.&lt;/div&gt;
 &lt;/div&gt;

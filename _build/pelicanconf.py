@@ -61,16 +61,16 @@ PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 # AUTHOR_FEED_ATOM = None
 # AUTHOR_FEED_RSS = None
 
-CATEGORY_FEED_ATOM = 'feeds/category.%s.atom'
+CATEGORY_FEED_ATOM = 'feeds/category.{slug}.atom'
 FEED_ALL_ATOM = 'feeds/all.atom'
-AUTHOR_FEED_ATOM = 'feeds/author.%s.atom'
-TAG_FEED_ATOM = 'feeds/tag.%s.atom'
+AUTHOR_FEED_ATOM = 'feeds/author.{slug}.atom'
+TAG_FEED_ATOM = 'feeds/tag.{slug}.atom'
 
 
-CATEGORY_FEED_RSS = 'feeds/category.%s.rss'
-AUTHOR_FEED_RSS = 'feeds/author.%s.rss'
+CATEGORY_FEED_RSS = 'feeds/category.{slug}.rss'
+AUTHOR_FEED_RSS = 'feeds/author.{slug}.rss'
 FEED_ALL_RSS = 'feeds/all.rss'
-TAG_FEED_RSS = 'feeds/tag.%s.rss'
+TAG_FEED_RSS = 'feeds/tag.{slug}.rss'
 
 DISPLAY_PAGES_ON_MENU = False
 

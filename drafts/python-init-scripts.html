@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>   Purely Python: LSB-Compliant Init Scripts - The Collected Works of jjmojojjmojo 
+          <title>   Purely Python: LSB-Compliant Init Scripts - The Collected Works of jjmojojjmojo 
 </title>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
-<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="/feeds/category.python.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/category.python.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta content="init script" name="tags"/>
-<meta content="lsb" name="tags"/>
-<meta content="python" name="tags"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+        <link href="/feeds/category.python.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
+        <link href="/feeds/category.python.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
+
+
+    <meta name="tags" content="init script" />
+    <meta name="tags" content="lsb" />
+    <meta name="tags" content="python" />
+
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<section class="body" id="content">
-<header>
-<h2 class="entry-title">
-<a href="/drafts/python-init-scripts.html" rel="bookmark" title="Permalink to Purely Python: LSB-Compliant Init Scripts">Purely Python: LSB-Compliant Init Scripts</a></h2>
-</header>
-<footer class="post-info">
-<time class="published" datetime="2009-12-29T08:44:00-05:00">
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/python-init-scripts.html" rel="bookmark"
+         title="Permalink to Purely Python: LSB-Compliant Init Scripts">Purely Python: LSB-Compliant Init Scripts</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2009-12-29T08:44:00-05:00">
       Tue 29 December 2009
     </time>
-<address class="vcard author">
+    <address class="vcard author">
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-</address>
-</footer><!-- /.post-info -->
-<div>
-<div id="toc"><ul><li><a class="toc-href" href="#background" title="Background">Background</a></li><li><a class="toc-href" href="#so-why-python" title="So Why Python?">So Why Python?</a></li><li><a class="toc-href" href="#concepts" title="Concepts">Concepts</a></li><li><a class="toc-href" href="#script-requirements" title="Script Requirements">Script Requirements</a></li><li><a class="toc-href" href="#code-skeleton" title="Code Skeleton">Code Skeleton</a></li><li><a class="toc-href" href="#getting-fancy" title="Getting Fancy">Getting Fancy</a></li><li><a class="toc-href" href="#moving-forward" title="Moving Forward">Moving Forward</a></li></ul></div>
-</div>
-<div class="warning">
-<h2>WARNING</h2>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href="#background" title="Background">Background</a></li><li><a class="toc-href" href="#so why python?" title="So Why Python?">So Why Python?</a></li><li><a class="toc-href" href="#concepts" title="Concepts">Concepts</a></li><li><a class="toc-href" href="#script requirements" title="Script Requirements">Script Requirements</a></li><li><a class="toc-href" href="#code skeleton" title="Code Skeleton">Code Skeleton</a></li><li><a class="toc-href" href="#getting fancy" title="Getting Fancy">Getting Fancy</a></li><li><a class="toc-href" href="#moving forward" title="Moving Forward">Moving Forward</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
-<div class="entry-content status-draft">
-<p>I've recently been writing a large number of Linux
+  <div class="entry-content status-draft">
+    <p>I've recently been writing a large number of Linux
 <a class="reference external" href="http://en.wikipedia.org/wiki/UNIX_System_V">Sys-V</a> style init
 scripts, to control how services are started upon system boot (or
 terminated upon shutdown).</p>
@@ -112,7 +118,7 @@ maintained, and your script will be safe from manipulation from package
 updates.</p>
 </div>
 <div class="section" id="so-why-python">
-<h2 id="so-why-python">So Why Python?</h2>
+<h2 id="so why python?">So Why Python?</h2>
 <p>I chose Python as the scripting language here for a couple of reasons:</p>
 <ol class="arabic simple">
 <li>Python is readily available on both my host machines (RHEL depends
@@ -225,7 +231,7 @@ by the init system. This ensures they will start or shutdown in the
 proper order.</p>
 </div>
 <div class="section" id="script-requirements">
-<h2 id="script-requirements">Script Requirements</h2>
+<h2 id="script requirements">Script Requirements</h2>
 <p>Because of common convention, LSB standards, and the nuance of the
 chkconfig command, any init script we write will have to meet the
 following requirements:</p>
@@ -276,10 +282,10 @@ dash means "don't start by default in any runlevels")</li>
 </ol>
 <p>Note the orders are just <em>requests</em>, the LSB block (defined below)
 and other dependencies will dictate the final start/shutdown order.</p>
-<p></p><p>The <tt class="docutils literal">description:</tt> field describes what the service is. It can span
+<p><p>The <tt class="docutils literal">description:</tt> field describes what the service is. It can span
 multiple lines if you add a backslash before the carriage return, as
 illustrated above.</p>
-</li>
+</p></li>
 <li><div class="first line-block">
 <div class="line">It must contain an <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/initscrcomconv.html">LSB info
 block</a>,
@@ -313,7 +319,7 @@ shutdown.</p>
 </pre>
 <p>In this example, we're telling <tt class="docutils literal">chkconfig</tt> that our service mustn't
 start before nfs <em>and</em> ntpd have started.</p>
-<p></p><div class="line-block">
+<p><div class="line-block">
 <div class="line">There are also <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/facilname.html">some "facilities" that are
 in-specific</a>,
 and prefixed with a dollar sign. These include <tt class="docutils literal">$network</tt> and
@@ -323,7 +329,7 @@ and prefixed with a dollar sign. These include <tt class="docutils literal">$net
 are mounted", respectively.</div>
 </div>
 </div>
-</li>
+</p></li>
 <li><p class="first">The script must write a file with the same name as the service to
 <tt class="docutils literal">/var/lock/subsys</tt>.</p>
 </li></ol></div><p>I'm having trouble finding concrete explanation as to why this is a
@@ -331,10 +337,12 @@ requirement. All I've been able to find is a <a class="reference external" href=
 tricks"
 entry</a>
 (scroll down).</p>
-<p></p><p>So I'm not sure if this is a hard requirement, a Red Hat requirement,
+<p><p>So I'm not sure if this is a hard requirement, a Red Hat requirement,
 or what, but it was part of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14">Coraid's init script
 shell</a>, and I
 don't see any harm, so I've included it here.</p>
+</p>
+
 <p>Some other things to keep in mind:</p>
 <ul>
 <li><p class="first">Best practice dictates that we put functions and such in external
@@ -358,8 +366,9 @@ application and return a relevant status code.</p>
 cleaver way of dealing with that, which I will describe below.</p>
 </li>
 </ul>
+
 <div class="section" id="code-skeleton">
-<h2 id="code-skeleton">Code Skeleton</h2>
+<h2 id="code skeleton">Code Skeleton</h2>
 <p>Taking the above requirements into account, I've developed a code
 skeleton that contains all of the bits and pieces, plus an easy to use
 "switchboard" to control the whole thing.</p>
@@ -610,7 +619,7 @@ lrwxrwxrwx  1 root root   20 Dec 28 15:05 S01my-service -&gt; ../init.d/my-servi
 into that further.</p>
 </div>
 <div class="section" id="getting-fancy">
-<h2 id="getting-fancy">Getting Fancy</h2>
+<h2 id="getting fancy">Getting Fancy</h2>
 <div class="section" id="pretty-status">
 <h3>Pretty Status</h3>
 <p>The LSB specs call for a "library" of sorts that contains useful
@@ -1291,7 +1300,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="section" id="moving-forward">
-<h2 id="moving-forward">Moving Forward</h2>
+<h2 id="moving forward">Moving Forward</h2>
 <p>There are a handful of items on my TODO list that I'd like to document
 here</p>
 <ul>
@@ -1351,14 +1360,15 @@ I may "fix" this just so the end use isn't caught off guard by it.</p>
 </li>
 </ul>
 </div>
-</div><!-- /.entry-content -->
+
+  </div><!-- /.entry-content -->
 </section>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

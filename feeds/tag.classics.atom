@@ -13,7 +13,7 @@
 &lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
 
 &lt;div class="section" id="seeing-myself-in-the-tv-people"&gt;
-&lt;h2 id="seeing-myself-in-the-tv-people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
+&lt;h2 id="seeing myself in the tv people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
 &lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg"/&gt;
 &lt;p class="caption"&gt;Ron Swanson (Nick Offerman) and Leslie Knope (Amy Poehler), or, "what Josh's brain looks like inside".&lt;/p&gt;
@@ -29,7 +29,7 @@
 &lt;p&gt;That's me in a nutshell - optimistic and positive, bubbly, intensely excited about things I'm interested in. Yet I'm a quiet, matter-of-fact, pragmatic craftsman when I'm creating. Both sides of my personality work together when I'm sharing what I know, teaching, or writing documentation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-reference-explained"&gt;
-&lt;h2 id="the-reference-explained"&gt;The Reference Explained&lt;/h2&gt;
+&lt;h2 id="the reference explained"&gt;The Reference Explained&lt;/h2&gt;
 &lt;p&gt;There was an episode where Ron was tasked with coaching a children's basketball team. Ron decided that the best way to make true champions of his kids was to indoctrinate them with wisdom of what makes a person truly great.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
 &lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png"/&gt;
@@ -50,7 +50,7 @@
 &lt;p&gt;And that's what got me thinking - what sort of things would I put on such a pyramid, in a similar tongue-in-cheek style, that I might push on unsuspecting software engineers? I fired up Illustrator and got to work.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2 id="the-johnson-pyramid-of-programmer-greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
+&lt;h2 id="the johnson pyramid of programmer greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
 &lt;p&gt;My interpretation of Ron Swanson's masterpiece is probably a little more serious than his was, but it's still intended to be a light-hearted take. It was designed in Adobe Illustrator, at full 24x48" poster size. I tweaked the dimensions a little bit to accommodate printing on standard letter/A4 paper, in landscape.&lt;/p&gt;
 &lt;p&gt;Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 80%;"/&gt;
@@ -149,21 +149,21 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="making-boot-faster"&gt;
-&lt;h2 id="making-boot-faster"&gt;Making Boot Faster&lt;/h2&gt;
+&lt;h2 id="making boot faster"&gt;Making Boot Faster&lt;/h2&gt;
 &lt;p&gt;Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_profile&lt;/span&gt;&lt;/tt&gt; or similar other files for your particular shell. See the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options"&gt;JVM-Options&lt;/a&gt; page in the boot documentation for details, and other ways to incorporate these settings into your projects:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-simple-script"&gt;
-&lt;h2 id="a-simple-script"&gt;A Simple Script&lt;/h2&gt;
+&lt;h2 id="a simple script"&gt;A Simple Script&lt;/h2&gt;
 &lt;p&gt;For this article, we'll start with an example of a useful application that grabs the most recent tweet from the &lt;a class="reference external" href="https://twitter.com/nihilist_arbys"&gt;Nihilist Arby's&lt;/a&gt; twitter feed. A great addition to your &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29"&gt;MOTD&lt;/a&gt; to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="twitter-api-tokens"&gt;
-&lt;h2 id="twitter-api-tokens"&gt;Twitter API Tokens&lt;/h2&gt;
+&lt;h2 id="twitter api tokens"&gt;Twitter API Tokens&lt;/h2&gt;
 &lt;p&gt;Before we begin, set up an application and &lt;a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens"&gt;obtain a consumer key&lt;/a&gt;&amp;nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to &lt;em&gt;read only&lt;/em&gt;. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="quick-note-development-deviations"&gt;
-&lt;h2 id="quick-note-development-deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
+&lt;h2 id="quick note: development deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
 &lt;p&gt;Since we're not building anything right now, or utilizing the task infrastructure, we don't need a &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run &lt;tt class="docutils literal"&gt;boot repl&lt;/tt&gt;:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -172,7 +172,7 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-script-version-1"&gt;
-&lt;h2 id="the-script-version-1"&gt;The Script: Version 1&lt;/h2&gt;
+&lt;h2 id="the script: version 1"&gt;The Script: Version 1&lt;/h2&gt;
 &lt;p&gt;For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
@@ -272,11 +272,11 @@ name it however you'd like:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-1"&gt;
-&lt;h2 id="distributioninstallation-mark-1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
+&lt;h2 id="distribution/installation: mark 1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
 &lt;p&gt;The real beauty of this boot script we have, is that it is a self-contained entity. We can send it to anyone who has boot and a JDK installed. They can place the script anywhere they like. Dependencies are automatically downloaded the first time its run.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-not-so-simple-script"&gt;
-&lt;h2 id="a-not-so-simple-script"&gt;A Not-So-Simple Script&lt;/h2&gt;
+&lt;h2 id="a not-so-simple script"&gt;A Not-So-Simple Script&lt;/h2&gt;
 &lt;p&gt;Boot scripting provides a natural progression from "just a script" to "full-blown application".&lt;/p&gt;
 &lt;p&gt;Boot scripts contain all of the functions needed to run, but this poses some problems:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -490,7 +490,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-2"&gt;
-&lt;h2 id="distributioninstallation-mark-2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
+&lt;h2 id="distribution/installation, mark 2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
 &lt;p&gt;Pulling some of the code out into a separate file has made our little script cleaner, but now distributing the file is slightly more complicated, since we have to provide the script access to the code we factored out.&lt;/p&gt;
 &lt;p&gt;There are several ways to handle this:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -504,7 +504,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-getting-rid-of-log4j-notices"&gt;
-&lt;h2 id="appendix-getting-rid-of-log4j-notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
+&lt;h2 id="appendix: getting rid of log4j notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
 &lt;p&gt;You may have noticed that you get a bunch of warning messages when running our code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
 &lt;span class="go"&gt;SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".&lt;/span&gt;
@@ -553,7 +553,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 </summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
 
 &lt;div class="section" id="overview-for-the-unititated"&gt;
-&lt;h2 id="overview-for-the-unititated"&gt;Overview For The Unititated&lt;/h2&gt;
+&lt;h2 id="overview for the unititated"&gt;Overview For The Unititated&lt;/h2&gt;
 &lt;p&gt;For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.&lt;/p&gt;
 &lt;p&gt;Clojure is a &lt;em&gt;functional programming language&lt;/em&gt; in the style of Common Lisp. "Functional" in this sense means that functions are first-class objects; code and data are peers. Data is &lt;em&gt;immutable&lt;/em&gt; - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.&lt;/p&gt;
 &lt;p&gt;Functional languages, especially in the Lisp-style are &lt;em&gt;expressive&lt;/em&gt; and, linguistically speaking, &lt;em&gt;simple&lt;/em&gt;. The original Lisp, invented in 1958 by John McCarthy at M.I.T., was expressed in seven functions and two special forms - the language, in total, contained just &lt;em&gt;nine elements&lt;/em&gt;, and was fully Touring-complete. By comparison, the current version (3.5) of Python has 30+ keywords, plus special elements such as mathematical operators and colons - and that's merely the language itself, that doesn't include idioms or conventions.&lt;/p&gt;
@@ -612,7 +612,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dales-la-bota-give-em-the-boot-installation"&gt;
-&lt;h2 id="dales-la-bota-give-em-the-boot-installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id="!dales la bota! (give 'em the boot!) - installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://boot-clj.com/"&gt;Boot&lt;/a&gt; is '&lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;installed&lt;/a&gt;' by simply downloading an &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;executable file&lt;/a&gt; and putting it somewhere where you can execute it.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
@@ -1549,7 +1549,7 @@ Writing target dir(s)...
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-alternative-install-methods"&gt;
-&lt;h2 id="appendix-alternative-install-methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
+&lt;h2 id="appendix: alternative install methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
 &lt;p&gt;Recent versions of boot are now available for homebrew, nix, and docker. More details &lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="boot"></category><category term="clojure"></category><category term="classics"></category></entry></feed>

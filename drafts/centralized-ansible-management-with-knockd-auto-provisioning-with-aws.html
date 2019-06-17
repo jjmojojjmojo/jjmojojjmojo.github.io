@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>   Centralized Ansible Management With Knockd + Auto-provisioning with AWS - The Collected Works of jjmojojjmojo 
+          <title>   Centralized Ansible Management With Knockd + Auto-provisioning with AWS - The Collected Works of jjmojojjmojo 
 </title>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="/theme/js/zepto.min.js"></script>
-<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="/feeds/category.uncategorized.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="/feeds/category.uncategorized.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta content="amazon web services" name="tags"/>
-<meta content="ansible" name="tags"/>
-<meta content="aws" name="tags"/>
-<meta content="knockd" name="tags"/>
-<meta content="port knocking" name="tags"/>
-<meta content="python" name="tags"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
+        <script src="/theme/js/zepto.min.js"></script>
+        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
+        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+        <link href="/feeds/category.uncategorized.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
+        <link href="/feeds/category.uncategorized.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
+
+
+    <meta name="tags" content="amazon web services" />
+    <meta name="tags" content="ansible" />
+    <meta name="tags" content="aws" />
+    <meta name="tags" content="knockd" />
+    <meta name="tags" content="port knocking" />
+    <meta name="tags" content="python" />
+
 </head>
-<body class="home" id="index">
-<header class="body" id="banner">
-<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-<ul id="menu">
-<li><a href="/pages/about.html">About</a></li>
-<li><a href="/pages/contact.html">Contact</a></li>
-<li><a href="/pages/index.html">Pages</a></li>
-<li><a href="/categories.html">Categories</a></li>
-<li><a href="/tags.html">Tags</a></li>
-</ul>
-<span id="settings-button">
-<a href="/pages/settings.html" title="Settings">
-<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
-</a>
-</span>
-</header><!-- /#banner -->
-<div id="content-wrapper">
-<section class="body" id="content">
-<header>
-<h2 class="entry-title">
-<a href="/drafts/centralized-ansible-management-with-knockd-auto-provisioning-with-aws.html" rel="bookmark" title="Permalink to Centralized Ansible Management With Knockd + Auto-provisioning with AWS">Centralized Ansible Management With Knockd + Auto-provisioning with AWS</a></h2>
-</header>
-<footer class="post-info">
-<time class="published" datetime="2014-04-23T06:47:00-04:00">
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+                <ul id="menu">
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                    <li><a href="/pages/index.html">Pages</a></li>
+                    <li><a href="/categories.html">Categories</a></li>
+                    <li><a href="/tags.html">Tags</a></li>
+                </ul>
+                <span id="settings-button">
+                    <a href="/pages/settings.html" title="Settings">
+                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
+                    </a>
+                </span>
+        </header><!-- /#banner -->
+        <div id="content-wrapper">
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/drafts/centralized-ansible-management-with-knockd-auto-provisioning-with-aws.html" rel="bookmark"
+         title="Permalink to Centralized Ansible Management With Knockd + Auto-provisioning with AWS">Centralized Ansible Management With Knockd + Auto-provisioning with AWS</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2014-04-23T06:47:00-04:00">
       Wed 23 April 2014
     </time>
-<address class="vcard author">
+    <address class="vcard author">
       By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
-</address>
-</footer><!-- /.post-info -->
-<div>
-<div id="toc"><ul><li><a class="toc-href" href="#ansible-a-push-model" title='Ansible - A "Push" Model'>Ansible - A "Push" Model</a></li><li><a class="toc-href" href="#port-knocking-for-fun-and-profit" title="Port Knocking For Fun And Profit">Port Knocking For Fun And Profit</a></li><li><a class="toc-href" href="#user-data-in-ec2" title="User Data In EC2">User Data In EC2</a></li><li><a class="toc-href" href="#auto-scalling" title="Auto Scalling">Auto Scalling</a></li><li><a class="toc-href" href="#ansilbe-knockd-centralized-on-demand-configuration" title="Ansilbe + Knockd = Centralized, On-Demand Configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</a></li><li><a class="toc-href" href="#making-it-automatic-with-user-data" title="Making It Automatic With User Data">Making It Automatic With User Data</a></li><li><a class="toc-href" href="#auto-scaling-and-user-data" title="Auto Scaling And User Data">Auto Scaling And User Data</a></li><li><a class="toc-href" href="#conclusions-and-next-steps" title="Conclusions And Next Steps">Conclusions And Next Steps</a></li></ul></div>
-</div>
-<div class="warning">
-<h2>WARNING</h2>
+    </address>
+  </footer><!-- /.post-info -->
+    <div>
+        <div id="toc"><ul><li><a class="toc-href" href='#ansible - a "push" model' title='Ansible - A "Push" Model'>Ansible - A "Push" Model</a></li><li><a class="toc-href" href="#port knocking for fun and profit" title="Port Knocking For Fun And Profit">Port Knocking For Fun And Profit</a></li><li><a class="toc-href" href="#user data in ec2" title="User Data In EC2">User Data In EC2</a></li><li><a class="toc-href" href="#auto scalling" title="Auto Scalling">Auto Scalling</a></li><li><a class="toc-href" href="#ansilbe + knockd = centralized, on-demand configuration" title="Ansilbe + Knockd = Centralized, On-Demand Configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</a></li><li><a class="toc-href" href="#making it automatic with user data" title="Making It Automatic With User Data">Making It Automatic With User Data</a></li><li><a class="toc-href" href="#auto scaling and user data" title="Auto Scaling And User Data">Auto Scaling And User Data</a></li><li><a class="toc-href" href="#conclusions and next steps" title="Conclusions And Next Steps">Conclusions And Next Steps</a></li></ul></div>
+    </div>
+  <div class="warning">
+  <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
-<div class="entry-content status-draft">
-<p>Ansible is a great tool. We've been using it at my job with a fair
+  <div class="entry-content status-draft">
+    <p>Ansible is a great tool. We've been using it at my job with a fair
 amount of success. When it was chosen, we didn't have a requirement for
 supporting Auto scaling groups in AWS. This offers a unique problem - we
 need machines to be able to essentially provision themselves when AWS
@@ -68,7 +74,7 @@ discusses how to wire it up to knockd, a "port knocking" server and
 client, and finally how to use user data in AWS to execute this at boot
 - or any reboot.</p>
 <div class="section" id="ansible-a-push-model">
-<h2 id="ansible-a-push-model">Ansible - A "Push" Model</h2>
+<h2 id='ansible - a "push" model'>Ansible - A "Push" Model</h2>
 <p>Ansible is a configuration management tool used in orchestration of
 large pieces of infrastructure. It's structured as a simple layer above
 SSH - but it's a very sophisticated piece of software. Bottom line, it
@@ -92,7 +98,7 @@ to break down.</p>
 very useful python API for specialized cases.</p>
 </div>
 <div class="section" id="port-knocking-for-fun-and-profit">
-<h2 id="port-knocking-for-fun-and-profit">Port Knocking For Fun And Profit</h2>
+<h2 id="port knocking for fun and profit">Port Knocking For Fun And Profit</h2>
 <p><a class="reference external" href="http://portknocking.org/">Port knocking</a> is a novel way of invoking
 code. It involves listening to the network at a very low level, and
 listening for <em>attempted</em> connections to a specific sequence of ports.
@@ -107,7 +113,7 @@ as limiting the number of times a client can invoke the knock sequence,
 by commenting out lines in a flat file.</p>
 </div>
 <div class="section" id="user-data-in-ec2">
-<h2 id="user-data-in-ec2">User Data In EC2</h2>
+<h2 id="user data in ec2">User Data In EC2</h2>
 <p>EC2 has a really cool feature called <a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">user
 data</a>,
 that allows you to add some information to an instance upon boot. It
@@ -116,7 +122,7 @@ works with <a class="reference external" href="http://cloudinit.readthedocs.org/
 machine is first booted, or rebooted.</p>
 </div>
 <div class="section" id="auto-scalling">
-<h2 id="auto-scalling">Auto Scalling</h2>
+<h2 id="auto scalling">Auto Scalling</h2>
 <p>EC2 provides a mechanism for spinning up instances based on need (or
 really any arbitrary event). The <a class="reference external" href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html">AWS
 documentation</a>
@@ -125,7 +131,7 @@ sudden spikes in demand, or contracting your running instances during
 low-demand periods.</p>
 </div>
 <div class="section" id="ansilbe-knockd-centralized-on-demand-configuration">
-<h2 id="ansilbe-knockd-centralized-on-demand-configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</h2>
+<h2 id="ansilbe + knockd = centralized, on-demand configuration">Ansilbe + Knockd = Centralized, On-Demand Configuration</h2>
 <p>As mentioned earlier, Ansible provides a fairly robust API for use in
 your own scripts. Knockd can be used to invoke any shell command. Here's
 how I tied the two together.</p>
@@ -401,7 +407,7 @@ ansible: running command: /home/ubuntu/run.sh 172.31.24.211
 </div>
 </div>
 <div class="section" id="making-it-automatic-with-user-data">
-<h2 id="making-it-automatic-with-user-data">Making It Automatic With User Data</h2>
+<h2 id="making it automatic with user data">Making It Automatic With User Data</h2>
 <p>Now that we have a way to configure machines on demand - the knock could
 happen at any time, from a cron job, executed via a distributed SSH
 client (like <a class="reference external" href="http://docs.fabfile.org/en/1.8/">fabric</a>), etc - we can
@@ -436,7 +442,7 @@ or using something a bit higher level, like
 <a class="reference external" href="https://aws.amazon.com/cloudformation/">CloudFormation</a>.</p>
 </div>
 <div class="section" id="auto-scaling-and-user-data">
-<h2 id="auto-scaling-and-user-data">Auto Scaling And User Data</h2>
+<h2 id="auto scaling and user data">Auto Scaling And User Data</h2>
 <p>Auto Scaling is controlled via "auto scaling groups" and "launch
 configuration". If you're not familiar these can sound like foreign
 concepts, but they're quite simple.</p>
@@ -451,7 +457,7 @@ section, just like when spinning up a new EC2 instance.</p>
 auto scaling.</p>
 </div>
 <div class="section" id="conclusions-and-next-steps">
-<h2 id="conclusions-and-next-steps">Conclusions And Next Steps</h2>
+<h2 id="conclusions and next steps">Conclusions And Next Steps</h2>
 <p>This proof of concept presents an exciting opportunity for people who
 use Ansible and have use cases that benefit from a "pull" model -
 without really changing anything about their setup.</p>
@@ -482,14 +488,15 @@ notifications when machines were launched, as well as more detailed
 logging.</li>
 </ul>
 </div>
-</div><!-- /.entry-content -->
+
+  </div><!-- /.entry-content -->
 </section>
-</div>
-<footer class="body" id="contentinfo">
-<div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-</div>
-</footer>
-<script src="/theme/js/main.js"></script>
+        </div>
+        <footer id="contentinfo" class="body">
+            <div id="footer-text-wrapper">
+                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+            </div>
+        </footer>
+        <script src="/theme/js/main.js"></script>
 </body>
 </html>

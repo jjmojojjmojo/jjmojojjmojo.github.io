@@ -15,7 +15,7 @@
 &lt;p&gt;All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.&lt;/p&gt;
 
 &lt;div class="section" id="revisiting-old-friends"&gt;
-&lt;h2 id="revisiting-old-friends"&gt;Revisiting Old Friends&lt;/h2&gt;
+&lt;h2 id="revisiting old friends"&gt;Revisiting Old Friends&lt;/h2&gt;
 &lt;p&gt;Lets start by applying state tracking to our &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing  code&lt;/a&gt; from the first part of this series.&lt;/p&gt;
 &lt;p&gt;For reference, here's one of the example circuits, using the Trinket M0 (see &lt;a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit"&gt;the demo circuit section in part 1&lt;/a&gt; for references using other boards):&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
@@ -134,7 +134,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="managing-state-a-three-phase-process"&gt;
-&lt;h2 id="managing-state-a-three-phase-process"&gt;Managing State: A Three-Phase Process&lt;/h2&gt;
+&lt;h2 id="managing state: a three-phase process"&gt;Managing State: A Three-Phase Process&lt;/h2&gt;
 &lt;p&gt;Before we go much further, lets draw an important distinction. Unlike a physical scoreboard at a baseball stadium, which acts as part of the experience of watching the game, our state merely &lt;em&gt;reflects&lt;/em&gt; our reality.&lt;/p&gt;
 &lt;p&gt;The way we work with state is to alter it either &lt;em&gt;because&lt;/em&gt; something happened (say, a button was pressed, much like scoring a point in a game), or to &lt;em&gt;cause&lt;/em&gt; something to happen (this is different; like lighting up an LED, or changing a NeoPixel's color).&lt;/p&gt;
 &lt;p&gt;After some thought and experimentation, I've settled on a three-phase process for handling state in a microcontroller project.&lt;/p&gt;
@@ -159,7 +159,7 @@
 &lt;p&gt;This all appears instantaneous for us, even giving the appearance of different lines of code running simultaneously, since cycles are millionths of a second long.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="an-rgb-led-of-a-different-color-getting-classy"&gt;
-&lt;h2 id="an-rgb-led-of-a-different-color-getting-classy"&gt;An RGB LED Of A Different Color: Getting Classy&lt;/h2&gt;
+&lt;h2 id="an rgb led of a different color: getting classy"&gt;An RGB LED Of A Different Color: Getting Classy&lt;/h2&gt;
 &lt;p&gt;Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.&lt;/p&gt;
 &lt;p&gt;But first, lets refactor our code to use a class to manage state.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -590,7 +590,7 @@
 &lt;p&gt;Now that we've explored what state is, and looked at how we can write code to deal with it, we have opened ourselves up to some really neat possibilities. But since we're using &lt;tt class="docutils literal"&gt;time.sleep()&lt;/tt&gt;, our code is still &lt;em&gt;blocking&lt;/em&gt;, and we're still limited by that. The next step is to utilize our new understanding of state to debounce our buttons &lt;em&gt;without&lt;/em&gt; blocking.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="unblocking-our-debouncing-using-state-to-avoid-blocking"&gt;
-&lt;h2 id="unblocking-our-debouncing-using-state-to-avoid-blocking"&gt;Unblocking Our Debouncing: Using State To Avoid Blocking&lt;/h2&gt;
+&lt;h2 id="unblocking our debouncing: using state to avoid blocking"&gt;Unblocking Our Debouncing: Using State To Avoid Blocking&lt;/h2&gt;
 &lt;p&gt;The next step is to get rid of that blocking code. This is another thing our &lt;tt class="docutils literal"&gt;State&lt;/tt&gt; class can handle for us.&lt;/p&gt;
 &lt;p&gt;As discussed earlier, the reason why we block is to keep our code from running too fast. This keeps our signals from our buttons smooth, avoiding bouncing.&lt;/p&gt;
 &lt;p&gt;Another way to look at it is that we've introduced the passage of &lt;em&gt;time&lt;/em&gt; into our main loop. We're fixing our code to run at an interval of 0.2 seconds, so we can wait until a button is completely pressed or released before we act, and so that our code won't run over and over without reason.&lt;/p&gt;
@@ -842,7 +842,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="diving-into-events"&gt;
-&lt;h2 id="diving-into-events"&gt;Diving Into Events&lt;/h2&gt;
+&lt;h2 id="diving into events"&gt;Diving Into Events&lt;/h2&gt;
 &lt;p&gt;In order to avoid calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; every single time we update our state, whether the "b" button was pressed or not, we need to decide when the best time to call &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; is. For this example, we were calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time).&lt;/p&gt;
 &lt;p&gt;So when should we do it, to avoid calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; too frequently?&lt;/p&gt;
 &lt;p&gt;Think about how a button, technically a "momentary switch", works. When you press it, the microcontroller pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". We can think about these situations as two separate &lt;em&gt;events&lt;/em&gt; - &lt;strong&gt;press&lt;/strong&gt; and &lt;strong&gt;release&lt;/strong&gt;.&lt;/p&gt;
@@ -1020,7 +1020,7 @@
 &lt;p&gt;You gain a lot of insight when you start to look at coding a microcontroller project as a problem of &lt;em&gt;managing state&lt;/em&gt;. Then you can think about changes in state as triggering &lt;em&gt;events&lt;/em&gt;. You can &lt;em&gt;handle&lt;/em&gt; those events with code. Very complex problems become very easy to reason about, and easier to debug.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="state-considerations"&gt;
-&lt;h2 id="state-considerations"&gt;State: Considerations&lt;/h2&gt;
+&lt;h2 id="state: considerations"&gt;State: Considerations&lt;/h2&gt;
 &lt;p&gt;There are many benefits to modeling our project code around state:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;We have ultimate flexibility. When it comes to debouncing buttons or otherwise detecting events, we can avoid blocking. Generally speaking, managing state lets us decide what data we care about, and we can define our own events based on what's important to our project.&lt;/li&gt;
@@ -1057,7 +1057,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusions-and-what-s-next"&gt;
-&lt;h2 id="conclusions-and-whats-next"&gt;Conclusions And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusions and what's next"&gt;Conclusions And What's Next&lt;/h2&gt;
 &lt;p&gt;So, now we know what a great tool state is, and how to wield it like a pro.&lt;/p&gt;
 &lt;p&gt;And building on that, we've explored the fundamentals of events, and we can think about things like pressing a button as a series of state changes. We can detect these changes and take action.&lt;/p&gt;
 &lt;p&gt;As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖&lt;/p&gt;
@@ -1077,7 +1077,7 @@
 &lt;p&gt;We'll talk about fixing the problem in the worst, but maybe easiest way: by &lt;em&gt;blocking&lt;/em&gt;. We'll also talk about why it's bad.&lt;/p&gt;
 
 &lt;div class="section" id="a-use-case-for-state-debouncing-buttons"&gt;
-&lt;h2 id="a-use-case-for-state-debouncing-buttons"&gt;A Use Case For State: Debouncing Buttons&lt;/h2&gt;
+&lt;h2 id="a use case for state: debouncing buttons"&gt;A Use Case For State: Debouncing Buttons&lt;/h2&gt;
 &lt;p&gt;Most electronics projects will have to deal with "bouncy" inputs, buttons in particular.&lt;/p&gt;
 &lt;p&gt;"Bounce", in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type"&gt;boolean&lt;/a&gt; value - it's either "on" or "off". It's "HIGH" or "LOW", &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;In reality, these values refer to &lt;em&gt;a voltage&lt;/em&gt;, or &lt;em&gt;the lack of a voltage&lt;/em&gt;. For our M0/M4 boards, that voltage is 3.3 volts. When the voltage is at 3.3 volts (plus/minus some wiggle room), the pin will read &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or "HIGH". The voltage is "on".&lt;/p&gt;
@@ -1124,7 +1124,7 @@
 &lt;p&gt;This means that your main loop is executing many &lt;em&gt;thousands&lt;/em&gt; of times per second. If you check a pin or sensors status every loop, even if the button or sensor is fully "debounced", your code will still get called many, many times. A perfectly clean signal will &lt;strong&gt;still&lt;/strong&gt; trigger your code to run over and over and over. If there are side effects, they will be run over and over and over as well.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="blocking-one-not-great-solution"&gt;
-&lt;h2 id="blocking-one-not-great-solution"&gt;Blocking: One (not great) Solution&lt;/h2&gt;
+&lt;h2 id="blocking: one (not great) solution"&gt;Blocking: One (not great) Solution&lt;/h2&gt;
 &lt;p&gt;The easiest way to deal with all of these issues, and the most common seen in "getting started" tutorials, is to "sleep" the processor for a few fractions of a second before checking an input's value. In programming, we use the term &lt;em&gt;block&lt;/em&gt; to describe this sort of behavior.&lt;/p&gt;
 &lt;p&gt;"Blocking" is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
@@ -1161,7 +1161,7 @@
 &lt;p&gt;Ok, so by now you're thoroughly convinced blocking is bad news. So what can we do instead to debounce our inputs?&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="debouncing-options"&gt;
-&lt;h2 id="debouncing-options"&gt;Debouncing Options&lt;/h2&gt;
+&lt;h2 id="debouncing options"&gt;Debouncing Options&lt;/h2&gt;
 &lt;p&gt;We have a few viable options:&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;For buttons, we can use an &lt;a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit"&gt;R/C filter circuit&lt;/a&gt; to clean the input (a.k.a. &lt;em&gt;hardware debouncing&lt;/em&gt;).&lt;/li&gt;
@@ -1186,7 +1186,7 @@
 &lt;p&gt;In the next section, we'll start from the ground up and really dig into what state is all about. We'll see how it's ideal for cleaning inputs, and also how it opens up some really useful pattens for making our code cleaner and more reliable.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="basics-of-state"&gt;
-&lt;h2 id="basics-of-state"&gt;Basics Of State&lt;/h2&gt;
+&lt;h2 id="basics of state"&gt;Basics Of State&lt;/h2&gt;
 &lt;p&gt;Let's start with basic definitions. &lt;em&gt;State&lt;/em&gt; is simply the status or phase of something at a given time. It's how you would describe something that can &lt;em&gt;transition&lt;/em&gt;, over time, from one &lt;em&gt;state&lt;/em&gt; to another.&lt;/p&gt;
 &lt;p&gt;For example, water has three common states (referred to as &lt;em&gt;phases&lt;/em&gt;): gas (steam), solid (ice), liquid (usually just called &lt;em&gt;water&lt;/em&gt;).&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-states-of-water.png" style="width: 80%;"/&gt;
@@ -1202,7 +1202,7 @@
 &lt;p&gt;Lets look at another example, this time from a area of life that lives and breathes metrics: &lt;strong&gt;sports&lt;/strong&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="score-keeping-is-tracking-state"&gt;
-&lt;h2 id="score-keeping-is-tracking-state"&gt;Score Keeping Is Tracking State&lt;/h2&gt;
+&lt;h2 id="score keeping is tracking state"&gt;Score Keeping Is Tracking State&lt;/h2&gt;
 &lt;p&gt;Keeping score during a sporting event is a way of tracking state. A performance happens, a ball is hit, a race ends, and the score is recorded.&lt;/p&gt;
 &lt;p&gt;Here's a common type of simple scoreboard for sports like gymnastics:&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-01.png" style="width: 80%;"/&gt;
@@ -1284,7 +1284,7 @@
 &lt;p&gt;A class might be better, since we can model what a "match" or an "entrant" looks like &lt;em&gt;once&lt;/em&gt;, and then make new instances as our tournament progresses (we'll talk about classes in depth shortly).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="global-state-and-a-better-analogy"&gt;
-&lt;h2 id="global-state-and-a-better-analogy"&gt;Global State And A Better Analogy&lt;/h2&gt;
+&lt;h2 id="global state and a better analogy"&gt;Global State And A Better Analogy&lt;/h2&gt;
 &lt;p&gt;In a microcontroller project, we're dealing more with what might be called &lt;em&gt;global state&lt;/em&gt; - a single group of attributes that are used by the whole project. We need to track our buttons, digital pins and sensors in one place, and use the values throughout our project. It would be best to have a &lt;em&gt;single source of truth&lt;/em&gt;, or one place to look for information about what state our project is in.&lt;/p&gt;
 &lt;p&gt;With the gymnastics example, we've covered capturing multiple states, and we've stored them in multiple places (either individual variables or a more complex structure, but each score is separate).&lt;/p&gt;
 &lt;p&gt;In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.&lt;/p&gt;
@@ -1530,7 +1530,7 @@
 &lt;p&gt;Now lets look at how we can work this concept into a microcontroller project. We'll start by bringing things back to basics.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusions-and-what-s-next"&gt;
-&lt;h2 id="conclusions-and-whats-next"&gt;Conclusions And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusions and what's next"&gt;Conclusions And What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment of the series, we've learned a lot about what state is, and how to model it in Python. We've modeled state using single variables, complex data structures, and classes.&lt;/p&gt;
 &lt;p&gt;We've discussed a problem that we can solve with state, button debouncing.&lt;/p&gt;
 &lt;p&gt;In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.&lt;/p&gt;
@@ -1553,7 +1553,7 @@
 &lt;p&gt;This series is intended for people who are new to Python, programming, and/or microcontrollers, so there's an effort to explain things as thoroughly as possible. However, experience with basic Python would be helpful.&lt;/p&gt;
 
 &lt;div class="section" id="the-project-the-platform"&gt;
-&lt;h2 id="the-project-the-platform"&gt;The Project, The Platform&lt;/h2&gt;
+&lt;h2 id="the project, the platform"&gt;The Project, The Platform&lt;/h2&gt;
 &lt;p&gt;All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.&lt;/p&gt;
 &lt;p&gt;I found the answer in &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing"&gt;capacative touch&lt;/a&gt;. This is the same technology behind modern cellphones and touchscreens.&lt;/p&gt;
 &lt;p&gt;I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to &lt;a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch"&gt;7 touch capable pins&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do &lt;a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction"&gt;some insanely cool stuff&lt;/a&gt;.&lt;/p&gt;
@@ -1607,7 +1607,7 @@
 &lt;p&gt;Please feel free to &lt;a class="reference external" href="/pages/contact.html"&gt;contact the author&lt;/a&gt; with questions, corrections, or suggestions on how to make this series more accessible!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="demo-project"&gt;
-&lt;h2 id="demo-project"&gt;Demo Project&lt;/h2&gt;
+&lt;h2 id="demo project"&gt;Demo Project&lt;/h2&gt;
 &lt;p&gt;To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.&lt;/p&gt;
 &lt;p&gt;It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.&lt;/p&gt;
 &lt;div class="centered docutils container"&gt;
@@ -1791,7 +1791,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="abstractions-keeping-the-code-simple"&gt;
-&lt;h2 id="abstractions-keeping-the-code-simple"&gt;Abstractions: Keeping The Code Simple&lt;/h2&gt;
+&lt;h2 id="abstractions: keeping the code simple"&gt;Abstractions: Keeping The Code Simple&lt;/h2&gt;
 &lt;p&gt;Because there are minor differences between the different boards, we're going to abstact them away using a python module. We'll call it &lt;tt class="docutils literal"&gt;setup.py&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;In programming, &lt;em&gt;abstraction&lt;/em&gt; is providing an indirect way to work with something. That something might be code, concepts, a service like a database, or something physical like different development boards, as we're abstracting here.&lt;/p&gt;
 &lt;p&gt;Abstraction helps by providing a single, simplified &lt;em&gt;interface&lt;/em&gt; to do things that may have a lot of complexity.&lt;/p&gt;
@@ -2103,7 +2103,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;/video&gt;
 &lt;/div&gt;&lt;/div&gt;
 &lt;div class="section" id="conclusion-and-what-s-next"&gt;
-&lt;h2 id="conclusion-and-whats-next"&gt;Conclusion And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusion and what's next"&gt;Conclusion And What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment, we've discussed some details about the CircuitPython platform, and built out a circuit for experimentation, taking advantage of some of the built-in components we've got at our disposal.&lt;/p&gt;
 &lt;p&gt;We have developed a rudimentary API: we've written code that uses abstraction to make it easy to write code that will run on many development boards.&lt;/p&gt;
 &lt;p&gt;We've hinted at "state" and "events" but have yet to really define what they are.&lt;/p&gt;

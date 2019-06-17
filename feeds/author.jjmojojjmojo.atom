@@ -13,7 +13,7 @@
 &lt;p&gt;However, I've realized that the difficulty of getting established is real, even for people with a typical education. There's a sort of &lt;em&gt;innocence&lt;/em&gt; that is impressed onto new graduates, and there aren't a lot of resources for them either. So college grads, this is for you too.&lt;/p&gt;
 
 &lt;div class="section" id="expectation-management"&gt;
-&lt;h2 id="expectation-management"&gt;Expectation Management&lt;/h2&gt;
+&lt;h2 id="expectation management"&gt;Expectation Management&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;People are lusty, excitable creatures. We are prone to fantastical elaborations and tend to see the world through rose-colored glasses.&lt;/div&gt;
 &lt;/div&gt;
@@ -36,7 +36,7 @@
 &lt;p&gt;This is what I mean about keeping personal expectations managed. It's important not to delude yourself. It &lt;em&gt;will&lt;/em&gt; get difficult, and when it does, it's helpful to be firmly rooted in reality.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-testing-profiling-and-debugging"&gt;
-&lt;h2 id="learn-testing-profiling-and-debugging"&gt;Learn Testing, Profiling And Debugging&lt;/h2&gt;
+&lt;h2 id="learn testing, profiling and debugging"&gt;Learn Testing, Profiling And Debugging&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;This can not be stressed enough: &lt;strong&gt;you have to know how to know what's wrong&lt;/strong&gt;.&lt;/div&gt;
 &lt;/div&gt;
@@ -50,7 +50,7 @@
 &lt;p&gt;If I were putting together a programming curriculum, I'd make testing and debugging the first thing my students would learn after basic syntax. Profiling would come later (once we have some complex, possibly poorly optimized code to work with), but would still be taught early. This is essential stuff that is often left out.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-the-scientific-method"&gt;
-&lt;h2 id="learn-the-scientific-method"&gt;Learn The Scientific Method&lt;/h2&gt;
+&lt;h2 id="learn the scientific method"&gt;Learn The Scientific Method&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;A methodical approach is key to writing good software.&lt;/div&gt;
 &lt;/div&gt;
@@ -74,7 +74,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mentor-every-day"&gt;
-&lt;h2 id="mentor-every-day"&gt;Mentor Every Day&lt;/h2&gt;
+&lt;h2 id="mentor every day"&gt;Mentor Every Day&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;The best way to really learn something is to teach it to someone else.&lt;/div&gt;
 &lt;/div&gt;
@@ -113,7 +113,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="learn-a-new-language"&gt;
-&lt;h2 id="learn-a-new-language"&gt;Learn A New Language&lt;/h2&gt;
+&lt;h2 id="learn a new language"&gt;Learn A New Language&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;There's a lot to be gained by going through the process of learning a new language, besides adding a new skill to your resume.&lt;/div&gt;
 &lt;/div&gt;
@@ -125,7 +125,7 @@
 &lt;p&gt;Choosing which languages or paradigms to learn can be hard. There's a book called &lt;a class="reference external" href="https://pragprog.com/book/btlang/seven-languages-in-seven-weeks"&gt;"Seven Languages In Seven Weeks"&lt;/a&gt; by Bruce A. Tate that is a great starting point if you have trouble identifying languages to try on your own.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="work-for-free-with-conditions"&gt;
-&lt;h2 id="work-for-free-with-conditions"&gt;Work For Free - With Conditions&lt;/h2&gt;
+&lt;h2 id="work for free - with conditions"&gt;Work For Free - With Conditions&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;A great way to establish yourself and gain real-life experience is to do volunteer work. But don't let people take advantage of you.&lt;/div&gt;
 &lt;/div&gt;
@@ -149,7 +149,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="know-how-servers-and-virtualization-work"&gt;
-&lt;h2 id="know-how-servers-and-virtualization-work"&gt;Know How Servers And Virtualization Work&lt;/h2&gt;
+&lt;h2 id="know how servers and virtualization work"&gt;Know How Servers And Virtualization Work&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Deploying, running, and scaling your application is not someone else's problem. Even when it is.&lt;/div&gt;
 &lt;/div&gt;
@@ -193,14 +193,14 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="never-stop-having-fun"&gt;
-&lt;h2 id="never-stop-having-fun"&gt;Never Stop Having Fun&lt;/h2&gt;
+&lt;h2 id="never stop having fun"&gt;Never Stop Having Fun&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;When this work stops being fun, you need to adjust your perspective, or maybe just GTFO.&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;To really make it in this industry, you have to &lt;strong&gt;enjoy&lt;/strong&gt; what you do. People say that about all work. Personally, I don't think it's universally true, &lt;em&gt;except in tech&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Now, that doesn't mean you have to live and breathe programming. It doesn't mean you have to be all smiles and "nerdgasms" and "go-team", &lt;em&gt;while you're struggling to get some stupid project you hate finished at 11PM because sales are a bunch of jerks and your boss promised things he knew you couldn't deliver and you have this pain in your side that the doctor says is nothing but you're sure its something and your kids need braces and Slack is down and I don't know what to do...&lt;/em&gt; 😀&lt;/p&gt;
 &lt;p&gt;I'm talking about true, simple joy. And finding it in out of the way places.&lt;/p&gt;
-&lt;p&gt;It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like your a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago.&lt;/p&gt;
+&lt;p&gt;It can be simple, or quite complex. Things like a sense of accomplishment, connecting with a user, feeling like you're a part of something, sure. But also having an epiphany at 2AM that solves a problem you spackled over because of time constraints 3 years ago.&lt;/p&gt;
 &lt;p&gt;It can come from looking at a piece of tech and not being able to stop smiling because you know how it works. Maybe you find it's just a &lt;em&gt;beautiful&lt;/em&gt; engineering achievement.&lt;/p&gt;
 &lt;p&gt;The joy can be in finding colleagues that really seem to &lt;em&gt;get&lt;/em&gt; you. The work might suck but sometimes the people you work with make it worth it.&lt;/p&gt;
 &lt;p&gt;Maybe it's the smug feeling you get being twitter friends with the gal that invented "that thing" everyone uses, or having beers with that guy that made the thing everybody in your industry relies on but nobody at the family reunion has ever heard of.&lt;/p&gt;
@@ -214,7 +214,7 @@
 &lt;p&gt;But there is a time when you have to be honest with yourself. There's so much variation and opportunity in this field, that if you just can't find some way to have fun with it, you really should find another line of work. 💔&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="interviewing-work-the-coding-challenges"&gt;
-&lt;h2 id="interviewing-work-the-coding-challenges"&gt;Interviewing: Work The Coding Challenges&lt;/h2&gt;
+&lt;h2 id="interviewing: work the coding challenges"&gt;Interviewing: Work The Coding Challenges&lt;/h2&gt;
 &lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Sometimes you have to play the game to get by, even when you know its rigged.&lt;/div&gt;
 &lt;/div&gt;
@@ -309,7 +309,7 @@
 &lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
 
 &lt;div class="section" id="seeing-myself-in-the-tv-people"&gt;
-&lt;h2 id="seeing-myself-in-the-tv-people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
+&lt;h2 id="seeing myself in the tv people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
 &lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg"/&gt;
 &lt;p class="caption"&gt;Ron Swanson (Nick Offerman) and Leslie Knope (Amy Poehler), or, "what Josh's brain looks like inside".&lt;/p&gt;
@@ -325,7 +325,7 @@
 &lt;p&gt;That's me in a nutshell - optimistic and positive, bubbly, intensely excited about things I'm interested in. Yet I'm a quiet, matter-of-fact, pragmatic craftsman when I'm creating. Both sides of my personality work together when I'm sharing what I know, teaching, or writing documentation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-reference-explained"&gt;
-&lt;h2 id="the-reference-explained"&gt;The Reference Explained&lt;/h2&gt;
+&lt;h2 id="the reference explained"&gt;The Reference Explained&lt;/h2&gt;
 &lt;p&gt;There was an episode where Ron was tasked with coaching a children's basketball team. Ron decided that the best way to make true champions of his kids was to indoctrinate them with wisdom of what makes a person truly great.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
 &lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png"/&gt;
@@ -346,7 +346,7 @@
 &lt;p&gt;And that's what got me thinking - what sort of things would I put on such a pyramid, in a similar tongue-in-cheek style, that I might push on unsuspecting software engineers? I fired up Illustrator and got to work.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2 id="the-johnson-pyramid-of-programmer-greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
+&lt;h2 id="the johnson pyramid of programmer greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
 &lt;p&gt;My interpretation of Ron Swanson's masterpiece is probably a little more serious than his was, but it's still intended to be a light-hearted take. It was designed in Adobe Illustrator, at full 24x48" poster size. I tweaked the dimensions a little bit to accommodate printing on standard letter/A4 paper, in landscape.&lt;/p&gt;
 &lt;p&gt;Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 80%;"/&gt;
@@ -379,7 +379,7 @@
 &lt;p&gt;All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.&lt;/p&gt;
 
 &lt;div class="section" id="revisiting-old-friends"&gt;
-&lt;h2 id="revisiting-old-friends"&gt;Revisiting Old Friends&lt;/h2&gt;
+&lt;h2 id="revisiting old friends"&gt;Revisiting Old Friends&lt;/h2&gt;
 &lt;p&gt;Lets start by applying state tracking to our &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing  code&lt;/a&gt; from the first part of this series.&lt;/p&gt;
 &lt;p&gt;For reference, here's one of the example circuits, using the Trinket M0 (see &lt;a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit"&gt;the demo circuit section in part 1&lt;/a&gt; for references using other boards):&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
@@ -498,7 +498,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="managing-state-a-three-phase-process"&gt;
-&lt;h2 id="managing-state-a-three-phase-process"&gt;Managing State: A Three-Phase Process&lt;/h2&gt;
+&lt;h2 id="managing state: a three-phase process"&gt;Managing State: A Three-Phase Process&lt;/h2&gt;
 &lt;p&gt;Before we go much further, lets draw an important distinction. Unlike a physical scoreboard at a baseball stadium, which acts as part of the experience of watching the game, our state merely &lt;em&gt;reflects&lt;/em&gt; our reality.&lt;/p&gt;
 &lt;p&gt;The way we work with state is to alter it either &lt;em&gt;because&lt;/em&gt; something happened (say, a button was pressed, much like scoring a point in a game), or to &lt;em&gt;cause&lt;/em&gt; something to happen (this is different; like lighting up an LED, or changing a NeoPixel's color).&lt;/p&gt;
 &lt;p&gt;After some thought and experimentation, I've settled on a three-phase process for handling state in a microcontroller project.&lt;/p&gt;
@@ -523,7 +523,7 @@
 &lt;p&gt;This all appears instantaneous for us, even giving the appearance of different lines of code running simultaneously, since cycles are millionths of a second long.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="an-rgb-led-of-a-different-color-getting-classy"&gt;
-&lt;h2 id="an-rgb-led-of-a-different-color-getting-classy"&gt;An RGB LED Of A Different Color: Getting Classy&lt;/h2&gt;
+&lt;h2 id="an rgb led of a different color: getting classy"&gt;An RGB LED Of A Different Color: Getting Classy&lt;/h2&gt;
 &lt;p&gt;Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.&lt;/p&gt;
 &lt;p&gt;But first, lets refactor our code to use a class to manage state.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -954,7 +954,7 @@
 &lt;p&gt;Now that we've explored what state is, and looked at how we can write code to deal with it, we have opened ourselves up to some really neat possibilities. But since we're using &lt;tt class="docutils literal"&gt;time.sleep()&lt;/tt&gt;, our code is still &lt;em&gt;blocking&lt;/em&gt;, and we're still limited by that. The next step is to utilize our new understanding of state to debounce our buttons &lt;em&gt;without&lt;/em&gt; blocking.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="unblocking-our-debouncing-using-state-to-avoid-blocking"&gt;
-&lt;h2 id="unblocking-our-debouncing-using-state-to-avoid-blocking"&gt;Unblocking Our Debouncing: Using State To Avoid Blocking&lt;/h2&gt;
+&lt;h2 id="unblocking our debouncing: using state to avoid blocking"&gt;Unblocking Our Debouncing: Using State To Avoid Blocking&lt;/h2&gt;
 &lt;p&gt;The next step is to get rid of that blocking code. This is another thing our &lt;tt class="docutils literal"&gt;State&lt;/tt&gt; class can handle for us.&lt;/p&gt;
 &lt;p&gt;As discussed earlier, the reason why we block is to keep our code from running too fast. This keeps our signals from our buttons smooth, avoiding bouncing.&lt;/p&gt;
 &lt;p&gt;Another way to look at it is that we've introduced the passage of &lt;em&gt;time&lt;/em&gt; into our main loop. We're fixing our code to run at an interval of 0.2 seconds, so we can wait until a button is completely pressed or released before we act, and so that our code won't run over and over without reason.&lt;/p&gt;
@@ -1206,7 +1206,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="diving-into-events"&gt;
-&lt;h2 id="diving-into-events"&gt;Diving Into Events&lt;/h2&gt;
+&lt;h2 id="diving into events"&gt;Diving Into Events&lt;/h2&gt;
 &lt;p&gt;In order to avoid calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; every single time we update our state, whether the "b" button was pressed or not, we need to decide when the best time to call &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; is. For this example, we were calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; when the button was unpressed because if we didn't, the color would change every 0.2 seconds that you held the button down (or constantly before we were tracking time).&lt;/p&gt;
 &lt;p&gt;So when should we do it, to avoid calling &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; too frequently?&lt;/p&gt;
 &lt;p&gt;Think about how a button, technically a "momentary switch", works. When you press it, the microcontroller pin reads "HIGH" until you remove your finger (or "release" the button). Then it reads "LOW". We can think about these situations as two separate &lt;em&gt;events&lt;/em&gt; - &lt;strong&gt;press&lt;/strong&gt; and &lt;strong&gt;release&lt;/strong&gt;.&lt;/p&gt;
@@ -1384,7 +1384,7 @@
 &lt;p&gt;You gain a lot of insight when you start to look at coding a microcontroller project as a problem of &lt;em&gt;managing state&lt;/em&gt;. Then you can think about changes in state as triggering &lt;em&gt;events&lt;/em&gt;. You can &lt;em&gt;handle&lt;/em&gt; those events with code. Very complex problems become very easy to reason about, and easier to debug.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="state-considerations"&gt;
-&lt;h2 id="state-considerations"&gt;State: Considerations&lt;/h2&gt;
+&lt;h2 id="state: considerations"&gt;State: Considerations&lt;/h2&gt;
 &lt;p&gt;There are many benefits to modeling our project code around state:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;We have ultimate flexibility. When it comes to debouncing buttons or otherwise detecting events, we can avoid blocking. Generally speaking, managing state lets us decide what data we care about, and we can define our own events based on what's important to our project.&lt;/li&gt;
@@ -1421,7 +1421,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusions-and-what-s-next"&gt;
-&lt;h2 id="conclusions-and-whats-next"&gt;Conclusions And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusions and what's next"&gt;Conclusions And What's Next&lt;/h2&gt;
 &lt;p&gt;So, now we know what a great tool state is, and how to wield it like a pro.&lt;/p&gt;
 &lt;p&gt;And building on that, we've explored the fundamentals of events, and we can think about things like pressing a button as a series of state changes. We can detect these changes and take action.&lt;/p&gt;
 &lt;p&gt;As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖&lt;/p&gt;
@@ -1441,7 +1441,7 @@
 &lt;p&gt;We'll talk about fixing the problem in the worst, but maybe easiest way: by &lt;em&gt;blocking&lt;/em&gt;. We'll also talk about why it's bad.&lt;/p&gt;
 
 &lt;div class="section" id="a-use-case-for-state-debouncing-buttons"&gt;
-&lt;h2 id="a-use-case-for-state-debouncing-buttons"&gt;A Use Case For State: Debouncing Buttons&lt;/h2&gt;
+&lt;h2 id="a use case for state: debouncing buttons"&gt;A Use Case For State: Debouncing Buttons&lt;/h2&gt;
 &lt;p&gt;Most electronics projects will have to deal with "bouncy" inputs, buttons in particular.&lt;/p&gt;
 &lt;p&gt;"Bounce", in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type"&gt;boolean&lt;/a&gt; value - it's either "on" or "off". It's "HIGH" or "LOW", &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;In reality, these values refer to &lt;em&gt;a voltage&lt;/em&gt;, or &lt;em&gt;the lack of a voltage&lt;/em&gt;. For our M0/M4 boards, that voltage is 3.3 volts. When the voltage is at 3.3 volts (plus/minus some wiggle room), the pin will read &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; or "HIGH". The voltage is "on".&lt;/p&gt;
@@ -1488,7 +1488,7 @@
 &lt;p&gt;This means that your main loop is executing many &lt;em&gt;thousands&lt;/em&gt; of times per second. If you check a pin or sensors status every loop, even if the button or sensor is fully "debounced", your code will still get called many, many times. A perfectly clean signal will &lt;strong&gt;still&lt;/strong&gt; trigger your code to run over and over and over. If there are side effects, they will be run over and over and over as well.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="blocking-one-not-great-solution"&gt;
-&lt;h2 id="blocking-one-not-great-solution"&gt;Blocking: One (not great) Solution&lt;/h2&gt;
+&lt;h2 id="blocking: one (not great) solution"&gt;Blocking: One (not great) Solution&lt;/h2&gt;
 &lt;p&gt;The easiest way to deal with all of these issues, and the most common seen in "getting started" tutorials, is to "sleep" the processor for a few fractions of a second before checking an input's value. In programming, we use the term &lt;em&gt;block&lt;/em&gt; to describe this sort of behavior.&lt;/p&gt;
 &lt;p&gt;"Blocking" is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
@@ -1525,7 +1525,7 @@
 &lt;p&gt;Ok, so by now you're thoroughly convinced blocking is bad news. So what can we do instead to debounce our inputs?&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="debouncing-options"&gt;
-&lt;h2 id="debouncing-options"&gt;Debouncing Options&lt;/h2&gt;
+&lt;h2 id="debouncing options"&gt;Debouncing Options&lt;/h2&gt;
 &lt;p&gt;We have a few viable options:&lt;/p&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;For buttons, we can use an &lt;a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit"&gt;R/C filter circuit&lt;/a&gt; to clean the input (a.k.a. &lt;em&gt;hardware debouncing&lt;/em&gt;).&lt;/li&gt;
@@ -1550,7 +1550,7 @@
 &lt;p&gt;In the next section, we'll start from the ground up and really dig into what state is all about. We'll see how it's ideal for cleaning inputs, and also how it opens up some really useful pattens for making our code cleaner and more reliable.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="basics-of-state"&gt;
-&lt;h2 id="basics-of-state"&gt;Basics Of State&lt;/h2&gt;
+&lt;h2 id="basics of state"&gt;Basics Of State&lt;/h2&gt;
 &lt;p&gt;Let's start with basic definitions. &lt;em&gt;State&lt;/em&gt; is simply the status or phase of something at a given time. It's how you would describe something that can &lt;em&gt;transition&lt;/em&gt;, over time, from one &lt;em&gt;state&lt;/em&gt; to another.&lt;/p&gt;
 &lt;p&gt;For example, water has three common states (referred to as &lt;em&gt;phases&lt;/em&gt;): gas (steam), solid (ice), liquid (usually just called &lt;em&gt;water&lt;/em&gt;).&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-states-of-water.png" style="width: 80%;"/&gt;
@@ -1566,7 +1566,7 @@
 &lt;p&gt;Lets look at another example, this time from a area of life that lives and breathes metrics: &lt;strong&gt;sports&lt;/strong&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="score-keeping-is-tracking-state"&gt;
-&lt;h2 id="score-keeping-is-tracking-state"&gt;Score Keeping Is Tracking State&lt;/h2&gt;
+&lt;h2 id="score keeping is tracking state"&gt;Score Keeping Is Tracking State&lt;/h2&gt;
 &lt;p&gt;Keeping score during a sporting event is a way of tracking state. A performance happens, a ball is hit, a race ends, and the score is recorded.&lt;/p&gt;
 &lt;p&gt;Here's a common type of simple scoreboard for sports like gymnastics:&lt;/p&gt;
 &lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-01.png" style="width: 80%;"/&gt;
@@ -1648,7 +1648,7 @@
 &lt;p&gt;A class might be better, since we can model what a "match" or an "entrant" looks like &lt;em&gt;once&lt;/em&gt;, and then make new instances as our tournament progresses (we'll talk about classes in depth shortly).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="global-state-and-a-better-analogy"&gt;
-&lt;h2 id="global-state-and-a-better-analogy"&gt;Global State And A Better Analogy&lt;/h2&gt;
+&lt;h2 id="global state and a better analogy"&gt;Global State And A Better Analogy&lt;/h2&gt;
 &lt;p&gt;In a microcontroller project, we're dealing more with what might be called &lt;em&gt;global state&lt;/em&gt; - a single group of attributes that are used by the whole project. We need to track our buttons, digital pins and sensors in one place, and use the values throughout our project. It would be best to have a &lt;em&gt;single source of truth&lt;/em&gt;, or one place to look for information about what state our project is in.&lt;/p&gt;
 &lt;p&gt;With the gymnastics example, we've covered capturing multiple states, and we've stored them in multiple places (either individual variables or a more complex structure, but each score is separate).&lt;/p&gt;
 &lt;p&gt;In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.&lt;/p&gt;
@@ -1894,7 +1894,7 @@
 &lt;p&gt;Now lets look at how we can work this concept into a microcontroller project. We'll start by bringing things back to basics.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusions-and-what-s-next"&gt;
-&lt;h2 id="conclusions-and-whats-next"&gt;Conclusions And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusions and what's next"&gt;Conclusions And What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment of the series, we've learned a lot about what state is, and how to model it in Python. We've modeled state using single variables, complex data structures, and classes.&lt;/p&gt;
 &lt;p&gt;We've discussed a problem that we can solve with state, button debouncing.&lt;/p&gt;
 &lt;p&gt;In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.&lt;/p&gt;
@@ -1917,7 +1917,7 @@
 &lt;p&gt;This series is intended for people who are new to Python, programming, and/or microcontrollers, so there's an effort to explain things as thoroughly as possible. However, experience with basic Python would be helpful.&lt;/p&gt;
 
 &lt;div class="section" id="the-project-the-platform"&gt;
-&lt;h2 id="the-project-the-platform"&gt;The Project, The Platform&lt;/h2&gt;
+&lt;h2 id="the project, the platform"&gt;The Project, The Platform&lt;/h2&gt;
 &lt;p&gt;All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.&lt;/p&gt;
 &lt;p&gt;I found the answer in &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing"&gt;capacative touch&lt;/a&gt;. This is the same technology behind modern cellphones and touchscreens.&lt;/p&gt;
 &lt;p&gt;I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to &lt;a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch"&gt;7 touch capable pins&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do &lt;a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction"&gt;some insanely cool stuff&lt;/a&gt;.&lt;/p&gt;
@@ -1971,7 +1971,7 @@
 &lt;p&gt;Please feel free to &lt;a class="reference external" href="/pages/contact.html"&gt;contact the author&lt;/a&gt; with questions, corrections, or suggestions on how to make this series more accessible!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="demo-project"&gt;
-&lt;h2 id="demo-project"&gt;Demo Project&lt;/h2&gt;
+&lt;h2 id="demo project"&gt;Demo Project&lt;/h2&gt;
 &lt;p&gt;To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.&lt;/p&gt;
 &lt;p&gt;It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.&lt;/p&gt;
 &lt;div class="centered docutils container"&gt;
@@ -2155,7 +2155,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="abstractions-keeping-the-code-simple"&gt;
-&lt;h2 id="abstractions-keeping-the-code-simple"&gt;Abstractions: Keeping The Code Simple&lt;/h2&gt;
+&lt;h2 id="abstractions: keeping the code simple"&gt;Abstractions: Keeping The Code Simple&lt;/h2&gt;
 &lt;p&gt;Because there are minor differences between the different boards, we're going to abstact them away using a python module. We'll call it &lt;tt class="docutils literal"&gt;setup.py&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;In programming, &lt;em&gt;abstraction&lt;/em&gt; is providing an indirect way to work with something. That something might be code, concepts, a service like a database, or something physical like different development boards, as we're abstracting here.&lt;/p&gt;
 &lt;p&gt;Abstraction helps by providing a single, simplified &lt;em&gt;interface&lt;/em&gt; to do things that may have a lot of complexity.&lt;/p&gt;
@@ -2467,7 +2467,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;/video&gt;
 &lt;/div&gt;&lt;/div&gt;
 &lt;div class="section" id="conclusion-and-what-s-next"&gt;
-&lt;h2 id="conclusion-and-whats-next"&gt;Conclusion And What's Next&lt;/h2&gt;
+&lt;h2 id="conclusion and what's next"&gt;Conclusion And What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment, we've discussed some details about the CircuitPython platform, and built out a circuit for experimentation, taking advantage of some of the built-in components we've got at our disposal.&lt;/p&gt;
 &lt;p&gt;We have developed a rudimentary API: we've written code that uses abstraction to make it easy to write code that will run on many development boards.&lt;/p&gt;
 &lt;p&gt;We've hinted at "state" and "events" but have yet to really define what they are.&lt;/p&gt;
@@ -2560,21 +2560,21 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="making-boot-faster"&gt;
-&lt;h2 id="making-boot-faster"&gt;Making Boot Faster&lt;/h2&gt;
+&lt;h2 id="making boot faster"&gt;Making Boot Faster&lt;/h2&gt;
 &lt;p&gt;Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;~/.bash_profile&lt;/span&gt;&lt;/tt&gt; or similar other files for your particular shell. See the &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options"&gt;JVM-Options&lt;/a&gt; page in the boot documentation for details, and other ways to incorporate these settings into your projects:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-simple-script"&gt;
-&lt;h2 id="a-simple-script"&gt;A Simple Script&lt;/h2&gt;
+&lt;h2 id="a simple script"&gt;A Simple Script&lt;/h2&gt;
 &lt;p&gt;For this article, we'll start with an example of a useful application that grabs the most recent tweet from the &lt;a class="reference external" href="https://twitter.com/nihilist_arbys"&gt;Nihilist Arby's&lt;/a&gt; twitter feed. A great addition to your &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29"&gt;MOTD&lt;/a&gt; to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="twitter-api-tokens"&gt;
-&lt;h2 id="twitter-api-tokens"&gt;Twitter API Tokens&lt;/h2&gt;
+&lt;h2 id="twitter api tokens"&gt;Twitter API Tokens&lt;/h2&gt;
 &lt;p&gt;Before we begin, set up an application and &lt;a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens"&gt;obtain a consumer key&lt;/a&gt;&amp;nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to &lt;em&gt;read only&lt;/em&gt;. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="quick-note-development-deviations"&gt;
-&lt;h2 id="quick-note-development-deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
+&lt;h2 id="quick note: development deviations"&gt;Quick Note: Development Deviations&lt;/h2&gt;
 &lt;p&gt;Since we're not building anything right now, or utilizing the task infrastructure, we don't need a &lt;tt class="docutils literal"&gt;build.boot&lt;/tt&gt; file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run &lt;tt class="docutils literal"&gt;boot repl&lt;/tt&gt;:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;set-env!&lt;/span&gt; &lt;span class="ss"&gt;:dependencies&lt;/span&gt; &lt;span class="o"&gt;'&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;twitter-api&lt;/span&gt; &lt;span class="s"&gt;"1.8.0"&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2583,7 +2583,7 @@ boot is easy to install. All you need is a JDK and the &lt;a class="reference ex
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-script-version-1"&gt;
-&lt;h2 id="the-script-version-1"&gt;The Script: Version 1&lt;/h2&gt;
+&lt;h2 id="the script: version 1"&gt;The Script: Version 1&lt;/h2&gt;
 &lt;p&gt;For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
@@ -2683,11 +2683,11 @@ name it however you'd like:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-1"&gt;
-&lt;h2 id="distributioninstallation-mark-1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
+&lt;h2 id="distribution/installation: mark 1"&gt;Distribution/Installation: Mark 1&lt;/h2&gt;
 &lt;p&gt;The real beauty of this boot script we have, is that it is a self-contained entity. We can send it to anyone who has boot and a JDK installed. They can place the script anywhere they like. Dependencies are automatically downloaded the first time its run.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="a-not-so-simple-script"&gt;
-&lt;h2 id="a-not-so-simple-script"&gt;A Not-So-Simple Script&lt;/h2&gt;
+&lt;h2 id="a not-so-simple script"&gt;A Not-So-Simple Script&lt;/h2&gt;
 &lt;p&gt;Boot scripting provides a natural progression from "just a script" to "full-blown application".&lt;/p&gt;
 &lt;p&gt;Boot scripts contain all of the functions needed to run, but this poses some problems:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -2901,7 +2901,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="distribution-installation-mark-2"&gt;
-&lt;h2 id="distributioninstallation-mark-2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
+&lt;h2 id="distribution/installation, mark 2"&gt;Distribution/Installation, Mark 2&lt;/h2&gt;
 &lt;p&gt;Pulling some of the code out into a separate file has made our little script cleaner, but now distributing the file is slightly more complicated, since we have to provide the script access to the code we factored out.&lt;/p&gt;
 &lt;p&gt;There are several ways to handle this:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -2915,7 +2915,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-getting-rid-of-log4j-notices"&gt;
-&lt;h2 id="appendix-getting-rid-of-log4j-notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
+&lt;h2 id="appendix: getting rid of log4j notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
 &lt;p&gt;You may have noticed that you get a bunch of warning messages when running our code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ./downer jjmojojjmojo
 &lt;span class="go"&gt;SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".&lt;/span&gt;
@@ -2964,7 +2964,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 </summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
 
 &lt;div class="section" id="overview-for-the-unititated"&gt;
-&lt;h2 id="overview-for-the-unititated"&gt;Overview For The Unititated&lt;/h2&gt;
+&lt;h2 id="overview for the unititated"&gt;Overview For The Unititated&lt;/h2&gt;
 &lt;p&gt;For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.&lt;/p&gt;
 &lt;p&gt;Clojure is a &lt;em&gt;functional programming language&lt;/em&gt; in the style of Common Lisp. "Functional" in this sense means that functions are first-class objects; code and data are peers. Data is &lt;em&gt;immutable&lt;/em&gt; - as values change, objects are replaced, not manipulated. Code structures and language features common to most other types of languages are not present. Instead, they are implemented as functions or are simply not necessary.&lt;/p&gt;
 &lt;p&gt;Functional languages, especially in the Lisp-style are &lt;em&gt;expressive&lt;/em&gt; and, linguistically speaking, &lt;em&gt;simple&lt;/em&gt;. The original Lisp, invented in 1958 by John McCarthy at M.I.T., was expressed in seven functions and two special forms - the language, in total, contained just &lt;em&gt;nine elements&lt;/em&gt;, and was fully Touring-complete. By comparison, the current version (3.5) of Python has 30+ keywords, plus special elements such as mathematical operators and colons - and that's merely the language itself, that doesn't include idioms or conventions.&lt;/p&gt;
@@ -3023,7 +3023,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="dales-la-bota-give-em-the-boot-installation"&gt;
-&lt;h2 id="dales-la-bota-give-em-the-boot-installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
+&lt;h2 id="!dales la bota! (give 'em the boot!) - installation"&gt;&lt;em&gt;&amp;iexcl;Dales la Bota!&lt;/em&gt; (Give 'em The &lt;em&gt;Boot&lt;/em&gt;!) - &lt;em&gt;Installation&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://boot-clj.com/"&gt;Boot&lt;/a&gt; is '&lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;installed&lt;/a&gt;' by simply downloading an &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;executable file&lt;/a&gt; and putting it somewhere where you can execute it.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
@@ -3960,7 +3960,7 @@ Writing target dir(s)...
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-alternative-install-methods"&gt;
-&lt;h2 id="appendix-alternative-install-methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
+&lt;h2 id="appendix: alternative install methods"&gt;Appendix: Alternative Install Methods&lt;/h2&gt;
 &lt;p&gt;Recent versions of boot are now available for homebrew, nix, and docker. More details &lt;a class="reference external" href="https://github.com/boot-clj/boot#install"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="boot"></category><category term="clojure"></category><category term="classics"></category></entry></feed>
