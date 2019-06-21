@@ -8,8 +8,10 @@
 
 {% block head %}
   {{ super() }}
-  {% if article.description %}
-    <meta name="description" content="{{article.description}}" />
+  {% if article.summary %}
+    <meta name="description" content="{{article.summary|striptags}}" />
+    <meta property="og:description" content="{{article.summary|striptags}}">
+    <meta property="twitter:description" content="{{article.summary|striptags}}">
   {% endif %}
 
   {% for tag in article.tags %}
