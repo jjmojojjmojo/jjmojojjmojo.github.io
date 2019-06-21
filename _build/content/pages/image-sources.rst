@@ -1,7 +1,7 @@
 Media Sources
 #############
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: misc
 :tags: credits; attribution; copyright;
 :slug: media-sources

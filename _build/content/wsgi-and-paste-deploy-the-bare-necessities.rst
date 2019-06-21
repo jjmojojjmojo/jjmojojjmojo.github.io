@@ -1,7 +1,7 @@
 WSGI and Paste Deploy: The Bare Necessities
 ###########################################
 :date: 2011-03-30 17:03
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: Uncategorized
 :slug: wsgi-and-paste-deploy-the-bare-necessities
 :status: draft

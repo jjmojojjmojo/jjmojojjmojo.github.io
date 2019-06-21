@@ -1,7 +1,7 @@
 State And Events In CircuitPython
 #################################
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
 :slug: circuitpython-state

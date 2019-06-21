@@ -1,7 +1,7 @@
 Thoughts On Consensus
 #####################
 :date: 2018-07-01 06:47
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: opinion
 :status: draft
 

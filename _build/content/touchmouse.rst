@@ -1,7 +1,7 @@
 TouchMouse: A CircuitPython Project To Reduce Input Fatigue
 ###########################################################
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; hardware;
 :slug: touchmouse

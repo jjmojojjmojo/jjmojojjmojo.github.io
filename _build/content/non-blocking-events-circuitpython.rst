@@ -1,7 +1,7 @@
 Exploring State: Non-Blocking Events In CircuitPython
 #####################################################
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
 :slug: non-blocking-events-in-circuitpython

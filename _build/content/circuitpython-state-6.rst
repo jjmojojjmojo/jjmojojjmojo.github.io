@@ -1,7 +1,7 @@
 State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory
 ##################################################################################
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :tags: tutorial; circuitpython; python; hardware; state;
 :slug: circuitpython-state-addendum

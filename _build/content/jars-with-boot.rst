@@ -1,7 +1,7 @@
 Making And Distributing Jars With Boot
 ######################################
 :date: 2015-04-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :slug: making-jars-with-boot
 :status: draft

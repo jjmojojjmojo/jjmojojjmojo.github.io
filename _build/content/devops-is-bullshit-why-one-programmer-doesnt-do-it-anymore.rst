@@ -1,7 +1,7 @@
 DevOps Is Bullshit: Why One Programmer Doesn't Do It Anymore
 ############################################################
 :date: 2015-03-08 11:47
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: commentary, culture, devops, editorial
 :tags: culture, devops
 :slug: devops-is-bullshit-why-one-programmer-doesnt-do-it-anymore

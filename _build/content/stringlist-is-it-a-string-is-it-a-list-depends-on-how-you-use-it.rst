@@ -1,7 +1,7 @@
 StringList - Is It A String? Is It A List? Depends On How You Use It!
 #####################################################################
 :date: 2013-10-23 19:39
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: Uncategorized
 :tags: code, github, jjmojojjmojo, lis, list, magic methods, python, string
 :slug: stringlist-is-it-a-string-is-it-a-list-depends-on-how-you-use-it

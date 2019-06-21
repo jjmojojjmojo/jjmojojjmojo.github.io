@@ -1,7 +1,7 @@
 Centralized Ansible Management With Knockd + Auto-provisioning with AWS
 #######################################################################
 :date: 2014-04-23 06:47
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: Uncategorized
 :tags: amazon web services, ansible, aws, knockd, port knocking, python
 :slug: centralized-ansible-management-with-knockd-auto-provisioning-with-aws

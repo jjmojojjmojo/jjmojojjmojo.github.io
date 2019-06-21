@@ -1,7 +1,7 @@
 How To Become A More Efficient Programmer
 #########################################
 :date: 2013-02-12 08:43
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: culture, efficiency, programming
 :tags: minimal effort, software
 :slug: how-to-become-a-more-efficient-programmer

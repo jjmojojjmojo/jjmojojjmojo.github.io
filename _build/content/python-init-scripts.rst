@@ -1,7 +1,7 @@
 Purely Python: LSB-Compliant Init Scripts
 #########################################
 :date: 2009-12-29 08:44
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: python
 :tags: init script, lsb, python
 :slug: python-init-scripts

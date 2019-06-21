@@ -1,7 +1,7 @@
 Raspberry Pi Build Environment In No Time At All
 ################################################
 :date: 2015-04-18 18:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: arch, linux, raspberrypi, tutorials, ubuntu
 :slug: raspberry-pi-build-environment-in-no-time-at-all
 :status: draft

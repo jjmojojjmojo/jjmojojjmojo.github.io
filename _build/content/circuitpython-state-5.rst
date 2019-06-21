@@ -1,7 +1,7 @@
 State And Events In CircuitPython: Part 4: Example Application
 ##############################################################
 :date: 2018-06-11 15:07
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorial
 :tags: circuitpython; python; hardware; state;
 :slug: circuitpython-state-part-5

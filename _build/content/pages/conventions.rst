@@ -1,7 +1,7 @@
 Site-wide Conventions Explained
 ###############################
 :date: 2015-01-17 11:41
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: tutorials
 :tags: about, conventions
 :slug: conventions

@@ -1,7 +1,7 @@
 From Back Log To Ready For Work
 ###############################
 :date: 2013-03-09 07:18
-:author: lionfacelemonface
+:author: jjmojojjmojo
 :category: Uncategorized
 :tags: agile, design, diagram, planning, scrum
 :slug: from-back-log-to-ready-for-work
