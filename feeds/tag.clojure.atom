@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - clojure</title><link href="/" rel="alternate"></link><link href="/feeds/tag.clojure.atom" rel="self"></link><id>/</id><updated>2018-08-08T13:34:00-04:00</updated><entry><title>Advanced Boot Scripting</title><link href="/advanced-boot-scripting.html" rel="alternate"></link><published>2018-08-08T13:34:00-04:00</published><updated>2018-08-08T13:34:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-08:/advanced-boot-scripting.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - clojure</title><link href="https://jjmojojjmojo.github.io/" rel="alternate"></link><link href="https://jjmojojjmojo.github.io/feeds/tag.clojure.atom" rel="self"></link><id>https://jjmojojjmojo.github.io/</id><updated>2018-08-08T13:34:00-04:00</updated><entry><title>Advanced Boot Scripting</title><link href="https://jjmojojjmojo.github.io/advanced-boot-scripting.html" rel="alternate"></link><published>2018-08-08T13:34:00-04:00</published><updated>2018-08-08T13:34:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-08-08:/advanced-boot-scripting.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
+&lt;p&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
 &lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot&lt;/a&gt; is an all-around useful tool
 for building clojure applications, but one feature in particular has
 proven a &lt;em&gt;adjuncti finalum&lt;/em&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[*]&lt;/a&gt; : boot lets you do &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;clojure scripting&lt;/a&gt;. This
@@ -19,7 +19,7 @@ discussion about getting your jars into
 </summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
+&lt;p&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As covered in a previous post&lt;/a&gt;,
 &lt;a class="reference external" href="https://github.com/boot-clj/boot"&gt;boot&lt;/a&gt; is an all-around useful tool
 for building clojure applications, but one feature in particular has
 proven a &lt;em&gt;adjuncti finalum&lt;/em&gt; &lt;a class="footnote-reference" href="#id2" id="id1"&gt;[*]&lt;/a&gt; : boot lets you do &lt;a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts"&gt;clojure scripting&lt;/a&gt;. This
@@ -42,7 +42,7 @@ discussion about getting your jars into
 &lt;/table&gt;
 &lt;div class="section" id="setup"&gt;
 &lt;h2 id="setup"&gt;Setup&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As I've covered before&lt;/a&gt;,
+&lt;p&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/boot-getting-started-with-clojure-in-10-minutes.html"&gt;As I've covered before&lt;/a&gt;,
 boot is easy to install. All you need is a JDK and the &lt;a class="reference external" href="https://github.com/boot-clj/boot/releases"&gt;boot executable&lt;/a&gt;. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
 &lt;span class="gp"&gt;$&lt;/span&gt; mkdir -p ~/bin
@@ -433,7 +433,7 @@ name it however you'd like:&lt;/p&gt;
 &lt;p&gt;We can leverage the power of java jar files (which are just zip files under the hood) to contain our source code and other artifacts.&lt;/p&gt;
 &lt;p&gt;This makes the jar file the best path. Once the jar is installed into a maven repository the script can reach, the script can once again be distributed as a simple stand-alone text file.&lt;/p&gt;
 &lt;p&gt;We can use boot for this. &lt;em&gt;That's what it does!&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Check out all you ever wanted to know about making jar files and distributing them in &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/making-jars-with-boot.html"&gt;the unoffical followup to this post.&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="appendix-getting-rid-of-log4j-notices"&gt;
 &lt;h2 id="appendix: getting rid of log4j notices"&gt;Appendix: Getting Rid Of Log4J Notices&lt;/h2&gt;
@@ -460,7 +460,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 &lt;p&gt;Since we don't need logging for our project, we'll choose the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;slf4j-nop&lt;/span&gt;&lt;/tt&gt; back-end.&lt;/p&gt;
 &lt;p&gt;To figure out exactly what the dependency specification looks like, we can search in the &lt;a class="reference external" href="https://search.maven.org/"&gt;Maven Central Repository&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 85%"&gt;
-&lt;img alt="" src="/images/maven-search.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/maven-search.png"/&gt;
 &lt;p class="caption"&gt;Screen grab of Maven Central search results for 'slf4j-nop'&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;From the screen grab above, we can derive the dependency specification: &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;[group-id/artifact-id&lt;/span&gt; "version"]&lt;/tt&gt;.&lt;/p&gt;
@@ -481,7 +481,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;After rebuilding our jar, or running our boot script again, we'll see the &lt;tt class="docutils literal"&gt;SLF4J&lt;/tt&gt; warnings have disapeared.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="clojure"></category><category term="boot"></category><category term="classics"></category></entry><entry><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link href="/boot-getting-started-with-clojure-in-10-minutes.html" rel="alternate"></link><published>2018-08-01T11:41:00-04:00</published><updated>2018-08-01T11:41:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</id><summary type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
+</content><category term="clojure"></category><category term="boot"></category><category term="classics"></category></entry><entry><title>Boot: Getting Started With Clojure In &lt; 10 Minutes</title><link href="https://jjmojojjmojo.github.io/boot-getting-started-with-clojure-in-10-minutes.html" rel="alternate"></link><published>2018-08-01T11:41:00-04:00</published><updated>2018-08-01T11:41:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-08-01:/boot-getting-started-with-clojure-in-10-minutes.html</id><summary type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;With the power of &lt;a class="reference external" href="http://boot-clj.com/"&gt;boot&lt;/a&gt;, it's possible to go from "never used java before" to budding &lt;a class="reference external" href="http://clojure.org/"&gt;Clojure&lt;/a&gt;-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.&lt;/p&gt;
 
 &lt;div class="section" id="overview-for-the-unititated"&gt;
@@ -508,7 +508,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;li&gt;They can have dependencies on Clojure libraries that are resolved at runtime.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This means you can distribute Boot scripts in the same manner as Python or Bash scripts - except dependencies are handled automatically.&lt;/p&gt;
-&lt;p&gt;This concept is explored in the sister post to this one, &lt;a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html"&gt;Boot: Getting Started With Clojure In 10 Minutes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This concept is explored in the sister post to this one, &lt;a class="reference external" href="https://jjmojojjmojo.github.io/boot-getting-started-with-clojure-in-10-minutes.html"&gt;Boot: Getting Started With Clojure In 10 Minutes&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="installation-development-setup"&gt;
 &lt;h3&gt;Installation/Development Setup&lt;/h3&gt;
@@ -523,7 +523,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;/div&gt;
 &lt;div class="section" id="conventions"&gt;
 &lt;h3&gt;Conventions&lt;/h3&gt;
-&lt;p&gt;See &lt;a class="reference external" href="/pages/conventions.html"&gt;Site-wide Conventions Explained&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/conventions.html"&gt;Site-wide Conventions Explained&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="prerequisites"&gt;
@@ -880,7 +880,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p&gt;I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio"&gt;Wikipedia page&lt;/a&gt; is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.&lt;/p&gt;
-&lt;p class="last"&gt;If you happen upon this and can shed some light on the subject, please &lt;a class="reference external" href="/pages/contact.html"&gt;drop me a line&lt;/a&gt;!&lt;/p&gt;
+&lt;p class="last"&gt;If you happen upon this and can shed some light on the subject, please &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/contact.html"&gt;drop me a line&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called &lt;a class="reference external" href="https://github.com/clojure/math.numeric-tower"&gt;math.numeric-tower&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="admonition note"&gt;

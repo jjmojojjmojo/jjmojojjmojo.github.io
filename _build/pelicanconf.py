@@ -77,6 +77,8 @@ TAG_FEED_RSS = 'feeds/tag.{slug}.rss'
 
 DISPLAY_PAGES_ON_MENU = False
 
+SITEURL = "https://jjmojojjmojo.github.io"
+
 # Blogroll
 LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Python.org', 'http://python.org/'),

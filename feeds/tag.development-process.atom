@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - development process</title><link href="/" rel="alternate"></link><link href="/feeds/tag.development-process.atom" rel="self"></link><id>/</id><updated>2019-06-19T09:00:00-04:00</updated><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - development process</title><link href="https://jjmojojjmojo.github.io/" rel="alternate"></link><link href="https://jjmojojjmojo.github.io/feeds/tag.development-process.atom" rel="self"></link><id>https://jjmojojjmojo.github.io/</id><updated>2019-06-19T09:00:00-04:00</updated><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
 &lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
@@ -67,7 +67,7 @@
 &lt;p&gt;From there, you'll have all the tools you need, save a preferred text editor and a console (or terminal) to follow along.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;The guide has been developed with unix-like systems in mind (Linux, BSD, MacOS). It should be possible to follow along in Windows, but this has not been tested. There are some quirks to using git and python in Windows that the author would like to explore in the future. If you are interested in seeing this guide include Windows-specific notes, please &lt;a class="reference external" href="/pages/contact.html"&gt;contact the author&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="last"&gt;The guide has been developed with unix-like systems in mind (Linux, BSD, MacOS). It should be possible to follow along in Windows, but this has not been tested. There are some quirks to using git and python in Windows that the author would like to explore in the future. If you are interested in seeing this guide include Windows-specific notes, please &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/contact.html"&gt;contact the author&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;We can ensure our tools are installed by opening up a terminal and running the following commands (the output shows what the author was using to develop the guide):&lt;/p&gt;
 &lt;div class="section" id="verify-git"&gt;
@@ -121,7 +121,7 @@
 &lt;div class="section" id="workflow-overview"&gt;
 &lt;h2 id="workflow overview"&gt;Workflow Overview&lt;/h2&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
-&lt;img alt="" src="/images/branching-git-pytest/workflow-overview.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview.png"/&gt;
 &lt;p class="caption"&gt;High-level overview of the workflow, showing each git command.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;The basic workflow goes like this:&lt;/p&gt;
@@ -166,17 +166,17 @@
 &lt;p&gt;🌈 We have branches for all of the major work done in the series:&lt;/p&gt;
 &lt;dl class="docutils"&gt;
 &lt;dt&gt;&lt;code&gt;part1&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;.&lt;/dd&gt;
+&lt;dd&gt;All the changes from &lt;a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;part2&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt; and
-&lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;&lt;/dd&gt;
+&lt;dd&gt;All the changes from &lt;a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt; and
+&lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;qotd&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;Developer &lt;strong&gt;A&lt;/strong&gt;'s feature from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
+&lt;dd&gt;Developer &lt;strong&gt;A&lt;/strong&gt;'s feature from &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;index-info&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;Developer &lt;strong&gt;B&lt;/strong&gt;'s bug fix from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
+&lt;dd&gt;Developer &lt;strong&gt;B&lt;/strong&gt;'s bug fix from &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;part3&lt;/code&gt;&lt;/dt&gt;
-&lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;,
-&lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!&lt;/dd&gt;
+&lt;dd&gt;All the changes from &lt;a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;,
+&lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Feel free to &lt;code&gt;git checkout&lt;/code&gt; if you need to reset your code, or jump around.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
@@ -240,7 +240,7 @@
 &lt;h3&gt;Deisgn Approach&lt;/h3&gt;
 &lt;p&gt;The design of the application is in two main parts. We have a data manager, &lt;code&gt;manager.RandomQuoteManager&lt;/code&gt;, that handles all interaction with the database. Then we have the WSGI application, &lt;code&gt;wsgi.RandomQuoteApp&lt;/code&gt; that provides a web-based API.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
-&lt;img alt="" src="/images/branching-git-pytest/key-classes-first-pass.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/key-classes-first-pass.png"/&gt;
 &lt;p class="caption"&gt;Key Classes In The Example Application, "Random Quote App"&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="explanation section"&gt;
@@ -253,7 +253,7 @@
 &lt;p&gt;These two classes are shown to be related by a simple two-direction arrow.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
-&lt;img alt="" src="/images/branching-git-pytest/api-boundaries.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/api-boundaries.png"/&gt;
 &lt;p class="caption"&gt;Essential API Boundaries&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;This is done for a few reasons. Primarily, the concept of &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns"&gt;separation of concerns&lt;/a&gt;. The &lt;em&gt;concern&lt;/em&gt; of the database interaction, the &lt;em&gt;concern&lt;/em&gt; of the web interaction, and the &lt;em&gt;concern&lt;/em&gt; of the web &lt;em&gt;client&lt;/em&gt; are separated by &lt;strong&gt;clear API boundaries&lt;/strong&gt;.&lt;/p&gt;
@@ -436,7 +436,7 @@
 &lt;p&gt;Modifying this amalgam is much more risky. We can very easily break the database code fixing a web API issue and vice-versa. It's hard for two developers to work on this part of the code base concurrently without running into conflicts.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;We will learn how to deal with that situation, however unlikely, in &lt;a class="reference external" href="/branching-git-with-pytest-3.rst"&gt;part 3&lt;/a&gt;! 🦄&lt;/p&gt;
+&lt;p class="last"&gt;We will learn how to deal with that situation, however unlikely, in &lt;a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest-3.rst"&gt;part 3&lt;/a&gt;! 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;But worse, its also harder to &lt;em&gt;test&lt;/em&gt;. This may be one of the biggest advantages to putting thought into separation of concerns, and creating sane API boundaries. When testing the nightmare code above, we have to simulate an HTTP request just to make sure the database works, and we need the database functioning to ensure the HTTP stuff functions. This leads to more complex test fixtures and complex object mocking, and ultimately more fragile test suites.&lt;/p&gt;
 &lt;p&gt;When writing software, its best to keep our units as small as possible and loosely coupled, so they can be easily isolated. Then our tests are simple and reliable.&lt;/p&gt;
@@ -446,7 +446,7 @@
 &lt;h3&gt;Application Design&lt;/h3&gt;
 &lt;p&gt;The application as it stands for this part of the guide incorporates concepts of separation of concerns as explored in the last section:&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
-&lt;img alt="" src="/images/branching-git-pytest/application-overview-first-pass.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/application-overview-first-pass.png"/&gt;
 &lt;p class="caption"&gt;"Random Quote App" Overview&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="explanation section"&gt;
@@ -471,7 +471,7 @@
 &lt;h3&gt;Data Model&lt;/h3&gt;
 &lt;p&gt;The initial database schema is very simple, but uses a somewhat advanced technique to select random quotes.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 40%"&gt;
-&lt;img alt="" src="/images/branching-git-pytest/er-diagram-first-pass.png"/&gt;
+&lt;img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/er-diagram-first-pass.png"/&gt;
 &lt;/div&gt;
 &lt;p&gt;We've got a &lt;code&gt;quotes&lt;/code&gt; table with four main columns:&lt;/p&gt;
 &lt;dl class="docutils"&gt;
@@ -1539,12 +1539,12 @@ Created a new test fixture that makes random tests reproducible.
 &lt;p&gt;Before we did this, anyone else who cloned our repository would not be able to see the commits we made. Now that we have, they can run &lt;code&gt;git fetch&lt;/code&gt; or &lt;code&gt;git pull&lt;/code&gt; and retrieve the commits we made.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p class="last"&gt;We will be exploring multi-user scenarios &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;a bit later&lt;/a&gt;! 🌈&lt;/p&gt;
+&lt;p class="last"&gt;We will be exploring multi-user scenarios &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html"&gt;a bit later&lt;/a&gt;! 🌈&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="conclusion-what-s-next"&gt;
 &lt;h2 id="conclusion/what's next"&gt;Conclusion/What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment, we covered the basics of doing work with pytest and git.&lt;/p&gt;
-&lt;p&gt;In &lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;, we'll dig into how branching works by fixing a bug.&lt;/p&gt;
+&lt;p&gt;In &lt;a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;, we'll dig into how branching works by fixing a bug.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry></feed>
