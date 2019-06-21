@@ -2,6 +2,9 @@
 {% block title%}
    {{ article.title }} - {{ SITENAME }} 
 {% endblock %}
+{% block twitter_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
+{% block og_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
+{% block meta_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
 
 {% block head %}
   {{ super() }}

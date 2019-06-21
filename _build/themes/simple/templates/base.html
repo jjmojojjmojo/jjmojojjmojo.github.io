@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jjmojojjmojo.github.io/{{ output_file }}">
+<meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock og_title %}">
+<meta property="og:description" content="">
+<meta property="og:image" content="{{ SITEURL }}/theme/images/default-social-full.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://jjmojojjmojo.github.io/{{ output_file }}">
+<meta property="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock twitter_title %}">
+<meta property="twitter:description" content="">
+<meta property="twitter:image" content="{{ SITEURL }}/theme/images/default-social-full.jpg">
         {% block head %}
+        <meta name="title" content="{% block meta_title %}{{ SITENAME }}{% endblock meta_title %}">
         {% block og_image %}
         <meta property="og:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />
         <meta property="twitter:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />

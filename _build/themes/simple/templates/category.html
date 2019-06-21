@@ -2,6 +2,9 @@
 {% block title%}
    Category: {{ category|title }} - {{ SITENAME }} 
 {% endblock %}
+{% block twitter_title %}Category: {{ category|title }} - {{ SITENAME }} {%endblock%}
+{% block og_title %}Category: {{ category|title }} - {{ SITENAME }} {%endblock%}
+{% block meta_title %}Category: {{ category|title }} - {{ SITENAME }} {%endblock%}
 {% block content_title %}
 <h2>Articles in the <em>{{ category|title }}</em> category</h2>
 {% endblock %}
