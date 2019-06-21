@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<title>   State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory - The Collected Works of jjmojojjmojo 
+</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="tutorial" name="tags"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="python" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
+</head>
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/drafts/circuitpython-state-addendum.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory">State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-06-11T15:07:00-04:00">
+      Mon 11 June 2018
+    </time>
+<address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#what to do when you run out of memory" title="What To Do When You Run Out Of Memory">What To Do When You Run Out Of Memory</a></li></ul></div>
+</div>
+<div class="warning">
+<h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+<div class="entry-content status-draft">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<!-- emoji for some reason - better to do this since I can replace these with -->
+<!-- icons or whatever I want) -->
+<div class="section" id="what-to-do-when-you-run-out-of-memory">
+<h2 id="what to do when you run out of memory">What To Do When You Run Out Of Memory</h2>
+<p>Occasionally, especially as a project grows in complexity, you will run into an exception:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">#Traceback (most recent call last):</span>
+<span class="go">  File "code.py", line 122, in &lt;module&gt;</span>
+<span class="go">MemoryError: memory allocation failed, allocating 4096 bytes</span>
+</pre></div>
+</td></tr></table></div><p>This happens when you have exhausted the available memory on your CircuitPython board. As discussed earlier, running Python on a microcontroller comes at a cost, and the biggest cost is reduced memory available for your programs.</p>
+<p>This section covers some strategies that can help reduce your memory footprint.</p>
+<p>The most prominent way to reduce memory usage is using less code, since lines of code are the biggest consumers of memory.</p>
+<p>Note that the optimizations discussed here almost all put limitations on your code, and shouldn't be used without need, or careful consideration.</p>
+<p>That brings up a really important point, and something that a lot of new programmers don't learn early enough: be careful not to fall into a common programming trap: <em>pre-emptive optimization</em>.</p>
+<p>Typically, you'll only need to optimize for memory consumption when you see the dreaded <tt class="docutils literal">MemoryError</tt> exception. It can be stressful - you think you have completed your project, or found the perfect library to add the functionality you need and <em>wham</em>, you're out of memory. But resist the temptation to try to head this off by obsessing about memory consumption before you actually run out.</p>
+<p>Most of the time, its best to focus on finishing your project, not solving problems you don't have!</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have other tips or tricks, or improvements to the techniques explored below, please <a class="reference external" href="/pages/contact.html">contact the author!</a>.</p>
+</div>
+<p>For comparison's sake, we're using the following code to test:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>On my GEMMA M0, it prints <tt class="docutils literal">8944</tt> when it starts up. That's the number we'll be comparing other approaches to.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is including our <a class="reference external" href="/circuitpython-state-part-1.html#Abstractions:KeepingTheCodeSimple">setup.py module</a> - so we're also loading the DotStar library and setting up both buttons, even though neither are necessary for this code.</p>
+</div>
+<p>Bear in mind though that these comparisons are just to ensure we're <em>actually</em> saving memory, it's not an evaluation of the effectiveness of a particular approach. The amount of savings and how significant it might be will entirely depend on your specific situation.</p>
+<p>Also keep in mind that memory is periodically cleaned up. Every so often the so-called "garbage collector" clears unused values and temporary variables from memory. So over time, the amount of memory you use can and will change.</p>
+<p>However, we don't have to think about that <em>too</em> much in our case, since our state objects will not typically change in a way that the garbage collector will affect - we're just replacing the initial values as the state changes. So checking the memory consumption at start up will give us an adequate amount of insight into how memory-intensive our state object might be.</p>
+<div class="section" id="keeping-an-eye-on-memory-consumption">
+<h3>Keeping An Eye On Memory Consumption</h3>
+<p>We can use the <tt class="docutils literal">gc</tt> module to tell us how much memory our project is using. The function we care about is <tt class="docutils literal">gc.mem_free()</tt>.</p>
+<p>This will be a fairly static value in most cases, so you can just print it before the main loop:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gc</span>
+
+<span class="o">...</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">...</span>
+</pre></div>
+</td></tr></table></div></div>
+<div class="section" id="use-more-efficient-data-types-or-don-t-use-a-state-object-heartbreak">
+<h3>Use More Efficient Data Types (or: Don't Use A State Object 💔)</h3>
+<p>One of the more drastic, ways of slashing memory use is to switch from using an instance of a custom state class to using other data structures. Lets start with simple variables:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="n">state_button</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state_led</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state_button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state_checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">state_button</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state_button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state_checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="n">state_button</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">state_button</span><span class="p">:</span>
+        <span class="n">state_led</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">state_led</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">if</span> <span class="n">state_led</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>This uses 9888 bytes of memory on my GEMMA. This approach gets messy quickly, but is still pretty easy to read.</p>
+<p>Lets try a method that's a bit less readable but should save some memory: we'll use a single list to store our state:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="c1">#        button   led      checkin</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span>   <span class="bp">False</span><span class="p">,</span>   <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+    <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>Using a list instead, my GEMMA reports 9984 bytes of free memory.</p>
+<p>Here's what the same code looks like using a dictionary. It uses a tiny bit more memory, but it's quite a bit more readable:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"button"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s2">"led"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s2">"checkin"</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+    <span class="n">state</span><span class="p">[</span><span class="s2">"led"</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">"led"</span><span class="p">]:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>The dictionary version leaves 9808 bytes of free RAM.</p>
+<p>For simple state like this, using a dictionary is probably the best way to go. If other parts of your project are memory intensive, or you need to use a lot of heavy third-party libraries, it's better to use less elegant code to deal with state than detract from core functionality.</p>
+<p>CircuitPython and Python-proper provide other data structures that <em>may</em> save some memory, depending on the circumstances.</p>
+<p>The one worth taking a look at is the <tt class="docutils literal">array</tt>. Python lists are dynamic - they can contain any kind of value: strings, integers, other lists, dictionaries, objects, anything.</p>
+<p>Arrays are different. The <tt class="docutils literal">array.array</tt> class provides a more memory efficient kind of list that can only contain one type of data.</p>
+<p>Here's our same state code, refactored to use an array of <em>unsigned short integers</em>:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">array</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="c1">#                         button   led      checkin</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s2">"H"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+    <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>My GEMMA reports <tt class="docutils literal">9760</tt> bytes of free memory. That's over 100 bytes <em>worse</em> than the dictionary version. However, some of that is due simply to the extra code brought in with the <tt class="docutils literal">array</tt> module. The savings might add up with more complex projects, especially when tracking many more state values.</p>
+<p>Finally, we can try using what's called a <em>bitmask</em>. This is mostly useful for storing boolean values - things that can be either <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
+<p>Bits are the building blocks of all data and logic in computing. A bit represents a single binary value - 1 or 0. This equates to true or false, on or off, up or down, etc.</p>
+<p>You can make larger number by arranging the 1's and 0's in sequence, just like decimal (base 10) numbers - except instead of using the numbers between 0 and 9, you can only use 0 or 1.</p>
+<p>For example, the decimal number <strong>15</strong> has a 1 in the "tens" place, and a 5 in the "ones" place. 15 is 10 + 5.</p>
+<p>The number 15 in binary is <strong>1111</strong>. There's a 1 in the ones place, a 1 in the <em>twos</em> place, a 1 in the <em>fours</em> place, and a 1 in the <em>eights</em> place. 1111 is 15, because 8 + 4 + 2 + 1 = 15.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>The nuances and amazing properties of the binary number system and doing binary math is beyond the scope of this article.</p>
+<p>Here are a couple of videos worth checking out that explain things:</p>
+<p><strong>TBD: more/better explanations!!!</strong></p>
+<ul class="last simple">
+<li><a class="reference external" href="https://youtu.be/kcTwu6TFZ08">James May's Q&amp;A (Ep 11100)</a></li>
+</ul>
+</div>
+<p>You can treat a binary number like an array of switches, and using binary math, flip each switch (bit) on or off to indicate a true or false state. This way you can store 32 state values in a single 32-bit integer. One variable that takes up as much space as the number 15 can store up to <em>32 values</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The exact number of possible values depends on how Python is storing the number and the specific platform you are running on.</p>
+<p class="last">It's also unclear if using the same number of variables with Python's booleans (<tt class="docutils literal">True</tt>/<tt class="docutils literal">False</tt>) is less efficient.</p>
+</div>
+<p>The basic technique is to use what's called a "bitwise and" operation (in python we use the <tt class="docutils literal">&amp;</tt> symbol) - you give it two numbers, and it will return a number where all of its bits are the product of a logical "and" - if a bit is 0 in the first number, and 0 in the second, that bit will be 0 in the result. If a bit is 1 in the first number, and 0 in the second, the bit will be 0 in the result. If a bit is 1 in the first number and 1 in the second, the bit will be 1 in the result.</p>
+<p>This ends up giving us a value that will be 0 if the bit we are interested in is 0, and something bigger than zero (depending on the location of the bit) if the bit is 1. This is something we can treat as a boolean value. It acts like a filter, giving us only the bits we have indicated as relevant in the second number.</p>
+<p>Then, to change the bits (update our state), we use three different techniques:</p>
+<ol class="arabic simple">
+<li>We use the "exclusive or" (xor) bitwise operator <tt class="docutils literal">^</tt> to "flip" a bit - given two numbers, the xor operator will return number where, if there's a 1 in a given position in both numbers, a 0 will be set, otherwise, 1 will be set.</li>
+<li>We use "bitwise or" (<tt class="docutils literal">|</tt>) to <em>set</em> a specific bit. Given two numbers, bitwise or returns a number where, if there's a 1 in a given position in either number, a 1 will be set. If there's a 1 in both numbers, or a 0 in both numbers, a 0 will be set.</li>
+<li>We use a combination of "bitwise and" and "bitwise negation" (<tt class="docutils literal">&amp;</tt> and <tt class="docutils literal">~</tt>) to <em>unset</em> a specific bit. Negation will invert every bit (<tt class="docutils literal">0110</tt> becomes <tt class="docutils literal">1001</tt>), and bitwise and acts as our filter as explained earlier.</li>
+</ol>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="c1"># 0b10 = button</span>
+<span class="c1"># 0b01 = led</span>
+<span class="n">state</span> <span class="o">=</span> <span class="mb">0b00</span>
+
+<span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="mb">0b10</span>
+            <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="mb">0b10</span>
+            <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">|</span> <span class="mb">0b01</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mb">0b01</span>
+
+    <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b01</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><p>So this also doesn't seem to save us much memory. My GEMMA reports ﻿9872 bytes free. However this could be much more significant if we were tracking many, many boolean values.</p>
+</div>
+<div class="section" id="drop-features">
+<h3>Drop Features</h3>
+<p>Sometimes you will have to give up some functionality in order to work within the limitations of your platform.</p>
+<p>Start with the lowest priority features - the once you might call "nice to have".</p>
+<p>Sometimes you can change the project's scope, instead of dropping features. Try not to do too much. Remove unnecessary flexibility.</p>
+<p>An example: you have a component (a potentiometer or something) that lets the user control the brightness of an LED, and you're running out of memory.</p>
+<p>Some things to ask yourself:</p>
+<ul class="simple">
+<li>Is it really necessary to control the brightness dynamically?</li>
+<li>Could the brightness be controlled through some other means that would require less code?</li>
+<li>Is the logic controlling it overly complex?</li>
+<li>Is it too user friendly?</li>
+<li>Am I using a library for the pot to function that I could implement differently?</li>
+</ul>
+</div>
+<div class="section" id="pre-calculate-values">
+<h3>Pre-calculate Values</h3>
+<p>Using external libraries is a big source of extraneous code that can eat into our available memory.</p>
+<p>Sometimes we're using an external library just to calculate a value that doesn't change, or isn't based on anything that couldn't be reduced to a fixed set of values.</p>
+<p>Here's an example that flashes the RGB LED instead of the red one, changing the color every time. This version uses the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> library to do the math:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you have copied <tt class="docutils literal">adafruit_fancyled</tt> folder to the <tt class="docutils literal">lib</tt> directory on your CircuitPython board.</p>
+</div>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+
+<span class="k">def</span> <span class="nf">random_color</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="o">*</span><span class="n">random_color</span><span class="p">()),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">color</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div><p>So every time we press the button, we get a new, random, gamma-corrected color on our DotStar.</p>
+<p>But you will notice that the remaining RAM is pretty low, at 2752 bytes.</p>
+<p>How do we keep the same basic functionality while reducing our memory usage, using pre-calculation?</p>
+<p>First, lets reduce our scope a little bit. Do we really need <em>any</em> random color in the whole possible range? No, and in fact, most of the colors in the range are not super pretty or very bright, and a lot aren't that different from each other.</p>
+<p>To solve that problem, lets establish a fixed set of colors we like, and only choose one of them at random.</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># -- snip --</span>
+
+<span class="n">colors</span> <span class="o">=</span>   <span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># red</span>
+            <span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>    <span class="c1"># orange-red</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>    <span class="c1"># orange</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>    <span class="c1"># yellow</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># green</span>
+            <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>   <span class="c1"># blue-green</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>      <span class="c1"># blue</span>
+            <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">130</span><span class="p">),</span>     <span class="c1"># indigo</span>
+            <span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>    <span class="c1"># violet</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>  <span class="c1"># white</span>
+
+<span class="k">def</span> <span class="nf">random_color</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="c1"># -- snip --</span>
+</pre></div>
+</td></tr></table></div><p>Now, we've limited ourselves to only 10 colors, but our available RAM has gone up to 4688 bytes, and we haven't even done any real pre-calculation yet!</p>
+<p>Next, you may note that all FancyLED is doing for us is some math, and that math really won't change - the variables involved are our color and the brightness level, and all of those values are fixed.</p>
+<p>So instead of doing those calculations on the fly, we can instead do them ahead of time, and eliminate the FancyLED library altogether.</p>
+<p>To precalculate the values, we can use a quick script that just prints them out for us:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+
+<span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s2">"white"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"violet"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">148</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">211</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"purple"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"blue_green"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"orange_red"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"orange"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"yellow"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">())</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"colors = ("</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"{:&gt;10},    # {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">")"</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><p>Now we can run this on our board, and copy what we see in the console into our code. We can then remove the dependency on FancyLED.</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span>
+       <span class="mi">8421504</span><span class="p">,</span>    <span class="c1"># white</span>
+       <span class="mi">1900620</span><span class="p">,</span>    <span class="c1"># violet</span>
+       <span class="mi">8388736</span><span class="p">,</span>    <span class="c1"># purple</span>
+           <span class="mi">128</span><span class="p">,</span>    <span class="c1"># blue</span>
+       <span class="mi">1980929</span><span class="p">,</span>    <span class="c1"># blue_green</span>
+         <span class="mi">32768</span><span class="p">,</span>    <span class="c1"># green</span>
+       <span class="mi">8388608</span><span class="p">,</span>    <span class="c1"># red</span>
+       <span class="mi">6031104</span><span class="p">,</span>    <span class="c1"># orange_red</span>
+       <span class="mi">8395008</span><span class="p">,</span>    <span class="c1"># orange</span>
+       <span class="mi">8421376</span><span class="p">,</span>    <span class="c1"># yellow</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">random_color</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random_color</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">color</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div><p>This version of the code shows 8480 bytes free - a really big improvement.</p>
+<p>You can take this approach a lot further than you might think. Brightness is a factor in Fancy's gamma correction algorithm. Lets say your project lets the user adjust brightness. Instead of calculating the gamma on the fly, if you use a fixed set of brightness levels, you can precalculate every possible color/brightness combination, and store them in a list of tuples, or a tuple for every brightness level.</p>
+<p>It can seem like a lot of data, but tuples of integers are really compact.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/docs/library/array.html">array module</a> can be used to even <em>more</em> efficiently store your precalculated values.</p>
+</div>
+<p>You will always have to balance memory used for lines of code verses memory used to store pre-calculated values, but it's a great way to save memory.</p>
+</div>
+<div class="section" id="compile-modules-into-mpy-files">
+<h3>Compile Modules Into MPY Files</h3>
+<p>MicroPython provides a tool called <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> that can take a python module and compile it into an intermediate form that takes up less memory. These files have the <tt class="docutils literal">.mpy</tt> suffix.</p>
+<p>Adafruit has just recently begun distributing a precompiled version of this tool with new versions of CircuitPython.</p>
+<p>To compile your code, you will first need to download the appropriate version of <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> from <a class="reference external" href="https://github.com/adafruit/circuitpython/releases/">the distribution page</a>, for both your operating system and the version of CircuitPython you are using.</p>
+<p>Place the tool in a directory in your <tt class="docutils literal">$PATH</tt>, or some place where you will be able to access it. You may need to make it executable (<tt class="docutils literal">chmod +x</tt>).</p>
+<p>Once you have the tool, you will want to move some of your code into a separate module, and then import it into <tt class="docutils literal">code.py</tt>.</p>
+<p>Given the example we've been using, you could break it up into the following files:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as state.py</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">check</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span>
+       <span class="mi">8421504</span><span class="p">,</span>    <span class="c1"># white</span>
+       <span class="mi">1900620</span><span class="p">,</span>    <span class="c1"># violet</span>
+       <span class="mi">8388736</span><span class="p">,</span>    <span class="c1"># purple</span>
+           <span class="mi">128</span><span class="p">,</span>    <span class="c1"># blue</span>
+       <span class="mi">1980929</span><span class="p">,</span>    <span class="c1"># blue_green</span>
+         <span class="mi">32768</span><span class="p">,</span>    <span class="c1"># green</span>
+       <span class="mi">8388608</span><span class="p">,</span>    <span class="c1"># red</span>
+       <span class="mi">6031104</span><span class="p">,</span>    <span class="c1"># orange_red</span>
+       <span class="mi">8395008</span><span class="p">,</span>    <span class="c1"># orange</span>
+       <span class="mi">8421376</span><span class="p">,</span>    <span class="c1"># yellow</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">random_color</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random_color</span><span class="p">()</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as code.py</span>
+<span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span>
+
+<span class="kn">from</span> <span class="nn">state</span> <span class="kn">import</span> <span class="n">State</span>
+
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">color</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div><p>Be careful to import any necessary libraries in your new module.</p>
+<p>Next, you use the <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> tool to convert your code into an mpy file.</p>
+<p>It's a good idea to set up a special working directory for this purpose, there isn't a tool to "decompile" the code, and you will want to delete the original module from your board.</p>
+<p>The process, in the terminal on a MacOS computer, looks like this:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> mkdir ~/circuitpython-working
+<span class="gp">$</span> cp /Volumes/CIRCUITPY/state.py ~/circuitpython-working
+<span class="gp">$</span> <span class="nb">cd</span> ~/circuitpython-working
+<span class="gp">$</span> mpy-cross state.py
+<span class="gp">$</span> rm /Volumes/CIRCUITPY/state.py
+<span class="gp">$</span> mv state.mpy /Volumes/CIRCUITPY/
+</pre></div>
+</td></tr></table></div><p>Before compiling the module, <tt class="docutils literal">gc.mem_free()</tt> returned 8160 bytes. After, it returns 8048. I'm not sure why this happened, I believe its because there are so many extra modules because of our <tt class="docutils literal">setup.py</tt> abstraction to make working with multiple boards in the examples easier.</p>
+<p>You will typically see a difference, especially when compiling more complex code.</p>
+<p>This is best saved for code that is really solid, since you can no longer edit the code right on your board.</p>
+</div>
+<div class="section" id="avoid-operations-that-create-temporary-variables">
+<h3>Avoid Operations That Create Temporary Variables</h3>
+<p>There are many places where Python will create a temporary variable. Temporary variables are used for only an instant, but can persist for a while before they are garbage collected.</p>
+<p>Further, if the temporary variable is large or complex, it can eat up a lot of memory.</p>
+<p>A few common places we'll discuss here are <em>string addition</em> and <em>list slicing</em>.</p>
+<p>Strings are <em>immutable</em>, which means that they cannot be changed. String operations always return a new string, they never alter the string <em>in place</em>.</p>
+<p>There are several ways you can combine strings in Python.</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gc</span>
+
+<span class="n">free</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">()</span>
+
+<span class="c1"># string interpolation (classic way)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"memory free </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">free</span><span class="p">,))</span>
+
+<span class="c1"># format() method (newer way)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"memory free {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
+
+<span class="c1"># string addition</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"memory free "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
+
+<span class="c1"># multiple parameters to print()</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"memory free"</span><span class="p">,</span> <span class="n">free</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><p>The first two ways avoid excess memory issues. String addition creates an implicit temporary variable. It's worse here, since we also have to do a conversion ourselves from the int we have to a string.</p>
+<p>I also included the last way, which isn't technically combining strings, but might not be obvious if you aren't familiar with modern Python: the <tt class="docutils literal">print()</tt> function takes a variable number of arguments, and it will print each one separated by a space.</p>
+<p>The last version is the most memory efficient, especially if all your doing is printing some debugging text to the console.</p>
+<p>The NeoPixel library supports all of the fancy slicing and other special indexing capabilities of Python's <tt class="docutils literal">list</tt>. However, behind the scenes using those features can be memory intensive.</p>
+<p>Here's a simple "chaser" light display using all 10 NeoPixels on the CircuitPlayground Express, using slicing:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">neopixel</span>
+
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="kn">import</span> <span class="nn">gc</span>
+
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">rgb</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">]</span>
+    <span class="n">rgb</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">]</span>
+    <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">rgb</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">]</span>
+    <span class="n">rgb</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">]</span>
+    <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div><p>The solution, if this becomes an issue, is to assign a color to each index  directly:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">board</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">neopixel</span>
+
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="kn">import</span> <span class="nn">gc</span>
+
+<span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
+    <span class="n">rgb</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
+    <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>While this fixed a memory issue I had in the past, I can't make sense of the readings I get from <tt class="docutils literal">gc.mem_free()</tt> - the amount of available memory slowly winds down with each loop until the garbage collector runs and its recovered.</p>
+<p class="last">This will require more research 🤔.</p>
+</div>
+</div>
+<div class="section" id="remove-debugging-comments">
+<h3>Remove Debugging/Comments</h3>
+<p>Any line of code counts toward your memory count. Removing the two debugging print statements in the sample above saved 96 bytes of memory.</p>
+<p>This technique should be left as a final pass step, after you've exhausted other ideas and your code is solid. Most of the time you won't have your CircuitPython board connected to a computer, so printing to the console is useless. However, during development, or when debugging, console access is a necessity. Working around a few helpful debugging statements is worth it so you have the memory overhead available to make fixing a problem easier.</p>
+</div>
+<div class="section" id="offload-to-external-boards-ics">
+<h3>Offload To External Boards/ICs</h3>
+<p>Sometimes trying to do too much on one microcontroller is just <em>too much</em>. So finding another component, IC, or even another microcontroller to offload the work to is a very viable option.</p>
+<p>A good example is audio. On the M0/M4 boards, it's possible to play 16-bit monaural audio samples. It's a great feature to have built-in. However, audio samples are large, and playing them takes up a lot of memory that you may need for other tasks.</p>
+<p>Luckily, you can get sound boards like the Adafruit AudioFX series to play  audio clips by writing to digital pins - all the loading and DAC work is done by the sound board, and that frees up your main M0 board for other things.</p>
+<p>There are other applications involving driving LEDs, controlling LCD displays, handling large amounts of NeoPixels, and so on.</p>
+<p>Frequently boards will communicate via I2C or SPI. You can implement those protocols yourself to get two M0 boards to talk to each other, sharing the load of your project.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I hope to explore cross-board communication with I2C and SPI in depth in a future blog post!</p>
+</div>
+</div>
+<div class="section" id="switch-to-arduino">
+<h3>Switch To Arduino</h3>
+<p>Finally, there are times when your application is just too much for the CircuitPython platform. That's where the Arduino toolchain comes into play.</p>
+<p>You can program your M0/M4 boards using the Arduino IDE just like any other compatible board. Most Arduino sketches will work without modification.</p>
+<p>Adafruit has an <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide">overview of the process</a> of getting set up, as well as some <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0">porting notes</a> for running Arduino sketches on the M0/M4 series boards.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The links above are in the documentation for a specific product, the <a class="reference external" href="https://www.adafruit.com/product/2772">Feather M0 Basic Proto</a>, but they are completely generic. Sadly, they were the only docs the author could find at the time of writing. 💔</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The author has not had a chance to do much with M0 boards and the Arduino IDE yet, but hopes to explore the topic thoroughly in a future blog post. A gentle <a class="reference external" href="/pages/contact.html">shout out</a> might motivate him to do so sooner rather than later 😉.</p>
+</div>
+</div>
+<div class="section" id="refactor-state-logic-into-dispatcher">
+<h3>Refactor State Logic Into Dispatcher</h3>
+<ul class="simple">
+<li>Instead of passing the event handlers as functions, we can instead implement them as overrides in a in herited class.</li>
+<li>Generalize the code even more - hard-code the event handlers inside of the <tt class="docutils literal">ButtonDispatch</tt> class based on the token.</li>
+</ul>
+</div>
+<div class="section" id="use-ints-instead-of-strings">
+<h3>Use ints instead of strings</h3>
+<ul class="simple">
+<li>instead of "BUTTON1", set BUTTON1 = 1</li>
+</ul>
+</div>
+<div class="section" id="use-const">
+<h3>Use const()</h3>
+</div>
+</div>
+</div><!-- /.entry-content -->
+</section>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
+</body>
+</html>

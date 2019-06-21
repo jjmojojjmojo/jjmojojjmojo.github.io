@@ -62,7 +62,7 @@ I initially mocked up my touch pads using green masking tape. In laying out the 
 
 It's important that the leads won't be accidentally grazed by our hands. We also don't want them to be awkwardly placed - our microcontroller board needs to comfortably connect and, especially in the case of this project, it needs to be visible. 
 
-.. image:: {filename}/images/touchmouse-prototype-front.png
+.. image:: {static}/images/touchmouse-prototype-front.png
    :width: 80%
 
 As you can see in the photograph, I've set up 4 touch pads. The two larger ones on the left (yellow) and right (green) will be left and right mouse clicks, respectively. We'll also trigger a middle click if both pads are touched at the same time. 
@@ -75,7 +75,7 @@ We could run the trace on the front side of the panel - we have room under the r
 
 So what I did to avoid this was run the trace on the obverse side of the panel:
 
-.. image:: {filename}/images/touchmouse-prototype-back.png
+.. image:: {static}/images/touchmouse-prototype-back.png
    :width: 80%
    
 Note that I was careful to avoid crossing the left click pad on the other side of the panel. This is to ensure we don't accidentally activate both pads. Capacative touch is pretty amazing in that it works even at a slight distance. We can take advantage of this to do some cool things, like creating a grid of touch inputs using a limited number of pins, but it's not what we want here.
@@ -98,17 +98,17 @@ I ended up using it as the guide for applying the conductive materials as well.
 
 I used some light cardstock that I had on hand. I cut the cardstock with a utility knife and a straight edge and glued the pieces together with a glue stick. 
 
-.. image:: {filename}/images/touchmouse-overlay-tools.png
+.. image:: {static}/images/touchmouse-overlay-tools.png
    :width: 80%
 
 Here's the finished product, laying on top of the masking tape mock-up:
 
-.. image:: {filename}/images/touchmouse-overlay.png
+.. image:: {static}/images/touchmouse-overlay.png
    :width: 80%
    
 After making sure everything lined up properly, I took a final finishing touch and ran the overlay through my trusty Scotch TL901 laminator. 
 
-.. image:: {filename}/images/touchmouse-laminator.png
+.. image:: {static}/images/touchmouse-laminator.png
    :width: 80%
 
 I laminated the overlay for a couple of reasons. First, it will make the overlay more durable - it will be water-proof, so it will resist spills and can easily be cleaned by wiping it down with a damp cloth. 
@@ -117,7 +117,7 @@ Second, it adds a little bit of extra insulation - my hands are a bit shaky, and
 
 Finally, it allows me to use water soluble markers to add notes or legends to my overlays, that can be easily changed.
 
-.. image:: {filename}/images/touchmouse-overlay-laminated-markedup.png
+.. image:: {static}/images/touchmouse-overlay-laminated-markedup.png
    :width: 80%
 
 I used Staedtler Lumocolor "correctable" markers, but there are other brands, like the Expo® Vis-a-vis®. They work a lot like dry-erase markers, except they are a bit more durable. They resist minor friction well. They are erasable with water. 
@@ -135,17 +135,17 @@ The Pads
    
 Before I laminated it, I used my overlay as a guide to lay out the front pads on the panel:
 
-.. image:: {filename}/images/touchmouse-overlay-lineup.png
+.. image:: {static}/images/touchmouse-overlay-lineup.png
    :width: 80%
    
 Then I cut my pads out of 2" copper foil tape, using the same stright edge and utility knife, and laid them out to make sure everything was OK:
 
-.. image:: {filename}/images/touchmouse-overlay-front-mockup.png
+.. image:: {static}/images/touchmouse-overlay-front-mockup.png
    :width: 80%
    
 Copper foil tape has a paper backing. Once everything looked good I removed it, and applied it to the panel. I used my overlay again as a guide:
 
-.. image:: {filename}/images/touchmouse-overlay-and-front-pads.png
+.. image:: {static}/images/touchmouse-overlay-and-front-pads.png
    :width: 80%
    
 The copper is pretty pure, so it's malleable - it's pretty easy to "nudge" if you need to, but it's also easy to tear, so be careful. 
@@ -154,12 +154,12 @@ You will want to lightly burnish the foil with a fingernail or bone folder just 
 
 Next, I held the panel up to a lamp and marked where the pads were so I could apply the copper trace on the back side that takes the "scroll down" pad and brings it up to the top edge:
 
-.. image:: {filename}/images/touchmouse-overlay-lineup-back-trace.png
+.. image:: {static}/images/touchmouse-overlay-lineup-back-trace.png
    :width: 80%
 
 I cut pieces of 1/4" copper foil tape for the main part of the trace, and I found a piece of scrap from the other pads to use for connecting the back of the panel to the "scroll down" pad on the front:
 
-.. image:: {filename}/images/touchmouse-back-trace-mockup.png
+.. image:: {static}/images/touchmouse-back-trace-mockup.png
    :width: 80%
    
 I ran the tape as close to the edge as I could without touching it, and then up on the right side far away from the "left click" pad.
@@ -168,17 +168,17 @@ When I applied the tape to the back panel, I had two problems. I was a little bi
 
 The solution to both problems was to cut up some more scrap foil and apply it to the problem areas:
 
-.. image:: {filename}/images/touchmouse-back-trace-patch.png
+.. image:: {static}/images/touchmouse-back-trace-patch.png
    :width: 80%
    
 I was sure to burnish the foil down securely.
    
-.. image:: {filename}/images/touchmouse-back-trace-complete.png
+.. image:: {static}/images/touchmouse-back-trace-complete.png
    :width: 80%
    
 Here's what the pads look like from the front, now that everything is complete:
 
-.. image:: {filename}/images/touchmouse-overlay-front-complete.png
+.. image:: {static}/images/touchmouse-overlay-front-complete.png
    :width: 80%
    
 Testing
@@ -191,7 +191,7 @@ For a basic test of our pad, we'll simply test *continuity*. Continuity tells us
    
 First, we'll change our multitester into continuity or "diode test" mode:
 
-.. image:: {filename}/images/touchmouse-testing-pads.png
+.. image:: {static}/images/touchmouse-testing-pads.png
    :width: 80%
    
 When there is no continuity (a.k.a. "open loop"), the meter will read 1. Otherwise, it will show the voltage running between the leads. It takes a second or two to settle down, and in the case of a short circuit (if you touch the leads together, or touch them to the same piece of metal), you'll see a very low number.
@@ -204,9 +204,9 @@ Here's a video showing how I tested the pads. Note that I also checked to be sur
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/images/IMG_6777.webm" type="video/webm">
+          <source src="{static}/images/IMG_6777.webm" type="video/webm">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/images/IMG_6777.webm">link to the video</a> instead.</p>
+             a <a href="{static}/images/IMG_6777.webm">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -216,7 +216,7 @@ Finishing Up
 ------------
 I used a couple of wide rubber bands to hold the overlay onto the touch panel. This secures the overlay well, and also provides a non-slip surface to keep the panel from sliding around during use.
 
-.. image:: {filename}/images/touchmouse-overlay-final.png
+.. image:: {static}/images/touchmouse-overlay-final.png
    :width: 80%
 
 
@@ -235,7 +235,7 @@ We can use any pads marked A1-A7 (A0 will be used to drive the speaker).
 
 I've evenly spaced the connections around the CircuitPlayground to reduce stress on the clips. My aligator clips are a bit long, so I also had to twirl the leads a bit so the CircuitPlayground was as close to the touch panel as possible. 
 
-.. image:: {filename}/images/touchmouse-circuitplayground-wiring.png
+.. image:: {static}/images/touchmouse-circuitplayground-wiring.png
    :width: 80%
 
 In close-up, you can see that I've connected the alligator clips as follows:
@@ -245,7 +245,7 @@ In close-up, you can see that I've connected the alligator clips as follows:
 * Scroll Up, blue, is connected to A1.
 * Right Click, green, is connected to A3.
 
-.. image:: {filename}/images/touchmouse-circuitplayground-wiring-closeup.png
+.. image:: {static}/images/touchmouse-circuitplayground-wiring-closeup.png
    :width: 80%
 
 Testing - Touch Pads
@@ -344,7 +344,7 @@ We'll test the built-in speaker with some simple code that will play a WAV file.
    
 The first thing we'll need to do is procure a couple of properly-formatted WAV files to play. The requirements and process are described `here <https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/convert-files>`__. I've found some files from `freesound.org <http://www.freesound.org>`__, and converted them to the right format. 
 
-`This <{filename}/images/coin.wav>`__ file is an "8-bit coin sound". Before running the code below, copy it to the root folder of the CircuitPlayground.
+`This <{static}/images/coin.wav>`__ file is an "8-bit coin sound". Before running the code below, copy it to the root folder of the CircuitPlayground.
 
 This code will play that sound once when the board first boots:
 

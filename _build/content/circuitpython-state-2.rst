@@ -35,14 +35,14 @@ When there's no voltage (plus or minus some wiggle room), the pin will read ``Fa
 
 An ideal button being pressed and released might look something like this, if we graphed the voltage over time:
 
-.. image:: {filename}/images/nonblocking-button-bounce-ideal.png
+.. image:: {static}/images/nonblocking-button-bounce-ideal.png
    :width: 80%
    :align: center
    
 
 The problem is that you will rarely ever get such straightforward readings. You'll instead get what looks like many pressings in quick succession:
 
-.. image:: {filename}/images/nonblocking-button-bounce-reality.png
+.. image:: {static}/images/nonblocking-button-bounce-reality.png
    :width: 80%
    :align: center
    
@@ -63,7 +63,7 @@ The two types of inputs are noisy for different reasons, but the problem is the 
 
 .. note::
     
-    This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" `in the next installment <{filename}/circuitpython-state-3.rst#using-state-to-avoid-blocking>`__ - the physical stuff we're discussing here is also affected by the timing of processor cycles. 
+    This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" `in the next installment <{static}/circuitpython-state-3.rst#using-state-to-avoid-blocking>`__ - the physical stuff we're discussing here is also affected by the timing of processor cycles. 
     
     The two overly-simplified subjects are very complexly related |grin|.
     
@@ -202,7 +202,7 @@ Let's start with basic definitions. *State* is simply the status or phase of som
 
 For example, water has three common states (referred to as *phases*): gas (steam), solid (ice), liquid (usually just called *water*). 
 
-.. image:: {filename}/images/nonblocking-states-of-water.png
+.. image:: {static}/images/nonblocking-states-of-water.png
    :width: 80%
    :align: center
 
@@ -228,7 +228,7 @@ Keeping score during a sporting event is a way of tracking state. A performance 
 
 Here's a common type of simple scoreboard for sports like gymnastics:
 
-.. image:: {filename}/images/nonblocking-state-examples-01.png
+.. image:: {static}/images/nonblocking-state-examples-01.png
    :width: 80%
    :align: center
    
@@ -236,7 +236,7 @@ It's a single score, from a single judge. This scoreboard scores from 1-10, with
 
 If we modeled the scoreboard in Python, we could use a single variable to store the score:
 
-.. image:: {filename}/images/nonblocking-state-examples-02.png
+.. image:: {static}/images/nonblocking-state-examples-02.png
    :width: 80%
    :align: center
    
@@ -316,7 +316,7 @@ A better analogy that more closely models our requirements is the `scoreboard <h
 
 Here's a contrived example of a typical scoreboard from an American baseball stadium:   
 
-.. image:: {filename}/images/nonblocking-state-examples-03.png
+.. image:: {static}/images/nonblocking-state-examples-03.png
    :width: 80%
    :align: center
 
@@ -329,7 +329,7 @@ It has various regions with indicators, usually lights, and numbers representing
 
 We can model a scoreboard as a series of individual variables, like we did initially for the gymnastics match:
 
-.. image:: {filename}/images/nonblocking-state-examples-04.png
+.. image:: {static}/images/nonblocking-state-examples-04.png
    :width: 80%
    :align: center
    

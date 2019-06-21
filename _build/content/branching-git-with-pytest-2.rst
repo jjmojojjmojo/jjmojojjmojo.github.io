@@ -1,6 +1,6 @@
 Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2
 #########################################################################
-:date: 2019-04-26 9:00
+:date: 2019-06-26 9:00
 :author: jjmojojjmojo
 :category: tutorial
 :tags: python; git; branching; development process
@@ -9,7 +9,14 @@ Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2
 
 .. include:: ../emojis.rst
 
-This is the second installment in a three-part series that takes a deep dive into writing tests and using git. In this part, we'll explore branching and tagging while we fix a bug in the example application.
+**This is part two of a three-part series.** This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using `pytest <https://docs.pytest.org>`__ and `git <https://git-scm.com/>`__, via feature branches. Along the way we'll touch on application design and discuss best practices.
+
+In this installment, we will:
+
+* Identify and fix a bug on a branch.
+* Build a new feature, also on a branch.
+* Use :code:`git rebase` to keep our change history tidy.
+* Use tagging to mark new versions of our application.
 
 .. PELICAN_END_SUMMARY
 
@@ -17,34 +24,27 @@ Setup
 =====
 Make sure you've got everything set up as outlined in `part 1 <{filename}/branching-git-with-pytest.rst>`__.
 
-.. tip::
-    
-    It's a good idea to review the steps below, but if you want to skip ahead, or you are only interested in this section and want to hit the ground running, you can run the following script:
-    
-    .. code-block:: console
-        
-        $ scripts/setup-part2.sh
-        
-    
-
 Here's a condensed summary:
 
 #. Ensure you have git, python 3.7+, and venv installed.
 #. Make a bare clone of the base repository to act as our *remote*:
    
    .. code-block:: console
+      :linenos: none
        
        $ git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
    
 #. Clone our remote:
    
    .. code-block:: console
+      :linenos: none
    
        $ git clone random_quote_remote random_quote
    
 #. Initialize the virtual environment, and install our requirements and project:
    
    .. code-block:: console
+      :linenos: none
         
         $ cd random_quote
         $ python -m venv .
@@ -55,25 +55,42 @@ Here's a condensed summary:
 #. Initialize the database, add some randomly generated quotes:
    
    .. code-block:: console
+      :linenos: none
         
         (random_quote) $ python scripts/generate_quotes.py
         (random_quote) $ python
-        >>>
-   
-   .. code-block:: pycon
-        
         >>> from random_quote import util
         >>> util.init("test.db")
         util.ingest("quotes.csv", "test.db")
    
-#. Add the :code:`fix_random()` test fixture and the extra tests for random functionality. If you had trouble or would like to skip that step, you can copy the following files from :code:`scripts/state/part1`:
+#. Add the :code:`fix_random()` test fixture and the extra tests for random functionality. If you had trouble, or would like to skip :code:`scripts/state/part1`, you can :code:`git checkout` the :code:`part1` branch:
    
    .. code-block:: console
+      :linenos: none
         
-        (random_quote) $ cp scripts/state/part1/conftest.py src/random_quote/tests/
-        (random_quote) $ cp scripts/state/part1/test_manager.py src/random_quote/tests/
-        (random_quote) $ cp scripts/state/part1/test_wsgi.py src/random_quote/tests/
-   
+        (random_quote) $ git checkout part1
+        
+   .. tip::
+       
+       |rainbow| We have branches for all of the major work done in the series:
+       
+       :code:`part1`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__.
+       :code:`part2`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__ and
+            `part 2 <{filename}/branching-git-with-pytest-2.rst>`__
+       :code:`qotd`
+            Developer **A**'s feature from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+       :code:`index-info`
+            Developer **B**'s bug fix from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+       :code:`part3`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__, 
+            `part 2 <{filename}/branching-git-with-pytest-2.rst>`__ *and* `part 3 <{filename}/branching-git-with-pytest-3.rst>`__!
+       
+       Feel free to :code:`git checkout` if you need to reset your code, or jump around.
+       
+       Use :code:`git stash` to keep any uncomitted changes for latter. See `the git documentation <https://git-scm.com/book/en/v1/Git-Tools-Stashing>`__ for more information. |unicorn|
+
 
 Let's Find A Bug!
 =================
@@ -84,6 +101,7 @@ Let's run the application locally so we can play with it in a browser, and ident
 We'll start the :code:`gunicorn` server using a couple of useful command-line options, since we'll be messing with the code:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
@@ -92,7 +110,7 @@ We'll start the :code:`gunicorn` server using a couple of useful command-line op
     
     Gunicorn is a multi-process server. This means it spawns multiple python processes and hands off web requests to them as needed, usually in a round-robin fashion. The processes are killed if they run for too long.
     
-    The first option, :code:`-b` sets the *bind* port - it's an IP address followed by a port number. Numbers under 1024 are available to you wuthout running as root. The default port is 8000. You can omit this parameter if you'd like, but it's really useful when you're running a bunch of stuff, or for deployment, so it's good practice to get used to using it.
+    The first option, :code:`-b` sets the *bind* port - it's an IP address followed by a port number. Numbers under 1024 are available to you without running with elevated privileges (aka "as root"). The default port is 8000. You can omit this parameter if you'd like, but it's really useful when you're running a bunch of stuff, or for deployment, so it's good practice to get used to using it.
     
     Next option, :code:`-t` sets the the timeout before a worker is killed and reclaimed. We set this to a very long time so if we are doing something like running a `pdb <https://docs.python.org/3/library/pdb.html>`__ session, it won't kick us out before we're done.
     
@@ -121,7 +139,7 @@ The server will print its logs out to the console so you can see when requests h
 
 Now, open a web browser to http://127.0.0.1:8080 . You should get a 404 "Not Found" response. This is expected, since we aren't covering the case of a request for the root, (aka :code:`/`) in our :code:`RandomQuoteApp.__call__()` method.
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-root-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-root-first-pass.png
    :align: center
    :figwidth: 80%
    
@@ -136,35 +154,35 @@ We can use the web API in our browser.
 
 To get a listing of all the quotes in your database, open http://127.0.0.1:8080/quotes:
 
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-all-first-pass.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-all-first-pass.png
        :align: center
        :figwidth: 80%
     
 
 To get a particular quote, open http://127.0.0.1:8080/quote/1 (where 1 is the id of the quote you want):
 
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-one-quote-first-pass.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-one-quote-first-pass.png
        :align: center
        :figwidth: 80%
     
 
 To get a random quote, open http://127.0.0.1:8080/random
 
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-random-first-pass.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-random-first-pass.png
        :align: center
        :figwidth: 80%
    
 
 Here's a handy map that shows how the various supported API endpoints invoke methods of :code:`RandomQuoteApp`:
 
-.. figure:: {filename}/images/branching-git-pytest/path-map-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/path-map-first-pass.png
    :align: center
    :figwidth: 80%
    
 
 Now, lets find a bug. Try requesting a quote id that you know doesn't exist. Since we're using numeric ids, requesting an alphanumeric string, like :code:`zzzzzz` would be a good choice. If we click on http://127.0.0.1:8080/quote/zzzzzz, what happens?
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-bad-id-bug.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-bad-id-bug.png
    :align: center
    :figwidth: 80%
 
@@ -174,6 +192,7 @@ Oh no, "Internal Server Error" is bad. Lets look at the log:
 **TODO: fix the paths so they look like what the user is probably using**
 
 .. code-block:: console
+    :linenos: none
     
     [2019-06-09 18:31:11 -0400] [16676] [INFO] Starting gunicorn 19.9.0
     [2019-06-09 18:31:11 -0400] [16676] [INFO] Listening at: http://127.0.0.1:8080 (16676)
@@ -181,15 +200,15 @@ Oh no, "Internal Server Error" is bad. Lets look at the log:
     [2019-06-09 18:31:11 -0400] [16679] [INFO] Booting worker with pid: 16679
     [2019-06-09 18:31:20 -0400] [16679] [ERROR] Error handling request /quote/zzzzzz
     Traceback (most recent call last):
-      File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 135, in handle
+      File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 135, in handle
         self.handle_request(listener, req, client, addr)
-      File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 176, in handle_request
+      File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 176, in handle_request
         respiter = self.wsgi(environ, resp.start_response)
-      File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/wsgi.py", line 29, in __call__
+      File "[...]/random_quote/src/random_quote/wsgi.py", line 29, in __call__
         response = self.get(request)
-      File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/wsgi.py", line 54, in get
+      File "[...]/random_quote/src/random_quote/wsgi.py", line 54, in get
         quote = self.manager.get(match.group(1))
-      File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/manager.py", line 49, in get
+      File "[...]/random_quote/src/random_quote/manager.py", line 49, in get
         return dict(result)
     TypeError: 'NoneType' object is not iterable
     
@@ -217,7 +236,7 @@ Here's that method isolated so we can take a look at it:
         
         return dict(result)
         
-When the method was written, the author used the fact that the :code:`sqlite3.Row` class can be transformed into a dictionary by passing it to :code:`dict()`. However, they  missed the fact that the :code:`fetchone()` method (line 47) returns :code:`None` when no rows are returned.
+When the method was written, the author (|cool|) used the fact that the :code:`sqlite3.Row` class can be transformed into a dictionary by passing it to :code:`dict()`. However, they  missed the fact that the :code:`fetchone()` method (line 47) returns :code:`None` when no rows are returned.
 
 Passing :code:`None` to :code:`dict()` on line 49 raises a :code:`TypeError`, as we saw in the traceback.
 
@@ -229,13 +248,13 @@ Great, so now we've identified the bug. Let's fix it!
     
 Fix The Bug: An Overview
 ========================
-In brief, we need to:
-
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2.png
    :align: right
    :figwidth: 40%
 
-#. Create a branch.
+In brief, we need to:
+
+#. Create and check out a branch. (:code:`git branch`, :code:`git checkout`)
 #. Write a *failing* test that replicates the bug.
 #. Fix the bug.
 #. Increase the version number.
@@ -245,21 +264,23 @@ In brief, we need to:
 #. :code:`git checkout master`.
 #. :code:`git merge` to our branch.
 #. Fix any conflicts.
-#. Finish the merge.
+#. Finish the merge (:code:`git add`, :code:`git commit`).
 #. Run the tests.
-#. Tag the version.
+#. :code:`git tag` the version.
+#. :code:`git push` changes.
 
 Create A Branch
 ===============
 Let's list the existing branches first:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git branch --list
     * master
     
 
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2-a-cropped.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-a-cropped.png
    :align: right
    :figwidth: 40%
 
@@ -270,20 +291,23 @@ We need a good name for our branch. The name should be obvious and specific to t
 Here's how it is created:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git branch bug-unknown-id 
     
 Running :code:`git branch --list` again, we can see our branch:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git branch --list
     bug-unknown-id
     * master
     
-We're still "on" the :code:`master` branch. To change branches, or *check out* our new branch:
+We're still "on" the :code:`master` branch. We need to change branches, or :code:`git checkout` our new branch:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git checkout bug-unknown-id
     Switched to branch 'bug-unknown-id'
@@ -298,6 +322,7 @@ As we can see, when we call :code:`git branch --list` again, our branch has the 
     You can save a step by passing the :code:`-b` switch to :code:`git checkout`, creating the branch before checking it out:
     
     .. code-block:: console
+       :linenos: none
         
         $ git checkout -b some-other-branch
         Switched to a new branch 'some-other-branch'
@@ -305,6 +330,7 @@ As we can see, when we call :code:`git branch --list` again, our branch has the 
     And we can see it's been created *and* checked out: 
     
     .. code-block:: console
+       :linenos: none
         
         $ git branch --list
         bug-unknown-id
@@ -315,6 +341,7 @@ As we can see, when we call :code:`git branch --list` again, our branch has the 
     If we want to go back to another branch, we just need to :code:`git checkout`:
     
     .. code-block:: console
+       :linenos: none
         
         $ git checkout bug-unknown-id
         Switched to branch 'bug-unknown-id'
@@ -322,6 +349,7 @@ As we can see, when we call :code:`git branch --list` again, our branch has the 
     And we can see it's changed again using :code:`git branch --list`:
     
     .. code-block:: console
+       :linenos: none
         
         $ git branch --list
         * bug-unknown-id
@@ -331,15 +359,38 @@ As we can see, when we call :code:`git branch --list` again, our branch has the 
 
 Replicate The Bug In A Test
 ===========================
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2-b-cropped.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-b-cropped.png
    :align: right
    :figwidth: 40%
    
 We want to add a test that will fail until the bug is fixed. This way we can prevent *regressions*, or situations where the bug inadvertently comes up later. If it fails now, and we fix it, and it passes, then test case will fail if the bug ever shows up again.
 
-As we explored previously, pytest test cases are simply functions. If they use a fixture, they take it as a parameter. We can look at one of the existing tests as a template.
+More Than A Bug
+---------------
+One thing that sets this particular bug apart from the sort you might run into, is that this bug represents a *use case* we missed. Like the lack of testing for random quotes we fixed in our first commit, it's not really a bug so much as an oversight.
 
-Here's an example from :code:`src/random_quote/tests/test_manager.py`, that uses the :code:`RandomQuoteManager.get()` method:
+.. note::
+    
+    If this *was* bug-related, as opposed to an oversight, we could chose to use a name that incorporated the name of the bug or the bug's identifier in our bug tracking system.
+    
+
+Before we can proceed, we have to make a decision. We've identified an error state when we try to get an quote that doesn't exist in the database. But what *should* happen if there *isn't* an error?
+
+There are a few possibilities:
+
+#. We can raise some kind of `exception <https://docs.python.org/3/tutorial/errors.html>`__, preferably something custom that alerts the developer about what happened, with name like :code:`NoQuoteFound`.
+#. We can return a *token* (or `sentinel value <https://en.wikipedia.org/wiki/Sentinel_value>`__) of some kind (:code:`None`, like the sqlite3 DBAPI does, or :code:`False`).
+#. We can return an empty dictionary (:code:`{}`), so the data type is the same, but it won't have the expected keys (it can also act as a token, since :code:`bool({}) == False`)
+#. We can return a "default" object with values indicative of missing data. For example, the :code:`id` could be 0, the author :code:`Unknown` and the :code:`quote` could be :code:`"There is no quote, only Zuul"`. The creation date could be long in the past. This way any templates or client code would still "work" in this situation, but it would be obvious something was amiss.
+
+Which one is best for your project is a technical decision for you and your team to make. There is a lot to consider with each option (and probably a few other options to consider!). To keep us out of the weeds in this guide, we'll arbitrarily choose the "token", option #2. |cool|
+
+As such, we'll have :code:`RandomQuoteManager.get()` return :code:`None`, instead of another common sentinel, like :code:`False`, so we're explicitly saying "there is no quote with that id" as opposed to "the request you made is not valid". The distinction is subtle here, but it could be more significant in other cases.
+
+Writing A Failing Test
+======================
+
+We are trying to replicate passing an unknown quote ID to :code:`RandomQuoteManager.get()`. We can use the "normal" test from :code:`src/random_quote/tests/test_manager.py` as a template:
 
 .. code-block:: python
     :linenostart: 15
@@ -354,34 +405,9 @@ Here's an example from :code:`src/random_quote/tests/test_manager.py`, that uses
         
 This test calls the :code:`get()` method with a known id, and checks that the correct text was returned. 
 
-Our bug case is almost identical to this one, it's just that we need to pass an id that we know doesn't exist. We'll name the test case :code:`test_unknown_id`. Like the branch name, it should be meaningful, and unique. By default (and convention), a test case has to start with the word :code:`test`.
+We'll name our new test case :code:`test_unknown_id`. Like the branch name, it should be meaningful, and unique. By default (and convention), a test case has to start with the string :code:`test_`.
 
-More Than A Bug
----------------
-One thing that sets this particular bug apart from the typical ones is that this bug represents a *use case* we missed. Like the lack of testing for random quotes we fixed in our first commit, it's not really a bug so much as an oversight. So we'll name the test case without mention of the bug.
-
-.. note::
-    
-    If this *was* bug-related, as opposed to an oversight, we could chose to use a name that incorporated the name of the bug or the bug's identifier in our bug tracking system.
-    
-
-Before we can proceed, we have to make a decision. We've identified an error state when we try to get an quote that doesn't exist in the database. But what *should* happen in this situation?
-
-There are a few possibilities:
-
-#. We can raise some kind of `exception <https://docs.python.org/3/tutorial/errors.html>`__, preferably something custom that alerts the developer about what happened, with name like :code:`NoQuoteFound`.
-#. We can return a *token* (or `sentinel value <https://en.wikipedia.org/wiki/Sentinel_value>`__) of some kind (:code:`None`, like the sqlite3 DBAPI does, or :code:`False`).
-#. We can return an empty dictionary (:code:`{}`), so the data type is the same, but it won't have the expected keys (it can also act as a token, since :code:`bool({}) == False`)
-#. We can return a "default" object with values indicative of missing data. For example, the :code:`id` could be 0, the author :code:`Unknown` and the :code:`quote` could be :code:`"There is no quote, only Zuul"`. The creation date could be long in the past.
-
-Which one is best for your project is a technical decision for you and your team to make. There is a lot to consider with each option (and probably a few other options to consider!). To keep us out of the weeds in this guide, we'll arbitrarily choose the "token", option #2. 
-
-As such, we'll have :code:`RandomQuoteManager.get()` return :code:`None`, instead of another common sentinel, like :code:`False`, so we're explicitly saying "there is no quote with that id" as opposed to "the request you made is not valid". The distinction is subtle here, but it could be more significant in other cases.
-
-Writing A Failing Test
-======================
-
-We'll first write a test that will fail, because it will raise a :code:`TypeError`. We'll also test that :code:`RandomQuoteManager.get()` returns :code:`None` as expected. 
+Our :code:`test_unknown_id()` test case will fail, because it will raise a :code:`TypeError`. We'll also test that :code:`RandomQuoteManager.get()` returns :code:`None` as expected (once we've fixed it).
 
 Let's put this test case at the end of :code:`src/random_quote/tests/test_manager.py`, after the :code:`test_random_quote()` case):
 
@@ -399,12 +425,13 @@ Let's put this test case at the end of :code:`src/random_quote/tests/test_manage
 Running the tests, we can now see there are 8 tests now, and one fails:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src -v
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 9 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED             [ 11%]
@@ -459,7 +486,7 @@ At this point, it's not a bad idea to save our work, so lets look at our changes
 
 Commit The Failing Test
 =======================
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2-b-cropped.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-b-cropped.png
    :align: right
    :figwidth: 40%
    
@@ -468,6 +495,7 @@ This is identical to our previous commit process, but lets go through it again.
 First, lets check what changed using :code:`git status`:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 2
     
     (random_quote) $ git status
@@ -492,6 +520,7 @@ Note that git tells us which branch we're on. It's a good idea to get in the hab
 Next, we'll :code:`git commit` our changes, using the :code:`-m` parameter:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git commit -a -m"Added failing test an unknown id is passed to RandomQuoteManager.get()"
     [bug-unknown-id 34afe34] Added failing test an unknown id is passed to RandomQuoteManager.get()
@@ -502,7 +531,7 @@ Actually Fix The Bug
 ====================
 Recall that earlier, we decided that the :code:`RandomQuoteManager.get()` method return :code:`None` as a *sentinel* if a non-existent id is passed. 
 
-We can fix this in :code:`src/random_quote/manager.py` pretty simply by checking the return value of :code:`c.fetchone()` before passing it to :code:`dict()`:
+We can fix this in :code:`src/random_quote/manager.py` by checking the return value of :code:`c.fetchone()` before passing it to :code:`dict()`:
 
 .. code-block:: python
     :linenostart: 37
@@ -539,12 +568,13 @@ On lines 47 to 52, we've stashed the result from the database cursor into a temp
 After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
 And open up http://127.0.0.1:8080/quote/zzzzzz.
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-bad-id-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-bad-id-first-pass.png
    :align: center
    :figwidth: 80%
 
@@ -553,12 +583,13 @@ At this point, we aren't getting the error anymore, but we aren't necessarily ge
 Next, lets re-run our tests:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest -v src
     ============================= test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 9 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 11%]
@@ -599,27 +630,29 @@ This time, lets take a deeper view of what has changed, using :code:`git diff`.
 
 The plus signs show what lines we added, and the minus signs show which were removed.
 
+.. tip::
+    
+    You can use :code:`git difftool` to view diffs in a graphical diff viewer. The `git-difftool docuentation <https://git-scm.com/docs/git-difftool>`__ has usage details.
+    
+
+
 Now since we like the changes that were made, we can make a commit:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git commit -a -m"Fixed bug where a non-existent quote id would raise a TypeError"
     [bug-unknown-id d9d2408] Fixed bug where a non-existent quote id would raise a TypeError
     1 file changed, 6 insertions(+), 1 deletion(-)
     
 
-.. tip::
-    
-    You can use :code:`git difftool` to view diffs in a graphical diff viewer. The `git-difftool docuentation <https://git-scm.com/docs/git-difftool>`__ has usage details.
-    
-
 We're Not Quite Done Yet
 ========================
 As mentioned in the last section, making a web request for :code:`/quote/zzzzz` no longer raises an exception, but it doesn't necessarily act in a way that's consistent with web standards.
 
-In web APIs, it's best practice to use the `HTTP status codes <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>`__ to tell a client what you can about how they messed up. In this case, we're returning an empty value, which sort of tells them they messed up, but what we *really* want to tell the client is "hey, you asked for a quote that doesn't exist".
+In web APIs, it's best practice to use the `HTTP status codes <https://developer.mozilla.org/en-US/docs/Web/HTTP/Status>`__ to tell a client what you can about how they messed up. In this case, we're returning an empty value, which *sort of* tells them they messed up, but what we *really* want to tell the client is, "hey, you asked for a quote that doesn't exist".
 
-The best status code for this situation is the *404 Not Found* code. Mozila describes it as "The server can not find requested resource", which is exactly what's happened here.
+The best status code for this situation is the *404 Not Found* code. Mozila describes it as, "The server can not find requested resource", which is exactly what's happened here.
 
 So we need to get our :code:`RandomQuoteApp` to detect when :code:`RandomQuoteManager.get()` returns :code:`None`, and send the correct HTTP status in the response.
 
@@ -664,12 +697,13 @@ We can test this by adding the following test case to the end of :code:`src/rand
 When the tests run, we see the error, this time, it's raised by :code:`WebTest.Testapp`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest -v src
     ============================= test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 10 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 10%]
@@ -743,6 +777,42 @@ Now, let's make this test pass, by getting the :code:`RandomQuoteApp.get()` meth
 
 :code:`webob` comes with a few handy helper classes and 'canned' responses to make things like returning a 404 error code easy. In particular, it provides :code:`webob.exc.HTTPNotFound`. It is a hybrid class that is a :code:`webob.Response` object, but also a python :code:`Exception`. It can be raised by part of your application, *caught* and returned to the user like any other :code:`webob.Response` to let them know something went wrong.
 
+.. note::
+    
+    We make use of this in the :code:`RandomQuoteApp.__call__()` method, in the code we use to route requests to various methods and objects:
+    
+    .. code-block:: python
+        :linenostart: 13
+        
+            def __call__(self, environ, start_response):
+            """
+            Invoke the WSGI application - routing.
+            
+            Based on the request path, invokes the appropriate method, passing a 
+            pre-constructed webob.Request object. 
+            
+            Expects each method to return a webob.Response object, which will be 
+            invoked and returned as per the WSGI protocol.
+            """
+            request = Request(environ)
+            
+            try:
+                if request.path == "/quotes":
+                    response = self.listing(request)
+                elif request.path.startswith("/quote"):
+                    response = self.get(request)
+                elif request.path == "/random":
+                    response = self.random(request)
+                else: 
+                    raise HTTPNotFound()
+                    
+                return response(environ, start_response)
+            except HTTPError as error_response:
+                return error_response(environ, start_response)
+                
+     
+
+
 With the help of :code:`webob.exc.HTTPNotFound`, we'll fix :code:`RandomQuoteApp.get()`. Add the two highlighted lines to :code:`src/random_quote/wsgi.py`:
 
 .. code-block:: python
@@ -780,11 +850,12 @@ With the help of :code:`webob.exc.HTTPNotFound`, we'll fix :code:`RandomQuoteApp
 Now, when we run the tests again, the :code:`test_get_quote_unknown_id()` case passes:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 10 items
     
     src/random_quote/tests/test_manager.py ......                             [ 60%]
@@ -808,7 +879,7 @@ Each version is incremented as corresponding changes are made. Versions start at
 
 The goal is to make it easy to compare versions as the code evolves. It's also easier to make certain judgments about the code's stability and compatibility. 
 
-For example, if you built your application against version **1.0.0** of a library, you can assume that your application will continue to work with version **1.0.4** (the fourth bug fix), as well as **1.2.0** (the second time backwards-compatible features were added), and **1.99.223** (99th feature release, 223rd bug fix - yikes). But, you can expect your code to need modifications if you want to use version **2.0.0**.
+For example, if you built your application against version **1.0.0** of a library, you can assume that your application will continue to work with version **1.0.4** (the fourth bug fix), as well as **1.2.0** (the second time backwards-compatible features were added), and **1.99.223** (99th feature release, 223rd bug fix - *yikes*). But, you can expect your code to need modifications if you want to upgrade to version **2.0.0**.
 
 Since our project is pre-release, but we're confident the API will stay stable, the project is initially versioned **0.1.0**.
 
@@ -846,12 +917,13 @@ Since this is the first bug, we just need to increment the last number. As such,
 
 We'll leave making this change as an exercise for the user.
 
-After the version change, be sure to re-install the application, using :code:`pip`, as we did in the initial setup, and re-run the tests to make sure everything is still working:
+After the version change, be sure to re-install the application, using :code:`pip`, as we did in the initial setup:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pip install -e .
-    Obtaining file:///Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    Obtaining file://[...]/random_quote
     Requirement already satisfied: webob in ./lib/python3.7/site-packages (from random-quote==0.1.1) (1.8.5)
     Installing collected packages: random-quote
       Found existing installation: random-quote 0.1.0
@@ -860,13 +932,15 @@ After the version change, be sure to re-install the application, using :code:`pi
       Running setup.py develop for random-quote
     Successfully installed random-quote
     
+And re-run the tests to make sure everything is still working:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src
     ==================================== test session starts =====================================
     platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 10 items
     
     src/random_quote/tests/test_manager.py ......                                          [ 60%]
@@ -881,13 +955,14 @@ Finally, remember to use :code:`git status` and :code:`git diff` to make sure th
 Fetch and Rebase
 ================
 
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2-c-cropped.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-c-cropped.png
    :align: right
    :figwidth: 40%
 
 We now have a backlog containing a handful of changes, all regarding this bug:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log --pretty=oneline
     
@@ -905,7 +980,7 @@ In order to make our changes part of the :code:`master` branch, we need to incor
 - Trying to understand everything that was changed across many commits is difficult.
 - If we messed up, and our bug fix needed to be reverted, it's hard to pinpoint exactly what we did.
 
-We can address all of these issues with :code:`git rebase`. It also adds "piece of mind", allowing us to commit frequently with poorly written commit messages without worrying that they will pollute the main log.
+We can address all of these issues with :code:`git rebase`. It also adds "piece of mind", allowing us to commit frequently with poorly written commit messages without worrying that they will pollute the main log. |cool|
 
 Rebase allows us to do a lot, but the basic purpose is to alter commits, including taking existing commits and condensing them down, as we're going to do here.
 
@@ -916,6 +991,7 @@ Rebase allows us to do a lot, but the basic purpose is to alter commits, includi
     There are several ways to protect yourself. The simplest is to just duplicate your checkout as a backup before you do your rebase:
     
     .. code-block:: console
+       :linenos: none
         
         (random_quote) $ cd ..
         (random_quote) $ cp -r random_quote random_quote_before_rebase_because_im_scared
@@ -926,14 +1002,16 @@ Rebase allows us to do a lot, but the basic purpose is to alter commits, includi
 First, we'll use :code:`git fetch` to retrieve the latest version of the :code:`master` branch:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git fetch origin master
-    From /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    From [...]/random_quote_remote
      * branch            master     -> FETCH_HEAD
     
 :code:`git rebase` has an *interactive* mode that makes the process simple |unicorn|. Start by invoking :code:`git rebase` with the :code:`-i` switch and telling git what you want to rebase *to*. In our case, we want to rebase against the changes made to :code:`master`, the branch we started with (this can be a branch, a specific commit id, or a tag):
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git rebase -i master
     
@@ -1053,6 +1131,7 @@ And as before, we want to be concise. If we needed to elaborate, we could do so 
 After we save that file, git will tell us if the rebase was a success:
 
 .. code-block:: console
+    :linenos: none
     
     [detached HEAD e80d483] BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.
      Date: Tue May 7 11:05:01 2019 -0400
@@ -1062,6 +1141,7 @@ After we save that file, git will tell us if the rebase was a success:
 If we run :code:`git log --pretty` again, we can see our old commits are gone, and the last one is present:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log --pretty
     
@@ -1076,11 +1156,12 @@ If we run :code:`git log --pretty` again, we can see our old commits are gone, a
 
 .. tip:: 
     
-    If you messed up the file causing a "recoverable" error, like say you tried to :code:`squash` every commit and forgot to :code:`pick` one, git will put you into an "in progress" state. Typically, this state is used when you need to fix conflicts (more on that soon), or do other work on the code to make a rebase complete successfully.
+    If you messed up the file causing a "recoverable" error, like say you tried to :code:`squash` every commit and forgot to :code:`pick` one, git will put you into an "in progress" state. Typically, this state is used when you need to fix conflicts (we'll cover that in `part 3 <{filename}/branching-git-with-pytest-3.html>`__), or do other work on the code to make a rebase complete successfully.
     
     You might get an error like this:
     
     .. code-block:: console
+       :linenos: none
         
         error: cannot 'squash' without a previous commit
         You can fix this with 'git rebase --edit-todo' and then run 'git rebase --continue'.
@@ -1089,6 +1170,7 @@ If we run :code:`git log --pretty` again, we can see our old commits are gone, a
     You'll also see you have a rebase in progress when you run :code:`git status`:
     
     .. code-block:: console
+       :linenos: none
         
         $ git status
         interactive rebase in progress; onto 70ae1f2
@@ -1111,6 +1193,7 @@ If we run :code:`git log --pretty` again, we can see our old commits are gone, a
     Again, git tells us exactly what we need to do. If you just made a typo, the best thing to do is issue :code:`git rebase --abort`. This will put you back to the way things were before you invoked :code:`git rebase -i`:
     
     .. code-block:: console
+       :linenos: none
         
         $ git rebase --abort
         
@@ -1119,11 +1202,12 @@ If we run :code:`git log --pretty` again, we can see our old commits are gone, a
 To be sure we didn't loose anything or make any mistakes during the rebase, now we should run the tests again:
 
 .. code-block:: console
+    :linenos: none
     
     $ pytest src
     =========================== test session starts ===========================
     platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 10 items
     
     src/random_quote/tests/test_manager.py ......                       [ 60%]
@@ -1135,7 +1219,7 @@ We should see 10 tests as before, and they should all pass.
 
 Merge Master And Publish
 ========================
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview-part2-d-cropped.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-d-cropped.png
    :align: right
    :figwidth: 40%
    
@@ -1143,7 +1227,7 @@ If we know someone has changed the code in :code:`master` since we branched, we 
 
 .. tip::
     
-    We know this hasn't happened, since we're the only ones working on this code. |grin| Don't fret, we'll simulate a collaboration in part 3!.
+    We know this hasn't happened, since we're the only ones working on this code. |grin| Don't fret, we'll simulate a collaboration in `part 3 <{filename}/branching-git-with-pytest-3.rst>`__!.
     
 
 In either case, we still have to go through the same basic process.
@@ -1153,6 +1237,7 @@ Now, we'll :code:`git checkout` :code:`master`, and :code:`git merge` our branch
 First the :code:`git checkout`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git checkout master
     Switched to branch 'master'
@@ -1161,6 +1246,7 @@ First the :code:`git checkout`:
 Then the :code:`git merge`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git merge bug-unknown-id
     Updating 370f975..94a4210
@@ -1174,6 +1260,7 @@ Then the :code:`git merge`:
 :code:`git status` shows us that we are one commit ahead of our remote repository:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git status
     On branch master
@@ -1190,12 +1277,14 @@ Then the :code:`git merge`:
 To make our changes public, we just need to :code:`git push`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git push origin master
     
 Now we can see our bug fix as a single commit in the log:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log --pretty
     
@@ -1210,6 +1299,10 @@ Now we can see our bug fix as a single commit in the log:
 
 Tag The Version
 ===============
+.. figure:: {static}/images/branching-git-pytest/workflow-overview-part2-e-cropped.png
+   :align: right
+   :figwidth: 40%
+   
 Git has a concept of "tagging" - where you can assign a user-friendly label to a specific commit. It can make it really easy for people to check out a specific point in the history of the code. Technically they are *optional*, but are a very useful tool.
 
 .. note::
@@ -1220,6 +1313,7 @@ Git has a concept of "tagging" - where you can assign a user-friendly label to a
 Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log -n1
     commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -> master, tag: v0.1.1, origin/master, origin/HEAD, bug-unknown-id)
@@ -1238,12 +1332,14 @@ We are going to name our tag :code:`v0.1.1`. The exact format is up to you and p
 Now for the actual tagging:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git tag v0.1.1
     
 To see what tags we've made, we can run :code:`git tag` without any arguments:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git tag
     v0.1.1
@@ -1251,6 +1347,7 @@ To see what tags we've made, we can run :code:`git tag` without any arguments:
 If we wanted to limit what tags we want to see, we can use the :code:`-l` parameter:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git tag -l "v*"
     v0.1.1
@@ -1259,22 +1356,23 @@ If we wanted to limit what tags we want to see, we can use the :code:`-l` parame
 We can remove a tag using the :code:`-d` flag:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git tag -d v0.1.1
     Deleted tag 'v0.1.1' (was e80d483)
     
 
 Remote Vs Local Tags
-====================
-
+--------------------
 So far, we've only used *local* tags. These tags only exist in our working directory - they aren't available in our *remote*, or the repository we cloned. To make a tag remote, we use :code:`git push`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git tag v0.1.1 # need to remake since we deleted it above
     (random_quote) $ git push origin v0.1.1
     Total 0 (delta 0), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
      * [new tag]         v0.1.1 -> v0.1.1
      
 
@@ -1283,6 +1381,7 @@ This is very similar to when we ran :code:`git push` in the last section, but gi
 To delete a remote tag, we need to let :code:`git push` know with the :code:`--delete` flag:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git push origin --delete v0.1.1
      - [deleted]         v0.1.1
@@ -1293,11 +1392,12 @@ To delete a remote tag, we need to let :code:`git push` know with the :code:`--d
     At this point, if you've followed along, we've deleted our tag. It would be a good idea to recreate it. Here's a condensed version of the process:
     
     .. code-block:: console
+       :linenos: none
         
         (random_quote) $ git tag v0.1.1
         (random_quote) $ git push origin v0.1.1
         Total 0 (delta 0), reused 0 (delta 0)
-        To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+        To [...]/random_quote_remote
          * [new tag]         v0.1.1 -> v0.1.1
          
 
@@ -1310,10 +1410,11 @@ However, when you are collaborating with people, you'll often need to give them 
 We use :code:`git push` to do this, just like we did with tags:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git push origin bug-unknown-id
     Total 0 (delta 0), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
      * [new branch]      bug-unknown-id -> bug-unknown-id
      
 .. tip::
@@ -1324,4 +1425,4 @@ Conclusion/What's Next
 ======================
 In this installment, we got a lot more comfortable writing tests and doing stuff with git. At this point, we're ready to do any sort of feature or bug work, and leave a clean commit log when we're done.
 
-In the final part of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.
+In the `final part <{filename}/branching-git-with-pytest-3.rst>`__ of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.

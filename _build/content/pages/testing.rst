@@ -7,7 +7,7 @@ Testing!
 :slug: testing
 :status: hidden
 
-.. include:: ../../emojis.rst
+.. include:: ../../extra.rst
 
 This page exists for testing the style and post-processing of the site outside of actual content.
 
@@ -35,7 +35,17 @@ I've experimented with using various emojis in my text. Here's what they look li
 
 |trademark| - trademark - should be right up against text |trademark|.
 
+|copyright| - copyright sign
+
 |sparkleheart| - sparkling heart
+
+|mortarboard| - face wearing graduation mortarboard
+
+|heart| - regular red heart
+
+|cool| - face wearing sunglasses
+
+|tongue-out| - face with tongue sticking out
 
 Admonitions
 ===========
@@ -99,32 +109,32 @@ Images in a container
 ---------------------
 .. container:: centered
    
-   .. image:: {filename}/images/circuitplayground-express-closeup-neopixel-marked.png
+   .. image:: {static}/images/circuitplayground-express-closeup-neopixel-marked.png
       :width: 20%
       
-   .. image:: {filename}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
+   .. image:: {static}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
       :width: 20%
       
-   .. image:: {filename}/images/trinket-m0-closeup-dotstar-marked.png
+   .. image:: {static}/images/trinket-m0-closeup-dotstar-marked.png
       :width: 20%
       
-   .. image:: {filename}/images/gemma-m0-closeup-dotstar-marked.png
+   .. image:: {static}/images/gemma-m0-closeup-dotstar-marked.png
       :width: 20%
    
 Images on their own
 -------------------
-.. image:: {filename}/images/aligator-clips.png
+.. image:: {static}/images/aligator-clips.png
    :width: 80%
    :align: center
    
-.. image:: {filename}/images/nonblocking-lengths-of-wire.png
+.. image:: {static}/images/nonblocking-lengths-of-wire.png
    :width: 50%
    :align: center
    
 Figures
 -------
 
-.. figure:: {filename}/images/basic-button-event-logic.png
+.. figure:: {static}/images/basic-button-event-logic.png
    :figwidth: 80%
    
    This is the caption for this figure.
@@ -148,3 +158,11 @@ Nested Line Block
 |    Line three is too.
 | Line four is not.
 | Line five is blah.
+
+Roles
+=====
+
+* :code:`code sample`
+* :strike:`strike through text`
+* :boldoblique:`bold oblique (italic) text`
+* :boldcode:`bold code sample`

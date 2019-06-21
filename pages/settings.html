@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Settings - The Collected Works of jjmojojjmojo</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<title>Settings - The Collected Works of jjmojojjmojo</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-    <h1>Settings</h1>
-    
-        <div class="contents">
-            <div id="toc"><ul><li><a class="toc-href" href="#site-wide settings" title="Site-wide Settings">Site-wide Settings</a><ul><li><a class="toc-href" href="#syntax highlighting" title="Syntax Highlighting">Syntax Highlighting</a></li><li><a class="toc-href" href="#toggle explanations" title="Toggle Explanations">Toggle Explanations</a></li><li><a class="toc-href" href="#save/clear" title="Save/Clear">Save/Clear</a></li></ul></li></ul></div>
-        </div>
-    <div class="status-published">
-    
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
+<div id="content-wrapper">
+<h1>Settings</h1>
+<div class="contents">
+<div id="toc"><ul><li><a class="toc-href" href="#site-wide settings" title="Site-wide Settings">Site-wide Settings</a><ul><li><a class="toc-href" href="#syntax highlighting" title="Syntax Highlighting">Syntax Highlighting</a></li><li><a class="toc-href" href="#toggle explanations" title="Toggle Explanations">Toggle Explanations</a></li><li><a class="toc-href" href="#save/clear" title="Save/Clear">Save/Clear</a></li></ul></li></ul></div>
+</div>
+<div class="status-published">
 <h1 id="site-wide settings">Site-wide Settings</h1>
 <p>This page lets you configure a few things about this website. All settings are stored in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API">Local Storage</a>. This means that you may have some trouble if you aren't using fairly modern browsers.</p>
 <h2 id="syntax highlighting">Syntax Highlighting</h2>
@@ -49,7 +54,7 @@
 </select>
 </p>
 <h3>Example</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -59,7 +64,7 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </pre></div>
-</td></tr></table>
+</td></tr></table></div>
 <h2 id="toggle explanations">Toggle Explanations</h2>
 <p>Throughout this site, detailed explanations are provided, but hidden by default. Using the <img class="align-middle" src="/images/book.svg"/> and <img class="align-middle" src="/images/book-open.svg"/> icons, you can show or hide each explanation.</p>
 <p>The state of each explanation you interact with is remembered.</p>
@@ -67,7 +72,6 @@
 <p>
 <input checked="" id="explain-do-nothing" name="choose-explain-toggle" type="radio" value="nothing"/>
 <label for="explain-do-nothing"><img class="align-middle" src="/images/star.svg"/>No Change (Remember Which Explanations Are Open)</label></p>
-
 <p>
 <input id="explain-open-all" name="choose-explain-toggle" type="radio" value="open"/>
 <label for="explain-open-all"><img class="align-middle" src="/images/book-open.svg"/>Open All Explanations</label>
@@ -83,15 +87,13 @@
 <button id="clear"><span class="icon">✘</span> Reset Settings.</button>
 </section>
 <script src="/js/config.js"></script>
-
-
-	</div>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

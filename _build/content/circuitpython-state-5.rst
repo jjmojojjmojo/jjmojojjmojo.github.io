@@ -251,9 +251,9 @@ Here's the code in action on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -480,9 +480,9 @@ Here's what that looks like running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -799,9 +799,9 @@ And the requisite video of this code in action on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 

@@ -2,6 +2,7 @@ About This Site
 ###############
 :slug: about
 :tags: about
+:status: published
 
 .. include:: ../../emojis.rst
 
@@ -25,7 +26,7 @@ If you have comments about, suggestions for, problems with, or just deep persona
 
 About The Author
 ================
-.. figure:: {filename}/images/about/josh-johnson-artists-rendering.png
+.. figure:: {static}/images/about/josh-johnson-artists-rendering.png
    :align: right
    :figwidth: 20%
    :width: 100%
@@ -91,10 +92,10 @@ The book icon |OPEN_BOOK_ICON| is clickable - if you click it, the explanation i
 
 The state of each explanation is stored in your browser, if its supported. You can control the data stored, as well as close or open all explanations on the `settings page </pages/settings.html>`__. You can get there quickly on any page in the site by clicking the gear icon in the right side of the header.
 
-.. |CLOSED_BOOK_ICON| image:: {filename}/images/book.svg
+.. |CLOSED_BOOK_ICON| image:: {static}/images/book.svg
    :align: middle
 
-.. |OPEN_BOOK_ICON| image:: {filename}/images/book-open.svg
+.. |OPEN_BOOK_ICON| image:: {static}/images/book-open.svg
    :align: middle
    
 Code samples are syntax-highlighted for easier readability. They are rendered using my favorite terminal font, `Inconsolata <http://levien.com/type/myfonts/inconsolata.html>`__. Here's an example of some random code:
@@ -132,7 +133,7 @@ Copyright, License, Etc
 =======================
 Copyright
 ---------
-All contents are |copyright| 2018 Josh Johnson. All rights are reserved.
+All contents are |copyright| 2019 Josh Johnson. All rights are reserved.
 
 I keep a listing of content from 3rd parties on `my media sources page <{filename}/pages/image-sources.rst>`__.
 

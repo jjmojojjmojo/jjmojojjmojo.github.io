@@ -2,6 +2,7 @@ How To Contact Josh Johnson
 ###########################
 :slug: contact
 :tags: about
+:status: published
 
 How do you get in contact with the site author?
 

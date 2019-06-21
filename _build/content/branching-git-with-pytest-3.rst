@@ -1,6 +1,6 @@
 Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3
 #########################################################################
-:date: 2019-04-26 9:00
+:date: 2019-07-03 9:00
 :author: jjmojojjmojo
 :category: tutorial
 :tags: python; git; branching; development process
@@ -9,21 +9,19 @@ Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3
 
 .. include:: ../emojis.rst
 
-In the final part of this guide, we'll simulate two developers working concurrently, in their own branches, on source that ends up causing a conflict. We'll learn how to resolve a conflict.
+**This is part three of a three-part series.** This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using `pytest <https://docs.pytest.org>`__ and `git <https://git-scm.com/>`__, via feature branches. Along the way we'll touch on application design and discuss best practices.
+
+In this installment, we will:
+
+* Simulate collaborative work by two developers.
+* Use the workflow we learned in `part 2 <{filename}/branching-git-with-pytest-2.rst>`__ to add a new feature, and fix a new bug.
+* Create a merge conflict and resolve it.
+
+.. PELICAN_END_SUMMARY
 
 Setup
 =====
-As with the last section, you will need to make sure you've got everything set up as outlined in `part 1 <{filename}/branching-git-with-pytest.rst>`__.
-
-.. tip::
-    
-    It's a good idea to review the steps below, but if you want to skip ahead, or you are only interested in this section and want to hit the ground running, you can run the following script:
-    
-    .. code-block:: console
-        
-        $ scripts/setup-part3.sh
-        
-    
+As with part 2, you will need to make sure you've got everything set up as outlined in `part 1 <{filename}/branching-git-with-pytest.rst#setup>`__, and have merged the changes made in `part 2 <{filename}/branching-git-with-pytest-2.rst>`__ to :code:`master`.
 
 Here's a condensed summary:
 
@@ -31,18 +29,21 @@ Here's a condensed summary:
 #. Make a bare clone of the base repository to act as our *remote*:
    
    .. code-block:: console
+      :linenos: none
        
        $ git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
    
 #. Clone our remote:
    
    .. code-block:: console
+      :linenos: none
    
        $ git clone random_quote_remote random_quote
    
 #. Initialize the virtual environment, and install our requirements and project:
    
    .. code-block:: console
+      :linenos: none
         
         $ cd random_quote
         $ python -m venv .
@@ -53,33 +54,46 @@ Here's a condensed summary:
 #. Initialize the database, add some randomly generated quotes:
    
    .. code-block:: console
+      :linenos: none
         
         (random_quote) $ python scripts/generate_quotes.py
         (random_quote) $ python
-        >>>
-   
-   .. code-block:: pycon
-        
         >>> from random_quote import util
         >>> util.init("test.db")
         util.ingest("quotes.csv", "test.db")
    
-#. Add the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__ and `part 2 <{filename}/branching-git-with-pytest-2.rst>`__. If you had trouble or would like to skip all of that, you can simply copy the following files from :code:`scripts/state/part2`:
+#. Add the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__ and `part 2 <{filename}/branching-git-with-pytest-2.rst>`__. If you had trouble or would like to skip all of that, you can simply checkout the :code:`part2` branch
+
+Note that you will have to do this to *each* clone *a* and *b* below.
    
    .. code-block:: console
+      :linenos: none
         
-        (random_quote) $ cp scripts/state/part2/setup.py src/random_quote/
-        (random_quote) $ cp scripts/state/part2/conftest.py src/random_quote/tests/
-        (random_quote) $ cp scripts/state/part2/test_manager.py src/random_quote/tests/
-        (random_quote) $ cp scripts/state/part2/test_wsgi.py src/random_quote/tests/
+        $ cd ../a
+        $ git checkout part2
+        $ cd ../b
+        $ git checkout part2
         
-#. :code:`git commit` and :code:`git push` all of the changes so they'll be available for this part of the guide:
-   
-   .. code-block:: console
-        
-        (random_quote) $ git commit -a -m"Getting up to speed from the last two sections of the guide."
-        (random_quote) $ git push origin master
-        
+   .. tip::
+       
+       |rainbow| We have branches for all of the major work done in the series:
+       
+       :code:`part1`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__.
+       :code:`part2`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__ and
+            `part 2 <{filename}/branching-git-with-pytest-2.rst>`__
+       :code:`qotd`
+            Developer **A**'s feature from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+       :code:`index-info`
+            Developer **B**'s bug fix from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+       :code:`part3`
+            All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__, 
+            `part 2 <{filename}/branching-git-with-pytest-2.rst>`__ *and* `part 3 <{filename}/branching-git-with-pytest-3.rst>`__!
+       
+       Feel free to :code:`git checkout` if you need to reset your code, or jump around.
+       
+       Use :code:`git stash` to keep any uncomitted changes for latter. See `the git documentation <https://git-scm.com/book/en/v1/Git-Tools-Stashing>`__ for more information. |unicorn|
 
 
 Let's Add A Feature, Fix Another Bug, and *Step On Some Toes*!
@@ -96,9 +110,9 @@ This feature has the following requirements:
 
 Developer **"B"** will be fixing a bug: "Root is a 404".
 
-This bug is more of an oversight. Remember when we first tested the app, visiting http://127.0.0.1:8080 would return a 404 "Not Found" error. This is not a great practice, even though it's technically true - we aren't putting anything at the "root" (or :code:`/`) location.
+This bug is more of an oversight. Remember when we first tested the app, visiting http://127.0.0.1:8080 would return a 404 "Not Found" error. This is not a great practice, even though it's technically true, since there is really no resource located at :code:`/`. Most people expect to see some sort of information at the root of a website.
 
-Ideally, we'd see some useful information there instead. So to fix this bug, developer B will be writing up a little info about what endpoints are available to be served when a request for :code:`/` comes in.
+So to fix this bug, developer B will be writing up a little info about what HTTP API endpoints are available to be served when a request for :code:`/` comes in.
 
 The astute reader might notice that these two tasks are in *conflict*. Both developers are changing what a request for :code:`/` returns.
 
@@ -106,16 +120,17 @@ This is good for us, because this makes it possible to walk through how to deal 
 
 .. note::
     
-    In real life, this situation would have been avoided through basic communication. 
+    In real life, this situation would have been avoided through **basic communication**. 
     
     The API is something that shouldn't be altered lightly, and so a discussion amongst developers *should* happen whenever it's going to change.
     
-    However, things like this do happen from time to time. As you'll see below, the process we're using makes these issues a lot less of a problem, when they do crop up. |unicorn|
+    However, things like this do happen from time to time. |unicorn|
     
 
 Before we begin, lets deactivate our virtual environment:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ deactivate
     $ 
@@ -125,9 +140,10 @@ Clone Two Copies Of The Repository
 ==================================
 To get started, lets clone two fresh copies of our :code:`random_quote_remote` bare repository that we made earlier. We'll call them simply :code:`a` and :code:`b` so we don't get confused |cool|.
 
-First, make sure we're in the correct directory.
+Let's make sure we're in the correct directory.
 
 .. code-block:: console
+    :linenos: none
     
     $ cd ..
     $ ls
@@ -136,11 +152,12 @@ First, make sure we're in the correct directory.
     
 We can see from the output of :code:`ls` that our original checkout is present, and the special bare copy we made to use as a remote is there as well.
 
-Next, :code:`git clone` the remote twice.
+Next, we'll :code:`git clone` the remote twice.
 
 Make a copy for developer **A**:
 
 .. code-block:: console
+    :linenos: none
     
     $ git clone random_quote_remote a
     Cloning into 'a'...
@@ -149,21 +166,45 @@ Make a copy for developer **A**:
 And another for developer **B**:
     
 .. code-block:: console
+    :linenos: none
     
     $ git clone random_quote_remote b
     Cloning into 'b'...
     done.
     
+.. note::
+    
+    If you have opted to skip following `part 1 <{filename}/branching-git-with-pytest.rst>`__ and
+    `part 2 <{filename}/branching-git-with-pytest-2.rst>`__, you'll need to :code:`git checkout part2` in each repository before proceeding.
+    
+
+    
 .. tip::
     
-    We're going to work on the feature first, then the bug, so things shouldn't be too confusing. But it might be a good idea to open two terminal windows, and tweak the settings so that they use different titles, or background colors, to help reinforce what's what.
+    We're going to work on the feature first, then the bug, so things shouldn't be too confusing. Pay attention to the shell prompt in the examples, when the :code:`venv` virtual environment is active, the prompt changes to the name of the directory. We've carried the prompt changes through to the examples in this guide, so you'll know what clone you're working on:
+    
+    **Developer A**:
+    
+    .. code-block:: console
+       :linenos: none
+        
+        (a) $ 
+        
+    
+    **Developer B**:
+    
+    .. code-block:: console
+       :linenos: none
+        
+        (b) $ 
+        
     
 
 Develper *A* Builds A New Feature: Quote Of The Day
 ===================================================
-As touched on earlier, we want our code to have an end point that will always return the "quote of the day" for each 24-hour period. We'd also like to keep a historical record of all the previous quotes that were saved.
+As we discussed when covering the feature requirements, we want our code to have an end point that will always return the "quote of the day" for each 24-hour period. We'd also like to keep a historical record of all the previous quotes that were saved.
 
-There are a few ways to approach this, but there are two main aspects that need to be designed:
+There are a few ways to approach this, but there are two sub-features that need to be designed:
 
 #. Generating a random quote every day.
 #. Keeping historical records of past quotes.
@@ -173,6 +214,7 @@ First, Lets Branch
 In repository :code:`a`, create a new branch called :code:`qotd`:
 
 .. code-block:: console
+    :linenos: none
     
     $ cd a
     $ git checkout -b qotd
@@ -184,6 +226,7 @@ Init
 Remember that since this is a fresh clone, we'll need to initialize the virtual environment.
 
 .. code-block:: console
+    :linenos: none
     
     $ python -m venv .
     $ source bin/activate
@@ -194,13 +237,24 @@ Remember that since this is a fresh clone, we'll need to initialize the virtual 
 Next, copy the database file from your other clone:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ cp ../random_quote/test.db .
     
+Or initialize a new one:
+
+.. code-block:: console
+    :linenos: none
+    
+    (random_quote) $ python scripts/generate_quotes.py
+    (random_quote) $ python
+    >>> from random_quote import util
+    >>> util.init("test.db")
+    util.ingest("quotes.csv", "test.db")
 
 Design: Daily Quotes
 --------------------
-Off hand, a few possibilities exist for handling this:
+Off hand, a few possibilities exist for handling this. |thinking|
 
 We could:
 
@@ -208,15 +262,15 @@ We could:
 #. Write a function that will pre-generate random quotes for each day of a given time period. This could also be run by a human, or automated to happen on a given interval (once a year, once a month, etc).
 #. Wait until a quote of the day is requested, generate it on demand and return it, or return the current quote of the day if it's already been generated.
 
-The first two have advantages when the historical listing of previous quotes of the day is important - there will be a quote for every day, and if users need that, those approaches are more useful. There will never be a day (unless the process or function doesn't run or cover a particular day) where a quote isn't generated.
+The first two possibilities have advantages when the historical listing of previous quotes of the day is important. There will be a quote for every day, and if users need that, those approaches are more useful. In either case, there will never be a day (unless the process or function doesn't run or cover a particular day) where a quote isn't generated.
 
-On the other hand, generating quotes on demand means that we'll only ever have quotes for days when *at least one user* requested a quote of the day. The advantage to this is that we never use more data than we needed.
+On the other hand, generating quotes on demand means that we'll only ever have quotes for days when *at least one user* requested a quote of the day. The advantage to this is that we never store more data than we need to. The down-side is that we can't count on any given day to have a quote. If our API has a lot of use, it may never be an issue, but there will likely always be holes in the data. As before, it really depends on how the historical quotes are used.
 
-There are other considerations as well. Generating the quote on demand means that the quote generation happens at most once per day (but also *at least* once per day), whereas the other two options can batch the load of generating quotes. In option 2, we could generate *thousands* of days of quotes if we wanted to, all at once. In this way, pre-populating the quotes takes the burden of generating a quote out of the process of a user requesting a quote of the day.
+There are other considerations as well. Generating the quote on demand means that the quote generation happens at most once per day (but also *at least* once per day), whereas the other two options can batch the load of generating quotes. In option 2, we could generate *thousands* of days of quotes if we wanted to, all at once. In this way, pre-populating the quotes moves the burden of generating a quote away from the process of a user requesting a quote of the day. This keeps the API from becoming less responsive.
 
-Our app is doing simple things and generating a random quote is a pretty quick process. So the impact on users, even if the quote of the day was generated for every single one, would be minimal. But in other cases, pre-loading is preferred, because the cost of generating the data that's being provided to the user is higher and can impact their ability to effectively use the application.
+Our app is doing simple things, and generating a random quote is a pretty quick process. So the impact on users, even if a special quote of the day was generated for every single one, every day, would be minimal. In other applications, pre-loading is preferred, because the cost of generating the data that's being provided to the user can be higher and can impact their ability to effectively use the application. You don't want the fact that you're generating data on the fly to make your API less responsive.
 
-All that considered, our use case is pretty simple, and our process for making a quote of the day is lightweight, so we'll opt to generate our quote of the day on the fly, as needed. We'll build the functionality such that it's easy to automate this process later if generating a quote becomes more expensive, thus getting the best of both worlds.
+All that considered, our use case is simple, and our process for making a quote of the day will be lightweight, so we'll opt to generate our quote of the day on the fly, as needed. We'll build the functionality such that it's easy to automate this process later if generating a quote becomes more expensive, thus getting the best of both worlds.
 
 .. tip::
     
@@ -227,7 +281,7 @@ All that considered, our use case is pretty simple, and our process for making a
 
 Design: Past Quotes Of The Day
 ------------------------------
-The other aspect of this feature is concerned with keeping old quotes around after the day they're generated. 
+The other aspect of this feature is keeping old quotes around after the day they're generated. 
 
 Since we're already using a relational database, it's a good candidate for storing quotes of the day.
 
@@ -240,14 +294,12 @@ We can add a new table, called :code:`quote_of_the_day` to store each generated 
 
 .. tip::
     
-    We are building a rudimentary `cache <https://en.wikipedia.org/wiki/Cache_(computing)>`__ here. This approach is extremely useful in application development, especially web development.
-    
-    Now, we *could* use an outside mechanism to cache this information - a tool like `varnish <https://varnish-cache.org/>`__  (and `many others <https://en.wikipedia.org/wiki/Web_cache#Web_caching_software>`__) can be configured to cache a certain end point such that it refreshes at a given interval, like say, once a day.
+    We are building a rudimentary `cache <https://en.wikipedia.org/wiki/Cache_(computing)>`__ here. This pattern is extremely useful in application development, especially web development.
     
 
 Here's our updated ER diagram:
 
-.. figure:: {filename}/images/branching-git-pytest/er-diagram-second-pass.png
+.. figure:: {static}/images/branching-git-pytest/er-diagram-second-pass.png
    :align: center
    :figwidth: 80%
     
@@ -257,7 +309,7 @@ The new :code:`quote_of_the_day` table consists of four columns:
 
 The other three columns will encode the day, month and year:
 
-* :code:`day`, integer, the day of the year (1-31)
+* :code:`day`, integer, the day of the month (1-31)
 * :code:`month`, integer, the month (1-12)
 * :code:`year`, integer, the year (e.g. 2019)
 
@@ -265,14 +317,16 @@ We'll put a `unique constraint <https://en.wikipedia.org/wiki/Unique_key>`__ on 
 
 By using three columns, we have a few benefits:
 
-* integers are (usually) stored in a form that takes up less space/memory.
-* we can easily get all the quotes for a given month, or year by just using a :code:`WHERE` clause:
-  .. code-block:: sql
-        
-        -- Get all quote id's from March of 2025
-        SELECT quote_id FROM qote_of_the_day WHERE month=3, year=2025
-        
-* we don't have to worry about the *time* portion of the typical date-time storage format (ISO8601, Julian, Unix). This means we don't have to worry about timezones, or what happens when a locale makes a date occur on a different day.
+* Integers are (usually) stored in a form that takes up less space/memory.
+* We can easily get all the quotes for a given month, or year by just using a :code:`WHERE` clause
+   
+   .. code-block:: sql
+       
+       -- Get all quote id's from March of 2025
+       SELECT quote_id FROM qote_of_the_day WHERE month=3, year=2025
+       
+
+* There's no need to worry about the *time* portion of the typical date-time storage format (`ISO8601 <https://en.wikipedia.org/wiki/ISO_8601>`__, `Julian <https://en.wikipedia.org/wiki/Julian_calendar>`__, `Unix <https://en.wikipedia.org/wiki/Unix_time>`__). This means we don't have to be concerned with timezones, or what happens when a `locale <https://en.wikipedia.org/wiki/Locale_(computer_software)>`__ difference makes a given time occur on a different calendar day.
 
 The SQL needed to generate the new table looks like this:
 
@@ -297,11 +351,11 @@ Our new feature will require two new endpoints:
 
 Implementation: Quote Of The Day API
 ------------------------------------
-We'll opt to create a new psuedo-manager class, called :code:`QuoteOfTheDay`. It will be responsible for retrieving a quote for a given day. It will retrieve an existing quote if one is present, generate a new one and save it if not.
+We'll opt to create a new psuedo-manager class, called :code:`QuoteOfTheDay`. It will be responsible for retrieving a quote for a given day. It will retrieve an existing quote if one is present, generate a new one and save it if not. The default will be the current day, but it will be possible to create or retrieve a quote for *any* day in the same manner.
 
 For convenience, we'll add an instance of :code:`QuoteOfTheDay` to :code:`RandomQuoteManager`, as the :code:`qotd` property.
 
-.. figure:: {filename}/images/branching-git-pytest/application-overview-second-pass.png
+.. figure:: {static}/images/branching-git-pytest/application-overview-second-pass.png
    :align: center
    :figwidth: 80%
 
@@ -323,6 +377,7 @@ Before we start, we need to add the new table to our :code:`test.db` file. First
 Next we'll use our :code:`util.init()` function, as we did when originally setting up the database:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ python
     >>> from random_quote.util import init
@@ -459,10 +514,23 @@ Here's the code you need to add.
 
 .. explanation::
     
-    **TODO**
+    We implement :code:`QuoteOfTheDay` as a class.
     
-
-The implementation is fairly straightforward, with the exception of the constructor. We're doing a conditional import to avoid circular imports because of the way the API is set up. This is sub-optimal, but the typical use case will be to provide a :code:`manager` object, so it's more there for the sake of completeness.
+    The constructor, :code:`__init__()` take two parameters. The first, like :code:`RandomQuoteManager` and :code:`RandomQuoteApp` is the path to the sqlite database file.
+    
+    The second parameter is an optional :code:`RandomQuoteManager` instance. If one is provided, it is used as-is. However, if that parameter is omitted, a new instance is created using the passed-in database file.
+    
+    :code:`RandomQuoteManager` will have a corresponding optional :code:`QuoteOfTheDay` instance, so the constructor uses a *conditional import* to prevent issues with a never-ending import cycle. If :code:`random_quote.manager` imports :code:`random_quote.qotd` and :code:`random_quote.qotd` imports :code:`random_quote.manager` in their module scope, it creates a sort of infinite loop of imports.
+    
+    We use this :code:`RandomQuoteManager` instance to get a random quote in the :code:`add()` method.
+    
+    In both cases, the corresponding instance is used to provide an extended API. This is a simplistic form of `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`__, allowing the user to configure their :code:`RandomQuoteManager` to their liking before passing it, or providing a completely different kind of object that implements the same interface.
+    
+    The rest of the module should be fairly self-explanatory.
+    
+    One important thing to note is that the :code:`get()` method automatically calls :code:`add()` in the event that no quote of the day is found for the given date.
+    
+    
 
 We'll also need to add an import to :code:`src/random_quote/__init__.py`, so we can access :code:`QuoteOfTheDay` from the :code:`random_quote.qotd` module:
 
@@ -502,15 +570,17 @@ Next we'll add the :code:`qotd` property to :code:`RandomQuoteManager` via it's 
                 
     ...
     
-
-Note that we've allowed for an optional :code:`qotd` object to be passed to the constructor. If it's not passed, we create a new :code:`QuoteOfTheDay` object. We do this to allow flexibility in terms of re-using objects during testing.
+.. explanation::
+    
+    This change allows for API extension and `dependency injection <https://en.wikipedia.org/wiki/Dependency_injection>`__ that is similar to (and complements) the implementation of :code:`QuoteOfTheDay.__init__()`.
 
 It's a good idea to make a commit after this work is done. This should be second nature by now, but lets walk through the steps, since we're doing something new: adding an untracked file.
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 14
     
-    (random_quote) $ git status
+    (a) $ git status
     On branch qotd
     Changes not staged for commit:
       (use "git add <file>..." to update what will be committed)
@@ -533,15 +603,17 @@ Note that we now have a file we care about in the :code:`Untracked files` sectio
 We have to :code:`git add` it in order to get it into our commit:
 
 .. code-block:: console
+    :linenos: none
     
-    (random_quote) $ git add src/random_quote/qotd.py
+    (a) $ git add src/random_quote/qotd.py
     
 Now, :code:`git status` shows :code:`src/random_quote/qotd.py` as a new file:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 6
     
-    (random_quote) $ git status
+    (a) $ git status
     On branch qotd
     Changes to be committed:
       (use "git reset HEAD <file>..." to unstage)
@@ -564,8 +636,9 @@ Now, :code:`git status` shows :code:`src/random_quote/qotd.py` as a new file:
 Now :code:`git commit`:
 
 .. code-block:: console
+    :linenos: none
     
-    (random_quote) $ git commit -a -m"Added first-pass of quote of the day functionality"
+    (a) $ git commit -a -m"Added first-pass of quote of the day functionality"
     [qotd 53ae911] Added first-pass of quote of the day functionality
      4 files changed, 132 insertions(+), 3 deletions(-)
      create mode 100644 src/random_quote/qotd.py
@@ -679,6 +752,14 @@ Then add the tests to :code:`src/random_quote/tests/test_qotd.py`:
         assert result[2] == quote3
         
     
+.. explanation::
+    
+    This test suite is fairly self-explanatory.
+    
+    The common theme with the test cases is that each test uses the current date or a specific date to identify if a quote is being stored. The :code:`get_quote_id()` helper function assists with this.
+    
+    Essentially, we're running each test, and then checking the database to see if the expected record was inserted.
+    
 
 Lets also add a new test case to :code:`src/random_quote/tests/test_manager.py` to make sure that the :code:`qotd` property exists:
      
@@ -697,11 +778,12 @@ Lets also add a new test case to :code:`src/random_quote/tests/test_manager.py` 
 Run the tests:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a
+    rootdir: [...]/a
     collected 17 items
     
     src/random_quote/tests/test_manager.py .......                            [ 41%]
@@ -774,18 +856,19 @@ Then we need to update the routing, in :code:`__call__()`:
 We can run the http server again and try it out in our browser:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
 If you look at http://127.0.0.1:8080, you'll notice a quote of the day is returned, instead of a 404:
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-root-second-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-root-second-pass.png
    :align: center
    :figwidth: 80%
 
 And loading http://127.0.0.1:8080/qotd returns a list, showing the quote that was just generated:
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-qotd-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-qotd-first-pass.png
    :align: center
    :figwidth: 80%
 
@@ -856,13 +939,14 @@ Then add three new tests to the bottom of the file:
 Running the tests, we see the new ones have been picked up:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 25 26 27
     
     (a) pytest -v src
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/a/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/a/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a
+    rootdir: [...]/a
     collected 20 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED             [  5%]
@@ -892,7 +976,7 @@ Commit your changes.
 
 Version Bump
 ------------
-As we did in `part 2 <{filename}/branching-git-with-pytest-2.rst>`__, change the version in :code:`setup.py`. This time, set the version to :code:`0.2.0`, since we have a new feature that is backwards-compatible with the :code:`0.1.0` version.
+As we did in `part 2 <{static}/branching-git-with-pytest-2.rst>`__, change the version in :code:`setup.py`. This time, set the version to **0.2.0**, since we have a new feature that is backwards-compatible with the **0.1.0** version.
 
 Don't forget to re-install (:code:`pip install -e .`), re-run the tests (:code:`pytest src`), and :code:`git commit` your changes.
 
@@ -903,12 +987,14 @@ Since we've only done this process once, lets walk through it again.
 First we need to :code:`git fetch` any outstanding remote changes:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ git fetch origin master
     
 Next, interactive :code:`git rebase`:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ git rebase -i master
     
@@ -929,11 +1015,12 @@ You can try preserving the old commit messages and adding a summary on the first
 Re-run the tests to make sure nothing went wrong (there should be 20 passing tests):
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a
+    rootdir: [...]/a
     collected 20 items
     
     src/random_quote/tests/test_manager.py .......                            [ 35%]
@@ -948,6 +1035,7 @@ Checkout And Merge :code:`master`
 First, :code:`git checkout` the :code:`master` branch:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ git checkout master
     Switched to branch 'master'
@@ -956,6 +1044,7 @@ First, :code:`git checkout` the :code:`master` branch:
 Then :code:`git merge` to your :code:`qotd` feature branch:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ git merge qotd
     Updating c2a655e..150ba38
@@ -980,6 +1069,7 @@ Push
 Finally, publish the changes using :code:`git push`:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ git push origin master
     Enumerating objects: 25, done.
@@ -988,7 +1078,7 @@ Finally, publish the changes using :code:`git push`:
     Compressing objects: 100% (13/13), done.
     Writing objects: 100% (14/14), 3.44 KiB | 3.44 MiB/s, done.
     Total 14 (delta 6), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
        c2a655e..150ba38  master -> master
        
 
@@ -1000,6 +1090,7 @@ Now, switch to the :code:`b` clone. We're going to pretend that developer **B** 
 First, :code:`deactivate` the virtual environment:
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ deactivate
     $
@@ -1007,12 +1098,14 @@ First, :code:`deactivate` the virtual environment:
 Then change into the :code:`b` directory:
 
 .. code-block:: console
+    :linenos: none
     
     $ cd ../b
     
 Initialize, activate, install, run the tests:
 
 .. code-block:: console
+    :linenos: none
     
     $ python -m venv .
     $ source bin/activate
@@ -1021,7 +1114,7 @@ Initialize, activate, install, run the tests:
     (b) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b
+    rootdir: [...]/b
     collected 10 items
     
     src/random_quote/tests/test_manager.py ......                             [ 60%]
@@ -1031,12 +1124,28 @@ Initialize, activate, install, run the tests:
     
 Note there are only 10 tests. This is because our copy of :code:`master` is from *before* developer **A** did their work.
 
-Next, copy the database file again, from your original :code:`random_quote` checkout (you could also re-inialize it if you'd like):
+Next, copy the database file again, from your original :code:`random_quote` checkout,
 
 .. code-block:: console
+    :linenos: none
     
     (a) $ cp ../random_quote/test.db .
     
+Or re-initialize, if you'd like:
+
+.. code-block:: console
+    :linenos: none
+    
+    (random_quote) $ python scripts/generate_quotes.py
+    (random_quote) $ python
+    >>>
+
+.. code-block:: pycon
+    :linenos: none
+    
+    >>> from random_quote import util
+    >>> util.init("test.db")
+    util.ingest("quotes.csv", "test.db")
 
 Design
 ------
@@ -1051,6 +1160,7 @@ Make The Branch
 Lets check out and create our branch. We'll call this one :code:`index-info`:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git checkout -b index-info
     Switched to a new branch 'index-info'
@@ -1063,6 +1173,7 @@ Lets construct a simple `HTML5 <https://developer.mozilla.org/en-US/docs/Web/Gui
 First, create the new :code:`src/random_quote/static` directory:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ mkdir src/random_quote/static
     
@@ -1111,11 +1222,11 @@ We have an example of how to do this already, in :code:`src/random_quote/util.py
         """
         return os.path.join(os.path.dirname(__file__), "schema.sql")
         
-Here we use Python's built-in special :code:`__file__` variable that returns the path to the currently executing file (`more detail <http://www.blog.pythonlibrary.org/2013/10/29/python-101-how-to-find-the-path-of-a-running-script/>`__). We then use a couple of functions from the `os.path <https://docs.python.org/3/library/os.path.html>`__ module to construct a path in a system-agnostic way.
+Here we use Python's built-in special :code:`__file__` variable that returns the path to the currently executing module (`more detail <http://www.blog.pythonlibrary.org/2013/10/29/python-101-how-to-find-the-path-of-a-running-script/>`__). We then use a couple of functions from the `os.path <https://docs.python.org/3/library/os.path.html>`__ module to construct a path in a system-agnostic way.
 
 .. note::
     
-    Python runs on many platforms, and most code you will write is compatible with all of them. It's best practice to construct paths using :code:`os.path` (or `pathlib <https://docs.python.org/3/library/pathlib.html#module-pathlib>`__). This abstracts away differences like using forward slashes (:code:`/`, unix-like systems) and backward slashes (:code:`\\`, windows), making it easy to switch platforms or run code in different developer environments.
+    Python runs on many platforms, and most code you will write is compatible with all of them. It's best practice to construct paths using :code:`os.path` (or `pathlib <https://docs.python.org/3/library/pathlib.html#module-pathlib>`__). This abstracts away differences like using forward slashes (:code:`/`, unix-like systems) and backward slashes (\\, windows), making it easy to switch platforms or run code in different developer environments.
     
 We can do the same thing with our new :code:`static` directory. But since we may be using it to serve multiple files, we'll add a little extra functionality to request a more specific path if needed. We'll call the function :code:`static()`. Add the following to the end of :code:`src/random_quote/util.py`:
 
@@ -1184,12 +1295,13 @@ And alter the routing:
 Lets start up the web server, and take a quick look:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
 If we visit http://127.0.0.1:8080 in a browser, we will see the new landing page. We can click the links and they should work.
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-root-third-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-root-third-pass.png
    :align: center
    :figwidth: 80%
 
@@ -1205,11 +1317,11 @@ Committing our changes is just like we've done before. Be sure to :code:`git add
 Test For The New Index Page
 ---------------------------
 
-The test for this fix is pretty simplistic. We just need to make sure there isn't a 404 when making a GET request for :code:`/`. We can use :code:`TestApp` to do this, via the :code:`preconfigured_wsgi_app()` fixture established in :code:`src/random_quote/tests/conftest.py`.
+The test for this fix is pretty simplistic. We just need to make sure there isn't a 404 status returned when making a GET request for :code:`/`. We can use :code:`TestApp` to do this, via the :code:`preconfigured_wsgi_app()` fixture established in :code:`src/random_quote/tests/conftest.py`.
 
-We should also make sure we're getting the right *kind* of content, by checking the `Content-Type header <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type>`__.
+We should also make sure we're getting the right *kind* of content, by checking the `Content-Type header <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type>`__. A JSON response (:code:`application/json`), instead of an HTML one (:code:`text/html`) would indicate something went wrong.
 
-Here's the most basic kind of test that meets these criteria. Add it to the end of :code:`src/random_quote/tests/test_wsgi.py`:
+Add this test to the end of :code:`src/random_quote/tests/test_wsgi.py`:
 
 .. code-block:: python
     :linenostart: 67
@@ -1229,14 +1341,15 @@ Here's the most basic kind of test that meets these criteria. Add it to the end 
 We run the tests again to make sure our new case was picked up, and that we didn't break anything else:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 19
     
     (b) $ pytest -v src
     
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/b/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/b/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b
+    rootdir: [...]/b
     collected 11 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED             [  9%]
@@ -1257,7 +1370,7 @@ Commit the tests.
 
 Version Bump
 ------------
-We've fixed a bug, and so we need to change the version number in :code:`setup.py` again. This time, it will be :code:`0.1.2`:
+We've fixed a bug, and so we need to change the version number in :code:`setup.py` again. This time, it will be **0.1.2**:
 
 .. code-block:: python
     :hl_lines: 4
@@ -1277,7 +1390,7 @@ Be sure to :code:`pip install -e .` again and re-run the tests before committing
     
 .. note::
     
-    You'll notice that our version is now a whole rev behind the version we set when adding the "Quote of the day" feature. Remember, in our "b" repository, we're unaware those changes have been made.
+    You'll notice that our version is now a whole minor revision behind the version we set when adding the "Quote of the day" feature. Remember, in our "b" repository, we're unaware those changes have been made.
     
 
 Rebase
@@ -1288,6 +1401,7 @@ Lets proceed to do the rebase as usual.
 First, we need to :code:`git fetch` any remote changes we haven't seen yet:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git fetch
     remote: Enumerating objects: 29, done.
@@ -1295,7 +1409,7 @@ First, we need to :code:`git fetch` any remote changes we haven't seen yet:
     remote: Compressing objects: 100% (16/16), done.
     remote: Total 17 (delta 8), reused 0 (delta 0)
     Unpacking objects: 100% (17/17), done.
-    From /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    From [...]/random_quote_remote
        c2a655e..9057fd0  master     -> origin/master
        
 Unlike the last couple of times we called :code:`git fetch`, we actually have changes to download. This is evidenced by the output above.
@@ -1306,22 +1420,24 @@ Merge, Now With *Problems*
 ==========================
 Now we need to merge :code:`master` with our local :code:`index-info` branch.
 
-First, we need to check out :code:`master`
+First, we check out :code:`master`
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git checkout master
     Switched to branch 'master'
     Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
       (use "git pull" to update your local branch)
       
-Note that git tells us that our branch is behind :code:`origin/master` by 1 commit, and suggests that we use :code:`git pull` to update. :code:`git pull` is like doing a :code:`fetch` followed by :code:`git merge`. 
+Note that git tells us that our branch is behind :code:`origin/master` by 1 commit, and suggests that we use :code:`git pull` to update. :code:`git pull` is like doing a :code:`fetch` followed by :code:`git merge`.
 
 Remember, this isn't *our* branch, all of our changes are still within the :code:`index-info` branch. We're just doing an update of changes to :code:`master`, that should merge without incident.
 
 Lets do a :code:`git pull`:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git pull
     Updating fa45753..5e45295
@@ -1342,6 +1458,7 @@ Lets do a :code:`git pull`:
 You see we've pulled in the changes made to master while we were working. This doesn't affect our code in our local :code:`index-info` branch. For that, we need to :code:`git merge`:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git merge index-info
     Auto-merging src/random_quote/wsgi.py
@@ -1413,6 +1530,7 @@ If you look into :code:`src/random_quote/tests/test_wsgi.py`, you can see what t
 Now :code:`git status` shows the conflicting files:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 5 17 18 19
     
     (b) git status
@@ -1441,7 +1559,9 @@ Now :code:`git status` shows the conflicting files:
         test.db
 
 
-Taking a look at the the other two files in question, we see that the primary issue arises because we're doing two different actions when an HTTP client makes a GET request for :code:`/`. The secondary issue is that we have conflicting version numbers in :code:`setup.py`:
+Taking a look at the the other two files in question, we see that the primary issue arises because we're doing two different actions when an HTTP client makes a GET request for :code:`/`, as you might expect. It's important to note the reason for the conflict is that the *specific lines* that changed are in conflict, not the overall changes. 
+
+The secondary issue is that we have conflicting version numbers in :code:`setup.py`:
 
 :code:`src/random_quote/wsgi.py`:
 
@@ -1477,7 +1597,7 @@ Taking a look at the the other two files in question, we see that the primary is
         )
         
 
-Before we can resolve these conflicts, we need to make a decision about what's the *right* thing to do when a GET request is made for :code:`/`, and what the *correct* version number should be.
+Before we can resolve these conflicts, we need to make a decision about the *right* thing to do when a GET request is made for :code:`/`, and what the *correct* version number should be.
 
 The "Quote Of The Day" feature added a quote of the day at :code:`/`. Our "API Index Information" bug fix added documentation at the same location.
 
@@ -1492,15 +1612,15 @@ The "Quote Of The Day" feature added a quote of the day at :code:`/`. Our "API I
 
 Thinking about it objectively, it's probably best to keep the documentation at :code:`/`. That's the most useful for our users. 
 
-Now, we need to figure out *how* one would request a quote of the day. 
+Now, we need to figure out *how* one would request a quote of the day, if something else is being returned at :code:`/`.
 
-The Quote Of The Day feature put the listing of all quotes of the day on :code:`/qotd`, but that endpoint is probably better suited for returning the today's quote of the day. 
+The Quote Of The Day feature put the listing of all quotes of the day on :code:`/qotd`, but that endpoint is probably better suited for returning today's quote of the day.
 
-So, now we just need a way to present all quotes of the day, so lets do that at :code:`/qotd-history`.
+So, now we just need a way to present all quotes of the day, so lets move that to :code:`/qotd-history`.
 
 Here's an updated path map to show how things route:
 
-.. figure:: {filename}/images/branching-git-pytest/path-map-third-pass.png
+.. figure:: {static}/images/branching-git-pytest/path-map-third-pass.png
    :align: center
    :figwidth: 80%
 
@@ -1509,7 +1629,7 @@ Next, we need to decide which version number to use. In this case, we should con
 
 Developer **B's** version is **0.1.2**, and developer **A's** is **0.2.0**. 
 
-What we'll do is do the next *bug fix* version of the *API update*, which gives us **0.2.1**.
+What we'll do is do the next **bug fix** version (or *patch version*) of the **API update** (or *minor version*), which gives us **0.2.1**.
 
 .. note::
     
@@ -1590,6 +1710,7 @@ To fix this, we need to preserve the case when the request looks for :code:`/`, 
 Before we can do a manual test, we need to add the changes to the database schema. This is done using :code:`util.init()`, run from the interpreter:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ python
     Python 3.7.3 (default, Mar 30 2019, 03:37:43)
@@ -1599,6 +1720,7 @@ Before we can do a manual test, we need to add the changes to the database schem
     
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> from random_quote.util import init
     >>> init("test.db")
@@ -1607,24 +1729,25 @@ Before we can do a manual test, we need to add the changes to the database schem
 Now we can start up :code:`gunicorn` again:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
 And open http://127.0.0.1:8080,
 
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-root-third-pass.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-root-third-pass.png
        :align: center
        :figwidth: 60%
    
 http://127.0.0.1:8080/qotd,
    
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-qotd-second-pass.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-qotd-second-pass.png
        :align: center
        :figwidth: 60%
    
 And http://127.0.0.1:8080/qotd-history
    
-    .. figure:: {filename}/images/branching-git-pytest/screen-cap-qotd-history.png
+    .. figure:: {static}/images/branching-git-pytest/screen-cap-qotd-history.png
        :align: center
        :figwidth: 60%
 
@@ -1729,11 +1852,12 @@ The only conflict is near the bottom, where the 'qotd' tests step on the 'index-
 Now we can run the tests to make sure everything still works:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ pytest src
     ================================ test session starts =================================
     platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b
+    rootdir: [...]/b
     collected 21 items
     
     src/random_quote/tests/test_manager.py .......                                 [ 33%]
@@ -1761,12 +1885,13 @@ Add the following links to :code:`src/random_quote/static/index.html`:
 Start up :code:`gunicorn` again:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ gunicorn -b 127.0.0.1:8080 -t 9999999 -w 1 --reload wsgi:app
     
 If we open http://127.0.0.1:8080 in a browser, the new page is shown, and the links do what they're supposed to.
 
-.. figure:: {filename}/images/branching-git-pytest/screen-cap-root-fourth-pass.png
+.. figure:: {static}/images/branching-git-pytest/screen-cap-root-fourth-pass.png
    :align: center
    :figwidth: 80%
 
@@ -1777,6 +1902,7 @@ Now that we've untangled this mess, we need to finish up the merge.
 :code:`git status` reminds us that we're in the middle of merging:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git status
     On branch master
@@ -1812,6 +1938,7 @@ Now that we've untangled this mess, we need to finish up the merge.
 To finish the merge, we first need to let git know the conflicted files are fixed. We do this by using :code:`git add`:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git add src/random_quote/tests/test_wsgi.py
     (b) $ git add src/random_quote/wsgi.py
@@ -1820,6 +1947,7 @@ To finish the merge, we first need to let git know the conflicted files are fixe
 Now :code:`git status` tells us what we need to do next:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 5 6
     
     (b) $ git status
@@ -1849,9 +1977,10 @@ Now :code:`git status` tells us what we need to do next:
         test.db
         
 
-Now to finish the merge, we just need to do what :code:`git status` is telling us: :code:`git commit`:
+To complete the merge, we just need to do what :code:`git status` is telling us: :code:`git commit`:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git commit -a -m"Resolved API endpoint conflicts"
     [master 36c0796] Resolved API endpoint conflicts
@@ -1859,6 +1988,7 @@ Now to finish the merge, we just need to do what :code:`git status` is telling u
 Now we can :code:`git push` our changes to the remote:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git push origin master
     Enumerating objects: 37, done.
@@ -1867,7 +1997,7 @@ Now we can :code:`git push` our changes to the remote:
     Compressing objects: 100% (18/18), done.
     Writing objects: 100% (23/23), 2.59 KiB | 2.59 MiB/s, done.
     Total 23 (delta 12), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
        9057fd0..5ccabd1  master -> master
        
 Tag The Fixed Version
@@ -1876,11 +2006,12 @@ Tag The Fixed Version
 As a last step, we just need to :code:`git tag` our new version, and push it to the remote:
 
 .. code-block:: console
+    :linenos: none
     
     (b) $ git tag v0.2.1
     (b) $ git push origin v0.2.1
     Total 0 (delta 0), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
      * [new tag]         v0.2.1 -> v0.2.1
      
 Conclusion

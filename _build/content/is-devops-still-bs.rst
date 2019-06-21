@@ -25,7 +25,7 @@ Fun fact about me: I'm from the mid-west (Iowa to be precise). There's something
 
 I'm not sure what it is exactly, but for people like me ambition is often difficult to muster. We see jobs as long-term investments in service, not stepping stones on a path to what we really want out of life.
 
-.. image:: {filename}/images/is-devops-still-bs/you-gotta-do-what-you-gotta-do.jpg
+.. image:: {static}/images/is-devops-still-bs/you-gotta-do-what-you-gotta-do.jpg
    :width: 80%
    :align: center
 

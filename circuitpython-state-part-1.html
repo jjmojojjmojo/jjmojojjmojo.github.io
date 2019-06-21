@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>   State And Events In CircuitPython: Part 1: Setup - The Collected Works of jjmojojjmojo 
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<title>   State And Events In CircuitPython: Part 1: Setup - The Collected Works of jjmojojjmojo 
 </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
-        <link href="/feeds/category.tutorial.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
-        <link href="/feeds/category.tutorial.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
-
-
-    <meta name="tags" content="circuitpython" />
-    <meta name="tags" content="python" />
-    <meta name="tags" content="hardware" />
-    <meta name="tags" content="state" />
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="python" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/circuitpython-state-part-1.html" rel="bookmark"
-         title="Permalink to State And Events In CircuitPython: Part 1: Setup">State And Events In CircuitPython: Part 1: Setup</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2018-08-27T13:01:00-04:00">
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/circuitpython-state-part-1.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 1: Setup">State And Events In CircuitPython: Part 1: Setup</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-08-27T13:01:00-04:00">
       Mon 27 August 2018
     </time>
-    <address class="vcard author">
+<address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
-    </address>
-  </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#the project, the platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions: keeping the code simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion and what" next'="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
-    </div>
-  <div class="entry-content status-published">
-    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#the project, the platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions: keeping the code simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion and what" next="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
+</div>
+<div class="entry-content status-published">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>This is the first article in a series that explores concepts of <em>state</em> in CircuitPython.</p>
 <p>In this installment, we discuss the platform we're using (both CircuitPython and the Adafruit M0/M4 boards that support it), and build a simple circuit for demonstration purposes. We'll also talk a bit about <em>abstraction</em>.</p>
 <p>This series is intended for people who are new to Python, programming, and/or microcontrollers, so there's an effort to explain things as thoroughly as possible. However, experience with basic Python would be helpful.</p>
-
 <div class="section" id="the-project-the-platform">
 <h2 id="the project, the platform">The Project, The Platform</h2>
 <p>All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.</p>
@@ -123,10 +124,10 @@
 <p>To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.</p>
 <p>It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.</p>
 <div class="centered docutils container">
-<img alt="" src="/images/circuitplayground-express-closeup-neopixel-marked.png" style="width: 20%;"/>
-<img alt="" src="/images/itsybitsy-m0-express-closeup-dotstar-marked.png" style="width: 20%;"/>
-<img alt="" src="/images/trinket-m0-closeup-dotstar-marked.png" style="width: 20%;"/>
-<img alt="" src="/images/gemma-m0-closeup-dotstar-marked.png" style="width: 20%;"/>
+<a href="/images/fullsize/circuitplayground-express-closeup-neopixel-marked.jpg"><img alt="" sizes="(min-width: 1696.0px) 320px,(min-width: 1272.0px) 240px,(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/circuitplayground-express-closeup-neopixel-marked.jpg" srcset="/images/responsive/circuitplayground-express-closeup-neopixel-marked-1600.jpg 1600w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-1200.jpg 1200w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-1000.jpg 1000w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-800.jpg 800w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-400.jpg 400w,/images/responsive/circuitplayground-express-closeup-neopixel-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/itsybitsy-m0-express-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/itsybitsy-m0-express-closeup-dotstar-marked.jpg" srcset="/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-800.jpg 800w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-400.jpg 400w,/images/responsive/itsybitsy-m0-express-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/trinket-m0-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/trinket-m0-closeup-dotstar-marked.jpg" srcset="/images/responsive/trinket-m0-closeup-dotstar-marked-1000.jpg 1000w,/images/responsive/trinket-m0-closeup-dotstar-marked-800.jpg 800w,/images/responsive/trinket-m0-closeup-dotstar-marked-400.jpg 400w,/images/responsive/trinket-m0-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
+<a href="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg" srcset="/images/responsive/gemma-m0-closeup-dotstar-marked-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-dotstar-marked-800.jpg 800w,/images/responsive/gemma-m0-closeup-dotstar-marked-400.jpg 400w,/images/responsive/gemma-m0-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
@@ -177,7 +178,7 @@
 <h3>The Development Board</h3>
 <p>Any of the M0 or M4 based boards <a class="reference external" href="https://www.adafruit.com/category/957">sold by Adafruit</a> should be compatible with the code in this article.</p>
 <p>I am fortunate to own, in part due to recent attendance at PyCon 2018, <em>four</em> examples of the M0 boards, and have tested the code on each:</p>
-<img alt="" class="align-center" src="/images/nonblocking-m0-boards-2.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-m0-boards-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-m0-boards-2.jpg" srcset="/images/responsive/nonblocking-m0-boards-2-2500.jpg 2500w,/images/responsive/nonblocking-m0-boards-2-2000.jpg 2000w,/images/responsive/nonblocking-m0-boards-2-1800.jpg 1800w,/images/responsive/nonblocking-m0-boards-2-1600.jpg 1600w,/images/responsive/nonblocking-m0-boards-2-1200.jpg 1200w,/images/responsive/nonblocking-m0-boards-2-1000.jpg 1000w,/images/responsive/nonblocking-m0-boards-2-800.jpg 800w,/images/responsive/nonblocking-m0-boards-2-400.jpg 400w,/images/responsive/nonblocking-m0-boards-2-200.jpg 200w" style="width: 80%;"/></a>
 <p>From left to right, we have
 the <a class="reference external" href="https://www.adafruit.com/product/3333">CircuitPlayground Express</a>,
 the <a class="reference external" href="https://www.adafruit.com/product/3727">ItsyBitsy M0 Express</a>,
@@ -185,7 +186,7 @@ the <a class="reference external" href="https://www.adafruit.com/product/3500">T
 and the <a class="reference external" href="https://www.adafruit.com/product/3500">GEMMA M0</a>. There's also a <a class="reference external" href="https://en.wikipedia.org/wiki/Quarter_(United_States_coin)">quarter</a> for scale. On the whole, these things are <em>tiny</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<img alt="" class="align-right" src="/images/gemma-m0-closeup-obverse.png" style="width: 20%;"/>
+<a href="/images/fullsize/gemma-m0-closeup-obverse.jpg"><img alt="" class="align-right" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-obverse.jpg" srcset="/images/responsive/gemma-m0-closeup-obverse-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-obverse-800.jpg 800w,/images/responsive/gemma-m0-closeup-obverse-400.jpg 400w,/images/responsive/gemma-m0-closeup-obverse-200.jpg 200w" style="width: 20%;"/></a>
 <p>The GEMMA M0 I have is a special edition that was included in the SWAG bag at PyCon 2018 in Cleveland Ohio. It's functionally identical to the GEMMA you get from the Adafruit shop but it's a different color and has a special Pycon 2018 marking on the back.</p>
 <p class="last">There was not a lot of fanfare about it, but I did find a <a class="reference external" href="https://www.youtube.com/watch?v=71eAnJeQu2U">video by Dan Bader</a> talking about it, and a great <a class="reference external" href="https://bigl.es/friday-fun-adafruit-gemma-m0-and-neopixels/">blog post by Les Pounder</a> putting it through its paces.</p>
 </div>
@@ -218,13 +219,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>The most common way to connect components in projects like ours is to use "jumper" wire - the term refers to the fact that the wire shorts (jumps) two points.</p>
 <p>These are essential when working with breadboards.</p>
 <p>You can make your own jumper wires using cut and stripped lengths of wire. The best to use for breadboard work is 22-gauge insulated wire, but anything that's conductive and between 18 and 24-guage should work.</p>
-<img alt="" class="align-center" src="/images/solid-core-jumper-wires.png" style="width: 80%;"/>
+<a href="/images/fullsize/solid-core-jumper-wires.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/solid-core-jumper-wires.jpg" srcset="/images/responsive/solid-core-jumper-wires-2500.jpg 2500w,/images/responsive/solid-core-jumper-wires-2000.jpg 2000w,/images/responsive/solid-core-jumper-wires-1800.jpg 1800w,/images/responsive/solid-core-jumper-wires-1600.jpg 1600w,/images/responsive/solid-core-jumper-wires-1200.jpg 1200w,/images/responsive/solid-core-jumper-wires-1000.jpg 1000w,/images/responsive/solid-core-jumper-wires-800.jpg 800w,/images/responsive/solid-core-jumper-wires-400.jpg 400w,/images/responsive/solid-core-jumper-wires-200.jpg 200w" style="width: 80%;"/></a>
 <p>You can also buy "pre-made" jumpers. These are usually flexible stranded wire with "boots" or plastic shields covering the ends. They come in various lengths, colors, and combinations of "genders". "Female" refers to receptive connectors, and "male" refers to protruding ones.</p>
 <p>For most projects (including this one), "male-to-male" wires are the go-to form.</p>
-<img alt="" class="align-center" src="/images/premade-jumper-wires-organized.png" style="width: 80%;"/>
+<a href="/images/fullsize/premade-jumper-wires-organized.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/premade-jumper-wires-organized.jpg" srcset="/images/responsive/premade-jumper-wires-organized-2500.jpg 2500w,/images/responsive/premade-jumper-wires-organized-2000.jpg 2000w,/images/responsive/premade-jumper-wires-organized-1800.jpg 1800w,/images/responsive/premade-jumper-wires-organized-1600.jpg 1600w,/images/responsive/premade-jumper-wires-organized-1200.jpg 1200w,/images/responsive/premade-jumper-wires-organized-1000.jpg 1000w,/images/responsive/premade-jumper-wires-organized-800.jpg 800w,/images/responsive/premade-jumper-wires-organized-400.jpg 400w,/images/responsive/premade-jumper-wires-organized-200.jpg 200w" style="width: 80%;"/></a>
 <p>Jumper wires will be required for any of the demo circuits for the ItsyBitsy or the Trinket. The GEMMA and CircuitPlayground will require other connectors, since they have those lilly-pad-style pads instead of standard pins.</p>
 <p>Eventually, you'll collect many of these lengths of wire, and will want to show them off, maybe by keeping them in a special drawer. 😀</p>
-<img alt="" class="align-center" src="/images/nonblocking-lengths-of-wire.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-lengths-of-wire.jpg"><img alt="" class="align-center" sizes="(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-lengths-of-wire.jpg" srcset="/images/responsive/nonblocking-lengths-of-wire-400.jpg 400w,/images/responsive/nonblocking-lengths-of-wire-200.jpg 200w" style="width: 80%;"/></a>
 </div>
 <div class="section" id="alligator-clips">
 <h4>Alligator Clips</h4>
@@ -232,13 +233,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>You can use alligator clips to connect anything conductive.</p>
 <p>Alligator clips are essential for prototyping and general use of the "lilypad" style boards, like the GEMMA and CircuitPlayground.</p>
 <p>In the demo circuits below, standard alligator clips aren't used, but they're a good addition to your toolbox, especially if you have one of the "lilypad" style boards.</p>
-<img alt="" class="align-center" src="/images/aligator-clips.png" style="width: 80%;"/>
+<a href="/images/fullsize/aligator-clips.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/aligator-clips.jpg" srcset="/images/responsive/aligator-clips-2500.jpg 2500w,/images/responsive/aligator-clips-2000.jpg 2000w,/images/responsive/aligator-clips-1800.jpg 1800w,/images/responsive/aligator-clips-1600.jpg 1600w,/images/responsive/aligator-clips-1200.jpg 1200w,/images/responsive/aligator-clips-1000.jpg 1000w,/images/responsive/aligator-clips-800.jpg 800w,/images/responsive/aligator-clips-400.jpg 400w,/images/responsive/aligator-clips-200.jpg 200w" style="width: 80%;"/></a>
 </div>
 <div class="section" id="alligator-clip-to-jumper-wire">
 <h4>Alligator Clip To Jumper Wire</h4>
 <p>This is a variant connector that combines a alligator-style clip to a flexible jumper cable. They also come in different "genders".</p>
 <p>We'll be using some of these in the "alligator-to-male" variety for the GEMMA version of the demo circuit.</p>
-<img alt="" class="align-center" src="/images/aligator-to-jumper.png" style="width: 80%;"/>
+<a href="/images/fullsize/aligator-to-jumper.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/aligator-to-jumper.jpg" srcset="/images/responsive/aligator-to-jumper-2500.jpg 2500w,/images/responsive/aligator-to-jumper-2000.jpg 2000w,/images/responsive/aligator-to-jumper-1800.jpg 1800w,/images/responsive/aligator-to-jumper-1600.jpg 1600w,/images/responsive/aligator-to-jumper-1200.jpg 1200w,/images/responsive/aligator-to-jumper-1000.jpg 1000w,/images/responsive/aligator-to-jumper-800.jpg 800w,/images/responsive/aligator-to-jumper-400.jpg 400w,/images/responsive/aligator-to-jumper-200.jpg 200w" style="width: 80%;"/></a>
 </div>
 </div>
 <div class="section" id="the-demo-circuit">
@@ -260,14 +261,14 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>I've used three different kinds of breadboards I had on hand, and mixed up the kinds of connectors a bit to illustrate some different ways of wiring up the buttons.</p>
 <div class="section" id="gemma-m0">
 <h4>Gemma M0</h4>
-<img alt="" class="align-center" src="/images/nonblocking-gemma-demo-circuit.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-gemma-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-gemma-demo-circuit.jpg" srcset="/images/responsive/nonblocking-gemma-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-gemma-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-gemma-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-gemma-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-gemma-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-gemma-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-gemma-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-gemma-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-gemma-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>With the Gemma, I used a "mini" breadboard. These breadboards are split into two halves by the screw holes at the top and bottom, and the "trench" in the middle. The tie points are connected in groups of five, running left to right. I've installed the buttons such that they straddle the trench. This was necessary because of a little plastic bit that sticks out between the pins.</p>
 <p>I wanted to make sure I had easy access to the buttons, so I put all of the jumper connections on the left side. On the right side, I made a little ground "bus" by tying together the rows where I needed to connect the buttons to ground with some solid-core wire. I tied the ground jumper/alligator clip to the "bus" using a little piece of wire over the screw hole.</p>
 <p>I clipped the black alligator clip to ground, the white one (button "A") to "D1" (also marked "A0" if you use it as an analog pin), and the yellow clip/button to "D0" ("A2").</p>
 </div>
 <div class="section" id="itsybitsy-m0-express">
 <h4>ItsyBitsy M0 Express</h4>
-<img alt="" class="align-center" src="/images/nonblocking-itsybitsy-demo-circuit.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg" srcset="/images/responsive/nonblocking-itsybitsy-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-itsybitsy-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-itsybitsy-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>For the ItsyBitsy, I used a full-sized breadboard. On these breadboards, they have a similar split and trench down the middle. They also have a long bus on each side (top and bottom in this picture) marked negative and positive. Each group of tie points are connected. We've used them to run power from the ItsyBitsy to the rest of the board.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
@@ -282,7 +283,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 <div class="section" id="trinket-m0">
 <h4>Trinket M0</h4>
-<img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-trinket-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-trinket-demo-circuit.jpg" srcset="/images/responsive/nonblocking-trinket-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-trinket-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-trinket-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-trinket-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-trinket-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-trinket-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-trinket-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-trinket-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-trinket-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>For the Trinket, I used a standard "half-sized" breadboard. It's just like the "full sized" on I used for the ItsyBitsy, but it's... half the size 🤔.</p>
 <p>For this circuit, I used pre-made jumper wires exclusively.</p>
 <div class="admonition tip">
@@ -309,7 +310,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Abstraction helps by providing a single, simplified <em>interface</em> to do things that may have a lot of complexity.</p>
 <p>For example, instead of building an abstraction module like we're doing below, we could have a bunch of <tt class="docutils literal">if</tt> statements that, given we have a way to figure out what board we're running our code on, set up the right pins or pixels for us.</p>
 <p>Something like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -345,7 +346,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
   <span class="n">use</span> <span class="n">pins</span> <span class="n">D0</span> <span class="ow">and</span> <span class="n">D1</span>
   <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
 </pre></div>
-</td></tr></table><p>The problem with this approach is that, besides being messy, it's adding a lot of extra places where our code could break. And every new board you want to use adds more complexity.</p>
+</td></tr></table></div><p>The problem with this approach is that, besides being messy, it's adding a lot of extra places where our code could break. And every new board you want to use adds more complexity.</p>
 <p>But more importantly, you have to know <em>every detail</em> of <em>every board</em> you might use. Maybe someone wants to use our code and their LED is on pin 3. Maybe they are using touch pads instead of buttons. Maybe there's some new-fangled RGB LED product (we'll call them SunSpots&trade; 😉) that someone wants to use.</p>
 <p>If we have this chain of <tt class="docutils literal">if</tt>'s, its up to <em>us</em> to add in support for these different ways of doing what we want to do.</p>
 <p>In an abstraction, we decide on a standard way of accessing the code, or <em>interface</em>. That means we decide that variables and functions will be named a certain way. Functions will take certain parameters and return specific kinds of values.</p>
@@ -358,7 +359,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Another term for this, that you'll hear used sometimes in computer science, is <em>contract</em>. I think that describes what the abstraction does a bit more concisely - you are saying to someone who wants to use your code "I promise that you can rely on my code working this way", and the user is saying "I agree to do things your way".</p>
 <p>As long as the code for each board follows the contract, and anyone using the board-specific code does so through the interface, everything works in an interchangeable way.</p>
 <p>I like to think about the interface in terms of the actual variables and functions you use, and the contract as the understanding of what inputs and outputs the interface uses, as well as the things the interface does when you call the functions or access the variables:</p>
-<img alt="" class="align-center" src="/images/abstraction-explained-1.png" style="width: 80%;"/>
+<a href="/images/fullsize/abstraction-explained-1.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/abstraction-explained-1.jpg" srcset="/images/responsive/abstraction-explained-1-2500.jpg 2500w,/images/responsive/abstraction-explained-1-2000.jpg 2000w,/images/responsive/abstraction-explained-1-1800.jpg 1800w,/images/responsive/abstraction-explained-1-1600.jpg 1600w,/images/responsive/abstraction-explained-1-1200.jpg 1200w,/images/responsive/abstraction-explained-1-1000.jpg 1000w,/images/responsive/abstraction-explained-1-800.jpg 800w,/images/responsive/abstraction-explained-1-400.jpg 400w,/images/responsive/abstraction-explained-1-200.jpg 200w" style="width: 80%;"/></a>
 <p>For this simple abstraction, I've decided to make five Python objects that define our interface:</p>
 <ul class="simple">
 <li>A pixel object (<tt class="docutils literal">rgb</tt>)</li>
@@ -369,7 +370,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>These are the bits of code used by the demo project that will be different from board to board.</p>
 <p>We'll put them into a Python module called <tt class="docutils literal">setup</tt>. Python modules are usually just Python files, so we'll store our abstraction in a file called <tt class="docutils literal">setup.py</tt>.</p>
 <p>To use our abstraction, we just need to <tt class="docutils literal">import setup</tt> and then we can access, for example, <tt class="docutils literal">setup.rgb</tt> to mess with the RGB pixel. That actual variable might be a NeoPixel. It might be a DotStar. It might be something we've never heard of (like a SunSpot&trade;). It could be wired to any pin, configured any way. It doesn't matter. As long as that <tt class="docutils literal">rgb</tt> object works the same way (has the same interface) as a DotStar or NeoPixel, it complies with the <em>contract</em> and everything works:</p>
-<img alt="" class="align-center" src="/images/abstraction-explained-2.png" style="width: 80%;"/>
+<a href="/images/fullsize/abstraction-explained-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/abstraction-explained-2.jpg" srcset="/images/responsive/abstraction-explained-2-2500.jpg 2500w,/images/responsive/abstraction-explained-2-2000.jpg 2000w,/images/responsive/abstraction-explained-2-1800.jpg 1800w,/images/responsive/abstraction-explained-2-1600.jpg 1600w,/images/responsive/abstraction-explained-2-1200.jpg 1200w,/images/responsive/abstraction-explained-2-1000.jpg 1000w,/images/responsive/abstraction-explained-2-800.jpg 800w,/images/responsive/abstraction-explained-2-400.jpg 400w,/images/responsive/abstraction-explained-2-200.jpg 200w" style="width: 80%;"/></a>
 <p>🦄 There's even a nested abstraction here. Adafruit has already abstracted the pixel code away for us, by giving the <tt class="docutils literal">DotStar</tt> and <tt class="docutils literal">NeoPixel</tt> classes the same interface. So we can interact with a string of NeoPixels in the same way we can interact with a string of DotStars.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
@@ -383,7 +384,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 <div class="section" id="for-the-circuitplayground">
 <h3>For the CircuitPlayground</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -431,7 +432,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -458,7 +459,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p class="first admonition-title">Note</p>
 <p class="last">Be sure to change the pin numbers to reflect how you wired up your buttons.</p>
 </div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -506,7 +507,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -530,10 +531,10 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <div class="section" id="how-it-works">
 <h3>How It Works</h3>
 <p>To use this in our other code (<tt class="docutils literal">code.py</tt>), we just need to use Python's <tt class="docutils literal">import</tt> statement:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 </pre></div>
-</td></tr></table><p>Now, in our code, we use the <tt class="docutils literal">led</tt> variable to turn the red LED on/off, and use <tt class="docutils literal">rgb</tt> to control the NeoPixel/DotStar. We will use the <tt class="docutils literal">check()</tt> function to see if a button is being pressed, like this:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+</td></tr></table></div><p>Now, in our code, we use the <tt class="docutils literal">led</tt> variable to turn the red LED on/off, and use <tt class="docutils literal">rgb</tt> to control the NeoPixel/DotStar. We will use the <tt class="docutils literal">check()</tt> function to see if a button is being pressed, like this:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -551,7 +552,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s2">"Button B has not been pressed"</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</td></tr></table></div></div>
 </div>
 <div class="section" id="testing">
 <h2 id="testing">Testing</h2>
@@ -567,7 +568,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p class="last">If you aren't familiar with this process, check out the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries</a> section of the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">"Welcome To CircuitPython"</a> guide.</p>
 </div>
 <p>Also make sure you have created a <tt class="docutils literal">setup.py</tt> module, as explained in <a class="reference internal" href="#abstractions-keeping-the-code-simple">the last section</a>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -591,7 +592,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -626,15 +627,14 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p class="last">Part 2 is now complete! <a class="reference external" href="/circuitpython-state-part-2.html">Go on to Part 2</a></p>
 </div>
 </div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

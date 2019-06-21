@@ -56,7 +56,7 @@ Remember how we mapped those analogies to our electronics projects:
 
 Recall the **three phases of working with state**:
 
-.. image:: {filename}/images/nonblocking-state-flowchart.png
+.. image:: {static}/images/nonblocking-state-flowchart.png
    :width: 60%
    :align: center
 
@@ -1051,7 +1051,7 @@ Because of the way class inheritance works, the code that we override will be ex
 
 Lets look at a graphic that illustrates this concept in generic terms.
 
-.. image:: {filename}/images/polymorphism-explained.png
+.. image:: {static}/images/polymorphism-explained.png
    :width: 80%
    :align: center
    
@@ -1059,7 +1059,7 @@ In our implementation, we'll be overriding the ``read_input()`` and ``set_color(
 
 Lets take the temperature sensor class, which we'll call ``TemperatureStatus``, as an example. If we modeled it in the style of the concept drawing above, it would look like this:
 
-.. image:: {filename}/images/nonblocking-polymorphism.png
+.. image:: {static}/images/nonblocking-polymorphism.png
    :width: 80%
    :align: center
    

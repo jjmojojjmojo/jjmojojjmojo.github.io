@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<title>   State And Events In CircuitPython: Part 4: Example Application - The Collected Works of jjmojojjmojo 
+</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="python" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
+</head>
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/drafts/circuitpython-state-part-5.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 4: Example Application">State And Events In CircuitPython: Part 4: Example Application</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-06-11T15:07:00-04:00">
+      Mon 11 June 2018
+    </time>
+<address class="vcard author">
+      By           <a class="url fn" href="/author/lionfacelemonface.html">lionfacelemonface</a>
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#example application: blink controller" title="Example Application: Blink Controller">Example Application: Blink Controller</a></li></ul></div>
+</div>
+<div class="warning">
+<h2>WARNING</h2>
+  You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
+  </div>
+<div class="entry-content status-draft">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+<!-- emoji for some reason - better to do this since I can replace these with -->
+<!-- icons or whatever I want) -->
+<div class="section" id="example-application-blink-controller">
+<h2 id="example application: blink controller">Example Application: Blink Controller</h2>
+<p>Now that we've established a pattern for working with state, and have a generic event dispatch class for button presses, we can build a more realistic application.</p>
+<p>This will illustrate how to use the <tt class="docutils literal">ButtonDispatch</tt> class with your own variation of the <tt class="docutils literal">State</tt> class to construct a project complex functionality with pretty simplistic code.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">An even more elaborate application can be explored in my <a class="reference external" href="/drafts/touchmouse.html">touch mouse project</a> 🐭 !</p>
+</div>
+<p>We'll use the state object for more than just tracking button state. We'll also use it to handle general on/off, as well regular flashing of two LEDs: the built-in red LED on pin 13, and the onboard RGB NeoPixel or DotStar. We'll also track the color of the NeoPixel/DotStar.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This is the culmination of all the test and example code we've been using throughout this article. 🦄</p>
+</div>
+<div class="section" id="phase-1">
+<h3>Phase 1</h3>
+<p>For a first pass, lets just control the red LED on pin 13. When the board boots, the LED will blink at a slow rate. If you press button A, the blink rate will increase. There will be 5 blink rates, and when you reach the fastest rate, pressing the A button again will reset back to the slowest one.</p>
+<p>The B button will enable/disable the LED, but won't affect the blink rate.</p>
+<p>In our new <tt class="docutils literal">State</tt> class, we'll be tracking the status of the LED, its current blink rate, whether the LED should be on or off (enabled), and the last time we flashed it.</p>
+<p>We'll be using the same technique to flash the LED that we use to debounce the buttons - stash the current value <tt class="docutils literal">time.monotonic()</tt> in a variable, and every cycle compare that variable to the latest value. When enough time has elapsed, toggle the LED on or off, and update the variable.</p>
+<p>We'll continue using the <tt class="docutils literal">__call__()</tt> method to handle updating the state, but this time we'll be deciding whether the LED should be on or off based on the <tt class="docutils literal">enabled</tt> attribute and the flashing logic outlined above.</p>
+<p>We're going to make a slight change to the <tt class="docutils literal">ButtonDispatcher</tt> class, to accommodate the fact that our state object is no longer a dictionary. We have to use the <tt class="docutils literal">getattr()</tt> and <tt class="docutils literal">setattr()</tt> functions to alter the state object. These functions let you access arbitrary attributes (properties) on an object, so we can use the <tt class="docutils literal">token</tt> property to dynamically alter the state object.</p>
+<p>We also changed from calling the button state slots "A-holding" and "B-holding" to "A_holding" and "B_holding", since dashes are not valid in attribute names in Python.</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flash</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flash</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_flash</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">flash</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">ButtonDispatch</span><span class="p">:</span>
+    <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">_hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># global state object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c1"># state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="c1"># get the state of the button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
+
+        <span class="c1"># event handlers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="o">=</span> <span class="n">press</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="o">=</span> <span class="n">release</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="o">=</span> <span class="n">hold</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
+
+    <span class="nd">@holding.setter</span>
+    <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="nd">@state.setter</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+        <span class="c1"># button has been held</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hold_threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hold</span><span class="p">()</span>
+
+        <span class="c1"># button has been pressed</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">press</span><span class="p">()</span>
+
+        <span class="c1"># button has been released</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>  <span class="s2">"&lt;Button {}|Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">flash</span> <span class="o">-=</span> <span class="mf">0.4</span>
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">flash</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">flash</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Flash: "</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">flash</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
+        <span class="n">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span>
+        <span class="err">﻿</span><span class="k">print</span><span class="p">(</span><span class="s2">"Enabled? "</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+
+<span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
+        <span class="n">dispatch</span><span class="p">()</span>
+
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h4>Explanation</h4>
+<div class="docutils container">
+</div>
+<p>On <strong>lines 4-25</strong>, we have our <em>fully encapsulated</em> state class. This is very similar to what we've used in previous sections, except that it's tracking different things.</p>
+<p>Note the state attributes (<strong>lines 6-13</strong>):
+* <tt class="docutils literal">A</tt> and <tt class="docutils literal">B</tt> are the state of each button. These names come from the <tt class="docutils literal">token</tt> that gets passed to the <tt class="docutils literal">ButtonDispatch</tt> constructor.
+* <tt class="docutils literal">A_holding</tt> and <tt class="docutils literal">B_holding</tt> track whether the buttons are being held down. These names are also generated based on the <tt class="docutils literal">token</tt> passed to the <tt class="docutils literal">ButtonDispatch</tt> constructor. Note that these differ from the key names we used for the same purpose in the last example (<tt class="docutils literal"><span class="pre">A-holding</span></tt> and <tt class="docutils literal"><span class="pre">B-holding</span></tt>). We've replaced the dash (<tt class="docutils literal">-</tt>) with an underscore (<tt class="docutils literal">_</tt>) because dashes are not valid in variable names.
+* <tt class="docutils literal">led</tt> tracks the state of the red LED on pin 13.
+* <tt class="docutils literal">flash</tt> tracks the blinking rate of the red LED, in seconds. This is a <em>delay</em>, so larger numbers mean a slower blink/flash rate.
+* <tt class="docutils literal">last_flash</tt> is our clock check-in attribute specifically for the flashing of the LED. This attribute is used in consort with <tt class="docutils literal">flash</tt> to blink the LED at the set rate.
+* Finally, <tt class="docutils literal">enabled</tt> tracks whether the LED should be blinking or not. It acts like an on/off switch, but it doesn't interrupt the flashing sequence - this is necessary because blinking the LED is really just turning it on and off - we need to be able to separately track turning the <em>whole sequence</em> on and off.</p>
+<p>In <tt class="docutils literal">__call__()</tt> (<strong>lines 15-25</strong>), we handle all of the logic necessary to blink the LED.</p>
+<p><strong>Lines 16-18</strong> handle the on/off state of the whole sequence. If <tt class="docutils literal">enabled</tt> is <tt class="docutils literal">False</tt>, the method sets the <tt class="docutils literal">led</tt> state to <tt class="docutils literal">False</tt> and then <em>short circuits</em> - by calling <tt class="docutils literal">return</tt> on <strong>line 18</strong>, the method immediately exits.</p>
+<p>Blinking is handled by <strong>lines 20-25</strong>. The logic is nearly identical to the button debouncing logic we've used before (and in fact, you will typically see similar blocking code to our original blocking debounce using <tt class="docutils literal">time.sleep()</tt> in "getting started" projects that blink an LED). We check if enough time has passed. If it has, we toggle the LED: we use the <tt class="docutils literal">not</tt> operator to negate the current state of the LED on <strong>line 22</strong>. We then reset by updating <tt class="docutils literal">last_flash</tt> to the current value of <tt class="docutils literal">time.monotonic()</tt>.</p>
+<p><tt class="docutils literal">ButtonDispatch</tt>, defined on <strong>lines 27-113</strong> has not changed from the last example, except to handle a class instance (object) instead of a dictionary. These changes happen on <strong>lines 52, 56, 60, and 64</strong>. We make use of the built-in Python functions <tt class="docutils literal">getattr()</tt> and <tt class="docutils literal">setattr()</tt>. These functions allow us to access (<tt class="docutils literal">getattr()</tt>) and store (<tt class="docutils literal">setattr()</tt>) values on a class instance using a <em>string</em>. This allows us to create dynamic attributes, as we're doing here. We construct the attribute where we store the button state or holding status based on the <tt class="docutils literal">token</tt> attribute of the <tt class="docutils literal">ButtonDispatch</tt> instance.</p>
+<p>We have a generic <em>release</em> event handler, and a helper function that manipulates the state defined on <strong>lines 120-132</strong>.</p>
+<p><tt class="docutils literal">increase_flash()</tt> looks at the state object and cycles through the various blink rates available. We've decided to flash between 2 and 0.4 seconds, in 0.4 second intervals - that equates to 5 distinct flashing rates.</p>
+<p>Every time <tt class="docutils literal">increase_flash()</tt> is called, it decreases the <tt class="docutils literal">state.flash</tt> value by 0.4 seconds. If this value drops below 0, the function resets it back to the default, 2 seconds.</p>
+<p>On <strong>line 125</strong>, we print the current value of the <tt class="docutils literal">flash</tt> state attribute so we can see what's going on.</p>
+<p>We define our <em>release</em> event handler on <strong>lines 127-132</strong>. If the "A" button triggered the event, we call <tt class="docutils literal">increase_flash()</tt>. If the "B" button triggered the event, we turn on or off the blinking by toggling <tt class="docutils literal">state.endabled</tt>. Printing the current value of <tt class="docutils literal">state.enabled</tt> on <strong>line 132</strong> helps us ensure something is happening. This is especially important with the enable/disable feature, since the LED blinking looks a lot like turning it on and off (well, because that's what blinking is 🤔 ). By printing to the console, we can be sure our event is firing and the state is changing the way we intend.</p>
+<p>Finally, <strong>Lines 135 and 136</strong> are worth noting because they show one way to bypass setting a certain event handler, by passing <tt class="docutils literal">None</tt> for the <tt class="docutils literal">press</tt> argument. Another way to do this would be with <em>keyword arguments</em>.</p>
+<p>Throughout this tutorial, we've been using <em>positional</em> arguments. We specify just the values when we call a function/method, and we <em>must</em> put them in the correct order.</p>
+<p>Keyword arguments specify the name of the argument from the function/method definition, followed by an equals sign, and the value you want to set. By using them, you can skip optional arguments, and the order isn't important.</p>
+<p>You can mix the two, you just need to be sure to put the positional arguments <em>before</em> any keyword arguments.</p>
+<p>Here's a couple of other ways we could have instantiated the <tt class="docutils literal">ButtonDispatch</tt> class for the "A" button:</p>
+<div class="highlight"><pre><span></span><span class="c1"># using nothing but keyword arguments</span>
+<span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="n">release</span><span class="p">)</span>
+
+<span class="c1"># using a mixture - keyword arguments must come *after* positional ones</span>
+<span class="c1"># note how the order of keyword arguments doesn't matter.</span>
+<span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="n">release</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here's the code in action on my Trinket M0:</p>
+<div class="video-container">
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4" type="video/mp4"/>
+<p>Your browser doesn't support HTML5 video. Here is
+          a <a href="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4">link to the video</a> instead.</p>
+</video>
+</div></div>
+<div class="section" id="phase-2">
+<h3>Phase 2</h3>
+<p>Now, lets add in the RGB LED and some more complex behavior.</p>
+<p>First, lets move our <tt class="docutils literal">ButtonDispatch</tt> code into its own module. We'll do this for three reasons.</p>
+<ol class="arabic simple">
+<li>It will make the code examples shorter.</li>
+<li>This code is stable so we shouldn't have to mess with it.</li>
+<li>We may run into memory issues and the easiest way to save some memory is to <a class="reference external" href="/drafts/circuitpython-state-part-5.html#CompileModulesIntoMPYFiles">compile this complex code into an MPY file</a>.</li>
+</ol>
+<p>We should get in the habit of doing this when we have well defined code, this is a great place to start.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Just bear in mind that if you do compile <tt class="docutils literal">dispatch.py</tt> into an <tt class="docutils literal">.mpy</tt> file, you won't be able to edit it directly (you'll have to edit it outside of your board, compile it, and copy it over again), so only do this when the code is <em>rock solid</em> and you need the extra memory.</p>
+</div>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as dispatch.py</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">ButtonDispatch</span><span class="p">:</span>
+    <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">_hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># global state object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c1"># state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="c1"># get the state of the button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
+
+        <span class="c1"># event handlers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="o">=</span> <span class="n">press</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="o">=</span> <span class="n">release</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="o">=</span> <span class="n">hold</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
+
+    <span class="nd">@holding.setter</span>
+    <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="nd">@state.setter</span>
+    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+        <span class="c1"># button has been held</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hold_threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hold</span><span class="p">()</span>
+
+        <span class="c1"># button has been pressed</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">press</span><span class="p">()</span>
+
+        <span class="c1"># button has been released</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>  <span class="s2">"&lt;Button {}|Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><p>For this phase, we'll just work in the state and activation logic for the RGB LED, and flash it right along with the red one on pin 13:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as code.py</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+<span class="kn">from</span> <span class="nn">dispatch</span> <span class="kn">import</span> <span class="n">ButtonDispatch</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"led"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="s2">"rgb"</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">-=</span> <span class="mf">0.4</span>
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">-=</span> <span class="mf">0.4</span>
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">"LED Flash:"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span><span class="p">,</span> <span class="s2">"RGB Flash:"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
+        <span class="n">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"rgb"</span><span class="p">)</span>
+        <span class="n">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"led"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Enabled? "</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+
+
+<span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="p">)</span>
+<span class="p">]</span>
+
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
+        <span class="n">dispatch</span><span class="p">()</span>
+
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_color</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h4>Explanation</h4>
+<div class="docutils container">
+</div>
+<p>The logic here is identical as the last example, except we've duplicated the state attributes and on/off logic for the RGB led, and had to rename some things to differentiate between the two (<tt class="docutils literal">flash</tt> has become <tt class="docutils literal">led_flash</tt> and <tt class="docutils literal">rgb_flash</tt>).</p>
+<p>We've added <tt class="docutils literal">rgb_color</tt> to the <tt class="docutils literal">State</tt> class to track the color of the RGB led. This isn't used just yet, but will come in handy in the future.</p>
+</div>
+<p>A few noteworthy changes:</p>
+<ul class="simple">
+<li>We've added different state for both the RGB and red LED. This isn't necessary at this point. We're adding it in now in preparation for when we're controlling the blink rate of each LED independently.</li>
+<li>We're tracking the desired color of the RGB LED in our <tt class="docutils literal">State</tt> class - this is not necessary at this point either, but this new state attribute will be used when we add color-changing functionality.</li>
+<li>We've altered <tt class="docutils literal">increase_flash()</tt> to work for both LEDs by adding a new parameter, <tt class="docutils literal">which</tt> - a string indicating which LED you want to adjust the flashing rate for.</li>
+<li>The standard red LED has two states, <em>on</em> and <em>off</em>. However, the DotStar/NeoPixel is actually 3 states, times the number of pixels: one each for Red, Green, and Blue. To turn it off, we can't just set it to <tt class="docutils literal">False</tt>, we instead have to write a "black" color - zero red, zero green, and zero blue.</li>
+</ul>
+<p>Here's what that looks like running on my Trinket M0:</p>
+<div class="video-container">
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4" type="video/mp4"/>
+<p>Your browser doesn't support HTML5 video. Here is
+          a <a href="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4">link to the video</a> instead.</p>
+</video>
+</div></div>
+<div class="section" id="phase-3">
+<h3>Phase 3</h3>
+<p>Next, we'll add in multiple-button logic similar to what we did previously and add a new feature to rotate through a set of predetermined colors when both buttons are pressed.</p>
+<p>We'll make use of the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED library</a> to gamma-correct the RGB LED so the colors look nicer.</p>
+<p>We'll also the brightness level, since we need it for the gamma-correction calculation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Make sure you've copied the <tt class="docutils literal">adafruit_fancyled</tt> library folder over to your <tt class="docutils literal">CIRCUITPY</tt> drive. Place it in the <tt class="docutils literal">lib</tt> folder.</p>
+</div>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+<span class="kn">from</span> <span class="nn">dispatch</span> <span class="kn">import</span> <span class="n">ButtonDispatch</span>
+
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+
+<span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">colors</span> <span class="o">=</span>   <span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># red</span>
+            <span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>    <span class="c1"># orange-red</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>    <span class="c1"># orange</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>    <span class="c1"># yellow</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># green</span>
+            <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>   <span class="c1"># blue-green</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>      <span class="c1"># blue</span>
+            <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">130</span><span class="p">),</span>     <span class="c1"># indigo</span>
+            <span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>    <span class="c1"># violet</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>  <span class="c1"># white</span>
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">both</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_color</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">cycle_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_index</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_color_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb_color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_color_index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">led_flash</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_led_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_rgb_flash</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">"led"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">which</span> <span class="o">==</span> <span class="s2">"rgb"</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">-=</span> <span class="mf">0.4</span>
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">-=</span> <span class="mf">0.4</span>
+        <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">"LED Flash:"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">led_flash</span><span class="p">,</span> <span class="s2">"RGB Flash:"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_flash</span><span class="p">)</span>
+
+<span class="err">﻿</span><span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">"held. Count:"</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">A</span> <span class="ow">and</span> <span class="n">state</span><span class="o">.</span><span class="n">B</span><span class="p">:</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">both</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Both buttons are being pressed"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">both</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s2">"button being pressed"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">both</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">A_holding</span><span class="p">:</span>
+            <span class="n">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"led"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">"Enabled? "</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span> <span class="ow">and</span> <span class="n">state</span><span class="o">.</span><span class="n">A_holding</span><span class="p">:</span>
+            <span class="n">increase_flash</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"rgb"</span><span class="p">)</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">both</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">hold</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">hold</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
+        <span class="n">dispatch</span><span class="p">()</span>
+
+    <span class="n">state</span><span class="p">()</span>
+
+    <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span>
+
+    <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">rgb_color</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><div class="explanation section">
+<h4>Explanation</h4>
+<div class="docutils container">
+</div>
+<p>We have a few new state attributes to deal with our new functionality.</p>
+<p>On <strong>line 26</strong>, we've introduced the state attribute <tt class="docutils literal">both</tt>, used to indicate when we've detected that both buttons have been pressed.</p>
+<p>On <strong>line 7</strong>, we've set the <tt class="docutils literal">brightness</tt> attribute on the NeoPixel/DotStar object from our <tt class="docutils literal">setup</tt> module to <tt class="docutils literal">1.0</tt>. These pixels are <em>bright</em>, so we normally won't use them at full brightness. However, setting the brightness to "full blast" here is necessary for getting the best results from the FancyLED library.</p>
+<p>Note that this value must be a <em>float</em> - you will get somewhat odd errors if you set it to an integer (so be sure to set it to <tt class="docutils literal">1.0</tt> not <tt class="docutils literal">1</tt>).</p>
+<p>We define our list of possible colors as a "tuple of tuples" on <strong>lines 9-18</strong>. Tuples work just like lists, except they are <em>immutable</em> - you can't change them once they're defined. This is perfect for our list of colors, since we have no need to change it.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The colors were chosen by searching for "RGB rainbow" and grabbing a few triplets that looked good. The exact colors could use some adjustment. If you try this code on different boards, you'll notice some variation between pixels, especially between DotStars and NeoPixels - this is expected. The electronics involved are different, and will produce slightly different wavelengths of light for each of the red, green, and blue elements.</p>
+</div>
+<p>We've added new state attributes to handle the cycling of colors on <strong>lines 38 and 39</strong>.</p>
+<p>Brightness is now being tracked on <strong>line 41</strong>. This value could be defined outside of our <tt class="docutils literal">State</tt> class, since we're not altering it in this project. However, a handy feature you could add would be allowing the user to change the brightness, and that would require keeping in the state object.</p>
+<p>We have a new method defined on <strong>lines  45-51</strong>, <tt class="docutils literal">cycle_color()</tt>, that handles changing the state to the next color in the global tuple we defined on <strong>lines 9-18</strong>.</p>
+<p><tt class="docutils literal">cycle_color()</tt> keeps track of which color was last used, by <em>index</em> (<tt class="docutils literal">_color_index</tt>). To choose a color, it simply uses that attribute as the index of the <tt class="docutils literal">colors</tt> tuple (<strong>line 51</strong>).</p>
+<p><tt class="docutils literal">_color_index</tt> defaults at -1 - this way, when <tt class="docutils literal">cycle_color()</tt> is first called, it will start with the first member of the <tt class="docutils literal">colors</tt> tuple (index 0).</p>
+<p>To cycle to the next color, it just increments <tt class="docutils literal">_color_index</tt> (<strong>line 46</strong>). To avoid increasing <tt class="docutils literal">_color_index</tt> to a number higher than the highest index of <tt class="docutils literal">colors</tt>, and to start over at the first color,  <tt class="docutils literal">cycle_color()</tt> uses a little bit of math (<strong>line 48</strong>): after incrementing <tt class="docutils literal">_color_index</tt>, it checks to see if it's higher than the length of the <tt class="docutils literal">colors</tt> tuple <em>minus one</em>. Since tuple indexes start at 0, the highest index number is always the length of the tuple minus one (this is true for lists as well). We can add and remove colors to the <tt class="docutils literal">colors</tt> tuple and <tt class="docutils literal">cycle_color()</tt> will automatically adjust.</p>
+<p>In our event handlers (<strong>lines 90-116</strong>), we've added some logic to handle multiple button presses. We've also implemented a handler for the <em>hold</em> event (<tt class="docutils literal">hold()</tt>, <strong>lines 90-91</strong>). This handler mostly serves for debugging purposes. We need to make sure that when we're pressing multiple buttons, the proper events are being triggered. Sometimes a <em>hold</em> might be triggered in error, and we need to see that.</p>
+<p>Our <tt class="docutils literal">press()</tt> function is in charge of detecting when we're pressing <em>both</em> buttons. It's only function is to see if <tt class="docutils literal">state.A</tt> and <tt class="docutils literal">state.B</tt> are <tt class="docutils literal">True</tt> (both buttons have been pressed), and change <tt class="docutils literal">state.both</tt> to <tt class="docutils literal">True</tt>. We've added some debugging help by printing to the console if both buttons <em>weren't</em> pressed (<strong>line 98</strong>).</p>
+<p><tt class="docutils literal">release()</tt> is where all of the functionality of our LED blinker is really happening - <strong>lines 101-105</strong>, we detect when both buttons have been released. This occurs when <tt class="docutils literal">state.both</tt> is <tt class="docutils literal">True</tt>, and <tt class="docutils literal">state.A</tt> and <tt class="docutils literal">state.B</tt> are both <tt class="docutils literal">False</tt>. So we've had a <em>press</em> event occur where both buttons were pressed, and now, both buttons are no longer pressed.
+When this occurs, we clear the <tt class="docutils literal">state.both</tt> attribute by setting it to <tt class="docutils literal">False</tt>.</p>
+<p>But before clearing the <tt class="docutils literal">state.both</tt> attribute, <tt class="docutils literal">release()</tt> calls <tt class="docutils literal">state.cycle_color()</tt> (<strong>line 102</strong>) so that the next time the RGB LED is turned on, it will use the next color in the <tt class="docutils literal">colors</tt> tuple.</p>
+<p><strong>Lines 107-116</strong> handle the actions that need to be taken when either a single button has been released, or both buttons have been released.</p>
+<p>The main logic branch (<strong>line 107</strong>) depends on the value of <tt class="docutils literal">state.both</tt> - if it's <tt class="docutils literal">True</tt> (both buttons have been pressed), then the multi-button logic kicks in. If it's <tt class="docutils literal">False</tt>, then the single-button logic is evaluated.</p>
+<p>If both buttons are not being pressed (<tt class="docutils literal">state.both</tt> is <tt class="docutils literal">False</tt>), we first look at the <tt class="docutils literal">token</tt>. If it's "A", we check to be sure "A" isn't also being held down (<tt class="docutils literal">state.A_holding</tt>, <strong>line 108</strong>). If that's the case, we take action, increasing the blink rate of the <em>LED</em>. This means that if you just press "A", it increases the blink rate of the red LED - this is the previous functionality of the "A" button.</p>
+<p>If both buttons are not being pressed, and the button that triggered the event is "B" (<tt class="docutils literal">token == "B"</tt>, <strong>line 110</strong>), we toggle the <tt class="docutils literal">enabled</tt> state attribute (this is the also the functionality that just pressing "B" had in the last iteration).</p>
+<p>If both buttons <em>are</em> being pressed (<tt class="docutils literal">state.both</tt> is <tt class="docutils literal">True</tt>, handled by the <tt class="docutils literal">else</tt> statement on <strong>line 113</strong>), we then look to see which button has been released (which button triggered the <em>release</em> event). If it was the "B" button, and we're holding the "A" button (the <tt class="docutils literal">token</tt> is "B" and <tt class="docutils literal">state.A_holding</tt> is <tt class="docutils literal">True</tt>, <strong>line 114</strong>), we'll take action, increasing the blink rate of the <em>RGB led</em>. This is new functionality - if you hold down the "A" button, and press "B", it increases the RGB blink rate.</p>
+<p>The last thing that <tt class="docutils literal">released()</tt> does in this branch of the logic, is clear the <tt class="docutils literal">state.both</tt> attribute by setting it to <tt class="docutils literal">False</tt>. This prevents any more logic regarding both buttons from happening. We're essentially saying "it's cool, we've handled this particular event, everyone else stand down".</p>
+<p>Finally, the other noteworthy change is that we've employed the FancyLED library to gamma-correct the RGB LED color (<strong>line 132</strong>) so it looks nicer, especially at lower brightness levels. To explain this line, lets refactor it into separate statements, using some intermediate, temporary variables:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">fancy_color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">rgb_color</span><span class="p">)</span>
+<span class="n">adjusted_fancy_color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy_color</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span>
+
+<span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">adjusted_fancy_color</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div><p>So first, we convert our <tt class="docutils literal">rgb_color</tt> state attribute, stored as a 3-member tuple of (red, green, blue), into a <tt class="docutils literal">CRGB</tt> object. <tt class="docutils literal">CRGB</tt> is a class that FancyLED uses for its calculations. All operations in the library work on these objects.</p>
+<p>The constructor for <tt class="docutils literal">CRGB</tt> takes three arguments: <tt class="docutils literal">red</tt>, <tt class="docutils literal">green</tt>, and <tt class="docutils literal">blue</tt>, in that order. We use a nifty feature of Python called <em>argument unpacking</em> to expand our <tt class="docutils literal">rgb_color</tt> tuple into three separate values, and pass them as the three required arguments that <tt class="docutils literal">CRGB</tt> is expecting. Here's another way to look at it:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">red</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">green</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rgb_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">blue</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rfb_color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">fancy_color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><p>Once we have a <tt class="docutils literal">CRGB</tt> object (<tt class="docutils literal">fancy_color</tt>), we can do calculations on it. We pass that object to <tt class="docutils literal">fancy.gamma_adjust()</tt>, along with the brightness level we want. <tt class="docutils literal">fancy.gamma_adjust()</tt> returns another <tt class="docutils literal">CRGB</tt> object, which we've named <tt class="docutils literal">adjusted_fancy_color</tt>.</p>
+<p>The NeoPixel and DotStar libraries don't understand <tt class="docutils literal">CRGB</tt> objects, so we have to convert them to a form that the libraries can understand before setting our pixel to the adjusted color.</p>
+<p>There are a couple ways of accomplishing this. The first is to use the <tt class="docutils literal">red</tt>, <tt class="docutils literal">green</tt>, and <tt class="docutils literal">blue</tt> attributes of the <tt class="docutils literal">adjusted_fancy_color</tt> object to create a tuple:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">...</span>
+
+<span class="n">adjusted_fancy_color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy_color</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span>
+
+<span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">adjusted_fancy_color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">adjusted_fancy_color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">adjusted_fancy_color</span><span class="o">.</span><span class="n">green</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div><p>The NeoPixel and DotStar libraries can also take an <em>integer</em>, instead of a tuple. <tt class="docutils literal">CRGB</tt> has a <tt class="docutils literal">pack()</tt> method that will return a compatible integer. So we finally take advantage of that method when we set the pixel.</p>
+<p>In the example code, we're doing all of these steps in one line. Whether to do it this way, break it up, or vary the approach in the ways we've just explored is entirely up to you - rarely will one way or the other be any more or less efficient. It really comes down to readability, for the most part.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is 100% true in general, and most of the time in CircuitPython projects. But be cautious - every line of code takes up precious memory you may need for your project. Sometimes you may have to make things a little messy to squeeze in a few more bytes so you can get things working.</p>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you are more experienced with Python, you may have thought that the <tt class="docutils literal">cycle_color()</tt> method would be a great usecase for a <em>generator</em>.</p>
+<p>Generators are functions/methods that maintain some sort of state. Typically any variables defined inside of a function or method are lost when the it ends (or <tt class="docutils literal">return</tt>'s). A generator is different, in that it can be looped over, like a list or tuple (it's <em>iterable</em>), and as you loop over it, it calls your function each time, going back to the same point over and over, until it returns. That point is marked by using the special <tt class="docutils literal">yeild</tt> keyword.</p>
+<p>Here's how a color cycling function might look, implemented as a generator:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span>   <span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>        <span class="c1"># red</span>
+            <span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">87</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>      <span class="c1"># orange-red</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># orange</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>      <span class="c1"># yellow</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>        <span class="c1"># green</span>
+            <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>     <span class="c1"># blue-green</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>        <span class="c1"># blue</span>
+            <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">130</span><span class="p">),</span>       <span class="c1"># indigo</span>
+            <span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>      <span class="c1"># violet</span>
+            <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>    <span class="c1"># white</span>
+
+<span class="k">def</span> <span class="nf">cycle_colors</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">color</span>
+
+<span class="n">cycled_colors</span> <span class="o">=</span> <span class="n">cycle_colors</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div><p>We can use the built-in function <tt class="docutils literal">next()</tt> to get the next color in the cycle, <em>for ever</em>. It will always start back at the beginning - once the colors have all been returned, the <tt class="docutils literal">while</tt> loop starts the process all over again.</p>
+<p>Here's how it looks, interacting with it in the console:</p>
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(255, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(226, 87, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(255, 127, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(255, 255, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(0, 255, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(150, 191, 51)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(0, 0, 255)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(75, 0, 130)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(139, 0, 255)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(255, 255, 255)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(255, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">cycled_colors</span><span class="p">)</span>
+<span class="go">(226, 87, 30)</span>
+</pre></div>
+</td></tr></table></div><p class="last">So why didn't we do it this way? It seems way more elegant, right? Well, this doesn't work well in CircuitPython 💔 . I very quickly ran out of memory when I implemented the generator this way. There are many possible explanations for this, but I bring this all up because generators are <em>awesome</em> and you should learn about them, but more importantly, it's an illustration of where the limitations of the platform start to affect how you design and implement your projects.</p>
+</div>
+<p>This iteration brings the following notable changes:</p>
+<ul class="simple">
+<li>We've brought in logic to cover pressing both buttons. This required adding a handler for the <em>press</em> event, and the addition of the <tt class="docutils literal">both</tt> state variable.</li>
+<li>The possible colors have been stored in a tuple of tuples called <tt class="docutils literal">colors</tt>.</li>
+<li>We're rotating through the colors using a method of the state object called <tt class="docutils literal">cycle_color()</tt>. It uses a new state variable, <tt class="docutils literal">_color_index</tt> to keep track of the location within the <tt class="docutils literal">color</tt> tuple of the color that was last used. <tt class="docutils literal">cycle_color()</tt> resets <tt class="docutils literal">_color_index</tt> to zero when it reaches the maximum index of <tt class="docutils literal">colors</tt>.</li>
+<li>We're using <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> to adjust the colors to better reflect our expectations. It has a lot more functionality than that, we're just scratching the surface.</li>
+</ul>
+<p>And the requisite video of this code in action on my Trinket M0:</p>
+<div class="video-container">
+<video controls="">
+<source src="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4" type="video/mp4"/>
+<p>Your browser doesn't support HTML5 video. Here is
+          a <a href="/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4">link to the video</a> instead.</p>
+</video>
+</div></div>
+<div class="section" id="conclusion">
+<h3>Conclusion</h3>
+<p>Now, we've added some very complex functionality to our project without having to write a lot of complex code. Further, we're not blocking to handle button debounce.</p>
+<p>Ultimately, what we've learned here is a very useful <em>pattern</em> for writing embedded applications. Resist the urge to just grab the <tt class="docutils literal">ButtonDispatch</tt> class and use it without thinking about your use case. Implement your own version that only does what you need.</p>
+<p>The last section outlines strategies to deal with running out of memory. As discussed earlier, memory can be a scarce resource on the CircuitPython platform, and while we've constructed quite a slick, neat codebase, we've added a lot of code to the mix that will eat into our available memory. You will run into memory issues with CircuitPython, it's just a matter of time, but using state the way we have, abstracting it away into really nice classes, can make that happen a little sooner than if we hadn't.</p>
+</div>
+</div>
+</div><!-- /.entry-content -->
+</section>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
+</body>
+</html>

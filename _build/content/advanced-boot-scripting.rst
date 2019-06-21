@@ -457,7 +457,7 @@ Since we don't need logging for our project, we'll choose the ``slf4j-nop`` back
 
 To figure out exactly what the dependency specification looks like, we can search in the `Maven Central Repository <https://search.maven.org/>`__.
 
-.. figure:: {filename}images/maven-search.png
+.. figure:: {static}images/maven-search.png
    :figwidth: 85%
    :align: center
    

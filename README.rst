@@ -6,6 +6,24 @@ This repository contains the source and HTML for my blog. It is written mostly i
 
 The HTML output is located in *this* directory. The source code and build tools are located in ``_build``.
 
+Editing Content
+===============
+All content has it's status set to :code:`draft` by default. Draft pages can be linked, and are accessible via the :code:`drafts` folder. This folder does not have an index page on it by default, so the draft content is not "live".
+
+In order for content to show up, you must add the :code:`:status: published` metadata tag to the content.
+
+Special Features
+================
+
+Notice
+------
+There is a special template named :code:`notice.html`, that is used by :code:`base.html` to display a notice after the banner on each page.
+
+The notice will be shown/hidden depending on the value of :code:`SHOW_NOTICE` in :code:`pelicanconf.py`.
+
+Table Of Contents
+-----------------
+This blog uses the `pelican-toc <https://github.com/ingwinlu/pelican-toc>`__ plugin. You can turn off the table of contents on a given page or article by setting the metadata :code:`toc_run` to :code:`False`.
 
 Check-out Notes
 ===============
@@ -25,14 +43,13 @@ This can be done in a virtual environment (recommended, I use virtualenv), or sy
 
 Here's how you would do things with virtualenv::
     
-    $ virutalenv .
+    $ python -m venv .
     $ source bin/activate
     $ pip install -r requirements.txt
     
 Third-Party Plugins
 ===================
 This site uses a couple of third-party pelican plugins. They are installed via git submodules. This was done to keep the code fresh, but also to avoid any problems with viral licensing (pelican-toc is GPL licensed).
-
 
 Building
 ========
@@ -48,28 +65,15 @@ Pelican comes with a development server that will serve the content and automati
 
 I had some problems with it, so I use a combination of a WSGI app I built, based on webob.FileApp, and watchmedo to accomplish the same thing.
 
-The webserver provides directory listings (useful for looking at the drafts folder). Since it's a WSGI app, you can run it in any WSGI server. Gunicorn is included in ``requirements.txt``.
+The webserver provides directory listings (useful for looking at the drafts folder). Since it's a WSGI app, you can run it in any WSGI server. `chaussette <https://chaussette.readthedocs.io/>`__ is included in ``requirements.txt``.
 
-To run the webserver::
+To run the development services::
     
     $ source bin/activate
     $ cd _build
-    $ gunicorn wsgi:app
+    $ circusd circus.ini
     
 The server listens on localhost, port 8000 by default.
-
-To monitor the files with watchmedo::
-    
-    $ source bin/activate
-    $ cd _build
-    $ watchmedo shell-command -c "make DEBUG=1 html" -p "*.rst;*.html;*.js;*.css;*.py" -W -R -D .
-    
-    
-.. note::
-    
-    The command-line options for watchmedo forget multiple events. So if you save a file while the site is being built, that event will be ignored.
-    
-
 
 Post-Processing Script
 ======================

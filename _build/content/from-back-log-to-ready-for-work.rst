@@ -30,5 +30,5 @@ without a lot of verbiage to accompany it?
 
 As such, thoughts and comments are welcome.
 
-.. |Image| image:: {filename}/images/project-analysis-breakdown.png
+.. |Image| image:: {static}/images/project-analysis-breakdown.png
    :width: 100%

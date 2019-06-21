@@ -84,12 +84,26 @@ body {
     height: 2em;
 }
 
+#notice {
+    padding: 1vwem;
+    font-size: 120%;
+    margin: 0;
+    border-left: 1px #897C81 solid;
+    border-right: 1px #897C81 solid;
+    padding: 2vw;
+    background-color: #b3f442;
+}
+
 /* roles */
 .underline {
     text-decoration: underline;
 }
 
-.boldoblique {
+.bold {
+    font-weight: bold;
+}
+
+.bold-oblique {
     font-weight: bold;
     font-style: oblique;
 }
@@ -195,7 +209,7 @@ dt {
 }
 
 .highlighttable {
-    margin-bottom: 1em;
+    /* margin-bottom: 1em; */
     width: 100%;
     border: 1px #bee0f0 solid;
 }

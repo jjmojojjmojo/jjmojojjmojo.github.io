@@ -104,16 +104,16 @@ It consists of two buttons, a single one-color LED, and a single "addressable" R
 
 .. container:: centered
     
-    .. image:: {filename}/images/circuitplayground-express-closeup-neopixel-marked.png
+    .. image:: {static}/images/circuitplayground-express-closeup-neopixel-marked.png
           :width: 20%
        
-    .. image:: {filename}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
+    .. image:: {static}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
           :width: 20%
        
-    .. image:: {filename}/images/trinket-m0-closeup-dotstar-marked.png
+    .. image:: {static}/images/trinket-m0-closeup-dotstar-marked.png
        :width: 20%
        
-    .. image:: {filename}/images/gemma-m0-closeup-dotstar-marked.png
+    .. image:: {static}/images/gemma-m0-closeup-dotstar-marked.png
        :width: 20%
     
 
@@ -171,7 +171,7 @@ Any of the M0 or M4 based boards `sold by Adafruit <https://www.adafruit.com/cat
 
 I am fortunate to own, in part due to recent attendance at PyCon 2018, *four* examples of the M0 boards, and have tested the code on each:
 
-.. image:: {filename}/images/nonblocking-m0-boards-2.png
+.. image:: {static}/images/nonblocking-m0-boards-2.png
    :width: 80%
    :align: center
    
@@ -183,7 +183,7 @@ and the `GEMMA M0 <https://www.adafruit.com/product/3500>`__. There's also a `qu
 
 .. note::
    
-   .. image:: {filename}/images/gemma-m0-closeup-obverse.png
+   .. image:: {static}/images/gemma-m0-closeup-obverse.png
       :width: 20%
       :align: right   
    
@@ -232,7 +232,7 @@ These are essential when working with breadboards.
 
 You can make your own jumper wires using cut and stripped lengths of wire. The best to use for breadboard work is 22-gauge insulated wire, but anything that's conductive and between 18 and 24-guage should work.
 
-.. image:: {filename}/images/solid-core-jumper-wires.png
+.. image:: {static}/images/solid-core-jumper-wires.png
    :width: 80%
    :align: center
 
@@ -240,7 +240,7 @@ You can also buy "pre-made" jumpers. These are usually flexible stranded wire wi
 
 For most projects (including this one), "male-to-male" wires are the go-to form.
 
-.. image:: {filename}/images/premade-jumper-wires-organized.png
+.. image:: {static}/images/premade-jumper-wires-organized.png
    :width: 80%
    :align: center
 
@@ -248,7 +248,7 @@ Jumper wires will be required for any of the demo circuits for the ItsyBitsy or 
 
 Eventually, you'll collect many of these lengths of wire, and will want to show them off, maybe by keeping them in a special drawer. |grin|
    
-.. image:: {filename}/images/nonblocking-lengths-of-wire.png
+.. image:: {static}/images/nonblocking-lengths-of-wire.png
    :width: 80%
    :align: center
 
@@ -262,7 +262,7 @@ Alligator clips are essential for prototyping and general use of the "lilypad" s
 
 In the demo circuits below, standard alligator clips aren't used, but they're a good addition to your toolbox, especially if you have one of the "lilypad" style boards.
 
-.. image:: {filename}/images/aligator-clips.png
+.. image:: {static}/images/aligator-clips.png
    :width: 80%
    :align: center
 
@@ -272,7 +272,7 @@ This is a variant connector that combines a alligator-style clip to a flexible j
 
 We'll be using some of these in the "alligator-to-male" variety for the GEMMA version of the demo circuit. 
 
-.. image:: {filename}/images/aligator-to-jumper.png
+.. image:: {static}/images/aligator-to-jumper.png
    :width: 80%
    :align: center
 
@@ -303,7 +303,7 @@ I've used three different kinds of breadboards I had on hand, and mixed up the k
 Gemma M0
 ~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-gemma-demo-circuit.png
+.. image:: {static}/images/nonblocking-gemma-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -316,7 +316,7 @@ I clipped the black alligator clip to ground, the white one (button "A") to "D1"
 ItsyBitsy M0 Express
 ~~~~~~~~~~~~~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-itsybitsy-demo-circuit.png
+.. image:: {static}/images/nonblocking-itsybitsy-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -341,7 +341,7 @@ I've connected button "B" (the yellow button, yellow wire, row 30) to pin 7 on t
 Trinket M0
 ~~~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-trinket-demo-circuit.png
+.. image:: {static}/images/nonblocking-trinket-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -428,7 +428,7 @@ As long as the code for each board follows the contract, and anyone using the bo
 
 I like to think about the interface in terms of the actual variables and functions you use, and the contract as the understanding of what inputs and outputs the interface uses, as well as the things the interface does when you call the functions or access the variables:
 
-.. image:: {filename}/images/abstraction-explained-1.png
+.. image:: {static}/images/abstraction-explained-1.png
    :width: 80%
    :align: center
 
@@ -445,7 +445,7 @@ We'll put them into a Python module called ``setup``. Python modules are usually
 
 To use our abstraction, we just need to ``import setup`` and then we can access, for example, ``setup.rgb`` to mess with the RGB pixel. That actual variable might be a NeoPixel. It might be a DotStar. It might be something we've never heard of (like a SunSpot |trademark|). It could be wired to any pin, configured any way. It doesn't matter. As long as that ``rgb`` object works the same way (has the same interface) as a DotStar or NeoPixel, it complies with the *contract* and everything works:
 
-.. image:: {filename}/images/abstraction-explained-2.png
+.. image:: {static}/images/abstraction-explained-2.png
    :width: 80%
    :align: center
 
@@ -677,9 +677,9 @@ Here's a short video demonstrating the test code and demo circuit on each of the
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 

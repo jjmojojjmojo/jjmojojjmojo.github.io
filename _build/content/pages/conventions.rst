@@ -5,6 +5,7 @@ Site-wide Conventions Explained
 :category: tutorials
 :tags: about, conventions
 :slug: conventions
+:status: published
 
 This page contains an overview of conventions used in this website.
 
@@ -101,8 +102,8 @@ Where applicable, each example is discussed in great detail below it - these exp
 
 You can click on the book icon |CLOSED_BOOK_ICON| to show an explanation. Clicking on the open book icon |OPEN_BOOK_ICON| will close it.
 
-.. |CLOSED_BOOK_ICON| image:: {filename}/images/book.svg
+.. |CLOSED_BOOK_ICON| image:: {static}/images/book.svg
    :align: middle
 
-.. |OPEN_BOOK_ICON| image:: {filename}/images/book-open.svg
+.. |OPEN_BOOK_ICON| image:: {static}/images/book-open.svg
    :align: middle

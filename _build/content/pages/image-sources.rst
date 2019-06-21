@@ -28,7 +28,7 @@ This file is a scratchpad for any images that I grabbed from someplace else. My 
 
 Media
 =====
-.. figure:: {filename}/images/nonblocking-lengths-of-wire.png
+.. figure:: {static}/images/nonblocking-lengths-of-wire.png
    :figwidth: 40%
 
 Source: 
@@ -38,7 +38,7 @@ Copyright:
 Obtained:
     07/21/2018
     
-.. figure:: {filename}/images/about/josh-johnson-artists-rendering.png
+.. figure:: {static}/images/about/josh-johnson-artists-rendering.png
    :figwidth: 20%
 
 Source:
@@ -48,7 +48,7 @@ Copyright:
 Obtained:
     08/02/2018
     
-.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png
+.. figure:: {static}/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png
    :figwidth: 40%
 
 Source:
@@ -58,7 +58,7 @@ Copyright:
 Obtained:
     09/10/2018
     
-.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg
+.. figure:: {static}/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg
    :figwidth: 20%
    
 Source:

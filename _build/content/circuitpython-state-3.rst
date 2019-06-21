@@ -41,7 +41,7 @@ We'll extend this a little bit and:
 
 * Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a *different color*.
 
-We can improve upon the code by building on the concepts of *state* we learned about in the `previous post <{filename}/circuitpython-state-2.rst>`__. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. |unicorn|
+We can improve upon the code by building on the concepts of *state* we learned about in the `previous post <{static}/circuitpython-state-2.rst>`__. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. |unicorn|
 
 Lets start by refactoring our original code to work just as it did, but using state.
 
@@ -146,7 +146,7 @@ At that point we hit the end of the ``while`` loop, and start over again.
 
 Here's a diagram showing how it works:
 
-.. image:: {filename}/images/nonblocking-state-flowchart.png
+.. image:: {static}/images/nonblocking-state-flowchart.png
    :width: 80%
    :align: center
 
@@ -379,9 +379,9 @@ Here's a video of this code running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -707,9 +707,9 @@ The changes are pretty subtle, but here's another video showing this version run
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -742,7 +742,7 @@ We know what the previous value was because we've stored in it our ``state`` obj
 
 The basic logic looks like this:
 
-.. image:: {filename}/images/basic-button-event-logic.png
+.. image:: {static}/images/basic-button-event-logic.png
    :width: 80%
    :align: center
 

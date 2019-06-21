@@ -5,7 +5,7 @@ State And Events In CircuitPython
 :category: tutorial
 :tags: tutorial; circuitpython; hardware; state;
 :slug: circuitpython-state
-:status: hidden
+:status: published
 
 This page collects links to all of the pages in the "State And Events In CircuitPython" series.
 

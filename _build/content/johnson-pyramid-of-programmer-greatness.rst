@@ -9,7 +9,7 @@ The Johnson Pyramid Of Programmer Greatness
 
 .. include:: ../emojis.rst
 
-.. image:: {filename}/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png
+.. image:: {static}/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png
    :width: 20%
    :align: right
 
@@ -22,7 +22,7 @@ In this post, I'll talk a bit in depth about how it came about, and what it all 
 Seeing Myself In The TV People
 ==============================
 
-.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg
+.. figure:: {static}/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg
    :align: right
    :figwidth: 40%
    
@@ -51,7 +51,7 @@ The Reference Explained
 =======================
 There was an episode where Ron was tasked with coaching a children's basketball team. Ron decided that the best way to make true champions of his kids was to indoctrinate them with wisdom of what makes a person truly great. 
 
-.. figure:: {filename}/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png
+.. figure:: {static}/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png
    :figwidth: 80%
    :align: center
    
@@ -77,19 +77,19 @@ My interpretation of Ron Swanson's masterpiece is probably a little more serious
 
 Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):
 
-.. image:: {filename}/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png
+.. image:: {static}/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png
    :width: 80%
    :align: center
 
 The original version used colors inspired by Ron's poster:
 
-.. image:: {filename}/images/johnson-pyramid-of-programmer-greatness/fullcolor-classic.png
+.. image:: {static}/images/johnson-pyramid-of-programmer-greatness/fullcolor-classic.png
    :width: 80%
    :align: center
 
 I've also made a black-and-white version for easier printing with black-and-white laser printers:
 
-.. image:: {filename}/images/johnson-pyramid-of-programmer-greatness/black-and-white.png
+.. image:: {static}/images/johnson-pyramid-of-programmer-greatness/black-and-white.png
    :width: 80%
    :align: center
    

@@ -2,6 +2,10 @@
 <html lang="{{ DEFAULT_LANG }}">
 <head>
         {% block head %}
+        {% block og_image %}
+        <meta property="og:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />
+        <meta property="twitter:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />
+        {% endblock %}
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,13 +55,22 @@
                     </a>
                 </span>
         </header><!-- /#banner -->
+        {% if SHOW_NOTICE %}
+            <div id="notice">
+                <div id="notice-content">
+                {% block notice %}
+                    {% include "notice.html" %}
+                {% endblock %}
+                </div>
+            </div>
+        {% endif %}
         <div id="content-wrapper">
             {% block content %}
             {% endblock %}
         </div>
         <footer id="contentinfo" class="body">
             <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="{{ SITEURL }}/pages/about.html">About</a></div>
+                <div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="{{ SITEURL }}/pages/about.html">About</a></div>
             </div>
         </footer>
         <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/main.js"></script>

@@ -29,7 +29,7 @@
 &lt;ul class="simple"&gt;
 &lt;li&gt;Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a &lt;em&gt;different color&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We can improve upon the code by building on the concepts of &lt;em&gt;state&lt;/em&gt; we learned about in the &lt;a class="reference external" href="/circuitpython-state-part-2.html"&gt;previous post&lt;/a&gt;. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄&lt;/p&gt;
+&lt;p&gt;We can improve upon the code by building on the concepts of &lt;em&gt;state&lt;/em&gt; we learned about in the &lt;a class="reference external" href="/circuitpython-state-2.rst"&gt;previous post&lt;/a&gt;. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄&lt;/p&gt;
 &lt;p&gt;Lets start by refactoring our original code to work just as it did, but using state.&lt;/p&gt;
 &lt;p&gt;Here are the global state attributes we will need to track:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -1099,7 +1099,7 @@
 &lt;p&gt;The two types of inputs are noisy for different reasons, but the problem is the same.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p&gt;This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" &lt;a class="reference external" href="/circuitpython-state-part-3.html#using-state-to-avoid-blocking"&gt;in the next installment&lt;/a&gt; - the physical stuff we're discussing here is also affected by the timing of processor cycles.&lt;/p&gt;
+&lt;p&gt;This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" &lt;a class="reference external" href="/circuitpython-state-3.rst#using-state-to-avoid-blocking"&gt;in the next installment&lt;/a&gt; - the physical stuff we're discussing here is also affected by the timing of processor cycles.&lt;/p&gt;
 &lt;p&gt;The two overly-simplified subjects are very complexly related 😀.&lt;/p&gt;
 &lt;p&gt;A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an &lt;a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic"&gt;article by sparkfun&lt;/a&gt;. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).&lt;/p&gt;
 &lt;p&gt;I also recommend a book like &lt;em&gt;Code: The Hidden Language of Computer Hardware and Software&lt;/em&gt; by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.&lt;/p&gt;

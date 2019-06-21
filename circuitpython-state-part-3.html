@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-          <title>   State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!) - The Collected Works of jjmojojjmojo 
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<title>   State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!) - The Collected Works of jjmojojjmojo 
 </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
-        <link id="highlight-css" rel="stylesheet" type="text/css" href="/theme/css/syntax-solarized-light.css" />
-        <script src="/theme/js/zepto.min.js"></script>
-        <link href="/feeds/all.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" />
-        <link href="/feeds/all.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" />
-        <link href="/feeds/category.tutorial.atom" type="application/atom+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" />
-        <link href="/feeds/category.tutorial.rss" type="application/rss+xml" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" />
-
-
-    <meta name="tags" content="circuitpython" />
-    <meta name="tags" content="python" />
-    <meta name="tags" content="hardware" />
-    <meta name="tags" content="state" />
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="circuitpython" name="tags"/>
+<meta content="python" name="tags"/>
+<meta content="hardware" name="tags"/>
+<meta content="state" name="tags"/>
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
-                <ul id="menu">
-                    <li><a href="/pages/about.html">About</a></li>
-                    <li><a href="/pages/contact.html">Contact</a></li>
-                    <li><a href="/pages/index.html">Pages</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/tags.html">Tags</a></li>
-                </ul>
-                <span id="settings-button">
-                    <a href="/pages/settings.html" title="Settings">
-                        <img src="/theme/icons/settings.svg" alt="Gear Icon For Settings">
-                    </a>
-                </span>
-        </header><!-- /#banner -->
-        <div id="content-wrapper">
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="/circuitpython-state-part-3.html" rel="bookmark"
-         title="Permalink to State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)">State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <time class="published" datetime="2018-09-01T15:07:00-04:00">
+<body class="home" id="index">
+<header class="body" id="banner">
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<ul id="menu">
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
+</ul>
+<span id="settings-button">
+<a href="/pages/settings.html" title="Settings">
+<img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
+</a>
+</span>
+</header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
+<div id="content-wrapper">
+<section class="body" id="content">
+<header>
+<h2 class="entry-title">
+<a href="/circuitpython-state-part-3.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)">State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</a></h2>
+</header>
+<footer class="post-info">
+<time class="published" datetime="2018-09-01T15:07:00-04:00">
       Sat 01 September 2018
     </time>
-    <address class="vcard author">
+<address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
-    </address>
-  </footer><!-- /.post-info -->
-    <div>
-        <div id="toc"><ul><li><a class="toc-href" href="#revisiting old friends" title="Revisiting Old Friends">Revisiting Old Friends</a></li><li><a class="toc-href" href="#managing state: a three-phase process" title="Managing State: A Three-Phase Process">Managing State: A Three-Phase Process</a></li><li><a class="toc-href" href="#an rgb led of a different color: getting classy" title="An RGB LED Of A Different Color: Getting Classy">An RGB LED Of A Different Color: Getting Classy</a></li><li><a class="toc-href" href="#unblocking our debouncing: using state to avoid blocking" title="Unblocking Our Debouncing: Using State To Avoid Blocking">Unblocking Our Debouncing: Using State To Avoid Blocking</a></li><li><a class="toc-href" href="#diving into events" title="Diving Into Events">Diving Into Events</a></li><li><a class="toc-href" href="#state: considerations" title="State: Considerations">State: Considerations</a></li><li><a class="toc-href" href="#conclusions and what" next'="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
-    </div>
-  <div class="entry-content status-published">
-    <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
+</address>
+</footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#revisiting old friends" title="Revisiting Old Friends">Revisiting Old Friends</a></li><li><a class="toc-href" href="#managing state: a three-phase process" title="Managing State: A Three-Phase Process">Managing State: A Three-Phase Process</a></li><li><a class="toc-href" href="#an rgb led of a different color: getting classy" title="An RGB LED Of A Different Color: Getting Classy">An RGB LED Of A Different Color: Getting Classy</a></li><li><a class="toc-href" href="#unblocking our debouncing: using state to avoid blocking" title="Unblocking Our Debouncing: Using State To Avoid Blocking">Unblocking Our Debouncing: Using State To Avoid Blocking</a></li><li><a class="toc-href" href="#diving into events" title="Diving Into Events">Diving Into Events</a></li><li><a class="toc-href" href="#state: considerations" title="State: Considerations">State: Considerations</a></li><li><a class="toc-href" href="#conclusions and what" next="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
+</div>
+<div class="entry-content status-published">
+<!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p>In this part of the series, we'll apply what we've learned about state to our simple <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing code from part one</a>.</p>
 <p>Not only will we debounce some buttons <em>without blocking</em>, we'll use state to more efficiently control some LEDs.</p>
 <p>We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of <em>event detection</em> 🌈 .</p>
 <p>All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.</p>
-
 <div class="section" id="revisiting-old-friends">
 <h2 id="revisiting old friends">Revisiting Old Friends</h2>
 <p>Lets start by applying state tracking to our <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing  code</a> from the first part of this series.</p>
 <p>For reference, here's one of the example circuits, using the Trinket M0 (see <a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit">the demo circuit section in part 1</a> for references using other boards):</p>
-<img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-trinket-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-trinket-demo-circuit.jpg" srcset="/images/responsive/nonblocking-trinket-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-trinket-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-trinket-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-trinket-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-trinket-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-trinket-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-trinket-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-trinket-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-trinket-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>We have two buttons, and two LEDs - one is the standard red LED on pin 13, the other is a built-in RGB LED, either a NeoPixel or DotStar.</p>
 <p>Recall that to test our board, we set up a simple project that has the following functionality:</p>
 <ul class="simple">
@@ -80,7 +81,7 @@
 <ul class="simple">
 <li>Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a <em>different color</em>.</li>
 </ul>
-<p>We can improve upon the code by building on the concepts of <em>state</em> we learned about in the <a class="reference external" href="/circuitpython-state-part-2.html">previous post</a>. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄</p>
+<p>We can improve upon the code by building on the concepts of <em>state</em> we learned about in the <a class="reference external" href="/circuitpython-state-2.rst">previous post</a>. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄</p>
 <p>Lets start by refactoring our original code to work just as it did, but using state.</p>
 <p>Here are the global state attributes we will need to track:</p>
 <ul class="simple">
@@ -95,7 +96,7 @@
 <p class="first admonition-title">Tip</p>
 <p class="last">Remember this code is assuming you have created a <tt class="docutils literal">setup.py</tt> file as explained <a class="reference external" href="/circuitpython-state-part-1.html#abstractions-keeping-the-code-simple">part 1</a>.</p>
 </div>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -171,7 +172,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -200,7 +201,7 @@
 </div>
 <p>At that point we hit the end of the <tt class="docutils literal">while</tt> loop, and start over again.</p>
 <p>Here's a diagram showing how it works:</p>
-<img alt="" class="align-center" src="/images/nonblocking-state-flowchart.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-state-flowchart.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-flowchart.jpg" srcset="/images/responsive/nonblocking-state-flowchart-2500.jpg 2500w,/images/responsive/nonblocking-state-flowchart-2000.jpg 2000w,/images/responsive/nonblocking-state-flowchart-1800.jpg 1800w,/images/responsive/nonblocking-state-flowchart-1600.jpg 1600w,/images/responsive/nonblocking-state-flowchart-1200.jpg 1200w,/images/responsive/nonblocking-state-flowchart-1000.jpg 1000w,/images/responsive/nonblocking-state-flowchart-800.jpg 800w,/images/responsive/nonblocking-state-flowchart-400.jpg 400w,/images/responsive/nonblocking-state-flowchart-200.jpg 200w" style="width: 80%;"/></a>
 <p>For our simple example, we could shortcut some of these steps. An obvious shortcut would be to directly set the value of the red LED to that of the "A" button: <tt class="docutils literal">led.value = <span class="pre">check("A")</span></tt>.</p>
 <p>But it's important to keep the phases separate when we can. The phases represent logical ways to group code, and as we get more sophisticated, the separation will come in handy.</p>
 <p>Further, the phases are separated in terms of interacting with reality. This is important from a performance standpoint - reading from a sensor or writing to an output can be blocking sometimes. Keeping that code separate from our internal logic helps keep things moving smoothly. Changing variables is fast. If we mix these kinds of code up, we can get somewhat choppy interactions.</p>
@@ -213,7 +214,7 @@
 <h2 id="an rgb led of a different color: getting classy">An RGB LED Of A Different Color: Getting Classy</h2>
 <p>Now that we have a clear pattern for working with state, lets add our new feature, and make the RGB LED change colors every time its pressed.</p>
 <p>But first, lets refactor our code to use a class to manage state.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -295,7 +296,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -325,7 +326,7 @@
 <p>Lets illustrate this by taking the "different" from our requirement of a "different color" quite literally.</p>
 <p>We'll add a method to the <tt class="docutils literal">State</tt> class that generates a totally <strong>random</strong> color.</p>
 <p>The method will then assign it to the <tt class="docutils literal">color</tt> state attribute.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -375,7 +376,7 @@
 
 <span class="c1"># -- snip --</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -385,7 +386,7 @@
 <p>So every time the <tt class="docutils literal">random_color()</tt> method is called, a new random color is generated and stored in the state object.</p>
 </div>
 <p>Now, we can change the logic in our main loop to use the new <tt class="docutils literal">State.random_color()</tt> method to generate a random color.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -489,7 +490,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -514,7 +515,7 @@
           a <a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
 </video>
 </div><p>Before we move on, lets <em>refactor</em> our code yet again, but this time, just a little bit. Since <tt class="docutils literal">State</tt> is our keeper of state for our project, lets move <strong>all</strong> of the code that changes state into to a method of the <tt class="docutils literal">State</tt> class:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -622,7 +623,7 @@
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -693,7 +694,7 @@
 <p>We'll look at <tt class="docutils literal">checkin</tt> every loop, and see if the current value of <tt class="docutils literal">time.monotonic()</tt> is at least 0.2 seconds larger - if this is true, it would mean that 0.2 seconds have elapsed. It's super simple and non-blocking.</p>
 <p>At that point we can update our state - the reading from the button should be stable.</p>
 <p>As a last step, we need to set <tt class="docutils literal">checkin</tt> to the new value of <tt class="docutils literal">time.monotonic()</tt>, to mark the last time we checked the clock, and the cycle can start all over again.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -809,7 +810,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -904,10 +905,10 @@
 <p>In Python, that means the <em>press</em> event happens when a pin's <tt class="docutils literal">value</tt> attribute used to read <tt class="docutils literal">False</tt>, and now it reads <tt class="docutils literal">True</tt>. A <em>release</em> event happens when a pin's <tt class="docutils literal">value</tt> used to read <tt class="docutils literal">True</tt> and now it's <tt class="docutils literal">False</tt>.</p>
 <p>We know what the previous value was because we've stored in it our <tt class="docutils literal">state</tt> object. We can use that to detect the change in state by just comparing the current real-life value with the last value we recorded in the state object.</p>
 <p>The basic logic looks like this:</p>
-<img alt="" class="align-center" src="/images/basic-button-event-logic.png" style="width: 80%;"/>
+<a href="/images/fullsize/basic-button-event-logic.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/basic-button-event-logic.jpg" srcset="/images/responsive/basic-button-event-logic-2500.jpg 2500w,/images/responsive/basic-button-event-logic-2000.jpg 2000w,/images/responsive/basic-button-event-logic-1800.jpg 1800w,/images/responsive/basic-button-event-logic-1600.jpg 1600w,/images/responsive/basic-button-event-logic-1200.jpg 1200w,/images/responsive/basic-button-event-logic-1000.jpg 1000w,/images/responsive/basic-button-event-logic-800.jpg 800w,/images/responsive/basic-button-event-logic-400.jpg 400w,/images/responsive/basic-button-event-logic-200.jpg 200w" style="width: 80%;"/></a>
 <p>Now that we can act <em>only</em> when the button transitions from one state to the other, we can call <tt class="docutils literal">random_color()</tt> in a more logical place, like right before we change the RGB pixel's state, when the button is pressed. We could also just do it when the button is released, more in line with the original logic.</p>
 <p>Here's our code again, with the <tt class="docutils literal">random_color()</tt> call wrapped inside of logic that detects a <em>press</em> event:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -1041,7 +1042,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</td></tr></table><div class="explanation section">
+</td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -1114,15 +1115,14 @@
 <p>As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖</p>
 <p>In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code, in preparation for building the more complex project described in <a class="reference external" href="/circuitpython-state-part-1.html">part 1</a>.</p>
 </div>
-
-  </div><!-- /.entry-content -->
+</div><!-- /.entry-content -->
 </section>
-        </div>
-        <footer id="contentinfo" class="body">
-            <div id="footer-text-wrapper">
-                <div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
-            </div>
-        </footer>
-        <script src="/theme/js/main.js"></script>
+</div>
+<footer class="body" id="contentinfo">
+<div id="footer-text-wrapper">
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+</div>
+</footer>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

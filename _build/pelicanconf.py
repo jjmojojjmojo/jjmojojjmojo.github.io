@@ -33,9 +33,10 @@ JINJA_FILTERS = {
     'pluralize': my_plural
 }
 
-CACHE_CONTENT = True
-LOAD_CONTENT_CACHE = True
-CACHE_PATH = "./cache"
+#CACHE_CONTENT = True
+#LOAD_CONTENT_CACHE = True
+#CACHE_PATH = "./cache"
+STATIC_CHECK_IF_MODIFIED=True
 
 AUTHOR = 'jjmojojjmojo'
 SITENAME = 'The Collected Works of jjmojojjmojo'
@@ -45,6 +46,8 @@ PLUGIN_PATHS = ["plugins", "pelican-plugins"]
 PLUGINS = ["explanation", "pelican-toc", "summary"]
 
 PATH = 'content'
+OUTPUT_PATH = "../"
+OUTPUT_SOURCES = False
 
 THEME = "themes/simple"
 
@@ -91,6 +94,7 @@ TOC = {
     'TOC_INCLUDE_TITLE': 'false'
 }
 
+# Settings used by custom templates
 TAG_DESCRIPTIONS = {
     'clojure': "Articles relating to the Clojure programming language.",
     'python': "The Python programming language",
@@ -105,10 +109,13 @@ CATEGORY_DESCRIPTIONS = {
     'tutorial': "How-tos, introductions, walk-throughs."
 }
 
+# turn on/off the notice block
+SHOW_NOTICE = True
+
 STATIC_PATHS = ['images', 'files', 'js', 'videos', 'attachments']
 
 TEMPLATE_PAGES = {'pages.html': 'pages/index.html'}
 
-# DEFAULT_METADATA = {
-#     'status': 'hidden'
-# }
+DEFAULT_METADATA = {
+    'status': 'draft',
+}

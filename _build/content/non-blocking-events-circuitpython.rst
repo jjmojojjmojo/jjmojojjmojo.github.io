@@ -108,16 +108,16 @@ It consists of two buttons, a single one-color LED, and a single "addressable" R
 
 .. container:: centered
     
-    .. image:: {filename}/images/circuitplayground-express-closeup-neopixel-marked.png
+    .. image:: {static}/images/circuitplayground-express-closeup-neopixel-marked.png
           :width: 20%
        
-    .. image:: {filename}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
+    .. image:: {static}/images/itsybitsy-m0-express-closeup-dotstar-marked.png
           :width: 20%
        
-    .. image:: {filename}/images/trinket-m0-closeup-dotstar-marked.png
+    .. image:: {static}/images/trinket-m0-closeup-dotstar-marked.png
        :width: 20%
        
-    .. image:: {filename}/images/gemma-m0-closeup-dotstar-marked.png
+    .. image:: {static}/images/gemma-m0-closeup-dotstar-marked.png
        :width: 20%
     
 
@@ -175,7 +175,7 @@ Any of the M0 or M4 based boards `sold by Adafruit <https://www.adafruit.com/cat
 
 I am fortunate to own, in part due to recent attendance at PyCon 2018, *four* examples of the M0 boards, and have tested the code on each:
 
-.. image:: {filename}/images/nonblocking-m0-boards-2.png
+.. image:: {static}/images/nonblocking-m0-boards-2.png
    :width: 80%
    :align: center
    
@@ -187,7 +187,7 @@ and the `GEMMA M0 <https://www.adafruit.com/product/3500>`__. There's also a `qu
 
 .. note::
    
-   .. image:: {filename}/images/gemma-m0-closeup-obverse.png
+   .. image:: {static}/images/gemma-m0-closeup-obverse.png
       :width: 20%
       :align: right   
    
@@ -227,7 +227,7 @@ Alligator Clips
 ~~~~~~~~~~~~~~~
 The CircuitPlayground has everything we need built in. It comes with two buttons soldered to the board (labeled "A" and "B"). So we don't really need any sort of connectors. For any other projects, you will need to pick up some alligator clips, but to follow along with this article, the CircuitPlayground is all you need.
 
-.. image:: {filename}/images/aligator-clips.png
+.. image:: {static}/images/aligator-clips.png
    :width: 80%
    :align: center
 
@@ -235,7 +235,7 @@ Alligator Clip To Jumper Wire
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The Gemma will require some Aligator-to-male jumper clips to connect the breadboard where the to the Gemma pads. 
 
-.. image:: {filename}/images/aligator-to-jumper.png
+.. image:: {static}/images/aligator-to-jumper.png
    :width: 80%
    :align: center
 
@@ -243,15 +243,15 @@ Jumper Wires
 ~~~~~~~~~~~~
 Other boards will require the use of jumper wires. For the sake of this article, the pre-made kind or cut pieces of solid-core wire will work. We've used both in the example circuits below.
 
-.. image:: {filename}/images/premade-jumper-wires-organized.png
+.. image:: {static}/images/premade-jumper-wires-organized.png
    :width: 80%
    :align: center
    
-.. image:: {filename}/images/solid-core-jumper-wires.png
+.. image:: {static}/images/solid-core-jumper-wires.png
    :width: 80%
    :align: center
    
-.. image:: {filename}/images/nonblocking-lengths-of-wire.png
+.. image:: {static}/images/nonblocking-lengths-of-wire.png
    :width: 80%
    :align: center
 
@@ -283,7 +283,7 @@ I've used three different kinds of breadboards I had on hand, and mixed up the k
 Gemma M0
 ~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-gemma-demo-circuit.png
+.. image:: {static}/images/nonblocking-gemma-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -296,7 +296,7 @@ I clipped the black alligator clip to ground, the white one (button "A") to "D1"
 ItsyBitsy M0 Express
 ~~~~~~~~~~~~~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-itsybitsy-demo-circuit.png
+.. image:: {static}/images/nonblocking-itsybitsy-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -321,7 +321,7 @@ I've connected button "B" (the yellow button, yellow wire, row 30) to pin 7 on t
 Trinket M0
 ~~~~~~~~~~
 
-.. image:: {filename}/images/nonblocking-trinket-demo-circuit.png
+.. image:: {static}/images/nonblocking-trinket-demo-circuit.png
    :width: 80%
    :align: center
 
@@ -408,7 +408,7 @@ As long as the code for each board follows the contract, and anyone using the bo
 
 I like to think about the interface in terms of the actual variables and functions you use, and the contract as the understanding of what inputs and outputs the interface uses, as well as the things the interface does when you call the functions or access the variables:
 
-.. image:: {filename}/images/abstraction-explained-1.png
+.. image:: {static}/images/abstraction-explained-1.png
    :width: 80%
    :align: center
 
@@ -425,7 +425,7 @@ We'll put them into a Python module called ``setup``. Python modules are usually
 
 To use our abstraction, we just need to ``import setup`` and then we can access, for example, ``setup.rgb`` to mess with the RGB pixel. That actual variable might be a NeoPixel. It might be a DotStar. It might be something we've never heard of (like a SunSpot |trademark|). It could be wired to any pin, configured any way. It doesn't matter. As long as that ``rgb`` object works the same way (has the same interface) as a DotStar or NeoPixel, it complies with the *contract* and everything works:
 
-.. image:: {filename}/images/abstraction-explained-2.png
+.. image:: {static}/images/abstraction-explained-2.png
    :width: 80%
    :align: center
 
@@ -657,9 +657,9 @@ Here's a short video demonstrating the test code and demo circuit on each of the
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -676,14 +676,14 @@ When there's no voltage (plus or minus some wiggle room), the pin will read ``Fa
 
 An ideal button being pressed and released might look something like this if we graphed the voltage:
 
-.. image:: {filename}/images/nonblocking-button-bounce-ideal.png
+.. image:: {static}/images/nonblocking-button-bounce-ideal.png
    :width: 80%
    :align: center
    
 
 The problem is that you will rarely ever get such straightforward readings. You'll instead get what looks like many pressings in quick succession:
 
-.. image:: {filename}/images/nonblocking-button-bounce-reality.png
+.. image:: {static}/images/nonblocking-button-bounce-reality.png
    :width: 80%
    :align: center
    
@@ -760,7 +760,7 @@ Keeping score during a sporting event is a way of tracking state. A performance 
 
 Here's a common scoreboard for sports like gymnastics:
 
-.. image:: {filename}/images/nonblocking-state-examples-01.png
+.. image:: {static}/images/nonblocking-state-examples-01.png
    :width: 80%
    :align: center
    
@@ -768,7 +768,7 @@ It's a single score, from a single judge. This scoreboard scores from 1-10, with
 
 If we modeled the scoreboard in Python, we could use a single variable to store the score:
 
-.. image:: {filename}/images/nonblocking-state-examples-02.png
+.. image:: {static}/images/nonblocking-state-examples-02.png
    :width: 80%
    :align: center
    
@@ -843,7 +843,7 @@ Here's a contrived example of a typical scoreboard from an American baseball sta
     The nuances and rules for American baseball are not relevant to this article, but if you aren't familiar and want to dig in, the `wikipedia article <https://en.wikipedia.org/wiki/Baseball>`__ is the place to start.
     
 
-.. image:: {filename}/images/nonblocking-state-examples-03.png
+.. image:: {static}/images/nonblocking-state-examples-03.png
    :width: 80%
    :align: center
 
@@ -851,7 +851,7 @@ It has various regions with indicators, usually lights, and numbers representing
 
 We can model a scoreboard as a series of variables, like we did initially for the gymnastics match:
 
-.. image:: {filename}/images/nonblocking-state-examples-04.png
+.. image:: {static}/images/nonblocking-state-examples-04.png
    :width: 80%
    :align: center
    
@@ -1114,7 +1114,7 @@ The final pass reconciles the state object with reality. This is where you would
 
 Here's a diagram showing how it works:
 
-.. image:: {filename}/images/nonblocking-state-flowchart.png
+.. image:: {static}/images/nonblocking-state-flowchart.png
    :width: 80%
    :align: center
 
@@ -1327,9 +1327,9 @@ Here's a video of this code running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -1560,9 +1560,9 @@ The changes are pretty subtle, but here's another video showing this version run
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -1594,7 +1594,7 @@ We know what the previous value was because we've stored in it our ``state`` obj
 
 The basic logic looks like this:
 
-.. image:: {filename}/images/basic-button-event-logic.png
+.. image:: {static}/images/basic-button-event-logic.png
    :width: 80%
    :align: center
 
@@ -2070,9 +2070,9 @@ We can opt to skip certain events by passing ``None`` to the constructor for the
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -2138,9 +2138,9 @@ Here's what the code looks like (the ``ButtonDispatch`` class doesn't change):
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -2182,9 +2182,9 @@ In practice, most code will look more like this:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4">link to the video</a> instead.</p>
        </video>
    </div>
             
@@ -2324,9 +2324,9 @@ Here's a video of this code running, again on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -2348,9 +2348,9 @@ You may have run into an application of this problem: holding down one button ma
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -2691,9 +2691,9 @@ Here's a video of this code running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -2946,9 +2946,9 @@ Here's the code in action on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -3175,9 +3175,9 @@ Here's what that looks like running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -3494,9 +3494,9 @@ And the requisite video of this code in action on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-demo-trinket-04.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 

@@ -1,11 +1,11 @@
 Branching With Git And Testing With Pytest: A Comprehensive Guide
 #################################################################
-:date: 2019-04-26 9:00
+:date: 2019-06-19 9:00
 :author: jjmojojjmojo
 :category: tutorial
 :tags: python; git; branching; development process
 :slug: branching-git-with-pytest
-:status: draft
+:status: published
 
 .. include:: ../extra.rst
 
@@ -70,12 +70,13 @@ From there, you'll have all the tools you need, save a preferred text editor and
     The guide has been developed with unix-like systems in mind (Linux, BSD, MacOS). It should be possible to follow along in Windows, but this has not been tested. There are some quirks to using git and python in Windows that the author would like to explore in the future. If you are interested in seeing this guide include Windows-specific notes, please `contact the author <{filename}/pages/contact.rst>`__.
     
 
-We can test these things by opening up a terminal and running the following commands:
+We can ensure our tools are installed by opening up a terminal and running the following commands (the output shows what the author was using to develop the guide):
 
 Verify Git
 ----------
 
 .. code-block:: console
+    :linenos: none
     
     $ git --version
     git version 2.20.1 (Apple Git-117)
@@ -84,6 +85,7 @@ Verify Python
 -------------
 
 .. code-block:: console
+    :linenos: none
     
     $ python -V
     Python 3.7.3
@@ -92,6 +94,7 @@ Verify :code:`venv`
 -------------------
 
 .. code-block:: console
+    :linenos: none
     
     $ python -m venv --help
     usage: venv [-h] [--system-site-packages] [--symlinks | --copies] [--clear]
@@ -128,7 +131,7 @@ Unless you get any errors, or the versions look really dissimilar, you are in go
 
 Workflow Overview
 =================
-.. figure:: {filename}/images/branching-git-pytest/workflow-overview.png
+.. figure:: {static}/images/branching-git-pytest/workflow-overview.png
    :align: right
    :figwidth: 40%
    
@@ -140,8 +143,8 @@ The basic workflow goes like this:
 #. :code:`git clone` the repository (or :code:`git pull` changes into an existing clone).
 #. Check out the branch you want to work from (usually :code:`master`).
 #. Run the tests.
-#. Create a new branch for the bug/feature.
-#. Check out the new branch.
+#. Create a new branch for the bug/feature. (:code:`git branch`)
+#. Check out the new branch. (:code:`git checkout`)
 #. Make the changes.
 #. Write tests for your changes.
 #. Increment the revision number. (if applicable)
@@ -164,12 +167,14 @@ The first step is to clone the initial version of the example application, from 
 First, we need to do a *bare* clone of the repository. This will give us a `remote <https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes>`__, that isn't `github <https://www.github.com>`__, that we can clone and work on.
 
 .. code-block:: console
+    :linenos: none
     
     $ git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
     
 Now, instead of cloning my repository from github, we clone :code:`random_quote_remote`:
 
 .. code-block:: console
+    :linenos: none
     
     $ git clone random_quote_remote random_quote
     
@@ -179,6 +184,33 @@ Any changes we :code:`git push` in :code:`random_quote` will only go to :code:`r
     
     This is a handy way to set up a temporary git repository that you can experiment with without any risk to the code hosted on your shared git server (or `github <https://www.github.com>`__). |unicorn|
     
+
+Jumping Around In The Guide
+===========================
+
+|rainbow| We have branches for all of the major work done in the series:
+
+:code:`part1`
+    All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__.
+:code:`part2`
+    All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__ and
+    `part 2 <{filename}/branching-git-with-pytest-2.rst>`__
+:code:`qotd`
+    Developer **A**'s feature from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+:code:`index-info`
+    Developer **B**'s bug fix from `part 3 <{filename}/branching-git-with-pytest-3.rst>`__.
+:code:`part3`
+    All the changes from `part 1 <{filename}/branching-git-with-pytest.rst>`__, 
+    `part 2 <{filename}/branching-git-with-pytest-2.rst>`__ *and* `part 3 <{filename}/branching-git-with-pytest-3.rst>`__!
+
+Feel free to :code:`git checkout` if you need to reset your code, or jump around.
+   
+
+.. tip::
+    
+   Use :code:`git stash` to keep any uncomitted changes for latter. See `the git documentation <https://git-scm.com/book/en/v1/Git-Tools-Stashing>`__ for more information. |unicorn|
+   
+
 
 Quick Overview Of The Application Layout
 ========================================
@@ -219,6 +251,7 @@ Initialize The Virtual Environment
 Now that the repo is cloned and we've checked out the :code:`master` branch, we need to initialize the virtual environment, and install the libraries we need for development:
 
 .. code-block:: console
+    :linenos: none
     
     $ cd random_quote
     $ python -m venv .
@@ -249,7 +282,7 @@ Deisgn Approach
 ---------------
 The design of the application is in two main parts. We have a data manager, :code:`manager.RandomQuoteManager`, that handles all interaction with the database. Then we have the WSGI application, :code:`wsgi.RandomQuoteApp` that provides a web-based API. 
 
-.. figure:: {filename}/images/branching-git-pytest/key-classes-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/key-classes-first-pass.png
    :align: center
    :figwidth: 80%
    
@@ -266,6 +299,12 @@ The design of the application is in two main parts. We have a data manager, :cod
     These two classes are shown to be related by a simple two-direction arrow.
     
 
+.. figure:: {static}/images/branching-git-pytest/api-boundaries.png
+   :align: right
+   :figwidth: 40%
+   
+   Essential API Boundaries
+   
 This is done for a few reasons. Primarily, the concept of `separation of concerns <https://en.wikipedia.org/wiki/Separation_of_concerns>`__. The *concern* of the database interaction, the *concern* of the web interaction, and the *concern* of the web *client* are separated by **clear API boundaries**.
 
 By doing this, we isolate code that has to be different by its nature. :code:`RandomQuoteManager` is concerned with managing and retrieving data in the database. :code:`RandomQuoteApp` is concerned with interacting with web clients. The web client is completely out of our control (a browser like `Firefox <https://www.mozilla.org/en-US/firefox/new/>`__, a utility like `cURL <https://curl.haxx.se/>`__, or another application).
@@ -279,15 +318,6 @@ Finally, the concerns of the client are theirs alone. Today we may be building o
 We may write console scripts that use the web API via tools like cURL as part of systems automation.
 
 Whatever the client exactly is, it can be the *best* client for whatever its purpose. As long as the web API is understood by the client, everything keeps working.
-
-We can diagram the most important boundaries (depending on how you define them, there could be more):
-
-.. figure:: {filename}/images/branching-git-pytest/api-boundaries.png
-   :align: center
-   :figwidth: 80%
-   
-   Essential API Boundaries
-   
 
 This is entirely in terms of functionality. But there are benefits to this separation for us as developers too.
 
@@ -421,7 +451,7 @@ Modifying this amalgam is much more risky. We can very easily break the database
 
 .. tip::
     
-    We will learn how to deal with that situation, however unlikely, in `part 3 <{filename}/branching-git-with-pytest-3.rst>`__! |unicorn|
+    We will learn how to deal with that situation, however unlikely, in `part 3 <{static}/branching-git-with-pytest-3.rst>`__! |unicorn|
     
 
 But worse, its also harder to *test*. This may be one of the biggest advantages to putting thought into separation of concerns, and creating sane API boundaries. When testing the nightmare code above, we have to simulate an HTTP request just to make sure the database works, and we need the database functioning to ensure the HTTP stuff functions. This leads to more complex test fixtures and complex object mocking, and ultimately more fragile test suites.
@@ -434,7 +464,7 @@ Application Design
 ------------------
 The application as it stands for this part of the guide incorporates concepts of separation of concerns as explored in the last section:
 
-.. figure:: {filename}/images/branching-git-pytest/application-overview-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/application-overview-first-pass.png
    :align: center
    :figwidth: 80%
    
@@ -465,7 +495,7 @@ Data Model
 ----------
 The initial database schema is very simple, but uses a somewhat advanced technique to select random quotes.
 
-.. figure:: {filename}/images/branching-git-pytest/er-diagram-first-pass.png
+.. figure:: {static}/images/branching-git-pytest/er-diagram-first-pass.png
    :align: center
    :figwidth: 40%
    
@@ -482,6 +512,20 @@ We've got a :code:`quotes` table with four main columns:
     
 We then have a special column, :boldcode:`rand`, that stores a random number. It's generated using the sqlite :code:`random()` function if it's not specified. We've added an index on this column so it can be sorted efficiently.
 
+Here's the SQL command we're using to generate the table (this is locaed in :code:`src/random_quote/schema.sql`):
+
+.. code-block:: sql
+    
+    CREATE TABLE IF NOT EXISTS quotes (
+        id INTEGER PRIMARY KEY, 
+        quote TEXT NOT NULL,
+        author TEXT NOT NULL,
+        created TEXT DEFAULT (datetime('now')),
+        rand INTEGER DEFAULT (random())
+    );
+    
+    CREATE INDEX IF NOT EXISTS quotes_rand ON quotes (rand);
+
 We use :code:`rand` to easily get a random row in the table using a simple query:
 
 .. code-block:: sql
@@ -491,6 +535,7 @@ We use :code:`rand` to easily get a random row in the table using a simple query
 This is a bit more efficient than the usual :code:`ORDER BY random()` approach, and it has an added benefit: we can fix all the random values during tests if we provide the random numbers in python. You can see this in action in :code:`src/random_quote/manager.py`, in the :code:`RandomQuoteManager.random()` method:
 
 .. code-block:: python
+    :hl_lines: 29
     
     import random
     ...
@@ -526,6 +571,16 @@ This is a bit more efficient than the usual :code:`ORDER BY random()` approach, 
             
             return dict(result)
             
+.. explanation::
+    
+    In this example, we've abbreviated the source of :code:`RandomQuoteManager` a bit so we can focus just on the parts that are relevant to the :code:`random()` method.
+    
+    sqlite3 has a `random() function <https://www.sqlite.org/lang_corefunc.html#random>`__ as well. It returns integer values between *-9223372036854775808* and *+9223372036854775807*. 
+    
+    In our SQL :code:`CREATE` statement, we're setting the default value of :code:`rand` to :code:`random()`. This will invoke the sqlite function if a value isn't specified.
+    
+    We emulate that functionality in our python code so we can interfere with the way random numbers are generated. This is not possible if we were to rely on sqlite to do set the value of :code:`rand` for us.
+    
     
 
 .. note::
@@ -534,22 +589,8 @@ This is a bit more efficient than the usual :code:`ORDER BY random()` approach, 
     
 .. tip::
     
-    If you're curious how we might go about fixing the random values, stay tuned, we're going to do that shortly. |unicorn|
+    If you're curious how we might go about fixing the random values, stay tuned, we're going to do that shortly! |unicorn|
     
-
-Here's the SQL command we're using to generate the table (this is locaed in :code:`src/random_quote/schema.sql`):
-
-.. code-block:: sql
-    
-    CREATE TABLE IF NOT EXISTS quotes (
-        id INTEGER PRIMARY KEY, 
-        quote TEXT NOT NULL,
-        author TEXT NOT NULL,
-        created TEXT DEFAULT (datetime('now')),
-        rand INTEGER DEFAULT (random())
-    );
-    
-    CREATE INDEX IF NOT EXISTS quotes_rand ON quotes (rand);
     
 
 Background For The Uninitiated
@@ -606,7 +647,9 @@ WebOb
 
 Pytest
 ------
-`Pytest <https://docs.pytest.org/en/latest/>`__ is a newer testing framework for Python.
+`Pytest <https://docs.pytest.org/en/latest/>`__ is a newer testing framework for Python. It is simpler than, but compatible with, the built-in `unittest module <https://docs.python.org/3/library/unittest.html>`__.
+
+Pytest uses a convention-over-configuration approach. Test suites and test cases are discovered simply by being named a certain way. However, that discovery process is highly configurable. |cool|
 
 WebTest
 -------
@@ -618,11 +661,12 @@ Run The Tests
 Now that we have the code, we've initialized our environment, and we understand what we're working on, we can run the tests. This is done with the :code:`pytest` command:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 6 items
     
     src/random_quote/tests/test_manager.py ....                               [ 66%]
@@ -649,6 +693,7 @@ First, lets create a `CSV <https://en.wikipedia.org/wiki/Comma-separated_values>
 You can do this using your favorite spreadsheet program, a text editor, or (recommended) use the provided :code:`generate_quotes.py` script:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ python scripts/generate_quotes.py
     
@@ -656,6 +701,7 @@ You can do this using your favorite spreadsheet program, a text editor, or (reco
 To initialize the database and mess with the API, lets start a python prompt in our virtual environment:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ python
     Python 3.7.3 (default, Mar 30 2019, 03:37:43)
@@ -665,6 +711,7 @@ To initialize the database and mess with the API, lets start a python prompt in 
 We'll put our database in a file named :code:`test.db` in the current directory:
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> from random_quote import util
     >>> util.init("test.db")
@@ -672,12 +719,14 @@ We'll put our database in a file named :code:`test.db` in the current directory:
 Now, lets load :code:`quotes.csv`.
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> util.ingest("quotes.csv", "test.db")
     
 And we can use the :code:`RandomQuoteManager` to look at what we've loaded:
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> from random_quote.manager import RandomQuoteManager
     >>> rqm = RandomQuoteManager("test.db")
@@ -687,6 +736,7 @@ And we can use the :code:`RandomQuoteManager` to look at what we've loaded:
 And we can use it to add a new quote:
     
 .. code-block:: pycon
+    :linenos: none
     
     >>> rqm.add("Something quite quotable")
     1001
@@ -696,6 +746,7 @@ The :code:`add()` method returns the id of the newly created quote.
 Note that the author is *optional*, and defaults to :code:`Unknown`:
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> rqm.get(1001)
     {'id': 1001, 'author': 'Unknown', 'quote': 'Something quite quotable',...
@@ -704,20 +755,20 @@ To exit the console, press :code:`ctrl-D`, or run the :code:`exit()` function.
 
 Getting Comfortable With Git And Pytest
 =======================================
-As a first step, lets add a new pytest fixture and some test cases. We won't bother doing any branching. This will get us acquainted with how pytest works, and we'll get comfortable with the most basic git commands.
+As a first step, lets add a new pytest fixture and some test cases. We won't bother doing any branching. This will get us acquainted with how pytest works, and we'll get comfortable with the most basic git commands: :code:`git status`, :code:`git commit`, and :code:`git push`.
 
 Pytest Basics
 =============
 Pytest uses the concept of  *convention over configuration* to provide a lot of flexbility when writing tests. All you need to do is provide a python module that has the :code:`test_` prefix, and fill it with functions that also begin with :code:`test_`. Pytest will collect these functions and run them for you. 
 
-To make a test fail, pytest utilizes the python built-in :code:`assert` keyword. :code:`assert` evaluates the given expression, and raises an exception if the expression evaluates to :code:`False`. Pytest leverages this to make writing tests straight forward.
+To make a test fail, pytest utilizes the python built-in :code:`assert` keyword. :code:`assert` evaluates the given expression, and raises an exception if the expression evaluates to :code:`False`. Pytest leverages this to make writing tests straight forward: you are simply making *assertions* about the truth of some expression.
 
 .. tip::
     
     For more details, see `Installation And Getting Started <https://docs.pytest.org/en/latest/getting-started.html>`__ in the `pytest documentation <https://docs.pytest.org/en/latest>`__.
     
 
-Here's a contrived test that pytest can run. Save it as :code:`test_example.py`:
+Here's a contrived *test suite* (collection of tests) that pytest can run. Save it as :code:`test_example.py`:
 
 .. code-block:: python
     
@@ -732,14 +783,25 @@ Here's a contrived test that pytest can run. Save it as :code:`test_example.py`:
         """
         assert phi() != 2
         
+    
+
+.. explanation::
+    
+    This *test suite* consists of a single *test case*, named :code:`test_phi()`. It has a *helper function* named :code:`phi()` that generates `The Golden Ratio <https://en.wikipedia.org/wiki/Golden_ratio>`__, also known as |phi|.
+    
+    This test is non-sensical, simply asserting that |phi| != 2.
+    
+
+
 As before, we can use :code:`pytest` to run our test case, but this time we'll specify the file instead of :code:`src`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest test_example.py
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 1 item
     
     test_example.py .                                                         [100%]
@@ -751,12 +813,13 @@ In this case, only the :code:`test_phi()` *test case* is run directly by :code:`
 To prove this, we can ask :code:`pytest` to be more *verbose*, using the :code:`-v` flag:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest -v test_example.py
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 1 item
     
     test_example.py::test_phi PASSED                                          [100%]
@@ -764,13 +827,19 @@ To prove this, we can ask :code:`pytest` to be more *verbose*, using the :code:`
     =========================== 1 passed in 0.01 seconds ============================
     
 
-The next thing you should know is how to write *test fixtures*. With pytest, fixtures are just specially decorated functions.
+The next thing you should know is how to write *test fixtures*. With pytest, fixtures are just specially `decorated functions <https://realpython.com/primer-on-python-decorators/>`__.
 
 So what are fixtures for? Fixtures allow us to do some set up work before each test is run, and clean up (or *tear down*) after. In our :code:`random_quote` application, it's used to create a database and add some data to it. The database is then destroyed after the test.
 
 Fixtures are decorated with :code:`pytest.fixture` . To use them in a test, you take a parameter that has the same name. If you :code:`return` a value, it's passed to the test case. If you :code:`yield` one, the :code:`yield` ed value is passed, and control returns to your fixture to clean up after the test.
 
-More contrived examples will illustrate how it works:
+.. tip::
+    
+    The terms *set up* and *tear down* are fundamental automated testing terms. In a lot of other testing frameworks, test suites have special functions or methods with names like :code:`setUp` and :code:`tearDown` that provide the same functionality as pytest's fixtures. |rainbow|
+    
+    What's cool about pytest, is that fixtures serve the same purpose, but are much more robust. You can change the scope of a fixture by providing the :code:`scope` keyword argument when decorating a fixture function. `More details can be found in the documentation <https://docs.pytest.org/en/latest/fixture.html#scope-sharing-a-fixture-instance-across-tests-in-a-class-module-or-session>`__.
+
+More contrived examples will illustrate how fixtures work:
 
 .. code-block:: python
     
@@ -809,19 +878,32 @@ More contrived examples will illustrate how it works:
     def test_no_fixture():
         assert CHANGE_ME == "Hello"
         
-Here, we set up a global variable, :code:`CHANGE_ME`, and we use the :code:`yielded_value()` fixture to change it temporarily, then restore it after the fixture :code:`yield` 's.
+.. explanation::
+    
+    In this example, we've set up two fixtures to illustrate using :code:`yield` and :code:`return`, named :code:`yielded_value()` and :code:`returned_value()` respectively.
+    
+    To show that something has changed due to using the :code:`yielded_value()` fixture, we set up a global variable, :code:`CHANGE_ME`. We use the :code:`global` keyword to allow our fixture to change a value outside of its scope. 
+    
+    The new test suites, :code:`test_returned()`, :code:`test_yielded()`, and :code:`test_no_fixture()` illustrate how fixtures are consumed by test suites.
+    
 
-We also see how we can use multiple :code:`assert` statements in one test case if we wish.
+    :code:`test_yielded()` shows that we can use multiple :code:`assert` statements in one test case if we wish. 
+    
+    .. note::
+        
+        This is not considered `a best practice <http://programmaticallyspeaking.com/one-assertion-per-test-please.html>`__, and so it should be used sparingly (more discussion on `the software enginering stack exchange <https://softwareengineering.stackexchange.com/questions/7823/is-it-ok-to-have-multiple-asserts-in-a-single-unit-test>`__, but it can be useful to save some typing.
+    
 
 When we run the new test cases, we see everything passes:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest -v test_example.py
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 4 items
     
     test_example.py::test_phi PASSED                                          [ 25%]
@@ -961,11 +1043,11 @@ Here's what :code:`src/random_quote/tests/conftest.py` looks like right now:
 
 You'll note that we have three fixtures defined in this file. The first, :code:`temp_db()`, creates a temporary file (using the built-in `tempfile <https://docs.python.org/3/library/tempfile.html>`__ module) to store the sqlite database. After it returns the path to the temporary file, when the fixture finishes, it deletes it. This is a perfect example of situations where fixtures are particularly useful.
 
-Next, we have :code:`preconfigured_manager()`, a fixture that uses the :code:`util` module to initialize the database, then plain SQL statements to pre-populate it. After returning the :code:`RandomQuoteManager` object, it closes the connection to ensure it's freed before the next test. 
+Next, we have :code:`preconfigured_manager()`, a fixture that uses the :code:`util` module to initialize the database, then plain SQL statements to pre-populate it. After returning the :code:`RandomQuoteManager` object, it closes the connection to ensure it's freed before the next test.
 
-We can see how fixtures can be chained in the same way we use fixtures in test cases. Pytest ensures all the cleanup is done in the correct order.
+We can see how fixtures can be chained in the same way we use fixtures in test cases, as :code:`preconfigured_manager()` takes :code:`temp_db` as a parameter. Multiple fixtures can be used as well, by taking multiple parameters, as illustrated by :code:`preconfigured_wsgi_app`. Pytest ensures all the cleanup is done in the correct order.
 
-Finally, we have a fixture that sets up a :code:`WebTest.TestApp` instance wrapping a :code:`RandomQuoteApp` instance. It illustrates how a test case (or in this case, a fixture) can take multiple fixture arguments, taking :code:`temp_db` and :code:`preconfigured_manager`. We aren't using the return value of :code:`preconfigured_manager()` in :code:`preconfigured_wsgi_app()`, but we do want the database initialization and data population to be done for us.
+Finally, :code:`preconfigured_wsgi_app` sets up a :code:`WebTest.TestApp` instance, wrapping a :code:`RandomQuoteApp` instance. We aren't using the return value of :code:`preconfigured_manager()` in :code:`preconfigured_wsgi_app()`, but we do want the database initialization and data population to be done for us. Even though :code:`temp_db` is used by both fixtures, it is only called once, ensuring that the database path used by :code:`preconfigured_manager()` is identical to the one used by :code:`preconfigured_wsgi_app()`.
 
 Now that we understand the basics of using pytest, lets fill in some missing tests and do our first :code:`git commit`.
 
@@ -977,12 +1059,12 @@ The last developer who worked on this project (yours truly |cool|) has made a pr
     
     This is a great reason to look into *test coverage analysis*, in particular the `coverage.py <https://coverage.readthedocs.io/en/v4.5.x/>`__ library.
     
-    If we were using coverage, we'd have noticed that there was a method that wasn't exercised in the tests.
+    If we were using coverage analysis, we'd have noticed that there was a method that wasn't exercised in the tests.
     
 
 We shouldn't be too hard on our predecessor, since they were put into a tough spot. Our quotes are inserted and retrieved using python's built-in psuedo-random number generation tools (the `random <https://docs.python.org/3/library/random.html>`__ module). Every time a function in that module is called (e.g. :code:`random.randint()`), it will likely produce a different output.
 
-That means that if we were to write a test case for the :code:`RandomQuoteManager.random()` method, the test case would fail *randomly* every time it is run.
+That means that if we were to write a test case for the :code:`RandomQuoteManager.random()` method, the test case would fail *randomly* every time it is run. |thinking|
 
 Lets see this in action. Here's a test case for :code:`RandomQuoteManager.random()`, that you should add to the end of :code:`src/random_quote/tests/test_manager.py`:
 
@@ -1002,11 +1084,12 @@ Lets see this in action. Here's a test case for :code:`RandomQuoteManager.random
 Now, if we run the tests, we will likely get a failure (if you don't, try running them again):
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src
     ==================================== test session starts =====================================
     platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 7 items
     
     src/random_quote/tests/test_manager.py ....F                                           [ 71%]
@@ -1030,11 +1113,16 @@ Now, if we run the tests, we will likely get a failure (if you don't, try runnin
     src/random_quote/tests/test_manager.py:65: AssertionError
     ============================= 1 failed, 6 passed in 0.25 seconds =============================
     
-So how do we fix this? There is a :code:`seed()` function in the :code:`random` module that `re-initializes the random number generator <https://docs.python.org/3/library/random.html#random.seed>`__. It can take a parameter, which is used to provide *reproducible* randomness. When used, everything will function properly: if you were to call a random function multiple times under normal circumstances and get a different value, you still would. But the values would be (likely) different, and the same values will be returned. This happens *every time* that :code:`random.seed()` is called with the same value.
+So how do we fix this? We alluded to "fixing" the randomness of our code earlier. How is this possible? 
+
+There is a :code:`seed()` function in the :code:`random` module that `re-initializes the random number generator <https://docs.python.org/3/library/random.html#random.seed>`__. It can take a parameter, which is used to provide *reproducible* randomness. 
+
+When used, everything will function properly: if you were to call a random function multiple times under normal circumstances and get a different value, you still would. But the values would be (likely) different, and the same values will be returned. This happens *every time* that :code:`random.seed()` is called with the same value.
 
 Here's how that works:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ python
     Python 3.7.3 (default, Mar 30 2019, 03:37:43)
@@ -1044,6 +1132,7 @@ Here's how that works:
     
 
 .. code-block:: pycon
+    :linenos: none
     
     >>> import random
     >>> random.randint(0, 10)
@@ -1072,9 +1161,12 @@ Lets add a test fixture to the top of :code:`src/random_quote/tests/conftest.py`
         random.seed()
         
 
-Note how we don't actually yield a value. This is totally acceptable, but in the future we may want to return something that the test cases can use, like the value we used for the seed.
+.. note::
+    
+    We don't actually yield a value here. This is totally acceptable, but in the future we may want to return something that the test cases can use, like the value we used for the seed.
+    
 
-After the :code:`yield`, we call :code:`random.seed()` with no explicit value, that re-seeds the random number generator with the default, which is the way it normally works (usually it's the system time).
+After the :code:`yield`, we call :code:`random.seed()` with no explicit value. That re-seeds the random number generator with the default value, which is the way it normally works (usually it's seeded with the system time).
 
 In order to use this fixture, we just need to pass :code:`fix_random` as a parameter to :code:`preconfigured_manager()`. Every test case that uses :code:`preconfigured_manager`, or any test cases that use fixtures that use :code:`preconfigured_manager`, will have their randomness "fixed" with the same seed.
 
@@ -1141,11 +1233,12 @@ Here's the new version of :code:`src/random_quote/tests/conftest.py`:
 Now, running the tests again, we see that the new test case :code:`test_random_quote()` passes:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ pytest src
     ============================== test session starts ==============================
     platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 7 items
     
     src/random_quote/tests/test_manager.py .....                              [ 71%]
@@ -1155,13 +1248,14 @@ Now, running the tests again, we see that the new test case :code:`test_random_q
     
 Our First :code:`git commit`
 ============================
-The most basic way to work with :code:`git` is to clone a repository, and make changes on the default branch, usually called :code:`master`.
+The most basic way to work with :code:`git` is to make a clone of a repository, make changes on the default branch, usually called :code:`master`, then :code:`git commit`, followed by :code:`git push`.
 
-While it's not best practice to do this most of the time, it's a little less complicated, and will get us acquainted with git.
+While it's not best practice to do this most of the time, it's a little less complicated than a fully-baked branch-based development workflow. So we'll take it easy with this first batch of changes, so we can get acquainted with git.
 
 First, we need to ask git what has changed. We do this using :code:`git status`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git status
     On branch master
@@ -1201,11 +1295,12 @@ When this command is executed, git creates a temporary file for us, and will bri
     
     You can configure this to be nearly any editor you'd like. `Here are some examples from github <https://help.github.com/en/articles/associating-text-editors-with-git>`__.
     
-Our commit messages should be descriptive, but not too long. There's no point in mentioning which files changed, focus on stating *why* things changed instead.
+Our commit messages should be descriptive, but not too long. There's no point in mentioning things that git records in the change set, like which files changed or even which code was altered. Instead, focus on stating *why* things changed, and the overall *point* of the commit.
 
 Lets go ahead and execute :code:`git commit -a`:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git commit -a
     
@@ -1241,11 +1336,20 @@ Again, we can see that git is quite helpful |grin|. Let's add the following to t
     
 Save, and exit.
 
-In a git commit message, the first line should be short and give an overview of what was done. The following lines, if any, can provide more detail.
+In a git commit message, the first line should be short and give an overview of what was done. The following lines, if any, can provide more detail. We do this chiefly because most git tools only show a truncated version of that first line.
 
-This way, when we look at :code:`git log`, we can get a sense of what's been going on:
+.. tip::
+    
+    There is a lot of opinion and different practices revolving around git commit log messages. We've only scratched the surface of what makes a great message, and further, what makes a great *commit*. 
+    
+    I like the `git log standard <https://wiki.openstack.org/wiki/GitCommitMessages>`__ used by the `OpenStack project <https://www.openstack.org/>`__. Even if you weren't to adopt it verbatim, it's a great outline of things you need to think about when collaborating on a software project. |unicorn|
+    
+
+
+Now, looking at :code:`git log`, we can get a sense of what's been going on:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log
     commit f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -> master)
@@ -1274,6 +1378,7 @@ Log entries are listed from newest to oldest.
 Of particular use, is the :code:`--pretty` flag:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log --pretty=oneline
     f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -> master) Added tests for randomness.
@@ -1292,6 +1397,7 @@ Try other valid options for :code:`--pretty`, like :code:`short`.
 Another useful command line option for :code:`git log` is :code:`-n[?]` - you can pass any number to limit the log output to just that many entries:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git log --pretty=oneline -n1
     f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -> master) Added tests for randomness.
@@ -1334,13 +1440,14 @@ Note that we are receiving the *same* quote that we got in :code:`test_random_qu
 We can run the tests again and see that the new test got picked up, and ran successfully. To be extra-sure, lets use the :code:`-v` flag to :code:`pytest`, it will give us more detail about what tests were run:
 
 .. code-block:: console
+    :linenos: none
     :hl_lines: 16
     
     (random_quote) $ pytest -v src
     ============================== test session starts ==============================
-    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python
+    platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python
     cachedir: .pytest_cache
-    rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote
+    rootdir: [...]/random_quote
     collected 8 items
     
     src/random_quote/tests/test_manager.py::test_add_quote PASSED             [ 12%]
@@ -1354,11 +1461,17 @@ We can run the tests again and see that the new test got picked up, and ran succ
     
     =========================== 8 passed in 0.36 seconds ============================
     
-Lets :code:`git commit` our new test. We'll use the :code:`-m` flag this time. This way, we can specify our commit log message on the command line. It's really handy for small changes like this.
+Lets :code:`git commit` our new test. We'll use the :code:`-m` flag this time. This way, we can specify our commit log message on the command line, surrounded by double quotes (:code:`"`). It's really handy for small changes like this.
+
+.. tip::
+    
+    Be careful of `special shell characters <https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch01s09.html>`__, in messages you pass to the :code:`-m` switch. If you have to use one, prefix it with a backslash (\\).
+    
 
 First, lets check :code:`git status` to make sure we know what we're committing:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git status
     On branch master
@@ -1385,6 +1498,7 @@ Note that now, :code:`git status` tells us that we are "ahead of 'orign/master' 
 Ok, so we know what's going to be committed, lets do the commit:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git commit -a -m"Added web API test for a random quote"
     [master a110267] Added web API test for a random quote
@@ -1392,7 +1506,7 @@ Ok, so we know what's going to be committed, lets do the commit:
      
 Let's Publish Our Changes (:code:`git push`)
 ============================================
-Since git is *decentralized*. There is a place where you got your copy of the code, this is referred to as a *remote*. Each clone, or *working copy* of the repository contains all of the changes since the repository was created. We work on our clone of the repository and can view and manipulate any change ever made. We work independently, in perpetuity. 
+Git is *decentralized*. There is a place where you got your copy of the code, this is referred to as a *remote*. Each clone, or *working copy* of the repository contains all of the changes since the repository was created. We work on our clone of the repository and can view and manipulate any change ever made. We work independently, in perpetuity. 
 
 In order for someone else to use those changes, we need to use send our commits to the remote. This is done via :code:`git push`.
 
@@ -1401,6 +1515,7 @@ The default name for the default remote is :code:`origin`. It's not necessary to
 Lets push our changes to the :code:`master` branch:
 
 .. code-block:: console
+    :linenos: none
     
     (random_quote) $ git push origin master
     Enumerating objects: 20, done.
@@ -1409,19 +1524,19 @@ Lets push our changes to the :code:`master` branch:
     Compressing objects: 100% (11/11), done.
     Writing objects: 100% (13/13), 1.19 KiB | 1.19 MiB/s, done.
     Total 13 (delta 8), reused 0 (delta 0)
-    To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote
+    To [...]/random_quote_remote
        c670c79..a110267  master -> master
        
 Before we did this, anyone else who cloned our repository would not be able to see the commits we made. Now that we have, they can run :code:`git fetch` or :code:`git pull` and retrieve the commits we made.
 
 .. note::
     
-    We will be exploring multi-user scenarios a bit later!
+    We will be exploring multi-user scenarios `a bit later <{filename}/branching-git-with-pytest-3.rst>`__! |rainbow|
     
 
 Conclusion/What's Next
 ======================
 In this installment, we covered the basics of doing work with pytest and git.
 
-In part 2, we'll dig into how branching works by fixing a bug.
+In `part 2 <{filename}/branching-git-with-pytest-2.rst>`__, we'll dig into how branching works by fixing a bug.
 

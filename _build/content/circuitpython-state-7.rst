@@ -1025,7 +1025,7 @@ State That Reconciles Itself
 ============================
 Recall the three-phases of state:
 
-.. image:: {filename}/images/nonblocking-state-flowchart.png
+.. image:: {static}/images/nonblocking-state-flowchart.png
    :align: center
    :width: 80%
    
@@ -1374,9 +1374,9 @@ We can opt to skip certain events by passing ``None`` to the constructor for the
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
@@ -1445,9 +1445,9 @@ Here's what the code looks like (the ``ButtonDispatch`` class doesn't change):
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-02.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -1489,9 +1489,9 @@ In practice, most code will look more like this:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-03.mp4">link to the video</a> instead.</p>
        </video>
    </div>
             
@@ -1634,9 +1634,9 @@ Here's a video of this code running, again on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-04.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -1660,9 +1660,9 @@ You may have run into an application of this problem: holding down one button ma
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/blink-controller-alarm-clock-example.mp4">link to the video</a> instead.</p>
        </video>
    </div>
 
@@ -2004,9 +2004,9 @@ Here's a video of this code running on my Trinket M0:
    
    <div class="video-container">
        <video controls>
-          <source src="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4" type="video/mp4">
+          <source src="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4" type="video/mp4">
           <p>Your browser doesn't support HTML5 video. Here is
-             a <a href="{filename}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4">link to the video</a> instead.</p>
+             a <a href="{static}/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-05.mp4">link to the video</a> instead.</p>
        </video>
    </div>
    
