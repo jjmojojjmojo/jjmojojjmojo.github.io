@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - circuitpython</title><link href="https://jjmojojjmojo.github.io/" rel="alternate"></link><link href="https://jjmojojjmojo.github.io/feeds/tag.circuitpython.atom" rel="self"></link><id>https://jjmojojjmojo.github.io/</id><updated>2018-09-01T15:07:00-04:00</updated><entry><title>State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</title><link href="https://jjmojojjmojo.github.io/circuitpython-state-part-3.html" rel="alternate"></link><published>2018-09-01T15:07:00-04:00</published><updated>2018-09-01T15:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-09-01:/circuitpython-state-part-3.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - circuitpython</title><link href="/" rel="alternate"></link><link href="/feeds/tag.circuitpython.atom" rel="self"></link><id>/</id><updated>2018-09-01T15:07:00-04:00</updated><entry><title>State And Events In CircuitPython: Part 3: State And Microcontrollers And Events (Oh My!)</title><link href="/circuitpython-state-part-3.html" rel="alternate"></link><published>2018-09-01T15:07:00-04:00</published><updated>2018-09-01T15:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-01:/circuitpython-state-part-3.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;p&gt;In this part of the series, we'll apply what we've learned about state to our simple &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#testing"&gt;testing code from part one&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this part of the series, we'll apply what we've learned about state to our simple &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing code from part one&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Not only will we debounce some buttons &lt;em&gt;without blocking&lt;/em&gt;, we'll use state to more efficiently control some LEDs.&lt;/p&gt;
 &lt;p&gt;We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of &lt;em&gt;event detection&lt;/em&gt; 🌈 .&lt;/p&gt;
 &lt;p&gt;All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.&lt;/p&gt;
 </summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;p&gt;In this part of the series, we'll apply what we've learned about state to our simple &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#testing"&gt;testing code from part one&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this part of the series, we'll apply what we've learned about state to our simple &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing code from part one&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Not only will we debounce some buttons &lt;em&gt;without blocking&lt;/em&gt;, we'll use state to more efficiently control some LEDs.&lt;/p&gt;
 &lt;p&gt;We'll also explore what happens when state changes, and how we can take advantage of that to do even more complex things with very little code, using the magic of &lt;em&gt;event detection&lt;/em&gt; 🌈 .&lt;/p&gt;
 &lt;p&gt;All of this will be done in an object-oriented fashion, so we'll learn a lot about OOP as we go along.&lt;/p&gt;
 
 &lt;div class="section" id="revisiting-old-friends"&gt;
 &lt;h2 id="revisiting old friends"&gt;Revisiting Old Friends&lt;/h2&gt;
-&lt;p&gt;Lets start by applying state tracking to our &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#testing"&gt;testing  code&lt;/a&gt; from the first part of this series.&lt;/p&gt;
-&lt;p&gt;For reference, here's one of the example circuits, using the Trinket M0 (see &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#the-demo-circuit"&gt;the demo circuit section in part 1&lt;/a&gt; for references using other boards):&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
+&lt;p&gt;Lets start by applying state tracking to our &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing  code&lt;/a&gt; from the first part of this series.&lt;/p&gt;
+&lt;p&gt;For reference, here's one of the example circuits, using the Trinket M0 (see &lt;a class="reference external" href="/circuitpython-state-part-1.html#the-demo-circuit"&gt;the demo circuit section in part 1&lt;/a&gt; for references using other boards):&lt;/p&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
 &lt;p&gt;We have two buttons, and two LEDs - one is the standard red LED on pin 13, the other is a built-in RGB LED, either a NeoPixel or DotStar.&lt;/p&gt;
 &lt;p&gt;Recall that to test our board, we set up a simple project that has the following functionality:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -29,7 +29,7 @@
 &lt;ul class="simple"&gt;
 &lt;li&gt;Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a &lt;em&gt;different color&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We can improve upon the code by building on the concepts of &lt;em&gt;state&lt;/em&gt; we learned about in the &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-2.rst"&gt;previous post&lt;/a&gt;. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄&lt;/p&gt;
+&lt;p&gt;We can improve upon the code by building on the concepts of &lt;em&gt;state&lt;/em&gt; we learned about in the &lt;a class="reference external" href="/circuitpython-state-2.rst"&gt;previous post&lt;/a&gt;. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄&lt;/p&gt;
 &lt;p&gt;Lets start by refactoring our original code to work just as it did, but using state.&lt;/p&gt;
 &lt;p&gt;Here are the global state attributes we will need to track:&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -42,7 +42,7 @@
 &lt;p&gt;Since this is a first pass, let's start by simply using multiple variables to hold various state values.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;Remember this code is assuming you have created a &lt;tt class="docutils literal"&gt;setup.py&lt;/tt&gt; file as explained &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#abstractions-keeping-the-code-simple"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
+&lt;p class="last"&gt;Remember this code is assuming you have created a &lt;tt class="docutils literal"&gt;setup.py&lt;/tt&gt; file as explained &lt;a class="reference external" href="/circuitpython-state-part-1.html#abstractions-keeping-the-code-simple"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
@@ -149,7 +149,7 @@
 &lt;/div&gt;
 &lt;p&gt;At that point we hit the end of the &lt;tt class="docutils literal"&gt;while&lt;/tt&gt; loop, and start over again.&lt;/p&gt;
 &lt;p&gt;Here's a diagram showing how it works:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-flowchart.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-state-flowchart.png" style="width: 80%;"/&gt;
 &lt;p&gt;For our simple example, we could shortcut some of these steps. An obvious shortcut would be to directly set the value of the red LED to that of the "A" button: &lt;tt class="docutils literal"&gt;led.value = &lt;span class="pre"&gt;check("A")&lt;/span&gt;&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;But it's important to keep the phases separate when we can. The phases represent logical ways to group code, and as we get more sophisticated, the separation will come in handy.&lt;/p&gt;
 &lt;p&gt;Further, the phases are separated in terms of interacting with reality. This is important from a performance standpoint - reading from a sensor or writing to an output can be blocking sometimes. Keeping that code separate from our internal logic helps keep things moving smoothly. Changing variables is fast. If we mix these kinds of code up, we can get somewhat choppy interactions.&lt;/p&gt;
@@ -458,9 +458,9 @@
 &lt;p&gt;Here's a video of this code running on my Trinket M0:&lt;/p&gt;
 &lt;div class="video-container"&gt;
 &lt;video controls=""&gt;
-&lt;source src="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4"/&gt;
+&lt;source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4" type="video/mp4"/&gt;
 &lt;p&gt;Your browser doesn't support HTML5 video. Here is
-          a &lt;a href="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
+          a &lt;a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-01.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
 &lt;/video&gt;
 &lt;/div&gt;&lt;p&gt;Before we move on, lets &lt;em&gt;refactor&lt;/em&gt; our code yet again, but this time, just a little bit. Since &lt;tt class="docutils literal"&gt;State&lt;/tt&gt; is our keeper of state for our project, lets move &lt;strong&gt;all&lt;/strong&gt; of the code that changes state into to a method of the &lt;tt class="docutils literal"&gt;State&lt;/tt&gt; class:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -830,9 +830,9 @@
 &lt;p&gt;The changes are pretty subtle, but here's another video showing this version running on my Trinket M0:&lt;/p&gt;
 &lt;div class="video-container"&gt;
 &lt;video controls=""&gt;
-&lt;source src="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4"/&gt;
+&lt;source src="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4" type="video/mp4"/&gt;
 &lt;p&gt;Your browser doesn't support HTML5 video. Here is
-          a &lt;a href="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
+          a &lt;a href="/videos/non-blocking-events-circuitpython/state-demo-trinket-02.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
 &lt;/video&gt;
 &lt;/div&gt;&lt;p&gt;At this point we've "unblocked" our code, and crafted a really clean way of working with state.&lt;/p&gt;
 &lt;p&gt;There is a small flaw here, as touched on earlier. The &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; method is being called nearly every 0.2 seconds, whether the button has been pressed or not. This is better than the first version of the code, where it was running almost every single loop, but it's still unnecessary.&lt;/p&gt;
@@ -853,7 +853,7 @@
 &lt;p&gt;In Python, that means the &lt;em&gt;press&lt;/em&gt; event happens when a pin's &lt;tt class="docutils literal"&gt;value&lt;/tt&gt; attribute used to read &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;, and now it reads &lt;tt class="docutils literal"&gt;True&lt;/tt&gt;. A &lt;em&gt;release&lt;/em&gt; event happens when a pin's &lt;tt class="docutils literal"&gt;value&lt;/tt&gt; used to read &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; and now it's &lt;tt class="docutils literal"&gt;False&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;We know what the previous value was because we've stored in it our &lt;tt class="docutils literal"&gt;state&lt;/tt&gt; object. We can use that to detect the change in state by just comparing the current real-life value with the last value we recorded in the state object.&lt;/p&gt;
 &lt;p&gt;The basic logic looks like this:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/basic-button-event-logic.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/basic-button-event-logic.png" style="width: 80%;"/&gt;
 &lt;p&gt;Now that we can act &lt;em&gt;only&lt;/em&gt; when the button transitions from one state to the other, we can call &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; in a more logical place, like right before we change the RGB pixel's state, when the button is pressed. We could also just do it when the button is released, more in line with the original logic.&lt;/p&gt;
 &lt;p&gt;Here's our code again, with the &lt;tt class="docutils literal"&gt;random_color()&lt;/tt&gt; call wrapped inside of logic that detects a &lt;em&gt;press&lt;/em&gt; event:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -1061,9 +1061,9 @@
 &lt;p&gt;So, now we know what a great tool state is, and how to wield it like a pro.&lt;/p&gt;
 &lt;p&gt;And building on that, we've explored the fundamentals of events, and we can think about things like pressing a button as a series of state changes. We can detect these changes and take action.&lt;/p&gt;
 &lt;p&gt;As a side effect, we've also gotten a pretty good introductory overview of object-oriented programming, and how to use it in Python. I feel a bit sneaky 😀. Usually, OOP introductions are hardly practical, and it's really cool that we're able to do something real thanks to this awesome platform we have! 💖&lt;/p&gt;
-&lt;p&gt;In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code, in preparation for building the more complex project described in &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the next installment, we'll take this approach further. We'll create an easy-to-use class that will track button state and handle event detection for us. We'll do some more cool things with OOP Python, and adapt this new class to our test code, in preparation for building the more complex project described in &lt;a class="reference external" href="/circuitpython-state-part-1.html"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="circuitpython"></category><category term="python"></category><category term="hardware"></category><category term="state"></category></entry><entry><title>State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</title><link href="https://jjmojojjmojo.github.io/circuitpython-state-part-2.html" rel="alternate"></link><published>2018-09-01T10:07:00-04:00</published><updated>2018-09-01T10:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-09-01:/circuitpython-state-part-2.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+</content><category term="circuitpython"></category><category term="python"></category><category term="hardware"></category><category term="state"></category></entry><entry><title>State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</title><link href="/circuitpython-state-part-2.html" rel="alternate"></link><published>2018-09-01T10:07:00-04:00</published><updated>2018-09-01T10:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-01:/circuitpython-state-part-2.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;In this part of the series, we're going to really dig into what &lt;em&gt;state&lt;/em&gt; actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures.&lt;/p&gt;
@@ -1087,9 +1087,9 @@
 &lt;p class="last"&gt;I'm putting terms like "HIGH", "LOW", "on", and "off" in quotes, and the python booleans, &lt;tt class="docutils literal"&gt;False&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;True&lt;/tt&gt; in monotype for a reason: these terms are all mere &lt;em&gt;representations&lt;/em&gt; of what a pin is doing. There's an abstraction at work behind the scenes. I want to use terms that you will see in tutorials and documentation, but you shouldn't take them for granted. What they really are, under the covers, will vary depending on the context. These terms are really just convenient ways for human beings to reason about what the microprocessor is doing.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;An ideal button being pressed and released might look something like this, if we graphed the voltage over time:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-button-bounce-ideal.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-button-bounce-ideal.png" style="width: 80%;"/&gt;
 &lt;p&gt;The problem is that you will rarely ever get such straightforward readings. You'll instead get what looks like many pressings in quick succession:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-button-bounce-reality.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-button-bounce-reality.png" style="width: 80%;"/&gt;
 &lt;p&gt;What causes this? It's due to the realities of turning physical interactions into digital signals: when a button is pressed, a piece of metal crosses two contacts, completing a circuit. The microcontroller has an internal threshold that decides how much current constitutes "on" (or "HIGH"), and how much constitutes "off" (or "LOW") - the aforementioned "wiggle room". That threshold can be shockingly large - sometimes what you would think is a "weak" signal, the microcontroller interprets as "HIGH".&lt;/p&gt;
 &lt;p&gt;Then there's the buttons themselves. Most buttons are composed of two pieces of metal that are separated by a physical gap (represented by the red lines in the charts above). When you press the button, the metal pieces are brought into physical contact, causing current to flow through them as if they were a solid conductive element (like a continuous piece of wire or a copper trace on a PCB).&lt;/p&gt;
 &lt;p&gt;Since electricity &lt;em&gt;really&lt;/em&gt; wants to flow, if given sufficient current and a short enough distance, it will jump through the air. When this happens inside of a button, it causes current to flow momentarily before the contacts are fully in contact, which can cause a spike in the current being read from the microcontroller pin.&lt;/p&gt;
@@ -1099,7 +1099,7 @@
 &lt;p&gt;The two types of inputs are noisy for different reasons, but the problem is the same.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;p&gt;This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-3.rst#using-state-to-avoid-blocking"&gt;in the next installment&lt;/a&gt; - the physical stuff we're discussing here is also affected by the timing of processor cycles.&lt;/p&gt;
+&lt;p&gt;This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" &lt;a class="reference external" href="/circuitpython-state-3.rst#using-state-to-avoid-blocking"&gt;in the next installment&lt;/a&gt; - the physical stuff we're discussing here is also affected by the timing of processor cycles.&lt;/p&gt;
 &lt;p&gt;The two overly-simplified subjects are very complexly related 😀.&lt;/p&gt;
 &lt;p&gt;A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an &lt;a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic"&gt;article by sparkfun&lt;/a&gt;. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).&lt;/p&gt;
 &lt;p&gt;I also recommend a book like &lt;em&gt;Code: The Hidden Language of Computer Hardware and Software&lt;/em&gt; by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.&lt;/p&gt;
@@ -1136,7 +1136,7 @@
 &lt;p&gt;You will also &lt;em&gt;learn a lot&lt;/em&gt;, the people who work on CircuitPython and contribute libraries are seriously smart and do some great work 💖.&lt;/p&gt;
 &lt;p class="last"&gt;And maybe you'll find a better way to do something and contribute it back to the community! 🦄&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;We've already seen some code that blocks in the &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#testing"&gt;testing&lt;/a&gt; section of the first article in this series. We're using a Python function called &lt;tt class="docutils literal"&gt;time.sleep()&lt;/tt&gt;. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.&lt;/p&gt;
+&lt;p&gt;We've already seen some code that blocks in the &lt;a class="reference external" href="/circuitpython-state-part-1.html#testing"&gt;testing&lt;/a&gt; section of the first article in this series. We're using a Python function called &lt;tt class="docutils literal"&gt;time.sleep()&lt;/tt&gt;. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.&lt;/p&gt;
 &lt;p&gt;In the testing code, we block for &lt;tt class="docutils literal"&gt;0.2&lt;/tt&gt; seconds. This amount is considered "standard" for button debouncing. It's an arbitrary amount, suggested by a lot of articles and papers that tackle the problem. It was derived by experimenting with many buttons, actually tracking their voltage as a waveform on an oscilloscope - the output on the scope in these experiments looks a lot like the contrived example we saw above.&lt;/p&gt;
 &lt;p&gt;The amount of time it takes for the signal, generated by most buttons, to look more like the ideal square wave in the first chart is around 0.2 seconds.&lt;/p&gt;
 &lt;p&gt;There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when &lt;em&gt;you&lt;/em&gt; press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.&lt;/p&gt;
@@ -1189,7 +1189,7 @@
 &lt;h2 id="basics of state"&gt;Basics Of State&lt;/h2&gt;
 &lt;p&gt;Let's start with basic definitions. &lt;em&gt;State&lt;/em&gt; is simply the status or phase of something at a given time. It's how you would describe something that can &lt;em&gt;transition&lt;/em&gt;, over time, from one &lt;em&gt;state&lt;/em&gt; to another.&lt;/p&gt;
 &lt;p&gt;For example, water has three common states (referred to as &lt;em&gt;phases&lt;/em&gt;): gas (steam), solid (ice), liquid (usually just called &lt;em&gt;water&lt;/em&gt;).&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-states-of-water.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-states-of-water.png" style="width: 80%;"/&gt;
 &lt;p&gt;State is a kind of abstraction that refers to bundles of properties (or &lt;em&gt;attributes&lt;/em&gt;) of something at a given time. Various factors can cause those attributes to change. When that happens the state &lt;em&gt;transitions&lt;/em&gt; from one state to another.&lt;/p&gt;
 &lt;p&gt;For example, when water is brought to its boiling point of 100&amp;deg; C (212&amp;deg; F), it transitions into a gas. It becomes less dense, and given the opportunity, it will disperse throughout a space.&lt;/p&gt;
 &lt;p&gt;Another way to say this is that water's &lt;em&gt;temperature attribute&lt;/em&gt; has changed to a value above 100&amp;deg;, and so the &lt;em&gt;state&lt;/em&gt; has &lt;em&gt;transitioned&lt;/em&gt; to "steam". Now that it's in the "steam" state, there are other attributes that have changed besides the temperature (its density, for one), and it has new attributes - it can do new things, like fill a space.&lt;/p&gt;
@@ -1205,10 +1205,10 @@
 &lt;h2 id="score keeping is tracking state"&gt;Score Keeping Is Tracking State&lt;/h2&gt;
 &lt;p&gt;Keeping score during a sporting event is a way of tracking state. A performance happens, a ball is hit, a race ends, and the score is recorded.&lt;/p&gt;
 &lt;p&gt;Here's a common type of simple scoreboard for sports like gymnastics:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-01.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-01.png" style="width: 80%;"/&gt;
 &lt;p&gt;It's a single score, from a single judge. This scoreboard scores from 1-10, with fractional values down to hundredths of a point. This score is 9.70.&lt;/p&gt;
 &lt;p&gt;If we modeled the scoreboard in Python, we could use a single variable to store the score:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-02.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-02.png" style="width: 80%;"/&gt;
 &lt;p&gt;Here, we simply name the variable &lt;tt class="docutils literal"&gt;score&lt;/tt&gt;. If we were modeling a real gymnastics match, we might want to differentiate between different scores, since there will be one for each judge, and each participant:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
  2
@@ -1290,14 +1290,14 @@
 &lt;p&gt;In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.&lt;/p&gt;
 &lt;p&gt;A better analogy that more closely models our requirements is the &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Scoreboard"&gt;scoreboard&lt;/a&gt; from a team-based sport. A sports arena/field will typically have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.&lt;/p&gt;
 &lt;p&gt;Here's a contrived example of a typical scoreboard from an American baseball stadium:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-03.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-03.png" style="width: 80%;"/&gt;
 &lt;p&gt;It has various regions with indicators, usually lights, and numbers representing the state of the game. Each one represents an independent piece of important information. That information changes as the game progresses. Outs are made, points (runs) are scored by each team, innings go by (there are 9 in a typical baseball game). Other bits of data are recorded too - &lt;em&gt;balls&lt;/em&gt;, &lt;em&gt;strikes&lt;/em&gt;, &lt;em&gt;outs&lt;/em&gt;. These are used to move the game along in various ways.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
 &lt;p class="last"&gt;The nuances and rules for American baseball are not relevant to our discussion. However, if you aren't familiar with the game, and want to dig in, the &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Baseball"&gt;wikipedia article&lt;/a&gt; is the place to start.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;We can model a scoreboard as a series of individual variables, like we did initially for the gymnastics match:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-04.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-state-examples-04.png" style="width: 80%;"/&gt;
 &lt;p&gt;This is totally viable, and cleaner than doing the same thing for a gymnastics tournament. Since a baseball game changes state over time instead of accumulating multiple scores, having simple global variables for each state attribute we care about makes sense.&lt;/p&gt;
 &lt;p&gt;There are alternative ways of modeling global state like this, however. The two primary ones are: using a &lt;em&gt;dictionary&lt;/em&gt; and using a &lt;em&gt;class&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;A dictionary in Python is a key-value mapping, also known as an &lt;em&gt;associative array&lt;/em&gt;, &lt;em&gt;hash&lt;/em&gt;, or &lt;em&gt;hashmap&lt;/em&gt;. We worked with these earlier in the gymnastics example.&lt;/p&gt;
@@ -1536,10 +1536,10 @@
 &lt;p&gt;In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;Good news! You don't have to wait, &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-3.html"&gt;part 3 is up now!&lt;/a&gt;&lt;/p&gt;
+&lt;p class="last"&gt;Good news! You don't have to wait, &lt;a class="reference external" href="/circuitpython-state-part-3.html"&gt;part 3 is up now!&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</content><category term="circuitpython"></category><category term="python"></category><category term="hardware"></category><category term="state"></category></entry><entry><title>State And Events In CircuitPython: Part 1: Setup</title><link href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html" rel="alternate"></link><published>2018-08-27T13:01:00-04:00</published><updated>2018-08-27T13:01:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-08-27:/circuitpython-state-part-1.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+</content><category term="circuitpython"></category><category term="python"></category><category term="hardware"></category><category term="state"></category></entry><entry><title>State And Events In CircuitPython: Part 1: Setup</title><link href="/circuitpython-state-part-1.html" rel="alternate"></link><published>2018-08-27T13:01:00-04:00</published><updated>2018-08-27T13:01:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-08-27:/circuitpython-state-part-1.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;This is the first article in a series that explores concepts of &lt;em&gt;state&lt;/em&gt; in CircuitPython.&lt;/p&gt;
@@ -1604,17 +1604,17 @@
 &lt;p class="last"&gt;It wouldn't hurt to also work through &lt;a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials"&gt;CircuitPython Essentials&lt;/a&gt; as well!&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;This series tries to dive really deep into details when exploring the concepts behind the code being developed. There are line-by-line explanations of each code example. So don't be afraid to give this guide a shot, even if you're really new to microcontrollers.&lt;/p&gt;
-&lt;p&gt;Please feel free to &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/contact.html"&gt;contact the author&lt;/a&gt; with questions, corrections, or suggestions on how to make this series more accessible!&lt;/p&gt;
+&lt;p&gt;Please feel free to &lt;a class="reference external" href="/pages/contact.html"&gt;contact the author&lt;/a&gt; with questions, corrections, or suggestions on how to make this series more accessible!&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="demo-project"&gt;
 &lt;h2 id="demo project"&gt;Demo Project&lt;/h2&gt;
 &lt;p&gt;To illustrate state in action, I've devised a simple, but not overly contrived demonstration project.&lt;/p&gt;
 &lt;p&gt;It consists of two buttons, a single one-color LED, and a single "addressable" RGB LED. I've chosen these particular components because they are easy to obtain and hook up. In fact, the single LED and RGB LED (a DotStar or NeoPixel depending on the board) come integrated on all CircuitPython-capable boards.&lt;/p&gt;
 &lt;div class="centered docutils container"&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/circuitplayground-express-closeup-neopixel-marked.png" style="width: 20%;"/&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/itsybitsy-m0-express-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/trinket-m0-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/gemma-m0-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
+&lt;img alt="" src="/images/circuitplayground-express-closeup-neopixel-marked.png" style="width: 20%;"/&gt;
+&lt;img alt="" src="/images/itsybitsy-m0-express-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
+&lt;img alt="" src="/images/trinket-m0-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
+&lt;img alt="" src="/images/gemma-m0-closeup-dotstar-marked.png" style="width: 20%;"/&gt;
 &lt;/div&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
@@ -1665,7 +1665,7 @@
 &lt;h3&gt;The Development Board&lt;/h3&gt;
 &lt;p&gt;Any of the M0 or M4 based boards &lt;a class="reference external" href="https://www.adafruit.com/category/957"&gt;sold by Adafruit&lt;/a&gt; should be compatible with the code in this article.&lt;/p&gt;
 &lt;p&gt;I am fortunate to own, in part due to recent attendance at PyCon 2018, &lt;em&gt;four&lt;/em&gt; examples of the M0 boards, and have tested the code on each:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-m0-boards-2.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-m0-boards-2.png" style="width: 80%;"/&gt;
 &lt;p&gt;From left to right, we have
 the &lt;a class="reference external" href="https://www.adafruit.com/product/3333"&gt;CircuitPlayground Express&lt;/a&gt;,
 the &lt;a class="reference external" href="https://www.adafruit.com/product/3727"&gt;ItsyBitsy M0 Express&lt;/a&gt;,
@@ -1673,7 +1673,7 @@ the &lt;a class="reference external" href="https://www.adafruit.com/product/3500
 and the &lt;a class="reference external" href="https://www.adafruit.com/product/3500"&gt;GEMMA M0&lt;/a&gt;. There's also a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Quarter_(United_States_coin)"&gt;quarter&lt;/a&gt; for scale. On the whole, these things are &lt;em&gt;tiny&lt;/em&gt;.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
-&lt;img alt="" class="align-right" src="https://jjmojojjmojo.github.io/images/gemma-m0-closeup-obverse.png" style="width: 20%;"/&gt;
+&lt;img alt="" class="align-right" src="/images/gemma-m0-closeup-obverse.png" style="width: 20%;"/&gt;
 &lt;p&gt;The GEMMA M0 I have is a special edition that was included in the SWAG bag at PyCon 2018 in Cleveland Ohio. It's functionally identical to the GEMMA you get from the Adafruit shop but it's a different color and has a special Pycon 2018 marking on the back.&lt;/p&gt;
 &lt;p class="last"&gt;There was not a lot of fanfare about it, but I did find a &lt;a class="reference external" href="https://www.youtube.com/watch?v=71eAnJeQu2U"&gt;video by Dan Bader&lt;/a&gt; talking about it, and a great &lt;a class="reference external" href="https://bigl.es/friday-fun-adafruit-gemma-m0-and-neopixels/"&gt;blog post by Les Pounder&lt;/a&gt; putting it through its paces.&lt;/p&gt;
 &lt;/div&gt;
@@ -1706,13 +1706,13 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;The most common way to connect components in projects like ours is to use "jumper" wire - the term refers to the fact that the wire shorts (jumps) two points.&lt;/p&gt;
 &lt;p&gt;These are essential when working with breadboards.&lt;/p&gt;
 &lt;p&gt;You can make your own jumper wires using cut and stripped lengths of wire. The best to use for breadboard work is 22-gauge insulated wire, but anything that's conductive and between 18 and 24-guage should work.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/solid-core-jumper-wires.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/solid-core-jumper-wires.png" style="width: 80%;"/&gt;
 &lt;p&gt;You can also buy "pre-made" jumpers. These are usually flexible stranded wire with "boots" or plastic shields covering the ends. They come in various lengths, colors, and combinations of "genders". "Female" refers to receptive connectors, and "male" refers to protruding ones.&lt;/p&gt;
 &lt;p&gt;For most projects (including this one), "male-to-male" wires are the go-to form.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/premade-jumper-wires-organized.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/premade-jumper-wires-organized.png" style="width: 80%;"/&gt;
 &lt;p&gt;Jumper wires will be required for any of the demo circuits for the ItsyBitsy or the Trinket. The GEMMA and CircuitPlayground will require other connectors, since they have those lilly-pad-style pads instead of standard pins.&lt;/p&gt;
 &lt;p&gt;Eventually, you'll collect many of these lengths of wire, and will want to show them off, maybe by keeping them in a special drawer. 😀&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-lengths-of-wire.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-lengths-of-wire.png" style="width: 80%;"/&gt;
 &lt;/div&gt;
 &lt;div class="section" id="alligator-clips"&gt;
 &lt;h4&gt;Alligator Clips&lt;/h4&gt;
@@ -1720,13 +1720,13 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;You can use alligator clips to connect anything conductive.&lt;/p&gt;
 &lt;p&gt;Alligator clips are essential for prototyping and general use of the "lilypad" style boards, like the GEMMA and CircuitPlayground.&lt;/p&gt;
 &lt;p&gt;In the demo circuits below, standard alligator clips aren't used, but they're a good addition to your toolbox, especially if you have one of the "lilypad" style boards.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/aligator-clips.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/aligator-clips.png" style="width: 80%;"/&gt;
 &lt;/div&gt;
 &lt;div class="section" id="alligator-clip-to-jumper-wire"&gt;
 &lt;h4&gt;Alligator Clip To Jumper Wire&lt;/h4&gt;
 &lt;p&gt;This is a variant connector that combines a alligator-style clip to a flexible jumper cable. They also come in different "genders".&lt;/p&gt;
 &lt;p&gt;We'll be using some of these in the "alligator-to-male" variety for the GEMMA version of the demo circuit.&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/aligator-to-jumper.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/aligator-to-jumper.png" style="width: 80%;"/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="the-demo-circuit"&gt;
@@ -1748,14 +1748,14 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;I've used three different kinds of breadboards I had on hand, and mixed up the kinds of connectors a bit to illustrate some different ways of wiring up the buttons.&lt;/p&gt;
 &lt;div class="section" id="gemma-m0"&gt;
 &lt;h4&gt;Gemma M0&lt;/h4&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-gemma-demo-circuit.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-gemma-demo-circuit.png" style="width: 80%;"/&gt;
 &lt;p&gt;With the Gemma, I used a "mini" breadboard. These breadboards are split into two halves by the screw holes at the top and bottom, and the "trench" in the middle. The tie points are connected in groups of five, running left to right. I've installed the buttons such that they straddle the trench. This was necessary because of a little plastic bit that sticks out between the pins.&lt;/p&gt;
 &lt;p&gt;I wanted to make sure I had easy access to the buttons, so I put all of the jumper connections on the left side. On the right side, I made a little ground "bus" by tying together the rows where I needed to connect the buttons to ground with some solid-core wire. I tied the ground jumper/alligator clip to the "bus" using a little piece of wire over the screw hole.&lt;/p&gt;
 &lt;p&gt;I clipped the black alligator clip to ground, the white one (button "A") to "D1" (also marked "A0" if you use it as an analog pin), and the yellow clip/button to "D0" ("A2").&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="itsybitsy-m0-express"&gt;
 &lt;h4&gt;ItsyBitsy M0 Express&lt;/h4&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-itsybitsy-demo-circuit.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-itsybitsy-demo-circuit.png" style="width: 80%;"/&gt;
 &lt;p&gt;For the ItsyBitsy, I used a full-sized breadboard. On these breadboards, they have a similar split and trench down the middle. They also have a long bus on each side (top and bottom in this picture) marked negative and positive. Each group of tie points are connected. We've used them to run power from the ItsyBitsy to the rest of the board.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
@@ -1770,7 +1770,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;/div&gt;
 &lt;div class="section" id="trinket-m0"&gt;
 &lt;h4&gt;Trinket M0&lt;/h4&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/nonblocking-trinket-demo-circuit.png" style="width: 80%;"/&gt;
 &lt;p&gt;For the Trinket, I used a standard "half-sized" breadboard. It's just like the "full sized" on I used for the ItsyBitsy, but it's... half the size 🤔.&lt;/p&gt;
 &lt;p&gt;For this circuit, I used pre-made jumper wires exclusively.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
@@ -1846,7 +1846,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;Another term for this, that you'll hear used sometimes in computer science, is &lt;em&gt;contract&lt;/em&gt;. I think that describes what the abstraction does a bit more concisely - you are saying to someone who wants to use your code "I promise that you can rely on my code working this way", and the user is saying "I agree to do things your way".&lt;/p&gt;
 &lt;p&gt;As long as the code for each board follows the contract, and anyone using the board-specific code does so through the interface, everything works in an interchangeable way.&lt;/p&gt;
 &lt;p&gt;I like to think about the interface in terms of the actual variables and functions you use, and the contract as the understanding of what inputs and outputs the interface uses, as well as the things the interface does when you call the functions or access the variables:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/abstraction-explained-1.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/abstraction-explained-1.png" style="width: 80%;"/&gt;
 &lt;p&gt;For this simple abstraction, I've decided to make five Python objects that define our interface:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;A pixel object (&lt;tt class="docutils literal"&gt;rgb&lt;/tt&gt;)&lt;/li&gt;
@@ -1857,7 +1857,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;These are the bits of code used by the demo project that will be different from board to board.&lt;/p&gt;
 &lt;p&gt;We'll put them into a Python module called &lt;tt class="docutils literal"&gt;setup&lt;/tt&gt;. Python modules are usually just Python files, so we'll store our abstraction in a file called &lt;tt class="docutils literal"&gt;setup.py&lt;/tt&gt;.&lt;/p&gt;
 &lt;p&gt;To use our abstraction, we just need to &lt;tt class="docutils literal"&gt;import setup&lt;/tt&gt; and then we can access, for example, &lt;tt class="docutils literal"&gt;setup.rgb&lt;/tt&gt; to mess with the RGB pixel. That actual variable might be a NeoPixel. It might be a DotStar. It might be something we've never heard of (like a SunSpot&amp;trade;). It could be wired to any pin, configured any way. It doesn't matter. As long as that &lt;tt class="docutils literal"&gt;rgb&lt;/tt&gt; object works the same way (has the same interface) as a DotStar or NeoPixel, it complies with the &lt;em&gt;contract&lt;/em&gt; and everything works:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/abstraction-explained-2.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/abstraction-explained-2.png" style="width: 80%;"/&gt;
 &lt;p&gt;🦄 There's even a nested abstraction here. Adafruit has already abstracted the pixel code away for us, by giving the &lt;tt class="docutils literal"&gt;DotStar&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;NeoPixel&lt;/tt&gt; classes the same interface. So we can interact with a string of NeoPixels in the same way we can interact with a string of DotStars.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
@@ -2097,9 +2097,9 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;Here's a short video demonstrating the test code and demo circuit on each of the boards I have:&lt;/p&gt;
 &lt;div class="video-container"&gt;
 &lt;video controls=""&gt;
-&lt;source src="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4"/&gt;
+&lt;source src="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4" type="video/mp4"/&gt;
 &lt;p&gt;Your browser doesn't support HTML5 video. Here is
-          a &lt;a href="https://jjmojojjmojo.github.io/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
+          a &lt;a href="/videos/non-blocking-events-circuitpython/test-circuit-demo-all-boards.mp4"&gt;link to the video&lt;/a&gt; instead.&lt;/p&gt;
 &lt;/video&gt;
 &lt;/div&gt;&lt;/div&gt;
 &lt;div class="section" id="conclusion-and-what-s-next"&gt;
@@ -2111,7 +2111,7 @@ and the &lt;a class="reference external" href="https://www.adafruit.com/product/
 &lt;p&gt;We'll solve the problem of button "bounce" (as well as define what it actually is), and dive into some more practical code. We'll explore some patterns that are the basis for handling a whole slew of issues that face us as microcontroller programmers.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;Part 2 is now complete! &lt;a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-2.html"&gt;Go on to Part 2&lt;/a&gt;&lt;/p&gt;
+&lt;p class="last"&gt;Part 2 is now complete! &lt;a class="reference external" href="/circuitpython-state-part-2.html"&gt;Go on to Part 2&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </content><category term="circuitpython"></category><category term="python"></category><category term="hardware"></category><category term="state"></category></entry></feed>

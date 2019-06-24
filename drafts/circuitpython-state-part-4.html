@@ -3,28 +3,28 @@
 <head>
 <!-- Open Graph / Facebook -->
 <meta content="website" property="og:type"/>
-<meta content="https://jjmojojjmojo.github.io/drafts/circuitpython-state-part-4.html" property="og:url"/>
+<meta content="/drafts/circuitpython-state-part-4.html" property="og:url"/>
 <meta content="State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo " property="og:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card"/>
 <meta content="https://jjmojojjmojo.github.io/drafts/circuitpython-state-part-4.html" property="twitter:url"/>
 <meta content="State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo " property="twitter:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="https://jjmojojjmojo.github.io/theme/js/zepto.min.js"></script>
-<link href="https://jjmojojjmojo.github.io/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
 <meta content="This is the fourth part of a multi-part series exploring the concept of state, what it can do for you (like non-blocking button debounce) and how to track it in CircuitPython. In this part, we explore tracking state for analog inputs, and dig into more object-oriented features, particularly polymorphism: method &hellip;" name="description"/>
 <meta content="This is the fourth part of a multi-part series exploring the concept of state, what it can do for you (like non-blocking button debounce) and how to track it in CircuitPython. In this part, we explore tracking state for analog inputs, and dig into more object-oriented features, particularly polymorphism: method &hellip;" property="og:description"/>
 <meta content="This is the fourth part of a multi-part series exploring the concept of state, what it can do for you (like non-blocking button debounce) and how to track it in CircuitPython. In this part, we explore tracking state for analog inputs, and dig into more object-oriented features, particularly polymorphism: method &hellip;" property="twitter:description"/>
@@ -35,16 +35,16 @@
 </head>
 <body class="home" id="index">
 <header class="body" id="banner">
-<h1><a href="https://jjmojojjmojo.github.io/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
 <ul id="menu">
-<li><a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/contact.html">Contact</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/index.html">Pages</a></li>
-<li><a href="https://jjmojojjmojo.github.io/categories.html">Categories</a></li>
-<li><a href="https://jjmojojjmojo.github.io/tags.html">Tags</a></li>
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
 </ul>
 <span id="settings-button">
-<a href="https://jjmojojjmojo.github.io/pages/settings.html" title="Settings">
+<a href="/pages/settings.html" title="Settings">
 <img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
 </a>
 </span>
@@ -52,21 +52,21 @@
 <div id="notice">
 <div id="notice-content">
 <div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="https://jjmojojjmojo.github.io/pages/hire-me.html">More info</a>. <big>🦄</big>
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
 </div> </div>
 </div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
 <h2 class="entry-title">
-<a href="https://jjmojojjmojo.github.io/drafts/circuitpython-state-part-4.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 4: Polymorphism And Analog Events">State And Events In CircuitPython: Part 4: Polymorphism And Analog Events</a></h2>
+<a href="/drafts/circuitpython-state-part-4.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 4: Polymorphism And Analog Events">State And Events In CircuitPython: Part 4: Polymorphism And Analog Events</a></h2>
 </header>
 <footer class="post-info">
 <time class="published" datetime="2018-06-11T15:07:00-04:00">
       Mon 11 June 2018
     </time>
 <address class="vcard author">
-      By           <a class="url fn" href="https://jjmojojjmojo.github.io/author/jjmojojjmojo.html">jjmojojjmojo</a>
+      By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
 <div>
@@ -85,7 +85,7 @@
 <p>As a bonus, we'll explore a few interesting things about <em>voltage dividers</em>, a super useful electronic circuit. 🦄</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">Since we're pretty deep into the series now, I've set up a <a class="reference external" href="https://jjmojojjmojo.github.io/pages/circuitpython-state.html">landing page</a> 💖. Check it out if you'd like to catch up or review previous installments.</p>
+<p class="last">Since we're pretty deep into the series now, I've set up a <a class="reference external" href="/pages/circuitpython-state.html">landing page</a> 💖. Check it out if you'd like to catch up or review previous installments.</p>
 </div>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="a-brief-review">
@@ -116,7 +116,7 @@
 <li>We used a global state <strong>object</strong>, defined in the <tt class="docutils literal">State</tt> class, to work with those values.</li>
 </ul>
 <p>Recall the <strong>three phases of working with state</strong>:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-flowchart.png" style="width: 60%;"/>
+<a href="/images/fullsize/nonblocking-state-flowchart.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 1500px,(min-width: 2120.0px) 1200px,(min-width: 1908.0px) 1080px,(min-width: 1696.0px) 960px,(min-width: 1272.0px) 720px,(min-width: 1060.0px) 600px,(min-width: 848.0px) 480px,(min-width: 424.0px) 240px,(min-width: 212.0px) 120px" src="/images/fullsize/nonblocking-state-flowchart.jpg" srcset="/images/responsive/nonblocking-state-flowchart-2500.jpg 2500w,/images/responsive/nonblocking-state-flowchart-2000.jpg 2000w,/images/responsive/nonblocking-state-flowchart-1800.jpg 1800w,/images/responsive/nonblocking-state-flowchart-1600.jpg 1600w,/images/responsive/nonblocking-state-flowchart-1200.jpg 1200w,/images/responsive/nonblocking-state-flowchart-1000.jpg 1000w,/images/responsive/nonblocking-state-flowchart-800.jpg 800w,/images/responsive/nonblocking-state-flowchart-400.jpg 400w,/images/responsive/nonblocking-state-flowchart-200.jpg 200w" style="width: 60%;"/></a>
 <ul class="simple">
 <li>We start by establishing <strong>default</strong> state.</li>
 <li>Then, we <strong>assess</strong> real life.</li>
@@ -1369,10 +1369,10 @@
 <p>When we extend the <tt class="docutils literal">Status</tt> class, we will write our own implementations, <em>overriding</em>, the <tt class="docutils literal">read_input()</tt> and <tt class="docutils literal">set_color()</tt> methods.</p>
 <p>Because of the way class inheritance works, the code that we override will be executed in our class, and the code that we don't override will be executed in the base class. So unless we write our own <tt class="docutils literal">__init__()</tt> and <tt class="docutils literal">update()</tt> methods, the code for those methods will execute in the <tt class="docutils literal">Status</tt> class.</p>
 <p>Lets look at a graphic that illustrates this concept in generic terms.</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/polymorphism-explained.png" style="width: 80%;"/>
+<a href="/images/fullsize/polymorphism-explained.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/polymorphism-explained.jpg" srcset="/images/responsive/polymorphism-explained-2500.jpg 2500w,/images/responsive/polymorphism-explained-2000.jpg 2000w,/images/responsive/polymorphism-explained-1800.jpg 1800w,/images/responsive/polymorphism-explained-1600.jpg 1600w,/images/responsive/polymorphism-explained-1200.jpg 1200w,/images/responsive/polymorphism-explained-1000.jpg 1000w,/images/responsive/polymorphism-explained-800.jpg 800w,/images/responsive/polymorphism-explained-400.jpg 400w,/images/responsive/polymorphism-explained-200.jpg 200w" style="width: 80%;"/></a>
 <p>In our implementation, we'll be overriding the <tt class="docutils literal">read_input()</tt> and <tt class="docutils literal">set_color()</tt> methods in each of our classes. The other methods, <tt class="docutils literal">__init__()</tt> and <tt class="docutils literal">update()</tt>, and the one class property <tt class="docutils literal">_debounce</tt>, will share the implementation in the base class.</p>
 <p>Lets take the temperature sensor class, which we'll call <tt class="docutils literal">TemperatureStatus</tt>, as an example. If we modeled it in the style of the concept drawing above, it would look like this:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-polymorphism.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-polymorphism.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-polymorphism.jpg" srcset="/images/responsive/nonblocking-polymorphism-2500.jpg 2500w,/images/responsive/nonblocking-polymorphism-2000.jpg 2000w,/images/responsive/nonblocking-polymorphism-1800.jpg 1800w,/images/responsive/nonblocking-polymorphism-1600.jpg 1600w,/images/responsive/nonblocking-polymorphism-1200.jpg 1200w,/images/responsive/nonblocking-polymorphism-1000.jpg 1000w,/images/responsive/nonblocking-polymorphism-800.jpg 800w,/images/responsive/nonblocking-polymorphism-400.jpg 400w,/images/responsive/nonblocking-polymorphism-200.jpg 200w" style="width: 80%;"/></a>
 <p>Our other class, which we'll name <tt class="docutils literal">LightStatus</tt>, would look identical if it were illustrated in the same manner.</p>
 <p>So this should give us a proper mental model for how polymorphism is working for us in our class hierarchy.</p>
 <p>Now we can look at the completed code with the two derived classes fully implemented:</p>
@@ -2236,9 +2236,9 @@
 </div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
-<script src="https://jjmojojjmojo.github.io/theme/js/main.js"></script>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

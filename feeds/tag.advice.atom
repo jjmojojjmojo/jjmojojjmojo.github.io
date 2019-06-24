@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - advice</title><link href="https://jjmojojjmojo.github.io/" rel="alternate"></link><link href="https://jjmojojjmojo.github.io/feeds/tag.advice.atom" rel="self"></link><id>https://jjmojojjmojo.github.io/</id><updated>2018-09-29T15:07:00-04:00</updated><entry><title>Advice For New Programmers</title><link href="https://jjmojojjmojo.github.io/advice-for-new-programmers.html" rel="alternate"></link><published>2018-09-29T15:07:00-04:00</published><updated>2018-09-29T15:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-09-29:/advice-for-new-programmers.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - advice</title><link href="/" rel="alternate"></link><link href="/feeds/tag.advice.atom" rel="self"></link><id>/</id><updated>2018-09-29T15:07:00-04:00</updated><entry><title>Advice For New Programmers</title><link href="/advice-for-new-programmers.html" rel="alternate"></link><published>2018-09-29T15:07:00-04:00</published><updated>2018-09-29T15:07:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-29:/advice-for-new-programmers.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;I am a proud &lt;strong&gt;autodidact&lt;/strong&gt;. That means I am &lt;em&gt;entirely&lt;/em&gt; self taught. 🤔 🎓 ❤️ People like myself are not uncommon in the tech industry, but we have always been in the minority. Autodidacts represent &lt;em&gt;industry outsiders&lt;/em&gt;, because we've diverged from the typical learning path: a degree at a four-year college. With the advent of "let's code" initiatives, coding boot camps, better programming curriculum at 2-year colleges, and easier self-lead study, the number and varieties of outsiders is growing every day. We need to stick together.&lt;/p&gt;
@@ -279,7 +279,7 @@
 &lt;div class="admonition note"&gt;
 &lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
 &lt;p&gt;I'm not affiliated or endorsing any of these sites. I suggest them because I've looked through them or used them myself, and at least on the surface they look really good.&lt;/p&gt;
-&lt;p&gt;Please &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/contact.html"&gt;let me know&lt;/a&gt; if they turn out to be spammy, scammy, or are otherwise bad news.&lt;/p&gt;
+&lt;p&gt;Please &lt;a class="reference external" href="/pages/contact.html"&gt;let me know&lt;/a&gt; if they turn out to be spammy, scammy, or are otherwise bad news.&lt;/p&gt;
 &lt;p class="last"&gt;&lt;strong&gt;You should never have to pay for access to one of these sites, or to get interviews!&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Be sure to do some research about the company where you're interviewing, and pay attention to the job posting. You want to know what tools and problems they are solving. If it's not clear, ask the interviewer or recruiter before they give you the coding challenge. A lot of companies make coding challenges based on actual problems they've had to solve, so you can get a leg up if you start reading about algorithms and the like that are specific to that domain.&lt;/p&gt;
@@ -292,7 +292,7 @@
 &lt;/div&gt;
 &lt;div class="section" id="conculsion"&gt;
 &lt;h2 id="conculsion"&gt;Conculsion&lt;/h2&gt;
-&lt;p&gt;So here's what I would tell (and have told 😀 ) a new programmer. Please &lt;a class="reference external" href="https://jjmojojjmojo.github.io/pages/contact.html"&gt;let me know&lt;/a&gt; if you have any thing to add, or if I'm totally off base about something!&lt;/p&gt;
+&lt;p&gt;So here's what I would tell (and have told 😀 ) a new programmer. Please &lt;a class="reference external" href="/pages/contact.html"&gt;let me know&lt;/a&gt; if you have any thing to add, or if I'm totally off base about something!&lt;/p&gt;
 &lt;p&gt;I hope to expand on this post over time, so your feedback is greatly appreciated ❤️.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="advice"></category><category term="programming"></category></entry></feed>

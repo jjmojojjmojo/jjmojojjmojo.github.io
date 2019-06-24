@@ -3,28 +3,28 @@
 <head>
 <!-- Open Graph / Facebook -->
 <meta content="website" property="og:type"/>
-<meta content="https://jjmojojjmojo.github.io/circuitpython-state-part-2.html" property="og:url"/>
+<meta content="/circuitpython-state-part-2.html" property="og:url"/>
 <meta content="State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo " property="og:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card"/>
 <meta content="https://jjmojojjmojo.github.io/circuitpython-state-part-2.html" property="twitter:url"/>
 <meta content="State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo " property="twitter:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="https://jjmojojjmojo.github.io/theme/js/zepto.min.js"></script>
-<link href="https://jjmojojjmojo.github.io/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
 <meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" name="description" noisy="" problem="" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
 <meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" noisy="" problem="" property="og:description" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
 <meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" noisy="" problem="" property="twitter:description" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
@@ -35,16 +35,16 @@
 </head>
 <body class="home" id="index">
 <header class="body" id="banner">
-<h1><a href="https://jjmojojjmojo.github.io/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
 <ul id="menu">
-<li><a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/contact.html">Contact</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/index.html">Pages</a></li>
-<li><a href="https://jjmojojjmojo.github.io/categories.html">Categories</a></li>
-<li><a href="https://jjmojojjmojo.github.io/tags.html">Tags</a></li>
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
 </ul>
 <span id="settings-button">
-<a href="https://jjmojojjmojo.github.io/pages/settings.html" title="Settings">
+<a href="/pages/settings.html" title="Settings">
 <img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
 </a>
 </span>
@@ -52,21 +52,21 @@
 <div id="notice">
 <div id="notice-content">
 <div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="https://jjmojojjmojo.github.io/pages/hire-me.html">More info</a>. <big>🦄</big>
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
 </div> </div>
 </div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
 <h2 class="entry-title">
-<a href="https://jjmojojjmojo.github.io/circuitpython-state-part-2.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World">State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</a></h2>
+<a href="/circuitpython-state-part-2.html" rel="bookmark" title="Permalink to State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World">State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World</a></h2>
 </header>
 <footer class="post-info">
 <time class="published" datetime="2018-09-01T10:07:00-04:00">
       Sat 01 September 2018
     </time>
 <address class="vcard author">
-      By           <a class="url fn" href="https://jjmojojjmojo.github.io/author/jjmojojjmojo.html">jjmojojjmojo</a>
+      By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
 <div>
@@ -90,9 +90,9 @@
 <p class="last">I'm putting terms like "HIGH", "LOW", "on", and "off" in quotes, and the python booleans, <tt class="docutils literal">False</tt> and <tt class="docutils literal">True</tt> in monotype for a reason: these terms are all mere <em>representations</em> of what a pin is doing. There's an abstraction at work behind the scenes. I want to use terms that you will see in tutorials and documentation, but you shouldn't take them for granted. What they really are, under the covers, will vary depending on the context. These terms are really just convenient ways for human beings to reason about what the microprocessor is doing.</p>
 </div>
 <p>An ideal button being pressed and released might look something like this, if we graphed the voltage over time:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-button-bounce-ideal.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-button-bounce-ideal.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-button-bounce-ideal.jpg" srcset="/images/responsive/nonblocking-button-bounce-ideal-2500.jpg 2500w,/images/responsive/nonblocking-button-bounce-ideal-2000.jpg 2000w,/images/responsive/nonblocking-button-bounce-ideal-1800.jpg 1800w,/images/responsive/nonblocking-button-bounce-ideal-1600.jpg 1600w,/images/responsive/nonblocking-button-bounce-ideal-1200.jpg 1200w,/images/responsive/nonblocking-button-bounce-ideal-1000.jpg 1000w,/images/responsive/nonblocking-button-bounce-ideal-800.jpg 800w,/images/responsive/nonblocking-button-bounce-ideal-400.jpg 400w,/images/responsive/nonblocking-button-bounce-ideal-200.jpg 200w" style="width: 80%;"/></a>
 <p>The problem is that you will rarely ever get such straightforward readings. You'll instead get what looks like many pressings in quick succession:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-button-bounce-reality.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-button-bounce-reality.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-button-bounce-reality.jpg" srcset="/images/responsive/nonblocking-button-bounce-reality-2500.jpg 2500w,/images/responsive/nonblocking-button-bounce-reality-2000.jpg 2000w,/images/responsive/nonblocking-button-bounce-reality-1800.jpg 1800w,/images/responsive/nonblocking-button-bounce-reality-1600.jpg 1600w,/images/responsive/nonblocking-button-bounce-reality-1200.jpg 1200w,/images/responsive/nonblocking-button-bounce-reality-1000.jpg 1000w,/images/responsive/nonblocking-button-bounce-reality-800.jpg 800w,/images/responsive/nonblocking-button-bounce-reality-400.jpg 400w,/images/responsive/nonblocking-button-bounce-reality-200.jpg 200w" style="width: 80%;"/></a>
 <p>What causes this? It's due to the realities of turning physical interactions into digital signals: when a button is pressed, a piece of metal crosses two contacts, completing a circuit. The microcontroller has an internal threshold that decides how much current constitutes "on" (or "HIGH"), and how much constitutes "off" (or "LOW") - the aforementioned "wiggle room". That threshold can be shockingly large - sometimes what you would think is a "weak" signal, the microcontroller interprets as "HIGH".</p>
 <p>Then there's the buttons themselves. Most buttons are composed of two pieces of metal that are separated by a physical gap (represented by the red lines in the charts above). When you press the button, the metal pieces are brought into physical contact, causing current to flow through them as if they were a solid conductive element (like a continuous piece of wire or a copper trace on a PCB).</p>
 <p>Since electricity <em>really</em> wants to flow, if given sufficient current and a short enough distance, it will jump through the air. When this happens inside of a button, it causes current to flow momentarily before the contacts are fully in contact, which can cause a spike in the current being read from the microcontroller pin.</p>
@@ -102,7 +102,7 @@
 <p>The two types of inputs are noisy for different reasons, but the problem is the same.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-3.rst#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
+<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="/circuitpython-state-3.rst#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
 <p>The two overly-simplified subjects are very complexly related 😀.</p>
 <p>A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
 <p>I also recommend a book like <em>Code: The Hidden Language of Computer Hardware and Software</em> by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.</p>
@@ -139,7 +139,7 @@
 <p>You will also <em>learn a lot</em>, the people who work on CircuitPython and contribute libraries are seriously smart and do some great work 💖.</p>
 <p class="last">And maybe you'll find a better way to do something and contribute it back to the community! 🦄</p>
 </div>
-<p>We've already seen some code that blocks in the <a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-1.html#testing">testing</a> section of the first article in this series. We're using a Python function called <tt class="docutils literal">time.sleep()</tt>. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.</p>
+<p>We've already seen some code that blocks in the <a class="reference external" href="/circuitpython-state-part-1.html#testing">testing</a> section of the first article in this series. We're using a Python function called <tt class="docutils literal">time.sleep()</tt>. All that function does is tie up the processor for the given number of seconds. It's purpose is to intentionally block the code that's executing.</p>
 <p>In the testing code, we block for <tt class="docutils literal">0.2</tt> seconds. This amount is considered "standard" for button debouncing. It's an arbitrary amount, suggested by a lot of articles and papers that tackle the problem. It was derived by experimenting with many buttons, actually tracking their voltage as a waveform on an oscilloscope - the output on the scope in these experiments looks a lot like the contrived example we saw above.</p>
 <p>The amount of time it takes for the signal, generated by most buttons, to look more like the ideal square wave in the first chart is around 0.2 seconds.</p>
 <p>There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when <em>you</em> press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.</p>
@@ -192,7 +192,7 @@
 <h2 id="basics of state">Basics Of State</h2>
 <p>Let's start with basic definitions. <em>State</em> is simply the status or phase of something at a given time. It's how you would describe something that can <em>transition</em>, over time, from one <em>state</em> to another.</p>
 <p>For example, water has three common states (referred to as <em>phases</em>): gas (steam), solid (ice), liquid (usually just called <em>water</em>).</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-states-of-water.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-states-of-water.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-states-of-water.jpg" srcset="/images/responsive/nonblocking-states-of-water-2500.jpg 2500w,/images/responsive/nonblocking-states-of-water-2000.jpg 2000w,/images/responsive/nonblocking-states-of-water-1800.jpg 1800w,/images/responsive/nonblocking-states-of-water-1600.jpg 1600w,/images/responsive/nonblocking-states-of-water-1200.jpg 1200w,/images/responsive/nonblocking-states-of-water-1000.jpg 1000w,/images/responsive/nonblocking-states-of-water-800.jpg 800w,/images/responsive/nonblocking-states-of-water-400.jpg 400w,/images/responsive/nonblocking-states-of-water-200.jpg 200w" style="width: 80%;"/></a>
 <p>State is a kind of abstraction that refers to bundles of properties (or <em>attributes</em>) of something at a given time. Various factors can cause those attributes to change. When that happens the state <em>transitions</em> from one state to another.</p>
 <p>For example, when water is brought to its boiling point of 100&deg; C (212&deg; F), it transitions into a gas. It becomes less dense, and given the opportunity, it will disperse throughout a space.</p>
 <p>Another way to say this is that water's <em>temperature attribute</em> has changed to a value above 100&deg;, and so the <em>state</em> has <em>transitioned</em> to "steam". Now that it's in the "steam" state, there are other attributes that have changed besides the temperature (its density, for one), and it has new attributes - it can do new things, like fill a space.</p>
@@ -208,10 +208,10 @@
 <h2 id="score keeping is tracking state">Score Keeping Is Tracking State</h2>
 <p>Keeping score during a sporting event is a way of tracking state. A performance happens, a ball is hit, a race ends, and the score is recorded.</p>
 <p>Here's a common type of simple scoreboard for sports like gymnastics:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-01.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-state-examples-01.jpg"><img alt="" class="align-center" sizes="(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-01.jpg" srcset="/images/responsive/nonblocking-state-examples-01-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-01-800.jpg 800w,/images/responsive/nonblocking-state-examples-01-400.jpg 400w,/images/responsive/nonblocking-state-examples-01-200.jpg 200w" style="width: 80%;"/></a>
 <p>It's a single score, from a single judge. This scoreboard scores from 1-10, with fractional values down to hundredths of a point. This score is 9.70.</p>
 <p>If we modeled the scoreboard in Python, we could use a single variable to store the score:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-02.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-state-examples-02.jpg"><img alt="" class="align-center" sizes="(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-02.jpg" srcset="/images/responsive/nonblocking-state-examples-02-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-02-800.jpg 800w,/images/responsive/nonblocking-state-examples-02-400.jpg 400w,/images/responsive/nonblocking-state-examples-02-200.jpg 200w" style="width: 80%;"/></a>
 <p>Here, we simply name the variable <tt class="docutils literal">score</tt>. If we were modeling a real gymnastics match, we might want to differentiate between different scores, since there will be one for each judge, and each participant:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -293,14 +293,14 @@
 <p>In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.</p>
 <p>A better analogy that more closely models our requirements is the <a class="reference external" href="https://en.wikipedia.org/wiki/Scoreboard">scoreboard</a> from a team-based sport. A sports arena/field will typically have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.</p>
 <p>Here's a contrived example of a typical scoreboard from an American baseball stadium:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-03.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-state-examples-03.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-03.jpg" srcset="/images/responsive/nonblocking-state-examples-03-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-03-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-03-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-03-800.jpg 800w,/images/responsive/nonblocking-state-examples-03-400.jpg 400w,/images/responsive/nonblocking-state-examples-03-200.jpg 200w" style="width: 80%;"/></a>
 <p>It has various regions with indicators, usually lights, and numbers representing the state of the game. Each one represents an independent piece of important information. That information changes as the game progresses. Outs are made, points (runs) are scored by each team, innings go by (there are 9 in a typical baseball game). Other bits of data are recorded too - <em>balls</em>, <em>strikes</em>, <em>outs</em>. These are used to move the game along in various ways.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">The nuances and rules for American baseball are not relevant to our discussion. However, if you aren't familiar with the game, and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball">wikipedia article</a> is the place to start.</p>
 </div>
 <p>We can model a scoreboard as a series of individual variables, like we did initially for the gymnastics match:</p>
-<img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/nonblocking-state-examples-04.png" style="width: 80%;"/>
+<a href="/images/fullsize/nonblocking-state-examples-04.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-04.jpg" srcset="/images/responsive/nonblocking-state-examples-04-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-04-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-04-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-04-800.jpg 800w,/images/responsive/nonblocking-state-examples-04-400.jpg 400w,/images/responsive/nonblocking-state-examples-04-200.jpg 200w" style="width: 80%;"/></a>
 <p>This is totally viable, and cleaner than doing the same thing for a gymnastics tournament. Since a baseball game changes state over time instead of accumulating multiple scores, having simple global variables for each state attribute we care about makes sense.</p>
 <p>There are alternative ways of modeling global state like this, however. The two primary ones are: using a <em>dictionary</em> and using a <em>class</em>.</p>
 <p>A dictionary in Python is a key-value mapping, also known as an <em>associative array</em>, <em>hash</em>, or <em>hashmap</em>. We worked with these earlier in the gymnastics example.</p>
@@ -539,7 +539,7 @@
 <p>In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">Good news! You don't have to wait, <a class="reference external" href="https://jjmojojjmojo.github.io/circuitpython-state-part-3.html">part 3 is up now!</a></p>
+<p class="last">Good news! You don't have to wait, <a class="reference external" href="/circuitpython-state-part-3.html">part 3 is up now!</a></p>
 </div>
 </div>
 </div><!-- /.entry-content -->
@@ -547,9 +547,9 @@
 </div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
-<script src="https://jjmojojjmojo.github.io/theme/js/main.js"></script>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>

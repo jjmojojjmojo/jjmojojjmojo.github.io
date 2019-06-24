@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - graphics</title><link href="https://jjmojojjmojo.github.io/" rel="alternate"></link><link href="https://jjmojojjmojo.github.io/feeds/category.graphics.atom" rel="self"></link><id>https://jjmojojjmojo.github.io/</id><updated>2018-09-10T09:00:00-04:00</updated><entry><title>The Johnson Pyramid Of Programmer Greatness</title><link href="https://jjmojojjmojo.github.io/johnson-pyramid-of-programmer-greatness.html" rel="alternate"></link><published>2018-09-10T09:00:00-04:00</published><updated>2018-09-10T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:jjmojojjmojo.github.io,2018-09-10:/johnson-pyramid-of-programmer-greatness.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - graphics</title><link href="/" rel="alternate"></link><link href="/feeds/category.graphics.atom" rel="self"></link><id>/</id><updated>2018-09-10T09:00:00-04:00</updated><entry><title>The Johnson Pyramid Of Programmer Greatness</title><link href="/johnson-pyramid-of-programmer-greatness.html" rel="alternate"></link><published>2018-09-10T09:00:00-04:00</published><updated>2018-09-10T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-10:/johnson-pyramid-of-programmer-greatness.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;img alt="" class="align-right" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
+&lt;img alt="" class="align-right" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
 &lt;p&gt;A few years ago, inspired by the TV sitcom &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;, I fired up Adobe Illustrator and put together an infographic that highlights my personal philosophy about what makes a great software engineer, &lt;em&gt;The Johnson Pyramid Of Programmer Greatness&lt;/em&gt;. This is the latest version.&lt;/p&gt;
 &lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
 </summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
-&lt;img alt="" class="align-right" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
+&lt;img alt="" class="align-right" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
 &lt;p&gt;A few years ago, inspired by the TV sitcom &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;, I fired up Adobe Illustrator and put together an infographic that highlights my personal philosophy about what makes a great software engineer, &lt;em&gt;The Johnson Pyramid Of Programmer Greatness&lt;/em&gt;. This is the latest version.&lt;/p&gt;
 &lt;p&gt;In this post, I'll talk a bit in depth about how it came about, and what it all means.&lt;/p&gt;
 
 &lt;div class="section" id="seeing-myself-in-the-tv-people"&gt;
 &lt;h2 id="seeing myself in the tv people"&gt;Seeing Myself In The TV People&lt;/h2&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg"/&gt;
+&lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-leslie.jpg"/&gt;
 &lt;p class="caption"&gt;Ron Swanson (Nick Offerman) and Leslie Knope (Amy Poehler), or, "what Josh's brain looks like inside".&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;There's a TV sitcom that aired on &lt;a class="reference external" href="https://en.wikipedia.org/wiki/NBC"&gt;NBC&lt;/a&gt; in the US from 2009-2015 called &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parks_and_Recreation"&gt;Parks and Recreation&lt;/a&gt;. It's filmed in the style of a documentary, like &lt;a class="reference external" href="https://en.wikipedia.org/wiki/The_Office_(UK_TV_series)"&gt;The Office&lt;/a&gt;, but they didn't take the format too literally.&lt;/p&gt;
@@ -32,7 +32,7 @@
 &lt;h2 id="the reference explained"&gt;The Reference Explained&lt;/h2&gt;
 &lt;p&gt;There was an episode where Ron was tasked with coaching a children's basketball team. Ron decided that the best way to make true champions of his kids was to indoctrinate them with wisdom of what makes a person truly great.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
-&lt;img alt="" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png"/&gt;
+&lt;img alt="" src="/images/johnson-pyramid-of-programmer-greatness/ron-and-his-pyramid.png"/&gt;
 &lt;p class="caption"&gt;"Coach" Ron Swanson (Nick Offerman) presenting &lt;em&gt;The Swanson Pyramid Of Greatness&lt;/em&gt; to his team.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;He presented them with an infographic entitled &lt;em&gt;The Swanson Pyramid Of Greatness&lt;/em&gt;. In includes many true gems, real words to live by, such as:&lt;/p&gt;
@@ -53,16 +53,16 @@
 &lt;h2 id="the johnson pyramid of programmer greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
 &lt;p&gt;My interpretation of Ron Swanson's masterpiece is probably a little more serious than his was, but it's still intended to be a light-hearted take. It was designed in Adobe Illustrator, at full 24x48" poster size. I tweaked the dimensions a little bit to accommodate printing on standard letter/A4 paper, in landscape.&lt;/p&gt;
 &lt;p&gt;Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 80%;"/&gt;
 &lt;p&gt;The original version used colors inspired by Ron's poster:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/fullcolor-classic.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-classic.png" style="width: 80%;"/&gt;
 &lt;p&gt;I've also made a black-and-white version for easier printing with black-and-white laser printers:&lt;/p&gt;
-&lt;img alt="" class="align-center" src="https://jjmojojjmojo.github.io/images/johnson-pyramid-of-programmer-greatness/black-and-white.png" style="width: 80%;"/&gt;
+&lt;img alt="" class="align-center" src="/images/johnson-pyramid-of-programmer-greatness/black-and-white.png" style="width: 80%;"/&gt;
 &lt;p&gt;I've created PDF versions of each file, should you want to print in the best-possible quality:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-new.pdf"&gt;New Colorscheme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-classic.pdf"&gt;Classic Colorscheme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://jjmojojjmojo.github.io/attachments/johnson-pyramid-of-programmer-greatness/black-and-white.pdf"&gt;Black and White&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-new.pdf"&gt;New Colorscheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/fullcolor-classic.pdf"&gt;Classic Colorscheme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="/attachments/johnson-pyramid-of-programmer-greatness/black-and-white.pdf"&gt;Black and White&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;In my pyramid, as in Ron's, the blocks of wisdom are arranged such that the least important concepts are lower on the pyramid. Now, you might argue that &lt;strong&gt;Caffeine&lt;/strong&gt; is less important than &lt;strong&gt;Attention To Detail&lt;/strong&gt;, and that's sort of the point. It's about the way &lt;em&gt;I&lt;/em&gt; feel about things, and how &lt;em&gt;you&lt;/em&gt; feel about things. It's designed to spark conversation. Like, maybe we should talk if &lt;strong&gt;Beer&lt;/strong&gt; is higher on your list than, say &lt;strong&gt;Process&lt;/strong&gt;... 🤔 The idea is that we're "busting the collective chops" of myself and my colleagues, with a gentle nudge toward what I've found to be the most useful over the years. It's all meant in good fun. 💖&lt;/p&gt;
 &lt;p&gt;That said, I think we will &lt;strong&gt;all&lt;/strong&gt; agree that &lt;strong&gt;J.F.D.I.&lt;/strong&gt; and &lt;strong&gt;Awesomeness&lt;/strong&gt; are of ultimate (and penultimate) importance! 😉&lt;/p&gt;

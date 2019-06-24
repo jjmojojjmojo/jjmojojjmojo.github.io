@@ -3,28 +3,28 @@
 <head>
 <!-- Open Graph / Facebook -->
 <meta content="website" property="og:type"/>
-<meta content="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html" property="og:url"/>
+<meta content="/drafts/branching-git-with-pytest-2.html" property="og:url"/>
 <meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " property="og:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card"/>
 <meta content="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html" property="twitter:url"/>
 <meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " property="twitter:title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="https://jjmojojjmojo.github.io/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/main.css" rel="stylesheet" type="text/css"/>
-<link href="https://jjmojojjmojo.github.io/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
-<script src="https://jjmojojjmojo.github.io/theme/js/zepto.min.js"></script>
-<link href="https://jjmojojjmojo.github.io/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
-<link href="https://jjmojojjmojo.github.io/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<link href="/theme/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/css/syntax-solarized-light.css" id="highlight-css" rel="stylesheet" type="text/css"/>
+<script src="/theme/js/zepto.min.js"></script>
+<link href="/feeds/all.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Full Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
+<link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
+<link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
 <meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application &hellip;" name="description"/>
 <meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application &hellip;" property="og:description"/>
 <meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application &hellip;" property="twitter:description"/>
@@ -35,16 +35,16 @@
 </head>
 <body class="home" id="index">
 <header class="body" id="banner">
-<h1><a href="https://jjmojojjmojo.github.io/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
+<h1><a href="/"><img id="header-home-icon" src="/theme/icons/home.svg"/> <span id="header-site-title">The Collected Works of jjmojojjmojo <strong></strong></span></a></h1>
 <ul id="menu">
-<li><a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/contact.html">Contact</a></li>
-<li><a href="https://jjmojojjmojo.github.io/pages/index.html">Pages</a></li>
-<li><a href="https://jjmojojjmojo.github.io/categories.html">Categories</a></li>
-<li><a href="https://jjmojojjmojo.github.io/tags.html">Tags</a></li>
+<li><a href="/pages/about.html">About</a></li>
+<li><a href="/pages/contact.html">Contact</a></li>
+<li><a href="/pages/index.html">Pages</a></li>
+<li><a href="/categories.html">Categories</a></li>
+<li><a href="/tags.html">Tags</a></li>
 </ul>
 <span id="settings-button">
-<a href="https://jjmojojjmojo.github.io/pages/settings.html" title="Settings">
+<a href="/pages/settings.html" title="Settings">
 <img alt="Gear Icon For Settings" src="/theme/icons/settings.svg"/>
 </a>
 </span>
@@ -52,21 +52,21 @@
 <div id="notice">
 <div id="notice-content">
 <div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="https://jjmojojjmojo.github.io/pages/hire-me.html">More info</a>. <big>🦄</big>
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
 </div> </div>
 </div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
 <h2 class="entry-title">
-<a href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html" rel="bookmark" title="Permalink to Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2">Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</a></h2>
+<a href="/drafts/branching-git-with-pytest-2.html" rel="bookmark" title="Permalink to Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2">Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</a></h2>
 </header>
 <footer class="post-info">
 <time class="published" datetime="2019-06-26T09:00:00-04:00">
       Wed 26 June 2019
     </time>
 <address class="vcard author">
-      By           <a class="url fn" href="https://jjmojojjmojo.github.io/author/jjmojojjmojo.html">jjmojojjmojo</a>
+      By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
 <div>
@@ -91,7 +91,7 @@
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
-<p>Make sure you've got everything set up as outlined in <a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html">part 1</a>.</p>
+<p>Make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</p>
 <p>Here's a condensed summary:</p>
 <ol class="arabic">
 <li><p class="first">Ensure you have git, python 3.7+, and venv installed.</p>
@@ -128,21 +128,21 @@
 <p>🌈 We have branches for all of the major work done in the series:</p>
 <dl class="docutils">
 <dt><code>part1</code></dt>
-<dd><p class="first last">All the changes from <a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html">part 1</a>.</p>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</p>
 </dd>
 <dt><code>part2</code></dt>
-<dd><p class="first last">All the changes from <a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html">part 1</a> and
-<a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html">part 2</a></p>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
+<a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a></p>
 </dd>
 <dt><code>qotd</code></dt>
-<dd><p class="first last">Developer <strong>A</strong>'s feature from <a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
+<dd><p class="first last">Developer <strong>A</strong>'s feature from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
 </dd>
 <dt><code>index-info</code></dt>
-<dd><p class="first last">Developer <strong>B</strong>'s bug fix from <a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
+<dd><p class="first last">Developer <strong>B</strong>'s bug fix from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
 </dd>
 <dt><code>part3</code></dt>
-<dd><p class="first last">All the changes from <a class="reference external" href="https://jjmojojjmojo.github.io/branching-git-with-pytest.html">part 1</a>,
-<a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html">part 3</a>!</p>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>,
+<a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!</p>
 </dd>
 </dl>
 <p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
@@ -184,7 +184,7 @@
 <p>The server will print its logs out to the console so you can see when requests happen, and if any errors pop up.</p>
 <p>Now, open a web browser to <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> . You should get a 404 "Not Found" response. This is expected, since we aren't covering the case of a request for the root, (aka <code>/</code>) in our <code>RandomQuoteApp.__call__()</code> method.</p>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-root-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-root-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-200.jpg 200w"/></a>
 </div>
 <p>We can use the web API in our browser.</p>
 <div class="admonition note">
@@ -194,28 +194,28 @@
 <p>To get a listing of all the quotes in your database, open <a class="reference external" href="http://127.0.0.1:8080/quotes">http://127.0.0.1:8080/quotes</a>:</p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-all-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-all-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-all-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-all-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
 <p>To get a particular quote, open <a class="reference external" href="http://127.0.0.1:8080/quote/1">http://127.0.0.1:8080/quote/1</a> (where 1 is the id of the quote you want):</p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-one-quote-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-one-quote-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-one-quote-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
 <p>To get a random quote, open <a class="reference external" href="http://127.0.0.1:8080/random">http://127.0.0.1:8080/random</a></p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-random-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-random-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-random-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-random-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
 <p>Here's a handy map that shows how the various supported API endpoints invoke methods of <code>RandomQuoteApp</code>:</p>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/path-map-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/path-map-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/path-map-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/path-map-first-pass-2500.jpg 2500w,/images/branching-git-pytest/responsive/path-map-first-pass-2000.jpg 2000w,/images/branching-git-pytest/responsive/path-map-first-pass-1800.jpg 1800w,/images/branching-git-pytest/responsive/path-map-first-pass-1600.jpg 1600w,/images/branching-git-pytest/responsive/path-map-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/path-map-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/path-map-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/path-map-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/path-map-first-pass-200.jpg 200w"/></a>
 </div>
 <p>Now, lets find a bug. Try requesting a quote id that you know doesn't exist. Since we're using numeric ids, requesting an alphanumeric string, like <code>zzzzzz</code> would be a good choice. If we click on <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>, what happens?</p>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-bad-id-bug.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-bad-id-bug.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-bad-id-bug.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-200.jpg 200w"/></a>
 </div>
 <p>Oh no, "Internal Server Error" is bad. Lets look at the log:</p>
 <p><strong>TODO: fix the paths so they look like what the user is probably using</strong></p>
@@ -277,7 +277,7 @@
 <div class="section" id="fix-the-bug-an-overview">
 <h2 id="fix the bug: an overview">Fix The Bug: An Overview</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-200.jpg 200w"/></a>
 </div>
 <p>In brief, we need to:</p>
 <ol class="arabic simple">
@@ -304,7 +304,7 @@
 <span class="go">* master</span>
 </pre></div>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-a-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-a-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-a-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-200.jpg 200w"/></a>
 </div>
 <p>We see the <code>master</code> branch all by itself. <code>master</code> is the default name for the first branch in a repository. We have <em>checked out</em> the <code>master</code> branch, as indicated by the asterisk (*).</p>
 <p>We need a good name for our branch. The name should be obvious and specific to this bug. If you use an issue tracking system, the issue number is a good idea. Since we aren't using an issue tracker for this guide, lets do something descriptive. We'll call our bug branch <code>bug-unknown-id</code>.</p>
@@ -351,7 +351,7 @@
 <div class="section" id="replicate-the-bug-in-a-test">
 <h2 id="replicate the bug in a test">Replicate The Bug In A Test</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-b-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-b-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-b-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-200.jpg 200w"/></a>
 </div>
 <p>We want to add a test that will fail until the bug is fixed. This way we can prevent <em>regressions</em>, or situations where the bug inadvertently comes up later. If it fails now, and we fix it, and it passes, then test case will fail if the bug ever shows up again.</p>
 <div class="section" id="more-than-a-bug">
@@ -467,7 +467,7 @@
 <div class="section" id="commit-the-failing-test">
 <h2 id="commit the failing test">Commit The Failing Test</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-b-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-b-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-b-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-b-cropped-200.jpg 200w"/></a>
 </div>
 <p>This is identical to our previous commit process, but lets go through it again.</p>
 <p>First, lets check what changed using <code>git status</code>:</p>
@@ -547,7 +547,7 @@
 </pre></div>
 <p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
 <div class="figure align-center" style="width: 80%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/screen-cap-bad-id-first-pass.png"/>
+<a href="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-200.jpg 200w"/></a>
 </div>
 <p>At this point, we aren't getting the error anymore, but we aren't necessarily getting a useful result, since we're seeing the JSON serialization of <code>None</code>, the special Javascript value <code>null</code>. We'll deal with this issue in a minute. But our bug is now fixed.</p>
 <p>Next, lets re-run our tests:</p>
@@ -936,7 +936,7 @@ index 762ef05..d9da9cf 100644
 <div class="section" id="fetch-and-rebase">
 <h2 id="fetch and rebase">Fetch and Rebase</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-c-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-200.jpg 200w"/></a>
 </div>
 <p>We now have a backlog containing a handful of changes, all regarding this bug:</p>
 <div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline
@@ -1206,12 +1206,12 @@ Increased the version number
 <div class="section" id="merge-master-and-publish">
 <h2 id="merge master and publish">Merge Master And Publish</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-d-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-d-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-d-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-d-cropped-200.jpg 200w"/></a>
 </div>
 <p>If we know someone has changed the code in <code>master</code> since we branched, we will need to incorporate those changes into our branch before we proceed.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in <a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html">part 3</a>!.</p>
+<p class="last">We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!.</p>
 </div>
 <p>In either case, we still have to go through the same basic process.</p>
 <p>Now, we'll <code>git checkout</code> <code>master</code>, and <code>git merge</code> our branch:</p>
@@ -1261,7 +1261,7 @@ Increased the version number
 <div class="section" id="tag-the-version">
 <h2 id="tag the version">Tag The Version</h2>
 <div class="figure align-right" style="width: 40%">
-<img alt="" src="https://jjmojojjmojo.github.io/images/branching-git-pytest/workflow-overview-part2-e-cropped.png"/>
+<a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-e-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-e-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-e-cropped-200.jpg 200w"/></a>
 </div>
 <p>Git has a concept of "tagging" - where you can assign a user-friendly label to a specific commit. It can make it really easy for people to check out a specific point in the history of the code. Technically they are <em>optional</em>, but are a very useful tool.</p>
 <div class="admonition note">
@@ -1340,16 +1340,16 @@ Increased the version number
 <div class="section" id="conclusion-what-s-next">
 <h2 id="conclusion/what's next">Conclusion/What's Next</h2>
 <p>In this installment, we got a lot more comfortable writing tests and doing stuff with git. At this point, we're ready to do any sort of feature or bug work, and leave a clean commit log when we're done.</p>
-<p>In the <a class="reference external" href="https://jjmojojjmojo.github.io/drafts/branching-git-with-pytest-3.html">final part</a> of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.</p>
+<p>In the <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">final part</a> of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.</p>
 </div>
 </div><!-- /.entry-content -->
 </section>
 </div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="https://jjmojojjmojo.github.io/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
-<script src="https://jjmojojjmojo.github.io/theme/js/main.js"></script>
+<script src="/theme/js/main.js"></script>
 </body>
 </html>
