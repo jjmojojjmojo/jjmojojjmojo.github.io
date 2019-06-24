@@ -31,7 +31,7 @@ Here's a condensed summary:
    .. code-block:: console
       :linenos: none
        
-       $ git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
+       $ git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
    
 #. Clone our remote:
    

@@ -150,7 +150,7 @@
 &lt;h2 id="cloning the repository"&gt;Cloning The Repository&lt;/h2&gt;
 &lt;p&gt;The first step is to clone the initial version of the example application, from my &lt;a class="reference external" href="https://github.com/jjmojojjmojo/random_quote"&gt;github repository&lt;/a&gt;. But because of the stuff we're going to be doing later, this will be a special two-step process.&lt;/p&gt;
 &lt;p&gt;First, we need to do a &lt;em&gt;bare&lt;/em&gt; clone of the repository. This will give us a &lt;a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes"&gt;remote&lt;/a&gt;, that isn't &lt;a class="reference external" href="https://www.github.com"&gt;github&lt;/a&gt;, that we can clone and work on.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now, instead of cloning my repository from github, we clone &lt;code&gt;random_quote_remote&lt;/code&gt;:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; git clone random_quote_remote random_quote

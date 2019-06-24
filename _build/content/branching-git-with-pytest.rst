@@ -169,7 +169,7 @@ First, we need to do a *bare* clone of the repository. This will give us a `remo
 .. code-block:: console
     :linenos: none
     
-    $ git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
+    $ git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
     
 Now, instead of cloning my repository from github, we clone :code:`random_quote_remote`:
 
