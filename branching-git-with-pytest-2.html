@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Open Graph / Facebook -->
+<meta content="website" property="og:type"/>
+<meta content="/branching-git-with-pytest-2.html" property="og:url"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " property="og:title"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<!-- Twitter -->
+<meta content="summary_large_image" property="twitter:card"/>
+<meta content="https://jjmojojjmojo.github.io/branching-git-with-pytest-2.html" property="twitter:url"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " property="twitter:title"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " name="title"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -12,6 +25,9 @@
 <link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 <link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
 <link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Identify and fix a bug on a branch. Build a new feature, also on a branch. Use git rebase to keep our change history tidy. Use tagging to mark new versions of our application." name="description"/>
+<meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Identify and fix a bug on a branch. Build a new feature, also on a branch. Use git rebase to keep our change history tidy. Use tagging to mark new versions of our application." property="og:description"/>
+<meta content="This is part two of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Identify and fix a bug on a branch. Build a new feature, also on a branch. Use git rebase to keep our change history tidy. Use tagging to mark new versions of our application." property="twitter:description"/>
 <meta content="python" name="tags"/>
 <meta content="git" name="tags"/>
 <meta content="branching" name="tags"/>
@@ -33,6 +49,12 @@
 </a>
 </span>
 </header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -40,8 +62,8 @@
 <a href="/branching-git-with-pytest-2.html" rel="bookmark" title="Permalink to Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2">Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</a></h2>
 </header>
 <footer class="post-info">
-<time class="published" datetime="2019-06-26T09:00:00-04:00">
-      Wed 26 June 2019
+<time class="published" datetime="2019-06-28T09:00:00-04:00">
+      Fri 28 June 2019
     </time>
 <address class="vcard author">
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
@@ -65,58 +87,63 @@
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
 <p>Make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</p>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>It's a good idea to review the steps below, but if you want to skip ahead, or you are only interested in this section and want to hit the ground running, you can run the following script:</p>
-<div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> scripts/setup-part2.sh
-</pre></div>
-</td></tr></table></div></div></div>
 <p>Here's a condensed summary:</p>
 <ol class="arabic">
 <li><p class="first">Ensure you have git, python 3.7+, and venv installed.</p>
 </li>
 <li><p class="first">Make a bare clone of the base repository to act as our <em>remote</em>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Clone our remote:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote random_quote
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git clone random_quote_remote random_quote
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Initialize the virtual environment, and install our requirements and project:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> random_quote
-<span class="gp">$</span> python -m venv .
-<span class="gp">$</span> <span class="nb">source</span> bin/activate
-<span class="gp">(random_quote) $</span> pip install -r requirements.txt
-<span class="gp">(random_quote) $</span> pip install -e .
+<div class="highlight"><pre><span></span><span class="gp">  $</span> <span class="nb">cd</span> random_quote
+<span class="gp">  $</span> python -m venv .
+<span class="gp">  $</span> <span class="nb">source</span> bin/activate
+<span class="go">  (random_quote) $ pip install -r requirements.txt</span>
+<span class="go">  (random_quote) $ pip install -e .</span>
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Initialize the database, add some randomly generated quotes:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
-<span class="gp">(random_quote) $</span> python
-<span class="gp">&gt;</span>&gt;&gt;
+<div class="highlight"><pre><span></span><span class="go">  (random_quote) $ python scripts/generate_quotes.py</span>
+<span class="go">  (random_quote) $ python</span>
+<span class="go">  &gt;&gt;&gt; from random_quote import util</span>
+<span class="go">  &gt;&gt;&gt; util.init("test.db")</span>
+<span class="go">  util.ingest("quotes.csv", "test.db")</span>
 </pre></div>
-</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">util</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
-<span class="go">util.ingest("quotes.csv", "test.db")</span>
+</li>
+<li><p class="first">Add the <code>fix_random()</code> test fixture and the extra tests for random functionality. If you had trouble, or would like to skip <code>scripts/state/part1</code>, you can <code>git checkout</code> the <code>part1</code> branch:</p>
+<div class="highlight"><pre><span></span><span class="go">  (random_quote) $ git checkout part1</span>
 </pre></div>
-</td></tr></table></div></li>
-<li><p class="first">Add the <code>fix_random()</code> test fixture and the extra tests for random functionality. If you had trouble or would like to skip that step, you can copy the following files from <code>scripts/state/part1</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> cp scripts/state/part1/conftest.py src/random_quote/tests/
-<span class="gp">(random_quote) $</span> cp scripts/state/part1/test_manager.py src/random_quote/tests/
-<span class="gp">(random_quote) $</span> cp scripts/state/part1/test_wsgi.py src/random_quote/tests/
-</pre></div>
-</td></tr></table></div></li>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>🌈 We have branches for all of the major work done in the series:</p>
+<dl class="docutils">
+<dt><code>part1</code></dt>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</p>
+</dd>
+<dt><code>part2</code></dt>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a></p>
+</dd>
+<dt><code>qotd</code></dt>
+<dd><p class="first last">Developer <strong>A</strong>'s feature from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
+</dd>
+<dt><code>index-info</code></dt>
+<dd><p class="first last">Developer <strong>B</strong>'s bug fix from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</p>
+</dd>
+<dt><code>part3</code></dt>
+<dd><p class="first last">All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>,
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!</p>
+</dd>
+</dl>
+<p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
+<p class="last">Use <code>git stash</code> to keep any uncomitted changes for latter. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">the git documentation</a> for more information. 🦄</p>
+</div>
+</li>
 </ol>
 </div>
 <div class="section" id="let-s-find-a-bug">
@@ -124,9 +151,9 @@
 <p>Let's run the application locally so we can play with it in a browser, and identify a bug to fix.</p>
 <p><code>requirements.txt</code> has installed a web server for us called <a class="reference external" href="https://gunicorn.org/">Gunicorn</a>. It's a pure-python server that has a lot of great production-quality features.</p>
 <p>We'll start the <code>gunicorn</code> server using a couple of useful command-line options, since we'll be messing with the code:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><div class="explanation section">
+<div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -187,41 +214,25 @@
 </div>
 <p>Oh no, "Internal Server Error" is bad. Lets look at the log:</p>
 <p><strong>TODO: fix the paths so they look like what the user is probably using</strong></p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">[2019-06-09 18:31:11 -0400] [16676] [INFO] Starting gunicorn 19.9.0</span>
+<div class="highlight"><pre><span></span><span class="go">[2019-06-09 18:31:11 -0400] [16676] [INFO] Starting gunicorn 19.9.0</span>
 <span class="go">[2019-06-09 18:31:11 -0400] [16676] [INFO] Listening at: http://127.0.0.1:8080 (16676)</span>
 <span class="go">[2019-06-09 18:31:11 -0400] [16676] [INFO] Using worker: sync</span>
 <span class="go">[2019-06-09 18:31:11 -0400] [16679] [INFO] Booting worker with pid: 16679</span>
 <span class="go">[2019-06-09 18:31:20 -0400] [16679] [ERROR] Error handling request /quote/zzzzzz</span>
 <span class="go">Traceback (most recent call last):</span>
-<span class="go">  File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 135, in handle</span>
+<span class="go">  File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 135, in handle</span>
 <span class="go">    self.handle_request(listener, req, client, addr)</span>
-<span class="go">  File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 176, in handle_request</span>
+<span class="go">  File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 176, in handle_request</span>
 <span class="go">    respiter = self.wsgi(environ, resp.start_response)</span>
-<span class="go">  File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/wsgi.py", line 29, in __call__</span>
+<span class="go">  File "[...]/random_quote/src/random_quote/wsgi.py", line 29, in __call__</span>
 <span class="go">    response = self.get(request)</span>
-<span class="go">  File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/wsgi.py", line 54, in get</span>
+<span class="go">  File "[...]/random_quote/src/random_quote/wsgi.py", line 54, in get</span>
 <span class="go">    quote = self.manager.get(match.group(1))</span>
-<span class="go">  File "/Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/src/random_quote/manager.py", line 49, in get</span>
+<span class="go">  File "[...]/random_quote/src/random_quote/manager.py", line 49, in get</span>
 <span class="go">    return dict(result)</span>
 <span class="go">TypeError: 'NoneType' object is not iterable</span>
 </pre></div>
-</td></tr></table></div><p>In most web servers, when an exception isn't handled by the application, it "bubbles up" to the server and triggers the return of a 500, "Internal Server Error" response.</p>
+<p>In most web servers, when an exception isn't handled by the application, it "bubbles up" to the server and triggers the return of a 500, "Internal Server Error" response.</p>
 <p>In the log, we can see the basic status info that <code>gunicorn</code> gives us, and then on line 6, the traceback begins. On line 17 we see the exception that caused the 500 error originated on line 49 of <code>src/random_quote/manager.py</code>, in the <code>get()</code> method.</p>
 <p>Here's that method isolated so we can take a look at it:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>37
@@ -265,7 +276,7 @@
 </div>
 <p>In brief, we need to:</p>
 <ol class="arabic simple">
-<li>Create a branch.</li>
+<li>Create and check out a branch. (<code>git branch</code>, <code>git checkout</code>)</li>
 <li>Write a <em>failing</em> test that replicates the bug.</li>
 <li>Fix the bug.</li>
 <li>Increase the version number.</li>
@@ -275,77 +286,62 @@
 <li><code>git checkout master</code>.</li>
 <li><code>git merge</code> to our branch.</li>
 <li>Fix any conflicts.</li>
-<li>Finish the merge.</li>
+<li>Finish the merge (<code>git add</code>, <code>git commit</code>).</li>
 <li>Run the tests.</li>
-<li>Tag the version.</li>
+<li><code>git tag</code> the version.</li>
 <li><code>git push</code> changes.</li>
 </ol>
 </div>
 <div class="section" id="create-a-branch">
 <h2 id="create a branch">Create A Branch</h2>
 <p>Let's list the existing branches first:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
 <span class="go">* master</span>
 </pre></div>
-</td></tr></table></div><div class="figure align-right" style="width: 40%">
+<div class="figure align-right" style="width: 40%">
 <a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-a-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-a-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-a-cropped-200.jpg 200w"/></a>
 </div>
 <p>We see the <code>master</code> branch all by itself. <code>master</code> is the default name for the first branch in a repository. We have <em>checked out</em> the <code>master</code> branch, as indicated by the asterisk (*).</p>
 <p>We need a good name for our branch. The name should be obvious and specific to this bug. If you use an issue tracking system, the issue number is a good idea. Since we aren't using an issue tracker for this guide, lets do something descriptive. We'll call our bug branch <code>bug-unknown-id</code>.</p>
 <p>Here's how it is created:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch bug-unknown-id
 </pre></div>
-</td></tr></table></div><p>Running <code>git branch --list</code> again, we can see our branch:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
+<p>Running <code>git branch --list</code> again, we can see our branch:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
 <span class="go">bug-unknown-id</span>
 <span class="go">* master</span>
 </pre></div>
-</td></tr></table></div><p>We're still "on" the <code>master</code> branch. We need to change branches, or <code>git checkout</code> our new branch:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout bug-unknown-id
+<p>We're still "on" the <code>master</code> branch. We need to change branches, or <code>git checkout</code> our new branch:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout bug-unknown-id
 <span class="go">Switched to branch 'bug-unknown-id'</span>
 <span class="gp">(random_quote) $</span> git branch --list
 <span class="go">* bug-unknown-id</span>
 <span class="go">master</span>
 </pre></div>
-</td></tr></table></div><p>As we can see, when we call <code>git branch --list</code> again, our branch has the asterisk.</p>
+<p>As we can see, when we call <code>git branch --list</code> again, our branch has the asterisk.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>You can save a step by passing the <code>-b</code> switch to <code>git checkout</code>, creating the branch before checking it out:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git checkout -b some-other-branch
-<span class="go">Switched to a new branch 'some-other-branch'</span>
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git checkout -b some-other-branch
+<span class="go"> Switched to a new branch 'some-other-branch'</span>
 </pre></div>
-</td></tr></table></div><p>And we can see it's been created <em>and</em> checked out:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git branch --list
-<span class="go">bug-unknown-id</span>
-<span class="go">master</span>
-<span class="go">* some-other-branch</span>
+<p>And we can see it's been created <em>and</em> checked out:</p>
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git branch --list
+<span class="go"> bug-unknown-id</span>
+<span class="go"> master</span>
+<span class="go"> * some-other-branch</span>
 </pre></div>
-</td></tr></table></div><p>If we want to go back to another branch, we just need to <code>git checkout</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git checkout bug-unknown-id
-<span class="go">Switched to branch 'bug-unknown-id'</span>
+<p>If we want to go back to another branch, we just need to <code>git checkout</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git checkout bug-unknown-id
+<span class="go"> Switched to branch 'bug-unknown-id'</span>
 </pre></div>
-</td></tr></table></div><p>And we can see it's changed again using <code>git branch --list</code>:</p>
-<div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git branch --list
-<span class="go">* bug-unknown-id</span>
-<span class="go">master</span>
-<span class="go">some-other-branch</span>
+<p>And we can see it's changed again using <code>git branch --list</code>:</p>
+<div class="last"><div class="highlight"><pre><span></span><span class="gp"> $</span> git branch --list
+<span class="go"> * bug-unknown-id</span>
+<span class="go"> master</span>
+<span class="go"> some-other-branch</span>
 </pre></div>
-</td></tr></table></div></div></div>
+</div></div>
 </div>
 <div class="section" id="replicate-the-bug-in-a-test">
 <h2 id="replicate the bug in a test">Replicate The Bug In A Test</h2>
@@ -408,61 +404,11 @@
     <span class="k">assert</span> <span class="n">quote</span> <span class="ow">is</span> <span class="bp">None</span>
 </pre></div>
 </td></tr></table></div><p>Running the tests, we can now see there are 8 tests now, and one fails:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src -v
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src -v
 <span class="go">============================== test session starts ==============================</span>
-<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python</span>
+<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 9 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py::test_add_quote PASSED             [ 11%]</span>
@@ -510,7 +456,7 @@
 <span class="go">src/random_quote/manager.py:49: TypeError</span>
 <span class="go">====================== 1 failed, 8 passed in 11.15 seconds ======================</span>
 </pre></div>
-</td></tr></table></div><p>Since this test case raises a <code>TypeError</code>, it successfully replicates the bug.</p>
+<p>Since this test case raises a <code>TypeError</code>, it successfully replicates the bug.</p>
 <p>At this point, it's not a bad idea to save our work, so lets look at our changes, and commit them.</p>
 </div>
 <div class="section" id="commit-the-failing-test">
@@ -520,22 +466,7 @@
 </div>
 <p>This is identical to our previous commit process, but lets go through it again.</p>
 <p>First, lets check what changed using <code>git status</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
 <span class="hll"><span class="go">On branch bug-unknown-id</span>
 </span><span class="go">Changes not staged for commit:</span>
 <span class="go">  (use "git add &lt;file&gt;..." to update what will be committed)</span>
@@ -552,15 +483,13 @@
 
 <span class="go">no changes added to commit (use "git add" and/or "git commit -a")</span>
 </pre></div>
-</td></tr></table></div><p>Note that git tells us which branch we're on. It's a good idea to get in the habit of looking at that line of output.</p>
+<p>Note that git tells us which branch we're on. It's a good idea to get in the habit of looking at that line of output.</p>
 <p>Next, we'll <code>git commit</code> our changes, using the <code>-m</code> parameter:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Added failing test an unknown id is passed to RandomQuoteManager.get()"</span>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Added failing test an unknown id is passed to RandomQuoteManager.get()"</span>
 <span class="go">[bug-unknown-id 34afe34] Added failing test an unknown id is passed to RandomQuoteManager.get()</span>
 <span class="go"> 1 file changed, 9 insertions(+), 1 deletion(-)</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="actually-fix-the-bug">
 <h2 id="actually fix the bug">Actually Fix The Bug</h2>
 <p>Recall that earlier, we decided that the <code>RandomQuoteManager.get()</code> method return <code>None</code> as a <em>sentinel</em> if a non-existent id is passed.</p>
@@ -609,36 +538,19 @@
     <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"QUOTE {id_i_want} NOT FOUND!"</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
+<p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-200.jpg 200w"/></a>
 </div>
 <p>At this point, we aren't getting the error anymore, but we aren't necessarily getting a useful result, since we're seeing the JSON serialization of <code>None</code>, the special Javascript value <code>null</code>. We'll deal with this issue in a minute. But our bug is now fixed.</p>
 <p>Next, lets re-run our tests:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
 <span class="go">============================= test session starts ==============================</span>
-<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python</span>
+<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 9 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 11%]</span>
@@ -653,7 +565,7 @@
 
 <span class="go">=========================== 9 passed in 0.23 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>This time, lets take a deeper view of what has changed, using <code>git diff</code>.</p>
+<p>This time, lets take a deeper view of what has changed, using <code>git diff</code>.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -696,13 +608,11 @@ index 762ef05..d9da9cf 100644
 <p class="last">You can use <code>git difftool</code> to view diffs in a graphical diff viewer. The <a class="reference external" href="https://git-scm.com/docs/git-difftool">git-difftool docuentation</a> has usage details.</p>
 </div>
 <p>Now since we like the changes that were made, we can make a commit:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Fixed bug where a non-existent quote id would raise a TypeError"</span>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Fixed bug where a non-existent quote id would raise a TypeError"</span>
 <span class="go">[bug-unknown-id d9d2408] Fixed bug where a non-existent quote id would raise a TypeError</span>
 <span class="go">1 file changed, 6 insertions(+), 1 deletion(-)</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="we-re-not-quite-done-yet">
 <h2 id="we're not quite done yet">We're Not Quite Done Yet</h2>
 <p>As mentioned in the last section, making a web request for <code>/quote/zzzzz</code> no longer raises an exception, but it doesn't necessarily act in a way that's consistent with web standards.</p>
@@ -753,82 +663,11 @@ index 762ef05..d9da9cf 100644
 </pre></div>
 </td></tr></table></div><p><code>WebTest.TestApp</code>, returned by our fixture, does a lot of checking for us. Normally, it will even raise an exception when a non-"200 OK" status is returned. So in order to check for a specific status, we need to let the <code>TestApp.get()</code> method know we are expecting a different response code. This is done with the <code>status</code> keyword parameter (it can be a specific number, or a pattern to match, like "4??").</p>
 <p>When the tests run, we see the error, this time, it's raised by <code>WebTest.Testapp</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
 <span class="go">============================= test session starts ==============================</span>
-<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote/bin/python</span>
+<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 10 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 10%]</span>
@@ -897,7 +736,7 @@ index 762ef05..d9da9cf 100644
 <span class="go">lib/python3.7/site-packages/webtest/app.py:689: AppError</span>
 <span class="go">====================== 1 failed, 9 passed in 0.49 seconds ======================</span>
 </pre></div>
-</td></tr></table></div><p>Now, let's make this test pass, by getting the <code>RandomQuoteApp.get()</code> method to return a 404 when <code>None</code> is returned by <code>RandomQuoteManager.get()</code>.</p>
+<p>Now, let's make this test pass, by getting the <code>RandomQuoteApp.get()</code> method to return a 404 when <code>None</code> is returned by <code>RandomQuoteManager.get()</code>.</p>
 <p><code>webob</code> comes with a few handy helper classes and 'canned' responses to make things like returning a 404 error code easy. In particular, it provides <code>webob.exc.HTTPNotFound</code>. It is a hybrid class that is a <code>webob.Response</code> object, but also a python <code>Exception</code>. It can be raised by part of your application, <em>caught</em> and returned to the user like any other <code>webob.Response</code> to let them know something went wrong.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1009,19 +848,10 @@ index 762ef05..d9da9cf 100644
         <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </td></tr></table></div><p>Now, when we run the tests again, the <code>test_get_quote_unknown_id()</code> case passes:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 10 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py ......                             [ 60%]</span>
@@ -1029,7 +859,7 @@ index 762ef05..d9da9cf 100644
 
 <span class="go">=========================== 10 passed in 0.18 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>The last thing to do is to commit these changes. We'll leave that as an exercise for the reader. Remember to <code>git status</code>, and feel free to use the <code>-m</code> flag to <code>git commit</code> if you'd like.</p>
+<p>The last thing to do is to commit these changes. We'll leave that as an exercise for the reader. Remember to <code>git status</code>, and feel free to use the <code>-m</code> flag to <code>git commit</code> if you'd like.</p>
 </div>
 <div class="section" id="version-bump">
 <h2 id="version bump">Version Bump</h2>
@@ -1074,16 +904,8 @@ index 762ef05..d9da9cf 100644
 <p>Since this is the first bug, we just need to increment the last number. As such, our new version is <strong>0.1.1</strong>.</p>
 <p>We'll leave making this change as an exercise for the user.</p>
 <p>After the version change, be sure to re-install the application, using <code>pip</code>, as we did in the initial setup:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pip install -e .
-<span class="go">Obtaining file:///Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pip install -e .
+<span class="go">Obtaining file://[...]/random_quote</span>
 <span class="go">Requirement already satisfied: webob in ./lib/python3.7/site-packages (from random-quote==0.1.1) (1.8.5)</span>
 <span class="go">Installing collected packages: random-quote</span>
 <span class="go">  Found existing installation: random-quote 0.1.0</span>
@@ -1092,20 +914,11 @@ index 762ef05..d9da9cf 100644
 <span class="go">  Running setup.py develop for random-quote</span>
 <span class="go">Successfully installed random-quote</span>
 </pre></div>
-</td></tr></table></div><p>And re-run the tests to make sure everything is still working:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<p>And re-run the tests to make sure everything is still working:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
 <span class="go">==================================== test session starts =====================================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 10 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py ......                                          [ 60%]</span>
@@ -1113,7 +926,7 @@ index 762ef05..d9da9cf 100644
 
 <span class="go">================================= 10 passed in 0.18 seconds ==================================</span>
 </pre></div>
-</td></tr></table></div><p>Finally, remember to use <code>git status</code> and <code>git diff</code> to make sure the changes are correct before committing, and be sure to write a useful log message.</p>
+<p>Finally, remember to use <code>git status</code> and <code>git diff</code> to make sure the changes are correct before committing, and be sure to write a useful log message.</p>
 </div>
 <div class="section" id="fetch-and-rebase">
 <h2 id="fetch and rebase">Fetch and Rebase</h2>
@@ -1121,14 +934,7 @@ index 762ef05..d9da9cf 100644
 <a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-200.jpg 200w"/></a>
 </div>
 <p>We now have a backlog containing a handful of changes, all regarding this bug:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline
 
 <span class="go">5b81947745f2c184619a9d7c1a99546d9aa01662 (HEAD -&gt; bug-unknown-id) Increased the version number</span>
 <span class="go">640c4e2431776e9b6c252bef1c7509fee1557c79 Added test for requesting a non-existant quote id in the HTTP API</span>
@@ -1137,7 +943,7 @@ index 762ef05..d9da9cf 100644
 
 <span class="go">-- snip --</span>
 </pre></div>
-</td></tr></table></div><p>In order to make our changes part of the <code>master</code> branch, we need to incorporate them into the changes in that branch. This can be done with <code>git merge</code>, but all of our commits will be mixed into the commit log. This is bad.  Why? There are a handful of reasons:</p>
+<p>In order to make our changes part of the <code>master</code> branch, we need to incorporate them into the changes in that branch. This can be done with <code>git merge</code>, but all of our commits will be mixed into the commit log. This is bad.  Why? There are a handful of reasons:</p>
 <ul class="simple">
 <li>When someone looks at the log for the <code>master</code> branch, it will be messy.</li>
 <li>Trying to understand everything that was changed across many commits is difficult.</li>
@@ -1149,23 +955,20 @@ index 762ef05..d9da9cf 100644
 <p class="first admonition-title">Warning</p>
 <p><code>git rebase</code> is a destructive action. <strong>It cannot be undone</strong> (well, <a class="reference external" href="https://stackoverflow.com/questions/134882/undoing-a-git-rebase">it can</a>, but it's not easy). It's a very intuitive tool and something you'll get comfortable with quickly. Just be careful.</p>
 <p>There are several ways to protect yourself. The simplest is to just duplicate your checkout as a backup before you do your rebase:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> <span class="nb">cd</span> ..
-<span class="gp">(random_quote) $</span> cp -r random_quote random_quote_before_rebase_because_im_scared
+<div class="highlight"><pre><span></span><span class="go"> (random_quote) $ cd ..</span>
+<span class="go"> (random_quote) $ cp -r random_quote random_quote_before_rebase_because_im_scared</span>
 </pre></div>
-</td></tr></table></div><p class="last">Just be sure to delete it as soon as you're finished. Note that your virtual environment might not function. There are hard-coded paths in some of the environment files. To use the environment, you'll need to clean out the virtual environment directories/files (<code>lib</code>, <code>bin</code>, <code>include</code>, <code>pyvenv.cfg</code>) and re-run <code>python -m venv .</code>.</p>
+<p class="last">Just be sure to delete it as soon as you're finished. Note that your virtual environment might not function. There are hard-coded paths in some of the environment files. To use the environment, you'll need to clean out the virtual environment directories/files (<code>lib</code>, <code>bin</code>, <code>include</code>, <code>pyvenv.cfg</code>) and re-run <code>python -m venv .</code>.</p>
 </div>
 <p>First, we'll use <code>git fetch</code> to retrieve the latest version of the <code>master</code> branch:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git fetch origin master
-<span class="go">From /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git fetch origin master
+<span class="go">From [...]/random_quote_remote</span>
 <span class="go"> * branch            master     -&gt; FETCH_HEAD</span>
 </pre></div>
-</td></tr></table></div><p><code>git rebase</code> has an <em>interactive</em> mode that makes the process simple 🦄. Start by invoking <code>git rebase</code> with the <code>-i</code> switch and telling git what you want to rebase <em>to</em>. In our case, we want to rebase against the changes made to <code>master</code>, the branch we started with (this can be a branch, a specific commit id, or a tag):</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git rebase -i master
+<p><code>git rebase</code> has an <em>interactive</em> mode that makes the process simple 🦄. Start by invoking <code>git rebase</code> with the <code>-i</code> switch and telling git what you want to rebase <em>to</em>. In our case, we want to rebase against the changes made to <code>master</code>, the branch we started with (this can be a branch, a specific commit id, or a tag):</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git rebase -i master
 </pre></div>
-</td></tr></table></div><p>We'll be presented with a file in our editor (it will likely be <code>vim</code> on most platforms, but as discussed earlier, it's configurable and varies) that looks like this:</p>
+<p>We'll be presented with a file in our editor (it will likely be <code>vim</code> on most platforms, but as discussed earlier, it's configurable and varies) that looks like this:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1333,24 +1136,13 @@ Increased the version number
 </pre></div>
 </td></tr></table></div><p>And as before, we want to be concise. If we needed to elaborate, we could do so on the subsequent lines.</p>
 <p>After we save that file, git will tell us if the rebase was a success:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">[detached HEAD e80d483] BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.</span>
+<div class="highlight"><pre><span></span><span class="go">[detached HEAD e80d483] BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.</span>
 <span class="go"> Date: Tue May 7 11:05:01 2019 -0400</span>
 <span class="go"> 3 files changed, 23 insertions(+), 4 deletions(-)</span>
 <span class="go">Successfully rebased and updated refs/heads/bug-unknown-id.</span>
 </pre></div>
-</td></tr></table></div><p>If we run <code>git log --pretty</code> again, we can see our old commits are gone, and the last one is present:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
+<p>If we run <code>git log --pretty</code> again, we can see our old commits are gone, and the last one is present:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
 
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
@@ -1360,70 +1152,43 @@ Increased the version number
 
 <span class="go">-- snip --</span>
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>If you messed up the file causing a "recoverable" error, like say you tried to <code>squash</code> every commit and forgot to <code>pick</code> one, git will put you into an "in progress" state. Typically, this state is used when you need to fix conflicts (we'll cover that in <a class="reference external" href="{filename}/branching-git-with-pytest-3.html">part 3</a>), or do other work on the code to make a rebase complete successfully.</p>
 <p>You might get an error like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">error: cannot 'squash' without a previous commit</span>
-<span class="go">You can fix this with 'git rebase --edit-todo' and then run 'git rebase --continue'.</span>
-<span class="go">Or you can abort the rebase with 'git rebase --abort'.</span>
+<div class="highlight"><pre><span></span><span class="go"> error: cannot 'squash' without a previous commit</span>
+<span class="go"> You can fix this with 'git rebase --edit-todo' and then run 'git rebase --continue'.</span>
+<span class="go"> Or you can abort the rebase with 'git rebase --abort'.</span>
 </pre></div>
-</td></tr></table></div><p>You'll also see you have a rebase in progress when you run <code>git status</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git status
-<span class="go">interactive rebase in progress; onto 70ae1f2</span>
-<span class="go">No commands done.</span>
-<span class="go">Next commands to do (3 remaining commands):</span>
-<span class="go">   s b707557 Added test for a bug where specifying a nonexistent quote id throws a TypeError</span>
-<span class="go">   s b751360 Fixed bug where a non-existent quote id would raise a TypeError</span>
-<span class="go">  (use "git rebase --edit-todo" to view and edit)</span>
-<span class="go">You are currently editing a commit while rebasing branch 'bug-unknown-id' on '70ae1f2'.</span>
-<span class="go">  (use "git commit --amend" to amend the current commit)</span>
-<span class="go">  (use "git rebase --continue" once you are satisfied with your changes)</span>
+<p>You'll also see you have a rebase in progress when you run <code>git status</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git status
+<span class="go"> interactive rebase in progress; onto 70ae1f2</span>
+<span class="go"> No commands done.</span>
+<span class="go"> Next commands to do (3 remaining commands):</span>
+<span class="go">    s b707557 Added test for a bug where specifying a nonexistent quote id throws a TypeError</span>
+<span class="go">    s b751360 Fixed bug where a non-existent quote id would raise a TypeError</span>
+<span class="go">   (use "git rebase --edit-todo" to view and edit)</span>
+<span class="go"> You are currently editing a commit while rebasing branch 'bug-unknown-id' on '70ae1f2'.</span>
+<span class="go">   (use "git commit --amend" to amend the current commit)</span>
+<span class="go">   (use "git rebase --continue" once you are satisfied with your changes)</span>
 
-<span class="go">Untracked files:</span>
-<span class="go">  (use "git add &lt;file&gt;..." to include in what will be committed)</span>
+<span class="go"> Untracked files:</span>
+<span class="go">   (use "git add &lt;file&gt;..." to include in what will be committed)</span>
 
-<span class="go">    test.db</span>
+<span class="go">     test.db</span>
 
-<span class="go">nothing added to commit but untracked files present (use "git add" to track)</span>
+<span class="go"> nothing added to commit but untracked files present (use "git add" to track)</span>
 </pre></div>
-</td></tr></table></div><p>Again, git tells us exactly what we need to do. If you just made a typo, the best thing to do is issue <code>git rebase --abort</code>. This will put you back to the way things were before you invoked <code>git rebase -i</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git rebase --abort
+<p>Again, git tells us exactly what we need to do. If you just made a typo, the best thing to do is issue <code>git rebase --abort</code>. This will put you back to the way things were before you invoked <code>git rebase -i</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git rebase --abort
 </pre></div>
-</td></tr></table></div><p class="last">Now <code>git status</code> will look like it did before the aborted rebase.</p>
+<p class="last">Now <code>git status</code> will look like it did before the aborted rebase.</p>
 </div>
 <p>To be sure we didn't loose anything or make any mistakes during the rebase, now we should run the tests again:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp">$</span> pytest src
 <span class="go">=========================== test session starts ===========================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote</span>
+<span class="go">rootdir: [...]/random_quote</span>
 <span class="go">collected 10 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py ......                       [ 60%]</span>
@@ -1431,7 +1196,7 @@ Increased the version number
 
 <span class="go">======================== 10 passed in 0.18 seconds ========================</span>
 </pre></div>
-</td></tr></table></div><p>We should see 10 tests as before, and they should all pass.</p>
+<p>We should see 10 tests as before, and they should all pass.</p>
 </div>
 <div class="section" id="merge-master-and-publish">
 <h2 id="merge master and publish">Merge Master And Publish</h2>
@@ -1441,26 +1206,17 @@ Increased the version number
 <p>If we know someone has changed the code in <code>master</code> since we branched, we will need to incorporate those changes into our branch before we proceed.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in <a class="reference external" href="/branching-git-with-pytest-3.html">part 3</a>!.</p>
+<p class="last">We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!.</p>
 </div>
 <p>In either case, we still have to go through the same basic process.</p>
 <p>Now, we'll <code>git checkout</code> <code>master</code>, and <code>git merge</code> our branch:</p>
 <p>First the <code>git checkout</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 </pre></div>
-</td></tr></table></div><p>Then the <code>git merge</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git merge bug-unknown-id
+<p>Then the <code>git merge</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git merge bug-unknown-id
 <span class="go">Updating 370f975..94a4210</span>
 <span class="go">Fast-forward</span>
 <span class="go"> setup.py                               |  2 +-</span>
@@ -1469,18 +1225,8 @@ Increased the version number
 <span class="go"> src/random_quote/tests/test_wsgi.py    | 10 +++++++++-</span>
 <span class="go"> 4 files changed, 24 insertions(+), 5 deletions(-)</span>
 </pre></div>
-</td></tr></table></div><p><code>git status</code> shows us that we are one commit ahead of our remote repository:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<p><code>git status</code> shows us that we are one commit ahead of our remote repository:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is ahead of 'origin/master' by 1 commit.</span>
 <span class="go">  (use "git push" to publish your local commits)</span>
@@ -1492,19 +1238,11 @@ Increased the version number
 
 <span class="go">nothing added to commit but untracked files present (use "git add" to track)</span>
 </pre></div>
-</td></tr></table></div><p>To make our changes public, we just need to <code>git push</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin master
+<p>To make our changes public, we just need to <code>git push</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin master
 </pre></div>
-</td></tr></table></div><p>Now we can see our bug fix as a single commit in the log:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
+<p>Now we can see our bug fix as a single commit in the log:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
 
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; master, origin/master, origin/HEAD, bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
@@ -1514,7 +1252,7 @@ Increased the version number
 
 <span class="go">-- snip --</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="tag-the-version">
 <h2 id="tag the version">Tag The Version</h2>
 <div class="figure align-right" style="width: 40%">
@@ -1526,74 +1264,57 @@ Increased the version number
 <p class="last">There are two types of tags, "lightweight" and "annotated". The specifics aren't important for this guide, just be aware there is a difference, and know that we are using lightweight tags here.</p>
 </div>
 <p>Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log -n1
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log -n1
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; master, tag: v0.1.1, origin/master, origin/HEAD, bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
 <span class="go">Date:   Tue May 7 11:05:01 2019 -0400</span>
 
 <span class="go">    BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.</span>
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">If we wanted to tag a different commit, we just need to note the id (in this case <code>e80d48320ea1e912d8d0c137b32a21f33492e8f5</code>). We can use just the first few characters to save some typing, like <code>e80d4832</code>.</p>
 </div>
 <p>We are going to name our tag <code>v0.1.1</code>. The exact format is up to you and people you collaborate with, but it's useful to use a common prefix to help classify what the tag <em>means</em>. In this case, we're using <code>v</code> to indicate a release version. This is helpful later when your project has possibly hundreds of tags, for may reasons besides marking released versions, since we can do pattern matching when listing tags.</p>
 <p>Now for the actual tagging:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1
 </pre></div>
-</td></tr></table></div><p>To see what tags we've made, we can run <code>git tag</code> without any arguments:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag
+<p>To see what tags we've made, we can run <code>git tag</code> without any arguments:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag
 <span class="go">v0.1.1</span>
 </pre></div>
-</td></tr></table></div><p>If we wanted to limit what tags we want to see, we can use the <code>-l</code> parameter:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -l <span class="s2">"v*"</span>
+<p>If we wanted to limit what tags we want to see, we can use the <code>-l</code> parameter:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -l <span class="s2">"v*"</span>
 <span class="go">v0.1.1</span>
 </pre></div>
-</td></tr></table></div><p>We can remove a tag using the <code>-d</code> flag:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -d v0.1.1
+<p>We can remove a tag using the <code>-d</code> flag:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -d v0.1.1
 <span class="go">Deleted tag 'v0.1.1' (was e80d483)</span>
 </pre></div>
-</td></tr></table></div><div class="section" id="remote-vs-local-tags">
+<div class="section" id="remote-vs-local-tags">
 <h3>Remote Vs Local Tags</h3>
 <p>So far, we've only used <em>local</em> tags. These tags only exist in our working directory - they aren't available in our <em>remote</em>, or the repository we cloned. To make a tag remote, we use <code>git push</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1 <span class="c1"># need to remake since we deleted it above</span>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1 <span class="c1"># need to remake since we deleted it above</span>
 <span class="gp">(random_quote) $</span> git push origin v0.1.1
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new tag]         v0.1.1 -&gt; v0.1.1</span>
 </pre></div>
-</td></tr></table></div><p>This is very similar to when we ran <code>git push</code> in the last section, but git knows we are only asking to send the new tag to the repository.</p>
+<p>This is very similar to when we ran <code>git push</code> in the last section, but git knows we are only asking to send the new tag to the repository.</p>
 <p>To delete a remote tag, we need to let <code>git push</code> know with the <code>--delete</code> flag:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin --delete v0.1.1
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin --delete v0.1.1
 <span class="go"> - [deleted]         v0.1.1</span>
 </pre></div>
-</td></tr></table></div><div class="admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>At this point, if you've followed along, we've deleted our tag. It would be a good idea to recreate it. Here's a condensed version of the process:</p>
-<div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1
-<span class="gp">(random_quote) $</span> git push origin v0.1.1
-<span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
-<span class="go"> * [new tag]         v0.1.1 -&gt; v0.1.1</span>
+<div class="last"><div class="highlight"><pre><span></span><span class="go"> (random_quote) $ git tag v0.1.1</span>
+<span class="go"> (random_quote) $ git push origin v0.1.1</span>
+<span class="go"> Total 0 (delta 0), reused 0 (delta 0)</span>
+<span class="go"> To [...]/random_quote_remote</span>
+<span class="go">  * [new tag]         v0.1.1 -&gt; v0.1.1</span>
 </pre></div>
-</td></tr></table></div></div></div>
+</div></div>
 </div>
 </div>
 <div class="section" id="remote-vs-local-branches">
@@ -1601,15 +1322,12 @@ Increased the version number
 <p>As with tags, branches exist in <em>local</em> and <em>remote</em> versions. Our branch, so far, only exists in our clone of the repository. This is good, since we were able to fix our bug and merge our changes into <code>master</code> without having to show the code to anyone.</p>
 <p>However, when you are collaborating with people, you'll often need to give them access to your code. This is done by making your branch <em>remote</em>.</p>
 <p>We use <code>git push</code> to do this, just like we did with tags:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin bug-unknown-id
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new branch]      bug-unknown-id -&gt; bug-unknown-id</span>
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">It's OK to push to your remote branch frequently. There are a few git actions that are a little more difficult (<a class="reference external" href="https://stackoverflow.com/questions/22682870/git-undo-pushed-commits/22683231">reverting your changes</a>, for example) once you've pushed, but remember, you are working on a branch, and you will be rebasing later, so there's little risk and you get the benefit of being able to back up your changes to the git remote and show your progress to your collaborators.</p>
 </div>
@@ -1617,14 +1335,14 @@ Increased the version number
 <div class="section" id="conclusion-what-s-next">
 <h2 id="conclusion/what's next">Conclusion/What's Next</h2>
 <p>In this installment, we got a lot more comfortable writing tests and doing stuff with git. At this point, we're ready to do any sort of feature or bug work, and leave a clean commit log when we're done.</p>
-<p>In the <a class="reference external" href="/branching-git-with-pytest-3.html">final part</a> of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.</p>
+<p>In the <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">final part</a> of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.</p>
 </div>
 </div><!-- /.entry-content -->
 </section>
 </div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>

@@ -1,5 +1,1281 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - development process</title><link href="/" rel="alternate"></link><link href="/feeds/tag.development-process.atom" rel="self"></link><id>/</id><updated>2019-06-19T09:00:00-04:00</updated><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - development process</title><link href="/" rel="alternate"></link><link href="/feeds/tag.development-process.atom" rel="self"></link><id>/</id><updated>2019-06-28T09:00:00-04:00</updated><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</title><link href="/branching-git-with-pytest-2.html" rel="alternate"></link><published>2019-06-28T09:00:00-04:00</published><updated>2019-06-28T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-28:/branching-git-with-pytest-2.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;p&gt;&lt;strong&gt;This is part two of a three-part series.&lt;/strong&gt; This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using &lt;a class="reference external" href="https://docs.pytest.org"&gt;pytest&lt;/a&gt; and &lt;a class="reference external" href="https://git-scm.com/"&gt;git&lt;/a&gt;, via feature branches. Along the way we'll touch on application design and discuss best practices.&lt;/p&gt;
+&lt;p&gt;In this installment, we will:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Identify and fix a bug on a branch.&lt;/li&gt;
+&lt;li&gt;Build a new feature, also on a branch.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;git rebase&lt;/code&gt; to keep our change history tidy.&lt;/li&gt;
+&lt;li&gt;Use tagging to mark new versions of our application.&lt;/li&gt;
+&lt;/ul&gt;
+</summary><content type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;p&gt;&lt;strong&gt;This is part two of a three-part series.&lt;/strong&gt; This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using &lt;a class="reference external" href="https://docs.pytest.org"&gt;pytest&lt;/a&gt; and &lt;a class="reference external" href="https://git-scm.com/"&gt;git&lt;/a&gt;, via feature branches. Along the way we'll touch on application design and discuss best practices.&lt;/p&gt;
+&lt;p&gt;In this installment, we will:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Identify and fix a bug on a branch.&lt;/li&gt;
+&lt;li&gt;Build a new feature, also on a branch.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;git rebase&lt;/code&gt; to keep our change history tidy.&lt;/li&gt;
+&lt;li&gt;Use tagging to mark new versions of our application.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="section" id="setup"&gt;
+&lt;h2 id="setup"&gt;Setup&lt;/h2&gt;
+&lt;p&gt;Make sure you've got everything set up as outlined in &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here's a condensed summary:&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;Ensure you have git, python 3.7+, and venv installed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Make a bare clone of the base repository to act as our &lt;em&gt;remote&lt;/em&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Clone our remote:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git clone random_quote_remote random_quote
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Initialize the virtual environment, and install our requirements and project:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;  $&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; random_quote
+&lt;span class="gp"&gt;  $&lt;/span&gt; python -m venv .
+&lt;span class="gp"&gt;  $&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; bin/activate
+&lt;span class="go"&gt;  (random_quote) $ pip install -r requirements.txt&lt;/span&gt;
+&lt;span class="go"&gt;  (random_quote) $ pip install -e .&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Initialize the database, add some randomly generated quotes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;  (random_quote) $ python scripts/generate_quotes.py&lt;/span&gt;
+&lt;span class="go"&gt;  (random_quote) $ python&lt;/span&gt;
+&lt;span class="go"&gt;  &amp;gt;&amp;gt;&amp;gt; from random_quote import util&lt;/span&gt;
+&lt;span class="go"&gt;  &amp;gt;&amp;gt;&amp;gt; util.init("test.db")&lt;/span&gt;
+&lt;span class="go"&gt;  util.ingest("quotes.csv", "test.db")&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Add the &lt;code&gt;fix_random()&lt;/code&gt; test fixture and the extra tests for random functionality. If you had trouble, or would like to skip &lt;code&gt;scripts/state/part1&lt;/code&gt;, you can &lt;code&gt;git checkout&lt;/code&gt; the &lt;code&gt;part1&lt;/code&gt; branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;  (random_quote) $ git checkout part1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;🌈 We have branches for all of the major work done in the series:&lt;/p&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;&lt;code&gt;part1&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;part2&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt; and
+&lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;qotd&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;Developer &lt;strong&gt;A&lt;/strong&gt;'s feature from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;index-info&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;Developer &lt;strong&gt;B&lt;/strong&gt;'s bug fix from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code&gt;part3&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p class="first last"&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;,
+&lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;Feel free to &lt;code&gt;git checkout&lt;/code&gt; if you need to reset your code, or jump around.&lt;/p&gt;
+&lt;p class="last"&gt;Use &lt;code&gt;git stash&lt;/code&gt; to keep any uncomitted changes for latter. See &lt;a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing"&gt;the git documentation&lt;/a&gt; for more information. 🦄&lt;/p&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="let-s-find-a-bug"&gt;
+&lt;h2 id="let's find a bug!"&gt;Let's Find A Bug!&lt;/h2&gt;
+&lt;p&gt;Let's run the application locally so we can play with it in a browser, and identify a bug to fix.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;requirements.txt&lt;/code&gt; has installed a web server for us called &lt;a class="reference external" href="https://gunicorn.org/"&gt;Gunicorn&lt;/a&gt;. It's a pure-python server that has a lot of great production-quality features.&lt;/p&gt;
+&lt;p&gt;We'll start the &lt;code&gt;gunicorn&lt;/code&gt; server using a couple of useful command-line options, since we'll be messing with the code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="explanation section"&gt;
+&lt;h3&gt;Explanation&lt;/h3&gt;
+&lt;div class="docutils container"&gt;
+&lt;/div&gt;
+&lt;p&gt;Gunicorn is a multi-process server. This means it spawns multiple python processes and hands off web requests to them as needed, usually in a round-robin fashion. The processes are killed if they run for too long.&lt;/p&gt;
+&lt;p&gt;The first option, &lt;code&gt;-b&lt;/code&gt; sets the &lt;em&gt;bind&lt;/em&gt; port - it's an IP address followed by a port number. Numbers under 1024 are available to you without running with elevated privileges (aka "as root"). The default port is 8000. You can omit this parameter if you'd like, but it's really useful when you're running a bunch of stuff, or for deployment, so it's good practice to get used to using it.&lt;/p&gt;
+&lt;p&gt;Next option, &lt;code&gt;-t&lt;/code&gt; sets the the timeout before a worker is killed and reclaimed. We set this to a very long time so if we are doing something like running a &lt;a class="reference external" href="https://docs.python.org/3/library/pdb.html"&gt;pdb&lt;/a&gt; session, it won't kick us out before we're done.&lt;/p&gt;
+&lt;p&gt;The next, &lt;code&gt;-w&lt;/code&gt; sets the number of workers. By setting this to one, we can be sure that the &lt;code&gt;pdb&lt;/code&gt; session will block all other requests until we're done.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;The default number of workers is actually already set to 1. However, this is a good switch to know, it's good practice to test your code under a muilti-process environment, since that's often how code will be deployed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The last flag is &lt;code&gt;--reload&lt;/code&gt;. This flag tells &lt;code&gt;gunicorn&lt;/code&gt; to monitor our source files and reload the server if they change.&lt;/p&gt;
+&lt;p&gt;Finally, we specify which WSGI application to load in [module]:[callable] form. So we have a module called &lt;code&gt;wsgi.py&lt;/code&gt; and our app instance is named &lt;code&gt;app&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here's what &lt;code&gt;wsgi.py&lt;/code&gt; looks like:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random_quote&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;wsgi&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wsgi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RandomQuoteApp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"test.db"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;This module imports the &lt;code&gt;RandomQuoteApp&lt;/code&gt; class, and makes an instance of it that points to the &lt;code&gt;test.db&lt;/code&gt; we just set up.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The server will print its logs out to the console so you can see when requests happen, and if any errors pop up.&lt;/p&gt;
+&lt;p&gt;Now, open a web browser to &lt;a class="reference external" href="http://127.0.0.1:8080"&gt;http://127.0.0.1:8080&lt;/a&gt; . You should get a 404 "Not Found" response. This is expected, since we aren't covering the case of a request for the root, (aka &lt;code&gt;/&lt;/code&gt;) in our &lt;code&gt;RandomQuoteApp.__call__()&lt;/code&gt; method.&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-root-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;We can use the web API in our browser.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;I'm using a recent version of &lt;a class="reference external" href="https://www.mozilla.org/en-US/firefox/"&gt;Firefox&lt;/a&gt; for the screen shots below. It contains a built-in JSON browser if the &lt;code&gt;Content-Type&lt;/code&gt; header is set correctly. Super handy 🌈&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To get a listing of all the quotes in your database, open &lt;a class="reference external" href="http://127.0.0.1:8080/quotes"&gt;http://127.0.0.1:8080/quotes&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-all-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To get a particular quote, open &lt;a class="reference external" href="http://127.0.0.1:8080/quote/1"&gt;http://127.0.0.1:8080/quote/1&lt;/a&gt; (where 1 is the id of the quote you want):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-one-quote-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To get a random quote, open &lt;a class="reference external" href="http://127.0.0.1:8080/random"&gt;http://127.0.0.1:8080/random&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-random-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here's a handy map that shows how the various supported API endpoints invoke methods of &lt;code&gt;RandomQuoteApp&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/path-map-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;Now, lets find a bug. Try requesting a quote id that you know doesn't exist. Since we're using numeric ids, requesting an alphanumeric string, like &lt;code&gt;zzzzzz&lt;/code&gt; would be a good choice. If we click on &lt;a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz"&gt;http://127.0.0.1:8080/quote/zzzzzz&lt;/a&gt;, what happens?&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-bad-id-bug.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;Oh no, "Internal Server Error" is bad. Lets look at the log:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TODO: fix the paths so they look like what the user is probably using&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;[2019-06-09 18:31:11 -0400] [16676] [INFO] Starting gunicorn 19.9.0&lt;/span&gt;
+&lt;span class="go"&gt;[2019-06-09 18:31:11 -0400] [16676] [INFO] Listening at: http://127.0.0.1:8080 (16676)&lt;/span&gt;
+&lt;span class="go"&gt;[2019-06-09 18:31:11 -0400] [16676] [INFO] Using worker: sync&lt;/span&gt;
+&lt;span class="go"&gt;[2019-06-09 18:31:11 -0400] [16679] [INFO] Booting worker with pid: 16679&lt;/span&gt;
+&lt;span class="go"&gt;[2019-06-09 18:31:20 -0400] [16679] [ERROR] Error handling request /quote/zzzzzz&lt;/span&gt;
+&lt;span class="go"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="go"&gt;  File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 135, in handle&lt;/span&gt;
+&lt;span class="go"&gt;    self.handle_request(listener, req, client, addr)&lt;/span&gt;
+&lt;span class="go"&gt;  File "[...]/random_quote/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 176, in handle_request&lt;/span&gt;
+&lt;span class="go"&gt;    respiter = self.wsgi(environ, resp.start_response)&lt;/span&gt;
+&lt;span class="go"&gt;  File "[...]/random_quote/src/random_quote/wsgi.py", line 29, in __call__&lt;/span&gt;
+&lt;span class="go"&gt;    response = self.get(request)&lt;/span&gt;
+&lt;span class="go"&gt;  File "[...]/random_quote/src/random_quote/wsgi.py", line 54, in get&lt;/span&gt;
+&lt;span class="go"&gt;    quote = self.manager.get(match.group(1))&lt;/span&gt;
+&lt;span class="go"&gt;  File "[...]/random_quote/src/random_quote/manager.py", line 49, in get&lt;/span&gt;
+&lt;span class="go"&gt;    return dict(result)&lt;/span&gt;
+&lt;span class="go"&gt;TypeError: 'NoneType' object is not iterable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In most web servers, when an exception isn't handled by the application, it "bubbles up" to the server and triggers the return of a 500, "Internal Server Error" response.&lt;/p&gt;
+&lt;p&gt;In the log, we can see the basic status info that &lt;code&gt;gunicorn&lt;/code&gt; gives us, and then on line 6, the traceback begins. On line 17 we see the exception that caused the 500 error originated on line 49 of &lt;code&gt;src/random_quote/manager.py&lt;/code&gt;, in the &lt;code&gt;get()&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;Here's that method isolated so we can take a look at it:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;id_&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Retrieve a specific quote from the database, identified by id_.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Returns a dictionary.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"SELECT id, author, quote, created FROM quotes WHERE id = ?"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id_&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;When the method was written, the author (😎) used the fact that the &lt;code&gt;sqlite3.Row&lt;/code&gt; class can be transformed into a dictionary by passing it to &lt;code&gt;dict()&lt;/code&gt;. However, they  missed the fact that the &lt;code&gt;fetchone()&lt;/code&gt; method (line 47) returns &lt;code&gt;None&lt;/code&gt; when no rows are returned.&lt;/p&gt;
+&lt;p&gt;Passing &lt;code&gt;None&lt;/code&gt; to &lt;code&gt;dict()&lt;/code&gt; on line 49 raises a &lt;code&gt;TypeError&lt;/code&gt;, as we saw in the traceback.&lt;/p&gt;
+&lt;p&gt;Great, so now we've identified the bug. Let's fix it!&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;If you want to quit &lt;code&gt;gunicorn&lt;/code&gt;, type Ctrl-C (hold the "control" or "ctl" key and press "c").&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fix-the-bug-an-overview"&gt;
+&lt;h2 id="fix the bug: an overview"&gt;Fix The Bug: An Overview&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;In brief, we need to:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Create and check out a branch. (&lt;code&gt;git branch&lt;/code&gt;, &lt;code&gt;git checkout&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Write a &lt;em&gt;failing&lt;/em&gt; test that replicates the bug.&lt;/li&gt;
+&lt;li&gt;Fix the bug.&lt;/li&gt;
+&lt;li&gt;Increase the version number.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git commit&lt;/code&gt; our changes.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git fetch&lt;/code&gt; any changes to master.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git rebase&lt;/code&gt; against &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git checkout master&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git merge&lt;/code&gt; to our branch.&lt;/li&gt;
+&lt;li&gt;Fix any conflicts.&lt;/li&gt;
+&lt;li&gt;Finish the merge (&lt;code&gt;git add&lt;/code&gt;, &lt;code&gt;git commit&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Run the tests.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git tag&lt;/code&gt; the version.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git push&lt;/code&gt; changes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="create-a-branch"&gt;
+&lt;h2 id="create a branch"&gt;Create A Branch&lt;/h2&gt;
+&lt;p&gt;Let's list the existing branches first:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;span class="go"&gt;* master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-a-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;We see the &lt;code&gt;master&lt;/code&gt; branch all by itself. &lt;code&gt;master&lt;/code&gt; is the default name for the first branch in a repository. We have &lt;em&gt;checked out&lt;/em&gt; the &lt;code&gt;master&lt;/code&gt; branch, as indicated by the asterisk (*).&lt;/p&gt;
+&lt;p&gt;We need a good name for our branch. The name should be obvious and specific to this bug. If you use an issue tracking system, the issue number is a good idea. Since we aren't using an issue tracker for this guide, lets do something descriptive. We'll call our bug branch &lt;code&gt;bug-unknown-id&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here's how it is created:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch bug-unknown-id
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Running &lt;code&gt;git branch --list&lt;/code&gt; again, we can see our branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;span class="go"&gt;bug-unknown-id&lt;/span&gt;
+&lt;span class="go"&gt;* master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We're still "on" the &lt;code&gt;master&lt;/code&gt; branch. We need to change branches, or &lt;code&gt;git checkout&lt;/code&gt; our new branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git checkout bug-unknown-id
+&lt;span class="go"&gt;Switched to branch 'bug-unknown-id'&lt;/span&gt;
+&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;span class="go"&gt;* bug-unknown-id&lt;/span&gt;
+&lt;span class="go"&gt;master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, when we call &lt;code&gt;git branch --list&lt;/code&gt; again, our branch has the asterisk.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;You can save a step by passing the &lt;code&gt;-b&lt;/code&gt; switch to &lt;code&gt;git checkout&lt;/code&gt;, creating the branch before checking it out:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git checkout -b some-other-branch
+&lt;span class="go"&gt; Switched to a new branch 'some-other-branch'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can see it's been created &lt;em&gt;and&lt;/em&gt; checked out:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git branch --list
+&lt;span class="go"&gt; bug-unknown-id&lt;/span&gt;
+&lt;span class="go"&gt; master&lt;/span&gt;
+&lt;span class="go"&gt; * some-other-branch&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we want to go back to another branch, we just need to &lt;code&gt;git checkout&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git checkout bug-unknown-id
+&lt;span class="go"&gt; Switched to branch 'bug-unknown-id'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can see it's changed again using &lt;code&gt;git branch --list&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git branch --list
+&lt;span class="go"&gt; * bug-unknown-id&lt;/span&gt;
+&lt;span class="go"&gt; master&lt;/span&gt;
+&lt;span class="go"&gt; some-other-branch&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="replicate-the-bug-in-a-test"&gt;
+&lt;h2 id="replicate the bug in a test"&gt;Replicate The Bug In A Test&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-b-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;We want to add a test that will fail until the bug is fixed. This way we can prevent &lt;em&gt;regressions&lt;/em&gt;, or situations where the bug inadvertently comes up later. If it fails now, and we fix it, and it passes, then test case will fail if the bug ever shows up again.&lt;/p&gt;
+&lt;div class="section" id="more-than-a-bug"&gt;
+&lt;h3&gt;More Than A Bug&lt;/h3&gt;
+&lt;p&gt;One thing that sets this particular bug apart from the sort you might run into, is that this bug represents a &lt;em&gt;use case&lt;/em&gt; we missed. Like the lack of testing for random quotes we fixed in our first commit, it's not really a bug so much as an oversight.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;If this &lt;em&gt;was&lt;/em&gt; bug-related, as opposed to an oversight, we could chose to use a name that incorporated the name of the bug or the bug's identifier in our bug tracking system.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Before we can proceed, we have to make a decision. We've identified an error state when we try to get an quote that doesn't exist in the database. But what &lt;em&gt;should&lt;/em&gt; happen if there &lt;em&gt;isn't&lt;/em&gt; an error?&lt;/p&gt;
+&lt;p&gt;There are a few possibilities:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;We can raise some kind of &lt;a class="reference external" href="https://docs.python.org/3/tutorial/errors.html"&gt;exception&lt;/a&gt;, preferably something custom that alerts the developer about what happened, with name like &lt;code&gt;NoQuoteFound&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We can return a &lt;em&gt;token&lt;/em&gt; (or &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Sentinel_value"&gt;sentinel value&lt;/a&gt;) of some kind (&lt;code&gt;None&lt;/code&gt;, like the sqlite3 DBAPI does, or &lt;code&gt;False&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;We can return an empty dictionary (&lt;code&gt;{}&lt;/code&gt;), so the data type is the same, but it won't have the expected keys (it can also act as a token, since &lt;code&gt;bool({}) == False&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;We can return a "default" object with values indicative of missing data. For example, the &lt;code&gt;id&lt;/code&gt; could be 0, the author &lt;code&gt;Unknown&lt;/code&gt; and the &lt;code&gt;quote&lt;/code&gt; could be &lt;code&gt;"There is no quote, only Zuul"&lt;/code&gt;. The creation date could be long in the past. This way any templates or client code would still "work" in this situation, but it would be obvious something was amiss.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Which one is best for your project is a technical decision for you and your team to make. There is a lot to consider with each option (and probably a few other options to consider!). To keep us out of the weeds in this guide, we'll arbitrarily choose the "token", option #2. 😎&lt;/p&gt;
+&lt;p&gt;As such, we'll have &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt; return &lt;code&gt;None&lt;/code&gt;, instead of another common sentinel, like &lt;code&gt;False&lt;/code&gt;, so we're explicitly saying "there is no quote with that id" as opposed to "the request you made is not valid". The distinction is subtle here, but it could be more significant in other cases.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="writing-a-failing-test"&gt;
+&lt;h2 id="writing a failing test"&gt;Writing A Failing Test&lt;/h2&gt;
+&lt;p&gt;We are trying to replicate passing an unknown quote ID to &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt;. We can use the "normal" test from &lt;code&gt;src/random_quote/tests/test_manager.py&lt;/code&gt; as a template:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;15
+16
+17
+18
+19
+20
+21&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_get_quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Get a quote by id&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"quote"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'Generic quote 2'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;This test calls the &lt;code&gt;get()&lt;/code&gt; method with a known id, and checks that the correct text was returned.&lt;/p&gt;
+&lt;p&gt;We'll name our new test case &lt;code&gt;test_unknown_id&lt;/code&gt;. Like the branch name, it should be meaningful, and unique. By default (and convention), a test case has to start with the string &lt;code&gt;test_&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Our &lt;code&gt;test_unknown_id()&lt;/code&gt; test case will fail, because it will raise a &lt;code&gt;TypeError&lt;/code&gt;. We'll also test that &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt; returns &lt;code&gt;None&lt;/code&gt; as expected (once we've fixed it).&lt;/p&gt;
+&lt;p&gt;Let's put this test case at the end of &lt;code&gt;src/random_quote/tests/test_manager.py&lt;/code&gt;, after the &lt;code&gt;test_random_quote()&lt;/code&gt; case):&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;67
+68
+69
+70
+71
+72
+73&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_unknown_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Try to get a quote by an unknown id.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"zzzzz"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Running the tests, we can now see there are 8 tests now, and one fails:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src -v
+&lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
+&lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 9 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_add_quote PASSED             [ 11%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_get_quote PASSED             [ 22%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_remove_quote PASSED          [ 33%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_all PASSED                   [ 44%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_random_quote PASSED          [ 55%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_unknown_id FAILED            [ 66%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_get_quote PASSED                [ 77%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_all_quotes PASSED               [ 88%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_random_quote PASSED             [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;=================================== FAILURES ====================================&lt;/span&gt;
+&lt;span class="go"&gt;________________________________ test_unknown_id ________________________________&lt;/span&gt;
+
+&lt;span class="go"&gt;preconfigured_manager = &amp;lt;random_quote.manager.RandomQuoteManager object at 0x104572b00&amp;gt;&lt;/span&gt;
+
+&lt;span class="go"&gt;    def test_unknown_id(preconfigured_manager):&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="go"&gt;        Try to get a quote by an unknown id.&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;       &lt;span class="nv"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; preconfigured_manager.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"zzzzz"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py:71:&lt;/span&gt;
+&lt;span class="go"&gt;_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _&lt;/span&gt;
+
+&lt;span class="go"&gt;self = &amp;lt;random_quote.manager.RandomQuoteManager object at 0x104572b00&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;id_ = 'zzzzz'&lt;/span&gt;
+
+&lt;span class="go"&gt;    def get(self, id_):&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="go"&gt;        Retrieve a specific quote from the database, identified by id_.&lt;/span&gt;
+
+&lt;span class="go"&gt;        Returns a dictionary.&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="go"&gt;        c = self.conn.cursor()&lt;/span&gt;
+
+&lt;span class="go"&gt;        c.execute("SELECT id, author, quote, created FROM quotes WHERE id = ?", (id_,))&lt;/span&gt;
+
+&lt;span class="go"&gt;        result = c.fetchone()&lt;/span&gt;
+
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;       &lt;span class="k"&gt;return&lt;/span&gt; dict&lt;span class="o"&gt;(&lt;/span&gt;result&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;E       TypeError: 'NoneType' object is not iterable&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/manager.py:49: TypeError&lt;/span&gt;
+&lt;span class="go"&gt;====================== 1 failed, 8 passed in 11.15 seconds ======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since this test case raises a &lt;code&gt;TypeError&lt;/code&gt;, it successfully replicates the bug.&lt;/p&gt;
+&lt;p&gt;At this point, it's not a bad idea to save our work, so lets look at our changes, and commit them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="commit-the-failing-test"&gt;
+&lt;h2 id="commit the failing test"&gt;Commit The Failing Test&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-b-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;This is identical to our previous commit process, but lets go through it again.&lt;/p&gt;
+&lt;p&gt;First, lets check what changed using &lt;code&gt;git status&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;span class="hll"&gt;&lt;span class="go"&gt;On branch bug-unknown-id&lt;/span&gt;
+&lt;/span&gt;&lt;span class="go"&gt;Changes not staged for commit:&lt;/span&gt;
+&lt;span class="go"&gt;  (use "git add &amp;lt;file&amp;gt;..." to update what will be committed)&lt;/span&gt;
+&lt;span class="go"&gt;  (use "git checkout -- &amp;lt;file&amp;gt;..." to discard changes in working directory)&lt;/span&gt;
+
+&lt;span class="go"&gt;    modified:   src/random_quote/tests/test_manager.py&lt;/span&gt;
+
+&lt;span class="go"&gt;Untracked files:&lt;/span&gt;
+&lt;span class="go"&gt;  (use "git add &amp;lt;file&amp;gt;..." to include in what will be committed)&lt;/span&gt;
+
+&lt;span class="go"&gt;    quotes.csv&lt;/span&gt;
+&lt;span class="go"&gt;    test.db&lt;/span&gt;
+&lt;span class="go"&gt;    test_example.py&lt;/span&gt;
+
+&lt;span class="go"&gt;no changes added to commit (use "git add" and/or "git commit -a")&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that git tells us which branch we're on. It's a good idea to get in the habit of looking at that line of output.&lt;/p&gt;
+&lt;p&gt;Next, we'll &lt;code&gt;git commit&lt;/code&gt; our changes, using the &lt;code&gt;-m&lt;/code&gt; parameter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added failing test an unknown id is passed to RandomQuoteManager.get()"&lt;/span&gt;
+&lt;span class="go"&gt;[bug-unknown-id 34afe34] Added failing test an unknown id is passed to RandomQuoteManager.get()&lt;/span&gt;
+&lt;span class="go"&gt; 1 file changed, 9 insertions(+), 1 deletion(-)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="actually-fix-the-bug"&gt;
+&lt;h2 id="actually fix the bug"&gt;Actually Fix The Bug&lt;/h2&gt;
+&lt;p&gt;Recall that earlier, we decided that the &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt; method return &lt;code&gt;None&lt;/code&gt; as a &lt;em&gt;sentinel&lt;/em&gt; if a non-existent id is passed.&lt;/p&gt;
+&lt;p&gt;We can fix this in &lt;code&gt;src/random_quote/manager.py&lt;/code&gt; by checking the return value of &lt;code&gt;c.fetchone()&lt;/code&gt; before passing it to &lt;code&gt;dict()&lt;/code&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;id_&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Retrieve a specific quote from the database, identified by id_.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Returns a dictionary.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"SELECT id, author, quote, created FROM quotes WHERE id = ?"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id_&lt;/span&gt;&lt;span class="p"&gt;,))&lt;/span&gt;
+
+&lt;span class="hll"&gt;    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;On lines 47 to 52, we've stashed the result from the database cursor into a temporary variable &lt;code&gt;result&lt;/code&gt;, and then only feed it to &lt;code&gt;dict()&lt;/code&gt; before returning if it's not &lt;code&gt;None&lt;/code&gt;. If it is &lt;code&gt;None&lt;/code&gt;, we return &lt;code&gt;None&lt;/code&gt;. This way the user can do a simple check like this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id_i_want&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"HEY WE GOT ONE!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"QUOTE {id_i_want} NOT FOUND!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And open up &lt;a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz"&gt;http://127.0.0.1:8080/quote/zzzzzz&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="figure align-center" style="width: 80%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/screen-cap-bad-id-first-pass.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;At this point, we aren't getting the error anymore, but we aren't necessarily getting a useful result, since we're seeing the JSON serialization of &lt;code&gt;None&lt;/code&gt;, the special Javascript value &lt;code&gt;null&lt;/code&gt;. We'll deal with this issue in a minute. But our bug is now fixed.&lt;/p&gt;
+&lt;p&gt;Next, lets re-run our tests:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v src
+&lt;span class="go"&gt;============================= test session starts ==============================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
+&lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 9 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 11%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_get_quote PASSED            [ 22%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_remove_quote PASSED         [ 33%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_all PASSED                  [ 44%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_random_quote PASSED         [ 55%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_unknown_id PASSED           [ 66%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_get_quote PASSED               [ 77%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_all_quotes PASSED              [ 88%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_random_quote PASSED            [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;=========================== 9 passed in 0.23 seconds ===========================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This time, lets take a deeper view of what has changed, using &lt;code&gt;git diff&lt;/code&gt;.&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(random_quote) $ git diff
+diff --git a/src/random_quote/manager.py b/src/random_quote/manager.py
+index 762ef05..d9da9cf 100644
+--- a/src/random_quote/manager.py
++++ b/src/random_quote/manager.py
+@@ -46,7 +46,11 @@ class RandomQuoteManager:
+
+         result = c.fetchone()
+
+-        return dict(result)
++        if result is None:
++            return None
++        else:
++            return dict(result)
++
+
+     def remove(self, id_):
+         """
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;The plus signs show what lines we added, and the minus signs show which were removed.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;You can use &lt;code&gt;git difftool&lt;/code&gt; to view diffs in a graphical diff viewer. The &lt;a class="reference external" href="https://git-scm.com/docs/git-difftool"&gt;git-difftool docuentation&lt;/a&gt; has usage details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Now since we like the changes that were made, we can make a commit:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Fixed bug where a non-existent quote id would raise a TypeError"&lt;/span&gt;
+&lt;span class="go"&gt;[bug-unknown-id d9d2408] Fixed bug where a non-existent quote id would raise a TypeError&lt;/span&gt;
+&lt;span class="go"&gt;1 file changed, 6 insertions(+), 1 deletion(-)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="we-re-not-quite-done-yet"&gt;
+&lt;h2 id="we're not quite done yet"&gt;We're Not Quite Done Yet&lt;/h2&gt;
+&lt;p&gt;As mentioned in the last section, making a web request for &lt;code&gt;/quote/zzzzz&lt;/code&gt; no longer raises an exception, but it doesn't necessarily act in a way that's consistent with web standards.&lt;/p&gt;
+&lt;p&gt;In web APIs, it's best practice to use the &lt;a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"&gt;HTTP status codes&lt;/a&gt; to tell a client what you can about how they messed up. In this case, we're returning an empty value, which &lt;em&gt;sort of&lt;/em&gt; tells them they messed up, but what we &lt;em&gt;really&lt;/em&gt; want to tell the client is, "hey, you asked for a quote that doesn't exist".&lt;/p&gt;
+&lt;p&gt;The best status code for this situation is the &lt;em&gt;404 Not Found&lt;/em&gt; code. Mozila describes it as, "The server can not find requested resource", which is exactly what's happened here.&lt;/p&gt;
+&lt;p&gt;So we need to get our &lt;code&gt;RandomQuoteApp&lt;/code&gt; to detect when &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt; returns &lt;code&gt;None&lt;/code&gt;, and send the correct HTTP status in the response.&lt;/p&gt;
+&lt;p&gt;As before, lets write the test first, expecting it to fail.&lt;/p&gt;
+&lt;p&gt;Again, we can look to a similar test case, this time in &lt;code&gt;src/random_quote/tests/test_wsgi.py&lt;/code&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_get_quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Make a GET request for a single pre-existing quote.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/quote/1"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'200 OK'&lt;/span&gt;
+
+    &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"rowid"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"quote"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'Generic quote 1'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;What we want to do in our new case, is request a bad id, and test for a 404 response, like we got in our browser earlier.&lt;/p&gt;
+&lt;p&gt;We can test this by adding the following test case to the end of &lt;code&gt;src/random_quote/tests/test_wsgi.py&lt;/code&gt; (after &lt;code&gt;test_random_quote()&lt;/code&gt;):&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;59
+60
+61
+62
+63
+64
+65&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_get_quote_unknown_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Make a GET request for a single pre-existing quote, but the id doesn't exist.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/quote/zzzzzz"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;404&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'404 Not Found'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;code&gt;WebTest.TestApp&lt;/code&gt;, returned by our fixture, does a lot of checking for us. Normally, it will even raise an exception when a non-"200 OK" status is returned. So in order to check for a specific status, we need to let the &lt;code&gt;TestApp.get()&lt;/code&gt; method know we are expecting a different response code. This is done with the &lt;code&gt;status&lt;/code&gt; keyword parameter (it can be a specific number, or a pattern to match, like "4??").&lt;/p&gt;
+&lt;p&gt;When the tests run, we see the error, this time, it's raised by &lt;code&gt;WebTest.Testapp&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v src
+&lt;span class="go"&gt;============================= test session starts ==============================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
+&lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 10 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_add_quote PASSED            [ 10%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_get_quote PASSED            [ 20%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_remove_quote PASSED         [ 30%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_all PASSED                  [ 40%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_random_quote PASSED         [ 50%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py::test_unknown_id PASSED           [ 60%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_get_quote PASSED               [ 70%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_all_quotes PASSED              [ 80%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_random_quote PASSED            [ 90%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py::test_get_quote_unknown_id FAILED    [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;=================================== FAILURES ===================================&lt;/span&gt;
+&lt;span class="go"&gt;__________________________ test_get_quote_unknown_id ___________________________&lt;/span&gt;
+
+&lt;span class="go"&gt;preconfigured_wsgi_app = &amp;lt;webtest.app.TestApp object at 0x102fda6a0&amp;gt;&lt;/span&gt;
+
+&lt;span class="go"&gt;    def test_get_quote_unknown_id(preconfigured_wsgi_app):&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="go"&gt;        Make a GET request for a single pre-existing quote, but the id doesn't exist.&lt;/span&gt;
+&lt;span class="go"&gt;        """&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;       &lt;span class="nv"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; preconfigured_wsgi_app.get&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/quote/zzzzzz"&lt;/span&gt;, &lt;span class="nv"&gt;status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;404&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py:63:&lt;/span&gt;
+&lt;span class="go"&gt;_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _&lt;/span&gt;
+&lt;span class="go"&gt;lib/python3.7/site-packages/webtest/app.py:335: in get&lt;/span&gt;
+&lt;span class="go"&gt;    expect_errors=expect_errors)&lt;/span&gt;
+&lt;span class="go"&gt;lib/python3.7/site-packages/webtest/app.py:654: in do_request&lt;/span&gt;
+&lt;span class="go"&gt;    self._check_status(status, res)&lt;/span&gt;
+&lt;span class="go"&gt;_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _&lt;/span&gt;
+
+&lt;span class="go"&gt;self = &amp;lt;webtest.app.TestApp object at 0x102fda6a0&amp;gt;, status = 404&lt;/span&gt;
+&lt;span class="go"&gt;res = &amp;lt;200 OK application/json body=b'null'&amp;gt;&lt;/span&gt;
+
+&lt;span class="go"&gt;    def _check_status(self, status, res):&lt;/span&gt;
+&lt;span class="go"&gt;        if status == '*':&lt;/span&gt;
+&lt;span class="go"&gt;            return&lt;/span&gt;
+&lt;span class="go"&gt;        res_status = res.status&lt;/span&gt;
+&lt;span class="go"&gt;        if (isinstance(status, string_types) and '*' in status):&lt;/span&gt;
+&lt;span class="go"&gt;            if re.match(fnmatch.translate(status), res_status, re.I):&lt;/span&gt;
+&lt;span class="go"&gt;                return&lt;/span&gt;
+&lt;span class="go"&gt;        if isinstance(status, string_types):&lt;/span&gt;
+&lt;span class="go"&gt;            if status == res_status:&lt;/span&gt;
+&lt;span class="go"&gt;                return&lt;/span&gt;
+&lt;span class="go"&gt;        if isinstance(status, (list, tuple)):&lt;/span&gt;
+&lt;span class="go"&gt;            if res.status_int not in status:&lt;/span&gt;
+&lt;span class="go"&gt;                raise AppError(&lt;/span&gt;
+&lt;span class="go"&gt;                    "Bad response: %s (not one of %s for %s)\n%s",&lt;/span&gt;
+&lt;span class="go"&gt;                    res_status, ', '.join(map(str, status)),&lt;/span&gt;
+&lt;span class="go"&gt;                    res.request.url, res)&lt;/span&gt;
+&lt;span class="go"&gt;            return&lt;/span&gt;
+&lt;span class="go"&gt;        if status is None:&lt;/span&gt;
+&lt;span class="go"&gt;            if res.status_int &amp;gt;= 200 and res.status_int &amp;lt; 400:&lt;/span&gt;
+&lt;span class="go"&gt;                return&lt;/span&gt;
+&lt;span class="go"&gt;            raise AppError(&lt;/span&gt;
+&lt;span class="go"&gt;                "Bad response: %s (not 200 OK or 3xx redirect for %s)\n%s",&lt;/span&gt;
+&lt;span class="go"&gt;                res_status, res.request.url,&lt;/span&gt;
+&lt;span class="go"&gt;                res)&lt;/span&gt;
+&lt;span class="go"&gt;        if status != res.status_int:&lt;/span&gt;
+&lt;span class="go"&gt;            raise AppError(&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;               &lt;span class="s2"&gt;"Bad response: %s (not %s)\n%s"&lt;/span&gt;, res_status, status, res&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;E           webtest.app.AppError: Bad response: 200 OK (not 404)&lt;/span&gt;
+&lt;span class="go"&gt;E           b'null'&lt;/span&gt;
+
+&lt;span class="go"&gt;lib/python3.7/site-packages/webtest/app.py:689: AppError&lt;/span&gt;
+&lt;span class="go"&gt;====================== 1 failed, 9 passed in 0.49 seconds ======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, let's make this test pass, by getting the &lt;code&gt;RandomQuoteApp.get()&lt;/code&gt; method to return a 404 when &lt;code&gt;None&lt;/code&gt; is returned by &lt;code&gt;RandomQuoteManager.get()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;webob&lt;/code&gt; comes with a few handy helper classes and 'canned' responses to make things like returning a 404 error code easy. In particular, it provides &lt;code&gt;webob.exc.HTTPNotFound&lt;/code&gt;. It is a hybrid class that is a &lt;code&gt;webob.Response&lt;/code&gt; object, but also a python &lt;code&gt;Exception&lt;/code&gt;. It can be raised by part of your application, &lt;em&gt;caught&lt;/em&gt; and returned to the user like any other &lt;code&gt;webob.Response&lt;/code&gt; to let them know something went wrong.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;We make use of this in the &lt;code&gt;RandomQuoteApp.__call__()&lt;/code&gt; method, in the code we use to route requests to various methods and objects:&lt;/p&gt;
+&lt;div class="last"&gt;&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    Invoke the WSGI application - routing.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Based on the request path, invokes the appropriate method, passing a&lt;/span&gt;
+&lt;span class="sd"&gt;    pre-constructed webob.Request object.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Expects each method to return a webob.Response object, which will be&lt;/span&gt;
+&lt;span class="sd"&gt;    invoked and returned as per the WSGI protocol.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;request&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"/quotes"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/quote"&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"/random"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;HTTPNotFound&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;HTTPError&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;error_response&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;error_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;With the help of &lt;code&gt;webob.exc.HTTPNotFound&lt;/code&gt;, we'll fix &lt;code&gt;RandomQuoteApp.get()&lt;/code&gt;. Add the two highlighted lines to &lt;code&gt;src/random_quote/wsgi.py&lt;/code&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;        Return a webob.Response object with a JSON payload containing the&lt;/span&gt;
+&lt;span class="sd"&gt;        requested quote. The quote id is specified as the last part of the&lt;/span&gt;
+&lt;span class="sd"&gt;        request path:&lt;/span&gt;
+
+&lt;span class="sd"&gt;            /quote/12345&lt;/span&gt;
+
+
+&lt;span class="sd"&gt;        """&lt;/span&gt;
+        &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/([^/]+)$"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;HTTPNotFound&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;group&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="hll"&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;HTTPNotFound&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/span&gt;
+        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;
+
+        &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"application/json"&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now, when we run the tests again, the &lt;code&gt;test_get_quote_unknown_id()&lt;/code&gt; case passes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 10 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py ......                             [ 60%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py ....                                  [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;=========================== 10 passed in 0.18 seconds ===========================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The last thing to do is to commit these changes. We'll leave that as an exercise for the reader. Remember to &lt;code&gt;git status&lt;/code&gt;, and feel free to use the &lt;code&gt;-m&lt;/code&gt; flag to &lt;code&gt;git commit&lt;/code&gt; if you'd like.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="version-bump"&gt;
+&lt;h2 id="version bump"&gt;Version Bump&lt;/h2&gt;
+&lt;p&gt;Our project uses &lt;a class="reference external" href="https://semver.org/"&gt;semantic versioning&lt;/a&gt;. The 'semver' website has all of the specifics, but the gist is that each version of the software is represented by a number, broken into three parts (to quote the spec):&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;&lt;strong&gt;MAJOR&lt;/strong&gt; version when you make incompatible API changes,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MINOR&lt;/strong&gt; version when you add functionality in a backwards-compatible manner, and&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PATCH&lt;/strong&gt; version when you make backwards-compatible bug fixes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each version is incremented as corresponding changes are made. Versions start at zero.&lt;/p&gt;
+&lt;p&gt;The goal is to make it easy to compare versions as the code evolves. It's also easier to make certain judgments about the code's stability and compatibility.&lt;/p&gt;
+&lt;p&gt;For example, if you built your application against version &lt;strong&gt;1.0.0&lt;/strong&gt; of a library, you can assume that your application will continue to work with version &lt;strong&gt;1.0.4&lt;/strong&gt; (the fourth bug fix), as well as &lt;strong&gt;1.2.0&lt;/strong&gt; (the second time backwards-compatible features were added), and &lt;strong&gt;1.99.223&lt;/strong&gt; (99th feature release, 223rd bug fix - &lt;em&gt;yikes&lt;/em&gt;). But, you can expect your code to need modifications if you want to upgrade to version &lt;strong&gt;2.0.0&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Since our project is pre-release, but we're confident the API will stay stable, the project is initially versioned &lt;strong&gt;0.1.0&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Since our application is being distributed as a python egg, we're setting the version using the &lt;code&gt;version&lt;/code&gt; argument to &lt;code&gt;setup()&lt;/code&gt; in our &lt;code&gt;setup.py&lt;/code&gt;:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;setuptools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;find_packages&lt;/span&gt;
+
+&lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"random_quote"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="hll"&gt;    &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"0.1.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;    &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'random_quote'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="n"&gt;package_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'src'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="n"&gt;install_requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'webob'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;You can also add &lt;strong&gt;EXTENSIONS&lt;/strong&gt; to the version when needed, like &lt;strong&gt;0.1.0-alpha&lt;/strong&gt;. These extensions are useful for special releases, like handing off a pre-release version to testers or early adopters, or if you make a special variant of a release for a specific client.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;There are many ways to version software, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Software_versioning"&gt;semantic versioning isn't the only one&lt;/a&gt;. We've used it here because it's pretty common, and has some benefits. In particular, its very compatible with python packaging.&lt;/p&gt;
+&lt;p class="last"&gt;Before you adopt it wholesale in your projects, be sure to read up on its faults and look at other perspectives. &lt;a class="reference external" href="https://surfingthe.cloud/semantic-versioning-anti-pattern/"&gt;This post by Brandon Gillespie&lt;/a&gt; and the &lt;a class="reference external" href="https://news.ycombinator.com/item?id=13378637"&gt;Hacker News discussion about it&lt;/a&gt; are great examples of what to look for.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Now that we have a basic understanding of semantic versioning, it may be apparent what we need to do, now that we've fixed our first bug: &lt;strong&gt;we need to update the version number&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Since this is the first bug, we just need to increment the last number. As such, our new version is &lt;strong&gt;0.1.1&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;We'll leave making this change as an exercise for the user.&lt;/p&gt;
+&lt;p&gt;After the version change, be sure to re-install the application, using &lt;code&gt;pip&lt;/code&gt;, as we did in the initial setup:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pip install -e .
+&lt;span class="go"&gt;Obtaining file://[...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;Requirement already satisfied: webob in ./lib/python3.7/site-packages (from random-quote==0.1.1) (1.8.5)&lt;/span&gt;
+&lt;span class="go"&gt;Installing collected packages: random-quote&lt;/span&gt;
+&lt;span class="go"&gt;  Found existing installation: random-quote 0.1.0&lt;/span&gt;
+&lt;span class="go"&gt;    Uninstalling random-quote-0.1.0:&lt;/span&gt;
+&lt;span class="go"&gt;      Successfully uninstalled random-quote-0.1.0&lt;/span&gt;
+&lt;span class="go"&gt;  Running setup.py develop for random-quote&lt;/span&gt;
+&lt;span class="go"&gt;Successfully installed random-quote&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And re-run the tests to make sure everything is still working:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;span class="go"&gt;==================================== test session starts =====================================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 10 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py ......                                          [ 60%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py ....                                               [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;================================= 10 passed in 0.18 seconds ==================================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, remember to use &lt;code&gt;git status&lt;/code&gt; and &lt;code&gt;git diff&lt;/code&gt; to make sure the changes are correct before committing, and be sure to write a useful log message.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fetch-and-rebase"&gt;
+&lt;h2 id="fetch and rebase"&gt;Fetch and Rebase&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-c-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;We now have a backlog containing a handful of changes, all regarding this bug:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline
+
+&lt;span class="go"&gt;5b81947745f2c184619a9d7c1a99546d9aa01662 (HEAD -&amp;gt; bug-unknown-id) Increased the version number&lt;/span&gt;
+&lt;span class="go"&gt;640c4e2431776e9b6c252bef1c7509fee1557c79 Added test for requesting a non-existant quote id in the HTTP API&lt;/span&gt;
+&lt;span class="go"&gt;615a72a651293607e5429fc1b5bac1486cc2b486 Fixed bug where a non-existent quote id would raise a TypeError&lt;/span&gt;
+&lt;span class="go"&gt;a2806131faa19444964868234ec02123d47f73ef Added failing test an unknown id is passed to RandomQuoteManager.get()&lt;/span&gt;
+
+&lt;span class="go"&gt;-- snip --&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In order to make our changes part of the &lt;code&gt;master&lt;/code&gt; branch, we need to incorporate them into the changes in that branch. This can be done with &lt;code&gt;git merge&lt;/code&gt;, but all of our commits will be mixed into the commit log. This is bad.  Why? There are a handful of reasons:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;When someone looks at the log for the &lt;code&gt;master&lt;/code&gt; branch, it will be messy.&lt;/li&gt;
+&lt;li&gt;Trying to understand everything that was changed across many commits is difficult.&lt;/li&gt;
+&lt;li&gt;If we messed up, and our bug fix needed to be reverted, it's hard to pinpoint exactly what we did.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We can address all of these issues with &lt;code&gt;git rebase&lt;/code&gt;. It also adds "piece of mind", allowing us to commit frequently with poorly written commit messages without worrying that they will pollute the main log. 😎&lt;/p&gt;
+&lt;p&gt;Rebase allows us to do a lot, but the basic purpose is to alter commits, including taking existing commits and condensing them down, as we're going to do here.&lt;/p&gt;
+&lt;div class="admonition warning"&gt;
+&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git rebase&lt;/code&gt; is a destructive action. &lt;strong&gt;It cannot be undone&lt;/strong&gt; (well, &lt;a class="reference external" href="https://stackoverflow.com/questions/134882/undoing-a-git-rebase"&gt;it can&lt;/a&gt;, but it's not easy). It's a very intuitive tool and something you'll get comfortable with quickly. Just be careful.&lt;/p&gt;
+&lt;p&gt;There are several ways to protect yourself. The simplest is to just duplicate your checkout as a backup before you do your rebase:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt; (random_quote) $ cd ..&lt;/span&gt;
+&lt;span class="go"&gt; (random_quote) $ cp -r random_quote random_quote_before_rebase_because_im_scared&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p class="last"&gt;Just be sure to delete it as soon as you're finished. Note that your virtual environment might not function. There are hard-coded paths in some of the environment files. To use the environment, you'll need to clean out the virtual environment directories/files (&lt;code&gt;lib&lt;/code&gt;, &lt;code&gt;bin&lt;/code&gt;, &lt;code&gt;include&lt;/code&gt;, &lt;code&gt;pyvenv.cfg&lt;/code&gt;) and re-run &lt;code&gt;python -m venv .&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;First, we'll use &lt;code&gt;git fetch&lt;/code&gt; to retrieve the latest version of the &lt;code&gt;master&lt;/code&gt; branch:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git fetch origin master
+&lt;span class="go"&gt;From [...]/random_quote_remote&lt;/span&gt;
+&lt;span class="go"&gt; * branch            master     -&amp;gt; FETCH_HEAD&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;git rebase&lt;/code&gt; has an &lt;em&gt;interactive&lt;/em&gt; mode that makes the process simple 🦄. Start by invoking &lt;code&gt;git rebase&lt;/code&gt; with the &lt;code&gt;-i&lt;/code&gt; switch and telling git what you want to rebase &lt;em&gt;to&lt;/em&gt;. In our case, we want to rebase against the changes made to &lt;code&gt;master&lt;/code&gt;, the branch we started with (this can be a branch, a specific commit id, or a tag):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git rebase -i master
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We'll be presented with a file in our editor (it will likely be &lt;code&gt;vim&lt;/code&gt; on most platforms, but as discussed earlier, it's configurable and varies) that looks like this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pick a280613 Added failing test an unknown id is passed to RandomQuoteManager.get()
+pick 615a72a Fixed bug where a non-existent quote id would raise a TypeError
+pick 640c4e2 Added test for requesting a non-existant quote id in the HTTP API
+pick 5b81947 Increased the version number
+
+# Rebase 370f975..5b81947 onto 370f975 (4 commands)
+#
+# Commands:
+# p, pick &amp;lt;commit&amp;gt; = use commit
+# r, reword &amp;lt;commit&amp;gt; = use commit, but edit the commit message
+# e, edit &amp;lt;commit&amp;gt; = use commit, but stop for amending
+# s, squash &amp;lt;commit&amp;gt; = use commit, but meld into previous commit
+# f, fixup &amp;lt;commit&amp;gt; = like "squash", but discard this commit's log message
+# x, exec &amp;lt;command&amp;gt; = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop &amp;lt;commit&amp;gt; = remove commit
+# l, label &amp;lt;label&amp;gt; = label current HEAD with a name
+# t, reset &amp;lt;label&amp;gt; = reset HEAD to a label
+# m, merge [-C &amp;lt;commit&amp;gt; | -c &amp;lt;commit&amp;gt;] &amp;lt;label&amp;gt; [# &amp;lt;oneline&amp;gt;]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c &amp;lt;commit&amp;gt; to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;There are two sections to this file - the first is the list of commits (lines 1-3), in order from oldest to newest. The rest of the file is git, once again giving us really helpful in-line guidance. 🦄&lt;/p&gt;
+&lt;p&gt;Each commit line has three parts, separated by spaces:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;the &lt;em&gt;command&lt;/em&gt;, as referenced in the help text.&lt;/li&gt;
+&lt;li&gt;the &lt;em&gt;git id&lt;/em&gt; - a unique string that represents that commit within the repository. The ids are a &lt;em&gt;hash&lt;/em&gt; of a bunch of information, and are usually very long - they are different enough that it's possible to reference them using the "short" form here. This works most places where a git id is needed.&lt;/li&gt;
+&lt;li&gt;the first line of the &lt;em&gt;commit log message&lt;/em&gt;, to help you understand what you're looking at.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We just want to &lt;code&gt;squash&lt;/code&gt; these commits down to one, so we need to &lt;code&gt;pick&lt;/code&gt; one to use as the final commit. We need to ensure that we pick the oldest (the first one) so everything gets included.&lt;/p&gt;
+&lt;p&gt;With the correct commands in place, the first three lines look like this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pick a280613 Added failing test an unknown id is passed to RandomQuoteManager.get()
+squash 615a72a Fixed bug where a non-existent quote id would raise a TypeError
+squash 640c4e2 Added test for requesting a non-existant quote id in the HTTP API
+squash 5b81947 Increased the version number
+
+# -- snip --
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;When we save this file, &lt;code&gt;git rebase&lt;/code&gt; will present us with &lt;em&gt;another&lt;/em&gt; file - this is the commit log entry for our new squashed commit. Git does us a favor by aggregating all of the log entries for us, and giving us a summary of what the new commit looks like, in terms of what files changed:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# This is a combination of 4 commits.
+# This is the 1st commit message:
+
+Added failing test an unknown id is passed to RandomQuoteManager.get()
+
+# This is the commit message #2:
+
+Fixed bug where a non-existent quote id would raise a TypeError
+
+# This is the commit message #3:
+
+Added test for requesting a non-existant quote id in the HTTP API
+
+# This is the commit message #4:
+
+Increased the version number
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Thu Jun 13 11:10:16 2019 -0400
+#
+# interactive rebase in progress; onto 370f975
+# Last commands done (4 commands done):
+#    squash 640c4e2 Added test for requesting a non-existant quote id in the HTTP API
+#    squash 5b81947 Increased the version number
+# No commands remaining.
+# You are currently rebasing branch 'bug-unknown-id' on '370f975'.
+#
+# Changes to be committed:
+#       modified:   setup.py
+#       modified:   src/random_quote/manager.py
+#       modified:   src/random_quote/tests/test_manager.py
+#       modified:   src/random_quote/tests/test_wsgi.py
+#
+# Untracked files:
+#       quotes.csv
+#       test.db
+#       test_example.py
+#
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;This gives us a chance to write a nice, concise log entry that covers everything we did to fix this bug. Remove lines 1-16 and replace with something like this:&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;And as before, we want to be concise. If we needed to elaborate, we could do so on the subsequent lines.&lt;/p&gt;
+&lt;p&gt;After we save that file, git will tell us if the rebase was a success:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;[detached HEAD e80d483] BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.&lt;/span&gt;
+&lt;span class="go"&gt; Date: Tue May 7 11:05:01 2019 -0400&lt;/span&gt;
+&lt;span class="go"&gt; 3 files changed, 23 insertions(+), 4 deletions(-)&lt;/span&gt;
+&lt;span class="go"&gt;Successfully rebased and updated refs/heads/bug-unknown-id.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we run &lt;code&gt;git log --pretty&lt;/code&gt; again, we can see our old commits are gone, and the last one is present:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty
+
+&lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; bug-unknown-id)&lt;/span&gt;
+&lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Date:   Tue May 7 11:05:01 2019 -0400&lt;/span&gt;
+
+&lt;span class="go"&gt;    BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.&lt;/span&gt;
+
+&lt;span class="go"&gt;-- snip --&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p&gt;If you messed up the file causing a "recoverable" error, like say you tried to &lt;code&gt;squash&lt;/code&gt; every commit and forgot to &lt;code&gt;pick&lt;/code&gt; one, git will put you into an "in progress" state. Typically, this state is used when you need to fix conflicts (we'll cover that in &lt;a class="reference external" href="{filename}/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;), or do other work on the code to make a rebase complete successfully.&lt;/p&gt;
+&lt;p&gt;You might get an error like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt; error: cannot 'squash' without a previous commit&lt;/span&gt;
+&lt;span class="go"&gt; You can fix this with 'git rebase --edit-todo' and then run 'git rebase --continue'.&lt;/span&gt;
+&lt;span class="go"&gt; Or you can abort the rebase with 'git rebase --abort'.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You'll also see you have a rebase in progress when you run &lt;code&gt;git status&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git status
+&lt;span class="go"&gt; interactive rebase in progress; onto 70ae1f2&lt;/span&gt;
+&lt;span class="go"&gt; No commands done.&lt;/span&gt;
+&lt;span class="go"&gt; Next commands to do (3 remaining commands):&lt;/span&gt;
+&lt;span class="go"&gt;    s b707557 Added test for a bug where specifying a nonexistent quote id throws a TypeError&lt;/span&gt;
+&lt;span class="go"&gt;    s b751360 Fixed bug where a non-existent quote id would raise a TypeError&lt;/span&gt;
+&lt;span class="go"&gt;   (use "git rebase --edit-todo" to view and edit)&lt;/span&gt;
+&lt;span class="go"&gt; You are currently editing a commit while rebasing branch 'bug-unknown-id' on '70ae1f2'.&lt;/span&gt;
+&lt;span class="go"&gt;   (use "git commit --amend" to amend the current commit)&lt;/span&gt;
+&lt;span class="go"&gt;   (use "git rebase --continue" once you are satisfied with your changes)&lt;/span&gt;
+
+&lt;span class="go"&gt; Untracked files:&lt;/span&gt;
+&lt;span class="go"&gt;   (use "git add &amp;lt;file&amp;gt;..." to include in what will be committed)&lt;/span&gt;
+
+&lt;span class="go"&gt;     test.db&lt;/span&gt;
+
+&lt;span class="go"&gt; nothing added to commit but untracked files present (use "git add" to track)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Again, git tells us exactly what we need to do. If you just made a typo, the best thing to do is issue &lt;code&gt;git rebase --abort&lt;/code&gt;. This will put you back to the way things were before you invoked &lt;code&gt;git rebase -i&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt; $&lt;/span&gt; git rebase --abort
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p class="last"&gt;Now &lt;code&gt;git status&lt;/code&gt; will look like it did before the aborted rebase.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To be sure we didn't loose anything or make any mistakes during the rebase, now we should run the tests again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; pytest src
+&lt;span class="go"&gt;=========================== test session starts ===========================&lt;/span&gt;
+&lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0&lt;/span&gt;
+&lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
+&lt;span class="go"&gt;collected 10 items&lt;/span&gt;
+
+&lt;span class="go"&gt;src/random_quote/tests/test_manager.py ......                       [ 60%]&lt;/span&gt;
+&lt;span class="go"&gt;src/random_quote/tests/test_wsgi.py ....                            [100%]&lt;/span&gt;
+
+&lt;span class="go"&gt;======================== 10 passed in 0.18 seconds ========================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We should see 10 tests as before, and they should all pass.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="merge-master-and-publish"&gt;
+&lt;h2 id="merge master and publish"&gt;Merge Master And Publish&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-d-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;If we know someone has changed the code in &lt;code&gt;master&lt;/code&gt; since we branched, we will need to incorporate those changes into our branch before we proceed.&lt;/p&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;In either case, we still have to go through the same basic process.&lt;/p&gt;
+&lt;p&gt;Now, we'll &lt;code&gt;git checkout&lt;/code&gt; &lt;code&gt;master&lt;/code&gt;, and &lt;code&gt;git merge&lt;/code&gt; our branch:&lt;/p&gt;
+&lt;p&gt;First the &lt;code&gt;git checkout&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git checkout master
+&lt;span class="go"&gt;Switched to branch 'master'&lt;/span&gt;
+&lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then the &lt;code&gt;git merge&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git merge bug-unknown-id
+&lt;span class="go"&gt;Updating 370f975..94a4210&lt;/span&gt;
+&lt;span class="go"&gt;Fast-forward&lt;/span&gt;
+&lt;span class="go"&gt; setup.py                               |  2 +-&lt;/span&gt;
+&lt;span class="go"&gt; src/random_quote/manager.py            |  7 +++++--&lt;/span&gt;
+&lt;span class="go"&gt; src/random_quote/tests/test_manager.py | 10 +++++++++-&lt;/span&gt;
+&lt;span class="go"&gt; src/random_quote/tests/test_wsgi.py    | 10 +++++++++-&lt;/span&gt;
+&lt;span class="go"&gt; 4 files changed, 24 insertions(+), 5 deletions(-)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;git status&lt;/code&gt; shows us that we are one commit ahead of our remote repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;span class="go"&gt;On branch master&lt;/span&gt;
+&lt;span class="go"&gt;Your branch is ahead of 'origin/master' by 1 commit.&lt;/span&gt;
+&lt;span class="go"&gt;  (use "git push" to publish your local commits)&lt;/span&gt;
+
+&lt;span class="go"&gt;Untracked files:&lt;/span&gt;
+&lt;span class="go"&gt;  (use "git add &amp;lt;file&amp;gt;..." to include in what will be committed)&lt;/span&gt;
+
+&lt;span class="go"&gt;    test.db&lt;/span&gt;
+
+&lt;span class="go"&gt;nothing added to commit but untracked files present (use "git add" to track)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To make our changes public, we just need to &lt;code&gt;git push&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin master
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now we can see our bug fix as a single commit in the log:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty
+
+&lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; master, origin/master, origin/HEAD, bug-unknown-id)&lt;/span&gt;
+&lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Date:   Tue May 7 11:05:01 2019 -0400&lt;/span&gt;
+
+&lt;span class="go"&gt;    BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.&lt;/span&gt;
+
+&lt;span class="go"&gt;-- snip --&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="tag-the-version"&gt;
+&lt;h2 id="tag the version"&gt;Tag The Version&lt;/h2&gt;
+&lt;div class="figure align-right" style="width: 40%"&gt;
+&lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-e-cropped.png"/&gt;
+&lt;/div&gt;
+&lt;p&gt;Git has a concept of "tagging" - where you can assign a user-friendly label to a specific commit. It can make it really easy for people to check out a specific point in the history of the code. Technically they are &lt;em&gt;optional&lt;/em&gt;, but are a very useful tool.&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p class="last"&gt;There are two types of tags, "lightweight" and "annotated". The specifics aren't important for this guide, just be aware there is a difference, and know that we are using lightweight tags here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log -n1
+&lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; master, tag: v0.1.1, origin/master, origin/HEAD, bug-unknown-id)&lt;/span&gt;
+&lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;Date:   Tue May 7 11:05:01 2019 -0400&lt;/span&gt;
+
+&lt;span class="go"&gt;    BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;If we wanted to tag a different commit, we just need to note the id (in this case &lt;code&gt;e80d48320ea1e912d8d0c137b32a21f33492e8f5&lt;/code&gt;). We can use just the first few characters to save some typing, like &lt;code&gt;e80d4832&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;We are going to name our tag &lt;code&gt;v0.1.1&lt;/code&gt;. The exact format is up to you and people you collaborate with, but it's useful to use a common prefix to help classify what the tag &lt;em&gt;means&lt;/em&gt;. In this case, we're using &lt;code&gt;v&lt;/code&gt; to indicate a release version. This is helpful later when your project has possibly hundreds of tags, for may reasons besides marking released versions, since we can do pattern matching when listing tags.&lt;/p&gt;
+&lt;p&gt;Now for the actual tagging:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag v0.1.1
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To see what tags we've made, we can run &lt;code&gt;git tag&lt;/code&gt; without any arguments:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag
+&lt;span class="go"&gt;v0.1.1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we wanted to limit what tags we want to see, we can use the &lt;code&gt;-l&lt;/code&gt; parameter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag -l &lt;span class="s2"&gt;"v*"&lt;/span&gt;
+&lt;span class="go"&gt;v0.1.1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can remove a tag using the &lt;code&gt;-d&lt;/code&gt; flag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag -d v0.1.1
+&lt;span class="go"&gt;Deleted tag 'v0.1.1' (was e80d483)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="remote-vs-local-tags"&gt;
+&lt;h3&gt;Remote Vs Local Tags&lt;/h3&gt;
+&lt;p&gt;So far, we've only used &lt;em&gt;local&lt;/em&gt; tags. These tags only exist in our working directory - they aren't available in our &lt;em&gt;remote&lt;/em&gt;, or the repository we cloned. To make a tag remote, we use &lt;code&gt;git push&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag v0.1.1 &lt;span class="c1"&gt;# need to remake since we deleted it above&lt;/span&gt;
+&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin v0.1.1
+&lt;span class="go"&gt;Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
+&lt;span class="go"&gt;To [...]/random_quote_remote&lt;/span&gt;
+&lt;span class="go"&gt; * [new tag]         v0.1.1 -&amp;gt; v0.1.1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is very similar to when we ran &lt;code&gt;git push&lt;/code&gt; in the last section, but git knows we are only asking to send the new tag to the repository.&lt;/p&gt;
+&lt;p&gt;To delete a remote tag, we need to let &lt;code&gt;git push&lt;/code&gt; know with the &lt;code&gt;--delete&lt;/code&gt; flag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin --delete v0.1.1
+&lt;span class="go"&gt; - [deleted]         v0.1.1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="first admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;At this point, if you've followed along, we've deleted our tag. It would be a good idea to recreate it. Here's a condensed version of the process:&lt;/p&gt;
+&lt;div class="last"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt; (random_quote) $ git tag v0.1.1&lt;/span&gt;
+&lt;span class="go"&gt; (random_quote) $ git push origin v0.1.1&lt;/span&gt;
+&lt;span class="go"&gt; Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
+&lt;span class="go"&gt; To [...]/random_quote_remote&lt;/span&gt;
+&lt;span class="go"&gt;  * [new tag]         v0.1.1 -&amp;gt; v0.1.1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="remote-vs-local-branches"&gt;
+&lt;h2 id="remote vs local branches"&gt;Remote vs Local Branches&lt;/h2&gt;
+&lt;p&gt;As with tags, branches exist in &lt;em&gt;local&lt;/em&gt; and &lt;em&gt;remote&lt;/em&gt; versions. Our branch, so far, only exists in our clone of the repository. This is good, since we were able to fix our bug and merge our changes into &lt;code&gt;master&lt;/code&gt; without having to show the code to anyone.&lt;/p&gt;
+&lt;p&gt;However, when you are collaborating with people, you'll often need to give them access to your code. This is done by making your branch &lt;em&gt;remote&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;We use &lt;code&gt;git push&lt;/code&gt; to do this, just like we did with tags:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin bug-unknown-id
+&lt;span class="go"&gt;Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
+&lt;span class="go"&gt;To [...]/random_quote_remote&lt;/span&gt;
+&lt;span class="go"&gt; * [new branch]      bug-unknown-id -&amp;gt; bug-unknown-id&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition tip"&gt;
+&lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
+&lt;p class="last"&gt;It's OK to push to your remote branch frequently. There are a few git actions that are a little more difficult (&lt;a class="reference external" href="https://stackoverflow.com/questions/22682870/git-undo-pushed-commits/22683231"&gt;reverting your changes&lt;/a&gt;, for example) once you've pushed, but remember, you are working on a branch, and you will be rebasing later, so there's little risk and you get the benefit of being able to back up your changes to the git remote and show your progress to your collaborators.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion-what-s-next"&gt;
+&lt;h2 id="conclusion/what's next"&gt;Conclusion/What's Next&lt;/h2&gt;
+&lt;p&gt;In this installment, we got a lot more comfortable writing tests and doing stuff with git. At this point, we're ready to do any sort of feature or bug work, and leave a clean commit log when we're done.&lt;/p&gt;
+&lt;p&gt;In the &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;final part&lt;/a&gt; of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
 &lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
@@ -169,14 +1445,14 @@
 &lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;part2&lt;/code&gt;&lt;/dt&gt;
 &lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt; and
-&lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;&lt;/dd&gt;
+&lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;qotd&lt;/code&gt;&lt;/dt&gt;
 &lt;dd&gt;Developer &lt;strong&gt;A&lt;/strong&gt;'s feature from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;index-info&lt;/code&gt;&lt;/dt&gt;
 &lt;dd&gt;Developer &lt;strong&gt;B&lt;/strong&gt;'s bug fix from &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;.&lt;/dd&gt;
 &lt;dt&gt;&lt;code&gt;part3&lt;/code&gt;&lt;/dt&gt;
 &lt;dd&gt;All the changes from &lt;a class="reference external" href="/branching-git-with-pytest.html"&gt;part 1&lt;/a&gt;,
-&lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!&lt;/dd&gt;
+&lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; &lt;em&gt;and&lt;/em&gt; &lt;a class="reference external" href="/drafts/branching-git-with-pytest-3.html"&gt;part 3&lt;/a&gt;!&lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Feel free to &lt;code&gt;git checkout&lt;/code&gt; if you need to reset your code, or jump around.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
@@ -1545,6 +2821,6 @@ Created a new test fixture that makes random tests reproducible.
 &lt;div class="section" id="conclusion-what-s-next"&gt;
 &lt;h2 id="conclusion/what's next"&gt;Conclusion/What's Next&lt;/h2&gt;
 &lt;p&gt;In this installment, we covered the basics of doing work with pytest and git.&lt;/p&gt;
-&lt;p&gt;In &lt;a class="reference external" href="/drafts/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;, we'll dig into how branching works by fixing a bug.&lt;/p&gt;
+&lt;p&gt;In &lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;, we'll dig into how branching works by fixing a bug.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry></feed>

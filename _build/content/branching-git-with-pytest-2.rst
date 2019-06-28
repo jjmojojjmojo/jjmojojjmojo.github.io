@@ -1,11 +1,11 @@
 Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2
 #########################################################################
-:date: 2019-06-26 9:00
+:date: 2019-06-28 9:00
 :author: jjmojojjmojo
 :category: tutorial
 :tags: python; git; branching; development process
 :slug: branching-git-with-pytest-2
-:status: draft
+:status: published
 
 .. include:: ../emojis.rst
 

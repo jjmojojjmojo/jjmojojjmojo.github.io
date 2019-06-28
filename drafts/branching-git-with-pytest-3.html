@@ -84,13 +84,13 @@
 <p>In this installment, we will:</p>
 <ul class="simple">
 <li>Simulate collaborative work by two developers.</li>
-<li>Use the workflow we learned in <a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a> to add a new feature, and fix a new bug.</li>
+<li>Use the workflow we learned in <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> to add a new feature, and fix a new bug.</li>
 <li>Create a merge conflict and resolve it.</li>
 </ul>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
-<p>As with part 2, you will need to make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html#setup">part 1</a>, and have merged the changes made in <a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a> to <code>master</code>.</p>
+<p>As with part 2, you will need to make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html#setup">part 1</a>, and have merged the changes made in <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> to <code>master</code>.</p>
 <p>Here's a condensed summary:</p>
 <ol class="arabic">
 <li><p class="first">Ensure you have git, python 3.7+, and venv installed.</p>
@@ -119,7 +119,7 @@
 <span class="go">  util.ingest("quotes.csv", "test.db")</span>
 </pre></div>
 </li>
-<li><p class="first">Add the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and <a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a>. If you had trouble or would like to skip all of that, you can simply checkout the <code>part2</code> branch</p>
+<li><p class="first">Add the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>. If you had trouble or would like to skip all of that, you can simply checkout the <code>part2</code> branch</p>
 </li>
 </ol>
 <p>Note that you will have to do this to <em>each</em> clone <em>a</em> and <em>b</em> below.</p>
@@ -137,14 +137,14 @@
 <dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</dd>
 <dt><code>part2</code></dt>
 <dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
-<a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a></dd>
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a></dd>
 <dt><code>qotd</code></dt>
 <dd>Developer <strong>A</strong>'s feature from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</dd>
 <dt><code>index-info</code></dt>
 <dd>Developer <strong>B</strong>'s bug fix from <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>.</dd>
 <dt><code>part3</code></dt>
 <dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>,
-<a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!</dd>
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!</dd>
 </dl>
 <p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
 <p class="last">Use <code>git stash</code> to keep any uncomitted changes for latter. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">the git documentation</a> for more information. 🦄</p>
@@ -200,7 +200,7 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you have opted to skip following <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
-<a class="reference external" href="/drafts/branching-git-with-pytest-2.html">part 2</a>, you'll need to <code>git checkout part2</code> in each repository before proceeding.</p>
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>, you'll need to <code>git checkout part2</code> in each repository before proceeding.</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
