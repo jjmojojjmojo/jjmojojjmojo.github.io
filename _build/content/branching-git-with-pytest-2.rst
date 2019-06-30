@@ -89,7 +89,7 @@ Here's a condensed summary:
        
        Feel free to :code:`git checkout` if you need to reset your code, or jump around.
        
-       Use :code:`git stash` to keep any uncomitted changes for latter. See `the git documentation <https://git-scm.com/book/en/v1/Git-Tools-Stashing>`__ for more information. |unicorn|
+       Use :code:`git stash` to keep any uncommitted changes for later. See `the git documentation <https://git-scm.com/book/en/v1/Git-Tools-Stashing>`__ for more information. |unicorn|
 
 
 Let's Find A Bug!

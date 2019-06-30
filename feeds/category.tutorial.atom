@@ -79,7 +79,7 @@
 &lt;/dd&gt;
 &lt;/dl&gt;
 &lt;p&gt;Feel free to &lt;code&gt;git checkout&lt;/code&gt; if you need to reset your code, or jump around.&lt;/p&gt;
-&lt;p class="last"&gt;Use &lt;code&gt;git stash&lt;/code&gt; to keep any uncomitted changes for latter. See &lt;a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing"&gt;the git documentation&lt;/a&gt; for more information. 🦄&lt;/p&gt;
+&lt;p class="last"&gt;Use &lt;code&gt;git stash&lt;/code&gt; to keep any uncommitted changes for later. See &lt;a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing"&gt;the git documentation&lt;/a&gt; for more information. 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -1457,7 +1457,7 @@ Increased the version number
 &lt;p&gt;Feel free to &lt;code&gt;git checkout&lt;/code&gt; if you need to reset your code, or jump around.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;Use &lt;code&gt;git stash&lt;/code&gt; to keep any uncomitted changes for latter. See &lt;a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing"&gt;the git documentation&lt;/a&gt; for more information. 🦄&lt;/p&gt;
+&lt;p class="last"&gt;Use &lt;code&gt;git stash&lt;/code&gt; to keep any uncommitted changes for later. See &lt;a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing"&gt;the git documentation&lt;/a&gt; for more information. 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="quick-overview-of-the-application-layout"&gt;
