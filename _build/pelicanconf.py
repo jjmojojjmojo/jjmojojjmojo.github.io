@@ -46,7 +46,7 @@ PLUGIN_PATHS = ["plugins", "pelican-plugins"]
 PLUGINS = ["explanation", "pelican-toc", "summary"]
 
 PATH = 'content'
-OUTPUT_PATH = "../"
+OUTPUT_PATH = "output"
 OUTPUT_SOURCES = False
 
 THEME = "themes/simple"

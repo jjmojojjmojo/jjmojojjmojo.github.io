@@ -81,5 +81,5 @@ class DirectoryListingApp:
         
         return Response(body=output)
 
-#dev = DirectoryListingApp("./output")
+dev = DirectoryListingApp("./output")
 preview = DirectoryListingApp("../")

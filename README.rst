@@ -53,19 +53,58 @@ This site uses a couple of third-party pelican plugins. They are installed via g
 
 Building
 ========
-The HTML is built using make. Once you've activated the virtual environment, enter the ``_build`` diretory, run ``make html``. It's a good idea to turn debugging on most of the time. The process looks like this::
+Once you've activated the virtual environment, enter the ``_build`` diretory, run ``pelican`` with the given CLI parameters blow. It's a good idea to turn debugging on most of the time. The process looks like this::
     
     $ source bin/activate
     $ cd _build
-    $ make DEBUG=1 html
+    $ pelican -s pelicanconf.py --fatal errors -D
     
+This will put the output in the staging area, ``output``. This folder is in ``.gitignore``, and should not be added to the git repository.
+
+Publishing
+==========
+Once the content looks good, you need to do two things. First, re-generate the output but point the ``pelican`` tool to the parent directory::
+    
+    $ cd _build
+    $ pelican -s pelicanconf.py --fatal errors -D -o ../
+    
+Next, make sure you run the `Post-Processing Script`_::
+    
+    $ python responsive_postprocess.py
+    
+It's a good idea to run the preview web server and make sure everything looks OK before continuing::
+    
+    $ chaussette --port 8080 --backend tornado wsgi:preview
+    
+Take a look at http://127.0.0.1:8080
+
+To make the changes live, ``git commit``, then ``git push``. Be sure to use helpful commit log messages.
+
+Web Server
+==========
+To view the current state of the generated HTML you will need to run a web server.
+
+Two WSGI applications are provided. One (``dev``) serves the files in ``output``, the other (``preview``) serves the "live" content in the main directory. 
+
+`chaussette <https://chaussette.readthedocs.io/en/latest/>`__ is provided by the ``requirements.txt``. Any WSGI webserver will work. Here's how to run the dev server::
+    
+    $ chaussette --port 8000 --backend tornado wsgi:dev
+    
+And the preview server::
+    
+    $ chaussette --port 8080 --backend tornado wsgi:preview
+    
+Note that both services are run by the `Development Services`_ below.
+
 Development Services
 ====================
 Pelican comes with a development server that will serve the content and automatically regenerate it when files are changed. 
 
-I had some problems with it, so I use a combination of a WSGI app I built, based on webob.FileApp, and watchmedo to accomplish the same thing.
+I had some problems with it, so I use a combination of a WSGI app I built, based on `webob.FileApp <https://docs.pylonsproject.org/projects/webob/en/stable/api/static.html>`__, and watchmedo (from the `watchdog <https://github.com/gorakhargosh/watchdog>`__ library) to accomplish the same thing.
 
-The webserver provides directory listings (useful for looking at the drafts folder). Since it's a WSGI app, you can run it in any WSGI server. `chaussette <https://chaussette.readthedocs.io/>`__ is included in ``requirements.txt``.
+Watchmedo runs the build command mentioned above every time a file changes. This includes source files, and changes to the theme and most static files.
+
+The webserver provides directory listings (useful for looking at the drafts folder, since it's not directly served by normal web servers (like github pages)).
 
 To run the development services::
     
@@ -73,21 +112,17 @@ To run the development services::
     $ cd _build
     $ circusd circus.ini
     
-The server listens on localhost, port 8000 by default.
+As mentioned above, two services are started. On port ``8000``, the content currently in development (located in ``output``) is served.
+
+On port ``8080``, the content that will be published (located in the root of this repository) is served.
 
 Post-Processing Script
 ======================
-
-.. warning::
-    
-    This script is **experimental**.
-    
 I've added a script that does some post-processing, chiefly to make the site more responsive on different devices. 
 
 Currently, it does the following:
 
 * Collect all full-size images, converts them to JPEG
-* Cleans the exif data, adds copyright notice
 * Creates multiple resized copies of each image.
 * Alters the HTML of all image tags to make them responsive (adds ``srcset`` and ``sizes``), pointing to the resized copies.
 * Wraps all source code listings in an extra div so overflow on narrower devices can scroll.
