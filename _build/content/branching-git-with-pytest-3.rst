@@ -5,9 +5,9 @@ Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3
 :category: tutorial
 :tags: python; git; branching; development process
 :slug: branching-git-with-pytest-3
-:status: draft
+:status: published
 
-.. include:: ../emojis.rst
+.. include:: ../extra.rst
 
 **This is part three of a three-part series.** This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using `pytest <https://docs.pytest.org>`__ and `git <https://git-scm.com/>`__, via feature branches. Along the way we'll touch on application design and discuss best practices.
 

@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Open Graph / Facebook -->
+<meta content="website" property="og:type"/>
+<meta content="/branching-git-with-pytest-3.html" property="og:url"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3 - The Collected Works of jjmojojjmojo " property="og:title"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<!-- Twitter -->
+<meta content="summary_large_image" property="twitter:card"/>
+<meta content="https://jjmojojjmojo.github.io/branching-git-with-pytest-3.html" property="twitter:url"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3 - The Collected Works of jjmojojjmojo " property="twitter:title"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
+<meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3 - The Collected Works of jjmojojjmojo " name="title"/>
+<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
+<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3 - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -12,6 +25,9 @@
 <link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 <link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
 <link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
+<meta content="This is part three of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Simulate collaborative work by two developers. Use the workflow we learned in part 2 to add a new feature, and fix a new bug. Create a merge conflict and resolve it." name="description"/>
+<meta content="This is part three of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Simulate collaborative work by two developers. Use the workflow we learned in part 2 to add a new feature, and fix a new bug. Create a merge conflict and resolve it." property="og:description"/>
+<meta content="This is part three of a three-part series. This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using pytest and git, via feature branches. Along the way we'll touch on application design and discuss best practices. In this installment, we will: Simulate collaborative work by two developers. Use the workflow we learned in part 2 to add a new feature, and fix a new bug. Create a merge conflict and resolve it." property="twitter:description"/>
 <meta content="python" name="tags"/>
 <meta content="git" name="tags"/>
 <meta content="branching" name="tags"/>
@@ -33,6 +49,12 @@
 </a>
 </span>
 </header><!-- /#banner -->
+<div id="notice">
+<div id="notice-content">
+<div style="text-align: center">
+<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
+</div> </div>
+</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -51,9 +73,11 @@
 <div id="toc"><ul><li><a class="toc-href" href="#setup" title="Setup">Setup</a></li><li><a a="" add="" and="" another="" bug="" class="toc-href" feature="" fix="" href="#let" on="" s="" some="" step="" title="Let" toes="">Let's Add A Feature, Fix Another Bug, and Step On Some Toes!</a></li><li><a class="toc-href" href="#clone two copies of the repository" title="Clone Two Copies Of The Repository">Clone Two Copies Of The Repository</a></li><li><a class="toc-href" href="#develper a builds a new feature: quote of the day" title="Develper A Builds A New Feature: Quote Of The Day">Develper A Builds A New Feature: Quote Of The Day</a></li><li><a class="toc-href" href="#developer b fixes a bug and deals with a git conflict" title="Developer B Fixes A Bug And Deals With a Git Conflict">Developer B Fixes A Bug And Deals With a Git Conflict</a></li><li><a class="toc-href" href="#merge, now with problems" title="Merge, Now With Problems">Merge, Now With Problems</a></li><li><a class="toc-href" href="#tag the fixed version" title="Tag The Fixed Version">Tag The Fixed Version</a></li><li><a class="toc-href" href="#conclusion" title="Conclusion">Conclusion</a></li><li><a class="toc-href" href="#resources, what to do if you messed up" title="Resources, What To Do If You Messed Up">Resources, What To Do If You Messed Up</a></li></ul></div>
 </div>
 <div class="entry-content status-published">
+<!-- Collects all of the includable files into one. -->
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
+<!-- Special Roles Used In The Text. -->
 <p><strong>This is part three of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org">pytest</a> and <a class="reference external" href="https://git-scm.com/">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
 <p>In this installment, we will:</p>
 <ul class="simple">
@@ -63,68 +87,66 @@
 </ul>
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
-<p>As with part 2, you will need to make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html#setup">part 1</a>.</p>
-<div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>It's a good idea to review the steps below, but if you want to skip ahead, or you are only interested in this section and want to hit the ground running, you can run the following script:</p>
-<div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> scripts/setup-part3.sh
-</pre></div>
-</td></tr></table></div></div></div>
+<p>As with part 2, you will need to make sure you've got everything set up as outlined in <a class="reference external" href="/branching-git-with-pytest.html#setup">part 1</a>, and have merged the changes made in <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> to <code>master</code>.</p>
 <p>Here's a condensed summary:</p>
 <ol class="arabic">
 <li><p class="first">Ensure you have git, python 3.7+, and venv installed.</p>
 </li>
 <li><p class="first">Make a bare clone of the base repository to act as our <em>remote</em>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git clone --bare https://github.com/jjmojojjmojo/random_quote.git random_quote_remote
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Clone our remote:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote random_quote
+<div class="highlight"><pre><span></span><span class="gp"> $</span> git clone random_quote_remote random_quote
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Initialize the virtual environment, and install our requirements and project:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> random_quote
-<span class="gp">$</span> python -m venv .
-<span class="gp">$</span> <span class="nb">source</span> bin/activate
-<span class="gp">(random_quote) $</span> pip install -r requirements.txt
-<span class="gp">(random_quote) $</span> pip install -e .
+<div class="highlight"><pre><span></span><span class="gp">  $</span> <span class="nb">cd</span> random_quote
+<span class="gp">  $</span> python -m venv .
+<span class="gp">  $</span> <span class="nb">source</span> bin/activate
+<span class="go">  (random_quote) $ pip install -r requirements.txt</span>
+<span class="go">  (random_quote) $ pip install -e .</span>
 </pre></div>
-</td></tr></table></div></li>
+</li>
 <li><p class="first">Initialize the database, add some randomly generated quotes:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
-<span class="gp">(random_quote) $</span> python
-<span class="gp">&gt;</span>&gt;&gt;
+<div class="highlight"><pre><span></span><span class="go">  (random_quote) $ python scripts/generate_quotes.py</span>
+<span class="go">  (random_quote) $ python</span>
+<span class="go">  &gt;&gt;&gt; from random_quote import util</span>
+<span class="go">  &gt;&gt;&gt; util.init("test.db")</span>
+<span class="go">  util.ingest("quotes.csv", "test.db")</span>
 </pre></div>
-</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">util</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
-<span class="go">util.ingest("quotes.csv", "test.db")</span>
-</pre></div>
-</td></tr></table></div></li>
-<li><p class="first">Add the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>. If you had trouble or would like to skip all of that, you can simply copy the following files from <code>scripts/state/part2</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> cp scripts/state/part2/setup.py src/random_quote/
-<span class="gp">(random_quote) $</span> cp scripts/state/part2/conftest.py src/random_quote/tests/
-<span class="gp">(random_quote) $</span> cp scripts/state/part2/test_manager.py src/random_quote/tests/
-<span class="gp">(random_quote) $</span> cp scripts/state/part2/test_wsgi.py src/random_quote/tests/
-</pre></div>
-</td></tr></table></div></li>
-<li><p class="first"><code>git commit</code> and <code>git push</code> all of the changes so they'll be available for this part of the guide:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Getting up to speed from the last two sections of the guide."</span>
-<span class="gp">(random_quote) $</span> git push origin master
-</pre></div>
-</td></tr></table></div></li>
+</li>
+<li><p class="first">Add the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>. If you had trouble or would like to skip all of that, you can simply checkout the <code>part2</code> branch</p>
+</li>
 </ol>
+<p>Note that you will have to do this to <em>each</em> clone <em>a</em> and <em>b</em> below.</p>
+<blockquote>
+<div class="highlight"><pre><span></span><span class="gp">  $</span> <span class="nb">cd</span> ../a
+<span class="gp">  $</span> git checkout part2
+<span class="gp">  $</span> <span class="nb">cd</span> ../b
+<span class="gp">  $</span> git checkout part2
+</pre></div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>🌈 We have branches for all of the major work done in the series:</p>
+<dl class="docutils">
+<dt><code>part1</code></dt>
+<dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>.</dd>
+<dt><code>part2</code></dt>
+<dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a></dd>
+<dt><code>qotd</code></dt>
+<dd>Developer <strong>A</strong>'s feature from <a class="reference external" href="/branching-git-with-pytest-3.html">part 3</a>.</dd>
+<dt><code>index-info</code></dt>
+<dd>Developer <strong>B</strong>'s bug fix from <a class="reference external" href="/branching-git-with-pytest-3.html">part 3</a>.</dd>
+<dt><code>part3</code></dt>
+<dd>All the changes from <a class="reference external" href="/branching-git-with-pytest.html">part 1</a>,
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/branching-git-with-pytest-3.html">part 3</a>!</dd>
+</dl>
+<p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
+<p class="last">Use <code>git stash</code> to keep any uncommitted changes for later. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">the git documentation</a> for more information. 🦄</p>
+</div>
+</blockquote>
 </div>
 <div class="section" id="let-s-add-a-feature-fix-another-bug-and-step-on-some-toes">
 <h2 id="let's add a feature, fix another bug, and step on some toes!">Let's Add A Feature, Fix Another Bug, and <em>Step On Some Toes</em>!</h2>
@@ -147,49 +169,46 @@
 <p class="last">However, things like this do happen from time to time. 🦄</p>
 </div>
 <p>Before we begin, lets deactivate our virtual environment:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> deactivate
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> deactivate
 <span class="gp">$</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="clone-two-copies-of-the-repository">
 <h2 id="clone two copies of the repository">Clone Two Copies Of The Repository</h2>
 <p>To get started, lets clone two fresh copies of our <code>random_quote_remote</code> bare repository that we made earlier. We'll call them simply <code>a</code> and <code>b</code> so we don't get confused 😎.</p>
 <p>Let's make sure we're in the correct directory.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ..
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ..
 <span class="gp">$</span> ls
 <span class="go">random_quote</span>
 <span class="go">random_quote_remote</span>
 </pre></div>
-</td></tr></table></div><p>We can see from the output of <code>ls</code> that our original checkout is present, and the special bare copy we made to use as a remote is there as well.</p>
+<p>We can see from the output of <code>ls</code> that our original checkout is present, and the special bare copy we made to use as a remote is there as well.</p>
 <p>Next, we'll <code>git clone</code> the remote twice.</p>
 <p>Make a copy for developer <strong>A</strong>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote a
+<div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote a
 <span class="go">Cloning into 'a'...</span>
 <span class="go">done.</span>
 </pre></div>
-</td></tr></table></div><p>And another for developer <strong>B</strong>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote b
+<p>And another for developer <strong>B</strong>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> git clone random_quote_remote b
 <span class="go">Cloning into 'b'...</span>
 <span class="go">done.</span>
 </pre></div>
-</td></tr></table></div><div class="admonition tip">
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have opted to skip following <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
+<a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>, you'll need to <code>git checkout part2</code> in each repository before proceeding.</p>
+</div>
+<div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>We're going to work on the feature first, then the bug, so things shouldn't be too confusing. Pay attention to the shell prompt in the examples, when the <code>venv</code> virtual environment is active, the prompt changes to the name of the directory. We've carried the prompt changes through to the examples in this guide, so you'll know what clone you're working on:</p>
 <p><strong>Developer A</strong>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span>
+<div class="highlight"><pre><span></span><span class="go"> (a) $</span>
 </pre></div>
-</td></tr></table></div><p><strong>Developer B</strong>:</p>
-<div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span>
+<p><strong>Developer B</strong>:</p>
+<div class="last"><div class="highlight"><pre><span></span><span class="go"> (b) $</span>
 </pre></div>
-</td></tr></table></div></div></div>
+</div></div>
 </div>
 <div class="section" id="develper-a-builds-a-new-feature-quote-of-the-day">
 <h2 id="develper a builds a new feature: quote of the day">Develper <em>A</em> Builds A New Feature: Quote Of The Day</h2>
@@ -202,41 +221,30 @@
 <div class="section" id="first-lets-branch">
 <h3>First, Lets Branch</h3>
 <p>In repository <code>a</code>, create a new branch called <code>qotd</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> a
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> a
 <span class="gp">$</span> git checkout -b qotd
 <span class="go">Switched to a new branch 'qotd'</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="init">
 <h3>Init</h3>
 <p>Remember that since this is a fresh clone, we'll need to initialize the virtual environment.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
+<div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
 <span class="gp">$</span> <span class="nb">source</span> bin/activate
 <span class="gp">(a) $</span> pip install -r requirements.txt
 <span class="gp">(a) $</span> pip install -e .
 </pre></div>
-</td></tr></table></div><p>Next, copy the database file from your other clone:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
+<p>Next, copy the database file from your other clone:</p>
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
 </pre></div>
-</td></tr></table></div><p>Or initialize a new one:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
+<p>Or initialize a new one:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
 <span class="gp">(random_quote) $</span> python
-<span class="gp">&gt;</span>&gt;&gt;
-</pre></div>
-</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">util</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
+<span class="gp">&gt;</span>&gt;&gt; from random_quote import util
+<span class="gp">&gt;</span>&gt;&gt; util.init<span class="o">(</span><span class="s2">"test.db"</span><span class="o">)</span>
 <span class="go">util.ingest("quotes.csv", "test.db")</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="design-daily-quotes">
 <h3>Design: Daily Quotes</h3>
 <p>Off hand, a few possibilities exist for handling this. 🤔</p>
@@ -351,15 +359,12 @@
 <span class="p">);</span>
 </pre></div>
 </td></tr></table></div><p>Next we'll use our <code>util.init()</code> function, as we did when originally setting up the database:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> python
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> python
 <span class="gp">&gt;</span>&gt;&gt; from random_quote.util import init
 <span class="gp">&gt;</span>&gt;&gt; init<span class="o">(</span><span class="s2">"test.db"</span><span class="o">)</span>
 <span class="gp">&gt;</span>&gt;&gt; quit<span class="o">()</span>
 </pre></div>
-</td></tr></table></div><div class="admonition note">
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We can re-run <code>init()</code> as often as we like because of the <code>IF NOT EXISTS</code> clause in <code>CREATE TABLE</code> and <code>CREATE INDEX</code>. Otherwise, we'd have to either <code>DROP</code> the old tables/index first, or run each <code>CREATE</code> statement separately.</p>
 </div>
@@ -665,23 +670,7 @@
 <p>This change allows for API extension and <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> that is similar to (and complements) the implementation of <code>QuoteOfTheDay.__init__()</code>.</p>
 </div>
 <p>It's a good idea to make a commit after this work is done. This should be second nature by now, but lets walk through the steps, since we're doing something new: adding an untracked file.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
 <span class="go">On branch qotd</span>
 <span class="go">Changes not staged for commit:</span>
 <span class="go">  (use "git add &lt;file&gt;..." to update what will be committed)</span>
@@ -699,30 +688,12 @@
 
 <span class="go">no changes added to commit (use "git add" and/or "git commit -a")</span>
 </pre></div>
-</td></tr></table></div><p>Note that we now have a file we care about in the <code>Untracked files</code> section, <code>src/random_quote/qotd.py</code>.</p>
+<p>Note that we now have a file we care about in the <code>Untracked files</code> section, <code>src/random_quote/qotd.py</code>.</p>
 <p>We have to <code>git add</code> it in order to get it into our commit:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git add src/random_quote/qotd.py
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git add src/random_quote/qotd.py
 </pre></div>
-</td></tr></table></div><p>Now, <code>git status</code> shows <code>src/random_quote/qotd.py</code> as a new file:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
+<p>Now, <code>git status</code> shows <code>src/random_quote/qotd.py</code> as a new file:</p>
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
 <span class="go">On branch qotd</span>
 <span class="go">Changes to be committed:</span>
 <span class="go">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span>
@@ -742,16 +713,13 @@
 
 <span class="go">    test.db</span>
 </pre></div>
-</td></tr></table></div><p>Now <code>git commit</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git commit -a -m<span class="s2">"Added first-pass of quote of the day functionality"</span>
+<p>Now <code>git commit</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git commit -a -m<span class="s2">"Added first-pass of quote of the day functionality"</span>
 <span class="go">[qotd 53ae911] Added first-pass of quote of the day functionality</span>
 <span class="go"> 4 files changed, 132 insertions(+), 3 deletions(-)</span>
 <span class="go"> create mode 100644 src/random_quote/qotd.py</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="back-end-api-tests">
 <h3>Back-End API Tests</h3>
 <p>We'll put the main quote of the day tests in <code>src/random_quote/tests/test_qotd.py</code>.</p>
@@ -973,20 +941,10 @@
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">preconfigured_manager</span><span class="o">.</span><span class="n">qotd</span><span class="p">,</span> <span class="n">QuoteOfTheDay</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Run the tests:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a</span>
+<span class="go">rootdir: [...]/a</span>
 <span class="go">collected 17 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py .......                            [ 41%]</span>
@@ -995,7 +953,7 @@
 
 <span class="go">=========================== 17 passed in 0.20 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>Now, <code>git add</code> the <code>src/random_quote/tests/test_qotd.py</code> file, and commit.</p>
+<p>Now, <code>git add</code> the <code>src/random_quote/tests/test_qotd.py</code> file, and commit.</p>
 </div>
 <div class="section" id="implementation-web-api-endpoints">
 <h3>Implementation: Web API Endpoints</h3>
@@ -1074,9 +1032,9 @@
                 <span class="k">raise</span> <span class="n">HTTPNotFound</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><p>We can run the http server again and try it out in our browser:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><p>If you look at <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>, you'll notice a quote of the day is returned, instead of a 404:</p>
+<p>If you look at <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>, you'll notice a quote of the day is returned, instead of a 404:</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-second-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-second-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-second-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-200.jpg 200w"/></a>
 </div>
@@ -1182,39 +1140,11 @@
 <p class="last">To quit <code>gunicorn</code>, type control-C.</p>
 </div>
 <p>Running the tests, we see the new ones have been picked up:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">(a) pytest -v src</span>
+<div class="highlight"><pre><span></span><span class="go">(a) pytest -v src</span>
 <span class="go">============================== test session starts ==============================</span>
-<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/a/bin/python</span>
+<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/a/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a</span>
+<span class="go">rootdir: [...]/a</span>
 <span class="go">collected 20 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py::test_add_quote PASSED             [  5%]</span>
@@ -1240,7 +1170,7 @@
 </span>
 <span class="go">=========================== 20 passed in 0.52 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>Commit your changes.</p>
+<p>Commit your changes.</p>
 </div>
 <div class="section" id="version-bump">
 <h3>Version Bump</h3>
@@ -1251,12 +1181,12 @@
 <h3>Rebase To <code>master</code></h3>
 <p>Since we've only done this process once, lets walk through it again.</p>
 <p>First we need to <code>git fetch</code> any outstanding remote changes:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git fetch origin master
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git fetch origin master
 </pre></div>
-</td></tr></table></div><p>Next, interactive <code>git rebase</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git rebase -i master
+<p>Next, interactive <code>git rebase</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git rebase -i master
 </pre></div>
-</td></tr></table></div><p>Be sure to <code>pick</code> the oldest (first) commit, and <code>squash</code> the rest. Don't forget to write a nice log entry when <code>git rebase</code> gives you the chance.</p>
+<p>Be sure to <code>pick</code> the oldest (first) commit, and <code>squash</code> the rest. Don't forget to write a nice log entry when <code>git rebase</code> gives you the chance.</p>
 <p>You can try preserving the old commit messages and adding a summary on the first line:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1271,20 +1201,10 @@ Added HTTP API support for the quote of the day
 Set version to 0.2.0
 </pre></div>
 </td></tr></table></div><p>Re-run the tests to make sure nothing went wrong (there should be 20 passing tests):</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/a</span>
+<span class="go">rootdir: [...]/a</span>
 <span class="go">collected 20 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py .......                            [ 35%]</span>
@@ -1293,32 +1213,16 @@ Set version to 0.2.0
 
 <span class="go">=========================== 20 passed in 0.61 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="checkout-and-merge-master">
 <h3>Checkout And Merge <code>master</code></h3>
 <p>First, <code>git checkout</code> the <code>master</code> branch:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 </pre></div>
-</td></tr></table></div><p>Then <code>git merge</code> to your <code>qotd</code> feature branch:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git merge qotd
+<p>Then <code>git merge</code> to your <code>qotd</code> feature branch:</p>
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git merge qotd
 <span class="go">Updating c2a655e..150ba38</span>
 <span class="go">Fast-forward</span>
 <span class="go"> src/random_quote/__init__.py           |   3 +-</span>
@@ -1334,64 +1238,42 @@ Set version to 0.2.0
 <span class="go"> create mode 100644 src/random_quote/qotd.py</span>
 <span class="go"> create mode 100644 src/random_quote/tests/test_qotd.py</span>
 </pre></div>
-</td></tr></table></div><p>Run the tests again (<code>pytest src</code>)</p>
+<p>Run the tests again (<code>pytest src</code>)</p>
 </div>
 <div class="section" id="push">
 <h3>Push</h3>
 <p>Finally, publish the changes using <code>git push</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> git push origin master
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git push origin master
 <span class="go">Enumerating objects: 25, done.</span>
 <span class="go">Counting objects: 100% (25/25), done.</span>
 <span class="go">Delta compression using up to 8 threads</span>
 <span class="go">Compressing objects: 100% (13/13), done.</span>
 <span class="go">Writing objects: 100% (14/14), 3.44 KiB | 3.44 MiB/s, done.</span>
 <span class="go">Total 14 (delta 6), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">To [...]/random_quote_remote</span>
 <span class="go">   c2a655e..150ba38  master -&gt; master</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 </div>
 <div class="section" id="developer-b-fixes-a-bug-and-deals-with-a-git-conflict">
 <h2 id="developer b fixes a bug and deals with a git conflict">Developer <em>B</em> Fixes A Bug And Deals With a Git Conflict</h2>
 <p>Now, switch to the <code>b</code> clone. We're going to pretend that developer <strong>B</strong> is doing their bug-fix concurrently with the feature that developer <strong>A</strong> just pushed.</p>
 <p>First, <code>deactivate</code> the virtual environment:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> deactivate
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> deactivate
 <span class="gp">$</span>
 </pre></div>
-</td></tr></table></div><p>Then change into the <code>b</code> directory:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ../b
+<p>Then change into the <code>b</code> directory:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> ../b
 </pre></div>
-</td></tr></table></div><p>Initialize, activate, install, run the tests:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
+<p>Initialize, activate, install, run the tests:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
 <span class="gp">$</span> <span class="nb">source</span> bin/activate
 <span class="gp">(b) $</span> pip install -r requirements.txt
 <span class="gp">(b) $</span> pip install -e .
 <span class="gp">(b) $</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b</span>
+<span class="go">rootdir: [...]/b</span>
 <span class="go">collected 10 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py ......                             [ 60%]</span>
@@ -1399,24 +1281,20 @@ Set version to 0.2.0
 
 <span class="go">=========================== 10 passed in 0.49 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>Note there are only 10 tests. This is because our copy of <code>master</code> is from <em>before</em> developer <strong>A</strong> did their work.</p>
+<p>Note there are only 10 tests. This is because our copy of <code>master</code> is from <em>before</em> developer <strong>A</strong> did their work.</p>
 <p>Next, copy the database file again, from your original <code>random_quote</code> checkout,</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
+<div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
 </pre></div>
-</td></tr></table></div><p>Or re-initialize, if you'd like:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
+<p>Or re-initialize, if you'd like:</p>
+<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
 <span class="gp">(random_quote) $</span> python
 <span class="gp">&gt;</span>&gt;&gt;
 </pre></div>
-</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">util</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
 <span class="go">util.ingest("quotes.csv", "test.db")</span>
 </pre></div>
-</td></tr></table></div><div class="section" id="design">
+<div class="section" id="design">
 <h3>Design</h3>
 <p>This bug fix is simply just returning <em>something</em> when an HTTP client makes a GET request for <code>/</code>.</p>
 <p>We'll add a static HTML file to the source that will provide links to, and useful info about, each of the API endpoints. It will be served when a GET request is made for <code>/</code>.</p>
@@ -1425,18 +1303,17 @@ Set version to 0.2.0
 <div class="section" id="make-the-branch">
 <h3>Make The Branch</h3>
 <p>Lets check out and create our branch. We'll call this one <code>index-info</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout -b index-info
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout -b index-info
 <span class="go">Switched to a new branch 'index-info'</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="fix-the-bug">
 <h3>Fix The Bug</h3>
 <p>Lets construct a simple <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a> file that has the information about the API within it. The links will be <em>relative</em>. This allows for flexibility in how we host the API. We'll put it in a special directory within the source.</p>
 <p>First, create the new <code>src/random_quote/static</code> directory:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> mkdir src/random_quote/static
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> mkdir src/random_quote/static
 </pre></div>
-</td></tr></table></div><p>We're using this name because it indicates there are files that need to be served without being processed. We're setting up an entire directory to give us some flexibility in the future. We may want to add some additional static assets (such as images or CSS files) to our API documentation, or build some sort of front-end for the browser. We can switch to using the <code>webob.static.DirectoryApp</code> class and serve the entire directory at once.</p>
+<p>We're using this name because it indicates there are files that need to be served without being processed. We're setting up an entire directory to give us some flexibility in the future. We may want to add some additional static assets (such as images or CSS files) to our API documentation, or build some sort of front-end for the browser. We can switch to using the <code>webob.static.DirectoryApp</code> class and serve the entire directory at once.</p>
 <p>Add the following to <code>src/random_quote/static/index.html</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1583,9 +1460,9 @@ Set version to 0.2.0
             <span class="k">return</span> <span class="n">error_response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Lets start up the web server, and take a quick look:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><p>If we visit <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, we will see the new landing page. We can click the links and they should work.</p>
+<p>If we visit <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, we will see the new landing page. We can click the links and they should work.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-200.jpg 200w"/></a>
 </div>
@@ -1618,32 +1495,12 @@ Set version to 0.2.0
 <p class="last">We could go further with this, and ensure the links actually work. <a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/api.html#webtest.response.TestResponse.click">WebTest's response objects have a click() method</a> that could be used to be a bit more thorough.</p>
 </div>
 <p>We run the tests again to make sure our new case was picked up, and that we didn't break anything else:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest -v src
 
 <span class="go">============================== test session starts ==============================</span>
-<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- /Volumes/Untitled/Projects/branching-with-git-pytest/b/bin/python</span>
+<span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/b/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b</span>
+<span class="go">rootdir: [...]/b</span>
 <span class="go">collected 11 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py::test_add_quote PASSED             [  9%]</span>
@@ -1660,7 +1517,7 @@ Set version to 0.2.0
 </span>
 <span class="go">=========================== 11 passed in 0.20 seconds ===========================</span>
 </pre></div>
-</td></tr></table></div><p>Commit the tests.</p>
+<p>Commit the tests.</p>
 </div>
 <div class="section" id="id1">
 <h3>Version Bump</h3>
@@ -1693,23 +1550,16 @@ Set version to 0.2.0
 <h3>Rebase</h3>
 <p>Lets proceed to do the rebase as usual.</p>
 <p>First, we need to <code>git fetch</code> any remote changes we haven't seen yet:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git fetch
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git fetch
 <span class="go">remote: Enumerating objects: 29, done.</span>
 <span class="go">remote: Counting objects: 100% (29/29), done.</span>
 <span class="go">remote: Compressing objects: 100% (16/16), done.</span>
 <span class="go">remote: Total 17 (delta 8), reused 0 (delta 0)</span>
 <span class="go">Unpacking objects: 100% (17/17), done.</span>
-<span class="go">From /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">From [...]/random_quote_remote</span>
 <span class="go">   c2a655e..9057fd0  master     -&gt; origin/master</span>
 </pre></div>
-</td></tr></table></div><p>Unlike the last couple of times we called <code>git fetch</code>, we actually have changes to download. This is evidenced by the output above.</p>
+<p>Unlike the last couple of times we called <code>git fetch</code>, we actually have changes to download. This is evidenced by the output above.</p>
 <p>When we run <code>git rebase -i master</code>, it works as usual. Be sure to run the tests again (there should still only be <em>11</em> tests).</p>
 </div>
 </div>
@@ -1717,32 +1567,15 @@ Set version to 0.2.0
 <h2 id="merge, now with problems">Merge, Now With <em>Problems</em></h2>
 <p>Now we need to merge <code>master</code> with our local <code>index-info</code> branch.</p>
 <p>First, we check out <code>master</code></p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.</span>
 <span class="go">  (use "git pull" to update your local branch)</span>
 </pre></div>
-</td></tr></table></div><p>Note that git tells us that our branch is behind <code>origin/master</code> by 1 commit, and suggests that we use <code>git pull</code> to update. <code>git pull</code> is like doing a <code>fetch</code> followed by <code>git merge</code>.</p>
+<p>Note that git tells us that our branch is behind <code>origin/master</code> by 1 commit, and suggests that we use <code>git pull</code> to update. <code>git pull</code> is like doing a <code>fetch</code> followed by <code>git merge</code>.</p>
 <p>Remember, this isn't <em>our</em> branch, all of our changes are still within the <code>index-info</code> branch. We're just doing an update of changes to <code>master</code>, that should merge without incident.</p>
 <p>Lets do a <code>git pull</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git pull
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git pull
 <span class="go">Updating fa45753..5e45295</span>
 <span class="go">Fast-forward</span>
 <span class="go"> setup.py                               |   2 +-</span>
@@ -1758,15 +1591,8 @@ Set version to 0.2.0
 <span class="go"> create mode 100644 src/random_quote/qotd.py</span>
 <span class="go"> create mode 100644 src/random_quote/tests/test_qotd.py</span>
 </pre></div>
-</td></tr></table></div><p>You see we've pulled in the changes made to master while we were working. This doesn't affect our code in our local <code>index-info</code> branch. For that, we need to <code>git merge</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git merge index-info
+<p>You see we've pulled in the changes made to master while we were working. This doesn't affect our code in our local <code>index-info</code> branch. For that, we need to <code>git merge</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git merge index-info
 <span class="go">Auto-merging src/random_quote/wsgi.py</span>
 <span class="go">CONFLICT (content): Merge conflict in src/random_quote/wsgi.py</span>
 <span class="go">Auto-merging src/random_quote/tests/test_wsgi.py</span>
@@ -1775,7 +1601,7 @@ Set version to 0.2.0
 <span class="go">CONFLICT (content): Merge conflict in setup.py</span>
 <span class="go">Automatic merge failed; fix conflicts and then commit the result.</span>
 </pre></div>
-</td></tr></table></div><p><strong>Oh no!</strong> We have some <em>conflicts</em>. This means there are areas of files that git couldn't merge. Typically this means files where the changes are diffuse, or specific lines can't be matched up.</p>
+<p><strong>Oh no!</strong> We have some <em>conflicts</em>. This means there are areas of files that git couldn't merge. Typically this means files where the changes are diffuse, or specific lines can't be matched up.</p>
 <p>It's important to note that the files that are in conflict get marked up to preserve the conflict.</p>
 <p>If you look into <code>src/random_quote/tests/test_wsgi.py</code>, you can see what that looks like:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 68
@@ -1869,30 +1695,7 @@ Set version to 0.2.0
 <span class="hll"><span class="s2">&gt;&gt;&gt;&gt;&gt;&gt;&gt; index-info</span>
 </span></pre></div>
 </td></tr></table></div><p>Now <code>git status</code> shows the conflicting files:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">(b) git status</span>
+<div class="highlight"><pre><span></span><span class="go">(b) git status</span>
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -1917,7 +1720,7 @@ Set version to 0.2.0
 
 <span class="go">    test.db</span>
 </pre></div>
-</td></tr></table></div><p>Taking a look at the the other two files in question, we see that the primary issue arises because we're doing two different actions when an HTTP client makes a GET request for <code>/</code>, as you might expect. It's important to note the reason for the conflict is that the <em>specific lines</em> that changed are in conflict, not the overall changes.</p>
+<p>Taking a look at the the other two files in question, we see that the primary issue arises because we're doing two different actions when an HTTP client makes a GET request for <code>/</code>, as you might expect. It's important to note the reason for the conflict is that the <em>specific lines</em> that changed are in conflict, not the overall changes.</p>
 <p>The secondary issue is that we have conflicting version numbers in <code>setup.py</code>:</p>
 <p><code>src/random_quote/wsgi.py</code>:</p>
 <blockquote>
@@ -2091,24 +1894,19 @@ Set version to 0.2.0
 <p class="last">Check out <a class="reference external" href="https://git-scm.com/docs/git-mergetool">git mergetool</a> for details.</p>
 </div>
 <p>Before we can do a manual test, we need to add the changes to the database schema. This is done using <code>util.init()</code>, run from the interpreter:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> python
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> python
 <span class="go">Python 3.7.3 (default, Mar 30 2019, 03:37:43)</span>
 <span class="go">[Clang 10.0.0 (clang-1000.11.45.5)] on darwin</span>
 <span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
 <span class="gp">&gt;</span>&gt;&gt;
 </pre></div>
-</td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote.util</span> <span class="kn">import</span> <span class="n">init</span>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote.util</span> <span class="kn">import</span> <span class="n">init</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div><p>Now we can start up <code>gunicorn</code> again:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<p>Now we can start up <code>gunicorn</code> again:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><p>And open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>,</p>
+<p>And open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>,</p>
 <blockquote>
 <div class="figure align-center" style="width: 60%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-200.jpg 200w"/></a>
@@ -2309,20 +2107,10 @@ Set version to 0.2.0
     <span class="k">assert</span> <span class="n">json_quote</span> <span class="o">==</span> <span class="n">quote</span>
 </pre></div>
 </td></tr></table></div><p>Now we can run the tests to make sure everything still works:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest src
 <span class="go">================================ test session starts =================================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0</span>
-<span class="go">rootdir: /Volumes/Untitled/Projects/branching-with-git-pytest/b</span>
+<span class="go">rootdir: [...]/b</span>
 <span class="go">collected 21 items</span>
 
 <span class="go">src/random_quote/tests/test_manager.py .......                                 [ 33%]</span>
@@ -2331,7 +2119,7 @@ Set version to 0.2.0
 
 <span class="go">============================= 21 passed in 0.36 seconds ==============================</span>
 </pre></div>
-</td></tr></table></div><p>Before we proceed, we have one last thing to do: we need to update the web API documentation at <code>/</code> to reflect the new API endpoints that we added as part of resolving the conflicts.</p>
+<p>Before we proceed, we have one last thing to do: we need to update the web API documentation at <code>/</code> to reflect the new API endpoints that we added as part of resolving the conflicts.</p>
 <div class="section" id="documentation-update">
 <h3>Documentation Update</h3>
 <p>Add the following links to <code>src/random_quote/static/index.html</code>:</p>
@@ -2344,9 +2132,9 @@ Set version to 0.2.0
     <span class="p">&lt;</span><span class="nt">dd</span><span class="p">&gt;</span>Retrieve all previous "Quote of the day." entries.<span class="p">&lt;/</span><span class="nt">dd</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div><p>Start up <code>gunicorn</code> again:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-</td></tr></table></div><p>If we open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, the new page is shown, and the links do what they're supposed to.</p>
+<p>If we open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, the new page is shown, and the links do what they're supposed to.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-fourth-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-fourth-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-200.jpg 200w"/></a>
 </div>
@@ -2355,36 +2143,7 @@ Set version to 0.2.0
 <h3>Complete the merge</h3>
 <p>Now that we've untangled this mess, we need to finish up the merge.</p>
 <p><code>git status</code> reminds us that we're in the middle of merging:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -2415,39 +2174,13 @@ Set version to 0.2.0
 
 <span class="go">    test.db</span>
 </pre></div>
-</td></tr></table></div><p>To finish the merge, we first need to let git know the conflicted files are fixed. We do this by using <code>git add</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git add src/random_quote/tests/test_wsgi.py
+<p>To finish the merge, we first need to let git know the conflicted files are fixed. We do this by using <code>git add</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git add src/random_quote/tests/test_wsgi.py
 <span class="gp">(b) $</span> git add src/random_quote/wsgi.py
 <span class="gp">(b) $</span> git add setup.py
 </pre></div>
-</td></tr></table></div><p>Now <code>git status</code> tells us what we need to do next:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
+<p>Now <code>git status</code> tells us what we need to do next:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -2473,55 +2206,42 @@ Set version to 0.2.0
 
 <span class="go">    test.db</span>
 </pre></div>
-</td></tr></table></div><p>To complete the merge, we just need to do what <code>git status</code> is telling us: <code>git commit</code>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git commit -a -m<span class="s2">"Resolved API endpoint conflicts"</span>
+<p>To complete the merge, we just need to do what <code>git status</code> is telling us: <code>git commit</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git commit -a -m<span class="s2">"Resolved API endpoint conflicts"</span>
 <span class="go">[master 36c0796] Resolved API endpoint conflicts</span>
 </pre></div>
-</td></tr></table></div><p>Now we can <code>git push</code> our changes to the remote:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git push origin master
+<p>Now we can <code>git push</code> our changes to the remote:</p>
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git push origin master
 <span class="go">Enumerating objects: 37, done.</span>
 <span class="go">Counting objects: 100% (36/36), done.</span>
 <span class="go">Delta compression using up to 8 threads</span>
 <span class="go">Compressing objects: 100% (18/18), done.</span>
 <span class="go">Writing objects: 100% (23/23), 2.59 KiB | 2.59 MiB/s, done.</span>
 <span class="go">Total 23 (delta 12), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">To [...]/random_quote_remote</span>
 <span class="go">   9057fd0..5ccabd1  master -&gt; master</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 </div>
 <div class="section" id="tag-the-fixed-version">
 <h2 id="tag the fixed version">Tag The Fixed Version</h2>
 <p>As a last step, we just need to <code>git tag</code> our new version, and push it to the remote:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(b) $</span> git tag v0.2.1
+<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git tag v0.2.1
 <span class="gp">(b) $</span> git push origin v0.2.1
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
-<span class="go">To /Volumes/Untitled/Projects/branching-with-git-pytest/random_quote_remote</span>
+<span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new tag]         v0.2.1 -&gt; v0.2.1</span>
 </pre></div>
-</td></tr></table></div></div>
+</div>
 <div class="section" id="conclusion">
 <h2 id="conclusion">Conclusion</h2>
 <p>In this final section, we covered resolving merge conflicts.</p>
 <p>Now, you should be well-versed in working with git branches and using pytest to ensure you don't break things. 🦄</p>
-<p>If you have any ideas, problems, or suggestions, don't hesitate to <a class="reference external" href="/drafts/pages/contact.html">contact the author</a>.</p>
+<p>If you have any ideas, problems, or suggestions, don't hesitate to <a class="reference external" href="/pages/contact.html">contact the author</a>.</p>
 </div>
 <div class="section" id="resources-what-to-do-if-you-messed-up">
 <h2 id="resources, what to do if you messed up">Resources, What To Do If You Messed Up</h2>
-<p>Feel free to <a class="reference external" href="/drafts/pages/contact.html">contact the author</a> if you have any problems with this guide.</p>
+<p>Feel free to <a class="reference external" href="/pages/contact.html">contact the author</a> if you have any problems with this guide.</p>
 <p>Check out <a class="reference external" href="http://sethrobertson.github.io/GitFixUm/fixup.html">http://sethrobertson.github.io/GitFixUm/fixup.html</a> for a nice general git troubleshooting guide! It's extremely well done.</p>
 </div>
 </div><!-- /.entry-content -->
@@ -2529,7 +2249,7 @@ Set version to 0.2.0
 </div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2018 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>
