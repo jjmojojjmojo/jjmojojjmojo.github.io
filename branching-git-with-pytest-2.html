@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -151,7 +145,7 @@
 <p>Let's run the application locally so we can play with it in a browser, and identify a bug to fix.</p>
 <p><code>requirements.txt</code> has installed a web server for us called <a class="reference external" href="https://gunicorn.org/">Gunicorn</a>. It's a pure-python server that has a lot of great production-quality features.</p>
 <p>We'll start the <code>gunicorn</code> server using a couple of useful command-line options, since we'll be messing with the code:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <div class="explanation section">
 <h3>Explanation</h3>
@@ -295,7 +289,7 @@
 <div class="section" id="create-a-branch">
 <h2 id="create a branch">Create A Branch</h2>
 <p>Let's list the existing branches first:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git branch --list
 <span class="go">* master</span>
 </pre></div>
 <div class="figure align-right" style="width: 40%">
@@ -304,17 +298,17 @@
 <p>We see the <code>master</code> branch all by itself. <code>master</code> is the default name for the first branch in a repository. We have <em>checked out</em> the <code>master</code> branch, as indicated by the asterisk (*).</p>
 <p>We need a good name for our branch. The name should be obvious and specific to this bug. If you use an issue tracking system, the issue number is a good idea. Since we aren't using an issue tracker for this guide, lets do something descriptive. We'll call our bug branch <code>bug-unknown-id</code>.</p>
 <p>Here's how it is created:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git branch bug-unknown-id
 </pre></div>
 <p>Running <code>git branch --list</code> again, we can see our branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git branch --list
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git branch --list
 <span class="go">bug-unknown-id</span>
 <span class="go">* master</span>
 </pre></div>
 <p>We're still "on" the <code>master</code> branch. We need to change branches, or <code>git checkout</code> our new branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git checkout bug-unknown-id
 <span class="go">Switched to branch 'bug-unknown-id'</span>
-<span class="gp">(random_quote) $</span> git branch --list
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git branch --list
 <span class="go">* bug-unknown-id</span>
 <span class="go">master</span>
 </pre></div>
@@ -401,10 +395,10 @@
 <span class="sd">    """</span>
     <span class="n">quote</span> <span class="o">=</span> <span class="n">preconfigured_manager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"zzzzz"</span><span class="p">)</span>
 
-    <span class="k">assert</span> <span class="n">quote</span> <span class="ow">is</span> <span class="bp">None</span>
+    <span class="k">assert</span> <span class="n">quote</span> <span class="ow">is</span> <span class="kc">None</span>
 </pre></div>
 </td></tr></table></div><p>Running the tests, we can now see there are 8 tests now, and one fails:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src -v
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src -v
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -466,7 +460,7 @@
 </div>
 <p>This is identical to our previous commit process, but lets go through it again.</p>
 <p>First, lets check what changed using <code>git status</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git status
 <span class="hll"><span class="go">On branch bug-unknown-id</span>
 </span><span class="go">Changes not staged for commit:</span>
 <span class="go">  (use "git add &lt;file&gt;..." to update what will be committed)</span>
@@ -485,7 +479,7 @@
 </pre></div>
 <p>Note that git tells us which branch we're on. It's a good idea to get in the habit of looking at that line of output.</p>
 <p>Next, we'll <code>git commit</code> our changes, using the <code>-m</code> parameter:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Added failing test an unknown id is passed to RandomQuoteManager.get()"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Added failing test an unknown id is passed to RandomQuoteManager.get()"</span>
 <span class="go">[bug-unknown-id 34afe34] Added failing test an unknown id is passed to RandomQuoteManager.get()</span>
 <span class="go"> 1 file changed, 9 insertions(+), 1 deletion(-)</span>
 </pre></div>
@@ -521,8 +515,8 @@
 
 <span class="hll">    <span class="n">result</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 </span><span class="hll">
-</span><span class="hll">    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-</span><span class="hll">        <span class="k">return</span> <span class="bp">None</span>
+</span><span class="hll">    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span class="hll">        <span class="k">return</span> <span class="kc">None</span>
 </span><span class="hll">    <span class="k">else</span><span class="p">:</span>
 </span><span class="hll">        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span></pre></div>
@@ -533,12 +527,12 @@
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">quote</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">id_i_want</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">quote</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"HEY WE GOT ONE!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"HEY WE GOT ONE!"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">"QUOTE {id_i_want} NOT FOUND!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"QUOTE </span><span class="si">{</span><span class="n">id_i_want</span><span class="si">}</span><span class="s2"> NOT FOUND!"</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
 <div class="figure align-center" style="width: 80%">
@@ -546,7 +540,7 @@
 </div>
 <p>At this point, we aren't getting the error anymore, but we aren't necessarily getting a useful result, since we're seeing the JSON serialization of <code>None</code>, the special Javascript value <code>null</code>. We'll deal with this issue in a minute. But our bug is now fixed.</p>
 <p>Next, lets re-run our tests:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest -v src
 <span class="go">============================= test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -608,7 +602,7 @@ index 762ef05..d9da9cf 100644
 <p class="last">You can use <code>git difftool</code> to view diffs in a graphical diff viewer. The <a class="reference external" href="https://git-scm.com/docs/git-difftool">git-difftool docuentation</a> has usage details.</p>
 </div>
 <p>Now since we like the changes that were made, we can make a commit:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Fixed bug where a non-existent quote id would raise a TypeError"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Fixed bug where a non-existent quote id would raise a TypeError"</span>
 <span class="go">[bug-unknown-id d9d2408] Fixed bug where a non-existent quote id would raise a TypeError</span>
 <span class="go">1 file changed, 6 insertions(+), 1 deletion(-)</span>
 </pre></div>
@@ -663,7 +657,7 @@ index 762ef05..d9da9cf 100644
 </pre></div>
 </td></tr></table></div><p><code>WebTest.TestApp</code>, returned by our fixture, does a lot of checking for us. Normally, it will even raise an exception when a non-"200 OK" status is returned. So in order to check for a specific status, we need to let the <code>TestApp.get()</code> method know we are expecting a different response code. This is done with the <code>status</code> keyword parameter (it can be a specific number, or a pattern to match, like "4??").</p>
 <p>When the tests run, we see the error, this time, it's raised by <code>WebTest.Testapp</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest -v src
 <span class="go">============================= test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -848,7 +842,7 @@ index 762ef05..d9da9cf 100644
         <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </td></tr></table></div><p>Now, when we run the tests again, the <code>test_get_quote_unknown_id()</code> case passes:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -891,7 +885,7 @@ index 762ef05..d9da9cf 100644
 </span>    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">'random_quote'</span><span class="p">],</span>
     <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">''</span><span class="p">:</span><span class="s1">'src'</span><span class="p">},</span>
     <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'webob'</span><span class="p">],</span>
-    <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>You can also add <strong>EXTENSIONS</strong> to the version when needed, like <strong>0.1.0-alpha</strong>. These extensions are useful for special releases, like handing off a pre-release version to testers or early adopters, or if you make a special variant of a release for a specific client.</p>
@@ -904,7 +898,7 @@ index 762ef05..d9da9cf 100644
 <p>Since this is the first bug, we just need to increment the last number. As such, our new version is <strong>0.1.1</strong>.</p>
 <p>We'll leave making this change as an exercise for the user.</p>
 <p>After the version change, be sure to re-install the application, using <code>pip</code>, as we did in the initial setup:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pip install -e .
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pip install -e .
 <span class="go">Obtaining file://[...]/random_quote</span>
 <span class="go">Requirement already satisfied: webob in ./lib/python3.7/site-packages (from random-quote==0.1.1) (1.8.5)</span>
 <span class="go">Installing collected packages: random-quote</span>
@@ -915,7 +909,7 @@ index 762ef05..d9da9cf 100644
 <span class="go">Successfully installed random-quote</span>
 </pre></div>
 <p>And re-run the tests to make sure everything is still working:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src
 <span class="go">==================================== test session starts =====================================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -934,7 +928,7 @@ index 762ef05..d9da9cf 100644
 <a href="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/workflow-overview-part2-c-cropped.jpg" srcset="/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2500.jpg 2500w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-2000.jpg 2000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1800.jpg 1800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1600.jpg 1600w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1200.jpg 1200w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-1000.jpg 1000w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-800.jpg 800w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-400.jpg 400w,/images/branching-git-pytest/responsive/workflow-overview-part2-c-cropped-200.jpg 200w"/></a>
 </div>
 <p>We now have a backlog containing a handful of changes, all regarding this bug:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log --pretty<span class="o">=</span>oneline
 
 <span class="go">5b81947745f2c184619a9d7c1a99546d9aa01662 (HEAD -&gt; bug-unknown-id) Increased the version number</span>
 <span class="go">640c4e2431776e9b6c252bef1c7509fee1557c79 Added test for requesting a non-existant quote id in the HTTP API</span>
@@ -961,12 +955,12 @@ index 762ef05..d9da9cf 100644
 <p class="last">Just be sure to delete it as soon as you're finished. Note that your virtual environment might not function. There are hard-coded paths in some of the environment files. To use the environment, you'll need to clean out the virtual environment directories/files (<code>lib</code>, <code>bin</code>, <code>include</code>, <code>pyvenv.cfg</code>) and re-run <code>python -m venv .</code>.</p>
 </div>
 <p>First, we'll use <code>git fetch</code> to retrieve the latest version of the <code>master</code> branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git fetch origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git fetch origin master
 <span class="go">From [...]/random_quote_remote</span>
 <span class="go"> * branch            master     -&gt; FETCH_HEAD</span>
 </pre></div>
 <p><code>git rebase</code> has an <em>interactive</em> mode that makes the process simple 🦄. Start by invoking <code>git rebase</code> with the <code>-i</code> switch and telling git what you want to rebase <em>to</em>. In our case, we want to rebase against the changes made to <code>master</code>, the branch we started with (this can be a branch, a specific commit id, or a tag):</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git rebase -i master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git rebase -i master
 </pre></div>
 <p>We'll be presented with a file in our editor (it will likely be <code>vim</code> on most platforms, but as discussed earlier, it's configurable and varies) that looks like this:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1142,7 +1136,7 @@ Increased the version number
 <span class="go">Successfully rebased and updated refs/heads/bug-unknown-id.</span>
 </pre></div>
 <p>If we run <code>git log --pretty</code> again, we can see our old commits are gone, and the last one is present:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log --pretty
 
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
@@ -1211,12 +1205,12 @@ Increased the version number
 <p>In either case, we still have to go through the same basic process.</p>
 <p>Now, we'll <code>git checkout</code> <code>master</code>, and <code>git merge</code> our branch:</p>
 <p>First the <code>git checkout</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 </pre></div>
 <p>Then the <code>git merge</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git merge bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git merge bug-unknown-id
 <span class="go">Updating 370f975..94a4210</span>
 <span class="go">Fast-forward</span>
 <span class="go"> setup.py                               |  2 +-</span>
@@ -1226,7 +1220,7 @@ Increased the version number
 <span class="go"> 4 files changed, 24 insertions(+), 5 deletions(-)</span>
 </pre></div>
 <p><code>git status</code> shows us that we are one commit ahead of our remote repository:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is ahead of 'origin/master' by 1 commit.</span>
 <span class="go">  (use "git push" to publish your local commits)</span>
@@ -1239,10 +1233,10 @@ Increased the version number
 <span class="go">nothing added to commit but untracked files present (use "git add" to track)</span>
 </pre></div>
 <p>To make our changes public, we just need to <code>git push</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git push origin master
 </pre></div>
 <p>Now we can see our bug fix as a single commit in the log:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log --pretty
 
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; master, origin/master, origin/HEAD, bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
@@ -1264,7 +1258,7 @@ Increased the version number
 <p class="last">There are two types of tags, "lightweight" and "annotated". The specifics aren't important for this guide, just be aware there is a difference, and know that we are using lightweight tags here.</p>
 </div>
 <p>Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log -n1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log -n1
 <span class="go">commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&gt; master, tag: v0.1.1, origin/master, origin/HEAD, bug-unknown-id)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
 <span class="go">Date:   Tue May 7 11:05:01 2019 -0400</span>
@@ -1277,32 +1271,32 @@ Increased the version number
 </div>
 <p>We are going to name our tag <code>v0.1.1</code>. The exact format is up to you and people you collaborate with, but it's useful to use a common prefix to help classify what the tag <em>means</em>. In this case, we're using <code>v</code> to indicate a release version. This is helpful later when your project has possibly hundreds of tags, for may reasons besides marking released versions, since we can do pattern matching when listing tags.</p>
 <p>Now for the actual tagging:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git tag v0.1.1
 </pre></div>
 <p>To see what tags we've made, we can run <code>git tag</code> without any arguments:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git tag
 <span class="go">v0.1.1</span>
 </pre></div>
 <p>If we wanted to limit what tags we want to see, we can use the <code>-l</code> parameter:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -l <span class="s2">"v*"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git tag -l <span class="s2">"v*"</span>
 <span class="go">v0.1.1</span>
 </pre></div>
 <p>We can remove a tag using the <code>-d</code> flag:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag -d v0.1.1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git tag -d v0.1.1
 <span class="go">Deleted tag 'v0.1.1' (was e80d483)</span>
 </pre></div>
 <div class="section" id="remote-vs-local-tags">
 <h3>Remote Vs Local Tags</h3>
 <p>So far, we've only used <em>local</em> tags. These tags only exist in our working directory - they aren't available in our <em>remote</em>, or the repository we cloned. To make a tag remote, we use <code>git push</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git tag v0.1.1 <span class="c1"># need to remake since we deleted it above</span>
-<span class="gp">(random_quote) $</span> git push origin v0.1.1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git tag v0.1.1 <span class="c1"># need to remake since we deleted it above</span>
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git push origin v0.1.1
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
 <span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new tag]         v0.1.1 -&gt; v0.1.1</span>
 </pre></div>
 <p>This is very similar to when we ran <code>git push</code> in the last section, but git knows we are only asking to send the new tag to the repository.</p>
 <p>To delete a remote tag, we need to let <code>git push</code> know with the <code>--delete</code> flag:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin --delete v0.1.1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git push origin --delete v0.1.1
 <span class="go"> - [deleted]         v0.1.1</span>
 </pre></div>
 <div class="admonition note">
@@ -1322,7 +1316,7 @@ Increased the version number
 <p>As with tags, branches exist in <em>local</em> and <em>remote</em> versions. Our branch, so far, only exists in our clone of the repository. This is good, since we were able to fix our bug and merge our changes into <code>master</code> without having to show the code to anyone.</p>
 <p>However, when you are collaborating with people, you'll often need to give them access to your code. This is done by making your branch <em>remote</em>.</p>
 <p>We use <code>git push</code> to do this, just like we did with tags:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin bug-unknown-id
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git push origin bug-unknown-id
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
 <span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new branch]      bug-unknown-id -&gt; bug-unknown-id</span>

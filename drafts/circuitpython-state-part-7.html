@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -211,7 +205,7 @@
     <span class="n">_ranges</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -222,7 +216,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
@@ -230,7 +224,7 @@
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -283,7 +277,7 @@
     <span class="n">_ranges</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">read_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -410,7 +404,7 @@
 91
 92
 93</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Status</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_input</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">event_check</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_input</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">event_check</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_input</span> <span class="o">=</span> <span class="n">read_input</span>
@@ -418,7 +412,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">event_check</span> <span class="o">=</span> <span class="n">event_check</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
 
-        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -427,11 +421,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
 
-        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span>
@@ -441,7 +435,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
@@ -452,7 +446,7 @@
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -491,7 +485,7 @@
     <span class="n">ranges</span><span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">})</span>
 
 <span class="n">light</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span>
@@ -591,7 +585,7 @@
 7
 8
 9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">alter_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">d</span><span class="p">[</span><span class="s2">"gotcha"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">... </span>    <span class="n">d</span><span class="p">[</span><span class="s2">"gotcha"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"python"</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mydict</span>
@@ -634,10 +628,10 @@
 <span class="gp">... </span>    <span class="n">f</span><span class="p">(</span><span class="n">who</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">who</span><span class="o">=</span><span class="s2">"python"</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="n">who</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="n">who</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="n">who</span><span class="o">=</span><span class="s2">"python"</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"goodbye"</span><span class="p">,</span> <span class="n">who</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"goodbye"</span><span class="p">,</span> <span class="n">who</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">call_me</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
 <span class="go">hello python</span>
@@ -811,7 +805,7 @@
 <span class="kn">from</span> <span class="nn">state</span> <span class="kn">import</span> <span class="n">state</span>
 
 <span class="k">class</span> <span class="nc">Status</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_input</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">event_check</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_input</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">event_check</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_input</span> <span class="o">=</span> <span class="n">read_input</span>
@@ -819,7 +813,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">event_check</span> <span class="o">=</span> <span class="n">event_check</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
 
-        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -828,11 +822,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
 
-        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span>
@@ -846,20 +840,20 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">read_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -869,7 +863,7 @@
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -911,29 +905,29 @@
     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">thermistor</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">thermistor_high</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Temp is High!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Temp is High!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">thermistor_medium</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Temp is Medium!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Temp is Medium!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">thermistor_low</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Temp is Low!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Temp is Low!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">photocell_high</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Light is High!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Light is High!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">photocell_medium</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Light is Medium!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Light is Medium!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">photocell_low</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Light is Low!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Light is Low!"</span><span class="p">)</span>
 
 <span class="n">temp</span> <span class="o">=</span> <span class="n">Status</span><span class="p">(</span>
     <span class="n">thermistor_read</span><span class="p">,</span>
     <span class="n">ranges</span><span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">},</span>
     <span class="n">high</span><span class="o">=</span><span class="n">thermistor_high</span><span class="p">,</span>
     <span class="n">medium</span><span class="o">=</span><span class="n">thermistor_medium</span><span class="p">,</span>
@@ -951,7 +945,7 @@
     <span class="n">medium</span><span class="o">=</span><span class="n">photocell_medium</span><span class="p">,</span>
     <span class="n">low</span><span class="o">=</span><span class="n">photocell_low</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">light</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -1013,7 +1007,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">read_input</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reporting_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -1029,9 +1023,9 @@
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 </pre></div>
@@ -1114,7 +1108,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">read_input</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reporting_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -1130,9 +1124,9 @@
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -1145,15 +1139,15 @@
     <span class="n">temp_input</span> <span class="o">=</span> <span class="n">AnalogInput</span><span class="p">(</span><span class="n">read_temperature</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">light_input</span> <span class="o">=</span> <span class="n">AnalogInput</span><span class="p">(</span><span class="n">read_light</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">temp_input</span><span class="p">()</span>
         <span class="n">light_input</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">temp_input</span><span class="o">.</span><span class="n">changed</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Temperature changed!"</span><span class="p">,</span> <span class="n">temp_input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="n">temp_input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Temperature changed!"</span><span class="p">,</span> <span class="n">temp_input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="n">temp_input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">light_input</span><span class="o">.</span><span class="n">changed</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Light level changed!"</span><span class="p">,</span> <span class="n">light_input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="n">light_input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Light level changed!"</span><span class="p">,</span> <span class="n">light_input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="n">light_input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Next, we can create a generic <tt class="docutils literal">StatusEvents</tt> class, that detects the changes in state and dispatches events:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1235,11 +1229,11 @@
 77
 78
 79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">StatusEvents</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_obj</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_obj</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">input_obj</span>
 
-        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -1248,11 +1242,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
 
-        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span>
@@ -1262,29 +1256,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="o">=</span> <span class="n">low</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -1311,7 +1305,7 @@
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">changed</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Changed!"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Changed!"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><p>Again, we've opted to use the <tt class="docutils literal">__call__()</tt> method instead of <tt class="docutils literal">update()</tt>. But the rest of the code is nearly identical to our old <tt class="docutils literal">Status</tt> class. The main exception being that we are expecting an <tt class="docutils literal">AnalogInput</tt> object instead of a function to handle the reading, and of course, we aren't doing any of the sampling word we factored into <tt class="docutils literal">AnalogInput</tt>.</p>
@@ -1347,26 +1341,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"High '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"High '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Medium '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Medium '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Low '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Low '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">LEDHighNoticeHandler</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">led</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">led</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </td></tr></table></div><p>These two classes have completely different purposes. <tt class="docutils literal">PrintEventHandler</tt> prints a notice to the console when each event occurs.</p>
 <p><tt class="docutils literal">LEDHighNoticeHandler</tt> turns an LED (assumed to be a <tt class="docutils literal">﻿DigitalInOut</tt> object, we'll use the onboard red LED on pin 13) on or off when the <tt class="docutils literal">AnalogInput</tt> is in the "high" range.</p>
@@ -1585,7 +1579,7 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"light"</span>
 
@@ -1610,7 +1604,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">read_input</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reporting_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -1626,9 +1620,9 @@
             <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -1637,34 +1631,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"High '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"High '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Medium '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Medium '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Low '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Low '</span><span class="si">%s</span><span class="s2">' event detected"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">LEDHighNoticeHandler</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">led</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="n">led</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">class</span> <span class="nc">StatusEvents</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_obj</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_obj</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">medium</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">input_obj</span>
 
-        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -1673,11 +1667,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
 
-        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ranges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
                 <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="n">ranges</span>
@@ -1687,29 +1681,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="o">=</span> <span class="n">low</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">high</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_high</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_high</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_medium</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_low</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_low</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -1736,7 +1730,7 @@
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">changed</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Changed!"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Changed!"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">read_temperature</span><span class="p">():</span>
@@ -1758,7 +1752,7 @@
     <span class="n">ranges</span><span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">},</span>
     <span class="n">high</span><span class="o">=</span><span class="n">temp_handler</span><span class="o">.</span><span class="n">high</span><span class="p">,</span>
     <span class="n">medium</span><span class="o">=</span><span class="n">temp_handler</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span>
@@ -1775,7 +1769,7 @@
     <span class="n">medium</span><span class="o">=</span><span class="n">light_handler</span><span class="o">.</span><span class="n">medium</span><span class="p">,</span>
     <span class="n">low</span><span class="o">=</span><span class="n">light_handler</span><span class="o">.</span><span class="n">low</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="p">()</span>
     <span class="n">light</span><span class="p">()</span>
@@ -1828,12 +1822,12 @@
 <span class="n">button</span> <span class="o">=</span> <span class="c1"># digital pin object</span>
 
 <span class="c1"># is the button pressed or not</span>
-<span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">debounce</span> <span class="n">time</span> <span class="n">has</span> <span class="n">passed</span><span class="p">:</span>
         <span class="c1"># button has been pressed</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </td></tr></table></div></div>
 <div class="section" id="event-2-release">
@@ -1860,11 +1854,11 @@
 <span class="n">button</span> <span class="o">=</span> <span class="c1"># digital pin object</span>
 
 <span class="c1"># is the button pressed or not</span>
-<span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
     <span class="c1"># button has been released</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div></div>
 <div class="section" id="event-3-hold">
@@ -1904,21 +1898,21 @@
 <span class="n">button</span> <span class="o">=</span> <span class="c1"># properly configured digital pin</span>
 
 <span class="c1"># is the button pressed or not</span>
-<span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># time that we started holding</span>
 <span class="n">held_since</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
 <span class="c1"># remember the following is being run with a delay for debounce</span>
 <span class="n">every</span> <span class="n">debounce</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># button has been pressed</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">held_since</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="c1"># button has been released</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">held_since</span> <span class="o">&gt;</span> <span class="n">some_threshold</span><span class="p">:</span>
             <span class="c1"># button has been held</span>
@@ -1963,32 +1957,32 @@
 <span class="n">button</span> <span class="o">=</span> <span class="c1"># properly configured digital pin</span>
 
 <span class="c1"># is the button pressed or not</span>
-<span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># is the button being held</span>
-<span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># checkin to detect a hold</span>
 <span class="n">hold_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
 <span class="c1"># remember the following is being run with a delay for debounce</span>
 <span class="n">every</span> <span class="n">debounce</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># button has been pressed</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">hold_check</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">hold_check</span> <span class="o">&gt;</span> <span class="n">some_hold_threshold</span><span class="p">:</span>
-        <span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">hold_check</span> <span class="o">&gt;</span> <span class="n">some_hold_threshold</span><span class="p">:</span>
+        <span class="n">holding</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="k">if</span> <span class="n">holding</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">holding</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># dispatch the hold event</span>
         <span class="c1"># this will happen every time we debounce</span>
 
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">button</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="c1"># button has been released</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>Both approaches are valid, and which one to use will depend on your application.</p>
 <p>The first approach works well when we don't need to do anything <em>during</em> the time a button is being held down. An example of a use case for this would be holding a button for, say 2 seconds to change into a different <em>mode</em>, or holding the button in for 5 seconds to power the project off.</p>
@@ -2106,12 +2100,12 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
     <span class="n">_hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># get the state of the button</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
@@ -2122,13 +2116,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="o">=</span> <span class="n">hold</span>
 
     <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2137,15 +2131,15 @@
     <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -2155,7 +2149,7 @@
 
         <span class="c1"># button has been held</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hold_threshold</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hold</span><span class="p">()</span>
 
         <span class="c1"># button has been pressed</span>
@@ -2168,23 +2162,23 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span>  <span class="s2">"&lt;Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">"&lt;Check: </span><span class="si">{}</span><span class="s2">, State: </span><span class="si">{}</span><span class="s2"> Checkin: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">value</span><span class="p">():</span>
     <span class="n">reutrn</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">press</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A pressed!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A pressed!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">release</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A released!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A released!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 
 <span class="n">dispatch</span> <span class="o">=</span> <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">hold</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><div class="explanation section">
@@ -2291,32 +2285,32 @@
     <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">press_a</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A pressed!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A pressed!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">release_a</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A released!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A released!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hold_a</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">value_b</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">press_b</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B pressed!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B pressed!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">release_b</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B released!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B released!"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hold_b</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B held for "</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_a</span><span class="p">,</span> <span class="n">press_a</span><span class="p">,</span> <span class="n">release_a</span><span class="p">,</span> <span class="n">hold_a</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_b</span><span class="p">,</span> <span class="n">press_b</span><span class="p">,</span> <span class="n">release_b</span><span class="p">,</span> <span class="n">hold_b</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
@@ -2360,17 +2354,17 @@
     <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">say_hey</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"HEYDIE HEYDIE HEYDIE HEY"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"HEYDIE HEYDIE HEYDIE HEY"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">say_ho</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"HIDIE HIDIE HIDIE HO"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"HIDIE HIDIE HIDIE HO"</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_a</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">say_hey</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_b</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">say_ho</span><span class="p">)</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_a</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">say_hey</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="n">value_b</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">say_ho</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
@@ -2496,13 +2490,13 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
     <span class="n">_hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># get the state of the button</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
@@ -2513,13 +2507,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="o">=</span> <span class="n">hold</span>
 
     <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2528,15 +2522,15 @@
     <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -2546,7 +2540,7 @@
 
         <span class="c1"># button has been held</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hold_threshold</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hold</span><span class="p">()</span>
 
         <span class="c1"># button has been pressed</span>
@@ -2559,32 +2553,32 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span>  <span class="s2">"&lt;Button {}|Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">"&lt;Button </span><span class="si">{}</span><span class="s2">|Check: </span><span class="si">{}</span><span class="s2">, State: </span><span class="si">{}</span><span class="s2"> Checkin: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button {} pressed!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button </span><span class="si">{}</span><span class="s2"> pressed!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button {} released!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button </span><span class="si">{}</span><span class="s2"> released!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"HEYDIE HEYDIE HEYDIE HEY"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"HEYDIE HEYDIE HEYDIE HEY"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"HIDIE HIDIE HIDIE HO"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"HIDIE HIDIE HIDIE HO"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button {} held for {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button </span><span class="si">{}</span><span class="s2"> held for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">hold</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">hold</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
@@ -2647,7 +2641,7 @@
 15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># ... snip ...</span>
 
 <span class="err">﻿</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
@@ -2655,10 +2649,10 @@
 
     <span class="k">if</span> <span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">state</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Both buttons pressed!"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Both buttons pressed!"</span><span class="p">)</span>
             <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
-            <span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">buttons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">buttons</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
@@ -2768,7 +2762,7 @@
         <span class="k">return</span> <span class="s2">"Unknown"</span>
 
     <span class="c1"># setter - takes a string and stores an integer</span>
-    <span class="nd">@day_of_week.setter</span>
+    <span class="nd">@day_of_week</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">day_of_week</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"sunday"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_day_of_week</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2785,7 +2779,7 @@
         <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"saturday"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_day_of_week</span> <span class="o">=</span> <span class="mi">6</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No idea what day '{}' is"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No idea what day '</span><span class="si">{}</span><span class="s2">' is"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </pre></div>
 </td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
@@ -2831,7 +2825,7 @@
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
   File <span class="nb">"state.py"</span>, line <span class="m">47</span>, in <span class="n">day_of_week</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No idea what day '{}' is"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No idea what day '</span><span class="si">{}</span><span class="s2">' is"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 <span class="gr">ValueError</span>: <span class="n">No idea what day 'Munundununceday' is</span>
 </pre></div>
 </td></tr></table></div><p>So internally, we're storing the day of the week as an integer, but when you access <tt class="docutils literal">day_of_week</tt>, it returns a string. If we want to set the day of the week, we provide a string and it is translated into a integer for internal storage. We are able to add some error handling in the setter, that we wouldn't be able to do easily if we weren't using one.</p>
@@ -2976,16 +2970,16 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
     <span class="n">_hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># global state object</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
 
         <span class="c1"># state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># get the state of the button</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
@@ -2997,28 +2991,28 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="s2">"{}-holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="s2">"</span><span class="si">{}</span><span class="s2">-holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)]</span>
 
-    <span class="nd">@holding.setter</span>
+    <span class="nd">@holding</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="s2">"{}-holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="s2">"</span><span class="si">{}</span><span class="s2">-holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">]</span>
 
-    <span class="nd">@state.setter</span>
+    <span class="nd">@state</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3027,15 +3021,15 @@
     <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">press</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -3045,7 +3039,7 @@
 
         <span class="c1"># button has been held</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hold_threshold</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hold</span><span class="p">()</span>
 
         <span class="c1"># button has been pressed</span>
@@ -3058,36 +3052,36 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span>  <span class="s2">"&lt;Button {}|Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">"&lt;Button </span><span class="si">{}</span><span class="s2">|Check: </span><span class="si">{}</span><span class="s2">, State: </span><span class="si">{}</span><span class="s2"> Checkin: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">check</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button {} held for {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button </span><span class="si">{}</span><span class="s2"> held for </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">multi_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">!=</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="s1">'A-holding'</span><span class="p">]:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"A is holding while {} was pressed!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"A is holding while </span><span class="si">{}</span><span class="s2"> was pressed!"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]:</span>
-        <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Both buttons are being pressed"</span><span class="p">)</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Both buttons are being pressed"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">multi_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">token</span> <span class="o">!=</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="s1">'A-holding'</span><span class="p">]:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"A is holding and {} has been released"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"A is holding and </span><span class="si">{}</span><span class="s2"> has been released"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Both buttons released"</span><span class="p">)</span>
-        <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Both buttons released"</span><span class="p">)</span>
+        <span class="n">state</span><span class="p">[</span><span class="s2">"both"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"A"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s2">"B"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s2">"A-holding"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s2">"B-holding"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s2">"both"</span><span class="p">:</span> <span class="bp">False</span>
+    <span class="s2">"A"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"B"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"A-holding"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"B-holding"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"both"</span><span class="p">:</span> <span class="kc">False</span>
 <span class="p">}</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
@@ -3095,7 +3089,7 @@
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">multi_press</span><span class="p">,</span> <span class="n">multi_release</span><span class="p">,</span> <span class="n">hold</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>

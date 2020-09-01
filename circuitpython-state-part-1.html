@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -557,14 +551,14 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 7
 8
 9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A has been pressed"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A has been pressed"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button A has not been pressed"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A has not been pressed"</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B has been pressed"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B has been pressed"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Button B has not been pressed"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B has not been pressed"</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div></div>
 </div>
@@ -596,7 +590,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>

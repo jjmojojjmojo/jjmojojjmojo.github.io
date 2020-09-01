@@ -25,9 +25,9 @@
 <link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 <link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
 <link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta content="I've run into a bit of a delay in finishing up the State And Events In CircuitPython series. In the meantime, I wanted to do a quick project using some of the concepts and the CPX. In this tutorial, we'll build a sound meter - using the microphone on the CircuitPlayground &hellip;" name="description"/>
-<meta content="I've run into a bit of a delay in finishing up the State And Events In CircuitPython series. In the meantime, I wanted to do a quick project using some of the concepts and the CPX. In this tutorial, we'll build a sound meter - using the microphone on the CircuitPlayground &hellip;" property="og:description"/>
-<meta content="I've run into a bit of a delay in finishing up the State And Events In CircuitPython series. In the meantime, I wanted to do a quick project using some of the concepts and the CPX. In this tutorial, we'll build a sound meter - using the microphone on the CircuitPlayground &hellip;" property="twitter:description"/>
+<meta content="In this tutorial, we'll build a sound meter using the never-boring Circuit Playground Express. Building on the example in the CircuitPlayground Express docs, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management. Author's Note Tip Feel free to skip this &hellip;" name="description"/>
+<meta content="In this tutorial, we'll build a sound meter using the never-boring Circuit Playground Express. Building on the example in the CircuitPlayground Express docs, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management. Author's Note Tip Feel free to skip this &hellip;" property="og:description"/>
+<meta content="In this tutorial, we'll build a sound meter using the never-boring Circuit Playground Express. Building on the example in the CircuitPlayground Express docs, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management. Author's Note Tip Feel free to skip this &hellip;" property="twitter:description"/>
 <meta content="python" name="tags"/>
 <meta content="circuitplayground express" name="tags"/>
 <meta content="circuitpython" name="tags"/>
@@ -48,12 +48,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -68,6 +62,9 @@
       By           <a class="url fn" href="/author/jjmojojjmojo.html">jjmojojjmojo</a>
 </address>
 </footer><!-- /.post-info -->
+<div>
+<div id="toc"><ul><li><a class="toc-href" href="#author" note="" s="" title="Author">Author's Note</a></li><li><a class="toc-href" href="#overview" title="Overview">Overview</a></li><li><a class="toc-href" href="#our inspiration" title="Our Inspiration">Our Inspiration</a></li><li><a class="toc-href" href="#materials/setup" title="Materials/Setup">Materials/Setup</a></li><li><a class="toc-href" href="#basics of the components we" re="" title="Basics Of The Components We" using="">Basics Of The Components We're Using</a></li><li><a class="toc-href" href="#theory" title="Theory">Theory</a></li><li><a class="toc-href" href="#proof of concept" title="Proof Of Concept">Proof Of Concept</a></li></ul></div>
+</div>
 <div class="warning">
 <h2>WARNING</h2>
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
@@ -76,9 +73,66 @@
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
-<p>I've run into a bit of a delay in finishing up the <a class="reference external" href="/pages/circuitpython-state.html">State And Events In CircuitPython</a> series. In the meantime, I wanted to do a quick project using some of the concepts and the CPX.</p>
-<p>In this tutorial, we'll build a <em>sound meter</em> - using the microphone on the CircuitPlayground Express, we'll show relative sound intensity using the built-in Neopixels. We'll incorporate state and events along the way, and peek into analog signal processing.</p>
+<p>In this tutorial, we'll build a <em>sound meter</em> using the never-boring <a class="reference external" href="https://www.adafruit.com/product/3333">Circuit Playground Express</a>. Building on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/playground-sound-meter">example in the CircuitPlayground Express docs</a>, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management.</p>
 <!-- PELICAN_END_SUMMARY -->
+<div class="section" id="author-s-note">
+<h2 id="author's note">Author's Note</h2>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Feel free to skip this section! 🦄</p>
+</div>
+<p>In putting together <a class="reference external" href="/pages/circuitpython-state.html">State And Events In CircuitPython</a> in 2018, I found myself in a bit of a quagmire. I initially wrote the series as one very, very long article early in the year, and as I broke things up, the scope of the series expanded quite a bit.</p>
+<p>At the same time, "life stuff" got in the way, and I had to make some tough decisions about where I'd put my effort. As such, the series languished a bit.</p>
+<p>I did manage to synthesize what I had already written, along with what I had planned near-term into a presentation I gave to TriPython in December of 2018.</p>
+<p><strong>TODO: link to finished HTML conversion of the presentation</strong></p>
+</div>
+<div class="section" id="overview">
+<h2 id="overview">Overview</h2>
+</div>
+<div class="section" id="our-inspiration">
+<h2 id="our inspiration">Our Inspiration</h2>
+</div>
+<div class="section" id="materials-setup">
+<h2 id="materials/setup">Materials/Setup</h2>
+<p>In contrast to previous posts this article is written directly for the CircuitPlayground Express.</p>
+<p>Because of this, the only materials you need to follow along are:</p>
+<ul class="simple">
+<li>A CircuitPlayground Express board.</li>
+<li>A micro-USB cable.</li>
+<li>A computer.</li>
+</ul>
+<p>I'd highly suggest using the mu editor as well.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you'd like to see walk-throughs of building equivalent circuits using a different board and separate components, please reach out to the author.</p>
+</div>
+<div class="section" id="update-the-firmware">
+<h3>Update The Firmware</h3>
+<p>This tutorial was written using CircuitPython ﻿4.0.2. You should always use the latest available firmware.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please contact the author if you have any trouble with later versions of CircuitPython.</p>
+</div>
+<p>To update, follow the instructions at <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-quickstart">Adafruit's CPX Page</a>.</p>
+</div>
+</div>
+<div class="section" id="basics-of-the-components-we-re-using">
+<h2 id="basics of the components we're using">Basics Of The Components We're Using</h2>
+<div class="section" id="neopixels">
+<h3>NeoPixels</h3>
+</div>
+<div class="section" id="mems-micropohone">
+<h3>MEMs Micropohone</h3>
+</div>
+</div>
+<div class="section" id="theory">
+<h2 id="theory">Theory</h2>
+</div>
+<div class="section" id="proof-of-concept">
+<h2 id="proof of concept">Proof Of Concept</h2>
+<p>Now that we're comfortable with the hardware and APIs involved, lets apply our theory to a quick prototypical project.</p>
+<p>To keep things simple, lets</p>
+</div>
 </div><!-- /.entry-content -->
 </section>
 </div>

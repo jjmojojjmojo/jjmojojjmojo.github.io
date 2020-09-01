@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -169,7 +163,7 @@
 <p class="last">However, things like this do happen from time to time. 🦄</p>
 </div>
 <p>Before we begin, lets deactivate our virtual environment:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> deactivate
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> deactivate
 <span class="gp">$</span>
 </pre></div>
 </div>
@@ -231,15 +225,15 @@
 <p>Remember that since this is a fresh clone, we'll need to initialize the virtual environment.</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
 <span class="gp">$</span> <span class="nb">source</span> bin/activate
-<span class="gp">(a) $</span> pip install -r requirements.txt
-<span class="gp">(a) $</span> pip install -e .
+<span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> pip install -r requirements.txt
+<span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> pip install -e .
 </pre></div>
 <p>Next, copy the database file from your other clone:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> cp ../random_quote/test.db .
 </pre></div>
 <p>Or initialize a new one:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
-<span class="gp">(random_quote) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python scripts/generate_quotes.py
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python
 <span class="gp">&gt;</span>&gt;&gt; from random_quote import util
 <span class="gp">&gt;</span>&gt;&gt; util.init<span class="o">(</span><span class="s2">"test.db"</span><span class="o">)</span>
 <span class="go">util.ingest("quotes.csv", "test.db")</span>
@@ -359,7 +353,7 @@
 <span class="p">);</span>
 </pre></div>
 </td></tr></table></div><p>Next we'll use our <code>util.init()</code> function, as we did when originally setting up the database:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> python
 <span class="gp">&gt;</span>&gt;&gt; from random_quote.util import init
 <span class="gp">&gt;</span>&gt;&gt; init<span class="o">(</span><span class="s2">"test.db"</span><span class="o">)</span>
 <span class="gp">&gt;</span>&gt;&gt; quit<span class="o">()</span>
@@ -492,8 +486,8 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span>
 
 <span class="k">class</span> <span class="nc">QuoteOfTheDay</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="p">,</span> <span class="n">manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">.manager</span> <span class="kn">import</span> <span class="n">RandomQuoteManager</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">manager</span>  <span class="o">=</span> <span class="n">RandomQuoteManager</span><span class="p">(</span><span class="n">db_filename</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -501,17 +495,17 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">connection</span><span class="p">(</span><span class="n">db_filename</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_date_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_date_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Helper method to convert a date to the day/month/year that is</span>
 <span class="sd">        stored in the database.</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">date</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Return the quote of the day for a given date, or the current date</span>
 <span class="sd">        if one isn't specified.</span>
@@ -539,12 +533,12 @@
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Add a quote of the day for a given date, or the current date</span>
 <span class="sd">        if one isn't specified.</span>
@@ -654,9 +648,9 @@
 <span class="n">RAND_MAX</span> <span class="o">=</span> <span class="mi">9223372036854775807</span>
 
 <span class="k">class</span> <span class="nc">RandomQuoteManager</span><span class="p">:</span>
-<span class="hll">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="p">,</span> <span class="n">qotd</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="hll">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="p">,</span> <span class="n">qotd</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 </span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">connection</span><span class="p">(</span><span class="n">db_filename</span><span class="p">)</span>
-</span><span class="hll">        <span class="k">if</span> <span class="n">qotd</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class="hll">        <span class="k">if</span> <span class="n">qotd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 </span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">qotd</span> <span class="o">=</span> <span class="n">QuoteOfTheDay</span><span class="p">(</span><span class="n">db_filename</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 </span><span class="hll">        <span class="k">else</span><span class="p">:</span>
 </span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">qotd</span> <span class="o">=</span> <span class="n">qotd</span>
@@ -670,7 +664,7 @@
 <p>This change allows for API extension and <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> that is similar to (and complements) the implementation of <code>QuoteOfTheDay.__init__()</code>.</p>
 </div>
 <p>It's a good idea to make a commit after this work is done. This should be second nature by now, but lets walk through the steps, since we're doing something new: adding an untracked file.</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git status
 <span class="go">On branch qotd</span>
 <span class="go">Changes not staged for commit:</span>
 <span class="go">  (use "git add &lt;file&gt;..." to update what will be committed)</span>
@@ -690,10 +684,10 @@
 </pre></div>
 <p>Note that we now have a file we care about in the <code>Untracked files</code> section, <code>src/random_quote/qotd.py</code>.</p>
 <p>We have to <code>git add</code> it in order to get it into our commit:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git add src/random_quote/qotd.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git add src/random_quote/qotd.py
 </pre></div>
 <p>Now, <code>git status</code> shows <code>src/random_quote/qotd.py</code> as a new file:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git status
 <span class="go">On branch qotd</span>
 <span class="go">Changes to be committed:</span>
 <span class="go">  (use "git reset HEAD &lt;file&gt;..." to unstage)</span>
@@ -714,7 +708,7 @@
 <span class="go">    test.db</span>
 </pre></div>
 <p>Now <code>git commit</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git commit -a -m<span class="s2">"Added first-pass of quote of the day functionality"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Added first-pass of quote of the day functionality"</span>
 <span class="go">[qotd 53ae911] Added first-pass of quote of the day functionality</span>
 <span class="go"> 4 files changed, 132 insertions(+), 3 deletions(-)</span>
 <span class="go"> create mode 100644 src/random_quote/qotd.py</span>
@@ -941,7 +935,7 @@
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">preconfigured_manager</span><span class="o">.</span><span class="n">qotd</span><span class="p">,</span> <span class="n">QuoteOfTheDay</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Run the tests:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/a</span>
@@ -1032,7 +1026,7 @@
                 <span class="k">raise</span> <span class="n">HTTPNotFound</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><p>We can run the http server again and try it out in our browser:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <p>If you look at <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>, you'll notice a quote of the day is returned, instead of a 404:</p>
 <div class="figure align-center" style="width: 80%">
@@ -1140,7 +1134,7 @@
 <p class="last">To quit <code>gunicorn</code>, type control-C.</p>
 </div>
 <p>Running the tests, we see the new ones have been picked up:</p>
-<div class="highlight"><pre><span></span><span class="go">(a) pytest -v src</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="go">pytest -v src</span>
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/a/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -1174,17 +1168,17 @@
 </div>
 <div class="section" id="version-bump">
 <h3>Version Bump</h3>
-<p>As we did in <a class="reference external" href="/branching-git-with-pytest-2.rst">part 2</a>, change the version in <code>setup.py</code>. This time, set the version to <strong>0.2.0</strong>, since we have a new feature that is backwards-compatible with the <strong>0.1.0</strong> version.</p>
+<p>As we did in <a class="reference external" href="{static}/branching-git-with-pytest-2.rst">part 2</a>, change the version in <code>setup.py</code>. This time, set the version to <strong>0.2.0</strong>, since we have a new feature that is backwards-compatible with the <strong>0.1.0</strong> version.</p>
 <p>Don't forget to re-install (<code>pip install -e .</code>), re-run the tests (<code>pytest src</code>), and <code>git commit</code> your changes.</p>
 </div>
 <div class="section" id="rebase-to-master">
 <h3>Rebase To <code>master</code></h3>
 <p>Since we've only done this process once, lets walk through it again.</p>
 <p>First we need to <code>git fetch</code> any outstanding remote changes:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git fetch origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git fetch origin master
 </pre></div>
 <p>Next, interactive <code>git rebase</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git rebase -i master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git rebase -i master
 </pre></div>
 <p>Be sure to <code>pick</code> the oldest (first) commit, and <code>squash</code> the rest. Don't forget to write a nice log entry when <code>git rebase</code> gives you the chance.</p>
 <p>You can try preserving the old commit messages and adding a summary on the first line:</p>
@@ -1201,7 +1195,7 @@ Added HTTP API support for the quote of the day
 Set version to 0.2.0
 </pre></div>
 </td></tr></table></div><p>Re-run the tests to make sure nothing went wrong (there should be 20 passing tests):</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/a</span>
@@ -1217,12 +1211,12 @@ Set version to 0.2.0
 <div class="section" id="checkout-and-merge-master">
 <h3>Checkout And Merge <code>master</code></h3>
 <p>First, <code>git checkout</code> the <code>master</code> branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 </pre></div>
 <p>Then <code>git merge</code> to your <code>qotd</code> feature branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git merge qotd
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git merge qotd
 <span class="go">Updating c2a655e..150ba38</span>
 <span class="go">Fast-forward</span>
 <span class="go"> src/random_quote/__init__.py           |   3 +-</span>
@@ -1243,7 +1237,7 @@ Set version to 0.2.0
 <div class="section" id="push">
 <h3>Push</h3>
 <p>Finally, publish the changes using <code>git push</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> git push origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> git push origin master
 <span class="go">Enumerating objects: 25, done.</span>
 <span class="go">Counting objects: 100% (25/25), done.</span>
 <span class="go">Delta compression using up to 8 threads</span>
@@ -1259,7 +1253,7 @@ Set version to 0.2.0
 <h2 id="developer b fixes a bug and deals with a git conflict">Developer <em>B</em> Fixes A Bug And Deals With a Git Conflict</h2>
 <p>Now, switch to the <code>b</code> clone. We're going to pretend that developer <strong>B</strong> is doing their bug-fix concurrently with the feature that developer <strong>A</strong> just pushed.</p>
 <p>First, <code>deactivate</code> the virtual environment:</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> deactivate
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> deactivate
 <span class="gp">$</span>
 </pre></div>
 <p>Then change into the <code>b</code> directory:</p>
@@ -1268,9 +1262,9 @@ Set version to 0.2.0
 <p>Initialize, activate, install, run the tests:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> python -m venv .
 <span class="gp">$</span> <span class="nb">source</span> bin/activate
-<span class="gp">(b) $</span> pip install -r requirements.txt
-<span class="gp">(b) $</span> pip install -e .
-<span class="gp">(b) $</span> pytest src
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> pip install -r requirements.txt
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> pip install -e .
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/b</span>
@@ -1283,11 +1277,11 @@ Set version to 0.2.0
 </pre></div>
 <p>Note there are only 10 tests. This is because our copy of <code>master</code> is from <em>before</em> developer <strong>A</strong> did their work.</p>
 <p>Next, copy the database file again, from your original <code>random_quote</code> checkout,</p>
-<div class="highlight"><pre><span></span><span class="gp">(a) $</span> cp ../random_quote/test.db .
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(a)</span> <span class="gp">$</span> cp ../random_quote/test.db .
 </pre></div>
 <p>Or re-initialize, if you'd like:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
-<span class="gp">(random_quote) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python scripts/generate_quotes.py
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python
 <span class="gp">&gt;</span>&gt;&gt;
 </pre></div>
 <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">random_quote</span> <span class="kn">import</span> <span class="n">util</span>
@@ -1303,7 +1297,7 @@ Set version to 0.2.0
 <div class="section" id="make-the-branch">
 <h3>Make The Branch</h3>
 <p>Lets check out and create our branch. We'll call this one <code>index-info</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout -b index-info
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git checkout -b index-info
 <span class="go">Switched to a new branch 'index-info'</span>
 </pre></div>
 </div>
@@ -1311,7 +1305,7 @@ Set version to 0.2.0
 <h3>Fix The Bug</h3>
 <p>Lets construct a simple <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a> file that has the information about the API within it. The links will be <em>relative</em>. This allows for flexibility in how we host the API. We'll put it in a special directory within the source.</p>
 <p>First, create the new <code>src/random_quote/static</code> directory:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> mkdir src/random_quote/static
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> mkdir src/random_quote/static
 </pre></div>
 <p>We're using this name because it indicates there are files that need to be served without being processed. We're setting up an entire directory to give us some flexibility in the future. We may want to add some additional static assets (such as images or CSS files) to our API documentation, or build some sort of front-end for the browser. We can switch to using the <code>webob.static.DirectoryApp</code> class and serve the entire directory at once.</p>
 <p>Add the following to <code>src/random_quote/static/index.html</code>:</p>
@@ -1387,7 +1381,7 @@ Set version to 0.2.0
 64
 65
 66
-67</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">static</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+67</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">static</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Return the full path to a file the static directory.</span>
 <span class="sd">    """</span>
@@ -1460,7 +1454,7 @@ Set version to 0.2.0
             <span class="k">return</span> <span class="n">error_response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Lets start up the web server, and take a quick look:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <p>If we visit <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, we will see the new landing page. We can click the links and they should work.</p>
 <div class="figure align-center" style="width: 80%">
@@ -1495,7 +1489,7 @@ Set version to 0.2.0
 <p class="last">We could go further with this, and ensure the links actually work. <a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/api.html#webtest.response.TestResponse.click">WebTest's response objects have a click() method</a> that could be used to be a bit more thorough.</p>
 </div>
 <p>We run the tests again to make sure our new case was picked up, and that we didn't break anything else:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> pytest -v src
 
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/b/bin/python</span>
@@ -1537,7 +1531,7 @@ Set version to 0.2.0
 </span>    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">'random_quote'</span><span class="p">],</span>
     <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">''</span><span class="p">:</span><span class="s1">'src'</span><span class="p">},</span>
     <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'webob'</span><span class="p">],</span>
-    <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Be sure to <code>pip install -e .</code> again and re-run the tests before committing your changes.</p>
@@ -1550,7 +1544,7 @@ Set version to 0.2.0
 <h3>Rebase</h3>
 <p>Lets proceed to do the rebase as usual.</p>
 <p>First, we need to <code>git fetch</code> any remote changes we haven't seen yet:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git fetch
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git fetch
 <span class="go">remote: Enumerating objects: 29, done.</span>
 <span class="go">remote: Counting objects: 100% (29/29), done.</span>
 <span class="go">remote: Compressing objects: 100% (16/16), done.</span>
@@ -1567,7 +1561,7 @@ Set version to 0.2.0
 <h2 id="merge, now with problems">Merge, Now With <em>Problems</em></h2>
 <p>Now we need to merge <code>master</code> with our local <code>index-info</code> branch.</p>
 <p>First, we check out <code>master</code></p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git checkout master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git checkout master
 <span class="go">Switched to branch 'master'</span>
 <span class="go">Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.</span>
 <span class="go">  (use "git pull" to update your local branch)</span>
@@ -1575,7 +1569,7 @@ Set version to 0.2.0
 <p>Note that git tells us that our branch is behind <code>origin/master</code> by 1 commit, and suggests that we use <code>git pull</code> to update. <code>git pull</code> is like doing a <code>fetch</code> followed by <code>git merge</code>.</p>
 <p>Remember, this isn't <em>our</em> branch, all of our changes are still within the <code>index-info</code> branch. We're just doing an update of changes to <code>master</code>, that should merge without incident.</p>
 <p>Lets do a <code>git pull</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git pull
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git pull
 <span class="go">Updating fa45753..5e45295</span>
 <span class="go">Fast-forward</span>
 <span class="go"> setup.py                               |   2 +-</span>
@@ -1592,7 +1586,7 @@ Set version to 0.2.0
 <span class="go"> create mode 100644 src/random_quote/tests/test_qotd.py</span>
 </pre></div>
 <p>You see we've pulled in the changes made to master while we were working. This doesn't affect our code in our local <code>index-info</code> branch. For that, we need to <code>git merge</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git merge index-info
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git merge index-info
 <span class="go">Auto-merging src/random_quote/wsgi.py</span>
 <span class="go">CONFLICT (content): Merge conflict in src/random_quote/wsgi.py</span>
 <span class="go">Auto-merging src/random_quote/tests/test_wsgi.py</span>
@@ -1695,7 +1689,7 @@ Set version to 0.2.0
 <span class="hll"><span class="s2">&gt;&gt;&gt;&gt;&gt;&gt;&gt; index-info</span>
 </span></pre></div>
 </td></tr></table></div><p>Now <code>git status</code> shows the conflicting files:</p>
-<div class="highlight"><pre><span></span><span class="go">(b) git status</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="go">git status</span>
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -1768,7 +1762,7 @@ Set version to 0.2.0
     <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">'random_quote'</span><span class="p">],</span>
     <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">''</span><span class="p">:</span><span class="s1">'src'</span><span class="p">},</span>
     <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'webob'</span><span class="p">],</span>
-    <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </td></tr></table></div></blockquote>
@@ -1811,7 +1805,7 @@ Set version to 0.2.0
     <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s1">'random_quote'</span><span class="p">],</span>
     <span class="n">package_dir</span><span class="o">=</span><span class="p">{</span><span class="s1">''</span><span class="p">:</span><span class="s1">'src'</span><span class="p">},</span>
     <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">'webob'</span><span class="p">],</span>
-    <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Now lets fix <code>src/random_quote/wsgi.py</code>. The conflict is in <code>__call__()</code>, in the routing.</p>
@@ -1894,7 +1888,7 @@ Set version to 0.2.0
 <p class="last">Check out <a class="reference external" href="https://git-scm.com/docs/git-mergetool">git mergetool</a> for details.</p>
 </div>
 <p>Before we can do a manual test, we need to add the changes to the database schema. This is done using <code>util.init()</code>, run from the interpreter:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> python
 <span class="go">Python 3.7.3 (default, Mar 30 2019, 03:37:43)</span>
 <span class="go">[Clang 10.0.0 (clang-1000.11.45.5)] on darwin</span>
 <span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
@@ -1904,7 +1898,7 @@ Set version to 0.2.0
 <span class="gp">&gt;&gt;&gt; </span><span class="n">init</span><span class="p">(</span><span class="s2">"test.db"</span><span class="p">)</span>
 </pre></div>
 <p>Now we can start up <code>gunicorn</code> again:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <p>And open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>,</p>
 <blockquote>
@@ -2107,7 +2101,7 @@ Set version to 0.2.0
     <span class="k">assert</span> <span class="n">json_quote</span> <span class="o">==</span> <span class="n">quote</span>
 </pre></div>
 </td></tr></table></div><p>Now we can run the tests to make sure everything still works:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> pytest src
 <span class="go">================================ test session starts =================================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/b</span>
@@ -2132,7 +2126,7 @@ Set version to 0.2.0
     <span class="p">&lt;</span><span class="nt">dd</span><span class="p">&gt;</span>Retrieve all previous "Quote of the day." entries.<span class="p">&lt;/</span><span class="nt">dd</span><span class="p">&gt;</span>
 </pre></div>
 </td></tr></table></div><p>Start up <code>gunicorn</code> again:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
 <p>If we open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, the new page is shown, and the links do what they're supposed to.</p>
 <div class="figure align-center" style="width: 80%">
@@ -2143,7 +2137,7 @@ Set version to 0.2.0
 <h3>Complete the merge</h3>
 <p>Now that we've untangled this mess, we need to finish up the merge.</p>
 <p><code>git status</code> reminds us that we're in the middle of merging:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -2175,12 +2169,12 @@ Set version to 0.2.0
 <span class="go">    test.db</span>
 </pre></div>
 <p>To finish the merge, we first need to let git know the conflicted files are fixed. We do this by using <code>git add</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git add src/random_quote/tests/test_wsgi.py
-<span class="gp">(b) $</span> git add src/random_quote/wsgi.py
-<span class="gp">(b) $</span> git add setup.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git add src/random_quote/tests/test_wsgi.py
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git add src/random_quote/wsgi.py
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git add setup.py
 </pre></div>
 <p>Now <code>git status</code> tells us what we need to do next:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -2207,11 +2201,11 @@ Set version to 0.2.0
 <span class="go">    test.db</span>
 </pre></div>
 <p>To complete the merge, we just need to do what <code>git status</code> is telling us: <code>git commit</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git commit -a -m<span class="s2">"Resolved API endpoint conflicts"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Resolved API endpoint conflicts"</span>
 <span class="go">[master 36c0796] Resolved API endpoint conflicts</span>
 </pre></div>
 <p>Now we can <code>git push</code> our changes to the remote:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git push origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git push origin master
 <span class="go">Enumerating objects: 37, done.</span>
 <span class="go">Counting objects: 100% (36/36), done.</span>
 <span class="go">Delta compression using up to 8 threads</span>
@@ -2226,8 +2220,8 @@ Set version to 0.2.0
 <div class="section" id="tag-the-fixed-version">
 <h2 id="tag the fixed version">Tag The Fixed Version</h2>
 <p>As a last step, we just need to <code>git tag</code> our new version, and push it to the remote:</p>
-<div class="highlight"><pre><span></span><span class="gp">(b) $</span> git tag v0.2.1
-<span class="gp">(b) $</span> git push origin v0.2.1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git tag v0.2.1
+<span class="gp gp-VirtualEnv">(b)</span> <span class="gp">$</span> git push origin v0.2.1
 <span class="go">Total 0 (delta 0), reused 0 (delta 0)</span>
 <span class="go">To [...]/random_quote_remote</span>
 <span class="go"> * [new tag]         v0.2.1 -&gt; v0.2.1</span>

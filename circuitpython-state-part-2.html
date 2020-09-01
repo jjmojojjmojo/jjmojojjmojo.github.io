@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -102,7 +96,7 @@
 <p>The two types of inputs are noisy for different reasons, but the problem is the same.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="/circuitpython-state-3.rst#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
+<p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="{static}/circuitpython-state-3.rst#using-state-to-avoid-blocking#using-state-to-avoid-blocking#using-state-to-avoid-blocking#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
 <p>The two overly-simplified subjects are very complexly related 😀.</p>
 <p>A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
 <p>I also recommend a book like <em>Code: The Hidden Language of Computer Hardware and Software</em> by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.</p>
@@ -451,7 +445,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ball</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strike</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">tied</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"home"</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"guest"</span><span class="p">]</span>
@@ -461,9 +455,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">&gt;</span> <span class="mi">9</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tied</span><span class="p">():</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Game is over"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Game is over"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>

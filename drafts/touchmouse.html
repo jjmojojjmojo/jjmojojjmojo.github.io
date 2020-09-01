@@ -48,12 +48,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -260,18 +254,18 @@
 <span class="n">scroll_up</span> <span class="o">=</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">)</span>
 <span class="n">right_click</span> <span class="o">=</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">)</span>
 
-<span class="err">﻿</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="err">﻿</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">scroll_down</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Scroll down pressed"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Scroll down pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">left_click</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Left click pressed"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Left click pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">scroll_up</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Scroll up pressed"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Scroll up pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">right_click</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Right click pressed"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Right click pressed"</span><span class="p">)</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
@@ -317,7 +311,7 @@
 
 <span class="n">pixels</span><span class="p">[::]</span> <span class="o">=</span> <span class="p">[</span><span class="n">red</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">white</span><span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">pixels</span><span class="p">[::]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pixels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">pixels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
@@ -364,11 +358,11 @@
 <span class="c1"># enable the speaker</span>
 <span class="n">spkrenable</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">SPEAKER_ENABLE</span><span class="p">)</span>
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
-<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">filename</span> <span class="o">=</span> <span class="s2">"coin.wav"</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">"playing file "</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"playing file "</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
@@ -423,7 +417,7 @@ click, respectively.</p>
 <span class="n">b_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
 <span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">DOWN</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
         <span class="n">mouse</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">LEFT_BUTTON</span><span class="p">)</span>
 
@@ -529,7 +523,7 @@ CircuitPlayground, and they are easy to add to other platforms.</p>
 21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as code.py</span>
 <span class="err">﻿</span><span class="kn">import</span> <span class="nn">board</span>
 <span class="kn">import</span> <span class="nn">neopixel</span>
-<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 
 <span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.1</span>
 
@@ -665,26 +659,26 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="kn">import</span> <span class="nn">touchio</span>
 <span class="kn">from</span> <span class="nn">dispatch</span> <span class="kn">import</span> <span class="n">ButtonDispatch</span>
 <span class="kn">from</span> <span class="nn">adafruit_hid.mouse</span> <span class="kn">import</span> <span class="n">Mouse</span>
-<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 <span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span>
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.1</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
 <span class="n">spkrenable</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">SPEAKER_ENABLE</span><span class="p">)</span>
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
-<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">mouse</span> <span class="o">=</span> <span class="n">Mouse</span><span class="p">()</span>
 <span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span>
@@ -700,37 +694,37 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">return</span> <span class="n">pads</span><span class="p">[</span><span class="n">token</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
 
 <span class="err">﻿</span><span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
@@ -788,7 +782,7 @@ our intent - this is epseically apparent in the "in-between" colors like
 
 <span class="k">def</span> <span class="nf">click_sound</span><span class="p">():</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="s2">"click.wav"</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Playing sound {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Playing sound </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
@@ -796,42 +790,42 @@ our intent - this is epseically apparent in the "in-between" colors like
 
 <span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
-    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
+    <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"up"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">up_press</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">left_press</span><span class="p">,</span> <span class="n">left_release</span><span class="p">),</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 </pre></div>
@@ -985,14 +979,14 @@ our intent - this is epseically apparent in the "in-between" colors like
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
@@ -1000,10 +994,10 @@ our intent - this is epseically apparent in the "in-between" colors like
 
 <span class="n">spkrenable</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">SPEAKER_ENABLE</span><span class="p">)</span>
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
-<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">mouse</span> <span class="o">=</span> <span class="n">Mouse</span><span class="p">()</span>
-<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"click.wav"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
@@ -1048,36 +1042,36 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">up_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">down_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">left_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">right_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
@@ -1086,7 +1080,7 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 
@@ -1192,11 +1186,11 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="n">hold_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
     <span class="n">debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">press</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">release</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span> <span class="o">=</span> <span class="n">check</span>
@@ -1206,30 +1200,30 @@ our intent - this is epseically apparent in the "in-between" colors like
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">))</span>
 
-    <span class="nd">@holding.setter</span>
+    <span class="nd">@holding</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">holding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"{}_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">_holding"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">),</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
 
-    <span class="nd">@state.setter</span>
+    <span class="nd">@state</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span>  <span class="s2">"&lt;{} Check: {}, State: {} Checkin: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="s2">"&lt;</span><span class="si">{}</span><span class="s2"> Check: </span><span class="si">{}</span><span class="s2">, State: </span><span class="si">{}</span><span class="s2"> Checkin: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onrelease</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1238,7 +1232,7 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">def</span> <span class="nf">hold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onhold</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -1247,11 +1241,11 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="hll">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">lock</span><span class="p">:</span>
 </span><span class="hll">            <span class="k">return</span>
 </span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onpress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">holding</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1438,26 +1432,26 @@ our intent - this is epseically apparent in the "in-between" colors like
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_holding</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_holding</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.4</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
 <span class="n">spkrenable</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">SPEAKER_ENABLE</span><span class="p">)</span>
 <span class="n">spkrenable</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
-<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">spkrenable</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">mouse</span> <span class="o">=</span> <span class="n">Mouse</span><span class="p">()</span>
-<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">pixels</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"click.wav"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">audioio</span><span class="o">.</span><span class="n">AudioOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A0</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
@@ -1508,36 +1502,36 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="k">def</span> <span class="nf">up_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">up_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Up press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">up_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">down_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">down_rainbow</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">down_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Down release"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">scroll_up</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling up"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">scroll_down</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">hold_count</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Scrolling down"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">both_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">middle_stripes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">click_sound</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Both press"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Both press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
@@ -1546,12 +1540,12 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">else</span><span class="p">:</span>
         <span class="n">left_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">click_sound</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Left press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">left_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Left release"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">right_press</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
@@ -1560,12 +1554,12 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="k">else</span><span class="p">:</span>
         <span class="n">right_green</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">click_sound</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Right press"</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">right_release</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="n">clear</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
-    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Right release"</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">lock</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">buttons</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"down"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">down_press</span><span class="p">,</span> <span class="n">down_release</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">),</span>
@@ -1574,7 +1568,7 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="n">ButtonDispatch</span><span class="p">(</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">right_press</span><span class="p">,</span> <span class="n">right_release</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">dispatch</span> <span class="ow">in</span> <span class="n">buttons</span><span class="p">:</span>
         <span class="n">dispatch</span><span class="p">()</span>
 
@@ -1725,7 +1719,7 @@ our intent - this is epseically apparent in the "in-between" colors like
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">neopixel</span>
-<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 <span class="kn">from</span> <span class="nn">adafruit_hid.mouse</span> <span class="kn">import</span> <span class="n">Mouse</span>
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
@@ -1734,11 +1728,11 @@ our intent - this is epseically apparent in the "in-between" colors like
         <span class="bp">self</span><span class="o">.</span><span class="n">hold_threshold</span> <span class="o">=</span> <span class="n">hold_threshold</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pin</span><span class="p">,</span> <span class="n">callback_up</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">callback_down</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">callback_hold</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pin</span><span class="p">,</span> <span class="n">callback_up</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">callback_down</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">callback_hold</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">pin</span> <span class="o">=</span> <span class="n">touchio</span><span class="o">.</span><span class="n">TouchIn</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>
         <span class="n">pin</span><span class="o">.</span><span class="n">threshold</span> <span class="o">+=</span> <span class="mi">400</span>
         <span class="c1">#       pin  state  checkin           button rel    button press  when held      held?  latch count</span>
-        <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">pin</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">(),</span> <span class="n">callback_up</span><span class="p">,</span> <span class="n">callback_down</span><span class="p">,</span> <span class="n">callback_hold</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="n">pin</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">(),</span> <span class="n">callback_up</span><span class="p">,</span> <span class="n">callback_down</span><span class="p">,</span> <span class="n">callback_hold</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1748,7 +1742,7 @@ our intent - this is epseically apparent in the "in-between" colors like
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="n">current</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_threshold</span><span class="p">:</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s2">"time to run latch for "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">"time to run latch for "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">])</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">current</span>
@@ -1760,10 +1754,10 @@ our intent - this is epseically apparent in the "in-between" colors like
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">]()</span>
 
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">]:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s2">"Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">"Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">current</span>
 
             <span class="c1"># transition from pressed to not pressed</span>
@@ -1772,11 +1766,11 @@ our intent - this is epseically apparent in the "in-between" colors like
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]()</span>
 
-                    <span class="k">print</span><span class="p">(</span><span class="s2">"Un-Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">"Un-Latching "</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">current</span>
 
 <span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.1</span>
@@ -1842,12 +1836,12 @@ our intent - this is epseically apparent in the "in-between" colors like
     <span class="n">pixels</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="n">mouse</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">RIGHT_BUTTON</span><span class="p">)</span>
 
-<span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="n">clear_pixels</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">)</span>
-<span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A2</span><span class="p">,</span> <span class="n">clear_pixels</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">)</span>
+<span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="n">clear_pixels</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_up</span><span class="p">)</span>
+<span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A2</span><span class="p">,</span> <span class="n">clear_pixels</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">scroll_down</span><span class="p">)</span>
 <span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A3</span><span class="p">,</span> <span class="n">left_release</span><span class="p">,</span> <span class="n">left_hold</span><span class="p">)</span>
 <span class="n">pads</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A4</span><span class="p">,</span> <span class="n">right_release</span><span class="p">,</span> <span class="n">right_hold</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">pads</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div></div>

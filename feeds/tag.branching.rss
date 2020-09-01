@@ -11,7 +11,7 @@
 &lt;li&gt;Use the workflow we learned in &lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt; to add a new feature, and fix a new bug.&lt;/li&gt;
 &lt;li&gt;Create a merge conflict and resolve it.&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 03 Jul 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-07-03:/branching-git-with-pytest-3.html</guid><category>python</category><category>git</category><category>branching</category><category>development process</category></item><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</title><link>/branching-git-with-pytest-2.html</link><description>&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 03 Jul 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-07-03:/branching-git-with-pytest-3.html</guid><category>tutorial</category><category>python</category><category>git</category><category>branching</category><category>development process</category></item><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</title><link>/branching-git-with-pytest-2.html</link><description>&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;&lt;strong&gt;This is part two of a three-part series.&lt;/strong&gt; This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using &lt;a class="reference external" href="https://docs.pytest.org"&gt;pytest&lt;/a&gt; and &lt;a class="reference external" href="https://git-scm.com/"&gt;git&lt;/a&gt;, via feature branches. Along the way we'll touch on application design and discuss best practices.&lt;/p&gt;
@@ -22,7 +22,7 @@
 &lt;li&gt;Use &lt;code&gt;git rebase&lt;/code&gt; to keep our change history tidy.&lt;/li&gt;
 &lt;li&gt;Use tagging to mark new versions of our application.&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Fri, 28 Jun 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-06-28:/branching-git-with-pytest-2.html</guid><category>python</category><category>git</category><category>branching</category><category>development process</category></item><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link>/branching-git-with-pytest.html</link><description>&lt;!-- Collects all of the includable files into one. --&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Fri, 28 Jun 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-06-28:/branching-git-with-pytest-2.html</guid><category>tutorial</category><category>python</category><category>git</category><category>branching</category><category>development process</category></item><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link>/branching-git-with-pytest.html</link><description>&lt;!-- Collects all of the includable files into one. --&gt;
 &lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
@@ -34,4 +34,4 @@
 &lt;li&gt;Ensure we are set up for development.&lt;/li&gt;
 &lt;li&gt;Exercise the basics of pytest, and git by writing some tests, adding a fixture, and committing our changes.&lt;/li&gt;
 &lt;/ul&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 19 Jun 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-06-19:/branching-git-with-pytest.html</guid><category>python</category><category>git</category><category>branching</category><category>development process</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Wed, 19 Jun 2019 09:00:00 -0400</pubDate><guid isPermaLink="false">tag:None,2019-06-19:/branching-git-with-pytest.html</guid><category>tutorial</category><category>python</category><category>git</category><category>branching</category><category>development process</category></item></channel></rss>

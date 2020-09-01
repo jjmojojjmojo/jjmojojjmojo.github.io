@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -306,8 +300,8 @@
 <span class="err">﻿</span><span class="k">def</span> <span class="nf">getVoltage</span><span class="p">(</span><span class="n">pin</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">round</span><span class="p">((</span><span class="n">pin</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="mf">3.3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">65536</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="err">﻿</span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">))</span>
+<span class="err">﻿</span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">))</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
@@ -361,7 +355,7 @@
 <span class="kn">import</span> <span class="nn">analogio</span>
 <span class="kn">import</span> <span class="nn">adafruit_thermistor</span>
 
-<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">photocell</span> <span class="o">=</span> <span class="n">analogio</span><span class="o">.</span><span class="n">AnalogIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A2</span><span class="p">)</span>
 
 <span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
@@ -376,14 +370,14 @@
     <span class="k">return</span> <span class="nb">round</span><span class="p">((</span><span class="n">pin</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="mf">3.3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">65536</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">getVoltage</span><span class="p">(</span><span class="n">buttons</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.8</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>The exact voltage amount can vary a little bit from press to press of the buttons, so we've added a threshold - if the voltage is within 0.1 volts, we consider that "pressed".</p>
 <p>This is a really great example of the power of abstraction! Any code we have already written that uses the <tt class="docutils literal">check()</tt> function will still work without <em>any</em> modification, even though the wiring and code is radically different.</p>
@@ -433,9 +427,9 @@
 28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MultiplexedIO</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">drive_mode</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drive_mode</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -497,7 +491,7 @@
 <span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
 <span class="kn">import</span> <span class="nn">analogio</span>
 
-<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">TEMPERATURE</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">TEMPERATURE</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">photocell</span> <span class="o">=</span> <span class="n">analogio</span><span class="o">.</span><span class="n">AnalogIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">LIGHT</span><span class="p">)</span>
 
 <span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
@@ -560,7 +554,7 @@
 <span class="kn">import</span> <span class="nn">adafruit_dotstar</span>
 <span class="kn">import</span> <span class="nn">adafruit_thermistor</span>
 
-<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">thermistor</span> <span class="o">=</span> <span class="n">adafruit_thermistor</span><span class="o">.</span><span class="n">Thermistor</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A1</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">3950.0</span><span class="p">,</span> <span class="n">high_side</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">photocell</span> <span class="o">=</span> <span class="n">analogio</span><span class="o">.</span><span class="n">AnalogIn</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">A2</span><span class="p">)</span>
 
 <span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
@@ -597,8 +591,8 @@
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">thermistor</span><span class="p">,</span> <span class="n">photocell</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"Thermistor:"</span><span class="p">,</span><span class="n">thermistor</span><span class="o">.</span><span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">"Photocell:"</span><span class="p">,</span> <span class="n">photocell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Thermistor:"</span><span class="p">,</span><span class="n">thermistor</span><span class="o">.</span><span class="n">pin</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">"Photocell:"</span><span class="p">,</span> <span class="n">photocell</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Here's a video of the values changing:</p>
@@ -763,11 +757,11 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ambient_light</span> <span class="o">=</span> <span class="n">photocell</span><span class="o">.</span><span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -792,27 +786,27 @@
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
             <span class="c1"># b button was pressed</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"A button pressed"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"A button pressed"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">change</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">on_off_based_on_ambient_light</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ambient_light</span> <span class="o">&gt;</span> <span class="mi">2000</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_buttons</span><span class="p">()</span>
@@ -821,10 +815,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">on_off_based_on_ambient_light</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;State Color:{}, Enabled:{}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;State Color:</span><span class="si">{}</span><span class="s2">, Enabled:</span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">rgb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span>
@@ -936,11 +930,11 @@
     <span class="n">_light_sample</span> <span class="o">=</span> <span class="mf">0.1</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ambient_light</span> <span class="o">=</span> <span class="n">photocell</span><span class="o">.</span><span class="n">value</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">light_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -968,27 +962,27 @@
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
             <span class="c1"># b button was pressed</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"A button pressed"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"A button pressed"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">change</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">button_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">on_off_based_on_ambient_light</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ambient_light</span> <span class="o">&gt;</span> <span class="mi">2000</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_buttons</span><span class="p">()</span>
@@ -997,10 +991,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">on_off_based_on_ambient_light</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;State Color:{}, Enabled:{}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;State Color:</span><span class="si">{}</span><span class="s2">, Enabled:</span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">rgb</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">enabled</span>
@@ -1068,7 +1062,7 @@
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
     <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">color</span>
@@ -1167,7 +1161,7 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"light"</span>
 
@@ -1193,7 +1187,7 @@
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">thermistor</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
@@ -1215,7 +1209,7 @@
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debounce</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">photocell</span><span class="o">.</span><span class="n">value</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
@@ -1231,7 +1225,7 @@
 <span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureStatus</span><span class="p">()</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">light</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -1463,7 +1457,7 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"light"</span>
 
@@ -1528,7 +1522,7 @@
 <span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureStatus</span><span class="p">()</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">light</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -1588,7 +1582,7 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"light"</span>
 
@@ -1684,18 +1678,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Dispatching"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Dispatching"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Low level event"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Low level event"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="k">elif</span> <span class="mi">15</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">25</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Medium level event"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Medium level event"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"High level event"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"High level event"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1711,7 +1705,7 @@
 
 <span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureStatus</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">color</span>
 </pre></div>
@@ -1868,7 +1862,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
@@ -1964,7 +1958,7 @@
 <span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureStatus</span><span class="p">()</span>
 <span class="n">light</span> <span class="o">=</span> <span class="n">LightStatus</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">light</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -2122,7 +2116,7 @@
     <span class="n">_ranges</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20460</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">20460</span><span class="p">,</span> <span class="mi">40920</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">40920</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2133,7 +2127,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dispatch</span><span class="p">()</span>
 
@@ -2141,7 +2135,7 @@
         <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">params</span>
 
-            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
                     <span class="k">break</span>
@@ -2194,7 +2188,7 @@
     <span class="n">_ranges</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">'low'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
         <span class="s1">'medium'</span><span class="p">:</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="s1">'high'</span><span class="p">:</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">read_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2215,7 +2209,7 @@
 <span class="n">temp</span> <span class="o">=</span> <span class="n">TemperatureStatus</span><span class="p">()</span>
 <span class="n">light</span> <span class="o">=</span> <span class="n">LightStatus</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">light</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">temp</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>

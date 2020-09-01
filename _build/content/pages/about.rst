@@ -35,9 +35,11 @@ About The Author
 
 My name is Josh Johnson. I've been involved in tech professionally since 1999, and had my fair share of dabbling prior to that.
 
+
+
 I have extensive experience with programming (Python, PHP, Perl, Javascript, Clojure), particularly web programming, systems automation, systems engineering, development and deployment pipelines (aka DevOps) and general technology. 
 
-I really enjoy programming. I am a big fan functional paradigms, but embraced OOP very early on in my journey, so it's second nature. 
+I really enjoy programming. I am a big fan of functional paradigms, but embraced OOP very early on in my journey, so it's second nature. 
 
 I'm big on aesthetics. My style tends to be minimalistic, but I like colors and patterns. When it comes to my work, I know how to make things look nice. I am comfortable with creative tools. I'm well versed with commercial and open-source tools (I know most of the Adobe suite well, can do great things with MS Office, but I also know The Gimp, Inkscape, and LibreOffice).
 

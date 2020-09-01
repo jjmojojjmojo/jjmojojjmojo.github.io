@@ -108,7 +108,7 @@
 &lt;p class="last"&gt;However, things like this do happen from time to time. 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Before we begin, lets deactivate our virtual environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; deactivate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; deactivate
 &lt;span class="gp"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -170,15 +170,15 @@
 &lt;p&gt;Remember that since this is a fresh clone, we'll need to initialize the virtual environment.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; python -m venv .
 &lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; bin/activate
-&lt;span class="gp"&gt;(a) $&lt;/span&gt; pip install -r requirements.txt
-&lt;span class="gp"&gt;(a) $&lt;/span&gt; pip install -e .
+&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -r requirements.txt
+&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -e .
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Next, copy the database file from your other clone:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; cp ../random_quote/test.db .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; cp ../random_quote/test.db .
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Or initialize a new one:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python scripts/generate_quotes.py
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python scripts/generate_quotes.py
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; from random_quote import util
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; util.init&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"test.db"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="go"&gt;util.ingest("quotes.csv", "test.db")&lt;/span&gt;
@@ -298,7 +298,7 @@
 &lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Next we'll use our &lt;code&gt;util.init()&lt;/code&gt; function, as we did when originally setting up the database:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; from random_quote.util import init
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; init&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"test.db"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; quit&lt;span class="o"&gt;()&lt;/span&gt;
@@ -431,8 +431,8 @@
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;util&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;QuoteOfTheDay&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.manager&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RandomQuoteManager&lt;/span&gt;
             &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RandomQuoteManager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -440,17 +440,17 @@
 
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;util&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_date_parts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_date_parts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;        Helper method to convert a date to the day/month/year that is&lt;/span&gt;
 &lt;span class="sd"&gt;        stored in the database.&lt;/span&gt;
 &lt;span class="sd"&gt;        """&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;        Return the quote of the day for a given date, or the current date&lt;/span&gt;
 &lt;span class="sd"&gt;        if one isn't specified.&lt;/span&gt;
@@ -478,12 +478,12 @@
 
         &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;        Add a quote of the day for a given date, or the current date&lt;/span&gt;
 &lt;span class="sd"&gt;        if one isn't specified.&lt;/span&gt;
@@ -593,9 +593,9 @@
 &lt;span class="n"&gt;RAND_MAX&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;9223372036854775807&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RandomQuoteManager&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;span class="hll"&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;qotd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="hll"&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;qotd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;util&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;qotd&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;qotd&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qotd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QuoteOfTheDay&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db_filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qotd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qotd&lt;/span&gt;
@@ -609,7 +609,7 @@
 &lt;p&gt;This change allows for API extension and &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection"&gt;dependency injection&lt;/a&gt; that is similar to (and complements) the implementation of &lt;code&gt;QuoteOfTheDay.__init__()&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;It's a good idea to make a commit after this work is done. This should be second nature by now, but lets walk through the steps, since we're doing something new: adding an untracked file.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch qotd&lt;/span&gt;
 &lt;span class="go"&gt;Changes not staged for commit:&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git add &amp;lt;file&amp;gt;..." to update what will be committed)&lt;/span&gt;
@@ -629,10 +629,10 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that we now have a file we care about in the &lt;code&gt;Untracked files&lt;/code&gt; section, &lt;code&gt;src/random_quote/qotd.py&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;We have to &lt;code&gt;git add&lt;/code&gt; it in order to get it into our commit:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git add src/random_quote/qotd.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git add src/random_quote/qotd.py
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now, &lt;code&gt;git status&lt;/code&gt; shows &lt;code&gt;src/random_quote/qotd.py&lt;/code&gt; as a new file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch qotd&lt;/span&gt;
 &lt;span class="go"&gt;Changes to be committed:&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git reset HEAD &amp;lt;file&amp;gt;..." to unstage)&lt;/span&gt;
@@ -653,7 +653,7 @@
 &lt;span class="go"&gt;    test.db&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now &lt;code&gt;git commit&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added first-pass of quote of the day functionality"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added first-pass of quote of the day functionality"&lt;/span&gt;
 &lt;span class="go"&gt;[qotd 53ae911] Added first-pass of quote of the day functionality&lt;/span&gt;
 &lt;span class="go"&gt; 4 files changed, 132 insertions(+), 3 deletions(-)&lt;/span&gt;
 &lt;span class="go"&gt; create mode 100644 src/random_quote/qotd.py&lt;/span&gt;
@@ -880,7 +880,7 @@
     &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qotd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;QuoteOfTheDay&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Run the tests:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/a&lt;/span&gt;
@@ -971,7 +971,7 @@
                 &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;HTTPNotFound&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;We can run the http server again and try it out in our browser:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you look at &lt;a class="reference external" href="http://127.0.0.1:8080"&gt;http://127.0.0.1:8080&lt;/a&gt;, you'll notice a quote of the day is returned, instead of a 404:&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
@@ -1079,7 +1079,7 @@
 &lt;p class="last"&gt;To quit &lt;code&gt;gunicorn&lt;/code&gt;, type control-C.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Running the tests, we see the new ones have been picked up:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;(a) pytest -v src&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="go"&gt;pytest -v src&lt;/span&gt;
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/a/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -1113,17 +1113,17 @@
 &lt;/div&gt;
 &lt;div class="section" id="version-bump"&gt;
 &lt;h3&gt;Version Bump&lt;/h3&gt;
-&lt;p&gt;As we did in &lt;a class="reference external" href="/branching-git-with-pytest-2.rst"&gt;part 2&lt;/a&gt;, change the version in &lt;code&gt;setup.py&lt;/code&gt;. This time, set the version to &lt;strong&gt;0.2.0&lt;/strong&gt;, since we have a new feature that is backwards-compatible with the &lt;strong&gt;0.1.0&lt;/strong&gt; version.&lt;/p&gt;
+&lt;p&gt;As we did in &lt;a class="reference external" href="{static}/branching-git-with-pytest-2.rst"&gt;part 2&lt;/a&gt;, change the version in &lt;code&gt;setup.py&lt;/code&gt;. This time, set the version to &lt;strong&gt;0.2.0&lt;/strong&gt;, since we have a new feature that is backwards-compatible with the &lt;strong&gt;0.1.0&lt;/strong&gt; version.&lt;/p&gt;
 &lt;p&gt;Don't forget to re-install (&lt;code&gt;pip install -e .&lt;/code&gt;), re-run the tests (&lt;code&gt;pytest src&lt;/code&gt;), and &lt;code&gt;git commit&lt;/code&gt; your changes.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="rebase-to-master"&gt;
 &lt;h3&gt;Rebase To &lt;code&gt;master&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;Since we've only done this process once, lets walk through it again.&lt;/p&gt;
 &lt;p&gt;First we need to &lt;code&gt;git fetch&lt;/code&gt; any outstanding remote changes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git fetch origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git fetch origin master
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Next, interactive &lt;code&gt;git rebase&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git rebase -i master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git rebase -i master
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Be sure to &lt;code&gt;pick&lt;/code&gt; the oldest (first) commit, and &lt;code&gt;squash&lt;/code&gt; the rest. Don't forget to write a nice log entry when &lt;code&gt;git rebase&lt;/code&gt; gives you the chance.&lt;/p&gt;
 &lt;p&gt;You can try preserving the old commit messages and adding a summary on the first line:&lt;/p&gt;
@@ -1140,7 +1140,7 @@ Added HTTP API support for the quote of the day
 Set version to 0.2.0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Re-run the tests to make sure nothing went wrong (there should be 20 passing tests):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/a&lt;/span&gt;
@@ -1156,12 +1156,12 @@ Set version to 0.2.0
 &lt;div class="section" id="checkout-and-merge-master"&gt;
 &lt;h3&gt;Checkout And Merge &lt;code&gt;master&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;First, &lt;code&gt;git checkout&lt;/code&gt; the &lt;code&gt;master&lt;/code&gt; branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git checkout master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git checkout master
 &lt;span class="go"&gt;Switched to branch 'master'&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then &lt;code&gt;git merge&lt;/code&gt; to your &lt;code&gt;qotd&lt;/code&gt; feature branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git merge qotd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git merge qotd
 &lt;span class="go"&gt;Updating c2a655e..150ba38&lt;/span&gt;
 &lt;span class="go"&gt;Fast-forward&lt;/span&gt;
 &lt;span class="go"&gt; src/random_quote/__init__.py           |   3 +-&lt;/span&gt;
@@ -1182,7 +1182,7 @@ Set version to 0.2.0
 &lt;div class="section" id="push"&gt;
 &lt;h3&gt;Push&lt;/h3&gt;
 &lt;p&gt;Finally, publish the changes using &lt;code&gt;git push&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; git push origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin master
 &lt;span class="go"&gt;Enumerating objects: 25, done.&lt;/span&gt;
 &lt;span class="go"&gt;Counting objects: 100% (25/25), done.&lt;/span&gt;
 &lt;span class="go"&gt;Delta compression using up to 8 threads&lt;/span&gt;
@@ -1198,7 +1198,7 @@ Set version to 0.2.0
 &lt;h2 id="developer b fixes a bug and deals with a git conflict"&gt;Developer &lt;em&gt;B&lt;/em&gt; Fixes A Bug And Deals With a Git Conflict&lt;/h2&gt;
 &lt;p&gt;Now, switch to the &lt;code&gt;b&lt;/code&gt; clone. We're going to pretend that developer &lt;strong&gt;B&lt;/strong&gt; is doing their bug-fix concurrently with the feature that developer &lt;strong&gt;A&lt;/strong&gt; just pushed.&lt;/p&gt;
 &lt;p&gt;First, &lt;code&gt;deactivate&lt;/code&gt; the virtual environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; deactivate
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; deactivate
 &lt;span class="gp"&gt;$&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then change into the &lt;code&gt;b&lt;/code&gt; directory:&lt;/p&gt;
@@ -1207,9 +1207,9 @@ Set version to 0.2.0
 &lt;p&gt;Initialize, activate, install, run the tests:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; python -m venv .
 &lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; bin/activate
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; pip install -r requirements.txt
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; pip install -e .
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; pytest src
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -r requirements.txt
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -e .
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/b&lt;/span&gt;
@@ -1222,11 +1222,11 @@ Set version to 0.2.0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note there are only 10 tests. This is because our copy of &lt;code&gt;master&lt;/code&gt; is from &lt;em&gt;before&lt;/em&gt; developer &lt;strong&gt;A&lt;/strong&gt; did their work.&lt;/p&gt;
 &lt;p&gt;Next, copy the database file again, from your original &lt;code&gt;random_quote&lt;/code&gt; checkout,&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(a) $&lt;/span&gt; cp ../random_quote/test.db .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(a)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; cp ../random_quote/test.db .
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Or re-initialize, if you'd like:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python scripts/generate_quotes.py
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python scripts/generate_quotes.py
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random_quote&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;util&lt;/span&gt;
@@ -1242,7 +1242,7 @@ Set version to 0.2.0
 &lt;div class="section" id="make-the-branch"&gt;
 &lt;h3&gt;Make The Branch&lt;/h3&gt;
 &lt;p&gt;Lets check out and create our branch. We'll call this one &lt;code&gt;index-info&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git checkout -b index-info
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git checkout -b index-info
 &lt;span class="go"&gt;Switched to a new branch 'index-info'&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -1250,7 +1250,7 @@ Set version to 0.2.0
 &lt;h3&gt;Fix The Bug&lt;/h3&gt;
 &lt;p&gt;Lets construct a simple &lt;a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5"&gt;HTML5&lt;/a&gt; file that has the information about the API within it. The links will be &lt;em&gt;relative&lt;/em&gt;. This allows for flexibility in how we host the API. We'll put it in a special directory within the source.&lt;/p&gt;
 &lt;p&gt;First, create the new &lt;code&gt;src/random_quote/static&lt;/code&gt; directory:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; mkdir src/random_quote/static
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; mkdir src/random_quote/static
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We're using this name because it indicates there are files that need to be served without being processed. We're setting up an entire directory to give us some flexibility in the future. We may want to add some additional static assets (such as images or CSS files) to our API documentation, or build some sort of front-end for the browser. We can switch to using the &lt;code&gt;webob.static.DirectoryApp&lt;/code&gt; class and serve the entire directory at once.&lt;/p&gt;
 &lt;p&gt;Add the following to &lt;code&gt;src/random_quote/static/index.html&lt;/code&gt;:&lt;/p&gt;
@@ -1326,7 +1326,7 @@ Set version to 0.2.0
 64
 65
 66
-67&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;static&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+67&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;static&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Return the full path to a file the static directory.&lt;/span&gt;
 &lt;span class="sd"&gt;    """&lt;/span&gt;
@@ -1399,7 +1399,7 @@ Set version to 0.2.0
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;error_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Lets start up the web server, and take a quick look:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we visit &lt;a class="reference external" href="http://127.0.0.1:8080"&gt;http://127.0.0.1:8080&lt;/a&gt; in a browser, we will see the new landing page. We can click the links and they should work.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
@@ -1434,7 +1434,7 @@ Set version to 0.2.0
 &lt;p class="last"&gt;We could go further with this, and ensure the links actually work. &lt;a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/api.html#webtest.response.TestResponse.click"&gt;WebTest's response objects have a click() method&lt;/a&gt; that could be used to be a bit more thorough.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;We run the tests again to make sure our new case was picked up, and that we didn't break anything else:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; pytest -v src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v src
 
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0 -- [...]/b/bin/python&lt;/span&gt;
@@ -1476,7 +1476,7 @@ Set version to 0.2.0
 &lt;/span&gt;    &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'random_quote'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="n"&gt;package_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'src'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="n"&gt;install_requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'webob'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;
+    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Be sure to &lt;code&gt;pip install -e .&lt;/code&gt; again and re-run the tests before committing your changes.&lt;/p&gt;
@@ -1489,7 +1489,7 @@ Set version to 0.2.0
 &lt;h3&gt;Rebase&lt;/h3&gt;
 &lt;p&gt;Lets proceed to do the rebase as usual.&lt;/p&gt;
 &lt;p&gt;First, we need to &lt;code&gt;git fetch&lt;/code&gt; any remote changes we haven't seen yet:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git fetch
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git fetch
 &lt;span class="go"&gt;remote: Enumerating objects: 29, done.&lt;/span&gt;
 &lt;span class="go"&gt;remote: Counting objects: 100% (29/29), done.&lt;/span&gt;
 &lt;span class="go"&gt;remote: Compressing objects: 100% (16/16), done.&lt;/span&gt;
@@ -1506,7 +1506,7 @@ Set version to 0.2.0
 &lt;h2 id="merge, now with problems"&gt;Merge, Now With &lt;em&gt;Problems&lt;/em&gt;&lt;/h2&gt;
 &lt;p&gt;Now we need to merge &lt;code&gt;master&lt;/code&gt; with our local &lt;code&gt;index-info&lt;/code&gt; branch.&lt;/p&gt;
 &lt;p&gt;First, we check out &lt;code&gt;master&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git checkout master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git checkout master
 &lt;span class="go"&gt;Switched to branch 'master'&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git pull" to update your local branch)&lt;/span&gt;
@@ -1514,7 +1514,7 @@ Set version to 0.2.0
 &lt;p&gt;Note that git tells us that our branch is behind &lt;code&gt;origin/master&lt;/code&gt; by 1 commit, and suggests that we use &lt;code&gt;git pull&lt;/code&gt; to update. &lt;code&gt;git pull&lt;/code&gt; is like doing a &lt;code&gt;fetch&lt;/code&gt; followed by &lt;code&gt;git merge&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Remember, this isn't &lt;em&gt;our&lt;/em&gt; branch, all of our changes are still within the &lt;code&gt;index-info&lt;/code&gt; branch. We're just doing an update of changes to &lt;code&gt;master&lt;/code&gt;, that should merge without incident.&lt;/p&gt;
 &lt;p&gt;Lets do a &lt;code&gt;git pull&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git pull
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git pull
 &lt;span class="go"&gt;Updating fa45753..5e45295&lt;/span&gt;
 &lt;span class="go"&gt;Fast-forward&lt;/span&gt;
 &lt;span class="go"&gt; setup.py                               |   2 +-&lt;/span&gt;
@@ -1531,7 +1531,7 @@ Set version to 0.2.0
 &lt;span class="go"&gt; create mode 100644 src/random_quote/tests/test_qotd.py&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You see we've pulled in the changes made to master while we were working. This doesn't affect our code in our local &lt;code&gt;index-info&lt;/code&gt; branch. For that, we need to &lt;code&gt;git merge&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git merge index-info
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git merge index-info
 &lt;span class="go"&gt;Auto-merging src/random_quote/wsgi.py&lt;/span&gt;
 &lt;span class="go"&gt;CONFLICT (content): Merge conflict in src/random_quote/wsgi.py&lt;/span&gt;
 &lt;span class="go"&gt;Auto-merging src/random_quote/tests/test_wsgi.py&lt;/span&gt;
@@ -1634,7 +1634,7 @@ Set version to 0.2.0
 &lt;span class="hll"&gt;&lt;span class="s2"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; index-info&lt;/span&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now &lt;code&gt;git status&lt;/code&gt; shows the conflicting files:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;(b) git status&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="go"&gt;git status&lt;/span&gt;
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 
@@ -1707,7 +1707,7 @@ Set version to 0.2.0
     &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'random_quote'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="n"&gt;package_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'src'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="n"&gt;install_requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'webob'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;
+    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/blockquote&gt;
@@ -1750,7 +1750,7 @@ Set version to 0.2.0
     &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'random_quote'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="n"&gt;package_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'src'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="n"&gt;install_requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'webob'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;
+    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now lets fix &lt;code&gt;src/random_quote/wsgi.py&lt;/code&gt;. The conflict is in &lt;code&gt;__call__()&lt;/code&gt;, in the routing.&lt;/p&gt;
@@ -1833,7 +1833,7 @@ Set version to 0.2.0
 &lt;p class="last"&gt;Check out &lt;a class="reference external" href="https://git-scm.com/docs/git-mergetool"&gt;git mergetool&lt;/a&gt; for details.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Before we can do a manual test, we need to add the changes to the database schema. This is done using &lt;code&gt;util.init()&lt;/code&gt;, run from the interpreter:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="go"&gt;Python 3.7.3 (default, Mar 30 2019, 03:37:43)&lt;/span&gt;
 &lt;span class="go"&gt;[Clang 10.0.0 (clang-1000.11.45.5)] on darwin&lt;/span&gt;
 &lt;span class="go"&gt;Type "help", "copyright", "credits" or "license" for more information.&lt;/span&gt;
@@ -1843,7 +1843,7 @@ Set version to 0.2.0
 &lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"test.db"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we can start up &lt;code&gt;gunicorn&lt;/code&gt; again:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And open &lt;a class="reference external" href="http://127.0.0.1:8080"&gt;http://127.0.0.1:8080&lt;/a&gt;,&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2046,7 +2046,7 @@ Set version to 0.2.0
     &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;json_quote&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now we can run the tests to make sure everything still works:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;================================ test session starts =================================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/b&lt;/span&gt;
@@ -2071,7 +2071,7 @@ Set version to 0.2.0
     &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Retrieve all previous "Quote of the day." entries.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Start up &lt;code&gt;gunicorn&lt;/code&gt; again:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we open &lt;a class="reference external" href="http://127.0.0.1:8080"&gt;http://127.0.0.1:8080&lt;/a&gt; in a browser, the new page is shown, and the links do what they're supposed to.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
@@ -2082,7 +2082,7 @@ Set version to 0.2.0
 &lt;h3&gt;Complete the merge&lt;/h3&gt;
 &lt;p&gt;Now that we've untangled this mess, we need to finish up the merge.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git status&lt;/code&gt; reminds us that we're in the middle of merging:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 
@@ -2114,12 +2114,12 @@ Set version to 0.2.0
 &lt;span class="go"&gt;    test.db&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To finish the merge, we first need to let git know the conflicted files are fixed. We do this by using &lt;code&gt;git add&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git add src/random_quote/tests/test_wsgi.py
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; git add src/random_quote/wsgi.py
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; git add setup.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git add src/random_quote/tests/test_wsgi.py
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git add src/random_quote/wsgi.py
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git add setup.py
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now &lt;code&gt;git status&lt;/code&gt; tells us what we need to do next:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 
@@ -2146,11 +2146,11 @@ Set version to 0.2.0
 &lt;span class="go"&gt;    test.db&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To complete the merge, we just need to do what &lt;code&gt;git status&lt;/code&gt; is telling us: &lt;code&gt;git commit&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Resolved API endpoint conflicts"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Resolved API endpoint conflicts"&lt;/span&gt;
 &lt;span class="go"&gt;[master 36c0796] Resolved API endpoint conflicts&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we can &lt;code&gt;git push&lt;/code&gt; our changes to the remote:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git push origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin master
 &lt;span class="go"&gt;Enumerating objects: 37, done.&lt;/span&gt;
 &lt;span class="go"&gt;Counting objects: 100% (36/36), done.&lt;/span&gt;
 &lt;span class="go"&gt;Delta compression using up to 8 threads&lt;/span&gt;
@@ -2165,8 +2165,8 @@ Set version to 0.2.0
 &lt;div class="section" id="tag-the-fixed-version"&gt;
 &lt;h2 id="tag the fixed version"&gt;Tag The Fixed Version&lt;/h2&gt;
 &lt;p&gt;As a last step, we just need to &lt;code&gt;git tag&lt;/code&gt; our new version, and push it to the remote:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(b) $&lt;/span&gt; git tag v0.2.1
-&lt;span class="gp"&gt;(b) $&lt;/span&gt; git push origin v0.2.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag v0.2.1
+&lt;span class="gp gp-VirtualEnv"&gt;(b)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin v0.2.1
 &lt;span class="go"&gt;Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
 &lt;span class="go"&gt;To [...]/random_quote_remote&lt;/span&gt;
 &lt;span class="go"&gt; * [new tag]         v0.2.1 -&amp;gt; v0.2.1&lt;/span&gt;
@@ -2183,7 +2183,7 @@ Set version to 0.2.0
 &lt;p&gt;Feel free to &lt;a class="reference external" href="/pages/contact.html"&gt;contact the author&lt;/a&gt; if you have any problems with this guide.&lt;/p&gt;
 &lt;p&gt;Check out &lt;a class="reference external" href="http://sethrobertson.github.io/GitFixUm/fixup.html"&gt;http://sethrobertson.github.io/GitFixUm/fixup.html&lt;/a&gt; for a nice general git troubleshooting guide! It's extremely well done.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</title><link href="/branching-git-with-pytest-2.html" rel="alternate"></link><published>2019-06-28T09:00:00-04:00</published><updated>2019-06-28T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-28:/branching-git-with-pytest-2.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+</content><category term="tutorial"></category><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2</title><link href="/branching-git-with-pytest-2.html" rel="alternate"></link><published>2019-06-28T09:00:00-04:00</published><updated>2019-06-28T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-28:/branching-git-with-pytest-2.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;p&gt;&lt;strong&gt;This is part two of a three-part series.&lt;/strong&gt; This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using &lt;a class="reference external" href="https://docs.pytest.org"&gt;pytest&lt;/a&gt; and &lt;a class="reference external" href="https://git-scm.com/"&gt;git&lt;/a&gt;, via feature branches. Along the way we'll touch on application design and discuss best practices.&lt;/p&gt;
@@ -2273,7 +2273,7 @@ Set version to 0.2.0
 &lt;p&gt;Let's run the application locally so we can play with it in a browser, and identify a bug to fix.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;requirements.txt&lt;/code&gt; has installed a web server for us called &lt;a class="reference external" href="https://gunicorn.org/"&gt;Gunicorn&lt;/a&gt;. It's a pure-python server that has a lot of great production-quality features.&lt;/p&gt;
 &lt;p&gt;We'll start the &lt;code&gt;gunicorn&lt;/code&gt; server using a couple of useful command-line options, since we'll be messing with the code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="explanation section"&gt;
 &lt;h3&gt;Explanation&lt;/h3&gt;
@@ -2417,7 +2417,7 @@ Set version to 0.2.0
 &lt;div class="section" id="create-a-branch"&gt;
 &lt;h2 id="create a branch"&gt;Create A Branch&lt;/h2&gt;
 &lt;p&gt;Let's list the existing branches first:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git branch --list
 &lt;span class="go"&gt;* master&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure align-right" style="width: 40%"&gt;
@@ -2426,17 +2426,17 @@ Set version to 0.2.0
 &lt;p&gt;We see the &lt;code&gt;master&lt;/code&gt; branch all by itself. &lt;code&gt;master&lt;/code&gt; is the default name for the first branch in a repository. We have &lt;em&gt;checked out&lt;/em&gt; the &lt;code&gt;master&lt;/code&gt; branch, as indicated by the asterisk (*).&lt;/p&gt;
 &lt;p&gt;We need a good name for our branch. The name should be obvious and specific to this bug. If you use an issue tracking system, the issue number is a good idea. Since we aren't using an issue tracker for this guide, lets do something descriptive. We'll call our bug branch &lt;code&gt;bug-unknown-id&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Here's how it is created:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch bug-unknown-id
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git branch bug-unknown-id
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Running &lt;code&gt;git branch --list&lt;/code&gt; again, we can see our branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git branch --list
 &lt;span class="go"&gt;bug-unknown-id&lt;/span&gt;
 &lt;span class="go"&gt;* master&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We're still "on" the &lt;code&gt;master&lt;/code&gt; branch. We need to change branches, or &lt;code&gt;git checkout&lt;/code&gt; our new branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git checkout bug-unknown-id
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git checkout bug-unknown-id
 &lt;span class="go"&gt;Switched to branch 'bug-unknown-id'&lt;/span&gt;
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git branch --list
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git branch --list
 &lt;span class="go"&gt;* bug-unknown-id&lt;/span&gt;
 &lt;span class="go"&gt;master&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2523,10 +2523,10 @@ Set version to 0.2.0
 &lt;span class="sd"&gt;    """&lt;/span&gt;
     &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"zzzzz"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Running the tests, we can now see there are 8 tests now, and one fails:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src -v
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src -v
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -2588,7 +2588,7 @@ Set version to 0.2.0
 &lt;/div&gt;
 &lt;p&gt;This is identical to our previous commit process, but lets go through it again.&lt;/p&gt;
 &lt;p&gt;First, lets check what changed using &lt;code&gt;git status&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="hll"&gt;&lt;span class="go"&gt;On branch bug-unknown-id&lt;/span&gt;
 &lt;/span&gt;&lt;span class="go"&gt;Changes not staged for commit:&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git add &amp;lt;file&amp;gt;..." to update what will be committed)&lt;/span&gt;
@@ -2607,7 +2607,7 @@ Set version to 0.2.0
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that git tells us which branch we're on. It's a good idea to get in the habit of looking at that line of output.&lt;/p&gt;
 &lt;p&gt;Next, we'll &lt;code&gt;git commit&lt;/code&gt; our changes, using the &lt;code&gt;-m&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added failing test an unknown id is passed to RandomQuoteManager.get()"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added failing test an unknown id is passed to RandomQuoteManager.get()"&lt;/span&gt;
 &lt;span class="go"&gt;[bug-unknown-id 34afe34] Added failing test an unknown id is passed to RandomQuoteManager.get()&lt;/span&gt;
 &lt;span class="go"&gt; 1 file changed, 9 insertions(+), 1 deletion(-)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2643,8 +2643,8 @@ Set version to 0.2.0
 
 &lt;span class="hll"&gt;    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchone&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;
-&lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2655,12 +2655,12 @@ Set version to 0.2.0
 4
 5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id_i_want&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"HEY WE GOT ONE!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"HEY WE GOT ONE!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"QUOTE {id_i_want} NOT FOUND!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"QUOTE &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;id_i_want&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; NOT FOUND!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; gunicorn -b &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:8080 -t &lt;span class="m"&gt;9999999&lt;/span&gt; -w &lt;span class="m"&gt;1&lt;/span&gt; --reload wsgi:app
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And open up &lt;a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz"&gt;http://127.0.0.1:8080/quote/zzzzzz&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="figure align-center" style="width: 80%"&gt;
@@ -2668,7 +2668,7 @@ Set version to 0.2.0
 &lt;/div&gt;
 &lt;p&gt;At this point, we aren't getting the error anymore, but we aren't necessarily getting a useful result, since we're seeing the JSON serialization of &lt;code&gt;None&lt;/code&gt;, the special Javascript value &lt;code&gt;null&lt;/code&gt;. We'll deal with this issue in a minute. But our bug is now fixed.&lt;/p&gt;
 &lt;p&gt;Next, lets re-run our tests:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v src
 &lt;span class="go"&gt;============================= test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -2730,7 +2730,7 @@ index 762ef05..d9da9cf 100644
 &lt;p class="last"&gt;You can use &lt;code&gt;git difftool&lt;/code&gt; to view diffs in a graphical diff viewer. The &lt;a class="reference external" href="https://git-scm.com/docs/git-difftool"&gt;git-difftool docuentation&lt;/a&gt; has usage details.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Now since we like the changes that were made, we can make a commit:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Fixed bug where a non-existent quote id would raise a TypeError"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Fixed bug where a non-existent quote id would raise a TypeError"&lt;/span&gt;
 &lt;span class="go"&gt;[bug-unknown-id d9d2408] Fixed bug where a non-existent quote id would raise a TypeError&lt;/span&gt;
 &lt;span class="go"&gt;1 file changed, 6 insertions(+), 1 deletion(-)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -2785,7 +2785,7 @@ index 762ef05..d9da9cf 100644
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;&lt;code&gt;WebTest.TestApp&lt;/code&gt;, returned by our fixture, does a lot of checking for us. Normally, it will even raise an exception when a non-"200 OK" status is returned. So in order to check for a specific status, we need to let the &lt;code&gt;TestApp.get()&lt;/code&gt; method know we are expecting a different response code. This is done with the &lt;code&gt;status&lt;/code&gt; keyword parameter (it can be a specific number, or a pattern to match, like "4??").&lt;/p&gt;
 &lt;p&gt;When the tests run, we see the error, this time, it's raised by &lt;code&gt;WebTest.Testapp&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v src
 &lt;span class="go"&gt;============================= test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -2970,7 +2970,7 @@ index 762ef05..d9da9cf 100644
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now, when we run the tests again, the &lt;code&gt;test_get_quote_unknown_id()&lt;/code&gt; case passes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -3013,7 +3013,7 @@ index 762ef05..d9da9cf 100644
 &lt;/span&gt;    &lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'random_quote'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
     &lt;span class="n"&gt;package_dir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'src'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="n"&gt;install_requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'webob'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;
+    &lt;span class="n"&gt;include_package_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;You can also add &lt;strong&gt;EXTENSIONS&lt;/strong&gt; to the version when needed, like &lt;strong&gt;0.1.0-alpha&lt;/strong&gt;. These extensions are useful for special releases, like handing off a pre-release version to testers or early adopters, or if you make a special variant of a release for a specific client.&lt;/p&gt;
@@ -3026,7 +3026,7 @@ index 762ef05..d9da9cf 100644
 &lt;p&gt;Since this is the first bug, we just need to increment the last number. As such, our new version is &lt;strong&gt;0.1.1&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;We'll leave making this change as an exercise for the user.&lt;/p&gt;
 &lt;p&gt;After the version change, be sure to re-install the application, using &lt;code&gt;pip&lt;/code&gt;, as we did in the initial setup:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pip install -e .
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -e .
 &lt;span class="go"&gt;Obtaining file://[...]/random_quote&lt;/span&gt;
 &lt;span class="go"&gt;Requirement already satisfied: webob in ./lib/python3.7/site-packages (from random-quote==0.1.1) (1.8.5)&lt;/span&gt;
 &lt;span class="go"&gt;Installing collected packages: random-quote&lt;/span&gt;
@@ -3037,7 +3037,7 @@ index 762ef05..d9da9cf 100644
 &lt;span class="go"&gt;Successfully installed random-quote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And re-run the tests to make sure everything is still working:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;==================================== test session starts =====================================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.4.1, py-1.8.0, pluggy-0.10.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -3056,7 +3056,7 @@ index 762ef05..d9da9cf 100644
 &lt;img alt="" src="/images/branching-git-pytest/workflow-overview-part2-c-cropped.png"/&gt;
 &lt;/div&gt;
 &lt;p&gt;We now have a backlog containing a handful of changes, all regarding this bug:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline
 
 &lt;span class="go"&gt;5b81947745f2c184619a9d7c1a99546d9aa01662 (HEAD -&amp;gt; bug-unknown-id) Increased the version number&lt;/span&gt;
 &lt;span class="go"&gt;640c4e2431776e9b6c252bef1c7509fee1557c79 Added test for requesting a non-existant quote id in the HTTP API&lt;/span&gt;
@@ -3083,12 +3083,12 @@ index 762ef05..d9da9cf 100644
 &lt;p class="last"&gt;Just be sure to delete it as soon as you're finished. Note that your virtual environment might not function. There are hard-coded paths in some of the environment files. To use the environment, you'll need to clean out the virtual environment directories/files (&lt;code&gt;lib&lt;/code&gt;, &lt;code&gt;bin&lt;/code&gt;, &lt;code&gt;include&lt;/code&gt;, &lt;code&gt;pyvenv.cfg&lt;/code&gt;) and re-run &lt;code&gt;python -m venv .&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;First, we'll use &lt;code&gt;git fetch&lt;/code&gt; to retrieve the latest version of the &lt;code&gt;master&lt;/code&gt; branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git fetch origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git fetch origin master
 &lt;span class="go"&gt;From [...]/random_quote_remote&lt;/span&gt;
 &lt;span class="go"&gt; * branch            master     -&amp;gt; FETCH_HEAD&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;git rebase&lt;/code&gt; has an &lt;em&gt;interactive&lt;/em&gt; mode that makes the process simple 🦄. Start by invoking &lt;code&gt;git rebase&lt;/code&gt; with the &lt;code&gt;-i&lt;/code&gt; switch and telling git what you want to rebase &lt;em&gt;to&lt;/em&gt;. In our case, we want to rebase against the changes made to &lt;code&gt;master&lt;/code&gt;, the branch we started with (this can be a branch, a specific commit id, or a tag):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git rebase -i master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git rebase -i master
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We'll be presented with a file in our editor (it will likely be &lt;code&gt;vim&lt;/code&gt; on most platforms, but as discussed earlier, it's configurable and varies) that looks like this:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -3264,7 +3264,7 @@ Increased the version number
 &lt;span class="go"&gt;Successfully rebased and updated refs/heads/bug-unknown-id.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we run &lt;code&gt;git log --pretty&lt;/code&gt; again, we can see our old commits are gone, and the last one is present:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log --pretty
 
 &lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; bug-unknown-id)&lt;/span&gt;
 &lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
@@ -3333,12 +3333,12 @@ Increased the version number
 &lt;p&gt;In either case, we still have to go through the same basic process.&lt;/p&gt;
 &lt;p&gt;Now, we'll &lt;code&gt;git checkout&lt;/code&gt; &lt;code&gt;master&lt;/code&gt;, and &lt;code&gt;git merge&lt;/code&gt; our branch:&lt;/p&gt;
 &lt;p&gt;First the &lt;code&gt;git checkout&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git checkout master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git checkout master
 &lt;span class="go"&gt;Switched to branch 'master'&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then the &lt;code&gt;git merge&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git merge bug-unknown-id
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git merge bug-unknown-id
 &lt;span class="go"&gt;Updating 370f975..94a4210&lt;/span&gt;
 &lt;span class="go"&gt;Fast-forward&lt;/span&gt;
 &lt;span class="go"&gt; setup.py                               |  2 +-&lt;/span&gt;
@@ -3348,7 +3348,7 @@ Increased the version number
 &lt;span class="go"&gt; 4 files changed, 24 insertions(+), 5 deletions(-)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;git status&lt;/code&gt; shows us that we are one commit ahead of our remote repository:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is ahead of 'origin/master' by 1 commit.&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git push" to publish your local commits)&lt;/span&gt;
@@ -3361,10 +3361,10 @@ Increased the version number
 &lt;span class="go"&gt;nothing added to commit but untracked files present (use "git add" to track)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To make our changes public, we just need to &lt;code&gt;git push&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin master
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we can see our bug fix as a single commit in the log:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log --pretty
 
 &lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; master, origin/master, origin/HEAD, bug-unknown-id)&lt;/span&gt;
 &lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
@@ -3386,7 +3386,7 @@ Increased the version number
 &lt;p class="last"&gt;There are two types of tags, "lightweight" and "annotated". The specifics aren't important for this guide, just be aware there is a difference, and know that we are using lightweight tags here.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log -n1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log -n1
 &lt;span class="go"&gt;commit e80d48320ea1e912d8d0c137b32a21f33492e8f5 (HEAD -&amp;gt; master, tag: v0.1.1, origin/master, origin/HEAD, bug-unknown-id)&lt;/span&gt;
 &lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
 &lt;span class="go"&gt;Date:   Tue May 7 11:05:01 2019 -0400&lt;/span&gt;
@@ -3399,32 +3399,32 @@ Increased the version number
 &lt;/div&gt;
 &lt;p&gt;We are going to name our tag &lt;code&gt;v0.1.1&lt;/code&gt;. The exact format is up to you and people you collaborate with, but it's useful to use a common prefix to help classify what the tag &lt;em&gt;means&lt;/em&gt;. In this case, we're using &lt;code&gt;v&lt;/code&gt; to indicate a release version. This is helpful later when your project has possibly hundreds of tags, for may reasons besides marking released versions, since we can do pattern matching when listing tags.&lt;/p&gt;
 &lt;p&gt;Now for the actual tagging:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag v0.1.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag v0.1.1
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To see what tags we've made, we can run &lt;code&gt;git tag&lt;/code&gt; without any arguments:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag
 &lt;span class="go"&gt;v0.1.1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we wanted to limit what tags we want to see, we can use the &lt;code&gt;-l&lt;/code&gt; parameter:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag -l &lt;span class="s2"&gt;"v*"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag -l &lt;span class="s2"&gt;"v*"&lt;/span&gt;
 &lt;span class="go"&gt;v0.1.1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We can remove a tag using the &lt;code&gt;-d&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag -d v0.1.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag -d v0.1.1
 &lt;span class="go"&gt;Deleted tag 'v0.1.1' (was e80d483)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="remote-vs-local-tags"&gt;
 &lt;h3&gt;Remote Vs Local Tags&lt;/h3&gt;
 &lt;p&gt;So far, we've only used &lt;em&gt;local&lt;/em&gt; tags. These tags only exist in our working directory - they aren't available in our &lt;em&gt;remote&lt;/em&gt;, or the repository we cloned. To make a tag remote, we use &lt;code&gt;git push&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git tag v0.1.1 &lt;span class="c1"&gt;# need to remake since we deleted it above&lt;/span&gt;
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin v0.1.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git tag v0.1.1 &lt;span class="c1"&gt;# need to remake since we deleted it above&lt;/span&gt;
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin v0.1.1
 &lt;span class="go"&gt;Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
 &lt;span class="go"&gt;To [...]/random_quote_remote&lt;/span&gt;
 &lt;span class="go"&gt; * [new tag]         v0.1.1 -&amp;gt; v0.1.1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is very similar to when we ran &lt;code&gt;git push&lt;/code&gt; in the last section, but git knows we are only asking to send the new tag to the repository.&lt;/p&gt;
 &lt;p&gt;To delete a remote tag, we need to let &lt;code&gt;git push&lt;/code&gt; know with the &lt;code&gt;--delete&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin --delete v0.1.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin --delete v0.1.1
 &lt;span class="go"&gt; - [deleted]         v0.1.1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="admonition note"&gt;
@@ -3444,7 +3444,7 @@ Increased the version number
 &lt;p&gt;As with tags, branches exist in &lt;em&gt;local&lt;/em&gt; and &lt;em&gt;remote&lt;/em&gt; versions. Our branch, so far, only exists in our clone of the repository. This is good, since we were able to fix our bug and merge our changes into &lt;code&gt;master&lt;/code&gt; without having to show the code to anyone.&lt;/p&gt;
 &lt;p&gt;However, when you are collaborating with people, you'll often need to give them access to your code. This is done by making your branch &lt;em&gt;remote&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;We use &lt;code&gt;git push&lt;/code&gt; to do this, just like we did with tags:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin bug-unknown-id
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin bug-unknown-id
 &lt;span class="go"&gt;Total 0 (delta 0), reused 0 (delta 0)&lt;/span&gt;
 &lt;span class="go"&gt;To [...]/random_quote_remote&lt;/span&gt;
 &lt;span class="go"&gt; * [new branch]      bug-unknown-id -&amp;gt; bug-unknown-id&lt;/span&gt;
@@ -3459,7 +3459,7 @@ Increased the version number
 &lt;p&gt;In this installment, we got a lot more comfortable writing tests and doing stuff with git. At this point, we're ready to do any sort of feature or bug work, and leave a clean commit log when we're done.&lt;/p&gt;
 &lt;p&gt;In the &lt;a class="reference external" href="/branching-git-with-pytest-3.html"&gt;final part&lt;/a&gt; of this series, we'll simulate two developers working on different branches and causing a conflict, which we'll learn how to resolve.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
+</content><category term="tutorial"></category><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry><entry><title>Branching With Git And Testing With Pytest: A Comprehensive Guide</title><link href="/branching-git-with-pytest.html" rel="alternate"></link><published>2019-06-19T09:00:00-04:00</published><updated>2019-06-19T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2019-06-19:/branching-git-with-pytest.html</id><summary type="html">&lt;!-- Collects all of the includable files into one. --&gt;
 &lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
@@ -3676,8 +3676,8 @@ Increased the version number
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; random_quote
 &lt;span class="gp"&gt;$&lt;/span&gt; python -m venv .
 &lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;source&lt;/span&gt; bin/activate
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pip install -r requirements.txt
-&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pip install -e .
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -r requirements.txt
+&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pip install -e .
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="explanation section"&gt;
 &lt;h3&gt;Explanation&lt;/h3&gt;
@@ -3896,7 +3896,7 @@ Increased the version number
 &lt;p&gt;Modifying this amalgam is much more risky. We can very easily break the database code fixing a web API issue and vice-versa. It's hard for two developers to work on this part of the code base concurrently without running into conflicts.&lt;/p&gt;
 &lt;div class="admonition tip"&gt;
 &lt;p class="first admonition-title"&gt;Tip&lt;/p&gt;
-&lt;p class="last"&gt;We will learn how to deal with that situation, however unlikely, in &lt;a class="reference external" href="/branching-git-with-pytest-3.rst"&gt;part 3&lt;/a&gt;! 🦄&lt;/p&gt;
+&lt;p class="last"&gt;We will learn how to deal with that situation, however unlikely, in &lt;a class="reference external" href="{static}/branching-git-with-pytest-3.rst"&gt;part 3&lt;/a&gt;! 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;But worse, its also harder to &lt;em&gt;test&lt;/em&gt;. This may be one of the biggest advantages to putting thought into separation of concerns, and creating sane API boundaries. When testing the nightmare code above, we have to simulate an HTTP request just to make sure the database works, and we need the database functioning to ensure the HTTP stuff functions. This leads to more complex test fixtures and complex object mocking, and ultimately more fragile test suites.&lt;/p&gt;
 &lt;p&gt;When writing software, its best to keep our units as small as possible and loosely coupled, so they can be easily isolated. Then our tests are simple and reliable.&lt;/p&gt;
@@ -4106,7 +4106,7 @@ Increased the version number
 &lt;div class="section" id="run-the-tests"&gt;
 &lt;h2 id="run the tests"&gt;Run The Tests&lt;/h2&gt;
 &lt;p&gt;Now that we have the code, we've initialized our environment, and we understand what we're working on, we can run the tests. This is done with the &lt;code&gt;pytest&lt;/code&gt; command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -4131,10 +4131,10 @@ Increased the version number
 &lt;p&gt;For the sake of completeness, we'll also use the &lt;code&gt;RandomQuoteManager&lt;/code&gt; to add a few unique quotes and show how the API works.&lt;/p&gt;
 &lt;p&gt;First, lets create a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values"&gt;CSV&lt;/a&gt; file containing some quotes, called &lt;code&gt;quotes.csv&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;You can do this using your favorite spreadsheet program, a text editor, or (recommended) use the provided &lt;code&gt;generate_quotes.py&lt;/code&gt; script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python scripts/generate_quotes.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python scripts/generate_quotes.py
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To initialize the database and mess with the API, lets start a python prompt in our virtual environment:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="go"&gt;Python 3.7.3 (default, Mar 30 2019, 03:37:43)&lt;/span&gt;
 &lt;span class="go"&gt;Type "help", "copyright", "credits" or "license" for more information.&lt;/span&gt;
 &lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt;
@@ -4204,7 +4204,7 @@ Increased the version number
 &lt;p&gt;This test is non-sensical, simply asserting that ϕ != 2.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;As before, we can use &lt;code&gt;pytest&lt;/code&gt; to run our test case, but this time we'll specify the file instead of &lt;code&gt;src&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest test_example.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest test_example.py
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -4216,7 +4216,7 @@ Increased the version number
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;In this case, only the &lt;code&gt;test_phi()&lt;/code&gt; &lt;em&gt;test case&lt;/em&gt; is run directly by &lt;code&gt;pytest&lt;/code&gt;. The &lt;code&gt;phi()&lt;/code&gt; function itself is not.&lt;/p&gt;
 &lt;p&gt;To prove this, we can ask &lt;code&gt;pytest&lt;/code&gt; to be more &lt;em&gt;verbose&lt;/em&gt;, using the &lt;code&gt;-v&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v test_example.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v test_example.py
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -4274,11 +4274,11 @@ Increased the version number
 
 &lt;span class="n"&gt;CHANGE_ME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Hello"&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;returned_value&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"boo"&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;yielded_value&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;CHANGE_ME&lt;/span&gt;
     &lt;span class="n"&gt;CHANGE_ME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Goodbye"&lt;/span&gt;
@@ -4318,7 +4318,7 @@ Increased the version number
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;When we run the new test cases, we see everything passes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v test_example.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v test_example.py
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -4508,13 +4508,13 @@ Increased the version number
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tempfile&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;filehandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tempfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mkstemp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"random_quote_"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
     &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unlink&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Create a RandomQuoteManager, and initialize the database.&lt;/span&gt;
@@ -4527,7 +4527,7 @@ Increased the version number
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;rand&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RAND_MIN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RAND_MAX&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Unknown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Generic Quote {i}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Unknown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Generic Quote &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
     &lt;span class="n"&gt;rqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -4535,7 +4535,7 @@ Increased the version number
 
     &lt;span class="n"&gt;rqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Create an instance of RandomQuoteApp, with a preconfigured RandomQuoteManager,&lt;/span&gt;
@@ -4582,7 +4582,7 @@ Increased the version number
     &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now, if we run the tests, we will likely get a failure (if you don't, try running them again):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;==================================== test session starts =====================================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -4613,7 +4613,7 @@ Increased the version number
 &lt;p&gt;There is a &lt;code&gt;seed()&lt;/code&gt; function in the &lt;code&gt;random&lt;/code&gt; module that &lt;a class="reference external" href="https://docs.python.org/3/library/random.html#random.seed"&gt;re-initializes the random number generator&lt;/a&gt;. It can take a parameter, which is used to provide &lt;em&gt;reproducible&lt;/em&gt; randomness.&lt;/p&gt;
 &lt;p&gt;When used, everything will function properly: if you were to call a random function multiple times under normal circumstances and get a different value, you still would. But the values would be (likely) different, and the same values will be returned. This happens &lt;em&gt;every time&lt;/em&gt; that &lt;code&gt;random.seed()&lt;/code&gt; is called with the same value.&lt;/p&gt;
 &lt;p&gt;Here's how that works:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; python
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; python
 &lt;span class="go"&gt;Python 3.7.3 (default, Mar 30 2019, 03:37:43)&lt;/span&gt;
 &lt;span class="go"&gt;[Clang 10.0.0 (clang-1000.11.45.5)] on darwin&lt;/span&gt;
 &lt;span class="go"&gt;Type "help", "copyright", "credits" or "license" for more information.&lt;/span&gt;
@@ -4638,7 +4638,7 @@ Increased the version number
 10
 11
 12
-13&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+13&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fix_random&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;yield&lt;/span&gt;
@@ -4710,19 +4710,19 @@ Increased the version number
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tempfile&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="hll"&gt;&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="hll"&gt;&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fix_random&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="k"&gt;yield&lt;/span&gt;
 &lt;/span&gt;&lt;span class="hll"&gt;    &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/span&gt;
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="n"&gt;filehandle&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tempfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mkstemp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"random_quote_"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
     &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unlink&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="hll"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fix_random&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 &lt;/span&gt;    &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Create a RandomQuoteManager, and initialize an in-memory database.&lt;/span&gt;
@@ -4735,7 +4735,7 @@ Increased the version number
 
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;rand&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RAND_MIN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RAND_MAX&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Unknown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Generic Quote {i}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Unknown"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;"Generic Quote &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
     &lt;span class="n"&gt;rqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
@@ -4743,7 +4743,7 @@ Increased the version number
 
     &lt;span class="n"&gt;rqm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;preconfigured_wsgi_app&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;temp_db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;preconfigured_manager&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;"""&lt;/span&gt;
 &lt;span class="sd"&gt;    Create an instance of RandomQuoteApp, with a preconfigured RandomQuoteManager,&lt;/span&gt;
@@ -4756,7 +4756,7 @@ Increased the version number
     &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Now, running the tests again, we see that the new test case &lt;code&gt;test_random_quote()&lt;/code&gt; passes:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0&lt;/span&gt;
 &lt;span class="go"&gt;rootdir: [...]/random_quote&lt;/span&gt;
@@ -4773,7 +4773,7 @@ Increased the version number
 &lt;p&gt;The most basic way to work with &lt;code&gt;git&lt;/code&gt; is to make a clone of a repository, make changes on the default branch, usually called &lt;code&gt;master&lt;/code&gt;, then &lt;code&gt;git commit&lt;/code&gt;, followed by &lt;code&gt;git push&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;While it's not best practice to do this most of the time, it's a little less complicated than a fully-baked branch-based development workflow. So we'll take it easy with this first batch of changes, so we can get acquainted with git.&lt;/p&gt;
 &lt;p&gt;First, we need to ask git what has changed. We do this using &lt;code&gt;git status&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is up to date with 'origin/master'.&lt;/span&gt;
 
@@ -4806,7 +4806,7 @@ Increased the version number
 &lt;/div&gt;
 &lt;p&gt;Our commit messages should be descriptive, but not too long. There's no point in mentioning things that git records in the change set, like which files changed or even which code was altered. Instead, focus on stating &lt;em&gt;why&lt;/em&gt; things changed, and the overall &lt;em&gt;point&lt;/em&gt; of the commit.&lt;/p&gt;
 &lt;p&gt;Lets go ahead and execute &lt;code&gt;git commit -a&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Here's what the content of the file will look like:&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
@@ -4854,7 +4854,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;p class="last"&gt;I like the &lt;a class="reference external" href="https://wiki.openstack.org/wiki/GitCommitMessages"&gt;git log standard&lt;/a&gt; used by the &lt;a class="reference external" href="https://www.openstack.org/"&gt;OpenStack project&lt;/a&gt;. Even if you weren't to adopt it verbatim, it's a great outline of things you need to think about when collaborating on a software project. 🦄&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Now, looking at &lt;code&gt;git log&lt;/code&gt;, we can get a sense of what's been going on:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log
 &lt;span class="go"&gt;commit f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&amp;gt; master)&lt;/span&gt;
 &lt;span class="go"&gt;Author: Josh Johnson &amp;lt;jjmojojjmojo@gmail.com&amp;gt;&lt;/span&gt;
 &lt;span class="go"&gt;Date:   Sun Jun 9 17:45:53 2019 -0400&lt;/span&gt;
@@ -4875,7 +4875,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;git log&lt;/code&gt; has a few common command-line switches that can make reading the log a little less verbose.&lt;/p&gt;
 &lt;p&gt;Of particular use, is the &lt;code&gt;--pretty&lt;/code&gt; flag:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline
 &lt;span class="go"&gt;f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&amp;gt; master) Added tests for randomness.&lt;/span&gt;
 &lt;span class="go"&gt;c670c79823aa7c1c10add696795ee0f880d77b98 (origin/master, origin/HEAD) Added in an import that was accidentally removed&lt;/span&gt;
 &lt;span class="go"&gt;032f770e0300a61989fa40dc971e5a24a43928bb Added a helper script to make re-cloning easier for me while I edit the blog post&lt;/span&gt;
@@ -4889,7 +4889,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Try other valid options for &lt;code&gt;--pretty&lt;/code&gt;, like &lt;code&gt;short&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Another useful command line option for &lt;code&gt;git log&lt;/code&gt; is &lt;code&gt;-n[?]&lt;/code&gt; - you can pass any number to limit the log output to just that many entries:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline -n1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git log --pretty&lt;span class="o"&gt;=&lt;/span&gt;oneline -n1
 &lt;span class="go"&gt;f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&amp;gt; master) Added tests for randomness.&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="admonition tip"&gt;
@@ -4929,7 +4929,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;Note that we are receiving the &lt;em&gt;same&lt;/em&gt; quote that we got in &lt;code&gt;test_random_quote()&lt;/code&gt; from &lt;code&gt;test_manager.py&lt;/code&gt;. The random seed is working!&lt;/p&gt;
 &lt;p&gt;We can run the tests again and see that the new test got picked up, and ran successfully. To be extra-sure, lets use the &lt;code&gt;-v&lt;/code&gt; flag to &lt;code&gt;pytest&lt;/code&gt;, it will give us more detail about what tests were run:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; pytest -v src
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; pytest -v src
 &lt;span class="go"&gt;============================== test session starts ==============================&lt;/span&gt;
 &lt;span class="go"&gt;platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python&lt;/span&gt;
 &lt;span class="go"&gt;cachedir: .pytest_cache&lt;/span&gt;
@@ -4953,7 +4953,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;p class="last"&gt;Be careful of &lt;a class="reference external" href="https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch01s09.html"&gt;special shell characters&lt;/a&gt;, in messages you pass to the &lt;code&gt;-m&lt;/code&gt; switch. If you have to use one, prefix it with a backslash (\).&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;First, lets check &lt;code&gt;git status&lt;/code&gt; to make sure we know what we're committing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git status
 &lt;span class="go"&gt;On branch master&lt;/span&gt;
 &lt;span class="go"&gt;Your branch is ahead of 'origin/master' by 1 commit.&lt;/span&gt;
 &lt;span class="go"&gt;  (use "git push" to publish your local commits)&lt;/span&gt;
@@ -4975,7 +4975,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that now, &lt;code&gt;git status&lt;/code&gt; tells us that we are "ahead of 'orign/master' by 1 commit". That's letting us know we have commits that haven't been sent to the master (or &lt;code&gt;git push&lt;/code&gt;) since we made our clone.&lt;/p&gt;
 &lt;p&gt;Ok, so we know what's going to be committed, lets do the commit:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added web API test for a random quote"&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git commit -a -m&lt;span class="s2"&gt;"Added web API test for a random quote"&lt;/span&gt;
 &lt;span class="go"&gt;[master a110267] Added web API test for a random quote&lt;/span&gt;
 &lt;span class="go"&gt; 1 file changed, 11 insertions(+)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -4986,7 +4986,7 @@ Created a new test fixture that makes random tests reproducible.
 &lt;p&gt;In order for someone else to use those changes, we need to use send our commits to the remote. This is done via &lt;code&gt;git push&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The default name for the default remote is &lt;code&gt;origin&lt;/code&gt;. It's not necessary to specify it to &lt;code&gt;git push&lt;/code&gt;, but it's a good habit to get into.&lt;/p&gt;
 &lt;p&gt;Lets push our changes to the &lt;code&gt;master&lt;/code&gt; branch:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;(random_quote) $&lt;/span&gt; git push origin master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp gp-VirtualEnv"&gt;(random_quote)&lt;/span&gt; &lt;span class="gp"&gt;$&lt;/span&gt; git push origin master
 &lt;span class="go"&gt;Enumerating objects: 20, done.&lt;/span&gt;
 &lt;span class="go"&gt;Counting objects: 100% (20/20), done.&lt;/span&gt;
 &lt;span class="go"&gt;Delta compression using up to 8 threads&lt;/span&gt;
@@ -5007,4 +5007,4 @@ Created a new test fixture that makes random tests reproducible.
 &lt;p&gt;In this installment, we covered the basics of doing work with pytest and git.&lt;/p&gt;
 &lt;p&gt;In &lt;a class="reference external" href="/branching-git-with-pytest-2.html"&gt;part 2&lt;/a&gt;, we'll dig into how branching works by fixing a bug.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry></feed>
+</content><category term="tutorial"></category><category term="python"></category><category term="git"></category><category term="branching"></category><category term="development process"></category></entry></feed>

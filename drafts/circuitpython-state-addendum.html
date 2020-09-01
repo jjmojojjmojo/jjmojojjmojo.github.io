@@ -50,12 +50,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -145,38 +139,38 @@
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>On my GEMMA M0, it prints <tt class="docutils literal">8944</tt> when it starts up. That's the number we'll be comparing other approaches to.</p>
 <div class="admonition note">
@@ -201,9 +195,9 @@
 
 <span class="o">...</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 <span class="o">...</span>
 </pre></div>
 </td></tr></table></div></div>
@@ -245,34 +239,34 @@
 <span class="kn">import</span> <span class="nn">gc</span>
 <span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 
-<span class="n">state_button</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">state_led</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">state_button</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">state_led</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">state_button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state_checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-            <span class="n">state_button</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state_button</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state_button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state_checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-            <span class="n">state_button</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state_button</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">state_checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">state_button</span><span class="p">:</span>
-        <span class="n">state_led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state_led</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">state_led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state_led</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">state_led</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>This uses 9888 bytes of memory on my GEMMA. This approach gets messy quickly, but is still pretty easy to read.</p>
 <p>Lets try a method that's a bit less readable but should save some memory: we'll use a single list to store our state:</p>
@@ -308,29 +302,29 @@
 <span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 
 <span class="c1">#        button   led      checkin</span>
-<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">,</span>   <span class="bp">False</span><span class="p">,</span>   <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()]</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span>   <span class="kc">False</span><span class="p">,</span>   <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()]</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
     <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>Using a list instead, my GEMMA reports 9984 bytes of free memory.</p>
 <p>Here's what the same code looks like using a dictionary. It uses a tiny bit more memory, but it's quite a bit more readable:</p>
@@ -369,32 +363,32 @@
 <span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"button"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="s2">"led"</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s2">"button"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"led"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="s2">"checkin"</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 <span class="p">}</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">state</span><span class="p">[</span><span class="s2">"checkin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
     <span class="n">state</span><span class="p">[</span><span class="s2">"led"</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"button"</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">"led"</span><span class="p">]:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>The dictionary version leaves 9808 bytes of free RAM.</p>
 <p>For simple state like this, using a dictionary is probably the best way to go. If other parts of your project are memory intensive, or you need to use a lot of heavy third-party libraries, it's better to use less elegant code to deal with state than detract from core functionality.</p>
@@ -438,27 +432,27 @@
 <span class="c1">#                         button   led      checkin</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s2">"H"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)])</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
     <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>My GEMMA reports <tt class="docutils literal">9760</tt> bytes of free memory. That's over 100 bytes <em>worse</em> than the dictionary version. However, some of that is due simply to the extra code brought in with the <tt class="docutils literal">array</tt> module. The savings might add up with more complex projects, especially when tracking many more state values.</p>
 <p>Finally, we can try using what's called a <em>bitmask</em>. This is mostly useful for storing boolean values - things that can be either <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
@@ -532,20 +526,20 @@
 
 <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="mb">0b10</span>
             <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">^</span> <span class="mb">0b10</span>
             <span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b10</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">|</span> <span class="mb">0b01</span>
@@ -553,9 +547,9 @@
         <span class="n">state</span> <span class="o">=</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="o">~</span><span class="mb">0b01</span>
 
     <span class="k">if</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mb">0b01</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><p>So this also doesn't seem to save us much memory. My GEMMA reports ﻿9872 bytes free. However this could be much more significant if we were tracking many, many boolean values.</p>
 </div>
@@ -640,7 +634,7 @@
 <span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 
 <span class="k">def</span> <span class="nf">random_color</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
@@ -648,34 +642,34 @@
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="o">*</span><span class="n">random_color</span><span class="p">()),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
@@ -745,7 +739,7 @@
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 
 <span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
 
@@ -761,10 +755,10 @@
     <span class="p">(</span><span class="s2">"orange"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()),</span>
     <span class="p">(</span><span class="s2">"yellow"</span><span class="p">,</span> <span class="n">fancy</span><span class="o">.</span><span class="n">gamma_adjust</span><span class="p">(</span><span class="n">fancy</span><span class="o">.</span><span class="n">CRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">())</span>
 <span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"colors = ("</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"colors = ("</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">"{:&gt;10},    # {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">")"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{:&gt;10}</span><span class="s2">,    # </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">")"</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>Now we can run this on our board, and copy what we see in the console into our code. We can then remove the dependency on FancyLED.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -837,7 +831,7 @@
 <span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="kn">as</span> <span class="nn">fancy</span>
+<span class="kn">import</span> <span class="nn">adafruit_fancyled.adafruit_fancyled</span> <span class="k">as</span> <span class="nn">fancy</span>
 
 <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span>
        <span class="mi">8421504</span><span class="p">,</span>    <span class="c1"># white</span>
@@ -858,34 +852,34 @@
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random_color</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
@@ -982,29 +976,29 @@
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button pressed"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">random_color</span><span class="p">()</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Button released"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </td></tr></table></div><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1036,9 +1030,9 @@
 <span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">state</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span><span class="p">:</span>
@@ -1092,16 +1086,16 @@
 <span class="n">free</span> <span class="o">=</span> <span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">()</span>
 
 <span class="c1"># string interpolation (classic way)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"memory free </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">free</span><span class="p">,))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"memory free </span><span class="si">%d</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">free</span><span class="p">,))</span>
 
 <span class="c1"># format() method (newer way)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"memory free {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"memory free </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
 
 <span class="c1"># string addition</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"memory free "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"memory free "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">free</span><span class="p">))</span>
 
 <span class="c1"># multiple parameters to print()</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"memory free"</span><span class="p">,</span> <span class="n">free</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"memory free"</span><span class="p">,</span> <span class="n">free</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><p>The first two ways avoid excess memory issues. String addition creates an implicit temporary variable. It's worse here, since we also have to do a conversion ourselves from the int we have to a string.</p>
 <p>I also included the last way, which isn't technically combining strings, but might not be obvious if you aren't familiar with modern Python: the <tt class="docutils literal">print()</tt> function takes a variable number of arguments, and it will print each one separated by a space.</p>
@@ -1133,7 +1127,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">neopixel</span>
 
-<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
 
 <span class="kn">import</span> <span class="nn">gc</span>
@@ -1141,7 +1135,7 @@
 <span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">rgb</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">,</span> <span class="n">white</span><span class="p">]</span>
     <span class="n">rgb</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">]</span>
     <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1150,7 +1144,7 @@
     <span class="n">rgb</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">,</span> <span class="n">black</span><span class="p">]</span>
     <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div><p>The solution, if this becomes an issue, is to assign a color to each index  directly:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1194,7 +1188,7 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">neopixel</span>
 
-<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">neopixel</span><span class="o">.</span><span class="n">NeoPixel</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">NEOPIXEL</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">auto_write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">rgb</span><span class="o">.</span><span class="n">brightness</span> <span class="o">=</span> <span class="mf">0.3</span>
 
 <span class="kn">import</span> <span class="nn">gc</span>
@@ -1202,7 +1196,7 @@
 <span class="n">black</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">white</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
     <span class="n">rgb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">black</span>
     <span class="n">rgb</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
@@ -1227,7 +1221,7 @@
     <span class="n">rgb</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="n">white</span>
     <span class="n">rgb</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
 <p class="first admonition-title">Note</p>

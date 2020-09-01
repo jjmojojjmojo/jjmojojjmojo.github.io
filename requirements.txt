@@ -9,3 +9,6 @@ circus
 chaussette
 num2words
 bs4
+argh
+wheel
+PyYAML

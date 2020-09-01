@@ -39,12 +39,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <h1>Site-wide Conventions Explained</h1>
 <div class="contents">
@@ -86,10 +80,10 @@
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </pre></div>
 </td></tr></table></div><div class="explanation section">
 <h3>Explanation</h3>
@@ -111,10 +105,10 @@
 </dl>
 <p>Example</p>
 <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-<span class="gp">... </span>       <span class="k">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
 <span class="gp">... </span>       <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-<span class="gp">... </span>           <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="gp">... </span>           <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">some_function</span><span class="p">(</span><span class="s2">"boo"</span><span class="p">)</span>
 <span class="gt">Traceback (most recent call last):</span>

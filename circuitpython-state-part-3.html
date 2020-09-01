@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -95,7 +89,7 @@
 <ul class="simple">
 <li>Every time button "B" is pressed, the built-in RGB LED (NeoPixel or DotStar) will light up in a <em>different color</em>.</li>
 </ul>
-<p>We can improve upon the code by building on the concepts of <em>state</em> we learned about in the <a class="reference external" href="/circuitpython-state-2.rst">previous post</a>. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄</p>
+<p>We can improve upon the code by building on the concepts of <em>state</em> we learned about in the <a class="reference external" href="{static}/circuitpython-state-2.rst">previous post</a>. We'll see that we can also use the same concepts to remove the blocking code, and add our new feature in an elegant way. 🦄</p>
 <p>Lets start by refactoring our original code to work just as it did, but using state.</p>
 <p>Here are the global state attributes we will need to track:</p>
 <ul class="simple">
@@ -157,25 +151,25 @@
 <span class="c1">#   - check() is a function that handles differences between button wiring</span>
 
 <span class="c1"># these state variables need specific names</span>
-<span class="n">led_state</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">button_a_state</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">button_b_state</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">rgb_state</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">led_state</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">button_a_state</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">button_b_state</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">rgb_state</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">rgb_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">button_a_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
     <span class="n">button_b_state</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">button_a_state</span><span class="p">:</span>
-        <span class="n">led_state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">led_state</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">led_state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">led_state</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">button_b_state</span><span class="p">:</span>
-        <span class="n">rgb_state</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">rgb_state</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">rgb_state</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">rgb_state</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">led_state</span>
 
@@ -273,32 +267,32 @@
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, RGB: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># first pass: check real life</span>
     <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="c1"># second pass: assess state</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="c1"># third pass: reconcile state</span>
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">led</span>
@@ -326,7 +320,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
 <span class="go">&lt;Buttons: False/False, LED: False, RGB: False, Color: (255, 255, 255)&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">state</span>
 <span class="go">&lt;Buttons: False/False, LED: False, RGB: True, Color: (255, 255, 255)&gt;</span>
 </pre></div>
@@ -370,10 +364,10 @@
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">random_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -384,7 +378,7 @@
        <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, RGB: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, RGB: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
@@ -457,10 +451,10 @@
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">random_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -471,27 +465,27 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># update the state</span>
     <span class="n">state</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
     <span class="n">state</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
     <span class="c1"># take action - change the state</span>
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"LED: on"</span><span class="p">)</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"LED: on"</span><span class="p">)</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"RGB on. Color: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">state</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">state</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
 
     <span class="c1"># take action - do things that cause side effects</span>
@@ -588,10 +582,10 @@
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">random_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -606,24 +600,24 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"RGB on. Color: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># update the state</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
@@ -773,10 +767,10 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
@@ -793,26 +787,26 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-                <span class="err">﻿</span><span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="err">﻿</span><span class="nb">print</span><span class="p">(</span><span class="s2">"RGB on. Color: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># update the state</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
@@ -997,16 +991,16 @@
     <span class="n">_debounce</span> <span class="o">=</span> <span class="mf">0.2</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">random_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"Generating random color"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Generating random color"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">(</span>
              <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
              <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
@@ -1019,32 +1013,32 @@
 
             <span class="c1"># b button was pressed</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="ow">and</span> <span class="n">check</span><span class="p">(</span><span class="s2">"B"</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"B button pressed"</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">random_color</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"LED on"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">led</span> <span class="o">=</span> <span class="kc">False</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"RGB on. Color: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"RGB on. Color: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"&lt;Buttons: {}/{}, LED: {}, Color: {}&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"&lt;Buttons: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">, LED: </span><span class="si">{}</span><span class="s2">, Color: </span><span class="si">{}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button_a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">led</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">()</span>
 
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="c1"># update the state</span>
     <span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 

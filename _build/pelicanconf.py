@@ -112,7 +112,7 @@ CATEGORY_DESCRIPTIONS = {
 }
 
 # turn on/off the notice block
-SHOW_NOTICE = True
+SHOW_NOTICE = False
 
 STATIC_PATHS = ['images', 'files', 'js', 'videos', 'attachments']
 

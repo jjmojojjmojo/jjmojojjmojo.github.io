@@ -49,12 +49,6 @@
 </a>
 </span>
 </header><!-- /#banner -->
-<div id="notice">
-<div id="notice-content">
-<div style="text-align: center">
-<big>🦄</big> <strong>Hiring?</strong> Josh is looking for work! <a href="/pages/hire-me.html">More info</a>. <big>🦄</big>
-</div> </div>
-</div>
 <div id="content-wrapper">
 <section class="body" id="content">
 <header>
@@ -277,8 +271,8 @@
 <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> random_quote
 <span class="gp">$</span> python -m venv .
 <span class="gp">$</span> <span class="nb">source</span> bin/activate
-<span class="gp">(random_quote) $</span> pip install -r requirements.txt
-<span class="gp">(random_quote) $</span> pip install -e .
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pip install -r requirements.txt
+<span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pip install -e .
 </pre></div>
 <div class="explanation section">
 <h3>Explanation</h3>
@@ -497,7 +491,7 @@
 <p>Modifying this amalgam is much more risky. We can very easily break the database code fixing a web API issue and vice-versa. It's hard for two developers to work on this part of the code base concurrently without running into conflicts.</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last">We will learn how to deal with that situation, however unlikely, in <a class="reference external" href="/branching-git-with-pytest-3.rst">part 3</a>! 🦄</p>
+<p class="last">We will learn how to deal with that situation, however unlikely, in <a class="reference external" href="{static}/branching-git-with-pytest-3.rst">part 3</a>! 🦄</p>
 </div>
 <p>But worse, its also harder to <em>test</em>. This may be one of the biggest advantages to putting thought into separation of concerns, and creating sane API boundaries. When testing the nightmare code above, we have to simulate an HTTP request just to make sure the database works, and we need the database functioning to ensure the HTTP stuff functions. This leads to more complex test fixtures and complex object mocking, and ultimately more fragile test suites.</p>
 <p>When writing software, its best to keep our units as small as possible and loosely coupled, so they can be easily isolated. Then our tests are simple and reliable.</p>
@@ -707,7 +701,7 @@
 <div class="section" id="run-the-tests">
 <h2 id="run the tests">Run The Tests</h2>
 <p>Now that we have the code, we've initialized our environment, and we understand what we're working on, we can run the tests. This is done with the <code>pytest</code> command:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -732,10 +726,10 @@
 <p>For the sake of completeness, we'll also use the <code>RandomQuoteManager</code> to add a few unique quotes and show how the API works.</p>
 <p>First, lets create a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> file containing some quotes, called <code>quotes.csv</code>.</p>
 <p>You can do this using your favorite spreadsheet program, a text editor, or (recommended) use the provided <code>generate_quotes.py</code> script:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python scripts/generate_quotes.py
 </pre></div>
 <p>To initialize the database and mess with the API, lets start a python prompt in our virtual environment:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python
 <span class="go">Python 3.7.3 (default, Mar 30 2019, 03:37:43)</span>
 <span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
 <span class="gp">&gt;</span>&gt;&gt;
@@ -805,7 +799,7 @@
 <p>This test is non-sensical, simply asserting that ϕ != 2.</p>
 </div>
 <p>As before, we can use <code>pytest</code> to run our test case, but this time we'll specify the file instead of <code>src</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest test_example.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest test_example.py
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.2, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -817,7 +811,7 @@
 </pre></div>
 <p>In this case, only the <code>test_phi()</code> <em>test case</em> is run directly by <code>pytest</code>. The <code>phi()</code> function itself is not.</p>
 <p>To prove this, we can ask <code>pytest</code> to be more <em>verbose</em>, using the <code>-v</code> flag:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v test_example.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest -v test_example.py
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -875,11 +869,11 @@
 
 <span class="n">CHANGE_ME</span> <span class="o">=</span> <span class="s2">"Hello"</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">returned_value</span><span class="p">():</span>
     <span class="k">return</span> <span class="s2">"boo"</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">yielded_value</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">CHANGE_ME</span>
     <span class="n">CHANGE_ME</span> <span class="o">=</span> <span class="s2">"Goodbye"</span>
@@ -919,7 +913,7 @@
 </div>
 </div>
 <p>When we run the new test cases, we see everything passes:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v test_example.py
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest -v test_example.py
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -1109,13 +1103,13 @@
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">temp_db</span><span class="p">():</span>
     <span class="n">filehandle</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">"random_quote_"</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">path</span>
     <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">preconfigured_manager</span><span class="p">(</span><span class="n">temp_db</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Create a RandomQuoteManager, and initialize the database.</span>
@@ -1128,7 +1122,7 @@
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
         <span class="n">rand</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">manager</span><span class="o">.</span><span class="n">RAND_MIN</span><span class="p">,</span> <span class="n">manager</span><span class="o">.</span><span class="n">RAND_MAX</span><span class="p">)</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"Unknown"</span><span class="p">,</span> <span class="n">f</span><span class="s2">"Generic Quote {i}"</span><span class="p">,</span> <span class="n">rand</span><span class="p">))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"Unknown"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Generic Quote </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">rand</span><span class="p">))</span>
 
     <span class="n">rqm</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
@@ -1136,7 +1130,7 @@
 
     <span class="n">rqm</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">preconfigured_wsgi_app</span><span class="p">(</span><span class="n">temp_db</span><span class="p">,</span> <span class="n">preconfigured_manager</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Create an instance of RandomQuoteApp, with a preconfigured RandomQuoteManager,</span>
@@ -1183,7 +1177,7 @@
     <span class="k">assert</span> <span class="n">quote</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">12</span>
 </pre></div>
 </td></tr></table></div><p>Now, if we run the tests, we will likely get a failure (if you don't, try running them again):</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src
 <span class="go">==================================== test session starts =====================================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -1214,7 +1208,7 @@
 <p>There is a <code>seed()</code> function in the <code>random</code> module that <a class="reference external" href="https://docs.python.org/3/library/random.html#random.seed">re-initializes the random number generator</a>. It can take a parameter, which is used to provide <em>reproducible</em> randomness.</p>
 <p>When used, everything will function properly: if you were to call a random function multiple times under normal circumstances and get a different value, you still would. But the values would be (likely) different, and the same values will be returned. This happens <em>every time</em> that <code>random.seed()</code> is called with the same value.</p>
 <p>Here's how that works:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> python
 <span class="go">Python 3.7.3 (default, Mar 30 2019, 03:37:43)</span>
 <span class="go">[Clang 10.0.0 (clang-1000.11.45.5)] on darwin</span>
 <span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
@@ -1239,7 +1233,7 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@pytest.fixture</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">fix_random</span><span class="p">():</span>
     <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">yield</span>
@@ -1311,19 +1305,19 @@
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="hll"><span class="nd">@pytest.fixture</span>
+<span class="hll"><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 </span><span class="hll"><span class="k">def</span> <span class="nf">fix_random</span><span class="p">():</span>
 </span><span class="hll">    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span class="hll">    <span class="k">yield</span>
 </span><span class="hll">    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 </span>
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">temp_db</span><span class="p">():</span>
     <span class="n">filehandle</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">"random_quote_"</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">path</span>
     <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="hll"><span class="k">def</span> <span class="nf">preconfigured_manager</span><span class="p">(</span><span class="n">temp_db</span><span class="p">,</span> <span class="n">fix_random</span><span class="p">):</span>
 </span>    <span class="sd">"""</span>
 <span class="sd">    Create a RandomQuoteManager, and initialize an in-memory database.</span>
@@ -1336,7 +1330,7 @@
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
         <span class="n">rand</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">manager</span><span class="o">.</span><span class="n">RAND_MIN</span><span class="p">,</span> <span class="n">manager</span><span class="o">.</span><span class="n">RAND_MAX</span><span class="p">)</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"Unknown"</span><span class="p">,</span> <span class="n">f</span><span class="s2">"Generic Quote {i}"</span><span class="p">,</span> <span class="n">rand</span><span class="p">))</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO quotes (author, quote, rand) VALUES (?, ?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"Unknown"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Generic Quote </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">rand</span><span class="p">))</span>
 
     <span class="n">rqm</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
@@ -1344,7 +1338,7 @@
 
     <span class="n">rqm</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">preconfigured_wsgi_app</span><span class="p">(</span><span class="n">temp_db</span><span class="p">,</span> <span class="n">preconfigured_manager</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Create an instance of RandomQuoteApp, with a preconfigured RandomQuoteManager,</span>
@@ -1357,7 +1351,7 @@
     <span class="n">app</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><p>Now, running the tests again, we see that the new test case <code>test_random_quote()</code> passes:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0</span>
 <span class="go">rootdir: [...]/random_quote</span>
@@ -1374,7 +1368,7 @@
 <p>The most basic way to work with <code>git</code> is to make a clone of a repository, make changes on the default branch, usually called <code>master</code>, then <code>git commit</code>, followed by <code>git push</code>.</p>
 <p>While it's not best practice to do this most of the time, it's a little less complicated than a fully-baked branch-based development workflow. So we'll take it easy with this first batch of changes, so we can get acquainted with git.</p>
 <p>First, we need to ask git what has changed. We do this using <code>git status</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is up to date with 'origin/master'.</span>
 
@@ -1407,7 +1401,7 @@
 </div>
 <p>Our commit messages should be descriptive, but not too long. There's no point in mentioning things that git records in the change set, like which files changed or even which code was altered. Instead, focus on stating <em>why</em> things changed, and the overall <em>point</em> of the commit.</p>
 <p>Lets go ahead and execute <code>git commit -a</code>:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git commit -a
 </pre></div>
 <p>Here's what the content of the file will look like:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1455,7 +1449,7 @@ Created a new test fixture that makes random tests reproducible.
 <p class="last">I like the <a class="reference external" href="https://wiki.openstack.org/wiki/GitCommitMessages">git log standard</a> used by the <a class="reference external" href="https://www.openstack.org/">OpenStack project</a>. Even if you weren't to adopt it verbatim, it's a great outline of things you need to think about when collaborating on a software project. 🦄</p>
 </div>
 <p>Now, looking at <code>git log</code>, we can get a sense of what's been going on:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log
 <span class="go">commit f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&gt; master)</span>
 <span class="go">Author: Josh Johnson &lt;jjmojojjmojo@gmail.com&gt;</span>
 <span class="go">Date:   Sun Jun 9 17:45:53 2019 -0400</span>
@@ -1476,7 +1470,7 @@ Created a new test fixture that makes random tests reproducible.
 </div>
 <p><code>git log</code> has a few common command-line switches that can make reading the log a little less verbose.</p>
 <p>Of particular use, is the <code>--pretty</code> flag:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log --pretty<span class="o">=</span>oneline
 <span class="go">f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&gt; master) Added tests for randomness.</span>
 <span class="go">c670c79823aa7c1c10add696795ee0f880d77b98 (origin/master, origin/HEAD) Added in an import that was accidentally removed</span>
 <span class="go">032f770e0300a61989fa40dc971e5a24a43928bb Added a helper script to make re-cloning easier for me while I edit the blog post</span>
@@ -1490,7 +1484,7 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 <p>Try other valid options for <code>--pretty</code>, like <code>short</code>.</p>
 <p>Another useful command line option for <code>git log</code> is <code>-n[?]</code> - you can pass any number to limit the log output to just that many entries:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git log --pretty<span class="o">=</span>oneline -n1
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git log --pretty<span class="o">=</span>oneline -n1
 <span class="go">f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&gt; master) Added tests for randomness.</span>
 </pre></div>
 <div class="admonition tip">
@@ -1530,7 +1524,7 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 </td></tr></table></div><p>Note that we are receiving the <em>same</em> quote that we got in <code>test_random_quote()</code> from <code>test_manager.py</code>. The random seed is working!</p>
 <p>We can run the tests again and see that the new test got picked up, and ran successfully. To be extra-sure, lets use the <code>-v</code> flag to <code>pytest</code>, it will give us more detail about what tests were run:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> pytest -v src
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> pytest -v src
 <span class="go">============================== test session starts ==============================</span>
 <span class="go">platform darwin -- Python 3.7.3, pytest-4.6.3, py-1.8.0, pluggy-0.12.0 -- [...]/random_quote/bin/python</span>
 <span class="go">cachedir: .pytest_cache</span>
@@ -1554,7 +1548,7 @@ Created a new test fixture that makes random tests reproducible.
 <p class="last">Be careful of <a class="reference external" href="https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch01s09.html">special shell characters</a>, in messages you pass to the <code>-m</code> switch. If you have to use one, prefix it with a backslash (\).</p>
 </div>
 <p>First, lets check <code>git status</code> to make sure we know what we're committing:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git status
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git status
 <span class="go">On branch master</span>
 <span class="go">Your branch is ahead of 'origin/master' by 1 commit.</span>
 <span class="go">  (use "git push" to publish your local commits)</span>
@@ -1576,7 +1570,7 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 <p>Note that now, <code>git status</code> tells us that we are "ahead of 'orign/master' by 1 commit". That's letting us know we have commits that haven't been sent to the master (or <code>git push</code>) since we made our clone.</p>
 <p>Ok, so we know what's going to be committed, lets do the commit:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git commit -a -m<span class="s2">"Added web API test for a random quote"</span>
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Added web API test for a random quote"</span>
 <span class="go">[master a110267] Added web API test for a random quote</span>
 <span class="go"> 1 file changed, 11 insertions(+)</span>
 </pre></div>
@@ -1587,7 +1581,7 @@ Created a new test fixture that makes random tests reproducible.
 <p>In order for someone else to use those changes, we need to use send our commits to the remote. This is done via <code>git push</code>.</p>
 <p>The default name for the default remote is <code>origin</code>. It's not necessary to specify it to <code>git push</code>, but it's a good habit to get into.</p>
 <p>Lets push our changes to the <code>master</code> branch:</p>
-<div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> git push origin master
+<div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git push origin master
 <span class="go">Enumerating objects: 20, done.</span>
 <span class="go">Counting objects: 100% (20/20), done.</span>
 <span class="go">Delta compression using up to 8 threads</span>
