@@ -1,3 +1,6 @@
 [submodule "_build/pelican-plugins"]
 	path = _build/pelican-plugins
 	url = https://github.com/getpelican/pelican-plugins.git
+[submodule "_build/plugins/pelican-toc"]
+	path = _build/plugins/pelican-toc
+	url = https://github.com/jjmojojjmojo/pelican-toc.git
