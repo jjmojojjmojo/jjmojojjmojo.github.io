@@ -60,7 +60,7 @@
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <!-- Special Roles Used In The Text. -->
-<p><strong>This is part one of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org">pytest</a> and <a class="reference external" href="https://git-scm.com/">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
+<p><strong>This is part one of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org" target="external">pytest</a> and <a class="reference external" href="https://git-scm.com/" target="external">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
 <p>In this installment, we will:</p>
 <ul class="simple">
 <li>Talk a bit about the design of the example application.</li>
@@ -70,12 +70,12 @@
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="introduction">
 <h2 id="introduction">Introduction</h2>
-<p>Developing a sane and productive workflow is essential to increasing productivity and minimizing risk. Good testing discipline coupled with regimented use of a revision control system is key. The workflow outlined in this guide is the result of many years of experience and discussion of best practices. It is not comprehensive in the sense of total maximization of productivity or utter elimination of risk. Frankly, that's just not possible. Instead we lay the groundwork for more robust practices, like <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_deployment">continuous deployment</a>.</p>
+<p>Developing a sane and productive workflow is essential to increasing productivity and minimizing risk. Good testing discipline coupled with regimented use of a revision control system is key. The workflow outlined in this guide is the result of many years of experience and discussion of best practices. It is not comprehensive in the sense of total maximization of productivity or utter elimination of risk. Frankly, that's just not possible. Instead we lay the groundwork for more robust practices, like <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration" target="external">continuous integration</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_deployment" target="external">continuous deployment</a>.</p>
 <p>This guide <em>is</em>,  however, comprehensive in that it attempts to answer all of the basic questions that developers face when collaborating on large code bases.</p>
 <p>The workflow is presented using a non-trivial (but necessarily simplistic) example application as a framing device. It is designed to be easy to reason about, and show general good practices. However, it is <em>not</em> optimized or robust. We will discuss areas where we might improve on these aspects, but they're really out of scope for this guide.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">This workflow is a simplified version of the one outlined in the classic <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a> by Vincent Driessen.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">This workflow is a simplified version of the one outlined in the classic <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/" target="external">A successful Git branching model</a> by Vincent Driessen.</p>
 </div>
 </div>
 <div class="section" id="the-example-application">
@@ -88,13 +88,13 @@
 <ul class="simple">
 <li><strong>Keeping scope in check.</strong> The application should be easy to reason about. If it were to be too complex, like a real-life code base might be, we'd spend too much time explaining the implementation of the features and bug fixes.</li>
 <li><strong>Comfort of the audience.</strong> The author hopes that this guide is useful to programmers of all levels of expertise. As such, it's important that the concepts are easy to understand and explain.</li>
-<li><strong>Reducing dependencies (code and infrastructure)</strong> We could treat this application as a production-ready project, utilizing a highly optimized web framework, <a class="reference external" href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a>, enterprise-level database, and deploy the whole thing to a <a class="reference external" href="https://en.wikipedia.org/wiki/Platform_as_a_service">PAAS</a>. However, there's a strong desire to allow any reader, with minimal configuration, to jump in and benefit. Design and technical decisions are made with this in mind.</li>
-<li><strong>Be as generic as possible</strong> While we're using a specific database, we are generally adhering to well-known standards like <a class="reference external" href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a>, <a class="reference external" href="https://www.python.org/dev/peps/pep-0249/">DBAPI</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>. This should make the application useful as a good example of a generic web application.</li>
+<li><strong>Reducing dependencies (code and infrastructure)</strong> We could treat this application as a production-ready project, utilizing a highly optimized web framework, <a class="reference external" href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="external">ORM</a>, enterprise-level database, and deploy the whole thing to a <a class="reference external" href="https://en.wikipedia.org/wiki/Platform_as_a_service" target="external">PAAS</a>. However, there's a strong desire to allow any reader, with minimal configuration, to jump in and benefit. Design and technical decisions are made with this in mind.</li>
+<li><strong>Be as generic as possible</strong> While we're using a specific database, we are generally adhering to well-known standards like <a class="reference external" href="https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface" target="external">WSGI</a>, <a class="reference external" href="https://www.python.org/dev/peps/pep-0249/" target="external">DBAPI</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="external">HTTP</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="external">REST</a>. This should make the application useful as a good example of a generic web application.</li>
 </ul>
 <p>In practical terms, this means that the application will:</p>
 <ul class="simple">
 <li>Use as few dependencies as possible.</li>
-<li>Use a bundled database product (we're using <a class="reference external" href="https://www.sqlite.org/index.html">sqllite3</a>).</li>
+<li>Use a bundled database product (we're using <a class="reference external" href="https://www.sqlite.org/index.html" target="external">sqllite3</a>).</li>
 <li>Require no other tooling beyond a console (terminal), git, python 3 and some sort of text editor.</li>
 </ul>
 <p>One additional area where the design is being restricted is <em>error handling</em>. Avoiding input verification and exception handling helps keep the code simple.</p>
@@ -104,13 +104,13 @@
 <h2 id="preparation">Preparation</h2>
 <p>Before we begin, you should do the following:</p>
 <ol class="arabic simple">
-<li><a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Install git</a></li>
-<li><a class="reference external" href="https://www.python.org/downloads/">Install python 3</a></li>
-<li>Make sure <a class="reference external" href="https://docs.python.org/3/library/venv.html">venv</a> is installed (it should be, but some Linux distributions put it in a separate package)</li>
+<li><a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="external">Install git</a></li>
+<li><a class="reference external" href="https://www.python.org/downloads/" target="external">Install python 3</a></li>
+<li>Make sure <a class="reference external" href="https://docs.python.org/3/library/venv.html" target="external">venv</a> is installed (it should be, but some Linux distributions put it in a separate package)</li>
 </ol>
 <p>From there, you'll have all the tools you need, save a preferred text editor and a console (or terminal) to follow along.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The guide has been developed with unix-like systems in mind (Linux, BSD, MacOS). It should be possible to follow along in Windows, but this has not been tested. There are some quirks to using git and python in Windows that the author would like to explore in the future. If you are interested in seeing this guide include Windows-specific notes, please <a class="reference external" href="/drafts/pages/contact.html">contact the author</a>.</p>
 </div>
 <p>We can test these things by opening up a terminal and running the following commands:</p>
@@ -223,8 +223,8 @@
 </div>
 <div class="section" id="cloning-the-repository">
 <h2 id="cloning the repository">Cloning The Repository</h2>
-<p>The first step is to clone the initial version of the example application, from my <a class="reference external" href="https://github.com/jjmojojjmojo/random_quote">github repository</a>. But because of the stuff we're going to be doing later, this will be a special two-step process.</p>
-<p>First, we need to do a <em>bare</em> clone of the repository. This will give us a <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes">remote</a>, that isn't <a class="reference external" href="https://www.github.com">github</a>, that we can clone and work on.</p>
+<p>The first step is to clone the initial version of the example application, from my <a class="reference external" href="https://github.com/jjmojojjmojo/random_quote" target="external">github repository</a>. But because of the stuff we're going to be doing later, this will be a special two-step process.</p>
+<p>First, we need to do a <em>bare</em> clone of the repository. This will give us a <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes" target="external">remote</a>, that isn't <a class="reference external" href="https://www.github.com" target="external">github</a>, that we can clone and work on.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone --bare git@github.com:jjmojojjmojo/random_quote.git random_quote_remote
 </pre></div>
 </td></tr></table></div><p>Now, instead of cloning my repository from github, we clone <code>random_quote_remote</code>:</p>
@@ -232,13 +232,13 @@
 </pre></div>
 </td></tr></table></div><p>Any changes we <code>git push</code> in <code>random_quote</code> will only go to <code>random_quote_remote</code>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">This is a handy way to set up a temporary git repository that you can experiment with without any risk to the code hosted on your shared git server (or <a class="reference external" href="https://www.github.com">github</a>). 🦄</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">This is a handy way to set up a temporary git repository that you can experiment with without any risk to the code hosted on your shared git server (or <a class="reference external" href="https://www.github.com" target="external">github</a>). 🦄</p>
 </div>
 </div>
 <div class="section" id="quick-overview-of-the-application-layout">
 <h2 id="quick overview of the application layout">Quick Overview Of The Application Layout</h2>
-<p>The code is provided as a <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/formats.html">python egg</a>. The source code is contained in <code>src</code>, and the <code>setup.py</code> is located in the main directory.</p>
+<p>The code is provided as a <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/formats.html" target="external">python egg</a>. The source code is contained in <code>src</code>, and the <code>setup.py</code> is located in the main directory.</p>
 <p>The application is implemented in the following modules:</p>
 <dl class="docutils">
 <dt><code>random_quote.manager</code></dt>
@@ -246,7 +246,7 @@
 <dt><code>random_quote.wsgi</code></dt>
 <dd><code>src/random_quote/wsgi.py</code>. Provides a class, <code>RandomQuoteApp</code> which is a WSGI application that provides a limited subset of the manager functionality as an API endpoint.</dd>
 <dt><code>random_quote.util</code></dt>
-<dd><code>src/random_quote/util.py</code>. Utility functions. Contains a function that can create the database schema <code>init()</code>, and another that will populate a database with quotes contained in a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> file, <code>ingest()</code>.</dd>
+<dd><code>src/random_quote/util.py</code>. Utility functions. Contains a function that can create the database schema <code>init()</code>, and another that will populate a database with quotes contained in a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values" target="external">CSV</a> file, <code>ingest()</code>.</dd>
 <dt><code>random_quote.tests</code></dt>
 <dd><code>src/random_quote/tests/test_*.py</code>. Package that contains unit and functional tests, as well as fixtures (collected in <code>conftest.py</code>).</dd>
 </dl>
@@ -259,7 +259,7 @@
 <dt><code>src/random_quote/schema.sql</code></dt>
 <dd>A text file containing the SQL statmenets needed to initialize the database, creating the tables. Used by <code>random_quote.util.init()</code>.</dd>
 <dt><code>scripts/generate_quotes.py</code></dt>
-<dd>A python script that uses a <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain">Markov chain</a> to generate random, but realistic-looking quotes. (see the <code>scripts/README.rst</code> for more information).</dd>
+<dd>A python script that uses a <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain" target="external">Markov chain</a> to generate random, but realistic-looking quotes. (see the <code>scripts/README.rst</code> for more information).</dd>
 </dl>
 </div>
 <div class="section" id="initialize-the-virtual-environment">
@@ -303,16 +303,16 @@
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
-<p>This is a simplified version of a <a class="reference external" href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">UML</a> class diagram.</p>
+<p>This is a simplified version of a <a class="reference external" href="https://en.wikipedia.org/wiki/Unified_Modeling_Language" target="external">UML</a> class diagram.</p>
 <p>The classes are identified as <span class="underline">underlined</span> text. The modules are noted in the green boxes.</p>
 <p>Each public (or relevant) method is listed (methods are suffixed with parenthesis), as is each property.</p>
 <p>These two classes are shown to be related by a simple two-direction arrow.</p>
 </div>
-<p>This is done for a few reasons. Primarily, the concept of <a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns">separation of concerns</a>. The <em>concern</em> of the database interaction, the <em>concern</em> of the web interaction, and the <em>concern</em> of the web <em>client</em> are separated by <strong>clear API boundaries</strong>.</p>
-<p>By doing this, we isolate code that has to be different by its nature. <code>RandomQuoteManager</code> is concerned with managing and retrieving data in the database. <code>RandomQuoteApp</code> is concerned with interacting with web clients. The web client is completely out of our control (a browser like <a class="reference external" href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, a utility like <a class="reference external" href="https://curl.haxx.se/">cURL</a>, or another application).</p>
-<p>With proper separation, each concern can be optimized for its purpose. <code>RandomQuoteManager</code> can do database interactions in the best possible way - we can employ an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a> someday, or change exactly how we store the data. <code>RandomQuoteApp</code> will still function, as long as its python API hasn't changed.</p>
+<p>This is done for a few reasons. Primarily, the concept of <a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="external">separation of concerns</a>. The <em>concern</em> of the database interaction, the <em>concern</em> of the web interaction, and the <em>concern</em> of the web <em>client</em> are separated by <strong>clear API boundaries</strong>.</p>
+<p>By doing this, we isolate code that has to be different by its nature. <code>RandomQuoteManager</code> is concerned with managing and retrieving data in the database. <code>RandomQuoteApp</code> is concerned with interacting with web clients. The web client is completely out of our control (a browser like <a class="reference external" href="https://www.mozilla.org/en-US/firefox/new/" target="external">Firefox</a>, a utility like <a class="reference external" href="https://curl.haxx.se/" target="external">cURL</a>, or another application).</p>
+<p>With proper separation, each concern can be optimized for its purpose. <code>RandomQuoteManager</code> can do database interactions in the best possible way - we can employ an <a class="reference external" href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="external">ORM</a> someday, or change exactly how we store the data. <code>RandomQuoteApp</code> will still function, as long as its python API hasn't changed.</p>
 <p>In the same vein, we can make <code>RandomQuoteApp</code> the best web application possible - we can implement security, or caching - it can evolve into a socket-based API that doesn't use HTTP at all!</p>
-<p>Finally, the concerns of the client are theirs alone. Today we may be building our application for use by a <a class="reference external" href="https://en.wikipedia.org/wiki/Single-page_application">single page application</a> intended for a browser client. Tomorrow, the random quote service may be used in a network of  <a class="reference external" href="https://en.wikipedia.org/wiki/Microservices">microservices</a>, where the client will be another service.</p>
+<p>Finally, the concerns of the client are theirs alone. Today we may be building our application for use by a <a class="reference external" href="https://en.wikipedia.org/wiki/Single-page_application" target="external">single page application</a> intended for a browser client. Tomorrow, the random quote service may be used in a network of  <a class="reference external" href="https://en.wikipedia.org/wiki/Microservices" target="external">microservices</a>, where the client will be another service.</p>
 <p>We may write console scripts that use the web API via tools like cURL as part of systems automation.</p>
 <p>Whatever the client exactly is, it can be the <em>best</em> client for whatever its purpose. As long as the web API is understood by the client, everything keeps working.</p>
 <p>We can diagram the most important boundaries (depending on how you define them, there could be more):</p>
@@ -492,7 +492,7 @@
 <p>Combining the two methods is pretty straight forward. However, you can see that even with the very simple functionality in this method, things are getting a bit muddy. As the application grows and changes, it will just get worse.</p>
 <p>Modifying this amalgam is much more risky. We can very easily break the database code fixing a web API issue and vice-versa. It's hard for two developers to work on this part of the code base concurrently without running into conflicts.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">We will learn how to deal with that situation, however unlikely, in <a class="reference external" href="/branching-git-with-pytest-3.rst">part 3</a>! 🦄</p>
 </div>
 <p>But worse, its also harder to <em>test</em>. This may be one of the biggest advantages to putting thought into separation of concerns, and creating sane API boundaries. When testing the nightmare code above, we have to simulate an HTTP request just to make sure the database works, and we need the database functioning to ensure the HTTP stuff functions. This leads to more complex test fixtures and complex object mocking, and ultimately more fragile test suites.</p>
@@ -636,16 +636,16 @@
 <div class="docutils container">
 </div>
 <p>In this example, we've abbreviated the source of <code>RandomQuoteManager</code> a bit so we can focus just on the parts that are relevant to the <code>random()</code> method.</p>
-<p>sqlite3 has a <a class="reference external" href="https://www.sqlite.org/lang_corefunc.html#random">random() function</a> as well. It returns integer values between <em>-9223372036854775808</em> and <em>+9223372036854775807</em>.</p>
+<p>sqlite3 has a <a class="reference external" href="https://www.sqlite.org/lang_corefunc.html#random" target="external">random() function</a> as well. It returns integer values between <em>-9223372036854775808</em> and <em>+9223372036854775807</em>.</p>
 <p>In our SQL <code>CREATE</code> statement, we're setting the default value of <code>rand</code> to <code>random()</code>. This will invoke the sqlite function if a value isn't specified.</p>
 <p>We emulate that functionality in our python code so we can interfere with the way random numbers are generated. This is not possible if we were to rely on sqlite to do set the value of <code>rand</code> for us.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">See the <a class="reference external" href="https://stackoverflow.com/questions/24256258/order-by-random-with-seed-in-sqlite?noredirect=1&amp;lq=1">ORDER BY random() with seed in SQLITE</a> on StackOverflow for some discussion about this topic.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">See the <a class="reference external" href="https://stackoverflow.com/questions/24256258/order-by-random-with-seed-in-sqlite?noredirect=1&amp;lq=1" target="external">ORDER BY random() with seed in SQLITE</a> on StackOverflow for some discussion about this topic.</p>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">If you're curious how we might go about fixing the random values, stay tuned, we're going to do that shortly! 🦄</p>
 </div>
 </div>
@@ -655,49 +655,49 @@
 <p>This section will briefly discuss the libraries and technology involved, and provide links where you can get more information.</p>
 <div class="section" id="git">
 <h3>git</h3>
-<p>git is a <em>distributed</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Version_control">source control management system</a> (also known as "revision control" or "version control"). It was developed by Linus Torvalds for use in Linux kernel development. See <a class="reference external" href="https://git-scm.com/about">About - Git</a> for more information about why git is useful.</p>
-<p>The <a class="reference external" href="https://git-scm.com/doc">documnetation</a> is very good, but quite dense.</p>
+<p>git is a <em>distributed</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Version_control" target="external">source control management system</a> (also known as "revision control" or "version control"). It was developed by Linus Torvalds for use in Linux kernel development. See <a class="reference external" href="https://git-scm.com/about" target="external">About - Git</a> for more information about why git is useful.</p>
+<p>The <a class="reference external" href="https://git-scm.com/doc" target="external">documnetation</a> is very good, but quite dense.</p>
 </div>
 <div class="section" id="venv">
 <h3>venv</h3>
-<p><code>venv</code> is a virtual environment manager for Python. The <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">venv tutorial</a> has all the essential information and usage details.</p>
-<p><code>venv</code> superceeds older tools like <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>. It's handy because it is now included in the standard library.</p>
+<p><code>venv</code> is a virtual environment manager for Python. The <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html" target="external">venv tutorial</a> has all the essential information and usage details.</p>
+<p><code>venv</code> superceeds older tools like <a class="reference external" href="https://virtualenv.pypa.io/en/latest/" target="external">virtualenv</a>. It's handy because it is now included in the standard library.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">For a nice overview of the virtual enviromnent scene in Python (and to get a sense of why so many are confused by it), <a class="reference external" href="https://stackoverflow.com/a/41573588/11090167">an answer to a question on Stack Overflow</a> is about the best I've seen.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">For a nice overview of the virtual enviromnent scene in Python (and to get a sense of why so many are confused by it), <a class="reference external" href="https://stackoverflow.com/a/41573588/11090167" target="external">an answer to a question on Stack Overflow</a> is about the best I've seen.</p>
 </div>
 </div>
 <div class="section" id="sqlite3">
 <h3>sqlite3</h3>
-<p>sqlite is a robust, but easy to use <a class="reference external" href="https://en.wikipedia.org/wiki/Relational_database">relational database management system</a>. sqlite3 is the latest version.</p>
+<p>sqlite is a robust, but easy to use <a class="reference external" href="https://en.wikipedia.org/wiki/Relational_database" target="external">relational database management system</a>. sqlite3 is the latest version.</p>
 <p>sqlite provides the concept of <em>tables</em> containing <em>rows</em> of structured information.</p>
-<p>As opposed to other RDBMS', like <a class="reference external" href="https://www.postgresql.org/">PostgreSQL</a>, sqlite does not its own server, and cannot be easily shared across machines. Sqlite was chosen for the example project because Python has a <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">built-in sqlite3 library</a>.</p>
-<p>The <a class="reference external" href="https://www.sqlite.org/index.html">sqlite webstie</a> has comprehensive information about how sqlite works and its capabilities.</p>
+<p>As opposed to other RDBMS', like <a class="reference external" href="https://www.postgresql.org/" target="external">PostgreSQL</a>, sqlite does not its own server, and cannot be easily shared across machines. Sqlite was chosen for the example project because Python has a <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html" target="external">built-in sqlite3 library</a>.</p>
+<p>The <a class="reference external" href="https://www.sqlite.org/index.html" target="external">sqlite webstie</a> has comprehensive information about how sqlite works and its capabilities.</p>
 </div>
 <div class="section" id="wsgi">
 <h3>WSGI</h3>
-<p>Web applications are typically executed by <a class="reference external" href="https://en.wikipedia.org/wiki/Web_server">web servers</a>, like <a class="reference external" href="https://www.nginx.com/">ngnix</a>, <a class="reference external" href="https://gunicorn.org/">gunicorn</a>, or <a class="reference external" href="https://httpd.apache.org/">apache</a>. This abstracts away the need for application code to handle things like <a class="reference external" href="https://en.wikipedia.org/wiki/Fork_(system_call)">managing processes</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Berkeley_sockets">managing sockets</a>.</p>
-<p>To provide that abstraction, web servers support various kinds of <em>gateway interfaces</em>. A common and historically relevant one is the <a class="reference external" href="https://en.wikipedia.org/wiki/Common_Gateway_Interface">Common Gateway Interface (CGI)</a>. It essentially calls for the web server to execute a program like a user might on the command line, streams the request on standard in, and reads the response on standard out. Specific environment variables are defined to convey useful information to the program.</p>
+<p>Web applications are typically executed by <a class="reference external" href="https://en.wikipedia.org/wiki/Web_server" target="external">web servers</a>, like <a class="reference external" href="https://www.nginx.com/" target="external">ngnix</a>, <a class="reference external" href="https://gunicorn.org/" target="external">gunicorn</a>, or <a class="reference external" href="https://httpd.apache.org/" target="external">apache</a>. This abstracts away the need for application code to handle things like <a class="reference external" href="https://en.wikipedia.org/wiki/Fork_(system_call)" target="external">managing processes</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Berkeley_sockets" target="external">managing sockets</a>.</p>
+<p>To provide that abstraction, web servers support various kinds of <em>gateway interfaces</em>. A common and historically relevant one is the <a class="reference external" href="https://en.wikipedia.org/wiki/Common_Gateway_Interface" target="external">Common Gateway Interface (CGI)</a>. It essentially calls for the web server to execute a program like a user might on the command line, streams the request on standard in, and reads the response on standard out. Specific environment variables are defined to convey useful information to the program.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Reading <a class="reference external" href="https://tools.ietf.org/html/rfc3875">RFC3875</a>, where the CGI specification is defined is highly recommended for any web developer.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Reading <a class="reference external" href="https://tools.ietf.org/html/rfc3875" target="external">RFC3875</a>, where the CGI specification is defined is highly recommended for any web developer.</p>
 </div>
-<p>CGI had some rough edges and imposed some limitations that made writing web apps with Python a little more cumbersome. In 2003, <a class="reference external" href="https://www.python.org/dev/peps/pep-333/">PEP333</a>  was submitted (and subsequently superseded by <a class="reference external" href="https://www.python.org/dev/peps/pep-3333/">PEP3333</a>), outlining a new way for Python applications to integrate with web servers, that sought to overcome the flaws in CGI.</p>
-<p><a class="reference external" href="https://www.python.org/dev/peps/pep-3333/">PEP3333</a> lays out the specification in detail. The basics are that a WSGI application is a Python <em>callable</em> (a function, a class that implements a <code>__call__()</code> method) that takes a few specific parameters (including a dictionary of gateway information inspired by CGI), and then returns an <em>iterable</em> object, containing the body of the response.</p>
-<p>We're using <a class="reference external" href="https://docs.pylonsproject.org/projects/webob/en/stable/">WebOb</a> to handle most of this for us. In <code>RandomQuoteApp</code>, we work with <code>webob.Request</code> objects and return <code>webob.Response</code> objects.</p>
+<p>CGI had some rough edges and imposed some limitations that made writing web apps with Python a little more cumbersome. In 2003, <a class="reference external" href="https://www.python.org/dev/peps/pep-333/" target="external">PEP333</a>  was submitted (and subsequently superseded by <a class="reference external" href="https://www.python.org/dev/peps/pep-3333/" target="external">PEP3333</a>), outlining a new way for Python applications to integrate with web servers, that sought to overcome the flaws in CGI.</p>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-3333/" target="external">PEP3333</a> lays out the specification in detail. The basics are that a WSGI application is a Python <em>callable</em> (a function, a class that implements a <code>__call__()</code> method) that takes a few specific parameters (including a dictionary of gateway information inspired by CGI), and then returns an <em>iterable</em> object, containing the body of the response.</p>
+<p>We're using <a class="reference external" href="https://docs.pylonsproject.org/projects/webob/en/stable/" target="external">WebOb</a> to handle most of this for us. In <code>RandomQuoteApp</code>, we work with <code>webob.Request</code> objects and return <code>webob.Response</code> objects.</p>
 </div>
 <div class="section" id="webob">
 <h3>WebOb</h3>
-<p><a class="reference external" href="https://docs.pylonsproject.org/projects/webob/en/stable/">WebOb</a> is part of the <a class="reference external" href="https://pylonsproject.org/">Pylons</a> and <a class="reference external" href="https://trypyramid.com/">Pyramid</a> projects. It has a narrow scope, designed to help a web developer make sense of an incoming request, and construct WSGI-compliant responses.</p>
+<p><a class="reference external" href="https://docs.pylonsproject.org/projects/webob/en/stable/" target="external">WebOb</a> is part of the <a class="reference external" href="https://pylonsproject.org/" target="external">Pylons</a> and <a class="reference external" href="https://trypyramid.com/" target="external">Pyramid</a> projects. It has a narrow scope, designed to help a web developer make sense of an incoming request, and construct WSGI-compliant responses.</p>
 </div>
 <div class="section" id="pytest">
 <h3>Pytest</h3>
-<p><a class="reference external" href="https://docs.pytest.org/en/latest/">Pytest</a> is a newer testing framework for Python. It is simpler than, but compatible with, the built-in <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest module</a>.</p>
+<p><a class="reference external" href="https://docs.pytest.org/en/latest/" target="external">Pytest</a> is a newer testing framework for Python. It is simpler than, but compatible with, the built-in <a class="reference external" href="https://docs.python.org/3/library/unittest.html" target="external">unittest module</a>.</p>
 <p>Pytest uses a convention-over-configuration approach. Test suites and test cases are discovered simply by being named a certain way. However, that discovery process is highly configurable. 😎</p>
 </div>
 <div class="section" id="webtest">
 <h3>WebTest</h3>
-<p><a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/">WebTest</a>, another <a class="reference external" href="https://pylonsproject.org/">Pylons</a> project, provides an easy way to test WSGI applications in a very realistic way, without having to run a fully-functioning web server.</p>
+<p><a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/" target="external">WebTest</a>, another <a class="reference external" href="https://pylonsproject.org/" target="external">Pylons</a> project, provides an easy way to test WSGI applications in a very realistic way, without having to run a fully-functioning web server.</p>
 </div>
 </div>
 <div class="section" id="run-the-tests">
@@ -735,7 +735,7 @@
 <h2 id="initialize the database and add some quotes">Initialize The Database And Add Some Quotes</h2>
 <p>We have utility functions, <code>random_quote.util.init()</code> and <code>random_quote.util.ingest()</code> to create all the tables we need, and insert some quotes to get the database going.</p>
 <p>For the sake of completeness, we'll also use the <code>RandomQuoteManager</code> to add a few unique quotes and show how the API works.</p>
-<p>First, lets create a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> file containing some quotes, called <code>quotes.csv</code>.</p>
+<p>First, lets create a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values" target="external">CSV</a> file containing some quotes, called <code>quotes.csv</code>.</p>
 <p>You can do this using your favorite spreadsheet program, a text editor, or (recommended) use the provided <code>generate_quotes.py</code> script:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">(random_quote) $</span> python scripts/generate_quotes.py
 </pre></div>
@@ -787,8 +787,8 @@
 <p>Pytest uses the concept of  <em>convention over configuration</em> to provide a lot of flexbility when writing tests. All you need to do is provide a python module that has the <code>test_</code> prefix, and fill it with functions that also begin with <code>test_</code>. Pytest will collect these functions and run them for you.</p>
 <p>To make a test fail, pytest utilizes the python built-in <code>assert</code> keyword. <code>assert</code> evaluates the given expression, and raises an exception if the expression evaluates to <code>False</code>. Pytest leverages this to make writing tests straight forward: you are simply making <em>assertions</em> about the truth of some expression.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">For more details, see <a class="reference external" href="https://docs.pytest.org/en/latest/getting-started.html">Installation And Getting Started</a> in the <a class="reference external" href="https://docs.pytest.org/en/latest">pytest documentation</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">For more details, see <a class="reference external" href="https://docs.pytest.org/en/latest/getting-started.html" target="external">Installation And Getting Started</a> in the <a class="reference external" href="https://docs.pytest.org/en/latest" target="external">pytest documentation</a>.</p>
 </div>
 <p>Here's a contrived <em>test suite</em> (collection of tests) that pytest can run. Save it as <code>test_example.py</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -815,7 +815,7 @@
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
-<p>This <em>test suite</em> consists of a single <em>test case</em>, named <code>test_phi()</code>. It has a <em>helper function</em> named <code>phi()</code> that generates <a class="reference external" href="https://en.wikipedia.org/wiki/Golden_ratio">The Golden Ratio</a>, also known as ϕ.</p>
+<p>This <em>test suite</em> consists of a single <em>test case</em>, named <code>test_phi()</code>. It has a <em>helper function</em> named <code>phi()</code> that generates <a class="reference external" href="https://en.wikipedia.org/wiki/Golden_ratio" target="external">The Golden Ratio</a>, also known as ϕ.</p>
 <p>This test is non-sensical, simply asserting that ϕ != 2.</p>
 </div>
 <p>As before, we can use <code>pytest</code> to run our test case, but this time we'll specify the file instead of <code>src</code>:</p>
@@ -859,13 +859,13 @@
 
 <span class="go">=========================== 1 passed in 0.01 seconds ============================</span>
 </pre></div>
-</td></tr></table></div><p>The next thing you should know is how to write <em>test fixtures</em>. With pytest, fixtures are just specially <a class="reference external" href="https://realpython.com/primer-on-python-decorators/">decorated functions</a>.</p>
+</td></tr></table></div><p>The next thing you should know is how to write <em>test fixtures</em>. With pytest, fixtures are just specially <a class="reference external" href="https://realpython.com/primer-on-python-decorators/" target="external">decorated functions</a>.</p>
 <p>So what are fixtures for? Fixtures allow us to do some set up work before each test is run, and clean up (or <em>tear down</em>) after. In our <code>random_quote</code> application, it's used to create a database and add some data to it. The database is then destroyed after the test.</p>
 <p>Fixtures are decorated with <code>pytest.fixture</code> . To use them in a test, you take a parameter that has the same name. If you <code>return</code> a value, it's passed to the test case. If you <code>yield</code> one, the <code>yield</code> ed value is passed, and control returns to your fixture to clean up after the test.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>The terms <em>set up</em> and <em>tear down</em> are fundamental automated testing terms. In a lot of other testing frameworks, test suites have special functions or methods with names like <code>setUp</code> and <code>tearDown</code> that provide the same functionality as pytest's fixtures. 🌈</p>
-<p class="last">What's cool about pytest, is that fixtures serve the same purpose, but are much more robust. You can change the scope of a fixture by providing the <code>scope</code> keyword argument when decorating a fixture function. <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html#scope-sharing-a-fixture-instance-across-tests-in-a-class-module-or-session">More details can be found in the documentation</a>.</p>
+<p class="last">What's cool about pytest, is that fixtures serve the same purpose, but are much more robust. You can change the scope of a fixture by providing the <code>scope</code> keyword argument when decorating a fixture function. <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html#scope-sharing-a-fixture-instance-across-tests-in-a-class-module-or-session" target="external">More details can be found in the documentation</a>.</p>
 </div>
 <p>More contrived examples will illustrate how fixtures work:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -945,8 +945,8 @@
 <p>The new test suites, <code>test_returned()</code>, <code>test_yielded()</code>, and <code>test_no_fixture()</code> illustrate how fixtures are consumed by test suites.</p>
 <p><code>test_yielded()</code> shows that we can use multiple <code>assert</code> statements in one test case if we wish.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is not considered <a class="reference external" href="http://programmaticallyspeaking.com/one-assertion-per-test-please.html">a best practice</a>, and so it should be used sparingly (more discussion on <a class="reference external" href="https://softwareengineering.stackexchange.com/questions/7823/is-it-ok-to-have-multiple-asserts-in-a-single-unit-test">the software enginering stack exchange</a>, but it can be useful to save some typing.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">This is not considered <a class="reference external" href="http://programmaticallyspeaking.com/one-assertion-per-test-please.html" target="external">a best practice</a>, and so it should be used sparingly (more discussion on <a class="reference external" href="https://softwareengineering.stackexchange.com/questions/7823/is-it-ok-to-have-multiple-asserts-in-a-single-unit-test" target="external">the software enginering stack exchange</a>, but it can be useful to save some typing.</p>
 </div>
 </div>
 <p>When we run the new test cases, we see everything passes:</p>
@@ -977,8 +977,8 @@
 <span class="go">=========================== 4 passed in 0.20 seconds ============================</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information about pytest's fixtures, the <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html">documentation</a> explains all the cool things you can do with them. 🦄</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For more information about pytest's fixtures, the <a class="reference external" href="https://docs.pytest.org/en/latest/fixture.html" target="external">documentation</a> explains all the cool things you can do with them. 🦄</p>
 </div>
 <p>Now, lets look at some practical examples, taken from our <code>random_quote</code> project.</p>
 <div class="section" id="how-pytest-is-used-in-random-quote">
@@ -1191,7 +1191,7 @@
 
     <span class="n">app</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div><p>You'll note that we have three fixtures defined in this file. The first, <code>temp_db()</code>, creates a temporary file (using the built-in <a class="reference external" href="https://docs.python.org/3/library/tempfile.html">tempfile</a> module) to store the sqlite database. After it returns the path to the temporary file, when the fixture finishes, it deletes it. This is a perfect example of situations where fixtures are particularly useful.</p>
+</td></tr></table></div><p>You'll note that we have three fixtures defined in this file. The first, <code>temp_db()</code>, creates a temporary file (using the built-in <a class="reference external" href="https://docs.python.org/3/library/tempfile.html" target="external">tempfile</a> module) to store the sqlite database. After it returns the path to the temporary file, when the fixture finishes, it deletes it. This is a perfect example of situations where fixtures are particularly useful.</p>
 <p>Next, we have <code>preconfigured_manager()</code>, a fixture that uses the <code>util</code> module to initialize the database, then plain SQL statements to pre-populate it. After returning the <code>RandomQuoteManager</code> object, it closes the connection to ensure it's freed before the next test.</p>
 <p>We can see how fixtures can be chained in the same way we use fixtures in test cases, as <code>preconfigured_manager()</code> takes <code>temp_db</code> as a parameter. Multiple fixtures can be used as well, by taking multiple parameters, as illustrated by <code>preconfigured_wsgi_app</code>. Pytest ensures all the cleanup is done in the correct order.</p>
 <p>Finally, <code>preconfigured_wsgi_app</code> sets up a <code>WebTest.TestApp</code> instance, wrapping a <code>RandomQuoteApp</code> instance. We aren't using the return value of <code>preconfigured_manager()</code> in <code>preconfigured_wsgi_app()</code>, but we do want the database initialization and data population to be done for us. Even though <code>temp_db</code> is used by both fixtures, it is only called once, ensuring that the database path used by <code>preconfigured_manager()</code> is identical to the one used by <code>preconfigured_wsgi_app()</code>.</p>
@@ -1202,11 +1202,11 @@
 <h2 id="something is missing! (writing our first test and fixture)">Something Is Missing! (Writing Our First Test and Fixture)</h2>
 <p>The last developer who worked on this project (yours truly 😎) has made a pretty big error. We have a good amount of tests, but none of them use the <code>RandomQuoteManager.random()</code> method. It's a big oversight, given that the whole point of this project is to generate random quotes.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>This is a great reason to look into <em>test coverage analysis</em>, in particular the <a class="reference external" href="https://coverage.readthedocs.io/en/v4.5.x/">coverage.py</a> library.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>This is a great reason to look into <em>test coverage analysis</em>, in particular the <a class="reference external" href="https://coverage.readthedocs.io/en/v4.5.x/" target="external">coverage.py</a> library.</p>
 <p class="last">If we were using coverage analysis, we'd have noticed that there was a method that wasn't exercised in the tests.</p>
 </div>
-<p>We shouldn't be too hard on our predecessor, since they were put into a tough spot. Our quotes are inserted and retrieved using python's built-in psuedo-random number generation tools (the <a class="reference external" href="https://docs.python.org/3/library/random.html">random</a> module). Every time a function in that module is called (e.g. <code>random.randint()</code>), it will likely produce a different output.</p>
+<p>We shouldn't be too hard on our predecessor, since they were put into a tough spot. Our quotes are inserted and retrieved using python's built-in psuedo-random number generation tools (the <a class="reference external" href="https://docs.python.org/3/library/random.html" target="external">random</a> module). Every time a function in that module is called (e.g. <code>random.randint()</code>), it will likely produce a different output.</p>
 <p>That means that if we were to write a test case for the <code>RandomQuoteManager.random()</code> method, the test case would fail <em>randomly</em> every time it is run. 🤔</p>
 <p>Lets see this in action. Here's a test case for <code>RandomQuoteManager.random()</code>, that you should add to the end of <code>src/random_quote/tests/test_manager.py</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>58
@@ -1279,7 +1279,7 @@
 <span class="go">============================= 1 failed, 6 passed in 0.25 seconds =============================</span>
 </pre></div>
 </td></tr></table></div><p>So how do we fix this? We alluded to "fixing" the randomness of our code earlier. How is this possible?</p>
-<p>There is a <code>seed()</code> function in the <code>random</code> module that <a class="reference external" href="https://docs.python.org/3/library/random.html#random.seed">re-initializes the random number generator</a>. It can take a parameter, which is used to provide <em>reproducible</em> randomness.</p>
+<p>There is a <code>seed()</code> function in the <code>random</code> module that <a class="reference external" href="https://docs.python.org/3/library/random.html#random.seed" target="external">re-initializes the random number generator</a>. It can take a parameter, which is used to provide <em>reproducible</em> randomness.</p>
 <p>When used, everything will function properly: if you were to call a random function multiple times under normal circumstances and get a different value, you still would. But the values would be (likely) different, and the same values will be returned. This happens <em>every time</em> that <code>random.seed()</code> is called with the same value.</p>
 <p>Here's how that works:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1329,7 +1329,7 @@
     <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">We don't actually yield a value here. This is totally acceptable, but in the future we may want to return something that the test cases can use, like the value we used for the seed.</p>
 </div>
 <p>After the <code>yield</code>, we call <code>random.seed()</code> with no explicit value. That re-seeds the random number generator with the default value, which is the way it normally works (usually it's seeded with the system time).</p>
@@ -1511,9 +1511,9 @@
 <p>We don't want to add any of these untracked files, but we do want to add all of the changes, so we'll go ahead and use <code>git commit -a</code>.</p>
 <p>When this command is executed, git creates a temporary file for us, and will bring up our default editor. Git expects us to provide a <em>commit log message</em>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>Usually, the editor is the <a class="reference external" href="https://www.vim.org/">vim</a> editor.</p>
-<p class="last">You can configure this to be nearly any editor you'd like. <a class="reference external" href="https://help.github.com/en/articles/associating-text-editors-with-git">Here are some examples from github</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>Usually, the editor is the <a class="reference external" href="https://www.vim.org/" target="external">vim</a> editor.</p>
+<p class="last">You can configure this to be nearly any editor you'd like. <a class="reference external" href="https://help.github.com/en/articles/associating-text-editors-with-git" target="external">Here are some examples from github</a>.</p>
 </div>
 <p>Our commit messages should be descriptive, but not too long. There's no point in mentioning things that git records in the change set, like which files changed or even which code was altered. Instead, focus on stating <em>why</em> things changed, and the overall <em>point</em> of the commit.</p>
 <p>Lets go ahead and execute <code>git commit -a</code>:</p>
@@ -1560,9 +1560,9 @@ Created a new test fixture that makes random tests reproducible.
 </td></tr></table></div><p>Save, and exit.</p>
 <p>In a git commit message, the first line should be short and give an overview of what was done. The following lines, if any, can provide more detail. We do this chiefly because most git tools only show a truncated version of that first line.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>There is a lot of opinion and different practices revolving around git commit log messages. We've only scratched the surface of what makes a great message, and further, what makes a great <em>commit</em>.</p>
-<p class="last">I like the <a class="reference external" href="https://wiki.openstack.org/wiki/GitCommitMessages">git log standard</a> used by the <a class="reference external" href="https://www.openstack.org/">OpenStack project</a>. Even if you weren't to adopt it verbatim, it's a great outline of things you need to think about when collaborating on a software project. 🦄</p>
+<p class="last">I like the <a class="reference external" href="https://wiki.openstack.org/wiki/GitCommitMessages" target="external">git log standard</a> used by the <a class="reference external" href="https://www.openstack.org/" target="external">OpenStack project</a>. Even if you weren't to adopt it verbatim, it's a great outline of things you need to think about when collaborating on a software project. 🦄</p>
 </div>
 <p>Now, looking at <code>git log</code>, we can get a sense of what's been going on:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1591,9 +1591,9 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 </td></tr></table></div><p>Log entries are listed from newest to oldest.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>On most systems, the output from <code>git log</code> is run through a <em>pager</em>, an application that lets you scroll through a program's output in a user-friendly way.</p>
-<p class="last">On my system, the pager is <a class="reference external" href="https://en.wikipedia.org/wiki/Less_(Unix)">less</a>. You can quit <code>less</code> (or a similar but older tool called <code>more</code>), by typing "q", or control-C.</p>
+<p class="last">On my system, the pager is <a class="reference external" href="https://en.wikipedia.org/wiki/Less_(Unix)" target="external">less</a>. You can quit <code>less</code> (or a similar but older tool called <code>more</code>), by typing "q", or control-C.</p>
 </div>
 <p><code>git log</code> has a few common command-line switches that can make reading the log a little less verbose.</p>
 <p>Of particular use, is the <code>--pretty</code> flag:</p>
@@ -1626,15 +1626,15 @@ Created a new test fixture that makes random tests reproducible.
 <span class="go">f007799b3fa0e45c2ff475930021c0dcea1c63c0 (HEAD -&gt; master) Added tests for randomness.</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">For more details, see <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History">Git Basics - Viewing the Commit History</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">For more details, see <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History" target="external">Git Basics - Viewing the Commit History</a>.</p>
 </div>
 </div>
 <div class="section" id="one-last-thing-web-api-test">
 <h2 id="one last thing! (web api test)">One last thing! (Web API Test)</h2>
 <p>Before we move on, we need to add one more test. We have a test for the <code>RandomQuoteManager.random()</code> method, but we haven't added a corresponding test for the WSGI application, <code>RandomQuoteApp</code>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Test coverage analysis would have caught this too! 🌈</p>
 </div>
 <p>Here's our test. Add it to the bottom of <code>src/random_quote/tests/test_wsgi.py</code>:</p>
@@ -1698,8 +1698,8 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 </td></tr></table></div><p>Lets <code>git commit</code> our new test. We'll use the <code>-m</code> flag this time. This way, we can specify our commit log message on the command line, surrounded by double quotes (<code>"</code>). It's really handy for small changes like this.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Be careful of <a class="reference external" href="https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch01s09.html">special shell characters</a>, in messages you pass to the <code>-m</code> switch. If you have to use one, prefix it with a backslash (\).</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Be careful of <a class="reference external" href="https://www.oreilly.com/library/view/learning-the-bash/1565923472/ch01s09.html" target="external">special shell characters</a>, in messages you pass to the <code>-m</code> switch. If you have to use one, prefix it with a backslash (\).</p>
 </div>
 <p>First, lets check <code>git status</code> to make sure we know what we're committing:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1775,7 +1775,7 @@ Created a new test fixture that makes random tests reproducible.
 </pre></div>
 </td></tr></table></div><p>Before we did this, anyone else who cloned our repository would not be able to see the commits we made. Now that we have, they can run <code>git fetch</code> or <code>git pull</code> and retrieve the commits we made.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">We will be exploring multi-user scenarios a bit later!</p>
 </div>
 </div>

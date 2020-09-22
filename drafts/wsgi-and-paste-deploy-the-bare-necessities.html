@@ -12,8 +12,6 @@
 <meta content="WSGI and Paste Deploy: The Bare Necessities - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="WSGI and Paste Deploy: The Bare Necessities - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   WSGI and Paste Deploy: The Bare Necessities - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -69,37 +67,37 @@
 <div class="entry-content status-draft">
 <p>Using paster to create layouts for various types of projects is great,
 especially when you need to get up and running quickly. The downside, is
-that that sometimes the hand-holding, even along with some <a class="reference external" href="http://docs.pylonsproject.org/docs/pyramid.html">amazing
+that that sometimes the hand-holding, even along with some <a class="reference external" href="http://docs.pylonsproject.org/docs/pyramid.html" target="external">amazing
 documentation</a>,
 doesn't give you the whole story.</p>
 <p>I'm in the planning stages for a new project, and although I'm still on
 the fence as to what we'll use to develop it, I'm sweet on
-<a class="reference external" href="http://pylonsproject.org/">Pyramid</a>. However, I'm also a WSGI n00b,
+<a class="reference external" href="http://pylonsproject.org/" target="external">Pyramid</a>. However, I'm also a WSGI n00b,
 and haven't used the paste stack for anything beyond building plone
 buildouts and archetypes boilerplate. That means that
-<a class="reference external" href="http://pythonpaste.org/deploy/">PasteDeploy</a> is not in my playbook.
-There are some great <a class="reference external" href="http://pythonpaste.org/script/">PasteScript</a>
+<a class="reference external" href="http://pythonpaste.org/deploy/" target="external">PasteDeploy</a> is not in my playbook.
+There are some great <a class="reference external" href="http://pythonpaste.org/script/" target="external">PasteScript</a>
 templates provided by the Pyramid project to get started quickly, but I
 didn't see any good explanation of <em>why</em> the files were created, and how
 they actually worked, even in the super-awesome Pyramid docs.</p>
 <p><em>Disclaimer: I didn't look that hard. :P</em></p>
 <p>So, to ease my pain, I got back to basics. I started with a fresh egg,
-the PasteDeploy documentation and <a class="reference external" href="http://www.python.org/dev/peps/pep-0333/">PEP
+the PasteDeploy documentation and <a class="reference external" href="http://www.python.org/dev/peps/pep-0333/" target="external">PEP
 333</a>. I came up with the
 absolute, bare-minimum code, setup, and config necessary to produce a
 functioning (albeit boring) WSGI application, and the necessary glue to
 run it via PasteDeploy.</p>
 <p>If you're the type that doesn't need much explaination and just want to
-look at the code, go <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/pastedeploy-minimal/trunk">right to the
+look at the code, go <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/pastedeploy-minimal/trunk" target="external">right to the
 source</a>
-(<a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/checkout">checkout
+(<a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/checkout" target="external">checkout
 instructions</a>)</p>
 <div class="section" id="prerequisites">
 <h2 id="prerequisites">Prerequisites</h2>
 <p>You'll need, at minimum, a modern version of python (I used the 2.6
 version that ships with Debian Squeeze),
-<a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a>, and some way to
-<a class="reference external" href="http://pypi.python.org/pypi/pip">install virtualenv</a>.</p>
+<a class="reference external" href="http://pypi.python.org/pypi/virtualenv" target="external">virtualenv</a>, and some way to
+<a class="reference external" href="http://pypi.python.org/pypi/pip" target="external">install virtualenv</a>.</p>
 <p>I'll leave getting virtualenv installed as an exercise for the reader :)</p>
 <p>I'm going to assume you're in a Linux environment in the few times we
 need to interact with the operating system. As far as I know, this
@@ -138,7 +136,7 @@ they exist and haven't been overridden locally)</li>
 setuptools-enabled (pretty much the standard). This requires a couple of
 directories, and some special files (I based this off of output of the
 PasteScript 'basic_namespace' template, for details about what this
-means, see <a class="reference external" href="http://peak.telecommunity.com/DevCenter/setuptools">the setuptools
+means, see <a class="reference external" href="http://peak.telecommunity.com/DevCenter/setuptools" target="external">the setuptools
 docs</a>).</p>
 <div class="line-block">
 <div class="line">Here's what the layout looks like:</div>
@@ -402,7 +400,7 @@ command.</p>
 <pre class="literal-block">
 (fun-minimal-wsgi)$ paster serve minimal/minimal.ini --reload
 </pre>
-<p>You can now navigate to <a class="reference external" href="http://127.0.0.1:6543">http://127.0.0.1:6543</a> and you should see 'hello
+<p>You can now navigate to <a class="reference external" href="http://127.0.0.1:6543" target="external">http://127.0.0.1:6543</a> and you should see 'hello
 world'</p>
 <p>Since we specified <tt class="docutils literal"><span class="pre">--reload</span></tt>, we should be able to make changes to
 the application code and <tt class="docutils literal">minimal.ini</tt> and the server will reload for
@@ -475,7 +473,7 @@ the server.</p>
 (fun-minimal-wsgi)$ cd ..
 (fun-minimal-wsgi)$ paster serve minimal/minimal.ini --reload
 </pre>
-<p>Now, visiting <a class="reference external" href="http://127.0.0.1:6543">http://127.0.0.1:6543</a> will look a little different.</p>
+<p>Now, visiting <a class="reference external" href="http://127.0.0.1:6543" target="external">http://127.0.0.1:6543</a> will look a little different.</p>
 <p>The same middleware can be added to the pipeline multiple times as well,
 try adding another copy of <tt class="docutils literal">middleware</tt> to <tt class="docutils literal">[pipeline:main]</tt> and see
 what happens. You could also add another section referencing the same

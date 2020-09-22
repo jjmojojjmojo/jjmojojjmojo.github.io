@@ -12,8 +12,6 @@
 <meta content="State And Events In CircuitPython: Part 4: Example Application - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 4: Example Application - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 4: Example Application - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -79,12 +77,12 @@
 <p>Now that we've established a pattern for working with state, and have a generic event dispatch class for button presses, we can build a more realistic application.</p>
 <p>This will illustrate how to use the <tt class="docutils literal">ButtonDispatch</tt> class with your own variation of the <tt class="docutils literal">State</tt> class to construct a project complex functionality with pretty simplistic code.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">An even more elaborate application can be explored in my <a class="reference external" href="/drafts/touchmouse.html">touch mouse project</a> 🐭 !</p>
 </div>
 <p>We'll use the state object for more than just tracking button state. We'll also use it to handle general on/off, as well regular flashing of two LEDs: the built-in red LED on pin 13, and the onboard RGB NeoPixel or DotStar. We'll also track the color of the NeoPixel/DotStar.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">This is the culmination of all the test and example code we've been using throughout this article. 🦄</p>
 </div>
 <div class="section" id="phase-1">
@@ -439,7 +437,7 @@
 </ol>
 <p>We should get in the habit of doing this when we have well defined code, this is a great place to start.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Just bear in mind that if you do compile <tt class="docutils literal">dispatch.py</tt> into an <tt class="docutils literal">.mpy</tt> file, you won't be able to edit it directly (you'll have to edit it outside of your board, compile it, and copy it over again), so only do this when the code is <em>rock solid</em> and you need the extra memory.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -816,10 +814,10 @@
 <div class="section" id="phase-3">
 <h3>Phase 3</h3>
 <p>Next, we'll add in multiple-button logic similar to what we did previously and add a new feature to rotate through a set of predetermined colors when both buttons are pressed.</p>
-<p>We'll make use of the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED library</a> to gamma-correct the RGB LED so the colors look nicer.</p>
+<p>We'll make use of the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED library</a> to gamma-correct the RGB LED so the colors look nicer.</p>
 <p>We'll also the brightness level, since we need it for the gamma-correction calculation.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Make sure you've copied the <tt class="docutils literal">adafruit_fancyled</tt> library folder over to your <tt class="docutils literal">CIRCUITPY</tt> drive. Place it in the <tt class="docutils literal">lib</tt> folder.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
@@ -1088,7 +1086,7 @@
 <p>Note that this value must be a <em>float</em> - you will get somewhat odd errors if you set it to an integer (so be sure to set it to <tt class="docutils literal">1.0</tt> not <tt class="docutils literal">1</tt>).</p>
 <p>We define our list of possible colors as a "tuple of tuples" on <strong>lines 9-18</strong>. Tuples work just like lists, except they are <em>immutable</em> - you can't change them once they're defined. This is perfect for our list of colors, since we have no need to change it.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">The colors were chosen by searching for "RGB rainbow" and grabbing a few triplets that looked good. The exact colors could use some adjustment. If you try this code on different boards, you'll notice some variation between pixels, especially between DotStars and NeoPixels - this is expected. The electronics involved are different, and will produce slightly different wavelengths of light for each of the red, green, and blue elements.</p>
 </div>
 <p>We've added new state attributes to handle the cycling of colors on <strong>lines 38 and 39</strong>.</p>
@@ -1145,12 +1143,12 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 </td></tr></table></div><p>The NeoPixel and DotStar libraries can also take an <em>integer</em>, instead of a tuple. <tt class="docutils literal">CRGB</tt> has a <tt class="docutils literal">pack()</tt> method that will return a compatible integer. So we finally take advantage of that method when we set the pixel.</p>
 <p>In the example code, we're doing all of these steps in one line. Whether to do it this way, break it up, or vary the approach in the ways we've just explored is entirely up to you - rarely will one way or the other be any more or less efficient. It really comes down to readability, for the most part.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p class="last">This is 100% true in general, and most of the time in CircuitPython projects. But be cautious - every line of code takes up precious memory you may need for your project. Sometimes you may have to make things a little messy to squeeze in a few more bytes so you can get things working.</p>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>If you are more experienced with Python, you may have thought that the <tt class="docutils literal">cycle_color()</tt> method would be a great usecase for a <em>generator</em>.</p>
 <p>Generators are functions/methods that maintain some sort of state. Typically any variables defined inside of a function or method are lost when the it ends (or <tt class="docutils literal">return</tt>'s). A generator is different, in that it can be looped over, like a list or tuple (it's <em>iterable</em>), and as you loop over it, it calls your function each time, going back to the same point over and over, until it returns. That point is marked by using the special <tt class="docutils literal">yeild</tt> keyword.</p>
 <p>Here's how a color cycling function might look, implemented as a generator:</p>
@@ -1243,7 +1241,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <li>We've brought in logic to cover pressing both buttons. This required adding a handler for the <em>press</em> event, and the addition of the <tt class="docutils literal">both</tt> state variable.</li>
 <li>The possible colors have been stored in a tuple of tuples called <tt class="docutils literal">colors</tt>.</li>
 <li>We're rotating through the colors using a method of the state object called <tt class="docutils literal">cycle_color()</tt>. It uses a new state variable, <tt class="docutils literal">_color_index</tt> to keep track of the location within the <tt class="docutils literal">color</tt> tuple of the color that was last used. <tt class="docutils literal">cycle_color()</tt> resets <tt class="docutils literal">_color_index</tt> to zero when it reaches the maximum index of <tt class="docutils literal">colors</tt>.</li>
-<li>We're using <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> to adjust the colors to better reflect our expectations. It has a lot more functionality than that, we're just scratching the surface.</li>
+<li>We're using <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED</a> to adjust the colors to better reflect our expectations. It has a lot more functionality than that, we're just scratching the surface.</li>
 </ul>
 <p>And the requisite video of this code in action on my Trinket M0:</p>
 <div class="video-container">

@@ -198,6 +198,12 @@ def process_file(path, force=False):
             src_path = image["src"]
             
             print(f"\tProcessing {src_path}...")
+            
+            src_name, src_ext = os.path.splitext(src_path)
+            if src_ext not in (".jpg", ".png"):
+                print(f"\t\tWARNING: unsupported image type {src_ext}")
+                continue
+            
             if image.get("srcset"):
                 print("\t\tWARNING: IMAGE ALREADY PROCESSED?")
                 continue
@@ -286,6 +292,25 @@ def process_file(path, force=False):
             div["class"] = "highlight-wrapper"
             block.wrap(div)
             
+            
+        # set the target on all external links to "external"
+        print("Changing target of all external links...")
+        links = soup.select("a")
+        for link in links:
+            if link["href"].startswith("http"):
+                print(f"\t\tFound {link['href']}")
+                link["target"] = "external"
+                
+        # convert all titles in admonisments to h2's
+        print("Changing titles of call outs to h2's...")
+        headers = soup.select(".admonition-title")
+        for header in headers:
+            print(f"\t\tProcessing {header.string}")
+            h2 = soup.new_tag("h2")
+            h2["class"] = header["class"]
+            h2.string = header.string
+            
+            header.replace_with(h2)
     
     temp_path = f"{base}.new{ext}"
     

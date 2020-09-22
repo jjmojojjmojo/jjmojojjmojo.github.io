@@ -12,8 +12,6 @@
 <meta content="State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Addendum: What To Do When You Run Out Of Memory - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -92,7 +90,7 @@
 <p>Typically, you'll only need to optimize for memory consumption when you see the dreaded <tt class="docutils literal">MemoryError</tt> exception. It can be stressful - you think you have completed your project, or found the perfect library to add the functionality you need and <em>wham</em>, you're out of memory. But resist the temptation to try to head this off by obsessing about memory consumption before you actually run out.</p>
 <p>Most of the time, its best to focus on finishing your project, not solving problems you don't have!</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If you have other tips or tricks, or improvements to the techniques explored below, please <a class="reference external" href="/pages/contact.html">contact the author!</a>.</p>
 </div>
 <p>For comparison's sake, we're using the following code to test:</p>
@@ -174,7 +172,7 @@
 </pre></div>
 </td></tr></table></div><p>On my GEMMA M0, it prints <tt class="docutils literal">8944</tt> when it starts up. That's the number we'll be comparing other approaches to.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This is including our <a class="reference external" href="/circuitpython-state-part-1.html#Abstractions:KeepingTheCodeSimple">setup.py module</a> - so we're also loading the DotStar library and setting up both buttons, even though neither are necessary for this code.</p>
 </div>
 <p>Bear in mind though that these comparisons are just to ensure we're <em>actually</em> saving memory, it's not an evaluation of the effectiveness of a particular approach. The amount of savings and how significant it might be will entirely depend on your specific situation.</p>
@@ -461,17 +459,17 @@
 <p>For example, the decimal number <strong>15</strong> has a 1 in the "tens" place, and a 5 in the "ones" place. 15 is 10 + 5.</p>
 <p>The number 15 in binary is <strong>1111</strong>. There's a 1 in the ones place, a 1 in the <em>twos</em> place, a 1 in the <em>fours</em> place, and a 1 in the <em>eights</em> place. 1111 is 15, because 8 + 4 + 2 + 1 = 15.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>The nuances and amazing properties of the binary number system and doing binary math is beyond the scope of this article.</p>
 <p>Here are a couple of videos worth checking out that explain things:</p>
 <p><strong>TBD: more/better explanations!!!</strong></p>
 <ul class="last simple">
-<li><a class="reference external" href="https://youtu.be/kcTwu6TFZ08">James May's Q&amp;A (Ep 11100)</a></li>
+<li><a class="reference external" href="https://youtu.be/kcTwu6TFZ08" target="external">James May's Q&amp;A (Ep 11100)</a></li>
 </ul>
 </div>
 <p>You can treat a binary number like an array of switches, and using binary math, flip each switch (bit) on or off to indicate a true or false state. This way you can store 32 state values in a single 32-bit integer. One variable that takes up as much space as the number 15 can store up to <em>32 values</em>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>The exact number of possible values depends on how Python is storing the number and the specific platform you are running on.</p>
 <p class="last">It's also unclear if using the same number of variables with Python's booleans (<tt class="docutils literal">True</tt>/<tt class="docutils literal">False</tt>) is less efficient.</p>
 </div>
@@ -572,9 +570,9 @@
 <h3>Pre-calculate Values</h3>
 <p>Using external libraries is a big source of extraneous code that can eat into our available memory.</p>
 <p>Sometimes we're using an external library just to calculate a value that doesn't change, or isn't based on anything that couldn't be reduced to a fixed set of values.</p>
-<p>Here's an example that flashes the RGB LED instead of the red one, changing the color every time. This version uses the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> library to do the math:</p>
+<p>Here's an example that flashes the RGB LED instead of the red one, changing the color every time. This version uses the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED</a> library to do the math:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Make sure you have copied <tt class="docutils literal">adafruit_fancyled</tt> folder to the <tt class="docutils literal">lib</tt> directory on your CircuitPython board.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -891,8 +889,8 @@
 <p>You can take this approach a lot further than you might think. Brightness is a factor in Fancy's gamma correction algorithm. Lets say your project lets the user adjust brightness. Instead of calculating the gamma on the fly, if you use a fixed set of brightness levels, you can precalculate every possible color/brightness combination, and store them in a list of tuples, or a tuple for every brightness level.</p>
 <p>It can seem like a lot of data, but tuples of integers are really compact.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/docs/library/array.html">array module</a> can be used to even <em>more</em> efficiently store your precalculated values.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/docs/library/array.html" target="external">array module</a> can be used to even <em>more</em> efficiently store your precalculated values.</p>
 </div>
 <p>You will always have to balance memory used for lines of code verses memory used to store pre-calculated values, but it's a great way to save memory.</p>
 </div>
@@ -900,7 +898,7 @@
 <h3>Compile Modules Into MPY Files</h3>
 <p>MicroPython provides a tool called <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> that can take a python module and compile it into an intermediate form that takes up less memory. These files have the <tt class="docutils literal">.mpy</tt> suffix.</p>
 <p>Adafruit has just recently begun distributing a precompiled version of this tool with new versions of CircuitPython.</p>
-<p>To compile your code, you will first need to download the appropriate version of <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> from <a class="reference external" href="https://github.com/adafruit/circuitpython/releases/">the distribution page</a>, for both your operating system and the version of CircuitPython you are using.</p>
+<p>To compile your code, you will first need to download the appropriate version of <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> from <a class="reference external" href="https://github.com/adafruit/circuitpython/releases/" target="external">the distribution page</a>, for both your operating system and the version of CircuitPython you are using.</p>
 <p>Place the tool in a directory in your <tt class="docutils literal">$PATH</tt>, or some place where you will be able to access it. You may need to make it executable (<tt class="docutils literal">chmod +x</tt>).</p>
 <p>Once you have the tool, you will want to move some of your code into a separate module, and then import it into <tt class="docutils literal">code.py</tt>.</p>
 <p>Given the example we've been using, you could break it up into the following files:</p>
@@ -1224,7 +1222,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>While this fixed a memory issue I had in the past, I can't make sense of the readings I get from <tt class="docutils literal">gc.mem_free()</tt> - the amount of available memory slowly winds down with each loop until the garbage collector runs and its recovered.</p>
 <p class="last">This will require more research 🤔.</p>
 </div>
@@ -1242,7 +1240,7 @@
 <p>There are other applications involving driving LEDs, controlling LCD displays, handling large amounts of NeoPixels, and so on.</p>
 <p>Frequently boards will communicate via I2C or SPI. You can implement those protocols yourself to get two M0 boards to talk to each other, sharing the load of your project.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">I hope to explore cross-board communication with I2C and SPI in depth in a future blog post!</p>
 </div>
 </div>
@@ -1250,13 +1248,13 @@
 <h3>Switch To Arduino</h3>
 <p>Finally, there are times when your application is just too much for the CircuitPython platform. That's where the Arduino toolchain comes into play.</p>
 <p>You can program your M0/M4 boards using the Arduino IDE just like any other compatible board. Most Arduino sketches will work without modification.</p>
-<p>Adafruit has an <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide">overview of the process</a> of getting set up, as well as some <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0">porting notes</a> for running Arduino sketches on the M0/M4 series boards.</p>
+<p>Adafruit has an <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide" target="external">overview of the process</a> of getting set up, as well as some <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0" target="external">porting notes</a> for running Arduino sketches on the M0/M4 series boards.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The links above are in the documentation for a specific product, the <a class="reference external" href="https://www.adafruit.com/product/2772">Feather M0 Basic Proto</a>, but they are completely generic. Sadly, they were the only docs the author could find at the time of writing. 💔</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">The links above are in the documentation for a specific product, the <a class="reference external" href="https://www.adafruit.com/product/2772" target="external">Feather M0 Basic Proto</a>, but they are completely generic. Sadly, they were the only docs the author could find at the time of writing. 💔</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The author has not had a chance to do much with M0 boards and the Arduino IDE yet, but hopes to explore the topic thoroughly in a future blog post. A gentle <a class="reference external" href="/pages/contact.html">shout out</a> might motivate him to do so sooner rather than later 😉.</p>
 </div>
 </div>

@@ -12,8 +12,6 @@
 <meta content="Purely Python: LSB-Compliant Init Scripts - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Purely Python: LSB-Compliant Init Scripts - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Purely Python: LSB-Compliant Init Scripts - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -71,7 +69,7 @@
   </div>
 <div class="entry-content status-draft">
 <p>I've recently been writing a large number of Linux
-<a class="reference external" href="http://en.wikipedia.org/wiki/UNIX_System_V">Sys-V</a> style init
+<a class="reference external" href="http://en.wikipedia.org/wiki/UNIX_System_V" target="external">Sys-V</a> style init
 scripts, to control how services are started upon system boot (or
 terminated upon shutdown).</p>
 <p>I've chosen Python over shell script as my language of choice. I've dug
@@ -87,26 +85,26 @@ example &lt;http://lionfacelemonface.wordpress.com/2009/12/29/python-init-script
 <div class="section" id="background">
 <h2 id="background">Background</h2>
 <p>Over the past few months, I've building a large hardware infrastructure.
-It's based on <a class="reference external" href="http://www.redhat.com/rhel/server/">Red Hat Enterprise Linux
+It's based on <a class="reference external" href="http://www.redhat.com/rhel/server/" target="external">Red Hat Enterprise Linux
 5</a>, and will make heavy use of
-<a class="reference external" href="http://www.linux-kvm.org/page/Main_Page">KVM virtualization</a>.</p>
+<a class="reference external" href="http://www.linux-kvm.org/page/Main_Page" target="external">KVM virtualization</a>.</p>
 <p>I've established a
-<a class="reference external" href="http://www.drbd.org/">DRBD</a>+<a class="reference external" href="http://oss.oracle.com/projects/ocfs2/">OCFS2</a>
+<a class="reference external" href="http://www.drbd.org/" target="external">DRBD</a>+<a class="reference external" href="http://oss.oracle.com/projects/ocfs2/" target="external">OCFS2</a>
 cluster between two heavy-duty servers serving as virtual machine hosts.</p>
 <p>I'm using
-<a class="reference external" href="http://en.wikipedia.org/wiki/ATA_over_Ethernet">ATA-Over-Ethernet</a>
-(AoE)-based SAN hardware from <a class="reference external" href="http://www.coraid.com/">Coraid, Inc.</a>
+<a class="reference external" href="http://en.wikipedia.org/wiki/ATA_over_Ethernet" target="external">ATA-Over-Ethernet</a>
+(AoE)-based SAN hardware from <a class="reference external" href="http://www.coraid.com/" target="external">Coraid, Inc.</a>
 for mass-storage and backups.</p>
 <p>I'll be running multiple virtual machine guests, mostly Debian based
-(<a class="reference external" href="http://www.ubuntu.com/">Ubuntu</a>).</p>
+(<a class="reference external" href="http://www.ubuntu.com/" target="external">Ubuntu</a>).</p>
 <p>All of these features rely on various services. I got into the business
 of writing my own init scripts and the nuts and bolts of the
-<a class="reference external" href="http://en.wikipedia.org/wiki/Init">init</a> system because of a need to
+<a class="reference external" href="http://en.wikipedia.org/wiki/Init" target="external">init</a> system because of a need to
 aggregate multiple services under one control script, to ensure they are
 started properly.</p>
 <p>I was also drawn into init script development due to the lack of a
 useful init script from Coraid. Getting the exported drive space to
-mount requires a bit of finesse, and my general assessment of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14">Coraid's
+mount requires a bit of finesse, and my general assessment of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14" target="external">Coraid's
 documentation on the
 matter</a> is that
 they feel that it's up to the individual implementing the SAN to handle
@@ -140,10 +138,10 @@ possible so that I can hand off future tweaks and bug fixes to any of
 my developers (no sysadmin or shell expert needed).</li>
 </ol>
 <p>Python is well-equipped for shell scripting; the
-<a class="reference external" href="http://docs.python.org/library/sys.html">sys</a> and
-<a class="reference external" href="http://docs.python.org/library/os.html">os</a> modules handle most of
+<a class="reference external" href="http://docs.python.org/library/sys.html" target="external">sys</a> and
+<a class="reference external" href="http://docs.python.org/library/os.html" target="external">os</a> modules handle most of
 the basic shell commands, and the
-<a class="reference external" href="http://docs.python.org/library/subprocess.html">subprocess</a> module
+<a class="reference external" href="http://docs.python.org/library/subprocess.html" target="external">subprocess</a> module
 handles process control.</p>
 <p>Granted, there are some negative aspects to doing things this way.</p>
 <p>Problems arise from the simple differences between a general-purpose
@@ -195,7 +193,7 @@ esac
 is easier to do in Bash than in Python, but you get the idea.</p>
 <p>There's a risk of alienating any system administrators that may come
 after me, who don't know Python.</p>
-<p><a class="reference external" href="http://www.perl.org/">Perl</a> is really better suited for this anyway,
+<p><a class="reference external" href="http://www.perl.org/" target="external">Perl</a> is really better suited for this anyway,
 right?</p>
 <p>Bottom line: I'm not terribly worried about any of this. Python is a
 really great language for this purpose, and the process has proven to be
@@ -207,19 +205,19 @@ relatively painless.</p>
 explained elsewhere, but here's a rundown of the concepts we're dealing
 with when creating Python-based init scripts:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://en.wikipedia.org/wiki/Init#SysV-style">System V Init</a> -
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Init#SysV-style" target="external">System V Init</a> -
 the style of init that both of my target OS' use, or are compatible
 with (RHEL and Ubuntu).<ul>
-<li><a class="reference external" href="http://en.wikipedia.org/wiki/Runlevel">Runlevels</a></li>
-<li><a class="reference external" href="http://www.netbsd.org/docs/guide/en/chap-rc.html">/etc/rc.d</a></li>
-<li><a class="reference external" href="http://ss64.com/bash/chkconfig.html">chkconfig (man page)</a>,
-and <a class="reference external" href="http://www.linuxjournal.com/article/4445">more detail in an old
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Runlevel" target="external">Runlevels</a></li>
+<li><a class="reference external" href="http://www.netbsd.org/docs/guide/en/chap-rc.html" target="external">/etc/rc.d</a></li>
+<li><a class="reference external" href="http://ss64.com/bash/chkconfig.html" target="external">chkconfig (man page)</a>,
+and <a class="reference external" href="http://www.linuxjournal.com/article/4445" target="external">more detail in an old
 article</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="http://www.linuxfoundation.org/collaborate/workgroups/lsb">The Linux Standards Base
+<li><a class="reference external" href="http://www.linuxfoundation.org/collaborate/workgroups/lsb" target="external">The Linux Standards Base
 (LSB)</a>,
-and specifically, its <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/sysinit.html">standards for init
+and specifically, its <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/sysinit.html" target="external">standards for init
 scripts</a></li>
 </ul>
 <p>Essentially, here's what we need to do:</p>
@@ -275,7 +273,7 @@ work)</p>
 </li>
 <li><p class="first">It must contain 2 comments indicating the requested start/shutdown
 order and the description (these are specified by the <tt class="docutils literal">`chkconfig</tt>
-man page &lt;<a class="reference external" href="http://ss64.com/bash/chkconfig.html">http://ss64.com/bash/chkconfig.html</a>&gt;`__):</p>
+man page &lt;<a class="reference external" href="http://ss64.com/bash/chkconfig.html" target="external">http://ss64.com/bash/chkconfig.html</a>&gt;`__):</p>
 <pre class="literal-block">
 # chkconfig: 345 20 70
 # description: My service that rocks \
@@ -297,7 +295,7 @@ multiple lines if you add a backslash before the carriage return, as
 illustrated above.</p>
 </li>
 <li><div class="first line-block">
-<div class="line">It must contain an <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/initscrcomconv.html">LSB info
+<div class="line">It must contain an <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/initscrcomconv.html" target="external">LSB info
 block</a>,
 with at least the <tt class="docutils literal">Description</tt>, and <tt class="docutils literal">Provides</tt> fields.</div>
 </div>
@@ -330,7 +328,7 @@ shutdown.</p>
 <p>In this example, we're telling <tt class="docutils literal">chkconfig</tt> that our service mustn't
 start before nfs <em>and</em> ntpd have started.</p>
 <p></p><div class="line-block">
-<div class="line">There are also <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/facilname.html">some "facilities" that are
+<div class="line">There are also <a class="reference external" href="http://dev.linux-foundation.org/betaspecs/booksets/LSB-Core-generic/LSB-Core-generic/facilname.html" target="external">some "facilities" that are
 in-specific</a>,
 and prefixed with a dollar sign. These include <tt class="docutils literal">$network</tt> and
 <tt class="docutils literal">$local_fs</tt>,</div>
@@ -343,12 +341,12 @@ are mounted", respectively.</div>
 <li><p class="first">The script must write a file with the same name as the service to
 <tt class="docutils literal">/var/lock/subsys</tt>.</p>
 </li></ol></div><p>I'm having trouble finding concrete explanation as to why this is a
-requirement. All I've been able to find is a <a class="reference external" href="http://www.redhat.com/magazine/008jun05/departments/tips_tricks/">Red Hat "tips and
+requirement. All I've been able to find is a <a class="reference external" href="http://www.redhat.com/magazine/008jun05/departments/tips_tricks/" target="external">Red Hat "tips and
 tricks"
 entry</a>
 (scroll down).</p>
 <p></p><p>So I'm not sure if this is a hard requirement, a Red Hat requirement,
-or what, but it was part of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14">Coraid's init script
+or what, but it was part of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14" target="external">Coraid's init script
 shell</a>, and I
 don't see any harm, so I've included it here.</p>
 <p>Some other things to keep in mind:</p>
@@ -583,14 +581,14 @@ if __name__ == '__main__':
         # return 1 for "general error"
         sys.exit(1)
 </pre>
-<p>I've put this code skeleton into my <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/initscript/">google code
+<p>I've put this code skeleton into my <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/initscript/" target="external">google code
 repository</a>.
 Check there for the latest version as well as a fully unit tested
 version.</p>
 <p>What the script does, in esscence, is take an action from the command
 line, and then call a function that performs that action. Everything is
 wrapped in a <tt class="docutils literal"><span class="pre">try...</span> except</tt> block, so that any exceptions are caught,
-the user is notified via <a class="reference external" href="http://en.wikipedia.org/wiki/Stderr#Standard_error_.28stderr.29">standard
+the user is notified via <a class="reference external" href="http://en.wikipedia.org/wiki/Stderr#Standard_error_.28stderr.29" target="external">standard
 error</a>
 (so if errors appear during boot, they'll get logged somewhere like
 <tt class="docutils literal">/var/log/messages</tt>), and the appropriate error code is returned.</p>
@@ -644,7 +642,7 @@ little colorized <tt class="docutils literal"><span class="pre">[&nbsp;&nbsp;OK&
 that idea.</p>
 <p>This is accomplished with a couple of new functions, named after shell
 functions I found in <tt class="docutils literal">/etc/init.d/functions</tt> (on a RHEL5 machine).</p>
-<p>To get the cursor movement and colors, we'll use <a class="reference external" href="http://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape
+<p>To get the cursor movement and colors, we'll use <a class="reference external" href="http://en.wikipedia.org/wiki/ANSI_escape_code" target="external">ANSI escape
 codes</a>. I've defined
 them as variables (using all caps as an homage to the shell script
 convention)</p>
@@ -699,7 +697,7 @@ the nature of the error to standard error.</p>
 <p>My first full-blown init script involved mounting AoE LUNs on my SAN. I
 had trouble mounting them using the standard <tt class="docutils literal">fstab</tt> methods (even
 with <tt class="docutils literal">_netdev</tt> specified).</p>
-<p>What <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14">Coraid
+<p>What <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14" target="external">Coraid
 provided</a> was
 fairly lacking, and quite hard for a non-shell expert to really
 understand, so I took a cue from a colleague of mine who had done
@@ -716,7 +714,7 @@ still don't) know how to accurately simulate an exception in a doctest.</p>
 "switchboard" for the init script. This meant that the standard way of
 invoking the doctest module wouldn't work.</p>
 <p>I mucked around a bit and settled on adding another action to the
-script, called "unittest". Using the <a class="reference external" href="http://docs.python.org/library/doctest.html">doctest
+script, called "unittest". Using the <a class="reference external" href="http://docs.python.org/library/doctest.html" target="external">doctest
 API</a>, I was able to run
 all the doctests, so that worked out well.</p>
 <p>When it came to overcoming the other problems, I was able to do so by
@@ -739,7 +737,7 @@ rework the script to use the skeleton, and work the unit testing bits
 into the skeleton, but I think it's a good example of what a
 Python-based init script can look like, and I don't mind getting other
 pythonista's opinions of how it could be improved.</p>
-<p>Keep an eye on my <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/initscript/">google code
+<p>Keep an eye on my <a class="reference external" href="http://code.google.com/p/lionfacelemonface/source/browse/trunk/initscript/" target="external">google code
 repository</a>.
 The code is there and I'll be tracking my changes as the script is
 refactored (it should probably be its own project, but that's an
@@ -1334,7 +1332,7 @@ testing bits into something more concrete and transparent.</p>
 <li><p class="first">The more I think about it, the more I feel I need to figure out how
 to put my init scripts into proper eggs. As things get more complex,
 I may need external dependencies, and I'd like to let the
-<a class="reference external" href="http://pypi.python.org/pypi/setuptools">setuptools</a>
+<a class="reference external" href="http://pypi.python.org/pypi/setuptools" target="external">setuptools</a>
 infrastructure handle that for me.</p>
 <p>Also, an egg package would afford me lots of leeway for creating
 tests. I could move most of the doctests into a central file and move

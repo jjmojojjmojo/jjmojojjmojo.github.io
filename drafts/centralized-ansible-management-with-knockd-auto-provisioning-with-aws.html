@@ -12,8 +12,6 @@
 <meta content="Centralized Ansible Management With Knockd + Auto-provisioning with AWS - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Centralized Ansible Management With Knockd + Auto-provisioning with AWS - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Centralized Ansible Management With Knockd + Auto-provisioning with AWS - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -91,7 +89,7 @@ SSH - but it's a very sophisticated piece of software. Bottom line, it
 uses SSH to "push" configuration out to remote servers - this differs
 from some other popular approaches (like Chef, Puppet and CFEngine)
 where an agent is run on each machine, and a centralized server manages
-communication with the agents. Check out <a class="reference external" href="http://www.ansible.com/how-ansible-works">How Ansible
+communication with the agents. Check out <a class="reference external" href="http://www.ansible.com/how-ansible-works" target="external">How Ansible
 Works</a> for a bit more
 detail.</p>
 <p>Every approach has it's advantages and disadvantages - discussing the
@@ -99,7 +97,7 @@ nuances is beyond the scope of this article, but the primary
 disadvantage that Ansible has is one of it's strongest advantages: it's
 decentralized and doesn't require agent installation. The problem arises
 when you don't know your inventory (Ansible-speak for "list of all your
-machines") beforehand. This can be mitigated with <a class="reference external" href="http://docs.ansible.com/intro_dynamic_inventory.html">inventory
+machines") beforehand. This can be mitigated with <a class="reference external" href="http://docs.ansible.com/intro_dynamic_inventory.html" target="external">inventory
 plugins</a>.
 However, when you have to configure machines that are being spun up
 dynamically, that need to be configured quickly, the push model starts
@@ -109,14 +107,14 @@ very useful python API for specialized cases.</p>
 </div>
 <div class="section" id="port-knocking-for-fun-and-profit">
 <h2 id="port knocking for fun and profit">Port Knocking For Fun And Profit</h2>
-<p><a class="reference external" href="http://portknocking.org/">Port knocking</a> is a novel way of invoking
+<p><a class="reference external" href="http://portknocking.org/" target="external">Port knocking</a> is a novel way of invoking
 code. It involves listening to the network at a very low level, and
 listening for <em>attempted</em> connections to a specific sequence of ports.
 No ports are opened. It has its roots in network security, where it's
 used to temporarily open up firewalls. You knock, then you connect, then
 you knock again to close the door behind you. It's very cool tech.</p>
 <p>The standard implementation of port knocking is
-<a class="reference external" href="http://www.zeroflux.org/projects/knock">knockd</a>, included with&nbsp; most
+<a class="reference external" href="http://www.zeroflux.org/projects/knock" target="external">knockd</a>, included with&nbsp; most
 major linux distributions. It's extremely light weight, and uses a
 simple configuration file. It supports some interesting features, such
 as limiting the number of times a client can invoke the knock sequence,
@@ -124,17 +122,17 @@ by commenting out lines in a flat file.</p>
 </div>
 <div class="section" id="user-data-in-ec2">
 <h2 id="user data in ec2">User Data In EC2</h2>
-<p>EC2 has a really cool feature called <a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">user
+<p>EC2 has a really cool feature called <a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html" target="external">user
 data</a>,
 that allows you to add some information to an instance upon boot. It
-works with <a class="reference external" href="http://cloudinit.readthedocs.org/en/latest/">cloud-init</a>
+works with <a class="reference external" href="http://cloudinit.readthedocs.org/en/latest/" target="external">cloud-init</a>
 (installed on most AMIs) to perform tasks and run scripts when the
 machine is first booted, or rebooted.</p>
 </div>
 <div class="section" id="auto-scalling">
 <h2 id="auto scalling">Auto Scalling</h2>
 <p>EC2 provides a mechanism for spinning up instances based on need (or
-really any arbitrary event). The <a class="reference external" href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html">AWS
+really any arbitrary event). The <a class="reference external" href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html" target="external">AWS
 documentation</a>
 gives a detailed overview of how it works. It's useful for responding to
 sudden spikes in demand, or contracting your running instances during
@@ -184,7 +182,7 @@ correctly. They <strong>must</strong> be set to <tt class="docutils literal">060
 is to allow <em>all</em> ports from within the current subnet. This gives us
 maximum flexibility when assigning port knock sequences.</p>
 <p>Here's what it looks like:</p>
-<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png"><img alt="image0" src="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png?w=640"/></a>Depending on our circumstances, we would need to also open up
+<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png" target="external"><img alt="image0" src="http://lionfacelemonface.files.wordpress.com/2014/04/security-group-config.png?w=640"/></a>Depending on our circumstances, we would need to also open up
 UDP traffic as well (port knocks can be TCP or UDP based, or a
 combination within a sequence).</p>
 <p>For the sake of security, a limited range of a specific type of
@@ -294,7 +292,7 @@ verbose=utils.VERBOSITY)</div>
 </div>
 </div>
 <p>Most of the script is user-interface code, using
-<a class="reference external" href="https://docs.python.org/2/library/argparse.html?highlight=argparse#argparse">argparse</a>
+<a class="reference external" href="https://docs.python.org/2/library/argparse.html?highlight=argparse#argparse" target="external">argparse</a>
 to bring in configuration options. One unimplemented feature is using an
 INI file to specify things like the default playbook, pem key, user,
 etc. These things are just hard coded in the call to run_playbook for
@@ -309,7 +307,7 @@ scratched the surface here of what can be done. With custom callbacks,
 instead of the ones used by the ansible-playbook runner, we can fine
 tune how we collect information about each run.</p>
 <p>The playbook I used for testing this implementation is very simplistic
-(see <a class="reference external" href="http://docs.ansible.com/playbooks.html">the Ansible playbook
+(see <a class="reference external" href="http://docs.ansible.com/playbooks.html" target="external">the Ansible playbook
 documentation</a> for an
 explaination of the playbook syntax):</p>
 <div class="line-block">
@@ -420,11 +418,11 @@ ansible: running command: /home/ubuntu/run.sh 172.31.24.211
 <h2 id="making it automatic with user data">Making It Automatic With User Data</h2>
 <p>Now that we have a way to configure machines on demand - the knock could
 happen at any time, from a cron job, executed via a distributed SSH
-client (like <a class="reference external" href="http://docs.fabfile.org/en/1.8/">fabric</a>), etc - we can
+client (like <a class="reference external" href="http://docs.fabfile.org/en/1.8/" target="external">fabric</a>), etc - we can
 use the user data feature of EC2 with cloud-init to do the knock at
 boot, and every reboot.</p>
 <p>Here is the user data that I used, which is technically <em>cloud config</em>
-code (<a class="reference external" href="http://cloudinit.readthedocs.org/en/latest/topics/examples.html">more examples
+code (<a class="reference external" href="http://cloudinit.readthedocs.org/en/latest/topics/examples.html" target="external">more examples
 here</a>):</p>
 <div class="line-block">
 <div class="line">[code]</div>
@@ -444,12 +442,12 @@ here</a>):</p>
 <p>User data can be edited at any time as long as an EC2 instance is in the
 "stopped" state. When launching a new instance, the field is hidden in
 Step 3, under "Advanced Details":</p>
-<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png"><img alt="User Data Field" src="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png?w=640"/></a>Once this is established, you can use the "launch
+<p><a class="reference external" href="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png" target="external"><img alt="User Data Field" src="http://lionfacelemonface.files.wordpress.com/2014/04/user-data-screen-shot.png?w=640"/></a>Once this is established, you can use the "launch
 more like this" feature of the AWS console to replicate the user data.</p>
 <p>This is also a prime use case for writing your own provisioning scripts
-(using something like <a class="reference external" href="http://boto.readthedocs.org/en/latest/">boto</a>)
+(using something like <a class="reference external" href="http://boto.readthedocs.org/en/latest/" target="external">boto</a>)
 or using something a bit higher level, like
-<a class="reference external" href="https://aws.amazon.com/cloudformation/">CloudFormation</a>.</p>
+<a class="reference external" href="https://aws.amazon.com/cloudformation/" target="external">CloudFormation</a>.</p>
 </div>
 <div class="section" id="auto-scaling-and-user-data">
 <h2 id="auto scaling and user data">Auto Scaling And User Data</h2>
@@ -474,7 +472,7 @@ without really changing anything about their setup.</p>
 <p>Here are a few miscellaneous notes, and some things to consider:</p>
 <ul class="simple">
 <li>There are many implementations of port knocking, beyond knockd. There
-is a <a class="reference external" href="http://portknocking.org/view/resources">huge amount of information available</a> to dig into the
+is a <a class="reference external" href="http://portknocking.org/view/resources" target="external">huge amount of information available</a> to dig into the
 concept itself, and it's various implementations.</li>
 <li>The way the script is implemented, it's possible to have different
 knock sequences execute different playbooks. A "poor-man's" method of

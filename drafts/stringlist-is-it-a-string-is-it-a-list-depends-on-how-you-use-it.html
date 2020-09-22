@@ -12,8 +12,6 @@
 <meta content="StringList - Is It A String? Is It A List? Depends On How You Use It! - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="StringList - Is It A String? Is It A List? Depends On How You Use It! - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   StringList - Is It A String? Is It A List? Depends On How You Use It! - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -80,7 +78,7 @@ contain one or more strings. I assumed it would be a list, some of my
 users felt that <tt class="docutils literal"><span class="pre">['value',]</span></tt> was harder to write than <tt class="docutils literal">'value'</tt>. I
 found myself making the same mistake. So, I solved the problem, then I
 took the rough class I wrote and polished it. It's up on my github, at
-<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist">https://github.com/jjmojojjmojo/stringlist</a></p>
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist" target="external">https://github.com/jjmojojjmojo/stringlist</a></p>
 <div class="section" id="so-what-is-it">
 <h2 id="so what is it?">So what is it?</h2>
 <p>It's a class that tries to make a slick API when there can be one, or
@@ -92,9 +90,9 @@ string, and you use the <tt class="docutils literal">.append()</tt> method, it b
 <div class="section" id="how-would-i-use-it">
 <h2 id="how would i use it?">How would I use it?</h2>
 <p>Like so (see the
-<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist#stringlist">README</a>for
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist#stringlist" target="external">README</a>for
 a more detailed example, and the
-<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/tree/master/tests">tests</a>
+<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/tree/master/tests" target="external">tests</a>
 for comprehensive usage):</p>
 <pre class="literal-block">
 class Thing(object):
@@ -142,18 +140,18 @@ with <tt class="docutils literal">bin/nosetests</tt></li>
 <li>It was originally developed to avoid <tt class="docutils literal">['h', 'e', 'l', 'l', 'o']</tt>
 mistakes when a single string was used instead of a list.</li>
 <li>This is the first time I've used
-<a class="reference external" href="http://docs.python.org/2/howto/descriptor.html">descriptors</a> in
+<a class="reference external" href="http://docs.python.org/2/howto/descriptor.html" target="external">descriptors</a> in
 Python. Very cool.</li>
-<li>It would not have been possible without <a class="reference external" href="http://www.rafekettler.com/magicmethods.html">this marvelous post about
+<li>It would not have been possible without <a class="reference external" href="http://www.rafekettler.com/magicmethods.html" target="external">this marvelous post about
 Python's magic
 methods</a> (big thanks
 to Rafe Kettler).</li>
 <li>Some things were not as straight-forward as they could have been,
 given Python's string implementation. Of special interest is the
 implementation of the
-<tt class="docutils literal">`__delitem__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64</a>&gt;`__
+<tt class="docutils literal">`__delitem__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64" target="external">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L64</a>&gt;`__
 and
-<tt class="docutils literal">`__iter__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70</a>&gt;`__
+<tt class="docutils literal">`__iter__</tt> &lt;<a class="reference external" href="https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70" target="external">https://github.com/jjmojojjmojo/stringlist/blob/master/stringlist.py#L70</a>&gt;`__
 methods. In both cases, the base <tt class="docutils literal">str</tt> class doesn't have either
 method, so instead of doing the sane thing and proxying the call, I
 had to fall back to re-doing the operation in the method.</li>

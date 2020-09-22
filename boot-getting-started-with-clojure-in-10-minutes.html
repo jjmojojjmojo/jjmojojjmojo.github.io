@@ -12,8 +12,6 @@
 <meta content="Boot: Getting Started With Clojure In &lt; 10 Minutes - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Boot: Getting Started With Clojure In &lt; 10 Minutes - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Boot: Getting Started With Clojure In &lt; 10 Minutes - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -66,7 +64,7 @@
 <div id="toc"><ul><li><a class="toc-href" href="#overview for the unititated" title="Overview For The Unititated">Overview For The Unititated</a></li><li><a class="toc-href" href="#prerequisites" title="Prerequisites">Prerequisites</a></li><li><a boot="" class="toc-href" em="" href="#!dales la bota! (give " installation="" the="" title="&iexcl;Dales la Bota! (Give ">&iexcl;Dales la Bota! (Give 'em The Boot!) - Installation</a></li><li><a class="toc-href" href="#appendix: alternative install methods" title="Appendix: Alternative Install Methods">Appendix: Alternative Install Methods</a></li></ul></div>
 </div>
 <div class="entry-content status-published">
-<p>With the power of <a class="reference external" href="http://boot-clj.com/">boot</a>, it's possible to go from "never used java before" to budding <a class="reference external" href="http://clojure.org/">Clojure</a>-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.</p>
+<p>With the power of <a class="reference external" href="http://boot-clj.com/" target="external">boot</a>, it's possible to go from "never used java before" to budding <a class="reference external" href="http://clojure.org/" target="external">Clojure</a>-ist cranking out jars like a pickle factory in record time. This post walks you through the process, and provides some post-'hello world' examples, with pointers to more information.</p>
 <div class="section" id="overview-for-the-unititated">
 <h2 id="overview for the unititated">Overview For The Unititated</h2>
 <p>For those who are absolute Clojure beginners, here are a few clarifying terms and concepts.</p>
@@ -98,11 +96,11 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>The command-line examples assume a unix-like environment, and are to be run within a terminal. The bash shell was used. Examples have been tested on Ubuntu Linux and MacOs.</p>
 <p>However, the principals should be transferable to any Linux, BSD or similar operating system.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Clojure is supported in the Microsoft Windows operating system. The author hopes to expand this tutorial to cover Windows sometime in the future.</p>
 </div>
 <p>Clojure doesn't need to be installed, in the typical sense. Clojure is distributed as a JAR file, and so Boot is able to download it and use it as its standard operating procedure.</p>
-<p>Behind the scenes, <a class="reference external" href="https://maven.apache.org/">Maven</a> is used to manage JARs. The public maven repositories are utilized for Java dependencies, and <a class="reference external" href="http://clojars.org/">clojars</a> is used for clojure ones.</p>
+<p>Behind the scenes, <a class="reference external" href="https://maven.apache.org/" target="external">Maven</a> is used to manage JARs. The public maven repositories are utilized for Java dependencies, and <a class="reference external" href="http://clojars.org/" target="external">clojars</a> is used for clojure ones.</p>
 </div>
 <div class="section" id="conventions">
 <h3>Conventions</h3>
@@ -115,22 +113,22 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <ul class="simple">
 <li><em>A JDK installed</em>.</li>
 </ul>
-<p>Really, that's it. <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Sun's JDK</a> or <a class="reference external" href="http://openjdk.java.net/">OpenJDK</a> will work. Use the newest version.</p>
-<p>In addition, you'll need a way to download things. Feel free to use your browser. The examples below use <a class="reference external" href="https://www.gnu.org/software/wget/">wget</a>.</p>
-<p>If you're on Linux or Mac OS, you'll also need root access via <a class="reference external" href="http://www.sudo.ws/">sudo</a> - this is not a hard requirement but allows you to install boot for everyone on your machine to use.</p>
-<p>There's an expectation that you know basic <a class="reference external" href="http://clojure.org/">Clojure</a>, and examples try not to be too clever. For a good introduction, check out <a class="reference external" href="http://www.braveclojure.com">Clojure For The Brave and True</a>, specifically <a class="reference external" href="http://www.braveclojure.com/do-things/">Do Things: a Clojure Crash Course</a>. If you need help with specific forms used, the <a class="reference external" href="http://clojure.org/documentation">Clojure Community Documentation</a> is extremely helpful, especially the <a class="reference external" href="http://clojure.org/cheatsheet">Clojure Cheat Sheet</a>.</p>
-<p>It may be helpful to give the <a class="reference external" href="https://github.com/boot-clj/boot">boot readme</a> and <a class="reference external" href="https://github.com/boot-clj/boot/wiki">wiki documentation</a> a read.</p>
+<p>Really, that's it. <a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="external">Sun's JDK</a> or <a class="reference external" href="http://openjdk.java.net/" target="external">OpenJDK</a> will work. Use the newest version.</p>
+<p>In addition, you'll need a way to download things. Feel free to use your browser. The examples below use <a class="reference external" href="https://www.gnu.org/software/wget/" target="external">wget</a>.</p>
+<p>If you're on Linux or Mac OS, you'll also need root access via <a class="reference external" href="http://www.sudo.ws/" target="external">sudo</a> - this is not a hard requirement but allows you to install boot for everyone on your machine to use.</p>
+<p>There's an expectation that you know basic <a class="reference external" href="http://clojure.org/" target="external">Clojure</a>, and examples try not to be too clever. For a good introduction, check out <a class="reference external" href="http://www.braveclojure.com" target="external">Clojure For The Brave and True</a>, specifically <a class="reference external" href="http://www.braveclojure.com/do-things/" target="external">Do Things: a Clojure Crash Course</a>. If you need help with specific forms used, the <a class="reference external" href="http://clojure.org/documentation" target="external">Clojure Community Documentation</a> is extremely helpful, especially the <a class="reference external" href="http://clojure.org/cheatsheet" target="external">Clojure Cheat Sheet</a>.</p>
+<p>It may be helpful to give the <a class="reference external" href="https://github.com/boot-clj/boot" target="external">boot readme</a> and <a class="reference external" href="https://github.com/boot-clj/boot/wiki" target="external">wiki documentation</a> a read.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p><strong>For questions about boot or clojure,</strong> <a class="reference external" href="http://clojurians.net/">The Clojurians Slack</a> <strong>is the defacto place to go to converse with clojure rockstars and other newbs alike.</strong></p>
-<p class="last"><strong>If slack isn't your jam,</strong> <a class="reference external" href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> <strong>is another great way to get in touch with clojure folks. Come join us on</strong> <a class="reference external" href="https://freenode.net/">freenode</a>, <strong>in #hoplon.</strong></p>
+<h2 class="first admonition-title">Tip</h2>
+<p><strong>For questions about boot or clojure,</strong> <a class="reference external" href="http://clojurians.net/" target="external">The Clojurians Slack</a> <strong>is the defacto place to go to converse with clojure rockstars and other newbs alike.</strong></p>
+<p class="last"><strong>If slack isn't your jam,</strong> <a class="reference external" href="http://en.wikipedia.org/wiki/Internet_Relay_Chat" target="external">IRC</a> <strong>is another great way to get in touch with clojure folks. Come join us on</strong> <a class="reference external" href="https://freenode.net/" target="external">freenode</a>, <strong>in #hoplon.</strong></p>
 </div>
 </div>
 <div class="section" id="dales-la-bota-give-em-the-boot-installation">
 <h2 id="!dales la bota! (give 'em the boot!) - installation"><em>&iexcl;Dales la Bota!</em> (Give 'em The <em>Boot</em>!) - <em>Installation</em></h2>
-<p><a class="reference external" href="http://boot-clj.com/">Boot</a> is '<a class="reference external" href="https://github.com/boot-clj/boot#install">installed</a>' by simply downloading an <a class="reference external" href="https://github.com/boot-clj/boot/releases">executable file</a> and putting it somewhere where you can execute it.</p>
+<p><a class="reference external" href="http://boot-clj.com/" target="external">Boot</a> is '<a class="reference external" href="https://github.com/boot-clj/boot#install" target="external">installed</a>' by simply downloading an <a class="reference external" href="https://github.com/boot-clj/boot/releases" target="external">executable file</a> and putting it somewhere where you can execute it.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">For more options, see <a class="reference internal" href="#appendix-alternative-install-methods">Appendix: Alternative Install Methods</a>.</p>
 </div>
 <p>In our case, we'll use our home directory:</p>
@@ -146,11 +144,11 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 <p>First we need to download the boot executable script. The .sh extension indicates it's a shell script.</p>
 <p>Then a directory is created with <code>mkdir</code> for personal executables (binaries, hence <code>bin</code>). We use the <code>-p</code> flag to tell <code>mkdir</code> that any intermediary directories should be created. <code>-p</code> also silences any errors for already-existing directories.</p>
-<p>The tilde <code>~</code> is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely <code>/home/jjmojojjmojo</code>. But on some systems, it will be <code>/var/users/jjmojojjmojo</code>. On MacOS, home directories are in <code>/Users</code>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory">this wikipedia article</a> for more information.</p>
+<p>The tilde <code>~</code> is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely <code>/home/jjmojojjmojo</code>. But on some systems, it will be <code>/var/users/jjmojojjmojo</code>. On MacOS, home directories are in <code>/Users</code>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory" target="external">this wikipedia article</a> for more information.</p>
 <p>Finally, we string a few commands together using <code>&amp;&amp;</code>. <code>&amp;&amp;</code> will execute the following command if the preceding one succeeds (has a 0 return value). Here's what each part does:</p>
 <ol class="arabic simple">
 <li>We rename (move) the <code>boot.sh</code> to <code>boot</code>. This way we can type <code>boot</code> instead of <code>boot.sh</code> to execute boot commands later on.</li>
-<li>We change the <em>mode</em> of the <code>boot</code> script to include <em>execute</em> for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say <code>chmod 755</code>) only modifies the execute bit for each class. <a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm">More info</a>.</li>
+<li>We change the <em>mode</em> of the <code>boot</code> script to include <em>execute</em> for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say <code>chmod 755</code>) only modifies the execute bit for each class. <a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm" target="external">More info</a>.</li>
 <li>Finally, we move the <code>boot</code> script to our personal <code>~/bin</code> directory, so the shell can find it when we set that up in the next step.</li>
 </ol>
 </div>
@@ -163,14 +161,14 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <div class="docutils container">
 </div>
 <p>The shell looks for executables in a variable called <code>$PATH</code>. <code>$PATH</code> is a list of directories, that are searched in sequential order.</p>
-<p>We can get the shell to find our <code>boot</code> script by adding our personal bin directory to the end of that variable. <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)">More info</a>.</p>
+<p>We can get the shell to find our <code>boot</code> script by adding our personal bin directory to the end of that variable. <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)" target="external">More info</a>.</p>
 <p>By adding an <code>export</code> command to the end of our <code>~/.bash_profile</code>, we can ensure this modification to our shell happens every time we log in, or start our terminal app. Other environments, and shells have different files that are used this way.</p>
-<p>We accomplish this by using the <code>echo</code> command. <code>echo</code> sends data to the terminal output (stdout). We redirect that output to be appended to <code>~/.bash_profile</code>, using two greater-than symbols (<code>&gt;&gt;</code>). <a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html">More info</a>.</p>
+<p>We accomplish this by using the <code>echo</code> command. <code>echo</code> sends data to the terminal output (stdout). We redirect that output to be appended to <code>~/.bash_profile</code>, using two greater-than symbols (<code>&gt;&gt;</code>). <a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html" target="external">More info</a>.</p>
 <p>Note that we escape the dollar signs in the <code>$PATH</code> and <code>$HOME</code> variables. This prevents the shell from expanding the current value for those variables before adding the <code>export</code> to <code>~/.bash_profile</code>.</p>
 <p>Finally, we make the change take effect in our current shell by running the export (without the escaped dollar signs).</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Depending on your distribution, and shell, the way to make this change permanent may be different. Most shells read a special file in your home directory. Look for files like <code>~/.bashrc</code>, <code>~/.profile</code>, etc.</p>
 </div>
 <p>The real magic happens when boot is run. Boot sets everything up in a <tt class="docutils literal">.boot</tt> directory in your home folder. Without having any code to execute yet, you can trigger this by simply asking boot for help:</p>
@@ -190,7 +188,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <span class="go">BOOT_CLOJURE_VERSION=1.8.0</span>
 </pre></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>If you have previously installed boot, it's a good idea to run boot's self-update (<code>boot -u</code>) before continuing:</p>
 <div class="last"><div class="highlight"><pre><span></span><span class="gp">$</span> boot -u
 <span class="go">Retrieving boot-2.7.0.jar from https://clojars.org/repo/</span>
@@ -205,11 +203,11 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <h3>Let's Play With Clojure</h3>
 <div class="section" id="the-repl">
 <h4>The REPL</h4>
-<p>Clojure utilizes a concept called a <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> (<strong>R</strong>ead, <strong>E</strong>valuate, <strong>P</strong>rint, <strong>L</strong>oop). REPLs allow you to interactively run code and experiment.</p>
+<p>Clojure utilizes a concept called a <a class="reference external" href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop" target="external">REPL</a> (<strong>R</strong>ead, <strong>E</strong>valuate, <strong>P</strong>rint, <strong>L</strong>oop). REPLs allow you to interactively run code and experiment.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">$</span> boot repl
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Boot's <tt class="docutils literal">repl</tt> task downloads a bunch of dependencies. Don't be alarmed if a bunch of text scrolls by the first time you run <tt class="docutils literal">boot repl</tt>.</p>
 </div>
 <p>Boot then provides you with a prompt, where you can play around:</p>
@@ -257,15 +255,15 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 <p>The first few lines provide some basic information:</p>
 <ul class="simple">
-<li>Line 1: <a class="reference external" href="https://github.com/clojure/tools.nrepl">nREPL</a> is a service that allows you to connect to a repl using a remote client.</li>
-<li>Line 2: <a class="reference external" href="https://github.com/trptcolin/reply">REPL-y</a> is an alternative to the built-in REPL that has some nice features.</li>
+<li>Line 1: <a class="reference external" href="https://github.com/clojure/tools.nrepl" target="external">nREPL</a> is a service that allows you to connect to a repl using a remote client.</li>
+<li>Line 2: <a class="reference external" href="https://github.com/trptcolin/reply" target="external">REPL-y</a> is an alternative to the built-in REPL that has some nice features.</li>
 <li>Line 3: We're using Clojure 1.8.</li>
 <li>Line 4: This is the particular JVM in use.</li>
 </ul>
 <p>Line's 5 through 14 are some helpful forms and functions you can use inside the REPL.</p>
-<p>The <code>boot.user=&gt;</code> prompt tells us that we are in a special <a class="reference external" href="https://clojure.org/reference/namespaces">namespace</a>, set up for us by boot.</p>
+<p>The <code>boot.user=&gt;</code> prompt tells us that we are in a special <a class="reference external" href="https://clojure.org/reference/namespaces" target="external">namespace</a>, set up for us by boot.</p>
 <p>On line 15, we're doing a simple addition of some integers. When you press enter after typing some code, the result is printed below.</p>
-<p>On line 17, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the <a class="reference external" href="https://clojuredocs.org/clojure.repl/pst">pst</a> (<em>print stack trace</em>) form:</p>
+<p>On line 17, we illustrate what happens when there is a java exception. If you'd like to see the full stacktrace, you can use the <a class="reference external" href="https://clojuredocs.org/clojure.repl/pst" target="external">pst</a> (<em>print stack trace</em>) form:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -292,7 +290,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 <div class="section" id="a-simple-clojure-function">
 <h4>A Simple Clojure Function</h4>
-<p>Here's a simple Clojure function that prints the <a class="reference external" href="http://www.mathsisfun.com/numbers/fibonacci-sequence.html">Fibonacci sequence</a> to a given number of digits:</p>
+<p>Here's a simple Clojure function that prints the <a class="reference external" href="http://www.mathsisfun.com/numbers/fibonacci-sequence.html" target="external">Fibonacci sequence</a> to a given number of digits:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -313,17 +311,17 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
-<p>This is a basic clojure function definition. It uses <a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#multi-arity-functions">multiple airties</a>. This is how you provide multiple different ways to call the same function.</p>
+<p>This is a basic clojure function definition. It uses <a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#multi-arity-functions" target="external">multiple airties</a>. This is how you provide multiple different ways to call the same function.</p>
 <p>Note how on line 2 and line 4 we specify two different argument lists. The first is for calling the function the typical way (providing the maximum number of levels), the second is used for recursion - the <tt class="docutils literal">pair</tt> argument is a sequence containing the previous and current number in the sequence.</p>
 <ul class="simple">
 <li>Line 1: The opening of the function definition.</li>
 <li>Line 2: The first airty - one single argument named <tt class="docutils literal">n</tt>. The maximum number of levels.</li>
 <li>Line 3: Recursion - if only one argument is passed, call <tt class="docutils literal">fib</tt> again, but with 0 and 1 (the first numbers in the Fibonacci sequence) to get things started.</li>
 <li>Line 4: The second airty - two argunments: <tt class="docutils literal">pair</tt> a sequence containin two integers representing the previous and current numbers in the sequence, and <tt class="docutils literal">n</tt>, the maximum number of levels.</li>
-<li>Line 5: print the previous number to <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">standard out</a>. We're using the <a class="reference external" href="https://clojuredocs.org/clojure.core/print">print</a> function here to avoid adding a line break after the number so they'll all print to the console on the same line.</li>
-<li>Line 6: the <a class="reference external" href="https://clojuredocs.org/clojure.core/if">if</a> form  is used to check if we've hit the maximum number of levels yet. We subtract one from <tt class="docutils literal">n</tt> every iteration, so when it's equal to 1, it's time to stop.</li>
+<li>Line 5: print the previous number to <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)" target="external">standard out</a>. We're using the <a class="reference external" href="https://clojuredocs.org/clojure.core/print" target="external">print</a> function here to avoid adding a line break after the number so they'll all print to the console on the same line.</li>
+<li>Line 6: the <a class="reference external" href="https://clojuredocs.org/clojure.core/if" target="external">if</a> form  is used to check if we've hit the maximum number of levels yet. We subtract one from <tt class="docutils literal">n</tt> every iteration, so when it's equal to 1, it's time to stop.</li>
 <li>Line 7: <em>True condition.</em> Recurse, this time passing a vector containing the current number, and the sum of the current and previous number. The second parameter is the maximum level minus one.</li>
-<li>Line 8: <em>False condition.</em> The end of the requested sequence. Use the <a class="reference external" href="https://clojuredocs.org/clojure.core/println">println</a> function with no arguments to print a final line break.</li>
+<li>Line 8: <em>False condition.</em> The end of the requested sequence. Use the <a class="reference external" href="https://clojuredocs.org/clojure.core/println" target="external">println</a> function with no arguments to print a final line break.</li>
 </ul>
 </div>
 <p>You can paste this into your REPL and try it out:</p>
@@ -356,13 +354,13 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <span class="nv">Bye</span> <span class="nb">for </span><span class="nv">now!</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">You can copy the prompts along with the code, the REPL will ignore them.</p>
 </div>
 </div>
 <div class="section" id="boot-scripts">
 <h4>Boot Scripts</h4>
-<p>Boot also works as a <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">scripting platform</a> - you can construct applications, specifying dependencies, and parse command-line arguments.</p>
+<p>Boot also works as a <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts" target="external">scripting platform</a> - you can construct applications, specifying dependencies, and parse command-line arguments.</p>
 <p>We can transform that function into a command-line tool using the power of boot scripting. Assume this file is called <code>fib.boot</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -400,19 +398,19 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 <p>The primary differences betweent a boot script and the bare boot function we wrote earlier:</p>
 <ul class="simple">
-<li>A boot script is a shell script, and so it needs a line to indicate which interpreter is required to parse the contents. This is known as a <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> or 'hashbang' line. (Line 1.)</li>
+<li>A boot script is a shell script, and so it needs a line to indicate which interpreter is required to parse the contents. This is known as a <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)" target="external">shebang</a> or 'hashbang' line. (Line 1.)</li>
 <li>A boot script requires a <tt class="docutils literal"><span class="pre">-main</span></tt> function to be defined. This function is invoked by boot when the script is run. (Line 12.)</li>
 </ul>
 <p>The shebang line has to be a 'full' path (not relative) to the executable.</p>
 <p>In our shebang line, on line 1, we're using a (mostly) ubiquitous tool called <tt class="docutils literal">env</tt>, that looks for the given argument (<tt class="docutils literal">boot</tt>) in the directories specified in the <tt class="docutils literal">$PATH</tt> environment variable of the current user. This way, we don't have to hard code the location of the boot tool, since it can vary.</p>
 <p>For example,  in this article we've installed boot in <tt class="docutils literal">~/bin</tt>. In my case that expands to <tt class="docutils literal">/Users/jj/bin</tt>, but in yours, it might be <tt class="docutils literal">/home/joecool/bin</tt> or <tt class="docutils literal">/var/home/bethrulz</tt>. The location for home directories varies by operating system and more often than not, we will have different user names.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The <tt class="docutils literal">~</tt> shortcut for <tt class="docutils literal">$HOME</tt> is not expanded in shebang lines.</p>
 </div>
 <p>Or, you may have installed boot globally into <tt class="docutils literal">/usr/local/bin</tt> or any number of other possible system locations depending on a lot of factors. Using <tt class="docutils literal">env</tt> is a handy way to remove that complexity.</p>
 <p>Lines 3-10 are the same Fibonacci sequence we used before.</p>
-<p>Line 12 provides an <em>entry point</em>, a function that boot will invoke when the script is run. The name <tt class="docutils literal"><span class="pre">-main</span></tt> is required by boot. The argument list uses the <tt class="docutils literal">&amp;</tt> special form to collect a variable number of arguments into a single sequence named <tt class="docutils literal">args</tt> (a function that does this is called a <a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#variadic-functions">variadic function</a>).</p>
+<p>Line 12 provides an <em>entry point</em>, a function that boot will invoke when the script is run. The name <tt class="docutils literal"><span class="pre">-main</span></tt> is required by boot. The argument list uses the <tt class="docutils literal">&amp;</tt> special form to collect a variable number of arguments into a single sequence named <tt class="docutils literal">args</tt> (a function that does this is called a <a class="reference external" href="http://clojure-doc.org/articles/language/functions.html#variadic-functions" target="external">variadic function</a>).</p>
 <p>Boot passes the function a variable number of strings . Each string is text that was provided by the user in the console while invoking the script (typically referred to 'command-line arguments' or 'command-line options').</p>
 <p>For example, if an imaginary command-line tool called <tt class="docutils literal">boo</tt> is executed with "hello world, welcome to the thunder dome", like this:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> boo hello world, welcome to the thunder dome
@@ -428,16 +426,16 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </pre></div>
 <p>It's important to note that the shell can do other things with arguments that may be unexpected. The ins and outs of shells are outside the scope of this tutorial (and can vary from shell to shell), but here are a couple of common ones that might be useful or trip you up:</p>
 <ul class="simple">
-<li><strong>Glob Expansion.</strong> Shells help you out by replacing special patterns with matching filenames, so you can pass a bunch of paths to a command line tool without having to type them all out. <a class="reference external" href="https://en.wikipedia.org/wiki/Glob_(programming)">More info</a>.</li>
+<li><strong>Glob Expansion.</strong> Shells help you out by replacing special patterns with matching filenames, so you can pass a bunch of paths to a command line tool without having to type them all out. <a class="reference external" href="https://en.wikipedia.org/wiki/Glob_(programming)" target="external">More info</a>.</li>
 <li><strong>Environment Variable Expansion.</strong> Shells understand inline variables and will expand them before running your command line tool. Common useful environment variables include <tt class="docutils literal">$HOME</tt>, <tt class="docutils literal">$PATH</tt>, <tt class="docutils literal">$SHELL</tt>, and <tt class="docutils literal">$PWD</tt>.</li>
 <li><strong>Subshell Execution.</strong> Shells can execute commands for you and pass the results on to your command line script.</li>
 </ul>
-<p>Because of these things, it's good to be conscious of which characters are used to make use of these special features, and how to escape them so you don't get unexpected arguments passed to your scripts. This will vary depending on your shell - <a class="reference external" href="https://www.safaribooksonline.com/library/view/learning-the-bash/1565923472/ch01s09.html">take a look at a chapter from a book on learning bash</a> to get an idea of what you need to look out for.</p>
+<p>Because of these things, it's good to be conscious of which characters are used to make use of these special features, and how to escape them so you don't get unexpected arguments passed to your scripts. This will vary depending on your shell - <a class="reference external" href="https://www.safaribooksonline.com/library/view/learning-the-bash/1565923472/ch01s09.html" target="external">take a look at a chapter from a book on learning bash</a> to get an idea of what you need to look out for.</p>
 <p>On line 13, we extract the first member of <tt class="docutils literal">args</tt> to pass as the maximum number of Fibonacci iterations.</p>
 <p>Line 14 prints some informatio to the user to let them know what's going on.</p>
 <p>On line 15, the <tt class="docutils literal">fib</tt> is finally executed, passing the limit provided by the user on the command line.</p>
 <p>We need to convert the limit to an integer for use by our <tt class="docutils literal">fib</tt> function. This is accomplished using the Java <tt class="docutils literal">Integer.ParseInt()</tt> function.</p>
-<p>It may seem odd that we invoke a Java function here, but this is common practice in Clojure, since we are usually running on the JVM. It's referred to as <a class="reference external" href="https://clojure.org/reference/java_interop">Java interop</a>.</p>
+<p>It may seem odd that we invoke a Java function here, but this is common practice in Clojure, since we are usually running on the JVM. It's referred to as <a class="reference external" href="https://clojure.org/reference/java_interop" target="external">Java interop</a>.</p>
 </div>
 <p>Next, we make the script executable:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> chmod u+x fib.boot
@@ -446,7 +444,7 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <h5>Explanation</h5>
 <div class="docutils container">
 </div>
-<p>We're again utilizing the <tt class="docutils literal">chmod</tt> command to make a file executable. Here, we use the shorthand mode specification (see the man page <a class="reference external" href="https://linux.die.net/man/1/chmod">online</a> or you can type <tt class="docutils literal">man chmod</tt> in your console for specifics), instead of using octal numbers (like <tt class="docutils literal">755</tt>).</p>
+<p>We're again utilizing the <tt class="docutils literal">chmod</tt> command to make a file executable. Here, we use the shorthand mode specification (see the man page <a class="reference external" href="https://linux.die.net/man/1/chmod" target="external">online</a> or you can type <tt class="docutils literal">man chmod</tt> in your console for specifics), instead of using octal numbers (like <tt class="docutils literal">755</tt>).</p>
 <p><tt class="docutils literal">u+x</tt> means "<em>add</em> whatever bits are necessary to allow the <strong>u</strong>ser to e<strong>x</strong>ecute this file". This leaves any other bits untouched.</p>
 </div>
 <p>Now you can run the script:</p>
@@ -459,16 +457,16 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </td></tr></table></div></div>
 <div class="section" id="dependencies">
 <h4>Dependencies</h4>
-<p>The script can declare dependencies, which will be downloaded as needed when the script is run. Here, we'll show the use of an external dependency: we can write a new Fibonacci sequence that exploits an the fact that numbers in the sequence are related to each other by approximately the <a class="reference external" href="http://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a> (ca 1.62), as noted by Kepler, and derived from <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula">Binets Formula</a>.</p>
+<p>The script can declare dependencies, which will be downloaded as needed when the script is run. Here, we'll show the use of an external dependency: we can write a new Fibonacci sequence that exploits an the fact that numbers in the sequence are related to each other by approximately the <a class="reference external" href="http://en.wikipedia.org/wiki/Golden_ratio" target="external">golden ratio</a> (ca 1.62), as noted by Kepler, and derived from <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula" target="external">Binets Formula</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio">Wikipedia page</a> is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.</p>
+<h2 class="first admonition-title">Note</h2>
+<p>I'm not a maths scholar, so I may have the specifics and credit a bit wrong. The <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_number#Relation_to_the_golden_ratio" target="external">Wikipedia page</a> is a bit thin on specific references for the use of the golden ratio and rounding to calculate one Fibonacci number using another.</p>
 <p class="last">If you happen upon this and can shed some light on the subject, please <a class="reference external" href="/pages/contact.html">drop me a line</a>!</p>
 </div>
-<p>Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called <a class="reference external" href="https://github.com/clojure/math.numeric-tower">math.numeric-tower</a>.</p>
+<p>Rounding makes it all work, but rounding isn't "baked in" to Clojure, so we'll use an external library to do it for us, called <a class="reference external" href="https://github.com/clojure/math.numeric-tower" target="external">math.numeric-tower</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In actuality, the required functionality is present, you just need to use some <a class="reference external" href="http://stackoverflow.com/a/25098576">existing Java libraries</a> to make it work. I admit this is a bit of a strain, but it illustrates the use of external dependencies in boot.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">In actuality, the required functionality is present, you just need to use some <a class="reference external" href="http://stackoverflow.com/a/25098576" target="external">existing Java libraries</a> to make it work. I admit this is a bit of a strain, but it illustrates the use of external dependencies in boot.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -527,27 +525,27 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <div class="docutils container">
 </div>
 <p>Line 3 illustrates how to add a dependency to a boot script.</p>
-<p>Boot has the concept of an <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment">environment</a>. The environment represents the current working environment of the JVM during the execution of boot scripts or tasks.</p>
+<p>Boot has the concept of an <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment" target="external">environment</a>. The environment represents the current working environment of the JVM during the execution of boot scripts or tasks.</p>
 <p>On Line 3 we manipulate the environment using the <tt class="docutils literal"><span class="pre">set-env!</span></tt> function.</p>
 <p>Note that this function ends with an exclamation point (!), or <em>bang</em>. Data structures in Clojure are not normally <em>mutable</em> (they can't be changed, only transformed into new ones). But in some cases it's required. So clojurists have established a convention to suffix a function name with an exclamation point to indicate that the function mutates data, or otherwise has side effects.</p>
 <p>The environment is represented as a mapping, and so we use symbols to access and change its members. The <tt class="docutils literal">:dependencies</tt> key tells boot which libraries to look for.</p>
-<p>Dependencies are first sourced from <a class="reference external" href="https://clojars.org/">clojars</a>, then the <a class="reference external" href="https://maven.apache.org/repository/">Maven central repository</a>.</p>
-<p>The format for specifying dependencies is the same that <a class="reference external" href="https://leiningen.org/">Leiningen</a> uses - a vector containing a package specifier (often containing an organizational part, like <tt class="docutils literal">org.clojure</tt> in our script), and a version. Clojars uses <a class="reference external" href="https://semver.org/">semantic versioning</a>, so there are 3 numbers: a major revision (breaks existing APIs), a feature revision (API stays the same), and patch revision (for non-breaking bug fixes).</p>
-<p>Note that the list of dependencies is behind a <a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote">var quote</a>.</p>
-<p>On line 5, the library is brought into our namespace using <a class="reference external" href="https://clojuredocs.org/clojure.core/require">require</a>. (For more information about namespaces and libraries, <em>Clojure For The Brave and True</em>'s <a class="reference external" href="https://www.braveclojure.com/organization/">organization</a> chapter goes into some great detail. We've used the <tt class="docutils literal">:refer</tt> parameter to just import one function, <tt class="docutils literal">round</tt>.</p>
+<p>Dependencies are first sourced from <a class="reference external" href="https://clojars.org/" target="external">clojars</a>, then the <a class="reference external" href="https://maven.apache.org/repository/" target="external">Maven central repository</a>.</p>
+<p>The format for specifying dependencies is the same that <a class="reference external" href="https://leiningen.org/" target="external">Leiningen</a> uses - a vector containing a package specifier (often containing an organizational part, like <tt class="docutils literal">org.clojure</tt> in our script), and a version. Clojars uses <a class="reference external" href="https://semver.org/" target="external">semantic versioning</a>, so there are 3 numbers: a major revision (breaks existing APIs), a feature revision (API stays the same), and patch revision (for non-breaking bug fixes).</p>
+<p>Note that the list of dependencies is behind a <a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote" target="external">var quote</a>.</p>
+<p>On line 5, the library is brought into our namespace using <a class="reference external" href="https://clojuredocs.org/clojure.core/require" target="external">require</a>. (For more information about namespaces and libraries, <em>Clojure For The Brave and True</em>'s <a class="reference external" href="https://www.braveclojure.com/organization/" target="external">organization</a> chapter goes into some great detail. We've used the <tt class="docutils literal">:refer</tt> parameter to just import one function, <tt class="docutils literal">round</tt>.</p>
 <p>On line 7, we pre-calculate the golden ratio and define a variable named <tt class="docutils literal">phi</tt> (the greek letter phi [&phi;] is used to represent the golden ratio in equations).</p>
 <p>Lines 9-19 define our new, golden ratio-based Fibonacci sequence function. It performs basically the same way, except that it's single-airity.</p>
 <p>Some interesting concepts introduced in this new function:</p>
 <ul class="simple">
-<li>This is not a recursive function in the usual sense. Instead, we use the <tt class="docutils literal">loop</tt> function and <tt class="docutils literal">recur</tt> macro. This is the way looping (like you'd use <tt class="docutils literal">for</tt> or <tt class="docutils literal">while</tt> in other languages) works in Clojure. For more details on how they work, check out <a class="reference external" href="https://clojurebridge.github.io/community-docs/docs/clojure/recur/">this ClojureBridge article</a>.</li>
+<li>This is not a recursive function in the usual sense. Instead, we use the <tt class="docutils literal">loop</tt> function and <tt class="docutils literal">recur</tt> macro. This is the way looping (like you'd use <tt class="docutils literal">for</tt> or <tt class="docutils literal">while</tt> in other languages) works in Clojure. For more details on how they work, check out <a class="reference external" href="https://clojurebridge.github.io/community-docs/docs/clojure/recur/" target="external">this ClojureBridge article</a>.</li>
 <li>On line 11, we use <tt class="docutils literal">do</tt> to group multiple expressions (printing and recursing) into a single branch of an <tt class="docutils literal">if</tt>. This comes in handy a lot, but be careful not to overuse it - if you are doing too much in a conditional branch, it may be better to factor that code out into its own function.</li>
 <li>On line 14 and 17, we use <tt class="docutils literal">str</tt> to concatenate our Fibonacci numbers and some spaces. Core Clojure doesn't have string "math" or interpolation features.</li>
 </ul>
 <p>On lines 22 and 23, we process the command line argument. Variables that are unpacked by <tt class="docutils literal">let</tt> are processed in order, so we can refer to them right away. We take advantage of this to first extract the argument on line 22, then provide a sane default (10) in the event that the user didn't provide a value. We also go ahead and convert the argument to an integer using Java interop as we did in the previous version.</p>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>We've added a sane default for the single command-line argument, but otherwise aren't doing any input validation. We'll address this in a shallow way in the next section, when we use Boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">argument DSL</a>, but it's always something to keep in mind.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>We've added a sane default for the single command-line argument, but otherwise aren't doing any input validation. We'll address this in a shallow way in the next section, when we use Boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">argument DSL</a>, but it's always something to keep in mind.</p>
 <p>As such, the current script doesn't handle:</p>
 <blockquote class="last">
 <ul class="simple">
@@ -569,8 +567,8 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <span class="go">0 1 1 2 3 5 8 13 21 34</span>
 </pre></div>
 </td></tr></table></div><p>The syntax to parse our command line options can be a bit tedious and we will often run into the same patterns over and over, like "flags" (true/false toggles like <tt class="docutils literal"><span class="pre">-n</span></tt> or <tt class="docutils literal"><span class="pre">--without-module-x</span></tt>), collected values (like passing <tt class="docutils literal"><span class="pre">-vvv</span></tt> to increase verbosity), even complex subcommands (like <tt class="docutils literal">git merge</tt>).</p>
-<p>Luckily, we can borrow a macro from boot.core that lets us specify CLI options using a robust syntax. For the full syntax, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">the documentation</a>.</p>
-<p>Here, we'll let the user choose which implementation they'd like to use, and utilize the task <a class="reference external" href="http://martinfowler.com/books/dsl.html">DSL</a> to do some simple command line options:</p>
+<p>Luckily, we can borrow a macro from boot.core that lets us specify CLI options using a robust syntax. For the full syntax, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">the documentation</a>.</p>
+<p>Here, we'll let the user choose which implementation they'd like to use, and utilize the task <a class="reference external" href="http://martinfowler.com/books/dsl.html" target="external">DSL</a> to do some simple command line options:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -659,15 +657,15 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 <p>On line 6, we require the boot command line utility <tt class="docutils literal">boot.cli</tt>. We pass the <tt class="docutils literal">:as</tt> parameter to <tt class="docutils literal">require</tt> in order to give the library a different name in our namespace. We do this just to keep things a bit more tidy (and illustrate this feature!).</p>
 <p>The <tt class="docutils literal"><span class="pre">-main</span></tt> function on line 30 is chiefly the same, except that we use the <tt class="docutils literal">defclifn</tt> macro from <tt class="docutils literal">boot.cli</tt> instead of the special <tt class="docutils literal">defn</tt> form.</p>
 <p>The string on line 31 will be used in the usage description when the user provides the <tt class="docutils literal"><span class="pre">-h</span></tt> command line argument.</p>
-<p>The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the "option DSL" that is discussed in <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">the documentation</a>.</p>
+<p>The major difference besides using the macro, is in the argument specification on lines 32 and 33. This is the "option DSL" that is discussed in <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">the documentation</a>.</p>
 <p>The command line arguments are extracted and used to populate a special <tt class="docutils literal">*opts*</tt> map that will be automatically in scope of your function.</p>
 <p>Line 32 defines a <em>boolean</em> command line argument, or a <em>flag</em>. If the argument is provided, the value will be <tt class="docutils literal">true</tt>, otherwise, it will be <tt class="docutils literal">false</tt>. We are using this argument to let the user change algorithms used to generate their requested Fibonacci sequence.</p>
 <p>The first value is the "short form" of the option, <tt class="docutils literal"><span class="pre">-g</span></tt>. The second is the "long form" <tt class="docutils literal"><span class="pre">--golden</span></tt> and also the name of the argument in the <tt class="docutils literal">*opts*</tt> map (without the dashes). Next we specify the type of the argument, <tt class="docutils literal">bool</tt>, short for <em>boolean</em>, or a true/false value. The <tt class="docutils literal">defclifn</tt> macro will convert the string value from the command line arguments into a boolean. Finally, we provide a string that will be used to tell the user what sort of value we're expecting in the usage output.</p>
 <p>On the next line, we define another command-line option, this time one that takes a value. This is how the user will tell us how many numbers to generate.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>Due to how boot uses the CLI macro, it does not support <em>positional</em> arguments, like we used in our earlier scripts.</p>
-<p class="last">However another tool, like <a class="reference external" href="https://github.com/clojure/tools.cli">tools.cli</a> serves a similar purpose and has positional argument support, but is not as nice of an interface.</p>
+<p class="last">However another tool, like <a class="reference external" href="https://github.com/clojure/tools.cli" target="external">tools.cli</a> serves a similar purpose and has positional argument support, but is not as nice of an interface.</p>
 </div>
 <p>In this case, we use <tt class="docutils literal"><span class="pre">-n</span></tt> as the short form, <tt class="docutils literal"><span class="pre">--number</span></tt> as the name/long form, and <tt class="docutils literal">int</tt> as the type. The next form is used as the placeholder when printing the usage information.</p>
 <p>The last differences of note are on line 34 and 35.</p>
@@ -784,19 +782,19 @@ the Microsoft .Net Common Languge Runtime (CLR). There are platform-specific nua
 </div>
 <p>Our module is identical to our boot script, except for the following:</p>
 <ul class="simple">
-<li>On line 1 we declare a <a class="reference external" href="https://clojure.org/reference/namespaces">namespace</a> (<a class="reference external" href="https://www.braveclojure.com/organization/">more info</a>). <tt class="docutils literal">ns</tt> allows us to bring in libraries using the <tt class="docutils literal">:require</tt> parameter (line 2). The syntax is just like the <tt class="docutils literal">require</tt> function, except that you don't have to prefix the module name with a <a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote">var quote</a>.</li>
+<li>On line 1 we declare a <a class="reference external" href="https://clojure.org/reference/namespaces" target="external">namespace</a> (<a class="reference external" href="https://www.braveclojure.com/organization/" target="external">more info</a>). <tt class="docutils literal">ns</tt> allows us to bring in libraries using the <tt class="docutils literal">:require</tt> parameter (line 2). The syntax is just like the <tt class="docutils literal">require</tt> function, except that you don't have to prefix the module name with a <a class="reference external" href="https://clojure.org/guides/weird_characters#__code_code_var_quote" target="external">var quote</a>.</li>
 </ul>
-<p>We use the <tt class="docutils literal"><span class="pre">:gen-class</span></tt> parameter to tell clojure to generate proper Java classes for our namespace when compiling. This allows us to use our compiled jar file like any old Java jar. <a class="reference external" href="https://clojure.org/reference/compilation">More info</a>.</p>
+<p>We use the <tt class="docutils literal"><span class="pre">:gen-class</span></tt> parameter to tell clojure to generate proper Java classes for our namespace when compiling. This allows us to use our compiled jar file like any old Java jar. <a class="reference external" href="https://clojure.org/reference/compilation" target="external">More info</a>.</p>
 </div>
 <p>To build our jar, there are a handful of steps:</p>
 <ol class="arabic simple">
 <li>Download our dependencies.</li>
-<li>Compile our clojure code ahead of time (aka <a class="reference external" href="http://clojure.org/compilation">AOT</a>).</li>
-<li>Add a <a class="reference external" href="http://maven.apache.org/pom.html">POM</a> file describing our project and the version.</li>
+<li>Compile our clojure code ahead of time (aka <a class="reference external" href="http://clojure.org/compilation" target="external">AOT</a>).</li>
+<li>Add a <a class="reference external" href="http://maven.apache.org/pom.html" target="external">POM</a> file describing our project and the version.</li>
 <li>Scan all of our dependencies and add them to the fileset to be put into the jar.</li>
 <li>Build the jar, specifying a module containing a -main function to run when the jar is invoked.</li>
 </ol>
-<p>Helpfully, boot provides built-in functionality to do this for us. Each step is implemented as a boot <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Tasks">task</a>. Tasks act as a pipeline: the result of each can influence the next.</p>
+<p>Helpfully, boot provides built-in functionality to do this for us. Each step is implemented as a boot <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Tasks" target="external">task</a>. Tasks act as a pipeline: the result of each can influence the next.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -864,7 +862,7 @@ Writing target dir(s)...
 </pre></div>
 </td></tr></table></div><p>You can send this file to a friend, and they can use it too.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">At time of writing, the <tt class="docutils literal"><span class="pre">-h</span></tt> flag, that usually displays help info, is not working in the jar file. I think it's because the <tt class="docutils literal">java</tt> command is "swallowing" it.</p>
 </div>
 </div>
@@ -898,7 +896,7 @@ Writing target dir(s)...
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
-<p><tt class="docutils literal">build.boot</tt> is analogous to a <tt class="docutils literal">Makefile</tt> or <a class="reference external" href="https://ant.apache.org/">Apache Ant</a> build file - it acts a a robust configuration file with declarative syntax that tells the build tools what to do.</p>
+<p><tt class="docutils literal">build.boot</tt> is analogous to a <tt class="docutils literal">Makefile</tt> or <a class="reference external" href="https://ant.apache.org/" target="external">Apache Ant</a> build file - it acts a a robust configuration file with declarative syntax that tells the build tools what to do.</p>
 <p><tt class="docutils literal"><span class="pre">set-env!</span></tt> was introduced earlier, here's the new concepts introduced:</p>
 <ul>
 <li><p class="first">We have to specify the precise versions of our dependencies here - this might seem tedious, but it's best to <em>always</em> do this, even with things we take for granted like clojure itself and boot. This way, our code will always be explicitly telling any users which versions its compatible with, and we won't get any surprises.</p>
@@ -912,7 +910,7 @@ Writing target dir(s)...
 <span class="go">BOOT_VERSION=2.7.2</span>
 </pre></div>
 </li>
-<li><p class="first">The <tt class="docutils literal"><span class="pre">:source-paths</span></tt> setting is using a neat built-in data structure called a <a class="reference external" href="https://clojure.org/reference/data_structures#Sets">hash set</a>. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.</p>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">:source-paths</span></tt> setting is using a neat built-in data structure called a <a class="reference external" href="https://clojure.org/reference/data_structures#Sets" target="external">hash set</a>. It's a clever way of handling a sequence of values that come from multiple sources but need to be unique - the data structure handles duplicates transparently so you don't have to think about it. This comes at a slight performance cost in most cases (compared to a hashmap or "dumb" sequence like an array or vector), but it also adds some interesting features like efficient unions and diffs.</p>
 </li>
 <li><p class="first">On line 7, we use the <tt class="docutils literal"><span class="pre">task-options!</span></tt> macro to take the place of specifying task options on the command line. The keys for each setting correspond to the "long form" of the given option. You can see these using the built-in help:</p>
 <blockquote>
@@ -936,7 +934,7 @@ Writing target dir(s)...
 <span class="go">  -D, --dependencies SYM:VER   Conj [SYM VER] onto the project dependencies vector (overrides boot env dependencies).</span>
 </pre></div>
 <p>As you can see, the <tt class="docutils literal"><span class="pre">-v</span></tt> parameter corresponds to <tt class="docutils literal"><span class="pre">--version</span></tt>, and <tt class="docutils literal"><span class="pre">-p</span></tt> to <tt class="docutils literal"><span class="pre">--project</span></tt>. Hence we use <tt class="docutils literal">:version</tt> and <tt class="docutils literal">:project</tt> in <tt class="docutils literal"><span class="pre">task-options!</span></tt>.</p>
-<p>You will have to use a little intutition to figure out what <em>data type</em> the command wants, or you can always look at <a class="reference external" href="https://github.com/boot-clj/boot/blob/de1b9876b4485b23b25614dd4b4a528d0931ccda/boot/core/src/boot/task/built_in.clj#L534">the source</a>:</p>
+<p>You will have to use a little intutition to figure out what <em>data type</em> the command wants, or you can always look at <a class="reference external" href="https://github.com/boot-clj/boot/blob/de1b9876b4485b23b25614dd4b4a528d0931ccda/boot/core/src/boot/task/built_in.clj#L534" target="external">the source</a>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1058,14 +1056,14 @@ Writing target dir(s)...
 <ul class="simple">
 <li>Use boot instead of a "typical" scripting language for systems automation.</li>
 <li>Distribute single <code>.boot</code> files containing entire applications.</li>
-<li>Build WAR files and use other <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Community-Tasks">boot tasks provided by the community</a>to do all sorts of cool things, like <a class="reference external" href="https://github.com/mathias/boot-sassc">compile SASS     templates</a> and <a class="reference external" href="https://github.com/adzerk/boot-beanstalk">deploy to Amazon Elastic Beanstalk</a>.</li>
-<li>Write your own, specialized tasks to help streamline complex build     processes - boot can replace (or augment) tools like     <a class="reference external" href="http://ant.apache.org/">ant</a> and     <a class="reference external" href="http://www.gnu.org/software/make/">make</a>.</li>
+<li>Build WAR files and use other <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Community-Tasks" target="external">boot tasks provided by the community</a>to do all sorts of cool things, like <a class="reference external" href="https://github.com/mathias/boot-sassc" target="external">compile SASS     templates</a> and <a class="reference external" href="https://github.com/adzerk/boot-beanstalk" target="external">deploy to Amazon Elastic Beanstalk</a>.</li>
+<li>Write your own, specialized tasks to help streamline complex build     processes - boot can replace (or augment) tools like     <a class="reference external" href="http://ant.apache.org/" target="external">ant</a> and     <a class="reference external" href="http://www.gnu.org/software/make/" target="external">make</a>.</li>
 </ul>
 </div>
 </div>
 <div class="section" id="appendix-alternative-install-methods">
 <h2 id="appendix: alternative install methods">Appendix: Alternative Install Methods</h2>
-<p>Recent versions of boot are now available for homebrew, nix, and docker. More details <a class="reference external" href="https://github.com/boot-clj/boot#install">here</a>.</p>
+<p>Recent versions of boot are now available for homebrew, nix, and docker. More details <a class="reference external" href="https://github.com/boot-clj/boot#install" target="external">here</a>.</p>
 </div>
 </div><!-- /.entry-content -->
 </section>

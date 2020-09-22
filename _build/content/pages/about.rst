@@ -135,7 +135,7 @@ Copyright, License, Etc
 =======================
 Copyright
 ---------
-All contents are |copyright| 2019 Josh Johnson. All rights are reserved.
+All contents are |copyright| 2020 Josh Johnson. All rights are reserved.
 
 I keep a listing of content from 3rd parties on `my media sources page <{filename}/pages/image-sources.rst>`__.
 

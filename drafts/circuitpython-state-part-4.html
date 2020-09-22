@@ -12,8 +12,6 @@
 <meta content="State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 4: Polymorphism And Analog Events - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -78,7 +76,7 @@
 <p>In this part, we explore tracking state for analog inputs, and dig into more object-oriented features, particularly <em>polymorphism</em>: method overriding, and class inheritance.</p>
 <p>As a bonus, we'll explore a few interesting things about <em>voltage dividers</em>, a super useful electronic circuit. 🦄</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Since we're pretty deep into the series now, I've set up a <a class="reference external" href="/pages/circuitpython-state.html">landing page</a> 💖. Check it out if you'd like to catch up or review previous installments.</p>
 </div>
 <!-- PELICAN_END_SUMMARY -->
@@ -116,7 +114,7 @@
 <li>Then, we <strong>assess</strong> real life.</li>
 <li>Next, we <strong>reconsider</strong> the state values.</li>
 <li>Finally, we <strong>reconcile</strong> the state values with real life again.</li>
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Lather,_rinse,_repeat">Lather, rinse, and repeat</a> (or <em>assess</em>, <em>reconsider</em>, <em>reconcile</em> and <em>loop</em>) 😀 .</li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Lather,_rinse,_repeat" target="external">Lather, rinse, and repeat</a> (or <em>assess</em>, <em>reconsider</em>, <em>reconcile</em> and <em>loop</em>) 😀 .</li>
 </ul>
 </div>
 <div class="section" id="how-do-we-model-state">
@@ -132,7 +130,7 @@
 <li>Classes are <strong>encapsulated</strong>, so we can keep all of our state processing code with our state data, and out of the way of our other code.</li>
 </ul>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">In this installment of the series, we'll dig into some of the more advanced things you can do with classes in Python. When we start utilizing these aspects, classes really start to shine. 🦄</p>
 </div>
 </div>
@@ -152,7 +150,7 @@
 <p><strong>TODO: Picture of the CPX's sensors here</strong></p>
 <p>For the other boards, we'll need to add the new sensors to our existing demo circuit. We'll use a standard epoxy-coated <em>thermistor</em>, and a CdS-type <em>photoresistor</em> (aka photocell). We'll also need a resistor for each one.</p>
 <p>I bought these components from the Adafruit shop. Any comparable thermistor and photoresistor (photocell) should work. You may just need to use different values in the software, and/or use different companion resistors when you wire them up.</p>
-<p>We're also going to do a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Voltage_divider">voltage divider circuit</a>. It's optional, since it's just for demonstration, but recommended.</p>
+<p>We're also going to do a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Voltage_divider" target="external">voltage divider circuit</a>. It's optional, since it's just for demonstration, but recommended.</p>
 <p>Here's a parts list:</p>
 <blockquote>
 <ul class="simple">
@@ -179,9 +177,9 @@
 <li>An additional 10K ohm resistor.</li>
 </ul>
 </blockquote>
-<p>I've put together a <a class="reference external" href="https://www.adafruit.com/wishlists/472992">wishlist @ Adafruit</a> with everything new that you will need.</p>
+<p>I've put together a <a class="reference external" href="https://www.adafruit.com/wishlists/472992" target="external">wishlist @ Adafruit</a> with everything new that you will need.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>🤔 Here are some notes about why I chose these particular sensors, and why we're introducing them at this point in the series:</p>
 <ul class="last simple">
 <li>I want to explore tracking something in state besides boolean (<tt class="docutils literal">True</tt>/<tt class="docutils literal">False</tt>) values. These analog sensors produce a steady stream of data, and so they are great for this. There's a really good chance you will get variations with every read, and it helps illustrate how using our state model to control the sampling rate helps make a more stable project.</li>
@@ -189,7 +187,7 @@
 <li>Analog devices tend to be simpler, so they're easier to reason about. When you use a digital version of a sensor, a lot of the electronics are hidden from you. This is great when you want a simple solution, but you won't learn as much, and so I like that using these devices forces us to think about basic electronics and practice our electronic theory a little bit.</li>
 <li>Both sensors are built-in to the CircuitPlayground Express, so they're already available if you are using that board (and that is still <strong>highly recommended</strong> 💖 )</li>
 <li>If you aren't using the CircuitPlayground Express, as we'll see in the demo circuits below, they are cheap, easy to obtain, and simple to wire up.</li>
-<li>Both kinds of sensors have good documentation and support in CircuitPython. There's even a nice <a class="reference external" href="https://circuitpython.readthedocs.io/projects/thermistor/en/latest/api.html">library</a> for reading thermistors available.</li>
+<li>Both kinds of sensors have good documentation and support in CircuitPython. There's even a nice <a class="reference external" href="https://circuitpython.readthedocs.io/projects/thermistor/en/latest/api.html" target="external">library</a> for reading thermistors available.</li>
 <li>The two sensors we're using are similar in that they're both resistive components, yet they work with different values and have different levels of sensitivity. This is good to help drive home the core ideas about state and how we can generalize our thinking of it to write better code. 🦄</li>
 <li>Finally, in this part of the series, we're going to explore some more object-oriented concepts, chiefly <em>polymorphism</em>. It's helpful to see how we can consolidate code for many different kinds of inputs into a single base class (lots more on that in the next section!). So having lots of similar, yet different components helps to explain, in practical terms, these somewhat obtuse concepts.</li>
 </ul>
@@ -198,19 +196,19 @@
 <h3>Our New Sensors: The Basics</h3>
 <p>As mentioned, these components are <em>resistive</em>: their resistance changes as the thing they are sensing (heat, light), changes.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>For in-depth discussion about how to use and test these components, check out the following tutorials:</p>
 <ul class="last simple">
-<li><a class="reference external" href="https://learn.adafruit.com/photocells/overview">CdS Cells, Photoresistors, &amp; Light Dependent Resistors (LDR)</a></li>
-<li><a class="reference external" href="https://learn.adafruit.com/thermistor/">Thermistor - Measure temperature using a resistor!</a></li>
+<li><a class="reference external" href="https://learn.adafruit.com/photocells/overview" target="external">CdS Cells, Photoresistors, &amp; Light Dependent Resistors (LDR)</a></li>
+<li><a class="reference external" href="https://learn.adafruit.com/thermistor/" target="external">Thermistor - Measure temperature using a resistor!</a></li>
 </ul>
 </div>
 <p>We use the variable resistance to measure how much light or heat we're detecting. We can't detect variable resistance with our microcontrollers. We can, however, detect variable <strong>voltage</strong>. Resistors act to limit voltage. If we connect our variable resistor (thermistor, photocell) to a known voltage, as the resistance of the sensor changes, so will the voltage running through it. The voltage will vary in a consistent way, directly in line with the resistance of the sensor, as it reacts to whatever is stimulating it (again, heat or light). To read a variable voltage, we can use an analog input. Our M0/M4 boards allow us to configure analog inputs on <em>any pin</em>. So we have plenty of pins to work with.</p>
 <p>There is one other component we need to make this work: a <em>fixed</em> resistor (also known as "a regular garden-variety resistor"). The two resistors act in consort to provide a consistent voltage to our analog input.</p>
 <p>When you use two resistors in this manner, you create what's called a <em>voltage divider</em>. This is a special circuit that uses resistance to lower an input voltage. Typically, they aren't variable, and are used when you need to lower the voltage coming from (usually) a foreign source, or sending a signal to one. For example, in the recent past, I've used them to read a 5 volt signal (I needed to drop it down to less than 3.3 volts so my M0 board wouldn't be damaged by it) from an ultrasonic range finder, and to send a 1.5 volt signal to the "hot shoe" on a camera so it would know my project was connected to it. They are a very useful and simple circuit! 🦄</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Sparkfun has a great <a class="reference external" href="https://learn.sparkfun.com/tutorials/voltage-dividers/all">voltage divider tutorial</a> if you'd like to dig into the theory and math behind this.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Sparkfun has a great <a class="reference external" href="https://learn.sparkfun.com/tutorials/voltage-dividers/all" target="external">voltage divider tutorial</a> if you'd like to dig into the theory and math behind this.</p>
 </div>
 <p>A basic voltage divider consists of an input voltage, and two resistors. One is tied to ground, the other to the input voltage, and if you tap into the circuit between the two, you will get a voltage relative to the resistance of the two resistors.</p>
 <p>To illustrate this, lets build a quick voltage divider and show the voltage changing by using a multimeter.</p>
@@ -218,15 +216,15 @@
 <p><strong>TODO: Photo of voltage divider circuit using the trinket M0</strong></p>
 <p>You can see that we've got one 10K resistor going to ground, and the other going to the positive voltage rail. We've connected the power rails to the <tt class="docutils literal">usb</tt> pin, which gives us 5 volts from the USB port. I've chosen to use this power supply because when you use 2 10K resistors with 5 volts, you will get about 2.5 volts from your divider. It's a nice demonstration of literally dividing the voltage in half. It's also useful for reading 5 volt inputs on 3.3 volt boards, so it's nice to have in your repertoire.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>This particular circuit, using 2 10K resistors is a useful setup if you have to read from a 5 volt sensor on a 3.3 volt input, like the ones in our M0/M4 boards. 2.5 volts low enough to protect the microcontroller from damage, but high enough for the microcontroller to detect. Most older components, and most things built for Arduino, will communicate in 5 volt bursts.</p>
 <p>The voltage used for communication is referred to as the <em>logic level</em>. Most Arduinos have a <em>5 volt logic level</em>, and our CircuitPython boards have a <em>3.3 volt logic level</em>.</p>
 <p>A voltage divider is the simplest way to be able to use sensors with 5-volt logic on our 3.3 volt boards.</p>
 <p>We can also use integrated circuits called "logic level shifters" to do the same thing.</p>
-<p class="last">Both approaches have their use cases. Sparkfun has a <a class="reference external" href="https://learn.sparkfun.com/tutorials/logic-levels/all">nice overview</a> of the science behind these terms.</p>
+<p class="last">Both approaches have their use cases. Sparkfun has a <a class="reference external" href="https://learn.sparkfun.com/tutorials/logic-levels/all" target="external">nice overview</a> of the science behind these terms.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>We're using the Trinket M0 for this, but we're <em>only</em> using its power regulator. Any 5v power supply would work, just note that the pin may be marked <tt class="docutils literal">vout</tt> on some of the M0 boards like the CircuitPlayground Express and GEMMA M0.</p>
 <p><strong>TODO: photo of the Vout pads on the GEMMA and CPX</strong></p>
 <p>The power regulators in these Adafruit boards are very good, but you may want to use a separate power supply to reduce the risk of damaging your boards when you are experimenting with circuits like this.</p>
@@ -237,8 +235,8 @@
 <p>We'll need to set our multimeter to the "voltage" setting, and unless you have an "auto-ranging" multimeter, you'll have to choose a scale that 2.5-5 volts will fit within. On mine, it's the <tt class="docutils literal">20</tt> mark:</p>
 <p><strong>TODO: photo of settings on the multimeter</strong></p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you are new to multimeters, Adafruit has a <a class="reference external" href="https://learn.adafruit.com/multimeters/">nice tutorial</a> you should check out.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">If you are new to multimeters, Adafruit has a <a class="reference external" href="https://learn.adafruit.com/multimeters/" target="external">nice tutorial</a> you should check out.</p>
 </div>
 <p>Now, lets test the power rails to make sure we know our starting voltage is correct. Make sure your board is plugged in to a USB port (computer or wall adapter will work). Then place the black, negative probe on the blue negative rail, and the red, positive probe on the red, positive rail, like this:</p>
 <p><strong>TODO: photo of multimeter probes on the breadboard. Closeup of output</strong></p>
@@ -261,19 +259,19 @@
 <div class="section" id="gemma-m0">
 <h3>GEMMA M0</h3>
 <p>Being a super compact board, the GEMMA doesn't have enough pins (pads) for us to wire up both sensors and both buttons. We've only got three pins available in total. Any of them can be analog or digital inputs, but we will need four inputs for both buttons and sensors.</p>
-<p>We could use something like the <a class="reference external" href="https://learn.adafruit.com/adafruit-seesaw-atsamd09-breakout">Adafruit SeeSaw</a>, or any other sort of I2C port expander - the GEMMA supports I2C pretty well, just bear in mind that using I2C means giving up two pins, so whatver you choose has to provide whatever sort of inputs you need (in our case, something like the SeeSaw is ideal because it gives us enough analog <em>and</em> digital pins for our project).</p>
+<p>We could use something like the <a class="reference external" href="https://learn.adafruit.com/adafruit-seesaw-atsamd09-breakout" target="external">Adafruit SeeSaw</a>, or any other sort of I2C port expander - the GEMMA supports I2C pretty well, just bear in mind that using I2C means giving up two pins, so whatver you choose has to provide whatever sort of inputs you need (in our case, something like the SeeSaw is ideal because it gives us enough analog <em>and</em> digital pins for our project).</p>
 <p>Since we've been doing a lot with resistors, and any of the GEMMA's pads can be analog inputs, lets take advantage of that to "multiplex" a single analog input with both of our buttons. Then we'll have the other two pins to use for the thermistor and photocell.</p>
 <p>By wiring both buttons to the same analog pin, but using a resistor of a different value for each one, we will get a different, and consistent, reading depending on which button is pressed. We should also get (close to) a 0 reading if neither button is pressed.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">🤔 Guess what? This is another application of a <strong>voltage divider</strong>!! 🦄</p>
 </div>
 <p>Because this is a voltage divider, we'll need a second resistor in the circuit. We'll use a 10K ohm resistor, since we probably already have a handful.</p>
 <p>The other two resistors just need to be different, and large enough that, in combination with the 10K resistor, they will produce a voltage we can anticipate.</p>
 <p>The analog-to-digital converter (ADC) in our M0 chip is very precise, so we can detect small changes in voltage. However, we will want the values to be pretty different so it will be easy to tell them apart.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">You can use an online <a class="reference external" href="http://www.ohmslawcalculator.com/voltage-divider-calculator">voltage divider circuit calculator</a> to figure out what resistors to use. Start with what you have on hand, and input various values until you come up with something that looks reasonable.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">You can use an online <a class="reference external" href="http://www.ohmslawcalculator.com/voltage-divider-calculator" target="external">voltage divider circuit calculator</a> to figure out what resistors to use. Start with what you have on hand, and input various values until you come up with something that looks reasonable.</p>
 </div>
 <p>I chose to use a 22k resistor for button "A", and a 2k resistor for button "B".</p>
 <p>Here's what the new wiring looks like:</p>
@@ -382,19 +380,19 @@
 </td></tr></table></div><p>The exact voltage amount can vary a little bit from press to press of the buttons, so we've added a threshold - if the voltage is within 0.1 volts, we consider that "pressed".</p>
 <p>This is a really great example of the power of abstraction! Any code we have already written that uses the <tt class="docutils literal">check()</tt> function will still work without <em>any</em> modification, even though the wiring and code is radically different.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>There are two parts of our original API that we've lost here, <tt class="docutils literal">button_a</tt> and <tt class="docutils literal">button_b</tt>.</p>
 <p>None of the code in this tutorial series uses those objects directly, but if you happen to have written some that does, this change <em>breaks the API</em>.</p>
 <p>Essentially, we've violated the contract by not including those two objects. 💔</p>
 <p>For the sake of this project, it's not a big deal. As I mentioned earlier, the two missing objects are not used directly. For the sake of this tutorial, we can just ignore this issue.</p>
 <p>However, it's good practice to fix issues like this so don't confuse anyone (other people using your code, or your future self!). We have three primary options:</p>
 <ol class="arabic simple">
-<li>We can <a class="reference external" href="https://en.wikipedia.org/wiki/Retroactive_continuity">retcon</a> the API, or <em>retroactively change the documentation so it's as if these objects never existed</em>. I'd go back into part 1 and remove all references to <tt class="docutils literal">button_a</tt> and <tt class="docutils literal">button_b</tt>.</li>
+<li>We can <a class="reference external" href="https://en.wikipedia.org/wiki/Retroactive_continuity" target="external">retcon</a> the API, or <em>retroactively change the documentation so it's as if these objects never existed</em>. I'd go back into part 1 and remove all references to <tt class="docutils literal">button_a</tt> and <tt class="docutils literal">button_b</tt>.</li>
 <li>We can change the documentation to explain there is an exception. I'd go back to part 1 and add something along the lines of "if you are using the GEMMA M0 and are using the specialized button multiplexer, you will not have the <tt class="docutils literal">button_a</tt> and <tt class="docutils literal">button_b</tt> objects in <tt class="docutils literal">setup.py</tt>.</li>
 <li>We can go ahead and implement something that provides the API as described.</li>
 </ol>
 <p>There's no perfect answer here. Changing documentation, especially documentation that isn't labeled with a version number (like this series) is always risky. There could be a lot of users out there who wrote code according to the old docs, and now, if someone who followed the newer version tries to use their code, things get weird (errors, unexpected behavior).</p>
-<p>On the other hand, implementing API objects that really aren't used is probably a waste of time. In some cases it could be a large investment. In our case, our objects have their own separate API that we might need to implement.  In fact, if you look at the <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/shared-bindings/digitalio/DigitalInOut.html">DigitalIO API</a>, there's a lot of extra things we'd need to provide that probably don't really matter. If you aren't sure there are people depending on the original API that you violated, it's time you could be spending on something else.</p>
+<p>On the other hand, implementing API objects that really aren't used is probably a waste of time. In some cases it could be a large investment. In our case, our objects have their own separate API that we might need to implement.  In fact, if you look at the <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/shared-bindings/digitalio/DigitalInOut.html" target="external">DigitalIO API</a>, there's a lot of extra things we'd need to provide that probably don't really matter. If you aren't sure there are people depending on the original API that you violated, it's time you could be spending on something else.</p>
 <p>So it's always a judgement call. It helps to have open communication with your users so that you know who's relying on what. Overall, it's best to wait to publish an API until you've finished your blog series and realize that you broke things 😉.</p>
 <p>For the sake of completeness and illustration, here's an implementation that would provide a usable <tt class="docutils literal">DigitalIO</tt> interface for our multiplexed <tt class="docutils literal">AnalogIO</tt> buttons:</p>
 <div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -518,7 +516,7 @@
 <div class="section" id="itsybitsy-trinket-m0">
 <h3>ItsyBitsy/Trinket M0</h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Be sure to change the pin numbers as needed to reflect how your boards are wired up.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -602,22 +600,22 @@
 <div class="section" id="why-we-need-sampling">
 <h3>Why We Need Sampling</h3>
 <p>Analog signals have a range that, in practical terms, goes from zero to our working voltage (3.3 volts). The resolution is basically <em>infinite</em>.</p>
-<p>In an <em>analog</em> circuit, you can tie the value of a resistor to an analog voltage. Imagine a incandescent light that dims when you turn a dial. The dial is actually sort of a dynamic resistor (called a <a class="reference external" href="https://en.wikipedia.org/wiki/Potentiometer">potentiometer</a>) that changes its resistance as its turned, letting more or less electricity to the bulb. Imagine the dial was replaced with a thermistor and companion resistor. The temperature that the sensor is detecting would <em>directly</em> control the intensity of the bulb.</p>
+<p>In an <em>analog</em> circuit, you can tie the value of a resistor to an analog voltage. Imagine a incandescent light that dims when you turn a dial. The dial is actually sort of a dynamic resistor (called a <a class="reference external" href="https://en.wikipedia.org/wiki/Potentiometer" target="external">potentiometer</a>) that changes its resistance as its turned, letting more or less electricity to the bulb. Imagine the dial was replaced with a thermistor and companion resistor. The temperature that the sensor is detecting would <em>directly</em> control the intensity of the bulb.</p>
 <p><strong>TODO: would it be worth it to get a little incandescent bulb and do a demo of this?</strong></p>
 <p>Another, more common example is how audio is recorded and played back. Before digital recording, the entire process was analog: the microphone was an analog device where a diaphragm vibrated and generated a variable voltage, that voltage was cut into a record by a needle that vibrated to the voltage, and when you play back a record, a different needle would vibrate based on the grooves cut previously, generating a voltage that would go to a speaker, which is a device that takes electrical voltage and vibrates another diaphragm which pushes air around to make sound.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>This is a gross simplification! As much as audio is a big part of our lives, I'm hesitant to talk about it much here. The reason is that while audio is an analog medium, and it can be recorded as a variable voltage, there's a lot of very specific aspects of audio that are huge rabbit holes that risk distracting us from our task at hand.</p>
 <p>In particular, audio sampling and production systems are geared toward <em>human</em> sensitivity. There's a lot of extra information that is involved in the discussion that has nothing to do with reading analog signals in general. There <em>are</em> concepts that come into play though, like encoding schemes, packing data into signals, and so on, that can be really useful in microcontroller projects.</p>
 <p class="last"><strong>TODO: Find some good links for more info, probably Technology Connections</strong></p>
 </div>
 <p>In a microcontroller, we're working with <em>digital</em> circuitry. Our "language" is essentially "on" and "off" (<tt class="docutils literal">HIGH</tt> and <tt class="docutils literal">LOW</tt>, 1 and 0). If the voltage is over a threshold, an input reads "on". If it's below the threshold, the input reads "off". Analog signals can be anything between 0 and the maximum voltage. If we wired up a variable voltage to a "regular" digital pin, it would read "on" a percentage of the time, and "off" the rest of the time. This doesn't help us determine <em>how much</em> voltage is coming in. Quantifying the amount of voltage is how we can interpret the voltage and covert it to meaningful units like degrees and lumens.</p>
 <p>So how can we properly read an analog signal? 🤔</p>
-<p>This is where an <a class="reference external" href="https://en.wikipedia.org/wiki/Analog-to-digital_converter">analog to digital converter (ADC)</a> comes into play. ADCs measure the voltage level of an input at a regular interval (or <em>sample</em> the signal), and map that to a value you can read in software between 0 and some maximum number. If you were to look at it on a graph, the ADC turns a wave into a series of numbers, turning a smooth hill and valley into a stair-step pattern.</p>
+<p>This is where an <a class="reference external" href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" target="external">analog to digital converter (ADC)</a> comes into play. ADCs measure the voltage level of an input at a regular interval (or <em>sample</em> the signal), and map that to a value you can read in software between 0 and some maximum number. If you were to look at it on a graph, the ADC turns a wave into a series of numbers, turning a smooth hill and valley into a stair-step pattern.</p>
 <p><strong>TODO: illustration of how sampling works</strong></p>
 <p>The ADC fixes the resolution of the analog voltage to a certain amount (instead of infinity), because it's <em>sampling</em> the voltage, and because the value is converted to an integer within a fixed range. This is referred to as the <em>sample rate</em>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Sample rates are commonly expressed in terms of "bit depth" and "sample frequency". You may have heard that CD audio recorded at "16-bit/44.1kHz". This means it samples 16-bit (0-65536) values 441,000 times a second.</p>
 </div>
 </div>
@@ -628,7 +626,7 @@
 <p>We take samples at an undetermined rate, but lets assume it's the clock frequency of our board. In the case of the M0, that's 48kHz, so our sample rate is 16-bit/48kHz.</p>
 <p>This is where our first bit of wobble or jitter comes from in our CircuitPython readings. We've cut the resolution down from infinity to 16 bits per sample. This means we have to mush the voltage reading into one of 65,536 values. There's no in-between. So a value could "jump" from say, 12432 to 12433 if it actually falls somewhere in-between.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">I say the rate is "undetermined", because the data sheet for the SAMD21 in our M0 boards shows that the sample rate of the ADC is highly configurable. There are a <em>lot</em> of variables. The actual ADC is 12 bit, but it can do some tricks to get higher sample frequencies. I'm not close enough with the CircuitPython source code (yet) to say how exactly things are done, and it could vary from board to board. For the sake of this tutorial, assuming a sample rate of 16/48 is sufficient for explaining things, and it might be close, but it's probably not accurate <strong>at all</strong>.</p>
 </div>
 <p>Beyond the function of an ADC, we're really getting into the physics of the specialized materials in our sensors. They can be extremely sensitive. In one instance, there may be 8 photons (fake number) hitting our photocell. In the next, it may be 9, or 10. It varies. Temperature is the same.</p>
@@ -642,7 +640,7 @@
 <h2 id="an extreme example: a circuitplayground express nightlight">An Extreme Example: A CircuitPlayground Express Nightlight</h2>
 <p>Lets build a quick project using our demo circuits that illustrates the sampling problem in a visual way, and then we'll discuss some useful techniques for fixing it.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">The following code will work on any of the demo circuits we've built, but it's most illustrative of our problems on the CircuitPlayground Express, especially if you have all 10 neopixels turned on.</p>
 </div>
 <div class="section" id="quick-overview">
@@ -1009,7 +1007,7 @@
 <div class="section" id="claiming-our-inheritance">
 <h2 id="claiming our inheritance">Claiming Our Inheritance</h2>
 <p>Once an event is detected, some action is taken. So far in this series, that action is code that lives right along with the event.</p>
-<p>Let's revisit with a new example. In this state class, we're going to track the value of a temperature sensor. When the temperature is between 0&deg; and 15&deg; C, the neopixel/dotstar will be illuminated blue. When it's between 16&deg; and 25&deg; C, the pixel will be illuminated green (indicating optimal temperature for human comfort, according to <a class="reference external" href="https://en.wikipedia.org/wiki/Room_temperature">wikipedia</a>). If the temperature climbs above 25&deg; C, the pixel will turn red, indicating that it's really hot.</p>
+<p>Let's revisit with a new example. In this state class, we're going to track the value of a temperature sensor. When the temperature is between 0&deg; and 15&deg; C, the neopixel/dotstar will be illuminated blue. When it's between 16&deg; and 25&deg; C, the pixel will be illuminated green (indicating optimal temperature for human comfort, according to <a class="reference external" href="https://en.wikipedia.org/wiki/Room_temperature" target="external">wikipedia</a>). If the temperature climbs above 25&deg; C, the pixel will turn red, indicating that it's really hot.</p>
 <p>Here's some code that accomplishes that, using a state class in the style of previous examples:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1263,9 +1261,9 @@
 </ul>
 <p>We can think about the common and differing functionality in terms of actions - the status object reads the sensor, the status object updates the state, the status object changes the color. The way the status object does each of these things is slightly different. So we can factor out that functionality from the <tt class="docutils literal">update()</tt> method, into additional methods that <tt class="docutils literal">update()</tt> can call. This way, the <tt class="docutils literal">update()</tt> method from the base class can handle most use cases. We can provide a new implementation for any methods that require specialized functionality in child classes. When <tt class="docutils literal">update()</tt> calls the factored out methods, it will call the code from the child class.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>When we create a method in a child class that has the same name as one in the parent class, the child class' method is used when the method is called. This is a core OOP concept called <a class="reference external" href="https://en.wikipedia.org/wiki/Method_overriding">method overriding</a>.</p>
-<p>Method overriding and class inheritance are fundamental features of <a class="reference external" href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>, a key aspect of object-oriented programming. The finer details are beyond the scope of this series, but it's worth reading about.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>When we create a method in a child class that has the same name as one in the parent class, the child class' method is used when the method is called. This is a core OOP concept called <a class="reference external" href="https://en.wikipedia.org/wiki/Method_overriding" target="external">method overriding</a>.</p>
+<p>Method overriding and class inheritance are fundamental features of <a class="reference external" href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)" target="external">polymorphism</a>, a key aspect of object-oriented programming. The finer details are beyond the scope of this series, but it's worth reading about.</p>
 <p class="last">I suggest waiting to dig into that information until <em>after</em> you finish this part of the CircuitPython state series. In my experience, it can be a bit obtuse in the abstract, and having some practical experience with polymorphism without the theory might make the computer science bits easier to absorb 🎓.</p>
 </div>
 <p>We'll put all of the common functionality into one <em>base class</em>. This base class will exist solely to be extended.</p>
@@ -1309,19 +1307,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">checkin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This is, in practical terms, an <strong>abstract base class</strong> (or <a class="reference external" href="https://en.wikipedia.org/wiki/Abstract_type">abstract type</a>). However, Python doesn't provide true abstract types. In languages that do, you <em>cannot</em> instantiate a class that is marked as abstract. It causes a syntax error.</p>
+<h2 class="first admonition-title">Note</h2>
+<p>This is, in practical terms, an <strong>abstract base class</strong> (or <a class="reference external" href="https://en.wikipedia.org/wiki/Abstract_type" target="external">abstract type</a>). However, Python doesn't provide true abstract types. In languages that do, you <em>cannot</em> instantiate a class that is marked as abstract. It causes a syntax error.</p>
 <p>You will also get errors from the compiler if you try to extend an abstract class and don't implement all of the abstract methods.</p>
 <p>In Python, there isn't a language-level concept of <em>abstract</em>, so you can instantiate "abstract" base classes without causing any direct errors (depending on how they are constructed, they may cause secondary errors though). You can fail to fully implement the abstract parts, and it's totally cool 😎.</p>
-<p>In the standard library, there is, however, a module called <a class="reference external" href="https://docs.python.org/3/library/abc.html">abc</a> that uses <a class="reference external" href="https://en.wikipedia.org/wiki/Metaprogramming">metaprogramming</a> to implement functionality similar to true abstract types. It can be useful if you have a need to enforce the "abstractness" of a class like the one we're creating below.</p>
+<p>In the standard library, there is, however, a module called <a class="reference external" href="https://docs.python.org/3/library/abc.html" target="external">abc</a> that uses <a class="reference external" href="https://en.wikipedia.org/wiki/Metaprogramming" target="external">metaprogramming</a> to implement functionality similar to true abstract types. It can be useful if you have a need to enforce the "abstractness" of a class like the one we're creating below.</p>
 <p class="last">💔 However, the <tt class="docutils literal">abc</tt> module is not included in MicroPython or CircuitPython. There are other techniques you can use to get close, but not this module 💔</p>
 </div>
 <p>We've kept the common <tt class="docutils literal">color</tt> and <tt class="docutils literal">checkin</tt> attributes, but we've created a new, more generic common attribute called <tt class="docutils literal">value</tt>, that will store the last value read from the sensor.</p>
 <p>Note the two new methods, <tt class="docutils literal">read_input()</tt> and <tt class="docutils literal">set_color()</tt>. These handle the functionality that is different in each case. The way we update the state attribute and the way we decide what color the LED should be both differ between the temperature and light detecting classes. This is <em>method overriding</em> in action.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>Since this is just a base class, we're not actually doing anything in these methods. We've employed the <tt class="docutils literal">pass</tt> keyword to allow us to make a valid function that doesn't do anything (also known as a <a class="reference external" href="https://en.wikipedia.org/wiki/NOP">no-op</a>).</p>
-<p>Another, better way we can accomplish the same effect is have an empty method body, but add a <a class="reference external" href="https://en.wikipedia.org/wiki/Docstring">docstring</a>. This has the added benefit of documenting what the method is supposed to do.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>Since this is just a base class, we're not actually doing anything in these methods. We've employed the <tt class="docutils literal">pass</tt> keyword to allow us to make a valid function that doesn't do anything (also known as a <a class="reference external" href="https://en.wikipedia.org/wiki/NOP" target="external">no-op</a>).</p>
+<p>Another, better way we can accomplish the same effect is have an empty method body, but add a <a class="reference external" href="https://en.wikipedia.org/wiki/Docstring" target="external">docstring</a>. This has the added benefit of documenting what the method is supposed to do.</p>
 <p>It looks something like this:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1541,7 +1539,7 @@
 <p>Python provides the concept of <em>modules</em> and <em>packages</em> to help with this.</p>
 <p>Our code in this series is on the verge of growing more complex, and we will have a lot of code that won't change. So lets move some code around and make a new module.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">It also makes it possible to compile this unchanging code into <tt class="docutils literal">.mpy</tt> files to save space/memory. More on this later!</p>
 </div>
 <p>We've already done this with our <tt class="docutils literal">setup</tt> module, holding our board-to-board abstraction objects.</p>
@@ -1603,8 +1601,8 @@
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">state</span> <span class="kn">import</span> <span class="n">state</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">This is probably the simplest possible way to implement the <a class="reference external" href="https://en.wikipedia.org/wiki/Singleton_pattern">Singleton Pattern</a> in Python 🤔</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">This is probably the simplest possible way to implement the <a class="reference external" href="https://en.wikipedia.org/wiki/Singleton_pattern" target="external">Singleton Pattern</a> in Python 🤔</p>
 </div>
 </div>
 <div class="section" id="event-planning-not-just-for-parties-anymore">
@@ -1716,7 +1714,7 @@
 <p>The other major change occurs when a possible event is detected. A possible event happens when <tt class="docutils literal">self.previous</tt> is more than <tt class="docutils literal">self._threshold</tt> degrees larger or smaller than <tt class="docutils literal">self.value</tt>. From there, we call the <tt class="docutils literal">dispatch()</tt> method, which decides what the value represents.</p>
 <p>The second pass is to then <em>only</em> consider an event has occurred <em>if</em> the current temperature is in a different range from the range that we're currently in. Put differently, we're asking the question, "should the color change?", and only changing it when necessary. We know what the previous state is by looking at the current value of <tt class="docutils literal">self.color</tt>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This is a bit convoluted! I wanted to stick to the original approach as much as we could at this stage, so we can better see how things will change when we simplifying the code shortly. 🦄</p>
 </div>
 <p>Why do we need this two-pass approach? In this project, we have events that change a simple state value (the color). It only makes sense to change the color when the temperature crosses from one range to another. But in other projects, we may want to take action every time the value changes. In that case, our <tt class="docutils literal">dispatch()</tt> method would look very different. Instead of only changing the state if the current temperature reading would cause the state to change, it could act every time.</p>

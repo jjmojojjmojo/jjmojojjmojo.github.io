@@ -12,8 +12,6 @@
 <meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 2 - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -70,7 +68,7 @@
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
-<p><strong>This is part two of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org">pytest</a> and <a class="reference external" href="https://git-scm.com/">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
+<p><strong>This is part two of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org" target="external">pytest</a> and <a class="reference external" href="https://git-scm.com/" target="external">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
 <p>In this installment, we will:</p>
 <ul class="simple">
 <li>Identify and fix a bug on a branch.</li>
@@ -113,7 +111,7 @@
 <div class="highlight"><pre><span></span><span class="go">  (random_quote) $ git checkout part1</span>
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>🌈 We have branches for all of the major work done in the series:</p>
 <dl class="docutils">
 <dt><code>part1</code></dt>
@@ -135,7 +133,7 @@
 </dd>
 </dl>
 <p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
-<p class="last">Use <code>git stash</code> to keep any uncommitted changes for later. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">the git documentation</a> for more information. 🦄</p>
+<p class="last">Use <code>git stash</code> to keep any uncommitted changes for later. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing" target="external">the git documentation</a> for more information. 🦄</p>
 </div>
 </li>
 </ol>
@@ -143,7 +141,7 @@
 <div class="section" id="let-s-find-a-bug">
 <h2 id="let's find a bug!">Let's Find A Bug!</h2>
 <p>Let's run the application locally so we can play with it in a browser, and identify a bug to fix.</p>
-<p><code>requirements.txt</code> has installed a web server for us called <a class="reference external" href="https://gunicorn.org/">Gunicorn</a>. It's a pure-python server that has a lot of great production-quality features.</p>
+<p><code>requirements.txt</code> has installed a web server for us called <a class="reference external" href="https://gunicorn.org/" target="external">Gunicorn</a>. It's a pure-python server that has a lot of great production-quality features.</p>
 <p>We'll start the <code>gunicorn</code> server using a couple of useful command-line options, since we'll be messing with the code:</p>
 <div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
@@ -153,10 +151,10 @@
 </div>
 <p>Gunicorn is a multi-process server. This means it spawns multiple python processes and hands off web requests to them as needed, usually in a round-robin fashion. The processes are killed if they run for too long.</p>
 <p>The first option, <code>-b</code> sets the <em>bind</em> port - it's an IP address followed by a port number. Numbers under 1024 are available to you without running with elevated privileges (aka "as root"). The default port is 8000. You can omit this parameter if you'd like, but it's really useful when you're running a bunch of stuff, or for deployment, so it's good practice to get used to using it.</p>
-<p>Next option, <code>-t</code> sets the the timeout before a worker is killed and reclaimed. We set this to a very long time so if we are doing something like running a <a class="reference external" href="https://docs.python.org/3/library/pdb.html">pdb</a> session, it won't kick us out before we're done.</p>
+<p>Next option, <code>-t</code> sets the the timeout before a worker is killed and reclaimed. We set this to a very long time so if we are doing something like running a <a class="reference external" href="https://docs.python.org/3/library/pdb.html" target="external">pdb</a> session, it won't kick us out before we're done.</p>
 <p>The next, <code>-w</code> sets the number of workers. By setting this to one, we can be sure that the <code>pdb</code> session will block all other requests until we're done.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The default number of workers is actually already set to 1. However, this is a good switch to know, it's good practice to test your code under a muilti-process environment, since that's often how code will be deployed.</p>
 </div>
 <p>The last flag is <code>--reload</code>. This flag tells <code>gunicorn</code> to monitor our source files and reload the server if they change.</p>
@@ -171,28 +169,28 @@
 </td></tr></table></div><p>This module imports the <code>RandomQuoteApp</code> class, and makes an instance of it that points to the <code>test.db</code> we just set up.</p>
 </div>
 <p>The server will print its logs out to the console so you can see when requests happen, and if any errors pop up.</p>
-<p>Now, open a web browser to <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> . You should get a 404 "Not Found" response. This is expected, since we aren't covering the case of a request for the root, (aka <code>/</code>) in our <code>RandomQuoteApp.__call__()</code> method.</p>
+<p>Now, open a web browser to <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a> . You should get a 404 "Not Found" response. This is expected, since we aren't covering the case of a request for the root, (aka <code>/</code>) in our <code>RandomQuoteApp.__call__()</code> method.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-first-pass-200.jpg 200w"/></a>
 </div>
 <p>We can use the web API in our browser.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">I'm using a recent version of <a class="reference external" href="https://www.mozilla.org/en-US/firefox/">Firefox</a> for the screen shots below. It contains a built-in JSON browser if the <code>Content-Type</code> header is set correctly. Super handy 🌈</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">I'm using a recent version of <a class="reference external" href="https://www.mozilla.org/en-US/firefox/" target="external">Firefox</a> for the screen shots below. It contains a built-in JSON browser if the <code>Content-Type</code> header is set correctly. Super handy 🌈</p>
 </div>
-<p>To get a listing of all the quotes in your database, open <a class="reference external" href="http://127.0.0.1:8080/quotes">http://127.0.0.1:8080/quotes</a>:</p>
+<p>To get a listing of all the quotes in your database, open <a class="reference external" href="http://127.0.0.1:8080/quotes" target="external">http://127.0.0.1:8080/quotes</a>:</p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-all-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-all-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-all-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-all-first-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
-<p>To get a particular quote, open <a class="reference external" href="http://127.0.0.1:8080/quote/1">http://127.0.0.1:8080/quote/1</a> (where 1 is the id of the quote you want):</p>
+<p>To get a particular quote, open <a class="reference external" href="http://127.0.0.1:8080/quote/1" target="external">http://127.0.0.1:8080/quote/1</a> (where 1 is the id of the quote you want):</p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-one-quote-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-one-quote-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-one-quote-first-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
-<p>To get a random quote, open <a class="reference external" href="http://127.0.0.1:8080/random">http://127.0.0.1:8080/random</a></p>
+<p>To get a random quote, open <a class="reference external" href="http://127.0.0.1:8080/random" target="external">http://127.0.0.1:8080/random</a></p>
 <blockquote>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-random-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-random-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-random-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-random-first-pass-200.jpg 200w"/></a>
@@ -202,7 +200,7 @@
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/path-map-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/path-map-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/path-map-first-pass-2500.jpg 2500w,/images/branching-git-pytest/responsive/path-map-first-pass-2000.jpg 2000w,/images/branching-git-pytest/responsive/path-map-first-pass-1800.jpg 1800w,/images/branching-git-pytest/responsive/path-map-first-pass-1600.jpg 1600w,/images/branching-git-pytest/responsive/path-map-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/path-map-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/path-map-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/path-map-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/path-map-first-pass-200.jpg 200w"/></a>
 </div>
-<p>Now, lets find a bug. Try requesting a quote id that you know doesn't exist. Since we're using numeric ids, requesting an alphanumeric string, like <code>zzzzzz</code> would be a good choice. If we click on <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>, what happens?</p>
+<p>Now, lets find a bug. Try requesting a quote id that you know doesn't exist. Since we're using numeric ids, requesting an alphanumeric string, like <code>zzzzzz</code> would be a good choice. If we click on <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz" target="external">http://127.0.0.1:8080/quote/zzzzzz</a>, what happens?</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-bad-id-bug.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-bad-id-bug.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-bad-id-bug-200.jpg 200w"/></a>
 </div>
@@ -259,7 +257,7 @@
 <p>Passing <code>None</code> to <code>dict()</code> on line 49 raises a <code>TypeError</code>, as we saw in the traceback.</p>
 <p>Great, so now we've identified the bug. Let's fix it!</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">If you want to quit <code>gunicorn</code>, type Ctrl-C (hold the "control" or "ctl" key and press "c").</p>
 </div>
 </div>
@@ -314,7 +312,7 @@
 </pre></div>
 <p>As we can see, when we call <code>git branch --list</code> again, our branch has the asterisk.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>You can save a step by passing the <code>-b</code> switch to <code>git checkout</code>, creating the branch before checking it out:</p>
 <div class="highlight"><pre><span></span><span class="gp"> $</span> git checkout -b some-other-branch
 <span class="go"> Switched to a new branch 'some-other-branch'</span>
@@ -347,14 +345,14 @@
 <h3>More Than A Bug</h3>
 <p>One thing that sets this particular bug apart from the sort you might run into, is that this bug represents a <em>use case</em> we missed. Like the lack of testing for random quotes we fixed in our first commit, it's not really a bug so much as an oversight.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If this <em>was</em> bug-related, as opposed to an oversight, we could chose to use a name that incorporated the name of the bug or the bug's identifier in our bug tracking system.</p>
 </div>
 <p>Before we can proceed, we have to make a decision. We've identified an error state when we try to get an quote that doesn't exist in the database. But what <em>should</em> happen if there <em>isn't</em> an error?</p>
 <p>There are a few possibilities:</p>
 <ol class="arabic simple">
-<li>We can raise some kind of <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">exception</a>, preferably something custom that alerts the developer about what happened, with name like <code>NoQuoteFound</code>.</li>
-<li>We can return a <em>token</em> (or <a class="reference external" href="https://en.wikipedia.org/wiki/Sentinel_value">sentinel value</a>) of some kind (<code>None</code>, like the sqlite3 DBAPI does, or <code>False</code>).</li>
+<li>We can raise some kind of <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html" target="external">exception</a>, preferably something custom that alerts the developer about what happened, with name like <code>NoQuoteFound</code>.</li>
+<li>We can return a <em>token</em> (or <a class="reference external" href="https://en.wikipedia.org/wiki/Sentinel_value" target="external">sentinel value</a>) of some kind (<code>None</code>, like the sqlite3 DBAPI does, or <code>False</code>).</li>
 <li>We can return an empty dictionary (<code>{}</code>), so the data type is the same, but it won't have the expected keys (it can also act as a token, since <code>bool({}) == False</code>)</li>
 <li>We can return a "default" object with values indicative of missing data. For example, the <code>id</code> could be 0, the author <code>Unknown</code> and the <code>quote</code> could be <code>"There is no quote, only Zuul"</code>. The creation date could be long in the past. This way any templates or client code would still "work" in this situation, but it would be obvious something was amiss.</li>
 </ol>
@@ -534,7 +532,7 @@
 </td></tr></table></div><p>After making these changes, let's first make sure the code works in the browser. Lets restart gunicorn if it's not still running:</p>
 <div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-<p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
+<p>And open up <a class="reference external" href="http://127.0.0.1:8080/quote/zzzzzz" target="external">http://127.0.0.1:8080/quote/zzzzzz</a>.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-bad-id-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-bad-id-first-pass-200.jpg 200w"/></a>
 </div>
@@ -598,8 +596,8 @@ index 762ef05..d9da9cf 100644
 </pre></div>
 </td></tr></table></div><p>The plus signs show what lines we added, and the minus signs show which were removed.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">You can use <code>git difftool</code> to view diffs in a graphical diff viewer. The <a class="reference external" href="https://git-scm.com/docs/git-difftool">git-difftool docuentation</a> has usage details.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">You can use <code>git difftool</code> to view diffs in a graphical diff viewer. The <a class="reference external" href="https://git-scm.com/docs/git-difftool" target="external">git-difftool docuentation</a> has usage details.</p>
 </div>
 <p>Now since we like the changes that were made, we can make a commit:</p>
 <div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(random_quote)</span> <span class="gp">$</span> git commit -a -m<span class="s2">"Fixed bug where a non-existent quote id would raise a TypeError"</span>
@@ -610,7 +608,7 @@ index 762ef05..d9da9cf 100644
 <div class="section" id="we-re-not-quite-done-yet">
 <h2 id="we're not quite done yet">We're Not Quite Done Yet</h2>
 <p>As mentioned in the last section, making a web request for <code>/quote/zzzzz</code> no longer raises an exception, but it doesn't necessarily act in a way that's consistent with web standards.</p>
-<p>In web APIs, it's best practice to use the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status codes</a> to tell a client what you can about how they messed up. In this case, we're returning an empty value, which <em>sort of</em> tells them they messed up, but what we <em>really</em> want to tell the client is, "hey, you asked for a quote that doesn't exist".</p>
+<p>In web APIs, it's best practice to use the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="external">HTTP status codes</a> to tell a client what you can about how they messed up. In this case, we're returning an empty value, which <em>sort of</em> tells them they messed up, but what we <em>really</em> want to tell the client is, "hey, you asked for a quote that doesn't exist".</p>
 <p>The best status code for this situation is the <em>404 Not Found</em> code. Mozila describes it as, "The server can not find requested resource", which is exactly what's happened here.</p>
 <p>So we need to get our <code>RandomQuoteApp</code> to detect when <code>RandomQuoteManager.get()</code> returns <code>None</code>, and send the correct HTTP status in the response.</p>
 <p>As before, lets write the test first, expecting it to fail.</p>
@@ -733,7 +731,7 @@ index 762ef05..d9da9cf 100644
 <p>Now, let's make this test pass, by getting the <code>RandomQuoteApp.get()</code> method to return a 404 when <code>None</code> is returned by <code>RandomQuoteManager.get()</code>.</p>
 <p><code>webob</code> comes with a few handy helper classes and 'canned' responses to make things like returning a 404 error code easy. In particular, it provides <code>webob.exc.HTTPNotFound</code>. It is a hybrid class that is a <code>webob.Response</code> object, but also a python <code>Exception</code>. It can be raised by part of your application, <em>caught</em> and returned to the user like any other <code>webob.Response</code> to let them know something went wrong.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>We make use of this in the <code>RandomQuoteApp.__call__()</code> method, in the code we use to route requests to various methods and objects:</p>
 <div class="last"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
 14
@@ -857,7 +855,7 @@ index 762ef05..d9da9cf 100644
 </div>
 <div class="section" id="version-bump">
 <h2 id="version bump">Version Bump</h2>
-<p>Our project uses <a class="reference external" href="https://semver.org/">semantic versioning</a>. The 'semver' website has all of the specifics, but the gist is that each version of the software is represented by a number, broken into three parts (to quote the spec):</p>
+<p>Our project uses <a class="reference external" href="https://semver.org/" target="external">semantic versioning</a>. The 'semver' website has all of the specifics, but the gist is that each version of the software is represented by a number, broken into three parts (to quote the spec):</p>
 <ol class="arabic simple">
 <li><strong>MAJOR</strong> version when you make incompatible API changes,</li>
 <li><strong>MINOR</strong> version when you add functionality in a backwards-compatible manner, and</li>
@@ -890,9 +888,9 @@ index 762ef05..d9da9cf 100644
 </pre></div>
 </td></tr></table></div><p>You can also add <strong>EXTENSIONS</strong> to the version when needed, like <strong>0.1.0-alpha</strong>. These extensions are useful for special releases, like handing off a pre-release version to testers or early adopters, or if you make a special variant of a release for a specific client.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>There are many ways to version software, <a class="reference external" href="https://en.wikipedia.org/wiki/Software_versioning">semantic versioning isn't the only one</a>. We've used it here because it's pretty common, and has some benefits. In particular, its very compatible with python packaging.</p>
-<p class="last">Before you adopt it wholesale in your projects, be sure to read up on its faults and look at other perspectives. <a class="reference external" href="https://surfingthe.cloud/semantic-versioning-anti-pattern/">This post by Brandon Gillespie</a> and the <a class="reference external" href="https://news.ycombinator.com/item?id=13378637">Hacker News discussion about it</a> are great examples of what to look for.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>There are many ways to version software, <a class="reference external" href="https://en.wikipedia.org/wiki/Software_versioning" target="external">semantic versioning isn't the only one</a>. We've used it here because it's pretty common, and has some benefits. In particular, its very compatible with python packaging.</p>
+<p class="last">Before you adopt it wholesale in your projects, be sure to read up on its faults and look at other perspectives. <a class="reference external" href="https://surfingthe.cloud/semantic-versioning-anti-pattern/" target="external">This post by Brandon Gillespie</a> and the <a class="reference external" href="https://news.ycombinator.com/item?id=13378637" target="external">Hacker News discussion about it</a> are great examples of what to look for.</p>
 </div>
 <p>Now that we have a basic understanding of semantic versioning, it may be apparent what we need to do, now that we've fixed our first bug: <strong>we need to update the version number</strong>.</p>
 <p>Since this is the first bug, we just need to increment the last number. As such, our new version is <strong>0.1.1</strong>.</p>
@@ -946,8 +944,8 @@ index 762ef05..d9da9cf 100644
 <p>We can address all of these issues with <code>git rebase</code>. It also adds "piece of mind", allowing us to commit frequently with poorly written commit messages without worrying that they will pollute the main log. 😎</p>
 <p>Rebase allows us to do a lot, but the basic purpose is to alter commits, including taking existing commits and condensing them down, as we're going to do here.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p><code>git rebase</code> is a destructive action. <strong>It cannot be undone</strong> (well, <a class="reference external" href="https://stackoverflow.com/questions/134882/undoing-a-git-rebase">it can</a>, but it's not easy). It's a very intuitive tool and something you'll get comfortable with quickly. Just be careful.</p>
+<h2 class="first admonition-title">Warning</h2>
+<p><code>git rebase</code> is a destructive action. <strong>It cannot be undone</strong> (well, <a class="reference external" href="https://stackoverflow.com/questions/134882/undoing-a-git-rebase" target="external">it can</a>, but it's not easy). It's a very intuitive tool and something you'll get comfortable with quickly. Just be careful.</p>
 <p>There are several ways to protect yourself. The simplest is to just duplicate your checkout as a backup before you do your rebase:</p>
 <div class="highlight"><pre><span></span><span class="go"> (random_quote) $ cd ..</span>
 <span class="go"> (random_quote) $ cp -r random_quote random_quote_before_rebase_because_im_scared</span>
@@ -1147,7 +1145,7 @@ Increased the version number
 <span class="go">-- snip --</span>
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>If you messed up the file causing a "recoverable" error, like say you tried to <code>squash</code> every commit and forgot to <code>pick</code> one, git will put you into an "in progress" state. Typically, this state is used when you need to fix conflicts (we'll cover that in <a class="reference external" href="{filename}/branching-git-with-pytest-3.html">part 3</a>), or do other work on the code to make a rebase complete successfully.</p>
 <p>You might get an error like this:</p>
 <div class="highlight"><pre><span></span><span class="go"> error: cannot 'squash' without a previous commit</span>
@@ -1199,7 +1197,7 @@ Increased the version number
 </div>
 <p>If we know someone has changed the code in <code>master</code> since we branched, we will need to incorporate those changes into our branch before we proceed.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">We know this hasn't happened, since we're the only ones working on this code. 😀 Don't fret, we'll simulate a collaboration in <a class="reference external" href="/branching-git-with-pytest-3.html">part 3</a>!.</p>
 </div>
 <p>In either case, we still have to go through the same basic process.</p>
@@ -1254,7 +1252,7 @@ Increased the version number
 </div>
 <p>Git has a concept of "tagging" - where you can assign a user-friendly label to a specific commit. It can make it really easy for people to check out a specific point in the history of the code. Technically they are <em>optional</em>, but are a very useful tool.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">There are two types of tags, "lightweight" and "annotated". The specifics aren't important for this guide, just be aware there is a difference, and know that we are using lightweight tags here.</p>
 </div>
 <p>Git assumes that you want to tag the current commit if you don't specify one, so if we look at the last log entry, we'll know what's being tagged:</p>
@@ -1266,7 +1264,7 @@ Increased the version number
 <span class="go">    BUG: if a bad quote id was given (invalid, non-existent), a TypeError was raised.</span>
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">If we wanted to tag a different commit, we just need to note the id (in this case <code>e80d48320ea1e912d8d0c137b32a21f33492e8f5</code>). We can use just the first few characters to save some typing, like <code>e80d4832</code>.</p>
 </div>
 <p>We are going to name our tag <code>v0.1.1</code>. The exact format is up to you and people you collaborate with, but it's useful to use a common prefix to help classify what the tag <em>means</em>. In this case, we're using <code>v</code> to indicate a release version. This is helpful later when your project has possibly hundreds of tags, for may reasons besides marking released versions, since we can do pattern matching when listing tags.</p>
@@ -1300,7 +1298,7 @@ Increased the version number
 <span class="go"> - [deleted]         v0.1.1</span>
 </pre></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>At this point, if you've followed along, we've deleted our tag. It would be a good idea to recreate it. Here's a condensed version of the process:</p>
 <div class="last"><div class="highlight"><pre><span></span><span class="go"> (random_quote) $ git tag v0.1.1</span>
 <span class="go"> (random_quote) $ git push origin v0.1.1</span>
@@ -1322,8 +1320,8 @@ Increased the version number
 <span class="go"> * [new branch]      bug-unknown-id -&gt; bug-unknown-id</span>
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">It's OK to push to your remote branch frequently. There are a few git actions that are a little more difficult (<a class="reference external" href="https://stackoverflow.com/questions/22682870/git-undo-pushed-commits/22683231">reverting your changes</a>, for example) once you've pushed, but remember, you are working on a branch, and you will be rebasing later, so there's little risk and you get the benefit of being able to back up your changes to the git remote and show your progress to your collaborators.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">It's OK to push to your remote branch frequently. There are a few git actions that are a little more difficult (<a class="reference external" href="https://stackoverflow.com/questions/22682870/git-undo-pushed-commits/22683231" target="external">reverting your changes</a>, for example) once you've pushed, but remember, you are working on a branch, and you will be rebasing later, so there's little risk and you get the benefit of being able to back up your changes to the git remote and show your progress to your collaborators.</p>
 </div>
 </div>
 <div class="section" id="conclusion-what-s-next">

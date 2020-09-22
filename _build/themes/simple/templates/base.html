@@ -6,19 +6,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ SITEURL }}/{{ output_file }}">
 <meta property="og:title" content="{% block og_title %}{{ SITENAME }}{% endblock og_title %}">
-<meta property="og:image" content="{{ SITEURL }}/theme/images/default-social-full.jpg">
+<meta property="og:image" content="{{ SITEURL }}{% block og_social_image %}/theme/images/default-social-full.jpg{% endblock %}">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://jjmojojjmojo.github.io/{{ output_file }}">
 <meta property="twitter:title" content="{% block twitter_title %}{{ SITENAME }}{% endblock twitter_title %}">
-<meta property="twitter:image" content="{{ SITEURL }}/theme/images/default-social-full.jpg">
+<meta property="twitter:image" content="{{ SITEURL }}{% block twitter_social_image %}/theme/images/default-social-full.jpg{% endblock %}">
+
         {% block head %}
         <meta name="title" content="{% block meta_title %}{{ SITENAME }}{% endblock meta_title %}">
-        {% block og_image %}
-        <meta property="og:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />
-        <meta property="twitter:image" content="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/default-social-full.jpg" />
-        {% endblock %}
         <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

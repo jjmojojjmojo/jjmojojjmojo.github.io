@@ -12,8 +12,6 @@
 <meta content="Making And Distributing Jars With Boot - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Making And Distributing Jars With Boot - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Making And Distributing Jars With Boot - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -91,9 +89,9 @@
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
-<p>This application uses the <a class="reference external" href="https://clojars.org/twitter-api">twitter-api</a> library to grab the last tweet from a given account.</p>
+<p>This application uses the <a class="reference external" href="https://clojars.org/twitter-api" target="external">twitter-api</a> library to grab the last tweet from a given account.</p>
 <p>As explained in <a class="reference external" href="/advanced-boot-scripting.html">Advanced Boot Scripting</a>, to use it, you must set up a developer account for twitter, and generate API credentials.</p>
-<p>The CLI script is called <tt class="docutils literal">downer</tt> because it defaults to displaying the last tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys">Nihilist Arbys</a> twitter account.</p>
+<p>The CLI script is called <tt class="docutils literal">downer</tt> because it defaults to displaying the last tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys" target="external">Nihilist Arbys</a> twitter account.</p>
 <p>This setup is a nice example of general boot scripting, and how you can build pretty robust applications without compiling anything.</p>
 <p>It's also nice groundwork for this post, since it has all of the elements we need to build and distribute jar files.</p>
 </div>
@@ -152,7 +150,7 @@
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
-<p>The <tt class="docutils literal"><span class="pre">last-tweet</span></tt> namespace and its <tt class="docutils literal"><span class="pre">last-tweet</span></tt> function are fairly self-explanatory. For more information, see <a class="reference external" href="/advanced-boot-scripting.html">Advanced Boot Scripting</a>, and <a class="reference external" href="https://github.com/adamwynne/twitter-api">the twitter-api github</a>.</p>
+<p>The <tt class="docutils literal"><span class="pre">last-tweet</span></tt> namespace and its <tt class="docutils literal"><span class="pre">last-tweet</span></tt> function are fairly self-explanatory. For more information, see <a class="reference external" href="/advanced-boot-scripting.html">Advanced Boot Scripting</a>, and <a class="reference external" href="https://github.com/adamwynne/twitter-api" target="external">the twitter-api github</a>.</p>
 </div>
 <p>And the source of <tt class="docutils literal">downer</tt>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -261,14 +259,14 @@
 <div class="highlight"><pre><span></span><span class="gp">$</span> ls target/*.jar
 <span class="go">last-tweet-1.0.0.jar</span>
 </pre></div>
-<p>We have several options for distribution, now that we have a jar file, each one takes advantage of the <a class="reference external" href="https://maven.apache.org/">Apache Maven</a> ecosystem:</p>
+<p>We have several options for distribution, now that we have a jar file, each one takes advantage of the <a class="reference external" href="https://maven.apache.org/" target="external">Apache Maven</a> ecosystem:</p>
 <ol class="arabic simple">
 <li>We can send the jar file along with the script to the user, and they
 can install it with boot.</li>
 <li>We can set up our own maven repository&nbsp;and upload the jar to that,
 then provide access to the user.</li>
 <li>We can send the jar file to a public repository like
-<a class="reference external" href="https://clojars.org/">clojars</a>.</li>
+<a class="reference external" href="https://clojars.org/" target="external">clojars</a>.</li>
 <li>We can upload the file to S3, and provide credentials to our user.</li>
 </ol>
 </div>
@@ -310,28 +308,28 @@ You can make changes to your library code and distribute it once, and when your 
 </div>
 <div class="section" id="uploading-to-clojars">
 <h2 id="uploading to clojars">Uploading To Clojars</h2>
-<p><a class="reference external" href="https://clojars.org/">Clojars</a> provides a public maven repository for the greater Clojure community.</p>
-<p>There isn't much in the way of documentation for using boot with clojars, but there is a <a class="reference external" href="https://github.com/ato/clojars-web/wiki/tutorial">tutorial</a>, and a handy tool called <a class="reference external" href="https://github.com/adzerk-oss/bootlaces">bootlaces</a> that provides a couple of wrapper boot tasks to make the process more seamless.</p>
+<p><a class="reference external" href="https://clojars.org/" target="external">Clojars</a> provides a public maven repository for the greater Clojure community.</p>
+<p>There isn't much in the way of documentation for using boot with clojars, but there is a <a class="reference external" href="https://github.com/ato/clojars-web/wiki/tutorial" target="external">tutorial</a>, and a handy tool called <a class="reference external" href="https://github.com/adzerk-oss/bootlaces" target="external">bootlaces</a> that provides a couple of wrapper boot tasks to make the process more seamless.</p>
 <p>Alas, neither of these things goes far enough to help the brand new boot user who wants to make use of clojars for their libraries. Very little is explained, and the tutorial is leiningen-centric.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">There is also an excellent write up of the process (also linegien-centric but it covers GPG and signing your jars) by Michael Peterson over at <a class="reference external" href="http://thornydev.blogspot.com/2013/03/signing-and-promoting-your-clojure.html">ThornyDev</a> including links to the rationale for signing packages.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">There is also an excellent write up of the process (also linegien-centric but it covers GPG and signing your jars) by Michael Peterson over at <a class="reference external" href="http://thornydev.blogspot.com/2013/03/signing-and-promoting-your-clojure.html" target="external">ThornyDev</a> including links to the rationale for signing packages.</p>
 </div>
 <p>So lets go over the process in detail, from the ground up. Admittedly, this is probably best left for a separate blog post, but as clojars is a great service and something any clojurist should be equipped to participate in - once you've got a handle on how it works "the hard way", you are free to use bootlaces or derive your own workflow. It slots in nicely with the next section, where we build our own maven repository.</p>
-<p>In preparation for pushing your jar to clojars, you'll first need to install <a class="reference external" href="https://www.gnupg.org/">GPG</a>.</p>
+<p>In preparation for pushing your jar to clojars, you'll first need to install <a class="reference external" href="https://www.gnupg.org/" target="external">GPG</a>.</p>
 <p>GPG will be used to sign jar files to ensure they are not tampered with by malicious third parties.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a comprehensive introduction, see <a class="reference external" href="http://www.dewinter.com/gnupg_howto/english/GPGMiniHowto.html">The GPG Mini HOWTO</a>.*</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For a comprehensive introduction, see <a class="reference external" href="http://www.dewinter.com/gnupg_howto/english/GPGMiniHowto.html" target="external">The GPG Mini HOWTO</a>.*</p>
 </div>
-<p>GPG can be installed via the downloads located at <a class="reference external" href="https://www.gnupg.org/download/index.html">gnupg.org</a>, or using your preferred package manager.</p>
+<p>GPG can be installed via the downloads located at <a class="reference external" href="https://www.gnupg.org/download/index.html" target="external">gnupg.org</a>, or using your preferred package manager.</p>
 <p>MacOs users can use homebrew (<tt class="docutils literal">brew install gpg</tt>), or MacPorts (<tt class="docutils literal">sudo port install gpg</tt>).</p>
 <p>We'll need to generate our key, if we've never used GPG before:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> gpg --gen-key
 </pre></div>
 <p>You will be asked many questions. For most, you can specify the default suggested by gpg (press ENTER). Take note of the e-mail address that you use for your key, it will be the identifier for your new key in your keyring.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">It's a good idea to specify a pass-phrase. If you decide not to, you can just enter an empty pass-phrase when prompted.</p>
 </div>
 <p>Now that we've generated our key, we can see it using <tt class="docutils literal">gpg <span class="pre">--list-keys</span></tt>:</p>
@@ -347,7 +345,7 @@ You can make changes to your library code and distribute it once, and when your 
 <span class="go">uid Josh Johnson &lt;[THE EMAIL YOU PROVIDED]&gt;</span>
 <span class="go">sub 2048R/6C662B47 2015-05-21</span>
 </pre></div>
-</td></tr></table></div><p>Next, we need to <a class="reference external" href="https://clojars.org/register">sign up for a clojars account.</a> Ignore the SSH key entry. We will need to generate a text-based "ASCII-armored" version of our public GPG key to paste into the corresponding text box in the form. This is accomplished with the <tt class="docutils literal">gpg</tt> command:</p>
+</td></tr></table></div><p>Next, we need to <a class="reference external" href="https://clojars.org/register" target="external">sign up for a clojars account.</a> Ignore the SSH key entry. We will need to generate a text-based "ASCII-armored" version of our public GPG key to paste into the corresponding text box in the form. This is accomplished with the <tt class="docutils literal">gpg</tt> command:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> gpg --armor --export <span class="o">[</span>THE EMAIL YOU PROVIDED<span class="o">]</span> code
 <span class="go">-----BEGIN PGP PUBLIC KEY BLOCK-----</span>
 <span class="go">[KEY CONTENT HERE]</span>
@@ -368,7 +366,7 @@ You can make changes to your library code and distribute it once, and when your 
                                   <span class="ss">:password</span> <span class="s">"[YOUR PASSWORD]"</span><span class="p">}]))</span>
 </pre></div>
 </td></tr></table></div><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p class="last">You will want to source your username and password from an environment variable, or some other place, like a local config file. We're putting them here for the sake of simplicity, but this is not a sound practice!</p>
 </div>
 <p>We've provided a <em>function</em> to set the environment property <tt class="docutils literal">:repositories</tt>. This allows us to update the list of repositories instead of replacing it.</p>
@@ -445,7 +443,7 @@ You can make changes to your library code and distribute it once, and when your 
 <p>Lines 1-4 invokes the <tt class="docutils literal"><span class="pre">set-env!</span></tt> function to declare the dependencies we require to be included in our jar. These correspond to the <tt class="docutils literal"><span class="pre">-d</span></tt> options in the command line we used earlier.</p>
 <p>Line 5 specifies the source directories. We previously specified our source directory with the <tt class="docutils literal"><span class="pre">-s</span></tt> command-line option.</p>
 <p>Lines 6-10 update the repositories list with our clojars destination and credentials, as we implemented earlier.</p>
-<p>For general explanation of these environment modifying lines, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment">Boot Environment</a>, in the Boot Wiki.</p>
+<p>For general explanation of these environment modifying lines, check out <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment" target="external">Boot Environment</a>, in the Boot Wiki.</p>
 <p>The rest of the file represents settings that are passed to boot tasks.</p>
 <p>Generally speaking, these correspond 1:1 with the command line options, but are expected to be pre-processed into clojure data objects.</p>
 <p>You can figure out the exact key to set for each value using the <tt class="docutils literal"><span class="pre">-h</span></tt> switch. For example, the help text for the <tt class="docutils literal">pom</tt> task, looks like this:</p>
@@ -465,7 +463,7 @@ You can make changes to your library code and distribute it once, and when your 
 </pre></div>
 <p>And we can see that the <tt class="docutils literal"><span class="pre">-d</span></tt> command line option corresponds to the``:description`` key passed to <tt class="docutils literal"><span class="pre">task-options!</span></tt>.</p>
 <p>Of particular interest to us are the <tt class="docutils literal"><span class="pre">--project</span></tt> and <tt class="docutils literal"><span class="pre">--license</span></tt> options - these are not specified as simple strings.</p>
-<p>The <tt class="docutils literal"><span class="pre">--project</span></tt> option is converted to a clojure <em>symbol</em>, as hinted at by the <tt class="docutils literal">SYM</tt> placeholder variable. To verify this, we need to look at the <a class="reference external" href="https://github.com/boot-clj/boot/blob/master/boot/core/src/boot/task/built_in.clj#L27">source for the task</a>, and read the task-option DSL:</p>
+<p>The <tt class="docutils literal"><span class="pre">--project</span></tt> option is converted to a clojure <em>symbol</em>, as hinted at by the <tt class="docutils literal">SYM</tt> placeholder variable. To verify this, we need to look at the <a class="reference external" href="https://github.com/boot-clj/boot/blob/master/boot/core/src/boot/task/built_in.clj#L27" target="external">source for the task</a>, and read the task-option DSL:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -487,8 +485,8 @@ You can make changes to your library code and distribute it once, and when your 
 </td></tr></table></div><p>Here we see in the 4th column, the handling directive for each command line option. In the case of the <tt class="docutils literal"><span class="pre">--project</span></tt> option, the <tt class="docutils literal">sym</tt> specification casts the value from the command line into a symbol.</p>
 <p>The <tt class="docutils literal"><span class="pre">--license</span></tt> is specificed as <tt class="docutils literal">{str str}</tt>, indicating it is a <em>mapping</em>. On the command line, a colon is used to separate the key of the map from its value. Additional <tt class="docutils literal"><span class="pre">--license</span></tt> command line options will conjoin into a single map. As such, in <tt class="docutils literal"><span class="pre">task-options!</span></tt>, a map is expected.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a comprehensive explanation of the various options, see the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">Task Options DSL</a> page in the Boot Wiki.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For a comprehensive explanation of the various options, see the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">Task Options DSL</a> page in the Boot Wiki.</p>
 </div>
 <p>The rest of the options are simply strings. A few, such as the <tt class="docutils literal"><span class="pre">-a</span></tt>, or <tt class="docutils literal">:all</tt> parameter to the <tt class="docutils literal">aot</tt> task, are flags, and are specified with a boolean value.</p>
 <p>One last note: the version of our project has to be incremented every time that we change the metadata in our jar file. This is important to note since the output jar will be named differently. If you try to upload a jar with the same version as a previous upload, it will fail with an "Access Denied" error.</p>
@@ -497,7 +495,7 @@ You can make changes to your library code and distribute it once, and when your 
 </pre></div>
 <p>These tasks can be simply composed into a custom boot task. This is left as an exercise for the reader, but with the following caveat:</p>
 <p><em>Once you've uploaded a jar to clojars, there's no automatic or simple way to get it removed.</em></p>
-<p>You can open an issue in github to ask for a deletion (details <a class="reference external" href="https://github.com/ato/clojars-web/wiki/Contact">here</a>), but it's considered bad form.</p>
+<p>You can open an issue in github to ask for a deletion (details <a class="reference external" href="https://github.com/ato/clojars-web/wiki/Contact" target="external">here</a>), but it's considered bad form.</p>
 <p>As such, <em>please be careful what you upload!</em>. Make sure that you're running tests, and doing verifications on your jar files before you push them out for mass consumption.</p>
 <p>It's a good idea to work those sorts of checks into any custom tasks that you put together.</p>
 </div>
@@ -566,8 +564,8 @@ $ which mvn
 ...path to the mvn executable
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">See <a class="reference external" href="https://maven.apache.org/download.cgi">the download page</a> for alternative mirrors and formats.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">See <a class="reference external" href="https://maven.apache.org/download.cgi" target="external">the download page</a> for alternative mirrors and formats.</p>
 </div>
 <p>If you are using OS X, you can install maven via homebrew:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> brew install maven
@@ -599,12 +597,12 @@ $ which mvn
 <span class="go">last-tweet</span>
 <span class="go">...</span>
 </pre></div>
-<p>To share this repository, we have many options, but we're going to do the simplest for our introductory purposes: set up <a class="reference external" href="http://nginx.org/">nginx</a> to serve our repository to the public.</p>
+<p>To share this repository, we have many options, but we're going to do the simplest for our introductory purposes: set up <a class="reference external" href="http://nginx.org/" target="external">nginx</a> to serve our repository to the public.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Any web server will work, as long as it generates directory listings.</p>
 </div>
-<p>First, we need to install nginx. There are <a class="reference external" href="http://nginx.org/en/download.html">packages available for most operating systems</a>, and it's in <a class="reference external" href="http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/">homebrew for folks using OS X</a>.</p>
+<p>First, we need to install nginx. There are <a class="reference external" href="http://nginx.org/en/download.html" target="external">packages available for most operating systems</a>, and it's in <a class="reference external" href="http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/" target="external">homebrew for folks using OS X</a>.</p>
 <p>Since the location of the nginx configuration is variable depending on what operating system you're using, we'll make a bare-minimum configuration and pass it to nginx, called <tt class="docutils literal">nginx.conf</tt>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -635,13 +633,13 @@ $ which mvn
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">You will want to better fine-tune the web server in a "production" deployment, this is just a bare-minimum example to get you going.</p>
 </div>
 <p>We can then start up nginx:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> nginx -c nginx.conf
 </pre></div>
-<p>Nginx will run in the background. Now you can open a browser to <a class="reference external" href="http://localhost:8080/">http://localhost:8080/</a>, and see your repository.</p>
+<p>Nginx will run in the background. Now you can open a browser to <a class="reference external" href="http://localhost:8080/" target="external">http://localhost:8080/</a>, and see your repository.</p>
 <p>We can now configure the boot script to use this repository in the same manner we used the file path earlier:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2

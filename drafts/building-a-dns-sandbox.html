@@ -12,8 +12,6 @@
 <meta content="Building A DNS Sandbox - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Building A DNS Sandbox - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Building A DNS Sandbox - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -78,7 +76,7 @@ since the dawn of time, a lot simpler than it seems at first glance.</p>
 DNS server. The DNS server doesn't allow remote updating, and there's no
 DHCP server in play (for the record, I'm bringing up machines in AWS). I
 have access to the machine via SSH, so I can edit the zone files
-directly. As SOP, we use <a class="reference external" href="http://code.google.com/p/hostdb/">hostdb</a>
+directly. As SOP, we use <a class="reference external" href="http://code.google.com/p/hostdb/" target="external">hostdb</a>
 and a git repository. This works really well for manual updates, but
 it's a bit clunky to automate, and has one fatal flaw: there can be
 parity between what's in DNS and what's in the git repo. My hope is to
@@ -87,7 +85,7 @@ using other mechanisms for auditing and change-management.</p>
 <p>So the point of the DNS sandbox is to make testing/debugging of hostdb
 easier and to facilitate rapid development of new tools.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p class="last">Please be aware that this setup is designed strictly for experimentation
 and testing - it's not secure, or terribly useful outside of <em>basic</em> DNS
 functionality. Please take the time to really understand what it takes
@@ -124,14 +122,14 @@ and zone files.</p>
 <h2 id="zone files">Zone Files</h2>
 <div class="section" id="basics">
 <h3>Basics</h3>
-<p>See: <a class="reference external" href="http://www.zytrax.com/books/dns/ch8">http://www.zytrax.com/books/dns/ch8</a></p>
+<p>See: <a class="reference external" href="http://www.zytrax.com/books/dns/ch8" target="external">http://www.zytrax.com/books/dns/ch8</a></p>
 <ul class="simple">
 <li>Zone files have a header section called the SOA</li>
 <li>Fully-qualified domain names end with a period (e.g. my.domain.com.),
 subdomains relative to an FDQN do not (e.g. my, www).</li>
 <li>Zone files have an <em>origin</em> - a base added to every name in the file.
 The origin is defined using the $ORIGIN directive (see:
-<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#directives">http://www.zytrax.com/books/dns/ch8/#directives</a>)</li>
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#directives" target="external">http://www.zytrax.com/books/dns/ch8/#directives</a>)</li>
 <li>The @ symbol is used as a shortcut for $ORIGIN.</li>
 <li>Each zone file is referenced in the named.conf file (see
 <a class="reference external" href="#configuration">Configuration</a> below for details)</li>
@@ -149,7 +147,7 @@ Forward lookups resolve a doman name to an IP address (<tt class="docutils liter
 -&gt; <tt class="docutils literal">192.168.0.1</tt>). Reverse lookups resolve an IP address to a domain
 name (<tt class="docutils literal">192.168.0.1</tt> -&gt; <tt class="docutils literal">my.domain.name</tt>). Each type of lookup is
 controlled from a separate zone file, with different types of records.</p>
-<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#types">http://www.zytrax.com/books/dns/ch8/#types</a> for details about the
+<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch8/#types" target="external">http://www.zytrax.com/books/dns/ch8/#types</a> for details about the
 different types of records. This post only deals with <strong>SOA</strong>, <strong>NS</strong>,
 <strong>A</strong>, <strong>CNAME</strong> and <strong>PTR</strong> records.</p>
 <p>Note that reverse lookup is not required for a functioning DNS setup,
@@ -161,7 +159,7 @@ but is recommended.</p>
 <dt>Filename:</dt>
 <dd><tt class="docutils literal">/etc/bind/zones/example.test</tt></dd>
 <dt>Reference:</dt>
-<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch8/">http://www.zytrax.com/books/dns/ch8/</a></dd>
+<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch8/" target="external">http://www.zytrax.com/books/dns/ch8/</a></dd>
 </dl>
 <p>Our domain name is <em>example.test</em>.</p>
 <div class="line-block">
@@ -199,7 +197,7 @@ the other areas.</p>
 <li><p>Line 2 sets the Time To Live for records in this zone.</p>
 </li>
 <li><p>Lines 4-10 are the
-<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/soa.html">SOA</a>.</p>
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch8/soa.html" target="external">SOA</a>.</p>
 </li>
 <li><p>On line 5, We use @ to stand in for the $ORIGIN directive defined on
 line 1. We specifify the authoritative server (<tt class="docutils literal">ns.example.test.</tt>),
@@ -239,7 +237,7 @@ resolves to <tt class="docutils literal">192.168.0.1</tt>.</p>
 <dt>Filename:</dt>
 <dd><tt class="docutils literal"><span class="pre">/etc/bind/zones/0.168.192.in-addr.arpa</span></tt></dd>
 <dt>Reference:</dt>
-<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch3/">http://www.zytrax.com/books/dns/ch3/</a></dd>
+<dd><a class="reference external" href="http://www.zytrax.com/books/dns/ch3/" target="external">http://www.zytrax.com/books/dns/ch3/</a></dd>
 </dl>
 <p>We're setting up reverse lookups for the 192.168.0.x subnet (CIDR
 192.168.0.0/24).</p>
@@ -292,7 +290,7 @@ an A record for in the forward zone file.</p>
 <p>In the default ubuntu setup, local configuration is handled in
 <tt class="docutils literal">/etc/bind/named.conf.local</tt> (this is just simply included into
 <tt class="docutils literal">/etc/bind/named.conf</tt>).</p>
-<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch7/">http://www.zytrax.com/books/dns/ch7/</a> for details about the
+<p>See <a class="reference external" href="http://www.zytrax.com/books/dns/ch7/" target="external">http://www.zytrax.com/books/dns/ch7/</a> for details about the
 <tt class="docutils literal">named.conf</tt> format and what the directives mean.</p>
 <div class="line-block">
 <div class="line">[code language="text"]</div>
@@ -337,7 +335,7 @@ configuration and prevents updates to this zone from other servers.</li>
 <li>Lines 7-11 set up the reverse zone "0.168.192.in-addr.arpa.".</li>
 <li>Lines 13-24 set up simple (and verbose) logging to
 <tt class="docutils literal">/var/log/named/bind.log</tt>. See
-<a class="reference external" href="http://www.zytrax.com/books/dns/ch7/logging.html">http://www.zytrax.com/books/dns/ch7/logging.html</a> for details about
+<a class="reference external" href="http://www.zytrax.com/books/dns/ch7/logging.html" target="external">http://www.zytrax.com/books/dns/ch7/logging.html</a> for details about
 the setting here.</li>
 </ul>
 </div>
@@ -464,9 +462,9 @@ sandbox DNS server</div>
 </div>
 </div>
 <p>Mac OS X:
-<a class="reference external" href="https://www.plus.net/support/software/dns/changing_dns_mac.shtml">https://www.plus.net/support/software/dns/changing_dns_mac.shtml</a></p>
+<a class="reference external" href="https://www.plus.net/support/software/dns/changing_dns_mac.shtml" target="external">https://www.plus.net/support/software/dns/changing_dns_mac.shtml</a></p>
 <p>Ubuntu:
-<a class="reference external" href="http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/">http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/</a></p>
+<a class="reference external" href="http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/" target="external">http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/</a></p>
 </div>
 </div><!-- /.entry-content -->
 </section>

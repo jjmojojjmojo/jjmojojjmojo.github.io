@@ -12,8 +12,6 @@
 <meta content="Advanced Boot Scripting - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Advanced Boot Scripting - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Advanced Boot Scripting - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -70,9 +68,9 @@
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
-<a class="reference external" href="https://github.com/boot-clj/boot">boot</a> is an all-around useful tool
+<a class="reference external" href="https://github.com/boot-clj/boot" target="external">boot</a> is an all-around useful tool
 for building clojure applications, but one feature in particular has
-proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#id2" id="id1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts">clojure scripting</a>. This
+proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#id2" id="id1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts" target="external">clojure scripting</a>. This
 elevates clojure to the same high productivity of scripting languages
 (like my personal favorite, Python), but bakes in dependency management
 and other goodies. This allows the user to build complexity iteratively,
@@ -81,8 +79,8 @@ project code and building a package). This article explores boot
 scripting further, illustrating how boot can be used to quickly and
 easily develop and distribute applications and tools. There's also
 discussion about getting your jars into
-<a class="reference external" href="http://clojars.org">Clojars</a>, and setting up a simple bare-minimum
-<a class="reference external" href="http://maven.apache.org/index.html">Maven</a> repository.</p>
+<a class="reference external" href="http://clojars.org" target="external">Clojars</a>, and setting up a simple bare-minimum
+<a class="reference external" href="http://maven.apache.org/index.html" target="external">Maven</a> repository.</p>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label"/><col/></colgroup>
 <tbody valign="top">
@@ -92,7 +90,7 @@ discussion about getting your jars into
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As I've covered before</a>,
-boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases">boot executable</a>. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):</p>
+boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases" target="external">boot executable</a>. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
 <span class="gp">$</span> mkdir -p ~/bin
 <span class="gp">$</span> mv boot.sh boot <span class="o">&amp;&amp;</span> chmod a+x boot <span class="o">&amp;&amp;</span> mv boot ~/bin/
@@ -106,22 +104,22 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 </div>
 <p>First we need to download the boot executable script. The .sh extension indicates it's a shell script.</p>
 <p>Then a directory is created with <code>mkdir</code> for personal executables (binaries, hence <code>bin</code>). We use the <code>-p</code> flag to tell <code>mkdir</code> that any intermediary directories should be created. <code>-p</code> also silences any errors for already-existing directories.</p>
-<p>The tilde <code>~</code> is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely <code>/home/jjmojojjmojo</code>. But on some systems, it will be <code>/var/users/jjmojojjmojo</code>. On MacOS, home directories are in <code>/Users</code>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory">this wikipedia article</a> for more information.</p>
+<p>The tilde <code>~</code> is an alias for the current user's home directory. We use it here because the specific path for home is variable depending on both the user, and the operating system. For example, if my log in is jjmojojjmojo, on Linux, my home directory is likely <code>/home/jjmojojjmojo</code>. But on some systems, it will be <code>/var/users/jjmojojjmojo</code>. On MacOS, home directories are in <code>/Users</code>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Home_directory" target="external">this wikipedia article</a> for more information.</p>
 <p>Finally, we string a few commands together using <code>&amp;&amp;</code>. <code>&amp;&amp;</code> will execute the following command if the preceding one succeeds (has a 0 return value). Here's what each part does:</p>
 <ol class="arabic simple">
 <li>We rename (move) the <code>boot.sh</code> to <code>boot</code>. This way we can type <code>boot</code> instead of <code>boot.sh</code> to execute boot commands later on.</li>
-<li>We change the <em>mode</em> of the <code>boot</code> script to include <em>execute</em> for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say <code>chmod 755</code>) only modifies the execute bit for each class. <a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm">More info</a>.</li>
+<li>We change the <em>mode</em> of the <code>boot</code> script to include <em>execute</em> for the group, owner, and other bits. This allows the script to be executed like any other command - and by anyone who can read it. Using this approach (as opposed to, say <code>chmod 755</code>) only modifies the execute bit for each class. <a class="reference external" href="http://mason.gmu.edu/~montecin/UNIXpermiss.htm" target="external">More info</a>.</li>
 <li>Finally, we move the <code>boot</code> script to our personal <code>~/bin</code> directory, so the shell can find it when we set that up in the next step.</li>
 </ol>
 <p>Then we need to update our <code>$PATH</code> environment variable so the shell can find our new executable <tt class="docutils literal">boot</tt>.</p>
 <p>The shell looks for executables in a variable called <code>$PATH</code>. <code>$PATH</code> is a list of directories, that are searched in sequential order.</p>
-<p>We can get the shell to find our <code>boot</code> script by adding our personal bin directory to the end of that variable. <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)">More info</a>.</p>
+<p>We can get the shell to find our <code>boot</code> script by adding our personal bin directory to the end of that variable. <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)" target="external">More info</a>.</p>
 <p>By adding an <code>export</code> command to the end of our <code>~/.bash_profile</code>, we can ensure this modification to our shell happens every time we log in, or start our terminal app. Other environments, and shells have different files that are used this way.</p>
-<p>We accomplish this by using the <code>echo</code> command. <code>echo</code> sends data to the terminal output (stdout). We redirect that output to be appended to <code>~/.bash_profile</code>, using two greater-than symbols (<code>&gt;&gt;</code>). <a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html">More info</a>.</p>
+<p>We accomplish this by using the <code>echo</code> command. <code>echo</code> sends data to the terminal output (stdout). We redirect that output to be appended to <code>~/.bash_profile</code>, using two greater-than symbols (<code>&gt;&gt;</code>). <a class="reference external" href="http://www.tldp.org/LDP/abs/html/io-redirection.html" target="external">More info</a>.</p>
 <p>Note that we escape the dollar signs in the <code>$PATH</code> and <code>$HOME</code> variables. This prevents the shell from expanding the current value for those variables before adding the <code>export</code> to <code>~/.bash_profile</code>.</p>
 <p>Finally, we make the change take effect in our current shell by running the export (without the escaped dollar signs).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Depending on your distribution, and shell, the way to make this change permanent may be different. Most shells read a special file in your home directory. Look for files like <code>~/.bashrc</code>, <code>~/.profile</code>, etc.</p>
 </div>
 </div>
@@ -131,17 +129,17 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 </div>
 <div class="section" id="making-boot-faster">
 <h2 id="making boot faster">Making Boot Faster</h2>
-<p>Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into <tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt> or similar other files for your particular shell. See the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options">JVM-Options</a> page in the boot documentation for details, and other ways to incorporate these settings into your projects:</p>
+<p>Adding the following to your environment will speed boot startup by a vast amount. You can either run this command in your terminal, or make it permanent by putting this line into <tt class="docutils literal"><span class="pre">~/.bash_profile</span></tt> or similar other files for your particular shell. See the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/JVM-Options" target="external">JVM-Options</a> page in the boot documentation for details, and other ways to incorporate these settings into your projects:</p>
 <div class="highlight"><pre><span></span><span class="go">export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xverify:none"</span>
 </pre></div>
 </div>
 <div class="section" id="a-simple-script">
 <h2 id="a simple script">A Simple Script</h2>
-<p>For this article, we'll start with an example of a useful application that grabs the most recent tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys">Nihilist Arby's</a> twitter feed. A great addition to your <a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29">MOTD</a> to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀</p>
+<p>For this article, we'll start with an example of a useful application that grabs the most recent tweet from the <a class="reference external" href="https://twitter.com/nihilist_arbys" target="external">Nihilist Arby's</a> twitter feed. A great addition to your <a class="reference external" href="http://en.wikipedia.org/wiki/Motd_%28Unix%29" target="external">MOTD</a> to de-motivate users overzealous about the fact that they have SSH privileges to your machine. 😀</p>
 </div>
 <div class="section" id="twitter-api-tokens">
 <h2 id="twitter api tokens">Twitter API Tokens</h2>
-<p>Before we begin, set up an application and <a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens">obtain a consumer key</a>&nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to <em>read only</em>. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.</p>
+<p>Before we begin, set up an application and <a class="reference external" href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens" target="external">obtain a consumer key</a>&nbsp;using a twitter account for which you have the username and password. For the sake of security, you may want to limit the application's access to <em>read only</em>. The tokens can be used to read anything in the account, and any private feeds the account has access to, so be careful.</p>
 </div>
 <div class="section" id="quick-note-development-deviations">
 <h2 id="quick note: development deviations">Quick Note: Development Deviations</h2>
@@ -219,7 +217,7 @@ name it however you'd like:</p>
 <span class="go">Rip it to shreds. Put it on a bun. Slather it in horsey sauce. Watch them line up to gorge. Feeding pigs to pigs. Arbys: a flat circle.</span>
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">You may see some output on stderr about some missing logging libraries. For now, these can be ignored. See <a class="reference internal" href="#appendix-getting-rid-of-log4j-notices">Appendix: Getting Rid Of Log4J Notices</a>.</p>
 </div>
 <div class="explanation section">
@@ -227,9 +225,9 @@ name it however you'd like:</p>
 <div class="docutils container">
 </div>
 <ul>
-<li><p class="first">The first 2 lines are what make this a boot script. The <tt class="docutils literal"><span class="pre">set-env!</span></tt> function and general information about environments can be found in the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment">boot documentation</a>.</p>
-<p>First we have the "<a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29">shebang</a>" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having <tt class="docutils literal">/bin/env</tt> available in the same location on most systems, to figure out where boot is.</p>
-<p>Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a>.</p>
+<li><p class="first">The first 2 lines are what make this a boot script. The <tt class="docutils literal"><span class="pre">set-env!</span></tt> function and general information about environments can be found in the <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Boot-Environment" target="external">boot documentation</a>.</p>
+<p>First we have the "<a class="reference external" href="http://en.wikipedia.org/wiki/Shebang_%28Unix%29" target="external">shebang</a>" line, which tells the operating system what interpreter to use to run the script. In this case, we're taking advantage of the convention of having <tt class="docutils literal">/bin/env</tt> available in the same location on most systems, to figure out where boot is.</p>
+<p>Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api" target="external">twitter-api</a>.</p>
 </li>
 <li><p class="first">lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called <tt class="docutils literal">boot.user</tt>. You can alternatively load external code using the <tt class="docutils literal">ns</tt> form. The example code could be replaced thusly:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -247,7 +245,7 @@ name it however you'd like:</p>
   <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
 </pre></div>
 </td></tr></table></div></li>
-<li><p class="first">Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</p>
+<li><p class="first">Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api" target="external">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline" target="external">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</p>
 </li>
 </ul>
 </div>
@@ -319,7 +317,7 @@ name it however you'd like:</p>
              <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Our namespace has a dash (-) in it - this isn't supported in clojure file names. So instead, we use an underscore (_) in the name of the file.</p>
 </div>
 <p>This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed <tt class="docutils literal"><span class="pre">-main</span></tt> to <tt class="docutils literal"><span class="pre">last-tweet</span></tt>.</p>
@@ -345,7 +343,7 @@ name it however you'd like:</p>
   <span class="p">(</span><span class="nf">last-tweet</span><span class="p">))</span>
 </pre></div>
 </td></tr></table></div><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
-<p>We can add many namespaces to the <tt class="docutils literal">src</tt> directory. We can also add other source paths - the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> directive is a <a class="reference external" href="http://clojure.org/data_structures#toc24">hash set</a>.</p>
+<p>We can add many namespaces to the <tt class="docutils literal">src</tt> directory. We can also add other source paths - the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> directive is a <a class="reference external" href="http://clojure.org/data_structures#toc24" target="external">hash set</a>.</p>
 <p>Now we can refactor the&nbsp;<tt class="docutils literal"><span class="pre">last-tweet/last-tweet</span></tt> function to take credentials and the twitter account to get a tweet from as arguments:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
 14
@@ -374,7 +372,7 @@ name it however you'd like:</p>
              <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
 </pre></div>
 </td></tr></table></div><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
-<p>Now we can utilize boot's extremely useful <tt class="docutils literal">defclifn</tt> macro and boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL">task option DSL</a>&nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.</p>
+<p>Now we can utilize boot's extremely useful <tt class="docutils literal">defclifn</tt> macro and boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">task option DSL</a>&nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -439,7 +437,7 @@ name it however you'd like:</p>
 </div>
 <ul class="simple">
 <li>The docstring for the function is used as the "usage" message when the user passes the <tt class="docutils literal"><span class="pre">-h</span></tt> flag.</li>
-<li>The task option DSL allows for <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#types">a pre-processing step</a> to be defined for each value. In this case, we used <tt class="docutils literal">str</tt>, which treats each argument as a string. This can be changed to one of many very useful options, including keywords, symbols, files (which take a path and return a java.io object) and many more, including <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#complex-options">complex compound values</a>.</li>
+<li>The task option DSL allows for <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#types" target="external">a pre-processing step</a> to be defined for each value. In this case, we used <tt class="docutils literal">str</tt>, which treats each argument as a string. This can be changed to one of many very useful options, including keywords, symbols, files (which take a path and return a java.io object) and many more, including <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL#complex-options" target="external">complex compound values</a>.</li>
 <li>There are two special variables that are provided by the <tt class="docutils literal">defclifn</tt>   macro: <tt class="docutils literal">*opts*</tt> and <tt class="docutils literal">*args*</tt>. <tt class="docutils literal">*opts*</tt> contains all of the processed options as defined in the argument list, in the form of a map. <tt class="docutils literal">*args*</tt> contains all other values passed on the command line, as a vector. We use the <tt class="docutils literal">*args*</tt> variable to allow the user an intuitive way to override the default twitter account.</li>
 <li>The use of environment variables as alternatives to CLI options is  illustrated here. It's very useful for deployment of more complex    applications, and keeps sensitive information out of the process list.</li>
 <li>We've added some error handling to give the user a nice message if they neglect to set their credentials.</li>
@@ -476,9 +474,9 @@ name it however you'd like:</p>
 <p>There are several ways to handle this:</p>
 <ul class="simple">
 <li>Distribute the source code via git, or a tarball. The <tt class="docutils literal"><span class="pre">:source-paths</span></tt> environment parameter can be changed if needed to point to a proper location such as <tt class="docutils literal">/opt/downer</tt>, or <tt class="docutils literal">/usr/local/lib/downer</tt>.</li>
-<li>Build a library jar file. The jar file can be installed into a local maven repository, or a public one like <a class="reference external" href="https://clojars.org/">clojars</a>.</li>
+<li>Build a library jar file. The jar file can be installed into a local maven repository, or a public one like <a class="reference external" href="https://clojars.org/" target="external">clojars</a>.</li>
 </ul>
-<p>The first option is sub-optimal. It can be made somewhat easier with help from <a class="reference external" href="https://github.com/jordansissel/fpm">fpm</a>, but it's still a bit cumbersome. The real beauty of boot scripting is we don't have to bother with complex installation procedures.</p>
+<p>The first option is sub-optimal. It can be made somewhat easier with help from <a class="reference external" href="https://github.com/jordansissel/fpm" target="external">fpm</a>, but it's still a bit cumbersome. The real beauty of boot scripting is we don't have to bother with complex installation procedures.</p>
 <p>We can leverage the power of java jar files (which are just zip files under the hood) to contain our source code and other artifacts.</p>
 <p>This makes the jar file the best path. Once the jar is installed into a maven repository the script can reach, the script can once again be distributed as a simple stand-alone text file.</p>
 <p>We can use boot for this. <em>That's what it does!</em></p>
@@ -493,7 +491,7 @@ name it however you'd like:</p>
 <span class="go">SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span>
 <span class="go">FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk</span>
 </pre></div>
-<p><tt class="docutils literal">SLF4J</tt> is the <a class="reference external" href="https://www.slf4j.org/">Simple Logging Facade For Java</a>. It
+<p><tt class="docutils literal">SLF4J</tt> is the <a class="reference external" href="https://www.slf4j.org/" target="external">Simple Logging Facade For Java</a>. It
 allows for <em>deployment-time</em> configuration of logging in an application. This
 means you build your app against the <tt class="docutils literal">SLF4J</tt> API, and when you deploy your
 application at some later time, you can use whatever logging back-end you want.
@@ -502,12 +500,12 @@ a tweet, it's probably nothing we really need to care about.</p>
 <p>The error concerns <tt class="docutils literal">SLF4J</tt> trying to find a logging back-end, and failing to find
 one. It's looking for the default backend, named <tt class="docutils literal">StaticLoggerBinder</tt>. So we
 have to fix this to get the warnings to dissapear.</p>
-<p>The <a class="reference external" href="http://www.slf4j.org/codes.html#StaticLoggerBinder">link provided in the output</a> tells us what needs to be done:</p>
+<p>The <a class="reference external" href="http://www.slf4j.org/codes.html#StaticLoggerBinder" target="external">link provided in the output</a> tells us what needs to be done:</p>
 <blockquote>
 This warning message is reported when the org.slf4j.impl.StaticLoggerBinder class could not be loaded into memory. This happens when no appropriate SLF4J binding could be found on the class path. Placing one (and only one) of slf4j-nop.jar slf4j-simple.jar, slf4j-log4j12.jar, slf4j-jdk14.jar or logback-classic.jar on the class path should solve the problem.</blockquote>
 <p>To do this for our project, we just need to add a backend to our dependencies in <tt class="docutils literal">build.boot</tt>.</p>
 <p>Since we don't need logging for our project, we'll choose the <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt> back-end.</p>
-<p>To figure out exactly what the dependency specification looks like, we can search in the <a class="reference external" href="https://search.maven.org/">Maven Central Repository</a>.</p>
+<p>To figure out exactly what the dependency specification looks like, we can search in the <a class="reference external" href="https://search.maven.org/" target="external">Maven Central Repository</a>.</p>
 <div class="figure align-center" style="width: 85%">
 <a href="/images/fullsize/maven-search.jpg"><img alt="" sizes="" src="/images/fullsize/maven-search.jpg" srcset="/images/responsive/maven-search-1000.jpg 1000w,/images/responsive/maven-search-800.jpg 800w,/images/responsive/maven-search-400.jpg 400w,/images/responsive/maven-search-200.jpg 200w"/></a>
 <p class="caption">Screen grab of Maven Central search results for 'slf4j-nop'</p>
@@ -515,7 +513,7 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 <p>From the screen grab above, we can derive the dependency specification: <tt class="docutils literal"><span class="pre">[group-id/artifact-id</span> "version"]</tt>.</p>
 <p>As such, in our case, our spec will be <tt class="docutils literal"><span class="pre">[org.slf4j/slf4j-nop</span> <span class="pre">"1.8.0-beta2"]</span></tt>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>We might want to be weary of using beta code, even if it isn't important to our project.</p>
 <p class="last">To find the latest <em>stable</em> version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is <tt class="docutils literal">1.7.25</tt>.</p>
 </div>

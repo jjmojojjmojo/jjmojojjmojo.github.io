@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>The Collected Works of jjmojojjmojo - tutorial</title><link>/</link><description></description><lastBuildDate>Wed, 03 Jul 2019 09:00:00 -0400</lastBuildDate><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3</title><link>/branching-git-with-pytest-3.html</link><description>&lt;!-- Collects all of the includable files into one. --&gt;
+<rss version="2.0"><channel><title>The Collected Works of jjmojojjmojo - tutorial</title><link>/</link><description></description><lastBuildDate>Mon, 21 Sep 2020 10:54:00 -0400</lastBuildDate><item><title>Time-Based NeoPixel Fading In Circuitpython With FancyLED</title><link>/time-based-fading.html</link><description>&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+&lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
+&lt;!-- icons or whatever I want) --&gt;
+&lt;img alt="" class="align-right" src="/images/time-based-fading/banner.gif" style="width: 10em;"/&gt;
+&lt;p&gt;Fading makes LEDs look really cool. It's a less abrupt way of transitioning from off to on, or from one color to the next. Even with Neopixels built-in drivers it can still be daunting, and a source of slowdowns in your code. In this tutorial, we'll explore the considerations for fading, walk through a few different approaches, and present a final approach that works especially well with CircuitPython.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">jjmojojjmojo</dc:creator><pubDate>Mon, 21 Sep 2020 10:54:00 -0400</pubDate><guid isPermaLink="false">tag:None,2020-09-21:/time-based-fading.html</guid><category>tutorial</category><category>circuitpython</category><category>python</category><category>hardware</category><category>state</category></item><item><title>Branching With Git And Testing With Pytest: A Comprehensive Guide: Part 3</title><link>/branching-git-with-pytest-3.html</link><description>&lt;!-- Collects all of the includable files into one. --&gt;
 &lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;

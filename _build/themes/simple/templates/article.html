@@ -6,6 +6,22 @@
 {% block og_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
 {% block meta_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
 
+{% block og_social_image %}
+{% if article.social_image -%}
+    {{article.social_image}}
+{%- else -%}
+    {{ super() }}
+{%- endif %}
+{% endblock %}
+
+{% block twitter_social_image %}
+{% if article.social_image -%}
+    {{article.social_image}}
+{%- else -%}
+    {{ super() }}
+{%- endif %}
+{% endblock %}
+
 {% block head %}
   {{ super() }}
   {% if article.summary %}

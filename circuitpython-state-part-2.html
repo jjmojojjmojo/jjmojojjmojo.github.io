@@ -12,8 +12,6 @@
 <meta content="State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 2: Exploring State And Debouncing The World - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -76,11 +74,11 @@
 <div class="section" id="a-use-case-for-state-debouncing-buttons">
 <h2 id="a use case for state: debouncing buttons">A Use Case For State: Debouncing Buttons</h2>
 <p>Most electronics projects will have to deal with "bouncy" inputs, buttons in particular.</p>
-<p>"Bounce", in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type">boolean</a> value - it's either "on" or "off". It's "HIGH" or "LOW", <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
+<p>"Bounce", in this sense, is essentially a noisy signal. Logically, you would think that if a button was pressed, that it would be a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Boolean_data_type" target="external">boolean</a> value - it's either "on" or "off". It's "HIGH" or "LOW", <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>.</p>
 <p>In reality, these values refer to <em>a voltage</em>, or <em>the lack of a voltage</em>. For our M0/M4 boards, that voltage is 3.3 volts. When the voltage is at 3.3 volts (plus/minus some wiggle room), the pin will read <tt class="docutils literal">True</tt> or "HIGH". The voltage is "on".</p>
 <p>When there's no voltage (plus or minus some wiggle room), the pin will read <tt class="docutils literal">False</tt> or "LOW". The voltage is "off".</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">I'm putting terms like "HIGH", "LOW", "on", and "off" in quotes, and the python booleans, <tt class="docutils literal">False</tt> and <tt class="docutils literal">True</tt> in monotype for a reason: these terms are all mere <em>representations</em> of what a pin is doing. There's an abstraction at work behind the scenes. I want to use terms that you will see in tutorials and documentation, but you shouldn't take them for granted. What they really are, under the covers, will vary depending on the context. These terms are really just convenient ways for human beings to reason about what the microprocessor is doing.</p>
 </div>
 <p>An ideal button being pressed and released might look something like this, if we graphed the voltage over time:</p>
@@ -95,26 +93,26 @@
 <p>In the case of a capacitive input, the capacitance that is increased by the user interacting with it is detectable long before the user has contacted the pad. It's not always possible to determine precisely when someone has contacted the pad, or we're just detecting a change in capacitance because someone is simply near it (we can use this to our advantage in some applications). There's also potential issues with interference that can make the signal more noisy than it should be.</p>
 <p>The two types of inputs are noisy for different reasons, but the problem is the same.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>This all a bit oversimplified. There's a lot more going on when it comes to a digital pin being read, or a capacitive sensor being interacted with. We will get into the (again, overly simplified) concept of "clocking" <a class="reference external" href="{static}/circuitpython-state-3.rst#using-state-to-avoid-blocking#using-state-to-avoid-blocking#using-state-to-avoid-blocking#using-state-to-avoid-blocking">in the next installment</a> - the physical stuff we're discussing here is also affected by the timing of processor cycles.</p>
 <p>The two overly-simplified subjects are very complexly related 😀.</p>
-<p>A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
+<p>A good (but a bit of a feet-first dive) discussion of how the "clock" works is covered in an <a class="reference external" href="https://learn.sparkfun.com/tutorials/digital-logic" target="external">article by sparkfun</a>. It's by no means a complete discussion of what's going on when we read a digital pin. But I figure that if it's a bit hard to wrap your head around as a whole, the Sparkfun article should give you enough keywords to dig further (the other parts of that series are good too).</p>
 <p>I also recommend a book like <em>Code: The Hidden Language of Computer Hardware and Software</em> by Charles Petzold to give a very gentle (but pretty thorough) introduction to how computers (like the processor in our M0/M4 dev boards) work on a fundamental level.</p>
 <p class="last">This is stuff that is important to understand, but you don't need any depth of knowledge of it to accomplish what we set out to do in this series.</p>
 </div>
 <p>Where you think you can use a logical check of a pin's status (<tt class="docutils literal">if pin.value</tt>) in your code to determine if the button is pressed, and do something, it's not that simple. Without smoothing out the signal from the pin, your code will end up executing many times before the button is even fully pressed down. The number of times will vary from button to button, and can even vary from day to day.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For an in-depth analysis of <em>button</em> bounce and possible solutions, check out <a class="reference external" href="http://www.ganssle.com/debouncing.htm">A Guide To Debouncing</a> from the <a class="reference external" href="http://www.ganssle.com/">Ganssle Group</a>. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For an in-depth analysis of <em>button</em> bounce and possible solutions, check out <a class="reference external" href="http://www.ganssle.com/debouncing.htm" target="external">A Guide To Debouncing</a> from the <a class="reference external" href="http://www.ganssle.com/" target="external">Ganssle Group</a>. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.</p>
 </div>
 <p>Maybe for some applications, like turning on an LED only while a button is pressed, it's not really a problem. But if pressing that button has <em>side effects</em> it can be really, really bad.</p>
 <p>What are <em>side effects</em>? These are changes that occur <em>outside</em> of the code that is executing, <em>because</em> of the code. Typically, this means we're altering data outside of our scope (function, method, module, instance, etc), but it can also mean that we're doing something in the "real world", outside of the <em>computer</em>. Altering a global variable would be a side effect, as would turning on an LED. These side effects are pretty innocuous, but imagine the side effect is something like writing data to a file. If things aren't kosher, we might write bad data or corrupt something. What about triggering a relay to turn on or off a piece of dangerous machinery, or sensitive equipment? That could cause physical damage to the equipment, or even hurt someone.</p>
 <p>So it's not just about having clean code that's less bug-prone (the main concern for most programs). Since we're programming an electronic device that interacts with the real world, we have to be especially conscious about side effects, since they could have real-world consequences.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Wikipedia has a pretty good <a class="reference external" href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">article about side effects</a> if you want to read more.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Wikipedia has a pretty good <a class="reference external" href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)" target="external">article about side effects</a> if you want to read more.</p>
 </div>
-<p>There's more to it than just noisy buttons, though. There are other "bouncy" signals that aren't quite as chaotic as button bounce, but need to be dealt with in the same way. This could be digital temperature readings from a <a class="reference external" href="https://en.wikipedia.org/wiki/Thermocouple">thermocouple</a> module (like <a class="reference external" href="https://www.adafruit.com/product/269">this one</a>), or an analog signal derived from the changing resistance of a <a class="reference external" href="https://en.wikipedia.org/wiki/Photoresistor">photoresistor</a>. Button bounce is the most common kind of "noise" you may have to deal with, but it's definitely not the only kind you'll run into in your projects.</p>
+<p>There's more to it than just noisy buttons, though. There are other "bouncy" signals that aren't quite as chaotic as button bounce, but need to be dealt with in the same way. This could be digital temperature readings from a <a class="reference external" href="https://en.wikipedia.org/wiki/Thermocouple" target="external">thermocouple</a> module (like <a class="reference external" href="https://www.adafruit.com/product/269" target="external">this one</a>), or an analog signal derived from the changing resistance of a <a class="reference external" href="https://en.wikipedia.org/wiki/Photoresistor" target="external">photoresistor</a>. Button bounce is the most common kind of "noise" you may have to deal with, but it's definitely not the only kind you'll run into in your projects.</p>
 <p>But there's something else to consider: our goal is, ultimately, to have <em>meaningful</em> signals. We want to only trigger side effects when necessary. You press the button, the LED turns on. Once we account for the noise, we're really close to that goal. However, there's one more obstacle in our way: the manner in which our code is being run by our development board.</p>
 <p>Our microcontroller code runs in a "main loop". In CircuitPython, that's usually a <tt class="docutils literal">while True:</tt> block. Inside of that block, we process inputs, do side effects, etc.</p>
 <p>CircuitPython runs that loop <em>as fast as it possibly can</em>.</p>
@@ -125,7 +123,7 @@
 <p>The easiest way to deal with all of these issues, and the most common seen in "getting started" tutorials, is to "sleep" the processor for a few fractions of a second before checking an input's value. In programming, we use the term <em>block</em> to describe this sort of behavior.</p>
 <p>"Blocking" is any action when you tie up the processor. When code is blocking, little, if anything else can happen until the blocking code finishes. We can't read sensors, we can't turn LEDs on or off, we can't even change variables in memory. Everything is on hold, while we wait for that blocking code to do its thing.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>Code can block for lots of reasons. Input and output (aka <em>IO</em> or <em>I/O</em>) are the main sources of blocking code - CircuitPython is really efficient in how it reads from or writes to digital pins (<em>inputs</em> or <em>outputs</em> to digital pins), but there's still the possibility of blocking when we do. It's just normally so quick that you don't notice it.</p>
 <p>In your own code, it's usually easy to see where you might be blocking, but there can be blocking code lurking in the libraries that you use. Sometimes it's necessary due to the hardware or some protocols that are in use, but sometimes it's possible to accomplish the same functionality without blocking.</p>
 <p>This is one of many reasons it's a good idea to comfortable reading Python (and C/C++, if you can) so you can dig into the source code for libraries.</p>
@@ -138,7 +136,7 @@
 <p>The amount of time it takes for the signal, generated by most buttons, to look more like the ideal square wave in the first chart is around 0.2 seconds.</p>
 <p>There's also a psychological aspect to it. 0.2 seconds has a good "feel" to it - when <em>you</em> press a button, 0.2 seconds is about how long it takes you to feel confident that you've successfully pressed the button.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Look at this number as a <em>starting point</em> when debouncing buttons. You should feel free to experiment with other values in your projects - do what feels right for you and works best for your requirements! There are times when a more sensitive button is more appropriate (like in a video game), and times when a <em>less</em> sensitive button is required (like when your users are kids or people with limited mobility).</p>
 <p>The buttons you use will impact this interval as well. More "quality" buttons will be less noisy, and can handle a shorter interval.</p>
 <p class="last">In any case, be creative, and experiment to find the right values for your use cases. It also doesn't hurt to recruit some friends or family to test your project for you.</p>
@@ -148,12 +146,12 @@
 <p>This works for other inputs too - if we have a really sensitive sensor that is constantly "wiggling" its reading up and down, sampling its value less frequently will give us more stable data to work with.</p>
 <p>Now that blocking code is in place, we can consider the button fully "debounced".</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The actual number of times your code runs is limited by many things, and even in an ideal situation, it will likely never <em>actually</em> run 48 million times per second. It might get close, 30 million, 10 million... It's still <strong>a lot</strong>.</p>
 </div>
 <p>The problem, as you will recall, is that while code is blocking, <em>nothing else is happening</em>.</p>
 <p>This can severely hamper our projects, especially as we graduate from simple "blinky" first steps and get into more complex applications. As we add more buttons, and additional types of sensors, we can't react to user input or changes in sensor reading while we're waiting for a button to stop bouncing. We can't update our outputs either. We can't refresh an LCD display, play a sound,  toggle an LED -- <em>nothing</em>.</p>
-<p>We have to do <em>everything</em> every 0.2 seconds when we block like this. Again, for something simple like our testing code, this is not a big deal. But imagine you are building a video game console, like the <a class="reference external" href="https://arduboy.com/">Arduboy</a>. 0.2 seconds is an <em>eternity</em> when playing a video game. Your user will get frustrated really quickly - or be able to hit every enemy because they're essentially moving in slow-motion. Every frame has to be drawn, every input has to be read, every sprite has to be updated only when the code stops blocking, every 0.2 seconds.</p>
+<p>We have to do <em>everything</em> every 0.2 seconds when we block like this. Again, for something simple like our testing code, this is not a big deal. But imagine you are building a video game console, like the <a class="reference external" href="https://arduboy.com/" target="external">Arduboy</a>. 0.2 seconds is an <em>eternity</em> when playing a video game. Your user will get frustrated really quickly - or be able to hit every enemy because they're essentially moving in slow-motion. Every frame has to be drawn, every input has to be read, every sprite has to be updated only when the code stops blocking, every 0.2 seconds.</p>
 <p>There's another tragic aspect to this: those 48 million cycles we have at our disposal are being <em>completely wasted</em> while we block. We are throwing away processor cycles we could be using to do work. 💔</p>
 <p>Ok, so by now you're thoroughly convinced blocking is bad news. So what can we do instead to debounce our inputs?</p>
 </div>
@@ -161,23 +159,23 @@
 <h2 id="debouncing options">Debouncing Options</h2>
 <p>We have a few viable options:</p>
 <ol class="arabic simple">
-<li>For buttons, we can use an <a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit">R/C filter circuit</a> to clean the input (a.k.a. <em>hardware debouncing</em>).</li>
-<li>We can use an <a class="reference external" href="https://en.wikipedia.org/wiki/Integrated_circuit">integrated circuit, or IC</a> that does debouncing, or input filtering for us.</li>
-<li>We can use <a class="reference external" href="https://www.sparkfun.com/tutorials/326">interrupts</a>.</li>
+<li>For buttons, we can use an <a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit" target="external">R/C filter circuit</a> to clean the input (a.k.a. <em>hardware debouncing</em>).</li>
+<li>We can use an <a class="reference external" href="https://en.wikipedia.org/wiki/Integrated_circuit" target="external">integrated circuit, or IC</a> that does debouncing, or input filtering for us.</li>
+<li>We can use <a class="reference external" href="https://www.sparkfun.com/tutorials/326" target="external">interrupts</a>.</li>
 <li>We can create a data structure that tracks the status over time (or <strong>state</strong>), of our inputs.</li>
 </ol>
 <p>Hardware debouncing is only really useful in situations where the debouncing needs to be <em>rock solid</em>. It requires more components, which increases the cost (more of an issue in industry) and introduces more complexity (more of an issue for us as hobbyists). But even with really solid hardware debouncing, we <em>still</em> need to be concerned with the realities of reading a digital input. Remember, what feels like a momentary press for a human being is an event that lasts many many processor cycles - the signal may be "clean", but we still have to be careful not to take action every single time we notice that clean signal reads "HIGH".</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">R/C ciruits might be overkill for button debouncing, but they are fundamental building blocks of electronics. You should spend some time reading about them and building some, you won't regret it.</p>
 </div>
-<p>Specialized button debouncing ICs are rare and tend to be expensive (the expensive part is again more a problem for industry, but the rare part is a big deal for us as hobbyists). For analog sensors, an IC like an <a class="reference external" href="https://en.wikipedia.org/wiki/Analog-to-digital_converter">analog-to-digital converter</a> could theoretically be used to reduce the sample frequency of a noisy input. We could even program another microcontroller to do debouncing for us.</p>
+<p>Specialized button debouncing ICs are rare and tend to be expensive (the expensive part is again more a problem for industry, but the rare part is a big deal for us as hobbyists). For analog sensors, an IC like an <a class="reference external" href="https://en.wikipedia.org/wiki/Analog-to-digital_converter" target="external">analog-to-digital converter</a> could theoretically be used to reduce the sample frequency of a noisy input. We could even program another microcontroller to do debouncing for us.</p>
 <p>Again, these solutions are more expensive and add complexity. And <em>yet again</em> we still have to be conscious of the fact that even a "clean" signal will be read many, many times per second by our main loop.</p>
 <p>Interrupts are extremely cool - you can configure the processor such that when a pin reads "HIGH", it triggers the execution of a predetermined chunk of code. The ATSAMD21 processor in our M0 boards allow for interrupts on nearly every pin. However, interrupt functionality is not currently exposed in CircuitPython 💔, so it's a non-starter for us.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>If you are interested, Adafruit has a <a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-2/overview">nice guide to interrupts on the Arduino platform</a> available.</p>
-<p class="last"><a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-1/overview">Part 1</a> of the guide covers an alternative approach that is very similar to what we'll be using in this series.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>If you are interested, Adafruit has a <a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-2/overview" target="external">nice guide to interrupts on the Arduino platform</a> available.</p>
+<p class="last"><a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-1/overview" target="external">Part 1</a> of the guide covers an alternative approach that is very similar to what we'll be using in this series.</p>
 </div>
 <p>Ultimately, tracking this so-called <em>state</em> is really the best option most of the time - and as we've seen, even with other debouncing methods, we will still need to deal with it (we just didn't call it <em>state</em> above 😉).</p>
 <p>In the next section, we'll start from the ground up and really dig into what state is all about. We'll see how it's ideal for cleaning inputs, and also how it opens up some really useful pattens for making our code cleaner and more reliable.</p>
@@ -192,7 +190,7 @@
 <p>Another way to say this is that water's <em>temperature attribute</em> has changed to a value above 100&deg;, and so the <em>state</em> has <em>transitioned</em> to "steam". Now that it's in the "steam" state, there are other attributes that have changed besides the temperature (its density, for one), and it has new attributes - it can do new things, like fill a space.</p>
 <p>The same is true for water condensing, melting, or freezing - the state changes as water's attributes change, and new attributes emerge.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">In programming, "properties" and "attributes" are often used interchangeably. We're settling on the term "attributes", since that's the term most commonly used in Python when talking about classes (which we'll get to later).</p>
 </div>
 <p>Water has multiple attributes in each state. We could record each of those attributes numerically - the temperature, the volume, the density - even attributes that are more binary (true/false) like "solid" and "liquid". Keep this in the back of your mind for now.</p>
@@ -232,8 +230,8 @@
 </td></tr></table></div><p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics! What if we wanted to track how these values change over time?</p>
 <p>We can simplify and generalize things a bit by using Python's built-in data structures.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview">simple guide</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview" target="external">simple guide</a>.</p>
 </div>
 <p>There are many, many ways to model a match like this, here's just one using lists and dictionaries:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -285,13 +283,13 @@
 <p>In a microcontroller project, we're dealing more with what might be called <em>global state</em> - a single group of attributes that are used by the whole project. We need to track our buttons, digital pins and sensors in one place, and use the values throughout our project. It would be best to have a <em>single source of truth</em>, or one place to look for information about what state our project is in.</p>
 <p>With the gymnastics example, we've covered capturing multiple states, and we've stored them in multiple places (either individual variables or a more complex structure, but each score is separate).</p>
 <p>In a microcontroller project, our state is a bit different. Since we have a fixed number of buttons, we just need to know if they are pressed or not. Our gymnastics example was more like a ledger, and we need something different.</p>
-<p>A better analogy that more closely models our requirements is the <a class="reference external" href="https://en.wikipedia.org/wiki/Scoreboard">scoreboard</a> from a team-based sport. A sports arena/field will typically have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.</p>
+<p>A better analogy that more closely models our requirements is the <a class="reference external" href="https://en.wikipedia.org/wiki/Scoreboard" target="external">scoreboard</a> from a team-based sport. A sports arena/field will typically have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.</p>
 <p>Here's a contrived example of a typical scoreboard from an American baseball stadium:</p>
 <a href="/images/fullsize/nonblocking-state-examples-03.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-03.jpg" srcset="/images/responsive/nonblocking-state-examples-03-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-03-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-03-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-03-800.jpg 800w,/images/responsive/nonblocking-state-examples-03-400.jpg 400w,/images/responsive/nonblocking-state-examples-03-200.jpg 200w" style="width: 80%;"/></a>
 <p>It has various regions with indicators, usually lights, and numbers representing the state of the game. Each one represents an independent piece of important information. That information changes as the game progresses. Outs are made, points (runs) are scored by each team, innings go by (there are 9 in a typical baseball game). Other bits of data are recorded too - <em>balls</em>, <em>strikes</em>, <em>outs</em>. These are used to move the game along in various ways.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">The nuances and rules for American baseball are not relevant to our discussion. However, if you aren't familiar with the game, and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball">wikipedia article</a> is the place to start.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">The nuances and rules for American baseball are not relevant to our discussion. However, if you aren't familiar with the game, and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball" target="external">wikipedia article</a> is the place to start.</p>
 </div>
 <p>We can model a scoreboard as a series of individual variables, like we did initially for the gymnastics match:</p>
 <a href="/images/fullsize/nonblocking-state-examples-04.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-04.jpg" srcset="/images/responsive/nonblocking-state-examples-04-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-04-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-04-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-04-800.jpg 800w,/images/responsive/nonblocking-state-examples-04-400.jpg 400w,/images/responsive/nonblocking-state-examples-04-200.jpg 200w" style="width: 80%;"/></a>
@@ -325,13 +323,13 @@
 </td></tr></table></div><p>So we have a single, global state variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
 <p>This has the advantage over using a series of variables in that it is more compact, but flexible - we're only using up one variable name, and the names of our state attributes can be almost anything - words with spaces, dashes, even other objects.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For an object to be used as a dictionary key, it must be <a class="reference external" href="https://docs.python.org/3.6/glossary.html#term-hashable">hashable</a>.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For an object to be used as a dictionary key, it must be <a class="reference external" href="https://docs.python.org/3.6/glossary.html#term-hashable" target="external">hashable</a>.</p>
 </div>
 <p>Another advantage is that we don't have to worry about collisions with other variable names - say we're recording the number of balls scored in a variable called <tt class="docutils literal">balls</tt> instead of <tt class="docutils literal">ball</tt>, and we're also tracking the number of baseballs that have been used in the game. If we called that variable <tt class="docutils literal">balls</tt> as well, it would conflict with the special state variable that has a totally different meaning.</p>
 <p>Since the dictionary is self-contained, we only have to worry about conflicts between key names within it - we don't have to be concerned with what's going on in the rest of the code.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>I admit this example is a bit contrived. You may be thinking "well, why can't we just name it <tt class="docutils literal">baseballs</tt> or <tt class="docutils literal">balls_used</tt> and call it a day?"</p>
 <p>This is true, and would be a totally acceptable solution. But keeping all of your variables separate in the same scope can get really messy over time.</p>
 <p>As the project progresses, say you also need to track baseballs lost, and baseballs that were caught by fans. Again, you could add more global variables with names like <tt class="docutils literal">balls_caught</tt>, and <tt class="docutils literal">balls_lost</tt>. But now we have 4 variables. Some are related (referring to actual baseballs) and one is completely different (<tt class="docutils literal">balls</tt>, referring to a kind of score that affects the progress of the game).</p>
@@ -400,10 +398,10 @@
 <p>A <em>class</em>, in the simplest terms, is a data structure that contains <strong>variables</strong> (called <em>attributes</em> in Python, you may see them referred to as <em>properties</em> as well), and <strong>functions</strong> (called <em>methods</em>).</p>
 <p>What makes classes special is that they are used as a blueprint for creating new objects. You define what your class looks like once, and then create <em>instances</em> of your class that store your data.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>There is a <em>ton</em> more to classes in Python. This is called <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object-Oriented Programming</a> (OOP), and is a whole school of thought (or <em>paradigm</em>) unto itself.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>There is a <em>ton</em> more to classes in Python. This is called <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="external">Object-Oriented Programming</a> (OOP), and is a whole school of thought (or <em>paradigm</em>) unto itself.</p>
 <p>I'm not going to go into too much detail here, since there is much to discuss.</p>
-<p class="last">A good place to start is <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">the python OOP tutorial</a>.</p>
+<p class="last">A good place to start is <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html" target="external">the python OOP tutorial</a>.</p>
 </div>
 <p>For our purposes, classes provide a way of reasoning about state in a self-contained manner. The class contains all of our state variables as <em>attributes</em>, and it has <em>methods</em> that provide functionality. We can extend the class if we need to, and can even use it to handle global state for multiple, similar parts of our project.</p>
 <p>Attributes are like our state variables - just data that's being stored.</p>
@@ -473,15 +471,15 @@
 <p><strong>Lines 2-12</strong> define the <em>constructor</em> of the class, which is always named <tt class="docutils literal">__init__()</tt>. This method is called only once, when the class instance is initially created.</p>
 <p>In Python, a class method name surrounded by two underscores on each side is considered "magic" - it has special meaning, like how this method is the constructor.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Magic methods are a extremely useful feature of Python, and are worth researching fully.</p>
-<p class="last">Check out this <a class="reference external" href="https://rszalski.github.io/magicmethods/">comprehensive view of magic methods in Python</a> for more information.</p>
+<p class="last">Check out this <a class="reference external" href="https://rszalski.github.io/magicmethods/" target="external">comprehensive view of magic methods in Python</a> for more information.</p>
 </div>
 <p>The constructor is used to establish all of the default values for the instance attributes. That's what's occurring on <strong>lines 3-12</strong>.</p>
 <p><em>Instance methods</em> are defined on <strong>lines 14-15</strong> (<tt class="docutils literal">tied()</tt>), and <strong>17-24</strong> (<tt class="docutils literal">next_inning()</tt>).</p>
 <p>Instance methods are methods that operate on an instance of a class. A reference to the instance is passed to all instance methods, named <tt class="docutils literal">self</tt>. We call them <em>instance</em> methods to differentiate them from <em>class methods</em>. Class attributes are explained a bit later on in this article. The thing to know about class <em>methods</em> is that instead of the first parameter being a reference to the <em>instance</em>, its a reference to the <em>class</em>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Most of the time you won't have to deal with class methods. In fact, to use them, you must decorate a method with the special <tt class="docutils literal">@classmethod</tt> decorator.</p>
 </div>
 <p><tt class="docutils literal">tied()</tt> will returns <tt class="docutils literal">True</tt> if the game is tied, and <tt class="docutils literal">False</tt> if not.</p>
@@ -532,7 +530,7 @@
 <p>We've discussed a problem that we can solve with state, button debouncing.</p>
 <p>In the next article, we'll actually apply what we've learned to debounce buttons without blocking, do some more OOP in CircuitPython, and explore what state can do for us in more detail.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Good news! You don't have to wait, <a class="reference external" href="/circuitpython-state-part-3.html">part 3 is up now!</a></p>
 </div>
 </div>

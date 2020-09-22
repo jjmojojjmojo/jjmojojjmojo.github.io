@@ -1,15 +1,20 @@
-How To Become A More Efficient Programmer
-#########################################
-:date: 2013-02-12 08:43
+How To Become A More Efficient Programmer [REISSUE]
+###################################################
+:date: 2020-09-10 08:43
 :author: jjmojojjmojo
 :category: culture, efficiency, programming
-:tags: minimal effort, software
+:tags: minimal effort, software, reissues
 :slug: how-to-become-a-more-efficient-programmer
 :status: draft
 
+.. include:: ../emojis.rst
 
-A few basic concepts I've found essential in getting great work done
-*fast*.
+Originally written in 2013, this essay covers approaches and philosophical building blocks that have helped make me successful over my career.
+
+In this reissue, I've edited it down a bit and fixed a few things. It's meant for anyone looking to 8X their 10X productivity, and to benefit beginners who might be missing some of the pieces.
+
+.. PELICAN_END_SUMMARY
+
 
 Get Better Requirements Up Front
 ================================
@@ -94,20 +99,15 @@ code that can more effectively be replaced or reworked.
 Utilize Design Patterns
 =======================
 
-*I sleep with the `GoF
-book <http://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612>`__
-under my pillow at night.*
-
-Seriously, design patterns are not a magic bullet, but remember why they
-exist - because software is repetitive.
+Design patterns are not a magic bullet, but remember why they
+exist - because *software is repetitive*.
 
 I've found the hardest part of any project is not writing the code. The
 real challenge is *engineering the solution*.
 
 Design patterns lay out a foundation of practical approaches that have
 been tested both intellectually and practically, over time. They help us
-articulate a software problem - they act as a sort of *solution
-vocabulary*.
+articulate a software problem - they act as a sort of *solution vocabulary*.
 
 Building up a solution out of a series of design patterns means less
 engineering work, less communication parity between developers, and
@@ -115,15 +115,14 @@ fewer engineering 'near misses'.
 
 Also, don't forget there are design patterns in other areas besides OOP
 work - and sometimes, they're not called 'design patterns'.  For
-example, check out this repository of `Enterprise Data
-Models <http://www.databaseanswers.org/data_models/>`__.
+example, check out this repository of `Enterprise Data Models <http://www.databaseanswers.org/data_models/>`__.
 
 Communicate Effectively
 =======================
 
 Absolute transparency coupled with free-flowing communication is
 essential to a healthy project... *assuming that your stakeholders
-actually understand what you're doing* :)
+actually understand what you're doing* |cool|
 
 It's important to channel information in constructive ways, and tailor
 it to your audience.

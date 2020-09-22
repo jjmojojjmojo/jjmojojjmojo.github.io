@@ -12,8 +12,6 @@
 <meta content="State And Events In CircuitPython: Part 5: A Generic State Dispatcher - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="State And Events In CircuitPython: Part 5: A Generic State Dispatcher - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   State And Events In CircuitPython: Part 5: A Generic State Dispatcher - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -81,7 +79,7 @@
 <p>When we create a new instance of a class, the <em>constuctor</em> is called. In Python, constructors have a special name, <tt class="docutils literal">__init__()</tt>.</p>
 <p>Up until now, we've used the constructors of our classes to just set up the default state of our objects. However, like all methods, it's possible to allow a constructor to accept parameters.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">All instance methods always take an instance object, named <tt class="docutils literal">self</tt> by convention, as the first parameter.</p>
 </div>
 <p>These parameters can be used for whatever purpose we choose, but are typically used to configure how the instance should operate.</p>
@@ -302,7 +300,7 @@
 <p>This was a great example of polymorphism at work. It's easy to read and use. However, there are times when this extra code is unneeded. With complex classes, or in situations where a lot has to change, it can be tedious to have to write the same code over and over. There tends to be a minimum amount of code that must be written to use a base class - this is called <em>boilerplate</em>. As elegant as it can be, it can also become quite tedious.</p>
 <p>It's also hard to change values while the code is executing. We're using <em>class attributes</em> so they can be overriden in child classes. This means that we can't easily change these values once we invoke the class and create the instance.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>🤔 Remember, <em>class attributes</em> are different from <em>instance attributes</em>.</p>
 <p><strong>Class attributes</strong> are defined in the class. They can be accessed from instances, and overridden by child classes. They cannot be changed from an instance.</p>
 <p><strong>Instance attributes</strong> exist in the instance, after its instantiated. They are not affected by class inheritance. They can be changed by instances.</p>
@@ -506,13 +504,13 @@
 </ul>
 <p>One thing thats important to discuss before we go on is the use of <tt class="docutils literal">None</tt> for the default <tt class="docutils literal">color</tt> and <tt class="docutils literal">ranges</tt> arguments. This is done because only <em>immutable</em> types can be set as default values in a function or method definition. This typically means strings, numbers (integers, floats), and tuples. Anything else will create unexpected behavior.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>The <a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/index.html">Little Book Of Python Anti-Patterns</a> has a <a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/correctness/mutable_default_value_as_argument.html">nice illustration</a> of the problems you can run into when trying to use a mutable object as a default.</p>
-<p class="last">There's also a <a class="reference external" href="http://effbot.org/zone/default-values.htm">classic explanation</a> over at <a class="reference external" href="http://effbot.org">effbot.org</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>The <a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/index.html" target="external">Little Book Of Python Anti-Patterns</a> has a <a class="reference external" href="https://docs.quantifiedcode.com/python-anti-patterns/correctness/mutable_default_value_as_argument.html" target="external">nice illustration</a> of the problems you can run into when trying to use a mutable object as a default.</p>
+<p class="last">There's also a <a class="reference external" href="http://effbot.org/zone/default-values.htm" target="external">classic explanation</a> over at <a class="reference external" href="http://effbot.org" target="external">effbot.org</a>.</p>
 </div>
 <p>So instead of setting the default there, we use a value we can easily differentiate from what we want, <tt class="docutils literal">None</tt>. We then check to see if the argument <tt class="docutils literal">is None</tt> to ensure the user hasn't passed something similar but not <tt class="docutils literal">None</tt> itself (which is passed automatically when the argument isn't provided).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>This some what strained phrasing is because if we were to use something else, like <tt class="docutils literal">False</tt> or an empty string <tt class="docutils literal">""</tt>, we would have trouble telling if the user passed an empty dictionary <tt class="docutils literal">{}</tt>, another "false" object like <tt class="docutils literal">0</tt>, etc.</p>
 <p><tt class="docutils literal">None</tt> is a nice choice because it is a global <em>singleton</em>, meaning there is one and only one <tt class="docutils literal">None</tt>. We know for sure that if <tt class="docutils literal">None</tt> was passed, the user didn't provide any value.</p>
 <p class="last">Now, we can also take advantage of the fact that <tt class="docutils literal">None</tt> is also a boolean false value - if we just check if the value is true, and if it's not, that could mean they passed any number of 'false' values, <tt class="docutils literal">""</tt>, <tt class="docutils literal">0</tt>, <tt class="docutils literal">[]</tt>, etc. This is risky because it's "magical", but can sometimes be useful.</p>
@@ -523,8 +521,8 @@
 <h2 id="passing functions as configuration and dependency injection">Passing Functions As Configuration And Dependency Injection</h2>
 <p>In the example above, we're passing <em>functions</em> (<tt class="docutils literal">thermistor_read</tt> and <tt class="docutils literal">photocell_read</tt>) to the constructor of our <tt class="docutils literal">Status</tt> class. The function is passed into the <tt class="docutils literal">read_input</tt> argument. We then assign the function to a 'private' instance attribute called <tt class="docutils literal">_read_input</tt>, and ultimately call that function inside of our class method <tt class="docutils literal">read_input()</tt>. So our <tt class="docutils literal">read_input()</tt> method is a <em>proxy</em> for whatever function was passed into the constructor.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">This is a simple example of <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern">The Proxy Pattern</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">This is a simple example of <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern" target="external">The Proxy Pattern</a>.</p>
 </div>
 <p>Passing functions as arguments is a really interesting feature of Python and a few other languages that can be a little weird at first glance.</p>
 <p>We briefly touched on <em>immutable</em> vs <em>mutable</em> objects earlier. <strong>Mutable</strong> basically means "can be changed", so <strong>immutable</strong> means "can not be changed". Immutable values in Python include strings, most numbers, and tuples. Note how you interact with these objects: you use methods, and operators, but you always get a new object as a result. In fact, you aren't allowed to change them:</p>
@@ -565,7 +563,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mylist</span>
 <span class="go">[' ', '!', 'e', 'h', 'l', 'l', 'o', 'o', 'p', 't', 'y']</span>
 </pre></div>
-</td></tr></table></div><p>This is important because of another concept in programming that is important to be aware of: <em>passing by reference</em>. It's a <a class="reference external" href="https://stackoverflow.com/questions/373419/whats-the-difference-between-passing-by-reference-vs-passing-by-value">much discussed</a> topic, but we can summarize it like this:</p>
+</td></tr></table></div><p>This is important because of another concept in programming that is important to be aware of: <em>passing by reference</em>. It's a <a class="reference external" href="https://stackoverflow.com/questions/373419/whats-the-difference-between-passing-by-reference-vs-passing-by-value" target="external">much discussed</a> topic, but we can summarize it like this:</p>
 <div class="line-block">
 <div class="line">When an object is passed to a function (or method) <strong>by reference</strong>, changes to the object inside the function affect the object <strong>outside the function</strong>.</div>
 </div>
@@ -642,7 +640,7 @@
 </pre></div>
 </td></tr></table></div><p>You can see how we can call functions, pass functions as arguments, and even pass arguments that are passed as arguments to the functions we pass! 🦄</p>
 <p>We leverage this in our new <tt class="docutils literal">Status</tt> class above to allow the user to pass any callable object to the constructor, to configure how the value that controls the status light is checked.</p>
-<p>This opens a lot of really interesting possibilities. In fact, an entire design pattern has been developed around this basic idea, called <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a>.</p>
+<p>This opens a lot of really interesting possibilities. In fact, an entire design pattern has been developed around this basic idea, called <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection" target="external">Dependency Injection</a>.</p>
 <p>You may have noticed one other major difference between our original example and this new one: <em>we are no longer dispatching to event methods</em>.</p>
 <p>We can fix this by leveraging our new dependency injection knowledge (here's the whole working script so you can try this out):</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
@@ -1032,14 +1030,14 @@
 </td></tr></table></div><p>We will create an <tt class="docutils literal">AnalogInput</tt> object for each sensor. These objects will handle all of the data tracking and sampling. We've continued to use the "constructor configuration" approach for this class, and so you have to pass a callable that will return the value of the input, just as before.</p>
 <p>One major difference is that, instead of calling <tt class="docutils literal">dispatch()</tt> when a change event is detected, we instead change the internal <tt class="docutils literal">changed</tt> attribute. So instead of encapsulating four events (<em>high</em>, <em>medium</em>, <em>low</em> and <em>changed</em>), we are only encapsulating the one <em>changed</em> event.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The <em>changed</em> event was obscured within the <tt class="docutils literal">update()</tt> method in our previous implementation. We've replicated it in the <tt class="docutils literal">__call__()</tt> method of <tt class="docutils literal">AnalogInput</tt>.</p>
 </div>
 <p>The other change is that we've constructed our class to be <em>callable</em> - instances of the <tt class="docutils literal">AnalogInput</tt> class can now be called just like a function to update it, instead of calling the <tt class="docutils literal">update()</tt> method.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Like <tt class="docutils literal">__init__()</tt>, <tt class="docutils literal">__call__()</tt> is one of Python's "magic" methods. These methods are used by the language to control behavior of objects under certain circumstances.</p>
-<p class="last">Rafe Kettler has a great guide to all the amazing things you can do with magic methods online, <a class="reference external" href="https://rszalski.github.io/magicmethods/">A Guide to Python's Magic Methods</a>.</p>
+<p class="last">Rafe Kettler has a great guide to all the amazing things you can do with magic methods online, <a class="reference external" href="https://rszalski.github.io/magicmethods/" target="external">A Guide to Python's Magic Methods</a>.</p>
 </div>
 <p>One final note, it may be a little confusing to see <tt class="docutils literal">_value</tt> and <tt class="docutils literal">value</tt> used to basically do the same thing: store the current value of the analog input. The difference is that <tt class="docutils literal">value</tt> is the value from the <em>last time things changed</em>, and <tt class="docutils literal">_value</tt> is the up-to-the-second value.</p>
 <p>We can configure the classes easily, and use the <tt class="docutils literal">changed</tt> attribute to trigger other events:</p>
@@ -2202,16 +2200,16 @@
 <p><strong>Lines 12-15</strong> establish the default state attributes the dispatcher uses to do its work. <tt class="docutils literal">checkin</tt> is the time keeping attribute. <tt class="docutils literal">holding</tt> is used to indicate if the button is currently being held. <tt class="docutils literal">hold_count</tt> tracks how many times the <em>hold</em> event has been detected. Finally <tt class="docutils literal">state</tt> is the state of the button, the last time it was read.</p>
 <p><strong>Line 18</strong> stashes the <tt class="docutils literal">check</tt> function passed to the constructor in an instance variable (<tt class="docutils literal">get_value</tt>) so it can be used later. This is a really cool feature of Python: you can pass functions around like any other kind of data. This means you can pass them to a constructor and assign them to an instance attribute like we've done here. To call the <tt class="docutils literal">check</tt> function passed in the constructor, we can call <tt class="docutils literal">self.get_value()</tt>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">This can be a little confusing, since this looks a lot like an instance method. The way to tell the difference is that an instance method always receives a <tt class="docutils literal">self</tt> attribute as its first argument.</p>
 </div>
 <p><strong>Lines 21-23</strong> assign the event handlers to instance attributes in the same way. We've named the instance attributes <tt class="docutils literal">onpress</tt>, <tt class="docutils literal">onrelease</tt> and <tt class="docutils literal">onhold</tt> - these names are a call back to event handlers in HTML. They are named such to differentiate them from the instance methods that are called when events are detected.</p>
 <p>The <tt class="docutils literal">release</tt>, <tt class="docutils literal">check</tt>, <tt class="docutils literal">hold</tt>, and <tt class="docutils literal">press</tt> methods defined on <strong>lines 25-52</strong> are proxies for the functions that were passed in the constructor. With the exception of <tt class="docutils literal">check</tt>, they all follow the same pattern. They first update any state attributes required because of the event detection. Then they check if the handler was defined (<tt class="docutils literal">is not None</tt>), and if it was, they call it. Finally, they update the <tt class="docutils literal">checkin</tt> time.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>It may seem a little odd that these functions are so simplistic. But the structure of the class has a specific purpose.</p>
 <p>The dispatcher has been constructed this way so that you could build one with the <em>same</em> API, that doesn't rely on external functions being passed into the constructor.</p>
-<p>You can instead hard-code what you want to happen in each event. To do different things for different buttons, you can use <a class="reference external" href="https://www.python-course.eu/python3_inheritance.php">class inheritence</a> to add in the special functionality.</p>
+<p>You can instead hard-code what you want to happen in each event. To do different things for different buttons, you can use <a class="reference external" href="https://www.python-course.eu/python3_inheritance.php" target="external">class inheritence</a> to add in the special functionality.</p>
 <p class="last">I find passing functions into the constructor to be much more flexible and straightforward, but the other approach is valid too, so I designed the class to be compatible with it.</p>
 </div>
 <p>On <strong>lines 54-69</strong>, the <tt class="docutils literal">__call__()</tt> 'magic' method makes instances of <tt class="docutils literal">ButtonDispatch</tt> <em>callable</em> - they can be invoked just like a function (we utilize this on <strong>line 89</strong>). When they are invoked that way, the <tt class="docutils literal">__call__()</tt> method is called. We use this as a central access point for making the event dispatch work.</p>
@@ -2234,7 +2232,7 @@
           a <a href="/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
 </video>
 </div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>This implementation is designed to still do the <em>accounting</em> for each event even if no event is set - it may be more efficient to avoid calling the press/hold/release method if one isn't provided.</p>
 <p class="last">You may also want to consider removing events, such as <em>hold</em>, if you aren't using them in your project.</p>
 </div>
@@ -2607,7 +2605,7 @@
 </div><p>The primary difference here is just the addition of the <tt class="docutils literal">token</tt> property, and the added requirement that it is now a parameter of each event handler function.</p>
 <p>Now using only three event functions, we can handle events for many, many buttons. Each event will produce a different effect depending on which button triggered it (in this case different messages will be printed to the console).</p>
 <p>The token has also been passed to the <tt class="docutils literal">check()</tt> function, so that has been centralized as well.</p>
-<p>This is a common pattern in programming, a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Message_passing">message passing</a>.</p>
+<p>This is a common pattern in programming, a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Message_passing" target="external">message passing</a>.</p>
 <p>You may also have noticed that you can press both buttons <em>simultaneously</em>. The events are not actually firing at the same time, however, they are firing one after the other. It just happens so quickly that they appear to be simultaneous.</p>
 </div>
 <div class="section" id="muti-button-events">
@@ -2665,7 +2663,7 @@
 </div>
 <p>This will cover most use cases. As mentioned before, complex button pressing scenarios are not common - they are necessary sometimes when there are a limited number of buttons, or the greater functionality of the project is rather complex (playing chords on a musical instrument for example).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This code prevents the <em>release</em> events from firing, and doesn't cover the <em>both buttons released</em> event. Handling this would require some refactoring and additional logic. It was left out of this example for the sake of simplicity - the technique covered next is the best way to handle anything more complex than a simple <em>both buttons pressed</em> sort of event as illustrated above.</p>
 </div>
 <p>When this extra complexity is necessary, it's best to separate the state of each button into a central state object, like we did earlier. We can either access that global object directly in our handlers, or pass it as an additional argument to them.</p>
@@ -3112,7 +3110,7 @@
 <p>A few key differences to note:</p>
 <ul class="simple">
 <li>We are again using a global <tt class="docutils literal">state</tt> object, in this case a dictionary instead of a class for illustration purposes. While the state tracked in <tt class="docutils literal">ButtonDispatch</tt> is sufficient for almost all of the state we need for this example, in most applications, tracking would be necessary anyway. Having the button state outside of the <tt class="docutils literal">ButtonDispatch</tt> class also separates the button state tracking from the event detection and handling, but sharing the variable means we can keep all state in one place.</li>
-<li>As mentioned earler, we're taking advantage of Python's <em>getters</em> and <em>setters</em> functionality so that when you change the <tt class="docutils literal">ButtonDispatch</tt> object's state, it's actually changing our <tt class="docutils literal">state</tt> dictionary. This is an example of the <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern">Proxy Pattern</a> in action.</li>
+<li>As mentioned earler, we're taking advantage of Python's <em>getters</em> and <em>setters</em> functionality so that when you change the <tt class="docutils literal">ButtonDispatch</tt> object's state, it's actually changing our <tt class="docutils literal">state</tt> dictionary. This is an example of the <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern" target="external">Proxy Pattern</a> in action.</li>
 <li>We've taken advantage of our new <tt class="docutils literal">state</tt> dictionary to track whether or not both buttons are pressed (the <tt class="docutils literal">both</tt> key). This acts as a <em>guard</em> so that we can differentiate between events.</li>
 <li>We've been able to handle some very complex situations in a very simple way - we cover the <em>both buttons pressed</em>, <em>both buttons released</em>, <em>b button pressed while a button is held</em> and <em>b button released while a button is held</em> events without a lot of code.</li>
 </ul>

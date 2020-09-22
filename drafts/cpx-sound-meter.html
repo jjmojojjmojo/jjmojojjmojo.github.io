@@ -12,8 +12,6 @@
 <meta content="Application Of State: A CircuitPlayground Express Sound Meter - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Application Of State: A CircuitPlayground Express Sound Meter - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Application Of State: A CircuitPlayground Express Sound Meter - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -73,12 +71,12 @@
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
-<p>In this tutorial, we'll build a <em>sound meter</em> using the never-boring <a class="reference external" href="https://www.adafruit.com/product/3333">Circuit Playground Express</a>. Building on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/playground-sound-meter">example in the CircuitPlayground Express docs</a>, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management.</p>
+<p>In this tutorial, we'll build a <em>sound meter</em> using the never-boring <a class="reference external" href="https://www.adafruit.com/product/3333" target="external">Circuit Playground Express</a>. Building on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/playground-sound-meter" target="external">example in the CircuitPlayground Express docs</a>, we'll improve the overall performance in a few key ways, and use an event-driven approach based on state management.</p>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="author-s-note">
 <h2 id="author's note">Author's Note</h2>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Feel free to skip this section! 🦄</p>
 </div>
 <p>In putting together <a class="reference external" href="/pages/circuitpython-state.html">State And Events In CircuitPython</a> in 2018, I found myself in a bit of a quagmire. I initially wrote the series as one very, very long article early in the year, and as I broke things up, the scope of the series expanded quite a bit.</p>
@@ -103,17 +101,17 @@
 </ul>
 <p>I'd highly suggest using the mu editor as well.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If you'd like to see walk-throughs of building equivalent circuits using a different board and separate components, please reach out to the author.</p>
 </div>
 <div class="section" id="update-the-firmware">
 <h3>Update The Firmware</h3>
 <p>This tutorial was written using CircuitPython ﻿4.0.2. You should always use the latest available firmware.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Please contact the author if you have any trouble with later versions of CircuitPython.</p>
 </div>
-<p>To update, follow the instructions at <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-quickstart">Adafruit's CPX Page</a>.</p>
+<p>To update, follow the instructions at <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-quickstart" target="external">Adafruit's CPX Page</a>.</p>
 </div>
 </div>
 <div class="section" id="basics-of-the-components-we-re-using">

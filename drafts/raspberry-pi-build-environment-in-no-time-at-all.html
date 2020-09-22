@@ -12,8 +12,6 @@
 <meta content="Raspberry Pi Build Environment In No Time At All - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Raspberry Pi Build Environment In No Time At All - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Raspberry Pi Build Environment In No Time At All - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -67,15 +65,15 @@
   You are viewing a <strong>draft</strong> document. It may contain inaccurate, misleading, or unvetted information.
   </div>
 <div class="entry-content status-draft">
-<p>Leveraging <a class="reference external" href="http://proot.me/">PRoot</a> and <a class="reference external" href="www.qemu.org">qemu</a>,
+<p>Leveraging <a class="reference external" href="http://proot.me/" target="external">PRoot</a> and <a class="reference external" href="www.qemu.org">qemu</a>,
 it's easy to configure Raspberry Pi's, build and install packages,
 without the need to do so on&nbsp;physical hardware. It's especially nice if
 you have to work with many disk images at once, create specialized
 distributions, reset passwords, or install/customize
 applications&nbsp;that&nbsp;aren't yet in the official repositories.</p>
 <p>I've recently dug in to building apps and doing fun things with the
-<a class="reference external" href="https://www.raspberrypi.org/">Raspberry Pi</a>. With the recent release
-of the <a class="reference external" href="https://www.raspberrypi.org/blog/page/6/#raspberry-pi-2-on-sale">Raspberry Pi 2</a>,
+<a class="reference external" href="https://www.raspberrypi.org/" target="external">Raspberry Pi</a>. With the recent release
+of the <a class="reference external" href="https://www.raspberrypi.org/blog/page/6/#raspberry-pi-2-on-sale" target="external">Raspberry Pi 2</a>,
 its an even more exciting platform. I've documented what I've been using
 to make my workflow more productive.</p>
 <div class="section" id="table-of-contents">
@@ -108,17 +106,17 @@ to make my workflow more productive.</p>
 <div class="section" id="setup">
 <h2 id="setup"><a class="toc-backref" href="#id2">Setup</a></h2>
 <p>We'll use a Linux machine. Below are setup instructions for
-<a class="reference external" href="http://www.ubuntu.com/">Ubuntu</a> and
-<a class="reference external" href="https://www.archlinux.org/">Arch</a>. I prefer Arch for desktop and
-personal work, I use <a class="reference external" href="https://www.debian.org/">Debian</a> or Ubuntu for
+<a class="reference external" href="http://www.ubuntu.com/" target="external">Ubuntu</a> and
+<a class="reference external" href="https://www.archlinux.org/" target="external">Arch</a>. I prefer Arch for desktop and
+personal work, I use <a class="reference external" href="https://www.debian.org/" target="external">Debian</a> or Ubuntu for
 production deployments.</p>
 <p>Arch Linux is a great "tinkerer's" distribution - if you haven't used it
-before it's worth checking out. It's <a class="reference external" href="http://archlinuxarm.org/">great on the Raspberry Pi</a>.</p>
+before it's worth checking out. It's <a class="reference external" href="http://archlinuxarm.org/" target="external">great on the Raspberry Pi</a>.</p>
 <p>Debian and Ubuntu have some differences, but share the same base and use
 the same package management system
-(<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">apt</a>). I've
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool" target="external">apt</a>). I've
 included instructions for&nbsp;Ubuntu in particular, since it's&nbsp;the most
-similar to <a class="reference external" href="http://www.raspbian.org/">Raspbian</a>, the
+similar to <a class="reference external" href="http://www.raspbian.org/" target="external">Raspbian</a>, the
 default&nbsp;Raspberry Pi operating system, and folks may be more familiar
 with that environment.</p>
 <p>Generally speaking, you'll need the following things:</p>
@@ -126,11 +124,11 @@ with that environment.</p>
 <li>A physical computer or virtual machine running some version of Linux
 (setup instructions are provided for the latest Arch and Ubuntu, but
 any Linux should work).</li>
-<li><a class="reference external" href="https://www.raspberrypi.org/downloads/">Installation files&nbsp;for the Raspberry Pi.</a></li>
-<li>SD cards <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/sd-cards.md">suitable for whatever Raspberry Pi you have</a>.
+<li><a class="reference external" href="https://www.raspberrypi.org/downloads/" target="external">Installation files&nbsp;for the Raspberry Pi.</a></li>
+<li>SD cards <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/sd-cards.md" target="external">suitable for whatever Raspberry Pi you have</a>.
 We'll learn how to work with raw disk images and how to copy disk images to SD cards.</li>
-<li><a class="reference external" href="http://www.qemu.org">QEMU</a>, an emulator system, and it's <a class="reference external" href="http://en.wikipedia.org/wiki/ARM_architecture">ARM processor</a> support (the Raspberry Pi uses an ARM processor).</li>
-<li><a class="reference external" href="http://proot.me/">PRoot</a>&nbsp;- a convenience tool that makes it
+<li><a class="reference external" href="http://www.qemu.org" target="external">QEMU</a>, an emulator system, and it's <a class="reference external" href="http://en.wikipedia.org/wiki/ARM_architecture" target="external">ARM processor</a> support (the Raspberry Pi uses an ARM processor).</li>
+<li><a class="reference external" href="http://proot.me/" target="external">PRoot</a>&nbsp;- a convenience tool that makes it
 easy&nbsp;to mount a "foreign" filesystem and run commands inside of it
 without booting.</li>
 <li>A way to create disk images, and mount them like physical devices.</li>
@@ -138,38 +136,38 @@ without booting.</li>
 <p>Once the packages are installed, the commands and processes for building
 and working with Raspberry Pi boot disks are the same.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We assume you have <a class="reference external" href="http://en.wikipedia.org/wiki/Sudo">sudo</a>&nbsp;installed and configured.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">We assume you have <a class="reference external" href="http://en.wikipedia.org/wiki/Sudo" target="external">sudo</a>&nbsp;installed and configured.</p>
 </div>
 <div class="section" id="virtual-machine-notes">
 <h3><a class="toc-backref" href="#id3">Virtual Machine&nbsp;Notes</a></h3>
 <p>If you're using an Apple (Mac OS X) computer or Windows, the easiest way
 to work with Linux systems is via virtualization.
-<a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> is available for most
+<a class="reference external" href="https://www.virtualbox.org/" target="external">VirtualBox</a> is available for most
 platforms and is easy to work with.</p>
-<p>The virtualbox documentation can walk you through the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html">installation of VirtualBox and creating your first virtual machine</a>.</p>
-<p>When working with an SD card, you'll might want to follow instructions for "<a class="reference external" href="https://www.virtualbox.org/manual/ch09.html#rawdisk">Access to entire physical hard disk</a>" to make
+<p>The virtualbox documentation can walk you through the <a class="reference external" href="https://www.virtualbox.org/manual/ch01.html" target="external">installation of VirtualBox and creating your first virtual machine</a>.</p>
+<p>When working with an SD card, you'll might want to follow instructions for "<a class="reference external" href="https://www.virtualbox.org/manual/ch09.html#rawdisk" target="external">Access to entire physical hard disk</a>" to make
 the card accessible to the virtual machine. As an alternative, you could
-use a USB SD card reader, and <a class="reference external" href="https://www.virtualbox.org/manual/ch03.html#settings-usb">usb pass-thru</a>&nbsp;to
+use a USB SD card reader, and <a class="reference external" href="https://www.virtualbox.org/manual/ch03.html#settings-usb" target="external">usb pass-thru</a>&nbsp;to
 present not the disk to the virtual machine, but the entire USB device,
 and let the virtual machine deal with mounting it.</p>
 <p>Both of these approaches can be (very) error prone, but provide the most
 "native" way of working.</p>
-<p>Instead I'd&nbsp;recommend installing&nbsp;<a class="reference external" href="https://www.virtualbox.org/manual/ch04.html">guest additions</a>.&nbsp;With guest
-additions installed in your virtual machine, you can use the <a class="reference external" href="https://www.virtualbox.org/manual/ch04.html#sharedfolders">shared folders feature</a>
+<p>Instead I'd&nbsp;recommend installing&nbsp;<a class="reference external" href="https://www.virtualbox.org/manual/ch04.html" target="external">guest additions</a>.&nbsp;With guest
+additions installed in your virtual machine, you can use the <a class="reference external" href="https://www.virtualbox.org/manual/ch04.html#sharedfolders" target="external">shared folders feature</a>
 of VirtualBox. This makes it easy to copy disk images created in your
 virtual machine to your host machine, and then you can use the standard
 instructions for
-<a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md">Windows</a>
-and <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md">Mac OS</a>&nbsp;to
+<a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/windows.md" target="external">Windows</a>
+and <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/mac.md" target="external">Mac OS</a>&nbsp;to
 copy the disks images to your SD cards.</p>
 </div>
 <div class="section" id="advanced-usage-note">
 <h3><a class="toc-backref" href="#id4">Advanced Usage Note</a></h3>
 <p>Personally, my usual method of operations with
-VirtualBox VMs is to set up <a class="reference external" href="https://www.samba.org/">Samba</a> in my
-virtual machine and share a folder over a <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">host-only network</a>
-(or I'll use <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_bridged">bridged networking</a>&nbsp;so
+VirtualBox VMs is to set up <a class="reference external" href="https://www.samba.org/" target="external">Samba</a> in my
+virtual machine and share a folder over a <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_hostonly" target="external">host-only network</a>
+(or I'll use <a class="reference external" href="https://www.virtualbox.org/manual/ch06.html#network_bridged" target="external">bridged networking</a>&nbsp;so
 I can connect to it from any machine on my LAN) - I'd consider this a
 more "advanced" approach but I've had more consistent results for
 day-to-day work than using guest additions or mounting host disks.
@@ -178,8 +176,8 @@ to the virtual machine, the shared folders feature should suffice.</p>
 </div>
 <div class="section" id="arch-linux">
 <h3><a class="toc-backref" href="#id5">Arch Linux</a></h3>
-<p>We'll use <a class="reference external" href="https://wiki.archlinux.org/index.php/Pacman">pacman</a> and
-<a class="reference external" href="https://www.gnu.org/software/wget/">wget</a> to procure and install
+<p>We'll use <a class="reference external" href="https://wiki.archlinux.org/index.php/Pacman" target="external">pacman</a> and
+<a class="reference external" href="https://www.gnu.org/software/wget/" target="external">wget</a> to procure and install
 most of the tools we need:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -211,12 +209,12 @@ common location for global executable that everyone on a machine can
 access, <tt class="docutils literal">/usr/local/bin</tt>. This location is just a suggestion - to
 follow along with the examples in this article, you just need to put the
 <tt class="docutils literal">proot</tt> executable somewhere on your
-<a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29">$PATH</a>.</p>
-<p>Finally, we'll use an <a class="reference external" href="https://aur.archlinux.org/">AUR</a> package to
+<a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29" target="external">$PATH</a>.</p>
+<p>Finally, we'll use an <a class="reference external" href="https://aur.archlinux.org/" target="external">AUR</a> package to
 obtain the <tt class="docutils literal">kpartx</tt> tool.</p>
 <p>kpartx wraps a handful of tasks&nbsp;required for creating loopback devices
 into a single action.</p>
-<p>If you haven't used the AUR before, <a class="reference external" href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_package">check out the documentation first</a>
+<p>If you haven't used the AUR before, <a class="reference external" href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_package" target="external">check out the documentation first</a>
 for an overview of the process, and to install prerequisites.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -238,7 +236,7 @@ for an overview of the process, and to install prerequisites.</p>
 such, the process of getting set up for using PRoot is a bit simpler,
 compared to Arch.</p>
 <p>Ubuntu uses
-<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">apt-get</a> for
+<a class="reference external" href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool" target="external">apt-get</a> for
 package installation.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -260,8 +258,8 @@ loopback devices into a single action.</dd>
 make copying disk images with dd a little easier for the impatient)</dd>
 </dl>
 <p>Then, we install PRoot by downloading the binary from
-<a class="reference external" href="http://proot.me">proot.me</a>, making it executable, and putting it
-somewhere on our <a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29">$PATH</a>,
+<a class="reference external" href="http://proot.me" target="external">proot.me</a>, making it executable, and putting it
+somewhere on our <a class="reference external" href="http://en.wikipedia.org/wiki/PATH_%28variable%29" target="external">$PATH</a>,
 <tt class="docutils literal">/usr/local/bin</tt>, making it available to all users on the system. This
 location is merely a suggestion, but putting the <tt class="docutils literal">proot</tt> executable
 somewhere on your $PATH will make it easier to follow along with the
@@ -273,10 +271,10 @@ examples below.</p>
 <p>A disk (in the Raspberry Pi's case, we're talking about an SD card) is
 just an arrangement of blocks for data storage. On top of those blocks
 is a description of how files are represented in those blocks, or a
-<em>filesystem</em> (for more detail, see the Wikipedia articles on <a class="reference external" href="http://en.wikipedia.org/wiki/Disk_storage">Disk Storage</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/File_system">File System</a>).</p>
+<em>filesystem</em> (for more detail, see the Wikipedia articles on <a class="reference external" href="http://en.wikipedia.org/wiki/Disk_storage" target="external">Disk Storage</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/File_system" target="external">File System</a>).</p>
 <p>Disks can exist in the physical world, or can be represented by a
 special file, called a disk image. We can download pre-made images with
-Raspbian already installed from the official <a class="reference external" href="https://www.raspberrypi.org/downloads/">Raspberry Pi downloads page</a>.</p>
+Raspbian already installed from the official <a class="reference external" href="https://www.raspberrypi.org/downloads/" target="external">Raspberry Pi downloads page</a>.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -448,7 +446,7 @@ partitions and mount them somewhere more descriptive, like
 <span class="gp">$</span> sudo mount /dev/sdb2 raspbian-root
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The <tt class="docutils literal"><span class="pre">-p</span></tt> switch to <tt class="docutils literal">mkdir</tt> causes <tt class="docutils literal">mkdir</tt> to ignore
 already-exsiting directories. We've added it here in case you were
 following along in the previous section and already have these
@@ -483,8 +481,8 @@ working directly on the SD card instead of inside of a disk image.</p>
 <p>Now that we've got either a disk image or a physical disk mounted, we
 can run commands within those filesystems using PRoot.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The following command line switches worked for me, but took some experimentation to figure out. Please take some time to read <a class="reference external" href="http://proot.me/">the PRoot documentation</a> so you understand exactly what the switches mean.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">The following command line switches worked for me, but took some experimentation to figure out. Please take some time to read <a class="reference external" href="http://proot.me/" target="external">the PRoot documentation</a> so you understand exactly what the switches mean.</p>
 </div>
 <p>We can run any command directly (like say, <tt class="docutils literal"><span class="pre">apt-get</span></tt>) but it's useful
 to be able to "log in" to the disk image (run a shell), and then perform
@@ -528,7 +526,7 @@ them - there may be some environmental tweaks that need to be made.</p>
 <p>We can do almost anything in the PRoot environment that we could do
 logged into a running Raspberry Pi.</p>
 <p>We can edit config.txt and change settings (for an explanation of the
-settings, see <a class="reference external" href="https://www.raspberrypi.org/documentation/configuration/config-txt.md">the documentation</a>):</p>
+settings, see <a class="reference external" href="https://www.raspberrypi.org/documentation/configuration/config-txt.md" target="external">the documentation</a>):</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">#</span> vi /boot/config.txt
 </pre></div>
 </td></tr></table></div><p>We can add a new user:</p>
@@ -595,16 +593,16 @@ image, these scripts aren't run.</li>
 <div class="section" id="compiling-for-the-rpi">
 <h2 id="compiling for the rpi"><a class="toc-backref" href="#id10">Compiling For The RPi</a></h2>
 <p>Raspbian comes with most of the tools we'll need (in particular, the
-<tt class="docutils literal"><span class="pre">build-essential</span></tt> package). Lets build and install the <a class="reference external" href="http://nginx.org/">nginx web server</a> - a relatively easy to build package.</p>
+<tt class="docutils literal"><span class="pre">build-essential</span></tt> package). Lets build and install the <a class="reference external" href="http://nginx.org/" target="external">nginx web server</a> - a relatively easy to build package.</p>
 <p>If you've never compiled software on Linux before, most (but not
 all!)&nbsp;source code&nbsp;packages are provided as tarballs, and include some
 scripts that help you build the software in what's known as the
 "configure, make, make install" (or CMMI) procedure.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">For a great explanation (with examples you can follow to
-build your own CMMI package), <a class="reference external" href="https://twitter.com/georgebrock">George Brocklehurst</a> wrote an excellent
-article explaining the details behind CMMI called "<a class="reference external" href="https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install">The magic behind configure, make, make install</a>".</p>
+build your own CMMI package), <a class="reference external" href="https://twitter.com/georgebrock" target="external">George Brocklehurst</a> wrote an excellent
+article explaining the details behind CMMI called "<a class="reference external" href="https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install" target="external">The magic behind configure, make, make install</a>".</p>
 </div>
 <p>First we'll need to obtain the nginx tarball:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -650,14 +648,14 @@ build dependencies:</p>
 </td></tr></table></div><p>We'll note that, helpfully (<em>cue eye roll</em>) that nginx has put into the README:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go">Documentation is available at http://nginx.org</span>
 </pre></div>
-</td></tr></table></div><p>A more <a class="reference external" href="http://nginx.org/en/docs/configure.html">direct link</a> gives
+</td></tr></table></div><p>A more <a class="reference external" href="http://nginx.org/en/docs/configure.html" target="external">direct link</a> gives
 us a little more useful information. Scanning this, there aren't any
 obvious dependencies or features we want to add/enable, so we can
 proceed.</p>
 <p>We can also find out which options are available by running
 <tt class="docutils literal">./configure <span class="pre">--help</span></tt>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">There are several configuration options that control where
 files are put when the compiled code is installed - they may be of use,
 in particular the standard <tt class="docutils literal"><span class="pre">--PREFIX</span></tt>. This can help segregate
@@ -712,13 +710,13 @@ rewrite module, so we can re-run <tt class="docutils literal">./configure</tt> w
 this, and rewriting is a pretty killer feature of any http server, so
 lets install the dependency.</p>
 <p>The configure script mentions the "PCRE library". PCRE stands for "Perl
-Compatible Regular Expressions". <a class="reference external" href="http://www.perl.org/">Perl</a> is a
+Compatible Regular Expressions". <a class="reference external" href="http://www.perl.org/" target="external">Perl</a> is a
 classical systems language that has hard-core text processing
-capabilities. It's particularly known for its <a class="reference external" href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> support
+capabilities. It's particularly known for its <a class="reference external" href="http://en.wikipedia.org/wiki/Regular_expression" target="external">regular expression</a> support
 and syntax. The Perl regular expression syntax is so useful in fact,
-that <a class="reference external" href="http://www.pcre.org/">some folks built a library allowing other programmers to use it without having to use Perl itself</a>.</p>
+that <a class="reference external" href="http://www.pcre.org/" target="external">some folks built a library allowing other programmers to use it without having to use Perl itself</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This information can be found by using your favorite search engine!</p>
 </div>
 <p>There are two ways libraries like PCRE are installed. The first, and
@@ -977,7 +975,7 @@ card and insert it into a Raspberry Pi.</p>
 <p>We'll use the <tt class="docutils literal">dd</tt> command, which writes raw blocks of data from one
 block device to another, to copy the disk image we made into an SD card.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The SD card you use will be COMPLETELY erased. Proceed with caution.</p>
 </div>
 <p>First, insert the SD card into your computer (or card reader, etc).
@@ -1008,10 +1006,10 @@ out the device name and if its mounted using <tt class="docutils literal">lsblk<
 we can tell that my operating system auto-mounted <tt class="docutils literal">sdb3</tt> into the
 <tt class="docutils literal">/run/media/jj/SETTINGS</tt> directory.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The partition layout may vary depending on what was on the SD
 card before you inserted it. My SD card had a fresh copy of
-<a class="reference external" href="https://www.raspberrypi.org/introducing-noobs/">NOOBS</a> that hadn't
+<a class="reference external" href="https://www.raspberrypi.org/introducing-noobs/" target="external">NOOBS</a> that hadn't
 yet installed an OS.</p>
 </div>
 <p>We can double-check that <tt class="docutils literal">sdb</tt> is the right disk with <tt class="docutils literal">fdisk</tt>:</p>
@@ -1044,7 +1042,7 @@ some drive manufacturers is not in "real" gigabytes, an exponent of
 2[<a class="reference external" href="#gb">*</a>] but in billions of bytes - note the byte count:
 16,021,192,704.</p>
 <p>We can see the three partitions, and what format they are in. The small
-<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table">FAT</a> filesystem
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table" target="external">FAT</a> filesystem
 is a good indication that this is a bootable Raspberry Pi disk.</p>
 <p>With a fresh SD card, the call to <tt class="docutils literal">fdisk</tt> may look more like this:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1066,7 +1064,7 @@ is a good indication that this is a bootable Raspberry Pi disk.</p>
 <span class="go">/dev/sdb1 8192 31291391 31283200 14.9G c W95 FAT32 (LBA)</span>
 </pre></div>
 </td></tr></table></div><p>Most SD cards are pre-formatted with a single partition containing a
-<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">FAT32</a>
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32" target="external">FAT32</a>
 filesystem.</p>
 <p>It's important to be able to differentiate between your system drives
 and the target for copying over your disk image - if you point <tt class="docutils literal">dd</tt> at
@@ -1116,22 +1114,22 @@ sets the <em>block size</em>, which indicates how big of a piece of data to
 write at a time.</p>
 <p>The <tt class="docutils literal">bs</tt> value can be tweaked to get faster or more reliable
 performance in various situations - we're using <tt class="docutils literal">4M</tt> (four megabytes)
-as <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">recommended by raspberrypi.org</a>.
+as <a class="reference external" href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md" target="external">recommended by raspberrypi.org</a>.
 The larger the value, the faster <tt class="docutils literal">dd</tt> will run, but there are physical
 limits to what your system can handle, so it's best to stick with the
 recommended value.</p>
 <p>So <tt class="docutils literal">dd</tt> gives us no output until it's completed. This is kind of an
-annoying thing about <tt class="docutils literal">dd</tt> <a class="reference external" href="http://askubuntu.com/questions/215505/how-do-you-monitor-the-progress-of-dd">but it can be remedied</a>.
+annoying thing about <tt class="docutils literal">dd</tt> <a class="reference external" href="http://askubuntu.com/questions/215505/how-do-you-monitor-the-progress-of-dd" target="external">but it can be remedied</a>.
 The easiest way is to install a tool called&nbsp;<tt class="docutils literal">pv</tt>, and split the
 command - <tt class="docutils literal">pv</tt> acts as an intermediary between two commands and
 displays a progress bar as it moves along. <tt class="docutils literal">dd</tt> can read and write
 data to a pipe
-(<a class="reference external" href="http://en.wikipedia.org/wiki/Pipeline_%28Unix%29">details</a>). So we
+(<a class="reference external" href="http://en.wikipedia.org/wiki/Pipeline_%28Unix%29" target="external">details</a>). So we
 can use two <tt class="docutils literal">dd</tt> commands, put <tt class="docutils literal">pv</tt> in the middle, and get a nice
 progress bar.</p>
 <p>Here's the same copy as before, but using <tt class="docutils literal">pv</tt>:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Here we're using <tt class="docutils literal">sh <span class="pre">-c</span></tt> to wrap the command pipeline in
 quotes. This allows us to provide the entire pipeline as a single unit.
 If we didn't, the shell would interpret the first pipe in the pipeline
@@ -1213,12 +1211,12 @@ instead distribute tarballs of files. They let you set up the disk
 however you want, then copy the files over to install the operating
 system.</p>
 <p>We can create our own disk images using <tt class="docutils literal">fallocate</tt>, and then use
-<tt class="docutils literal">fdisk</tt> or <tt class="docutils literal">`parted</tt> &lt;<a class="reference external" href="http://www.gnu.org/software/parted/">http://www.gnu.org/software/parted/</a>&gt;`__ (or if
-you prefer a GUI, <a class="reference external" href="http://gparted.org/">gparted</a>) to partition the
+<tt class="docutils literal">fdisk</tt> or <tt class="docutils literal">`parted</tt> &lt;<a class="reference external" href="http://www.gnu.org/software/parted/" target="external">http://www.gnu.org/software/parted/</a>&gt;`__ (or if
+you prefer a GUI, <a class="reference external" href="http://gparted.org/" target="external">gparted</a>) to partition the
 disk.</p>
-<p>We'll create a disk image for the latest <a class="reference external" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2">Arch Linux ARM distribution for the Raspberry Pi 2</a>.</p>
+<p>We'll create a disk image for the latest <a class="reference external" href="http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2" target="external">Arch Linux ARM distribution for the Raspberry Pi 2</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">You must create the disk image file on a compatible
 filesystem, such as ext4, for this to work. This is the default system
 disk filesystem for most modern Linux distributions, including Arch and
@@ -1231,9 +1229,9 @@ incompatible format, such as FAT32.</p>
 </pre></div>
 </td></tr></table></div><p>We'll use <tt class="docutils literal">fdisk</tt> to partition the disk. We need two partitions. The
 first will be 100 megabytes, formatted as
-<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">FAT32</a>.
-We'll need to set the partition's <a class="reference external" href="http://en.wikipedia.org/wiki/Partition_type">*system id*</a> to correspond to
-FAT32 with <a class="reference external" href="http://en.wikipedia.org/wiki/Logical_block_addressing">LBA</a> so that the Raspberry Pi's BIOS knows how to read it.</p>
+<a class="reference external" href="http://en.wikipedia.org/wiki/File_Allocation_Table#FAT32" target="external">FAT32</a>.
+We'll need to set the partition's <a class="reference external" href="http://en.wikipedia.org/wiki/Partition_type" target="external">*system id*</a> to correspond to
+FAT32 with <a class="reference external" href="http://en.wikipedia.org/wiki/Logical_block_addressing" target="external">LBA</a> so that the Raspberry Pi's BIOS knows how to read it.</p>
 <p>..note:</p>
 <pre class="literal-block">
 I've had trouble finding documentation as to exactly why FAT + LBA is required, the assumption is it has something to do with how the ARM processor loads the operating system in the earliest boot stages; if anyone knows more detail or can point me to the documentation about this, it would be greatly appreciated!
@@ -1242,7 +1240,7 @@ I've had trouble finding documentation as to exactly why FAT + LBA is required, 
 that <tt class="docutils literal">fdisk</tt> will suggest (and what the Arch installation instructions
 tell us to do).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This seems to work well- however, there is some confusion
 about partition alignment. The Raspbian disk images use a 8192 block
 offset, and there is a lot of information available explaining how a bad
@@ -1250,9 +1248,9 @@ alignment can cause quicker SD card degradation and hurt write
 performance. I'm still trying to figure out the best way to address
 this, this is another area where community help would be appreciated :)
 Here are a few links that dig into the issue:
-<a class="reference external" href="http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device">http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device</a>,
-<a class="reference external" href="http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/">http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/</a>,
-<a class="reference external" href="http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/">http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/</a>.</p>
+<a class="reference external" href="http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device" target="external">http://wiki.laptop.org/go/How_to_Damage_a_FLASH_Storage_Device</a>,
+<a class="reference external" href="http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/" target="external">http://thunk.org/tytso/blog/2009/02/20/aligning-filesystems-to-an-ssds-erase-block-size/</a>,
+<a class="reference external" href="http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/" target="external">http://3gfp.com/wp/2014/07/formatting-sd-cards-for-speed-and-lifetime/</a>.</p>
 </div>
 <p>The second partition will be ext4, and use the rest of the the available
 disk space.</p>
@@ -1622,17 +1620,17 @@ few ideas:</p>
 <li>Distribute disk images pre-configured with applications we created.</li>
 <li>Pre-configure images and SD cards for use in classrooms, meetups,
 demos, etc.</li>
-<li>Set up a <a class="reference external" href="http://en.wikipedia.org/wiki/Cron">cron</a> job that runs
+<li>Set up a <a class="reference external" href="http://en.wikipedia.org/wiki/Cron" target="external">cron</a> job that runs
 nightly and creates a disk image with the latest packages.</li>
 <li>Build our own packages (either just create tarballs or use a tool
-like <a class="reference external" href="https://github.com/jordansissel/fpm">FPM</a>&nbsp;and build deb
+like <a class="reference external" href="https://github.com/jordansissel/fpm" target="external">FPM</a>&nbsp;and build deb
 packages)&nbsp;for drivers and other software and save other folks the
 hassle of doing this themselves.</li>
 <li>Create rudimentary disk duplication setups for putting one image on a
 bunch of SD cards.</li>
 <li>Fix broken installs.</li>
 <li>Construct build and testing systems; integrate with tools like
-<a class="reference external" href="https://jenkins-ci.org/">Jenkins</a>.</li>
+<a class="reference external" href="https://jenkins-ci.org/" target="external">Jenkins</a>.</li>
 </ul>
 <p>So there we go - now you can customize the Raspberry Pi operating system
 with impunity, on your favorite workstation or laptop machine. If you

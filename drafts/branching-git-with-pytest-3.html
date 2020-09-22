@@ -80,7 +80,7 @@
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
-<p><strong>This is part three of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org">pytest</a> and <a class="reference external" href="https://git-scm.com/">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
+<p><strong>This is part three of a three-part series.</strong> This is a comprehensive guide to a basic development workflow. Using a simple, but non-trivial web application, we learn how to write tests, fix bugs, and add features using <a class="reference external" href="https://docs.pytest.org" target="external">pytest</a> and <a class="reference external" href="https://git-scm.com/" target="external">git</a>, via feature branches. Along the way we'll touch on application design and discuss best practices.</p>
 <p>In this installment, we will:</p>
 <ul class="simple">
 <li>Simulate collaborative work by two developers.</li>
@@ -130,7 +130,7 @@
 <span class="gp">  $</span> git checkout part2
 </pre></div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>🌈 We have branches for all of the major work done in the series:</p>
 <dl class="docutils">
 <dt><code>part1</code></dt>
@@ -147,7 +147,7 @@
 <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a> <em>and</em> <a class="reference external" href="/drafts/branching-git-with-pytest-3.html">part 3</a>!</dd>
 </dl>
 <p>Feel free to <code>git checkout</code> if you need to reset your code, or jump around.</p>
-<p class="last">Use <code>git stash</code> to keep any uncommitted changes for later. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">the git documentation</a> for more information. 🦄</p>
+<p class="last">Use <code>git stash</code> to keep any uncommitted changes for later. See <a class="reference external" href="https://git-scm.com/book/en/v1/Git-Tools-Stashing" target="external">the git documentation</a> for more information. 🦄</p>
 </div>
 </blockquote>
 </div>
@@ -161,12 +161,12 @@
 <li>The quote is saved, and a list of historical quotes can be seen at <code>/qotd</code></li>
 </ul>
 <p>Developer <strong>"B"</strong> will be fixing a bug: "Root is a 404".</p>
-<p>This bug is more of an oversight. Remember when we first tested the app, visiting <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> would return a 404 "Not Found" error. This is not a great practice, even though it's technically true, since there is really no resource located at <code>/</code>. Most people expect to see some sort of information at the root of a website.</p>
+<p>This bug is more of an oversight. Remember when we first tested the app, visiting <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a> would return a 404 "Not Found" error. This is not a great practice, even though it's technically true, since there is really no resource located at <code>/</code>. Most people expect to see some sort of information at the root of a website.</p>
 <p>So to fix this bug, developer B will be writing up a little info about what HTTP API endpoints are available to be served when a request for <code>/</code> comes in.</p>
 <p>The astute reader might notice that these two tasks are in <em>conflict</em>. Both developers are changing what a request for <code>/</code> returns.</p>
 <p>This is good for us, because this makes it possible to walk through how to deal with conflicts 😀.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>In real life, this situation would have been avoided through <strong>basic communication</strong>.</p>
 <p>The API is something that shouldn't be altered lightly, and so a discussion amongst developers <em>should</em> happen whenever it's going to change.</p>
 <p class="last">However, things like this do happen from time to time. 🦄</p>
@@ -198,12 +198,12 @@
 <span class="go">done.</span>
 </pre></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If you have opted to skip following <a class="reference external" href="/branching-git-with-pytest.html">part 1</a> and
 <a class="reference external" href="/branching-git-with-pytest-2.html">part 2</a>, you'll need to <code>git checkout part2</code> in each repository before proceeding.</p>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>We're going to work on the feature first, then the bug, so things shouldn't be too confusing. Pay attention to the shell prompt in the examples, when the <code>venv</code> virtual environment is active, the prompt changes to the name of the directory. We've carried the prompt changes through to the examples in this guide, so you'll know what clone you're working on:</p>
 <p><strong>Developer A</strong>:</p>
 <div class="highlight"><pre><span></span><span class="go"> (a) $</span>
@@ -253,7 +253,7 @@
 <p>Off hand, a few possibilities exist for handling this. 🤔</p>
 <p>We could:</p>
 <ol class="arabic simple">
-<li>Define a process, that, at midnight each night, uses the <code>RandomQuoteManager</code> to select a random quote. This would happen outside of the application or people using it. It could be a manual process, or <a class="reference external" href="https://en.wikipedia.org/wiki/Cron">automated as a scheduled job or task</a>.</li>
+<li>Define a process, that, at midnight each night, uses the <code>RandomQuoteManager</code> to select a random quote. This would happen outside of the application or people using it. It could be a manual process, or <a class="reference external" href="https://en.wikipedia.org/wiki/Cron" target="external">automated as a scheduled job or task</a>.</li>
 <li>Write a function that will pre-generate random quotes for each day of a given time period. This could also be run by a human, or automated to happen on a given interval (once a year, once a month, etc).</li>
 <li>Wait until a quote of the day is requested, generate it on demand and return it, or return the current quote of the day if it's already been generated.</li>
 </ol>
@@ -263,8 +263,8 @@
 <p>Our app is doing simple things, and generating a random quote is a pretty quick process. So the impact on users, even if a special quote of the day was generated for every single one, every day, would be minimal. In other applications, pre-loading is preferred, because the cost of generating the data that's being provided to the user can be higher and can impact their ability to effectively use the application. You don't want the fact that you're generating data on the fly to make your API less responsive.</p>
 <p>All that considered, our use case is simple, and our process for making a quote of the day will be lightweight, so we'll opt to generate our quote of the day on the fly, as needed. We'll build the functionality such that it's easy to automate this process later if generating a quote becomes more expensive, thus getting the best of both worlds.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>One other thing we can do that might help is use <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">the HTTP caching headers</a> to tell clients that they only need to make a new request to the quote of the day endpoint once per day.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>One other thing we can do that might help is use <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" target="external">the HTTP caching headers</a> to tell clients that they only need to make a new request to the quote of the day endpoint once per day.</p>
 <p class="last">This is out of scope for this guide, but something to always consider when building web applications. 🌈</p>
 </div>
 </div>
@@ -273,13 +273,13 @@
 <p>The other aspect of this feature is keeping old quotes around after the day they're generated.</p>
 <p>Since we're already using a relational database, it's a good candidate for storing quotes of the day.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This may seem obvious, but it's another important thing to remember: just because we're already using a certain pattern or method of storing data, it doesn't automatically make it the <em>best</em> pattern or method. 😎</p>
 </div>
 <p>We can add a new table, called <code>quote_of_the_day</code> to store each generated quote. We'll query that database table and use SQL to return the right quote for the current day.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">We are building a rudimentary <a class="reference external" href="https://en.wikipedia.org/wiki/Cache_(computing)">cache</a> here. This pattern is extremely useful in application development, especially web development.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">We are building a rudimentary <a class="reference external" href="https://en.wikipedia.org/wiki/Cache_(computing)" target="external">cache</a> here. This pattern is extremely useful in application development, especially web development.</p>
 </div>
 <p>Here's our updated ER diagram:</p>
 <div class="figure align-center" style="width: 80%">
@@ -287,7 +287,7 @@
 </div>
 <p>The new <code>quote_of_the_day</code> table consists of four columns:</p>
 <ul class="simple">
-<li><code>quote_id</code>, an integer, the ID of the quote that was selected. We'll put a <a class="reference external" href="https://en.wikipedia.org/wiki/Foreign_key">foreign key constraint</a> on the <code>id</code> column in the <code>quotes</code> table</li>
+<li><code>quote_id</code>, an integer, the ID of the quote that was selected. We'll put a <a class="reference external" href="https://en.wikipedia.org/wiki/Foreign_key" target="external">foreign key constraint</a> on the <code>id</code> column in the <code>quotes</code> table</li>
 </ul>
 <p>The other three columns will encode the day, month and year:</p>
 <ul class="simple">
@@ -295,7 +295,7 @@
 <li><code>month</code>, integer, the month (1-12)</li>
 <li><code>year</code>, integer, the year (e.g. 2019)</li>
 </ul>
-<p>We'll put a <a class="reference external" href="https://en.wikipedia.org/wiki/Unique_key">unique constraint</a> on these three columns - this prevents anyone from inserting a second quote of the day for any given month/day/year.</p>
+<p>We'll put a <a class="reference external" href="https://en.wikipedia.org/wiki/Unique_key" target="external">unique constraint</a> on these three columns - this prevents anyone from inserting a second quote of the day for any given month/day/year.</p>
 <p>By using three columns, we have a few benefits:</p>
 <ul>
 <li><p class="first">Integers are (usually) stored in a form that takes up less space/memory.</p>
@@ -308,7 +308,7 @@
 </pre></div>
 </td></tr></table></div></blockquote>
 </li>
-<li><p class="first">There's no need to worry about the <em>time</em> portion of the typical date-time storage format (<a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Julian_calendar">Julian</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_time">Unix</a>). This means we don't have to be concerned with timezones, or what happens when a <a class="reference external" href="https://en.wikipedia.org/wiki/Locale_(computer_software)">locale</a> difference makes a given time occur on a different calendar day.</p>
+<li><p class="first">There's no need to worry about the <em>time</em> portion of the typical date-time storage format (<a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601" target="external">ISO8601</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Julian_calendar" target="external">Julian</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_time" target="external">Unix</a>). This means we don't have to be concerned with timezones, or what happens when a <a class="reference external" href="https://en.wikipedia.org/wiki/Locale_(computer_software)" target="external">locale</a> difference makes a given time occur on a different calendar day.</p>
 </li>
 </ul>
 <p>The SQL needed to generate the new table looks like this:</p>
@@ -368,7 +368,7 @@
 <span class="gp">&gt;</span>&gt;&gt; quit<span class="o">()</span>
 </pre></div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">We can re-run <code>init()</code> as often as we like because of the <code>IF NOT EXISTS</code> clause in <code>CREATE TABLE</code> and <code>CREATE INDEX</code>. Otherwise, we'd have to either <code>DROP</code> the old tables/index first, or run each <code>CREATE</code> statement separately.</p>
 </div>
 <p>Now we can add the code for our <code>QuoteOfTheDay</code> class. We'll place this in a new <code>src/random_quote/qotd.py</code> module.</p>
@@ -610,7 +610,7 @@
 <p>The second parameter is an optional <code>RandomQuoteManager</code> instance. If one is provided, it is used as-is. However, if that parameter is omitted, a new instance is created using the passed-in database file.</p>
 <p><code>RandomQuoteManager</code> will have a corresponding optional <code>QuoteOfTheDay</code> instance, so the constructor uses a <em>conditional import</em> to prevent issues with a never-ending import cycle. If <code>random_quote.manager</code> imports <code>random_quote.qotd</code> and <code>random_quote.qotd</code> imports <code>random_quote.manager</code> in their module scope, it creates a sort of infinite loop of imports.</p>
 <p>We use this <code>RandomQuoteManager</code> instance to get a random quote in the <code>add()</code> method.</p>
-<p>In both cases, the corresponding instance is used to provide an extended API. This is a simplistic form of <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a>, allowing the user to configure their <code>RandomQuoteManager</code> to their liking before passing it, or providing a completely different kind of object that implements the same interface.</p>
+<p>In both cases, the corresponding instance is used to provide an extended API. This is a simplistic form of <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection" target="external">dependency injection</a>, allowing the user to configure their <code>RandomQuoteManager</code> to their liking before passing it, or providing a completely different kind of object that implements the same interface.</p>
 <p>The rest of the module should be fairly self-explanatory.</p>
 <p>One important thing to note is that the <code>get()</code> method automatically calls <code>add()</code> in the event that no quote of the day is found for the given date.</p>
 </div>
@@ -670,7 +670,7 @@
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
-<p>This change allows for API extension and <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> that is similar to (and complements) the implementation of <code>QuoteOfTheDay.__init__()</code>.</p>
+<p>This change allows for API extension and <a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_injection" target="external">dependency injection</a> that is similar to (and complements) the implementation of <code>QuoteOfTheDay.__init__()</code>.</p>
 </div>
 <p>It's a good idea to make a commit after this work is done. This should be second nature by now, but lets walk through the steps, since we're doing something new: adding an untracked file.</p>
 <div class="highlight"><pre><span></span><span class="gp">(a) $</span> git status
@@ -1037,11 +1037,11 @@
 </td></tr></table></div><p>We can run the http server again and try it out in our browser:</p>
 <div class="highlight"><pre><span></span><span class="gp">(a) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-<p>If you look at <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>, you'll notice a quote of the day is returned, instead of a 404:</p>
+<p>If you look at <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a>, you'll notice a quote of the day is returned, instead of a 404:</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-second-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-second-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-second-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-second-pass-200.jpg 200w"/></a>
 </div>
-<p>And loading <a class="reference external" href="http://127.0.0.1:8080/qotd">http://127.0.0.1:8080/qotd</a> returns a list, showing the quote that was just generated:</p>
+<p>And loading <a class="reference external" href="http://127.0.0.1:8080/qotd" target="external">http://127.0.0.1:8080/qotd</a> returns a list, showing the quote that was just generated:</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-qotd-first-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-qotd-first-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-qotd-first-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-qotd-first-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-qotd-first-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-qotd-first-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-qotd-first-pass-200.jpg 200w"/></a>
 </div>
@@ -1139,7 +1139,7 @@
     <span class="k">assert</span> <span class="n">quotes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">quote2</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">To quit <code>gunicorn</code>, type control-C.</p>
 </div>
 <p>Running the tests, we see the new ones have been picked up:</p>
@@ -1312,7 +1312,7 @@ Set version to 0.2.0
 </div>
 <div class="section" id="fix-the-bug">
 <h3>Fix The Bug</h3>
-<p>Lets construct a simple <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5</a> file that has the information about the API within it. The links will be <em>relative</em>. This allows for flexibility in how we host the API. We'll put it in a special directory within the source.</p>
+<p>Lets construct a simple <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5" target="external">HTML5</a> file that has the information about the API within it. The links will be <em>relative</em>. This allows for flexibility in how we host the API. We'll put it in a special directory within the source.</p>
 <p>First, create the new <code>src/random_quote/static</code> directory:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> mkdir src/random_quote/static
 </pre></div>
@@ -1375,10 +1375,10 @@ Set version to 0.2.0
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">"schema.sql"</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div><p>Here we use Python's built-in special <code>__file__</code> variable that returns the path to the currently executing module (<a class="reference external" href="http://www.blog.pythonlibrary.org/2013/10/29/python-101-how-to-find-the-path-of-a-running-script/">more detail</a>). We then use a couple of functions from the <a class="reference external" href="https://docs.python.org/3/library/os.path.html">os.path</a> module to construct a path in a system-agnostic way.</p>
+</td></tr></table></div><p>Here we use Python's built-in special <code>__file__</code> variable that returns the path to the currently executing module (<a class="reference external" href="http://www.blog.pythonlibrary.org/2013/10/29/python-101-how-to-find-the-path-of-a-running-script/" target="external">more detail</a>). We then use a couple of functions from the <a class="reference external" href="https://docs.python.org/3/library/os.path.html" target="external">os.path</a> module to construct a path in a system-agnostic way.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Python runs on many platforms, and most code you will write is compatible with all of them. It's best practice to construct paths using <code>os.path</code> (or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#module-pathlib">pathlib</a>). This abstracts away differences like using forward slashes (<code>/</code>, unix-like systems) and backward slashes (\, windows), making it easy to switch platforms or run code in different developer environments.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">Python runs on many platforms, and most code you will write is compatible with all of them. It's best practice to construct paths using <code>os.path</code> (or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#module-pathlib" target="external">pathlib</a>). This abstracts away differences like using forward slashes (<code>/</code>, unix-like systems) and backward slashes (\, windows), making it easy to switch platforms or run code in different developer environments.</p>
 </div>
 <p>We can do the same thing with our new <code>static</code> directory. But since we may be using it to serve multiple files, we'll add a little extra functionality to request a more specific path if needed. We'll call the function <code>static()</code>. Add the following to the end of <code>src/random_quote/util.py</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>58
@@ -1403,7 +1403,7 @@ Set version to 0.2.0
 </pre></div>
 </td></tr></table></div><p>If we don't pass a <code>path</code> argument, we get the path to just the <code>static</code> directory, otherwise, the <code>path</code> is added to the end.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">We're adding this flexibility because it's likely we'll want to serve other static files, like images, CSS, javascript, etc.</p>
 </div>
 <p>Next, we need to add an import for <code>webob.static.FileApp</code>, and our new <code>util.static()</code> function, to <code>src/random_quote/wsgi.py</code>:</p>
@@ -1465,13 +1465,13 @@ Set version to 0.2.0
 </td></tr></table></div><p>Lets start up the web server, and take a quick look:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-<p>If we visit <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, we will see the new landing page. We can click the links and they should work.</p>
+<p>If we visit <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a> in a browser, we will see the new landing page. We can click the links and they should work.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-200.jpg 200w"/></a>
 </div>
 <p>Committing our changes is just like we've done before. Be sure to <code>git add</code> the <code>src/random_quote/static/index.html</code> file.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Git is a bit odd about how it looks at files and directories. You may notice that running <code>git status</code> lists the <code>src/random_quote/static</code> directory, but not <code>index.html</code> specifically.</p>
 <p class="last">You can go ahead and <code>git add</code> the <code>src/random_quote/static</code> directory if you want. Just be aware that <code>git add</code> will add <em>any</em> files it finds in that directory or its subdirectories.</p>
 </div>
@@ -1479,7 +1479,7 @@ Set version to 0.2.0
 <div class="section" id="test-for-the-new-index-page">
 <h3>Test For The New Index Page</h3>
 <p>The test for this fix is pretty simplistic. We just need to make sure there isn't a 404 status returned when making a GET request for <code>/</code>. We can use <code>TestApp</code> to do this, via the <code>preconfigured_wsgi_app()</code> fixture established in <code>src/random_quote/tests/conftest.py</code>.</p>
-<p>We should also make sure we're getting the right <em>kind</em> of content, by checking the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">Content-Type header</a>. A JSON response (<code>application/json</code>), instead of an HTML one (<code>text/html</code>) would indicate something went wrong.</p>
+<p>We should also make sure we're getting the right <em>kind</em> of content, by checking the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type" target="external">Content-Type header</a>. A JSON response (<code>application/json</code>), instead of an HTML one (<code>text/html</code>) would indicate something went wrong.</p>
 <p>Add this test to the end of <code>src/random_quote/tests/test_wsgi.py</code>:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>67
 68
@@ -1494,8 +1494,8 @@ Set version to 0.2.0
     <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">==</span> <span class="s1">'text/html'</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">We could go further with this, and ensure the links actually work. <a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/api.html#webtest.response.TestResponse.click">WebTest's response objects have a click() method</a> that could be used to be a bit more thorough.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">We could go further with this, and ensure the links actually work. <a class="reference external" href="https://docs.pylonsproject.org/projects/webtest/en/latest/api.html#webtest.response.TestResponse.click" target="external">WebTest's response objects have a click() method</a> that could be used to be a bit more thorough.</p>
 </div>
 <p>We run the tests again to make sure our new case was picked up, and that we didn't break anything else:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> pytest -v src
@@ -1545,7 +1545,7 @@ Set version to 0.2.0
 </pre></div>
 </td></tr></table></div><p>Be sure to <code>pip install -e .</code> again and re-run the tests before committing your changes.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">You'll notice that our version is now a whole minor revision behind the version we set when adding the "Quote of the day" feature. Remember, in our "b" repository, we're unaware those changes have been made.</p>
 </div>
 </div>
@@ -1778,7 +1778,7 @@ Set version to 0.2.0
 <p>Before we can resolve these conflicts, we need to make a decision about the <em>right</em> thing to do when a GET request is made for <code>/</code>, and what the <em>correct</em> version number should be.</p>
 <p>The "Quote Of The Day" feature added a quote of the day at <code>/</code>. Our "API Index Information" bug fix added documentation at the same location.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>This is <strong>not</strong> a conversation that should happen in a vacuum. This is a major API change, and as we mentioned before, ideally it would have been settled before the two developers even started working.</p>
 <p>Communication is key to avoid these conflicts, and it's the only way to get past them when they manage to get through.</p>
 <p class="last">The first thing you should always do when a merge conflict happens is <strong>reach out to the other developer</strong> and make sure you're all on the same page.</p>
@@ -1795,7 +1795,7 @@ Set version to 0.2.0
 <p>Developer <strong>B's</strong> version is <strong>0.1.2</strong>, and developer <strong>A's</strong> is <strong>0.2.0</strong>.</p>
 <p>What we'll do is do the next <strong>bug fix</strong> version (or <em>patch version</em>) of the <strong>API update</strong> (or <em>minor version</em>), which gives us <strong>0.2.1</strong>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This has the advantage of also preserving any tags that were made for the two versions. We skipped that step here for the sake of brevity, but having three tags, one for <strong>0.1.2</strong>, <strong>0.2.0</strong> and <strong>0.2.1</strong> means we can deploy any of those three versions independently. This gives us a great deal of flexibility. 🦄</p>
 </div>
 <p>Lets fix <code>setup.py</code> first. We just need to take out the markers (<code>=====</code> and <code>&gt;&gt;&gt;&gt;</code>) and any duplicated lines, leaving only the stuff we need. When you're finished, <code>setup.py</code> will look like this:</p>
@@ -1892,9 +1892,9 @@ Set version to 0.2.0
             <span class="k">return</span> <span class="n">error_response</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>You can use a <a class="reference external" href="https://en.wikipedia.org/wiki/Comparison_of_file_comparison_tools">diff tool</a> to fix merge conflicts in an interactive way.</p>
-<p class="last">Check out <a class="reference external" href="https://git-scm.com/docs/git-mergetool">git mergetool</a> for details.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>You can use a <a class="reference external" href="https://en.wikipedia.org/wiki/Comparison_of_file_comparison_tools" target="external">diff tool</a> to fix merge conflicts in an interactive way.</p>
+<p class="last">Check out <a class="reference external" href="https://git-scm.com/docs/git-mergetool" target="external">git mergetool</a> for details.</p>
 </div>
 <p>Before we can do a manual test, we need to add the changes to the database schema. This is done using <code>util.init()</code>, run from the interpreter:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> python
@@ -1909,19 +1909,19 @@ Set version to 0.2.0
 <p>Now we can start up <code>gunicorn</code> again:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-<p>And open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>,</p>
+<p>And open <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a>,</p>
 <blockquote>
 <div class="figure align-center" style="width: 60%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-third-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-third-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
-<p><a class="reference external" href="http://127.0.0.1:8080/qotd">http://127.0.0.1:8080/qotd</a>,</p>
+<p><a class="reference external" href="http://127.0.0.1:8080/qotd" target="external">http://127.0.0.1:8080/qotd</a>,</p>
 <blockquote>
 <div class="figure align-center" style="width: 60%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-qotd-second-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-qotd-second-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-qotd-second-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-qotd-second-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-qotd-second-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-qotd-second-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-qotd-second-pass-200.jpg 200w"/></a>
 </div>
 </blockquote>
-<p>And <a class="reference external" href="http://127.0.0.1:8080/qotd-history">http://127.0.0.1:8080/qotd-history</a></p>
+<p>And <a class="reference external" href="http://127.0.0.1:8080/qotd-history" target="external">http://127.0.0.1:8080/qotd-history</a></p>
 <blockquote>
 <div class="figure align-center" style="width: 60%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-qotd-history.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-qotd-history.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-qotd-history-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-qotd-history-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-qotd-history-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-qotd-history-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-qotd-history-200.jpg 200w"/></a>
@@ -2137,7 +2137,7 @@ Set version to 0.2.0
 </td></tr></table></div><p>Start up <code>gunicorn</code> again:</p>
 <div class="highlight"><pre><span></span><span class="gp">(b) $</span> gunicorn -b <span class="m">127</span>.0.0.1:8080 -t <span class="m">9999999</span> -w <span class="m">1</span> --reload wsgi:app
 </pre></div>
-<p>If we open <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> in a browser, the new page is shown, and the links do what they're supposed to.</p>
+<p>If we open <a class="reference external" href="http://127.0.0.1:8080" target="external">http://127.0.0.1:8080</a> in a browser, the new page is shown, and the links do what they're supposed to.</p>
 <div class="figure align-center" style="width: 80%">
 <a href="/images/branching-git-pytest/fullsize/screen-cap-root-fourth-pass.jpg"><img alt="" sizes="" src="/images/branching-git-pytest/fullsize/screen-cap-root-fourth-pass.jpg" srcset="/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-1200.jpg 1200w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-1000.jpg 1000w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-800.jpg 800w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-400.jpg 400w,/images/branching-git-pytest/responsive/screen-cap-root-fourth-pass-200.jpg 200w"/></a>
 </div>
@@ -2245,7 +2245,7 @@ Set version to 0.2.0
 <div class="section" id="resources-what-to-do-if-you-messed-up">
 <h2 id="resources, what to do if you messed up">Resources, What To Do If You Messed Up</h2>
 <p>Feel free to <a class="reference external" href="/pages/contact.html">contact the author</a> if you have any problems with this guide.</p>
-<p>Check out <a class="reference external" href="http://sethrobertson.github.io/GitFixUm/fixup.html">http://sethrobertson.github.io/GitFixUm/fixup.html</a> for a nice general git troubleshooting guide! It's extremely well done.</p>
+<p>Check out <a class="reference external" href="http://sethrobertson.github.io/GitFixUm/fixup.html" target="external">http://sethrobertson.github.io/GitFixUm/fixup.html</a> for a nice general git troubleshooting guide! It's extremely well done.</p>
 </div>
 </div><!-- /.entry-content -->
 </section>

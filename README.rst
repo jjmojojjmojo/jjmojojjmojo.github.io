@@ -35,13 +35,13 @@ After the initial clone, you will have to run the following commands to get the 
 Development Setup
 =================
 
-This blog was developed using Python 3.6.
+This blog was developed using Python 3.6+ (currently 3.8).
 
 If you wish to rebuild the source or work on the content, you will need to install the dependencies in ``requirements.txt``. 
 
-This can be done in a virtual environment (recommended, I use virtualenv), or system-wide.
+This can be done in a virtual environment, or system-wide.
 
-Here's how you would do things with virtualenv::
+Basic setup::
     
     $ python -m venv .
     $ source bin/activate

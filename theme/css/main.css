@@ -152,6 +152,10 @@ body {
     vertical-align: middle;
 }
 
+.note, .tip, .warning {
+    overflow: auto;
+}
+
 .note {
     background-color: #CCCCCC;
     color: #666666;
@@ -243,6 +247,10 @@ pre {
     font-family: Inconsolata, monospace;
     line-height: 125%;
     font-size: 1em;
+}
+
+.highlight .hll {
+    display: block;
 }
 
 /* custom explanation tag */

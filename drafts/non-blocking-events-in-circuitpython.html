@@ -12,8 +12,6 @@
 <meta content="Exploring State: Non-Blocking Events In CircuitPython - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="Exploring State: Non-Blocking Events In CircuitPython - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   Exploring State: Non-Blocking Events In CircuitPython - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -74,47 +72,47 @@
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
 <!-- emoji for some reason - better to do this since I can replace these with -->
 <!-- icons or whatever I want) -->
-<p>In this article we'll cover dealing with state and working with events in a non-blocking way in <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython">CircuitPython</a>, <a class="reference external" href="https://adafruit.com">Adafruit's</a> port of <a class="reference external" href="https://micropython.org/">MicroPython</a> for the  <a class="reference external" href="https://www.microchip.com/wwwproducts/en/ATSAMD21G18">ATSAMD21 Cortex M0 microprocessor</a>.</p>
+<p>In this article we'll cover dealing with state and working with events in a non-blocking way in <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython" target="external">CircuitPython</a>, <a class="reference external" href="https://adafruit.com" target="external">Adafruit's</a> port of <a class="reference external" href="https://micropython.org/" target="external">MicroPython</a> for the  <a class="reference external" href="https://www.microchip.com/wwwproducts/en/ATSAMD21G18" target="external">ATSAMD21 Cortex M0 microprocessor</a>.</p>
 <p>We'll explore the most common use case for state, <em>button debouncing</em>, but also explore state as a concept, and discuss patterns for dealing with it in a microcontroller environment.</p>
 <p>While the code is being developed for CircuitPython, the concepts and patterns are universal, and apply to any microcontroller (and even some applications outside of embedded platforms).</p>
 <!-- PELICAN_END_SUMMARY -->
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">At the time of writing, Adafruit has just released/announced the first boards in it's M4 line based on the  ATSAMD51 Cortex M4 chip! (namely the <a class="reference external" href="https://blog.adafruit.com/2018/06/12/new-product-adafruit-itsybitsy-m4-express-featuring-atsamd51/">ItsyBitsy M4 Express</a> and <a class="reference external" href="https://blog.adafruit.com/2018/06/27/coming-soon-adafruit-feather-m4-express-featuring-atsamd51-cortex-m4/">Feather M4 Express</a>).</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">At the time of writing, Adafruit has just released/announced the first boards in it's M4 line based on the  ATSAMD51 Cortex M4 chip! (namely the <a class="reference external" href="https://blog.adafruit.com/2018/06/12/new-product-adafruit-itsybitsy-m4-express-featuring-atsamd51/" target="external">ItsyBitsy M4 Express</a> and <a class="reference external" href="https://blog.adafruit.com/2018/06/27/coming-soon-adafruit-feather-m4-express-featuring-atsamd51-cortex-m4/" target="external">Feather M4 Express</a>).</p>
 </div>
 <div class="section" id="the-project-the-platform">
 <h2 id="the project, the platform">The Project, The Platform</h2>
 <p>All of the code and thought that in this article has its roots in a personal project. I wanted to make a low-impact tool to help me mouse more efficiently.</p>
-<p>I found the answer in <a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing">capacative touch</a>. This is the same technology behind modern cellphones and touchscreens.</p>
-<p>I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch">7 touch capable pins</a> <em>and</em> they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do <a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction">some insanely cool stuff</a>.</p>
+<p>I found the answer in <a class="reference external" href="https://en.wikipedia.org/wiki/Capacitive_sensing" target="external">capacative touch</a>. This is the same technology behind modern cellphones and touchscreens.</p>
+<p>I was psyched when I found out that the Adafruit M0 series of microcontroler boards provided up to <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/circuitpython-cap-touch" target="external">7 touch capable pins</a> <em>and</em> they can become USB interface devices that can emulate a mouse or keyboard (and more). With these boards, there's no need for an external board or IC for touch or USB control, all I need is an M0, some conductive objects, and some code and I can do <a class="reference external" href="https://learn.adafruit.com/capacitive-touch-unicorn-horn/introduction" target="external">some insanely cool stuff</a>.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p class="last">The M4 boards <strong>do not</strong> support capacitive touch.</p>
 </div>
-<p>These boards also provide power management either built-in or it can be <a class="reference external" href="https://www.adafruit.com/product/2124">easily added</a>. It makes it easy to build a portable project that runs off of batteries, but still can be powered from the USB port (and in the case of a rechargable LiPoly battery pack, the USB port can be used to charge it as well).</p>
+<p>These boards also provide power management either built-in or it can be <a class="reference external" href="https://www.adafruit.com/product/2124" target="external">easily added</a>. It makes it easy to build a portable project that runs off of batteries, but still can be powered from the USB port (and in the case of a rechargable LiPoly battery pack, the USB port can be used to charge it as well).</p>
 <p>What makes these boards a really killer platform for hobby projects is that the M0/M4 series also support <strong>CircuitPython</strong>, Adafruit's fork of MicroPython for these particular ARM controllers. It's <em>Python</em>, and one of the languages I'm most comfortable with.</p>
 <p>Besides my personal preference, Python is a great language for learning, rapid prototyping, and general computing.</p>
 <p>CircuitPython is being developed with the express goal of making MicroPython more accessible to new programmers. Because of this, it diverges a bit from MicroPython. MicroPython has already diverged a bit from standard Python as well.</p>
 <p>The differences aren't significant enough to hinder people new to Python and/or microcontrollers, but if you already know MicroPython, or Python it might be a bit of an adjustment.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>The full list of differences:</p>
 <ul class="last simple">
-<li><a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/#differences-from-micropython">CircuitPython vs MicroPython</a></li>
-<li><a class="reference external" href="https://docs.micropython.org/en/latest/pyboard/genrst/index.html">MicroPython vs Python</a></li>
+<li><a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/#differences-from-micropython" target="external">CircuitPython vs MicroPython</a></li>
+<li><a class="reference external" href="https://docs.micropython.org/en/latest/pyboard/genrst/index.html" target="external">MicroPython vs Python</a></li>
 </ul>
 </div>
 <p>That aside, this is a really exciting platform. It stands to provide a gateway for non-programmers to get into computer science and electrical engineering. It's a great time to be alive!</p>
 <p>It's not all 🌈's and 🦄's though. In spite of generally being a great platform, CircuitPython has some limitations, that everyone should be aware of. A much more powerful processor is required to run any flavor of MicroPython. Even with more power, the interpreted nature of Python makes code run, overall, slower than comparable compiled Arduino code.</p>
-<p>Because a Python interpreter has to be constructed to execute Python code, the platform is also very RAM (<a class="reference external" href="https://en.wikipedia.org/wiki/Random-access_memory">random access memory</a>) intensive. RAM is a precious resource on any microcontroller, and CircuitPython eats up a lot of working memory before our program even runs. People experienced with microcontrollers will be used to dealing with this, but because of the interpreter, you're at a disadvantage before your code is even loaded. Programs will start to run out of memory when they approach 150-200 lines of code. That includes external libraries. That's not a lot to work with.</p>
+<p>Because a Python interpreter has to be constructed to execute Python code, the platform is also very RAM (<a class="reference external" href="https://en.wikipedia.org/wiki/Random-access_memory" target="external">random access memory</a>) intensive. RAM is a precious resource on any microcontroller, and CircuitPython eats up a lot of working memory before our program even runs. People experienced with microcontrollers will be used to dealing with this, but because of the interpreter, you're at a disadvantage before your code is even loaded. Programs will start to run out of memory when they approach 150-200 lines of code. That includes external libraries. That's not a lot to work with.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">We'll cover ways of reducing our memory footprint in this article. It's actually not as bad as it might seem.</p>
 </div>
 <p>Further, Python code, especially raw text, takes up a lot of space in another precious resource, <em>flash memory</em>. This is where our program code is stored. Again, this is nothing shocking if we've done any embedded development before, but using Python puts us at a bit of a disadvantage - our code can only be compiled down to an intermediary format, it can't be turned into compact machine code, so we have a lot less space to work with.</p>
 <p>Beyond this, Adafruit has made it pretty clear that CircuitPython is geared toward <em>beginners</em>, and as such their priorities for adding features and the general design of the platform has that audience at the forefront. This can cause some frustration if you want to use a MicroPython or Arduino feature that hasn't been ported to CircuitPython, access an on-board peripheral or use an external IC/breakout board that Adafruit doesn't yet support.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>This sounds way more dire than it is, and is changing all the time. CircuitPython is still relatively new and is under constant development. 💖 Adafruit has done an amazing job of supporting the onboard peripherals and the chips and breakout boards they sell in CircuitPython.</p>
 <p class="last">I don't want to downplay what they've accomplished, but if you are coming from other MicroPython boards or the Arduino, or you aspire to build projects that use the full capacity of your microcontroller, you should be aware of what you're getting into.</p>
 </div>
@@ -128,10 +126,10 @@
 <h2 id="audience">Audience</h2>
 <p>This guide is written for people who know basic Python, and have done rudimentary things with microcontrollers, like control LEDs and read from momentary switches.</p>
 <p>It doesn't assume you are a Python expert, or have done anything too elaborate with microcontrollers - but it will expose you to some advanced concepts.</p>
-<p>It's a good idea to work through <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">Adafruit's "Welcome To CircuitPython"</a> guide before trying to dig into the topics covered here, but it's not necessary.</p>
+<p>It's a good idea to work through <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview" target="external">Adafruit's "Welcome To CircuitPython"</a> guide before trying to dig into the topics covered here, but it's not necessary.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">It wouldn't hurt to also work through <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials">CircuitPython Essentials</a> as well!</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">It wouldn't hurt to also work through <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials" target="external">CircuitPython Essentials</a> as well!</p>
 </div>
 <p>This article does dive really deep into details when exploring the concepts behind the code being developed. It also provides line-by-line explanations of each code example. So don't be afraid to give this guide a shot, even if you're really new to microcontrollers.</p>
 <p>Please feel free to <a class="reference external" href="/pages/contact.html">contact the author</a> with questions, corrections, or suggestions on how to make this article more accessible!</p>
@@ -147,7 +145,7 @@
 <a href="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg"><img alt="" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-dotstar-marked.jpg" srcset="/images/responsive/gemma-m0-closeup-dotstar-marked-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-dotstar-marked-800.jpg 800w,/images/responsive/gemma-m0-closeup-dotstar-marked-400.jpg 400w,/images/responsive/gemma-m0-closeup-dotstar-marked-200.jpg 200w" style="width: 20%;"/></a>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">On the CircuitPlayground, even the buttons are already integrated!</p>
 </div>
 <p>The features of the demo project are as follows:</p>
@@ -182,42 +180,42 @@
 <li>Connectors (jumper cables, alligator clips, solid-core wire; specifics will depend on which board you are using).</li>
 <li>A breadboard.</li>
 </ul>
-<p>You can get all of these items from Adafruit, <a class="reference external" href="https://www.adafruit.com/wishlists/467781">here's a list</a>.</p>
-<p>I've also sourced them and similar ones from Mouser, to give you some idea of possible substitutions: <a class="reference external" href="https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=b9d0704608">shared cart</a>.</p>
+<p>You can get all of these items from Adafruit, <a class="reference external" href="https://www.adafruit.com/wishlists/467781" target="external">here's a list</a>.</p>
+<p>I've also sourced them and similar ones from Mouser, to give you some idea of possible substitutions: <a class="reference external" href="https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=b9d0704608" target="external">shared cart</a>.</p>
 <p>Amazon resellers will generally carry most of these things, even the Adafruit boards. It's a good idea to shop around, since there's a large gradient between cost, available options, shipping, and quality.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p><strong>I do not do affiliate links and do not endorse any particular storefront.</strong></p>
 <p>My point in providing saved carts and wishlists is to help you find what you need.</p>
 <p class="last">💖 That said, if given the opportunity, I will go on about Adafruit's quality and fast shipping, and this is based soley on my personal experiences with their online store and products. 🦄 💖</p>
 </div>
 <div class="section" id="the-development-board">
 <h3>The Development Board</h3>
-<p>Any of the M0 or M4 based boards <a class="reference external" href="https://www.adafruit.com/category/957">sold by Adafruit</a> should be compatible with the code in this article.</p>
+<p>Any of the M0 or M4 based boards <a class="reference external" href="https://www.adafruit.com/category/957" target="external">sold by Adafruit</a> should be compatible with the code in this article.</p>
 <p>I am fortunate to own, in part due to recent attendance at PyCon 2018, <em>four</em> examples of the M0 boards, and have tested the code on each:</p>
 <a href="/images/fullsize/nonblocking-m0-boards-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-m0-boards-2.jpg" srcset="/images/responsive/nonblocking-m0-boards-2-2500.jpg 2500w,/images/responsive/nonblocking-m0-boards-2-2000.jpg 2000w,/images/responsive/nonblocking-m0-boards-2-1800.jpg 1800w,/images/responsive/nonblocking-m0-boards-2-1600.jpg 1600w,/images/responsive/nonblocking-m0-boards-2-1200.jpg 1200w,/images/responsive/nonblocking-m0-boards-2-1000.jpg 1000w,/images/responsive/nonblocking-m0-boards-2-800.jpg 800w,/images/responsive/nonblocking-m0-boards-2-400.jpg 400w,/images/responsive/nonblocking-m0-boards-2-200.jpg 200w" style="width: 80%;"/></a>
 <p>From left to right, we have
-the <a class="reference external" href="https://www.adafruit.com/product/3333">CircuitPlayground Express</a>,
-the <a class="reference external" href="https://www.adafruit.com/product/3727">ItsyBitsy M0 Express</a>,
-the <a class="reference external" href="https://www.adafruit.com/product/3500">Trinket M0</a>,
-and the <a class="reference external" href="https://www.adafruit.com/product/3500">GEMMA M0</a>. There's also a <a class="reference external" href="https://en.wikipedia.org/wiki/Quarter_(United_States_coin)">quarter</a> for scale. On the whole, these things are <em>tiny</em>.</p>
+the <a class="reference external" href="https://www.adafruit.com/product/3333" target="external">CircuitPlayground Express</a>,
+the <a class="reference external" href="https://www.adafruit.com/product/3727" target="external">ItsyBitsy M0 Express</a>,
+the <a class="reference external" href="https://www.adafruit.com/product/3500" target="external">Trinket M0</a>,
+and the <a class="reference external" href="https://www.adafruit.com/product/3500" target="external">GEMMA M0</a>. There's also a <a class="reference external" href="https://en.wikipedia.org/wiki/Quarter_(United_States_coin)" target="external">quarter</a> for scale. On the whole, these things are <em>tiny</em>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <a href="/images/fullsize/gemma-m0-closeup-obverse.jpg"><img alt="" class="align-right" sizes="(min-width: 1060.0px) 200px,(min-width: 848.0px) 160px,(min-width: 424.0px) 80px,(min-width: 212.0px) 40px" src="/images/fullsize/gemma-m0-closeup-obverse.jpg" srcset="/images/responsive/gemma-m0-closeup-obverse-1000.jpg 1000w,/images/responsive/gemma-m0-closeup-obverse-800.jpg 800w,/images/responsive/gemma-m0-closeup-obverse-400.jpg 400w,/images/responsive/gemma-m0-closeup-obverse-200.jpg 200w" style="width: 20%;"/></a>
 <p>The GEMMA M0 I have is a special edition that was included in the SWAG bag at PyCon 2018 in Cleveland Ohio. It's functionally identical to the GEMMA you get from the Adafruit shop but it's a different color and has a special Pycon 2018 marking on the back.</p>
-<p class="last">There was not a lot of fanfare about it, but I did find a <a class="reference external" href="https://www.youtube.com/watch?v=71eAnJeQu2U">video by Dan Bader</a> talking about it, and a great <a class="reference external" href="https://bigl.es/friday-fun-adafruit-gemma-m0-and-neopixels/">blog post by Les Pounder</a> putting it through its paces.</p>
+<p class="last">There was not a lot of fanfare about it, but I did find a <a class="reference external" href="https://www.youtube.com/watch?v=71eAnJeQu2U" target="external">video by Dan Bader</a> talking about it, and a great <a class="reference external" href="https://bigl.es/friday-fun-adafruit-gemma-m0-and-neopixels/" target="external">blog post by Les Pounder</a> putting it through its paces.</p>
 </div>
 <p>Which board should you use? It depends on your application, as each board has it's strengths.</p>
 <p>The GEMMA, for example, is designed for wearable tech projects - it has a battery hookup and power regulator, as well as an on/off switch. The Trinket is absolutely lilliputian in its scale and a farily basic board. Both the GEMMA and Trinket have limited pins available. The ItsyBitsy and CircuitPlayground, being express boards, have extra flash memory. The CircuitPlayground has wearable features like the GEMMA, but it has a million nifty peripherals built in. It exposes a relatively small number of pins. In contrast, the ItsyBitsy is fairly barebones like the Trinket but has a <em>lot</em> of pins available.</p>
-<p>The <a class="reference external" href="https://www.adafruit.com/category/946">Feather boards</a> (not pictured) have a ton of great built-in peripherals provide a standard platform for expansion boards called "<a class="reference external" href="https://www.adafruit.com/category/945">wings</a>". They are a great, super-compact alternative to the old-school Arduino and Arduino Shield platform. I have an ESP8266-based Feather and one based on the ATmega32u4 with bluetooth LE, and really like the platform.</p>
-<p>Speaking of Arudino shields, Adafruit also makes an M0 board that's in the same form factor as the original Arduino, called the <a class="reference external" href="https://learn.adafruit.com/adafruit-metro-m0-express-designed-for-circuitpython">Metro M0 Express</a>. If you've already invested in a lot of Arduino shields, this is the board for you.</p>
+<p>The <a class="reference external" href="https://www.adafruit.com/category/946" target="external">Feather boards</a> (not pictured) have a ton of great built-in peripherals provide a standard platform for expansion boards called "<a class="reference external" href="https://www.adafruit.com/category/945" target="external">wings</a>". They are a great, super-compact alternative to the old-school Arduino and Arduino Shield platform. I have an ESP8266-based Feather and one based on the ATmega32u4 with bluetooth LE, and really like the platform.</p>
+<p>Speaking of Arudino shields, Adafruit also makes an M0 board that's in the same form factor as the original Arduino, called the <a class="reference external" href="https://learn.adafruit.com/adafruit-metro-m0-express-designed-for-circuitpython" target="external">Metro M0 Express</a>. If you've already invested in a lot of Arduino shields, this is the board for you.</p>
 <p>In any case, <strong>I would highly recommend doing any initial development on the CircuitPlayground Express</strong>. It has a dizzying array of peripherals built in, plus battery and power regulation, along with a large number of easy-to-work-with pads - it's appropriate for wearable projects as well as more traditional applications. It's easy to migrate to a smaller/less featureful board when a project starts to really come together.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>If your budget allows, and especially if you are just starting out, I'd suggest springing for the <a class="reference external" href="https://www.adafruit.com/product/2769">Circuit Playground Express Advanced Pack</a>. I had a couple of M0 boards and a lot of miscellaneous breakout boards before I picked up this kit, and I wish I had started with it instead.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>If your budget allows, and especially if you are just starting out, I'd suggest springing for the <a class="reference external" href="https://www.adafruit.com/product/2769" target="external">Circuit Playground Express Advanced Pack</a>. I had a couple of M0 boards and a lot of miscellaneous breakout boards before I picked up this kit, and I wish I had started with it instead.</p>
 <p class="last">It gives you everything you need to explore the possibilities of the platform (save maybe some wire and a breadboard or two), without having to solder anything!</p>
 </div>
-<p>A few things to keep in mind with regard to the "lilypad" style boards (GEMMA, CircuitPlayground; so-called after one of the first "wearable" platforms, <a class="reference external" href="https://store.arduino.cc/usa/lilypad-arduino-main-board">The Adruino LilyPad</a>) verses the "standard" ones (Trinket, ItsyBitsy):</p>
+<p>A few things to keep in mind with regard to the "lilypad" style boards (GEMMA, CircuitPlayground; so-called after one of the first "wearable" platforms, <a class="reference external" href="https://store.arduino.cc/usa/lilypad-arduino-main-board" target="external">The Adruino LilyPad</a>) verses the "standard" ones (Trinket, ItsyBitsy):</p>
 <ul class="simple">
 <li>Lilypad-style boards do not require any soldering or other assembly - you can just unpack them, plug in a USB cable, and start coding. You will typically use alligator clips, or conductive thread, to connect them to other components.</li>
 <li>Standard boards will require some soldering. You'll either have to solder wires directly to the pin pads on the perimeter of the board, or use the provided headers.</li>
@@ -257,8 +255,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>The trade off is that the button logic seems inverted compared to what common sense would dictate: when we press the button, it reads "LOW", and when it's not pressed, it reads "HIGH".</p>
 <p>The CircuitPlayground Express is wired in the reverse configuration, and requires a pull-<em>down</em> resistor turned on in software. The logic is also inverted to be "correct". This was done this way to make teaching easier with the board, but it adds an inconsistency in my little platoon of M0 development boards. This will be dealt with below.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last"><a class="reference external" href="https://en.wikipedia.org/wiki/Limor_Fried">Lady Ada</a> wrote a <a class="reference external" href="http://www.ladyada.net/learn/arduino/lesson5.html">classic tutorial</a> on the subject of wiring buttons to digital inputs. It explains everything, including the concept of "floating" really well. Highly recommended reading.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last"><a class="reference external" href="https://en.wikipedia.org/wiki/Limor_Fried" target="external">Lady Ada</a> wrote a <a class="reference external" href="http://www.ladyada.net/learn/arduino/lesson5.html" target="external">classic tutorial</a> on the subject of wiring buttons to digital inputs. It explains everything, including the concept of "floating" really well. Highly recommended reading.</p>
 </div>
 <p>I've used three different kinds of breadboards I had on hand, and mixed up the kinds of connectors a bit to illustrate some different ways of wiring up the buttons.</p>
 <div class="section" id="gemma-m0">
@@ -273,7 +271,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <a href="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-itsybitsy-demo-circuit.jpg" srcset="/images/responsive/nonblocking-itsybitsy-demo-circuit-2500.jpg 2500w,/images/responsive/nonblocking-itsybitsy-demo-circuit-2000.jpg 2000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1800.jpg 1800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1600.jpg 1600w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1200.jpg 1200w,/images/responsive/nonblocking-itsybitsy-demo-circuit-1000.jpg 1000w,/images/responsive/nonblocking-itsybitsy-demo-circuit-800.jpg 800w,/images/responsive/nonblocking-itsybitsy-demo-circuit-400.jpg 400w,/images/responsive/nonblocking-itsybitsy-demo-circuit-200.jpg 200w" style="width: 80%;"/></a>
 <p>For the ItsyBitsy, I used a full-sized breadboard. On these breadboards, they have a similar split and trench down the middle. They also have a long bus on each side (top and bottom in this picture) marked negative and positive. Each group of tie points are connected. We've used them to run power from the ItsyBitsy to the rest of the board.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">The buses can be removed and multiple breadboards can be connected to form larger areas to work with.</p>
 </div>
 <p>For ease of access, I've tied the left and right power rails together using some solid-core wire (far left). This isn't necessary for this project (we're only tying things to ground and pins on the ItsyBitsy), but it's a useful setup so I added it for demonstration purposes.</p>
@@ -289,7 +287,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>For the Trinket, I used a standard "half-sized" breadboard. It's just like the "full sized" on I used for the ItsyBitsy, but it's... half the size 🤔.</p>
 <p>For this circuit, I used pre-made jumper wires exclusively.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>It's a little messier using all jumpers, but it's really easy to change things up. In fact, I originally had the buttons wired to pins on the other side of the Trinket, but it was hard to see what was going on in the pictures. It was trivial to rearrange things to make it easier to see what's what.</p>
 <p class="last">It's always a good idea to use jumper wires to start a project, and as things take shape, slowly replace them with solid-core wires. 🦄</p>
 </div>
@@ -353,9 +351,9 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>If we have this chain of <tt class="docutils literal">if</tt>'s, its up to <em>us</em> to add in support for these different ways of doing what we want to do.</p>
 <p>In an abstraction, we decide on a standard way of accessing the code, or <em>interface</em>. That means we decide that variables and functions will be named a certain way. Functions will take certain parameters and return specific kinds of values.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Like many terms in technology, <em>interface</em> has multiple meanings in different contexts.</p>
-<p>We're using the term in the sense of an <a class="reference external" href="https://en.wikipedia.org/wiki/Application_programming_interface">application programming interface</a>, usually abbreviated as <em>API</em>.</p>
+<p>We're using the term in the sense of an <a class="reference external" href="https://en.wikipedia.org/wiki/Application_programming_interface" target="external">application programming interface</a>, usually abbreviated as <em>API</em>.</p>
 <p class="last">Be careful when searching 😀.</p>
 </div>
 <p>Another term for this, that you'll hear used sometimes in computer science, is <em>contract</em>. I think that describes what the abstraction does a bit more concisely - you are saying to someone who wants to use your code "I promise that you can rely on my code working this way", and the user is saying "I agree to do things your way".</p>
@@ -375,13 +373,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <a href="/images/fullsize/abstraction-explained-2.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/abstraction-explained-2.jpg" srcset="/images/responsive/abstraction-explained-2-2500.jpg 2500w,/images/responsive/abstraction-explained-2-2000.jpg 2000w,/images/responsive/abstraction-explained-2-1800.jpg 1800w,/images/responsive/abstraction-explained-2-1600.jpg 1600w,/images/responsive/abstraction-explained-2-1200.jpg 1200w,/images/responsive/abstraction-explained-2-1000.jpg 1000w,/images/responsive/abstraction-explained-2-800.jpg 800w,/images/responsive/abstraction-explained-2-400.jpg 400w,/images/responsive/abstraction-explained-2-200.jpg 200w" style="width: 80%;"/></a>
 <p>🦄 There's even a nested abstraction here. Adafruit has already abstracted the pixel code away for us, by giving the <tt class="docutils literal">DotStar</tt> and <tt class="docutils literal">NeoPixel</tt> classes the same interface. So we can interact with a string of NeoPixels in the same way we can interact with a string of DotStars.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">If someone wanted to use a different kind of RGB LED (SunSpots&trade;), as long they adhere to the interface of the abstraction Adafruit has provided, our code will still work. In fact, the SunSpots&trade; library would work <em>anywhere</em> <tt class="docutils literal">DotStar</tt> or <tt class="docutils literal">NeoPixel</tt> are used.</p>
 </div>
-<p>Now anyone who wants to follow this article, but maybe has a <a class="reference external" href="https://store.micropython.org/product/PYBv1.1">pyboard</a> or an <a class="reference external" href="https://www.espressif.com/en/products/hardware/esp8266ex/overview">ESP8266</a>-based board can follow along without having to constantly adapt the code to their situation. All they have to do is write a <tt class="docutils literal">setup.py</tt> module and make sure it has the expected objects.</p>
+<p>Now anyone who wants to follow this article, but maybe has a <a class="reference external" href="https://store.micropython.org/product/PYBv1.1" target="external">pyboard</a> or an <a class="reference external" href="https://www.espressif.com/en/products/hardware/esp8266ex/overview" target="external">ESP8266</a>-based board can follow along without having to constantly adapt the code to their situation. All they have to do is write a <tt class="docutils literal">setup.py</tt> module and make sure it has the expected objects.</p>
 <p>So here's the code for each of the boards I have.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If you are using a board that has a built-in NeoPixel, but <em>isn't</em> a CircuitPlayground, use the DotStar code, but replace the DotStar lines (lines 3, 8 and 9) with the NeoPixel code from the CircuitPlayground example.</p>
 </div>
 <div class="section" id="for-the-circuitplayground">
@@ -441,9 +439,9 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>This file will need to be saved on your <tt class="docutils literal">CIRCUITPY</tt> drive as <tt class="docutils literal">setup.py</tt>.</p>
 <p><strong>Lines 2-4</strong> import external libraries needed for this module to function.</p>
 <p>The <tt class="docutils literal">board</tt> library contains variables that are related to your specific development board. It contains all of the pin assignments, including some handy aliases for the built-in components (like the <tt class="docutils literal">board.NEOPIXEL</tt> variable used on <strong>line 9</strong>).</p>
-<p>The <tt class="docutils literal">neopixel</tt> library gives us a way to control the 10 RGB LEDs that surround the CircuitPlayground. Depending on how your CircuitPython was installed, you may have to install this library yourself. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
-<p>The basics of the <tt class="docutils literal">neopixel</tt> library, specifically for this board, are disucessed in the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-neopixel">documentation</a>.</p>
-<p>NeoPixels are a hugely cool peripheral, and you are not limited to just using the ones on your CircuitPlayground Express. Check out the <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels">NeoPixel &Uuml;berguide</a> for comprehensive information about them.</p>
+<p>The <tt class="docutils literal">neopixel</tt> library gives us a way to control the 10 RGB LEDs that surround the CircuitPlayground. Depending on how your CircuitPython was installed, you may have to install this library yourself. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries" target="external">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
+<p>The basics of the <tt class="docutils literal">neopixel</tt> library, specifically for this board, are disucessed in the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express/circuitpython-neopixel" target="external">documentation</a>.</p>
+<p>NeoPixels are a hugely cool peripheral, and you are not limited to just using the ones on your CircuitPlayground Express. Check out the <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels" target="external">NeoPixel &Uuml;berguide</a> for comprehensive information about them.</p>
 <p>On <strong>line 4</strong>, we import a few things from the <tt class="docutils literal">digitalio</tt> library. This library contains classes, variables and functions useful for reading and writing to digital pins (buttons, LEDs, etc). We're only importing the objects that we need to set up the buttons and built-in LED, <tt class="docutils literal">DigitalInOut</tt>, <tt class="docutils literal">Direction</tt>, and <tt class="docutils literal">Pull</tt>. Their purpose will be explained shortly.</p>
 <p><strong>Lines 6 and 7</strong> set up the built-in red LED. It's attached to digital pin 13, so we pass <tt class="docutils literal">board.D13</tt> to the <tt class="docutils literal">DigitalInOut</tt> constructor. On <strong>Line 7</strong>, we set the <em>direction</em> of the pin to be an <em>output</em> - this means the pin is only going to be used for sending information, on in this case, sending power to the pin to turn on the LED.</p>
 <p><tt class="docutils literal">led</tt> is now a <tt class="docutils literal">DigitalInOut</tt> object we can write to by setting its <tt class="docutils literal">value</tt> attribute to a boolean value (<tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>).</p>
@@ -458,7 +456,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <div class="section" id="for-the-other-boards-with-dotstars">
 <h3>For the other boards with DotStars</h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Be sure to change the pin numbers to reflect how you wired up your buttons.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -516,13 +514,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>This file will need to be saved on your <tt class="docutils literal">CIRCUITPY</tt> drive as <tt class="docutils literal">setup.py</tt>.</p>
 <p><strong>Lines 2-4</strong> import external libraries needed for this module to function.</p>
 <p>The <tt class="docutils literal">board</tt> library contains variables that are related to your specific development board. It contains all of the pin assignments, including some handy aliases for the built-in components (like the <tt class="docutils literal">board.APA102_SCK</tt> variable used on <strong>line 9</strong>).</p>
-<p>The <tt class="docutils literal">adafruit_dotstar</tt> module provides a way to control DotStars. DotStars are like NeoPixels, but use a different protocol. The differences are explained on <a class="reference external" href="https://learn.adafruit.com/adafruit-dotstar-leds/overview">the DotStar LED docuemntation page</a>.</p>
-<p>You will have to install the <tt class="docutils literal">adafruit_dotstar</tt> library. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
-<p>The details of working with the DotStar library in CircuitPython is covered in <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-dotstar">the CircuitPython DotStar section</a> of the CircuitPython Essentials document.</p>
+<p>The <tt class="docutils literal">adafruit_dotstar</tt> module provides a way to control DotStars. DotStars are like NeoPixels, but use a different protocol. The differences are explained on <a class="reference external" href="https://learn.adafruit.com/adafruit-dotstar-leds/overview" target="external">the DotStar LED docuemntation page</a>.</p>
+<p>You will have to install the <tt class="docutils literal">adafruit_dotstar</tt> library. This process is covered in detail on the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries" target="external">CircuitPython Libraries section</a> of the "Welcome To CircuitPython" guide.</p>
+<p>The details of working with the DotStar library in CircuitPython is covered in <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-dotstar" target="external">the CircuitPython DotStar section</a> of the CircuitPython Essentials document.</p>
 <p>On <strong>line 4</strong>, we import a few things from the <tt class="docutils literal">digitalio</tt> library. This library contains classes, variables and functions useful for reading and writing to digital pins (buttons, LEDs, etc). We're only importing the objects that we need to set up the buttons and built-in LED, <tt class="docutils literal">DigitalInOut</tt>, <tt class="docutils literal">Direction</tt>, and <tt class="docutils literal">Pull</tt>. Their purpose will be explained shortly.</p>
 <p><strong>Lines 6 and 7</strong> set up the built-in red LED. It's attached to digital pin 13, so we pass <tt class="docutils literal">board.D13</tt> to the <tt class="docutils literal">DigitalInOut</tt> constructor. On <strong>Line 7</strong>, we set the <em>direction</em> of the pin to be an <em>output</em> - this means the pin is only going to be used for sending information, on in this case, sending power to the pin to turn on the LED.</p>
 <p><tt class="docutils literal">led</tt> is now a <tt class="docutils literal">DigitalInOut</tt> object we can write to by setting its <tt class="docutils literal">value</tt> attribute to a boolean value (<tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>).</p>
-<p><strong>Lines 9 and 10</strong> configure the DotStar. We call the DotStar object simply <tt class="docutils literal">rgb</tt> to keep it as generic as possible. DotStars are connected via <a class="reference external" href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface">SPI</a>, so they require two pins to be specified in the constructor. We use the <tt class="docutils literal">board</tt> library to provide the two built-in pins that are pre-wired to all built-in DotStars, <tt class="docutils literal">board.APA102_SCK</tt> and <tt class="docutils literal">board.APA102_MOSI</tt>. Finally we pass <tt class="docutils literal">1</tt> to the constructor, to let the library know we are only controlling the single DotStar.</p>
+<p><strong>Lines 9 and 10</strong> configure the DotStar. We call the DotStar object simply <tt class="docutils literal">rgb</tt> to keep it as generic as possible. DotStars are connected via <a class="reference external" href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface" target="external">SPI</a>, so they require two pins to be specified in the constructor. We use the <tt class="docutils literal">board</tt> library to provide the two built-in pins that are pre-wired to all built-in DotStars, <tt class="docutils literal">board.APA102_SCK</tt> and <tt class="docutils literal">board.APA102_MOSI</tt>. Finally we pass <tt class="docutils literal">1</tt> to the constructor, to let the library know we are only controlling the single DotStar.</p>
 <p>On <strong>Line 10</strong> we set the brightness of the pixel to <tt class="docutils literal">0.3</tt>. The brightness is a float between <tt class="docutils literal">0</tt> and <tt class="docutils literal">1.0</tt>. These pixels are <em>incredibly</em> bright, feel free to lower this to <tt class="docutils literal">0.1</tt> if <tt class="docutils literal">0.3</tt> is too intense, or increase it if you want to really light up your life. 😀</p>
 <p><strong>Lines 12-14</strong> and <strong>lines 16-18</strong> set up our buttons. The pins are supplied via the <tt class="docutils literal">board</tt> module. The direction is set just like the <tt class="docutils literal">led</tt> on <strong>line 6</strong>, but in this case the direction is set to <tt class="docutils literal">Direction.INPUT</tt>, because these are pins to be <em>read</em> from, instead of written to. On these boards, we've wired all of the buttons so they connect to ground when pressed, so we have to use a pull up resistor so they function properly (<strong>lines 14 and 18</strong>) . This also means that our logic will be inverted relative to other wirirings (and common sense) - when the button is pressed, the pin will read <tt class="docutils literal">False</tt>, and when it's not pressed, it will read <tt class="docutils literal">True</tt>.</p>
 <p>Finally, on <strong>lines 20-24</strong>, we define a function called <tt class="docutils literal">check()</tt>. The purpose of this function is to abstract away the differences between how these various boards are wired up. On <strong>lines 22 and 24</strong>, we use the <tt class="docutils literal">not</tt> operator to negate whatever we got from the button pin. This normalizes the output between these boards, and boards like the CircuitPlayground that are wired in the opposite manner.</p>
@@ -561,13 +559,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Before digging into state and other fun stuff, its a good idea to run some super simple code to ensure that everything is wired up properly. I've written some minimalistic code you can use to verify everything is set up.</p>
 <p>What this code does is turn the on the onboard LED when button "A" is pressed, and the RGB LED (either a dotstar for the ItsyBitsy, Trinket, or GEMMA boards, or a NeoPixel in the case of the CircuitPlayground) when button "B" is pressed.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">For details about controlling the onboard RGB LEDs, see <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-internal-rgb-led">Adafruit's excellent documentation on the subject</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">For details about controlling the onboard RGB LEDs, see <a class="reference external" href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-internal-rgb-led" target="external">Adafruit's excellent documentation on the subject</a>.</p>
 </div>
 <p>Before running this code, make sure you've copied the proper RGB LED library over to your board, in the <tt class="docutils literal">lib</tt> folder.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you aren't familiar with this process, check out the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries">CircuitPython Libraries</a> section of the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview">"Welcome To CircuitPython"</a> guide.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">If you aren't familiar with this process, check out the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries" target="external">CircuitPython Libraries</a> section of the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview" target="external">"Welcome To CircuitPython"</a> guide.</p>
 </div>
 <p>Also make sure you have created a <tt class="docutils literal">setup.py</tt> module, as explained in <a class="reference internal" href="#abstractions-keeping-the-code-simple">the last section</a>.</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -600,7 +598,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 <ul class="simple">
 <li><strong>Lines 1 and 2</strong> import the necessary external objects and modules we need.</li>
-<li>The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/shared-bindings/time/__init__.html">time</a> module provides functions related to the passage of time, usually in terms of seconds.</li>
+<li>The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/shared-bindings/time/__init__.html" target="external">time</a> module provides functions related to the passage of time, usually in terms of seconds.</li>
 <li><strong>Line 4</strong> starts off the standard "main loop" where our code runs.</li>
 <li>On <strong>Line 5</strong>, we set the value of the <tt class="docutils literal">led</tt> object, or the red LED wired to pin 13, to whatever the value of the "A" button happens to be at that moment. If the value is <tt class="docutils literal">True</tt> (the button is pressed), the LED will turn on. If it's <tt class="docutils literal">False</tt> (the button is not pressed), the LED will turn off.</li>
 </ul>
@@ -636,8 +634,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>So where you think you can use a logical check of a pin's status (<tt class="docutils literal">if pin.value</tt>) in your code to determine if the button is pressed, and execute some code, it's not that simple. Without smoothing out the signal from the pin, your code will end up executing many times before the button is even fully pressed down. The number of times will vary from button to button, and can even vary from day to day.</p>
 <p>Maybe for some applications, like turning on an LED while a button is pressed, it's not really a problem. But if pressing that button has <em>side effects</em> it can be really, really bad.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For an in-depth analysis of <em>button</em> bounce and possible solutions, check out <a class="reference external" href="http://www.ganssle.com/debouncing.htm">A Guide To Debouncing</a> from the <a class="reference external" href="http://www.ganssle.com/">Ganssle Group</a>. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For an in-depth analysis of <em>button</em> bounce and possible solutions, check out <a class="reference external" href="http://www.ganssle.com/debouncing.htm" target="external">A Guide To Debouncing</a> from the <a class="reference external" href="http://www.ganssle.com/" target="external">Ganssle Group</a>. It's the best discussion I've found in my research, and often cited by other tutorials that you run into on the subject.</p>
 </div>
 <p>There's more to it than just noisy buttons, though. There are other "bouncy" signals that aren't quite as chaotic as button bounce, but need to be dealt with in the same way.</p>
 <p>Remember, your main loop is executing many thousands of times per second. If you check a pin's status every loop, even if the button attached to it is fully "debounced", your code will still get called many, many times. A perfectly clean signal will still trigger your code to run over and over and over.</p>
@@ -646,7 +644,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>We've already looked at code that blocks in the <a class="reference internal" href="#testing">Testing</a> section above. We're using a Python function called <tt class="docutils literal">time.sleep()</tt> that pauses processing for a given period of time (provided in seconds).</p>
 <p>This approach effectively smoothes out the signal from our inputs, by reducing the frequency at which we check the status of the button. Instead of checking <em>48 million times</em> every second (the clock frequency of the M0), we're only checking <em>5 times</em> per second. We'll miss any variations in the signal that happen while the button "settles" after its pressed.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The actual number of times your code runs is limited by many things, and even in an ideal situation will likely never <em>actually</em> run 48 million times per second. It might get close, 30 million, 10 million...</p>
 </div>
 <p>The problem is that while code is blocking, <em>nothing else can happen</em>.</p>
@@ -654,9 +652,9 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>So what can we do instead?</p>
 <p>We have a few viable options:</p>
 <ol class="arabic simple">
-<li>For buttons, we can use an <a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit">R/C filter circuit</a> to clean the input (a.k.a. <em>hardware debouncing</em>).</li>
+<li>For buttons, we can use an <a class="reference external" href="https://en.wikipedia.org/wiki/RC_circuit" target="external">R/C filter circuit</a> to clean the input (a.k.a. <em>hardware debouncing</em>).</li>
 <li>We can use an IC that does debouncing for us.</li>
-<li>We can use <a class="reference external" href="https://www.sparkfun.com/tutorials/326">interrupts</a>.</li>
+<li>We can use <a class="reference external" href="https://www.sparkfun.com/tutorials/326" target="external">interrupts</a>.</li>
 <li>We can create a data structure that tracks the <em>state</em>, or status, of our inputs.</li>
 </ol>
 <p>Hardware debouncing is only really useful in situations where the debouncing needs to be <em>rock solid</em>. It requires more components, which increases the cost (something more of an issue in industry) and introduces more complexity (more of an issue for us as hobbyists). Even with really solid hardware debouncing, we still need to be concerned with button state - remember what feels like a momentary press for a human being is an event that lasts many many processor cycles - if the action triggered by the button runs every cycle and if we aren't being conscious of the button state, we're in trouble.</p>
@@ -702,8 +700,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </td></tr></table></div><p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics!</p>
 <p>We can simplify and generalize things a bit by using Python's built-in data structures.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview">simple guide</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview" target="external">simple guide</a>.</p>
 </div>
 <p>There are many, many ways to model a match like this, here's just one using lists and dictionaries:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -752,8 +750,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>A better analogy for our needs is the <em>scoreboard</em> from a team-based sport. A sports arena/field will have one giant board that tracks the state of the entire game - all relevant information you need to understand the progress of the game is available in one place. It's globally accessible, you can see it from any seat - you just need to look at it.</p>
 <p>Here's a contrived example of a typical scoreboard from an American baseball stadium:</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">The nuances and rules for American baseball are not relevant to this article, but if you aren't familiar and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball">wikipedia article</a> is the place to start.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">The nuances and rules for American baseball are not relevant to this article, but if you aren't familiar and want to dig in, the <a class="reference external" href="https://en.wikipedia.org/wiki/Baseball" target="external">wikipedia article</a> is the place to start.</p>
 </div>
 <a href="/images/fullsize/nonblocking-state-examples-03.jpg"><img alt="" class="align-center" sizes="(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-03.jpg" srcset="/images/responsive/nonblocking-state-examples-03-1600.jpg 1600w,/images/responsive/nonblocking-state-examples-03-1200.jpg 1200w,/images/responsive/nonblocking-state-examples-03-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-03-800.jpg 800w,/images/responsive/nonblocking-state-examples-03-400.jpg 400w,/images/responsive/nonblocking-state-examples-03-200.jpg 200w" style="width: 80%;"/></a>
 <p>It has various regions with indicators, usually lights, and numbers representing the state of the game. Each one represents an independent piece of important information. That information changes as the game progresses. Outs are made, points (runs) are scored, innings go by (there are 9 in a typical baseball game).</p>
@@ -788,17 +786,17 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </td></tr></table></div><p>So we have a single, global variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
 <p>This has the advantage over using a series of variables in that it is more compact, but flexible - we're only using up one variable name, and the names of our state attributes can be almost anything - words with spaces, dashes, even other objects.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For an object to be used as a dictionary key, it must be <a class="reference external" href="https://docs.python.org/3.6/glossary.html#term-hashable">hashable</a>.</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">For an object to be used as a dictionary key, it must be <a class="reference external" href="https://docs.python.org/3.6/glossary.html#term-hashable" target="external">hashable</a>.</p>
 </div>
 <p>Dictionaries are limited in that they are strictly mappings of some key to some value. There are times when you will need to add more functionality, and that's where <em>classes</em> come in.</p>
 <p>A <em>class</em>, in the simplest terms, is a data structure that contains variables (called <em>attributes</em> or <em>properties</em>), and functions (called <em>methods</em>).</p>
 <p>What makes classes special is that they are used as a blueprint for creating new objects. You define what your class looks like once, and then create <em>instances</em> of your class that store your data.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>There is a <em>ton</em> more to classes in Python. This is called <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object-Oriented Programming</a> (OOP), and is a whole school of thought unto itself in programming (or <em>paradigm</em>).</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>There is a <em>ton</em> more to classes in Python. This is called <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="external">Object-Oriented Programming</a> (OOP), and is a whole school of thought unto itself in programming (or <em>paradigm</em>).</p>
 <p>I'm not going to go into too much detail here, since there is much to discuss.</p>
-<p class="last">A good place to start is <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">the python OOP tutorial</a>.</p>
+<p class="last">A good place to start is <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html" target="external">the python OOP tutorial</a>.</p>
 </div>
 <p>For our purposes, classes provide a way of reasoning about state in a self-contained manner. The class contains all of our state variables, and it has methods that operate on it. We can extend the class if we need to, and can even use it to handle global state for multiple similar parts of our project.</p>
 <p>Here's a simple example of a class that represents our scoreboard:</p>
@@ -860,15 +858,15 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p><strong>Lines 2-12</strong> define the <em>constructor</em> of the class, which is always named <tt class="docutils literal">__init__()</tt>. This method is called only once, when the class instance is initially created.</p>
 <p>In Python, a class method name surrounded by two underscores on each side is considered "magic" - it has special meaning, like how this method is the constructor.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>Magic methods are a extremely useful feature of Python, and are worth researching fully.</p>
-<p class="last">Check out this <a class="reference external" href="https://rszalski.github.io/magicmethods/">comprehensive view of magic methods in Python</a> for more information.</p>
+<p class="last">Check out this <a class="reference external" href="https://rszalski.github.io/magicmethods/" target="external">comprehensive view of magic methods in Python</a> for more information.</p>
 </div>
 <p>The constructor is used to establish all of the default values for the instance attributes. That's what's occurring on <strong>lines 3-12</strong>.</p>
 <p><em>Instance methods</em> are defined on <strong>lines 14-15</strong> (<tt class="docutils literal">tied()</tt>), and <strong>17-24</strong> (<tt class="docutils literal">next_inning()</tt>).</p>
 <p>Instance methods are methods that operate on an instance of a class. A reference to the instance is passed to all instance methods, named <tt class="docutils literal">self</tt>. We call them <em>instance</em> methods to differentiate them from <em>class methods</em>. Class attributes are explained a bit later on in this article. The thing to know about class <em>methods</em> is that instead of the first parameter being a reference to the <em>instance</em>, its a reference to the <em>class</em>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Most of the time you won't have to deal with class methods. In fact, to use them, you must decorate a method with the special <tt class="docutils literal">@classmethod</tt> decorator.</p>
 </div>
 <p><tt class="docutils literal">tied()</tt> will returns <tt class="docutils literal">True</tt> if the game is tied, and <tt class="docutils literal">False</tt> if not.</p>
@@ -953,7 +951,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </ul>
 <p>Again, we can simply use multiple variables to hold various state values, but we'll see how convoluted this can get:</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Remember this code is assuming you have created a <tt class="docutils literal">setup.py</tt> file as explained <a class="reference internal" href="#abstractions-keeping-the-code-simple">earlier</a>.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1050,13 +1048,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>The second pass involves looking at the state object and changing state based solely on that - something happened during the first pass that requires the state to change. A button's state has changed, so we need to update the state of the LED.</p>
 <p>The final pass reconciles the state object with reality. This is where you would buzz a piezo speaker, update a display, or turn on an LED. These are considered <em>side effects</em> - when we execute code, like setting a digital pin to <tt class="docutils literal">True</tt>, our code has had effects outside of its scope.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">In this case, and for our purposes, the side effects usually affect the physical state of our project (the LED lights up). But in programming, side effects can be anything, and are usually affecting other parts of our code or our data.</p>
 </div>
 <p>Here's a diagram showing how it works:</p>
 <a href="/images/fullsize/nonblocking-state-flowchart.jpg"><img alt="" class="align-center" sizes="(min-width: 2650.0px) 2000px,(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-flowchart.jpg" srcset="/images/responsive/nonblocking-state-flowchart-2500.jpg 2500w,/images/responsive/nonblocking-state-flowchart-2000.jpg 2000w,/images/responsive/nonblocking-state-flowchart-1800.jpg 1800w,/images/responsive/nonblocking-state-flowchart-1600.jpg 1600w,/images/responsive/nonblocking-state-flowchart-1200.jpg 1200w,/images/responsive/nonblocking-state-flowchart-1000.jpg 1000w,/images/responsive/nonblocking-state-flowchart-800.jpg 800w,/images/responsive/nonblocking-state-flowchart-400.jpg 400w,/images/responsive/nonblocking-state-flowchart-200.jpg 200w" style="width: 80%;"/></a>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">For our simple example, we can shortcut some of these steps (for example, just directly set the value of the led to that of its button). But it's good to think about things in this multiple-pass manner, since it makes more complex things much easier to reason about.</p>
 </div>
 <p>We need to add our "different color" feature. Before we do that, lets refactor our state variables into a class:</p>
@@ -1234,7 +1232,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <div class="docutils container">
 </div>
 <p>This code replaces the first lines of the previous example. Everything from the initial imports, through to instantiating the <tt class="docutils literal">state</tt> object is replaced with the above, up to the <tt class="docutils literal"># <span class="pre">--</span> snip <span class="pre">--</span></tt> comment.</p>
-<p>The first difference is that we've imported the <tt class="docutils literal">random</tt> module, on <strong>line 2</strong>. This is a standard Python module that provides an interface with a <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">psuedo-random number generator</a>.</p>
+<p>The first difference is that we've imported the <tt class="docutils literal">random</tt> module, on <strong>line 2</strong>. This is a standard Python module that provides an interface with a <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator" target="external">psuedo-random number generator</a>.</p>
 <p>The other change is the implementation of the <tt class="docutils literal">random_color()</tt> method on <strong>lines 13-18</strong>. This method uses the <tt class="docutils literal">randrange()</tt> function from the <tt class="docutils literal">random</tt> module to select three random numbers between 0 and 255 (the range of valid red, green, and blue amounts), and set <tt class="docutils literal">self.color</tt> to a tuple containing them.</p>
 <p>So every time the <tt class="docutils literal">random_color()</tt> method is called, a new random color is generated and stored in the state object.</p>
 </div>
@@ -1492,22 +1490,22 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Another way to look at it is that we've introduced the passage of time into our main loop. We're fixing our code to an interval of 0.2 seconds, so we can wait until a button is completely pressed or released before we act, and so that our code won't run over and over without reason.</p>
 <p>We can accomplish the same goal in a different way using state. Instead of putting a full stop on all of our code for 0.2 seconds, we can instead look at a some sort of clock at the start of every loop, and only <em>act</em> every 0.2 seconds. While we're waiting for time to pass, other code can run, getting rid of the blocking.</p>
 <p>This means that the time we looked at the clock is a <em>new state attribute</em>. We can reference this new attribute to decide when to act.</p>
-<p>So how do we track passing time? Most microcontrollers don't have true built-in clocks like PCs. Most computers have what's called a "<a class="reference external" href="https://en.wikipedia.org/wiki/Real-time_clock">real-time clock</a>", or RTC. It's typically an integrated circuit that counts time in a highly accurate way using some sort of oscillating crystal. A battery is used to keep power to the IC so that it won't loose track of time, especially when the PC is powered off.</p>
-<p>While we can get microcontrollers with RTCs built in, and as add-on boards (Adafruit has several in their shop that have <a class="reference external" href="https://learn.adafruit.com/adafruit-pcf8523-real-time-clock/rtc-with-circuitpython">CircuitPython support</a>), they are typically reserved for applications where "clock time" is necessary - for example, a digital alarm clock, or logging sensor data.</p>
+<p>So how do we track passing time? Most microcontrollers don't have true built-in clocks like PCs. Most computers have what's called a "<a class="reference external" href="https://en.wikipedia.org/wiki/Real-time_clock" target="external">real-time clock</a>", or RTC. It's typically an integrated circuit that counts time in a highly accurate way using some sort of oscillating crystal. A battery is used to keep power to the IC so that it won't loose track of time, especially when the PC is powered off.</p>
+<p>While we can get microcontrollers with RTCs built in, and as add-on boards (Adafruit has several in their shop that have <a class="reference external" href="https://learn.adafruit.com/adafruit-pcf8523-real-time-clock/rtc-with-circuitpython" target="external">CircuitPython support</a>), they are typically reserved for applications where "clock time" is necessary - for example, a digital alarm clock, or logging sensor data.</p>
 <p>Luckily, microcontrollers are in themselves a sort of <em>pseudo-clock</em>, because they operate on a regular processor cycle.</p>
 <p>The processor cycles are fixed to a specific rate. For example, our M0 board "clocks" at 48 megahertz (<em>48,000,000</em> cycles per second). That means that every second, the processor scans the part of its memory where your program code lives, and executes the instructions it finds <em>fourty-eight million times</em>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The chips in these CircuitPython boards, the ATSAMD21 and ATSAMD51, have a built-in <em>oscillator</em>. They have circuitry in the chips that can generate a regular pulse that can be used for clocking the processor. Not all microcontrollers have these. You'll often see a little oblong silver cylinder on the board (a <a class="reference external" href="https://en.wikipedia.org/wiki/Crystal_oscillator">crystal oscillator</a>) - this is the real "clock" in that situation.</p>
+<h2 class="first admonition-title">Note</h2>
+<p>The chips in these CircuitPython boards, the ATSAMD21 and ATSAMD51, have a built-in <em>oscillator</em>. They have circuitry in the chips that can generate a regular pulse that can be used for clocking the processor. Not all microcontrollers have these. You'll often see a little oblong silver cylinder on the board (a <a class="reference external" href="https://en.wikipedia.org/wiki/Crystal_oscillator" target="external">crystal oscillator</a>) - this is the real "clock" in that situation.</p>
 <p class="last">The processor runs at the frequency of the outboard oscillator. In the case of the M0/M4 chips, you can choose to use an external oscillator or choose one of several built-in to the chip.</p>
 </div>
 <p>That cycle is very reliable, so it's possible to track it, and with some math, convert cycles to seconds passing over time.</p>
 <p>There's a function in the <tt class="docutils literal">time</tt> module that does just that. It's called <tt class="docutils literal">time.monotonic()</tt>. When called, it returns the number of seconds that have passed since the processor was turned on.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Behind the scenes, CircuitPython is using so-called <a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-2/timers">timer interrupts</a>, features of microcontrollers where you can tell the processor to execute specific code blocks at regular intervals based on processor cycles.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Behind the scenes, CircuitPython is using so-called <a class="reference external" href="https://learn.adafruit.com/multi-tasking-the-arduino-part-2/timers" target="external">timer interrupts</a>, features of microcontrollers where you can tell the processor to execute specific code blocks at regular intervals based on processor cycles.</p>
 </div>
-<p><tt class="docutils literal">time.monotonic()</tt> returns a <em>float</em>, or <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">floating-point number</a> - essentially a fraction, so it's ideal for our two-tenths-of-a-second debouncing rate.</p>
+<p><tt class="docutils literal">time.monotonic()</tt> returns a <em>float</em>, or <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic" target="external">floating-point number</a> - essentially a fraction, so it's ideal for our two-tenths-of-a-second debouncing rate.</p>
 <p>Now, let's take advantage of this in our code.</p>
 <p>First, we'll need to add a new attribute to our <tt class="docutils literal">State</tt> class. It will represent the last time we looked at the clock, or <em>checked in</em> with the processor. We'll call it <tt class="docutils literal">checkin</tt>.</p>
 <p>Initially, we'll set it to the value of <tt class="docutils literal">time.monotonic()</tt>. By doing this in the constructor (<tt class="docutils literal">__init__()</tt>), we are calling <tt class="docutils literal">time.monotonic()</tt> when we create the <tt class="docutils literal">state</tt> variable from the <tt class="docutils literal">State</tt> class. So the initial value of <tt class="docutils literal">state.checkin</tt> will be the number of seconds from when the board was powered on, until that line of code is executed.</p>
@@ -1646,12 +1644,12 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>By making <tt class="docutils literal">_debounce</tt> a class attribute, we are indicating to anyone who uses our class that we don't intend for the value to be changed. However, if we were to change it, we would do so by accessing it as <tt class="docutils literal">State._debounce</tt>. What's really interesting is that changing <tt class="docutils literal">State._debounce</tt> would change <em>all</em> of the instances of <tt class="docutils literal">State</tt> too.</p>
 <p>There's some nuance to it, but generally speaking, we use class attributes like this when we want to set a value that will rarely, if ever, change. We're using it here like a configuration setting.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last"><a class="reference external" href="https://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide">This post</a> does a great job of explaining instance attributes and class attributes in great depth.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last"><a class="reference external" href="https://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide" target="external">This post</a> does a great job of explaining instance attributes and class attributes in great depth.</p>
 </div>
 <p>There's something else noteworthy about <tt class="docutils literal">_debounce</tt>. We've prefixed it with an <em>underscore</em>. This indicates that it should be considered a <em>private</em> attribute. This means the attribute is intended for use only within the class methods, and it's not to be accessed from outside.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>In Python, private attributes and methods are simply a <em>convention</em>. You shouldn't peek, but if you do, things will still work. The underscore is just a signal to other programmers that you don't intend the attribute to be used outside of the class.</p>
 <p>In other languages, this is not the case - an attribute declared private will not be accessible <em>at all</em> outside of the class - it's like it doesn't exist.</p>
 <p class="last">Since the concept of "privacy" in Python is merely a convention, it's better to express it not as "hidden" or "forbidden", but more so "an attribute name that I can't promise won't change, so don't count on it being there".</p>
@@ -1858,18 +1856,18 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <li>We will ultimately end up using more memory. This isn't too big of a concern on a beefy platform like the M0 Express boards, but we still have limits to how much memory we can use and have to remain conscious of this.</li>
 </ul>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">There is an excellent article series over on <a class="reference external" href="https://hackaday.com/2015/12/09/embed-with-elliot-debounce-your-noisy-buttons-part-i/">Hackaday</a> that covers debouncing in depth and illustrates a solution for the Arduino platform that is <em>extremely</em> memory efficient. Something like this could be adapted to CircuitPython if our state keeping variable got to be too memory intensive.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">There is an excellent article series over on <a class="reference external" href="https://hackaday.com/2015/12/09/embed-with-elliot-debounce-your-noisy-buttons-part-i/" target="external">Hackaday</a> that covers debouncing in depth and illustrates a solution for the Arduino platform that is <em>extremely</em> memory efficient. Something like this could be adapted to CircuitPython if our state keeping variable got to be too memory intensive.</p>
 </div>
 <ul class="simple">
 <li>The timing is likely to be ever-so-slightly inaccurate. While processor cycles are very consistent, counting them tends to loose accuracy over time (in PCs this is called "clock drift"). This is also due to the math being done - counting millions of cycles and dividing that by seconds and rounding to the precision available causes rounding errors.</li>
-<li>There can still be blocking code, and aspects of Python (like <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock">the GIL</a>) that can further throw off your timing, especially when your code is running for long periods of time (days).</li>
+<li>There can still be blocking code, and aspects of Python (like <a class="reference external" href="https://wiki.python.org/moin/GlobalInterpreterLock" target="external">the GIL</a>) that can further throw off your timing, especially when your code is running for long periods of time (days).</li>
 <li>The precision of <tt class="docutils literal">time.monotonic()</tt> is pretty shallow compared to the counters that CircuitPython uses behind the scenes to calculate it. Its typically only going to give you precision to hundredths of a second. Perfectly adequate for our purposes, but it could become an issue in some contexts (video games, for example).</li>
 </ul>
 <p>So there are things to be concerned about, but nothing that detracts from the utility of this approach.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">At the time of writing, there is an <a class="reference external" href="https://github.com/adafruit/circuitpython/issues/519">open issue</a> addressing the inaccuracy of <tt class="docutils literal">time.monotonic()</tt> in the CircuitPython github with a promising pull request attached. Worth keeping an eye on, and here's hoping that it gets more attention.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">At the time of writing, there is an <a class="reference external" href="https://github.com/adafruit/circuitpython/issues/519" target="external">open issue</a> addressing the inaccuracy of <tt class="docutils literal">time.monotonic()</tt> in the CircuitPython github with a promising pull request attached. Worth keeping an eye on, and here's hoping that it gets more attention.</p>
 </div>
 <p>In the following sections, we'll take this approach further, and create an easy-to-use state object that will execute arbitrary code when certain things happen, particularly button events.</p>
 </div>
@@ -2285,16 +2283,16 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p><strong>Lines 12-15</strong> establish the default state attributes the dispatcher uses to do its work. <tt class="docutils literal">checkin</tt> is the time keeping attribute. <tt class="docutils literal">holding</tt> is used to indicate if the button is currently being held. <tt class="docutils literal">hold_count</tt> tracks how many times the <em>hold</em> event has been detected. Finally <tt class="docutils literal">state</tt> is the state of the button, the last time it was read.</p>
 <p><strong>Line 18</strong> stashes the <tt class="docutils literal">check</tt> function passed to the constructor in an instance variable (<tt class="docutils literal">get_value</tt>) so it can be used later. This is a really cool feature of Python: you can pass functions around like any other kind of data. This means you can pass them to a constructor and assign them to an instance attribute like we've done here. To call the <tt class="docutils literal">check</tt> function passed in the constructor, we can call <tt class="docutils literal">self.get_value()</tt>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">This can be a little confusing, since this looks a lot like an instance method. The way to tell the difference is that an instance method always receives a <tt class="docutils literal">self</tt> attribute as its first argument.</p>
 </div>
 <p><strong>Lines 21-23</strong> assign the event handlers to instance attributes in the same way. We've named the instance attributes <tt class="docutils literal">onpress</tt>, <tt class="docutils literal">onrelease</tt> and <tt class="docutils literal">onhold</tt> - these names are a call back to event handlers in HTML. They are named such to differentiate them from the instance methods that are called when events are detected.</p>
 <p>The <tt class="docutils literal">release</tt>, <tt class="docutils literal">check</tt>, <tt class="docutils literal">hold</tt>, and <tt class="docutils literal">press</tt> methods defined on <strong>lines 25-52</strong> are proxies for the functions that were passed in the constructor. With the exception of <tt class="docutils literal">check</tt>, they all follow the same pattern. They first update any state attributes required because of the event detection. Then they check if the handler was defined (<tt class="docutils literal">is not None</tt>), and if it was, they call it. Finally, they update the <tt class="docutils literal">checkin</tt> time.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>It may seem a little odd that these functions are so simplistic. But the structure of the class has a specific purpose.</p>
 <p>The dispatcher has been constructed this way so that you could build one with the <em>same</em> API, that doesn't rely on external functions being passed into the constructor.</p>
-<p>You can instead hard-code what you want to happen in each event. To do different things for different buttons, you can use <a class="reference external" href="https://www.python-course.eu/python3_inheritance.php">class inheritence</a> to add in the special functionality.</p>
+<p>You can instead hard-code what you want to happen in each event. To do different things for different buttons, you can use <a class="reference external" href="https://www.python-course.eu/python3_inheritance.php" target="external">class inheritence</a> to add in the special functionality.</p>
 <p class="last">I find passing functions into the constructor to be much more flexible and straightforward, but the other approach is valid too, so I designed the class to be compatible with it.</p>
 </div>
 <p>On <strong>lines 54-69</strong>, the <tt class="docutils literal">__call__()</tt> 'magic' method makes instances of <tt class="docutils literal">ButtonDispatch</tt> <em>callable</em> - they can be invoked just like a function (we utilize this on <strong>line 89</strong>). When they are invoked that way, the <tt class="docutils literal">__call__()</tt> method is called. We use this as a central access point for making the event dispatch work.</p>
@@ -2317,7 +2315,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
           a <a href="/videos/non-blocking-events-circuitpython/dispatcher-demo-trinket-01.mp4">link to the video</a> instead.</p>
 </video>
 </div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>This implementation is designed to still do the <em>accounting</em> for each event even if no event is set - it may be more efficient to avoid calling the press/hold/release method if one isn't provided.</p>
 <p class="last">You may also want to consider removing events, such as <em>hold</em>, if you aren't using them in your project.</p>
 </div>
@@ -2684,7 +2682,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div><p>The primary difference here is just the addition of the <tt class="docutils literal">token</tt> property, and the added requirement that it is now a parameter of each event handler function.</p>
 <p>Now using only three event functions, we can handle events for many, many buttons. Each event will produce a different effect depending on which button triggered it (in this case different messages will be printed to the console).</p>
 <p>The token has also been passed to the <tt class="docutils literal">check()</tt> function, so that has been centralized as well.</p>
-<p>This is a common pattern in programming, a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Message_passing">message passing</a>.</p>
+<p>This is a common pattern in programming, a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Message_passing" target="external">message passing</a>.</p>
 <p>You may also have noticed that you can press both buttons <em>simultaneously</em>. The events are not actually firing at the same time, however, they are firing one after the other. It just happens so quickly that they appear to be simultaneous.</p>
 <p>This is a great accomplishment, and will work well for even quite complex projects. However, we have painted ourselves into a corner of sorts. We can fire two different events when buttons are pressed at the same time, but we can't see the state of one button from the event of the others. This becomes problematic if we want one button to affect the actions of another.</p>
 <p>You may have run into an application of this problem: holding down one button makes the meaning of another button change. Here's an example from an old digital alarm clock:</p>
@@ -2739,7 +2737,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 <p>This will cover most use cases. As mentioned before, complex button pressing scenarios are not common - they are necessary sometimes when there are a limited number of buttons, or the greater functionality of the project is rather complex (playing chords on a musical instrument for example).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This code prevents the <em>release</em> events from firing, and doesn't cover the <em>both buttons released</em> event. Handling this would require some refactoring and additional logic. It was left out of this example for the sake of simplicity - the technique covered next is the best way to handle anything more complex than a simple <em>both buttons pressed</em> sort of event as illustrated above.</p>
 </div>
 <p>When this extra complexity is necessary, it's best to separate the state of each button into a central state object, like we did earlier. We can either access that global object directly in our handlers, or pass it as an additional argument to them.</p>
@@ -3186,7 +3184,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>A few key differences to note:</p>
 <ul class="simple">
 <li>We are again using a global <tt class="docutils literal">state</tt> object, in this case a dictionary instead of a class for illustration purposes. While the state tracked in <tt class="docutils literal">ButtonDispatch</tt> is sufficient for almost all of the state we need for this example, in most applications, tracking would be necessary anyway. Having the button state outside of the <tt class="docutils literal">ButtonDispatch</tt> class also separates the button state tracking from the event detection and handling, but sharing the variable means we can keep all state in one place.</li>
-<li>As mentioned earler, we're taking advantage of Python's <em>getters</em> and <em>setters</em> functionality so that when you change the <tt class="docutils literal">ButtonDispatch</tt> object's state, it's actually changing our <tt class="docutils literal">state</tt> dictionary. This is an example of the <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern">Proxy Pattern</a> in action.</li>
+<li>As mentioned earler, we're taking advantage of Python's <em>getters</em> and <em>setters</em> functionality so that when you change the <tt class="docutils literal">ButtonDispatch</tt> object's state, it's actually changing our <tt class="docutils literal">state</tt> dictionary. This is an example of the <a class="reference external" href="https://en.wikipedia.org/wiki/Proxy_pattern" target="external">Proxy Pattern</a> in action.</li>
 <li>We've taken advantage of our new <tt class="docutils literal">state</tt> dictionary to track whether or not both buttons are pressed (the <tt class="docutils literal">both</tt> key). This acts as a <em>guard</em> so that we can differentiate between events.</li>
 <li>We've been able to handle some very complex situations in a very simple way - we cover the <em>both buttons pressed</em>, <em>both buttons released</em>, <em>b button pressed while a button is held</em> and <em>b button released while a button is held</em> events without a lot of code.</li>
 </ul>
@@ -3207,12 +3205,12 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Now that we've established a pattern for working with state, and have a generic event dispatch class for button presses, we can build a more realistic application.</p>
 <p>This will illustrate how to use the <tt class="docutils literal">ButtonDispatch</tt> class with your own variation of the <tt class="docutils literal">State</tt> class to construct a project complex functionality with pretty simplistic code.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">An even more elaborate application can be explored in my <a class="reference external" href="/drafts/touchmouse.html">touch mouse project</a> 🐭 !</p>
 </div>
 <p>We'll use the state object for more than just tracking button state. We'll also use it to handle general on/off, as well regular flashing of two LEDs: the built-in red LED on pin 13, and the onboard RGB NeoPixel or DotStar. We'll also track the color of the NeoPixel/DotStar.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">This is the culmination of all the test and example code we've been using throughout this article. 🦄</p>
 </div>
 <div class="section" id="phase-1">
@@ -3567,7 +3565,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </ol>
 <p>We should get in the habit of doing this when we have well defined code, this is a great place to start.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">Just bear in mind that if you do compile <tt class="docutils literal">dispatch.py</tt> into an <tt class="docutils literal">.mpy</tt> file, you won't be able to edit it directly (you'll have to edit it outside of your board, compile it, and copy it over again), so only do this when the code is <em>rock solid</em> and you need the extra memory.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3944,10 +3942,10 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <div class="section" id="phase-3">
 <h3>Phase 3</h3>
 <p>Next, we'll add in multiple-button logic similar to what we did previously and add a new feature to rotate through a set of predetermined colors when both buttons are pressed.</p>
-<p>We'll make use of the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED library</a> to gamma-correct the RGB LED so the colors look nicer.</p>
+<p>We'll make use of the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED library</a> to gamma-correct the RGB LED so the colors look nicer.</p>
 <p>We'll also the brightness level, since we need it for the gamma-correction calculation.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Make sure you've copied the <tt class="docutils literal">adafruit_fancyled</tt> library folder over to your <tt class="docutils literal">CIRCUITPY</tt> drive. Place it in the <tt class="docutils literal">lib</tt> folder.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
@@ -4216,7 +4214,7 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Note that this value must be a <em>float</em> - you will get somewhat odd errors if you set it to an integer (so be sure to set it to <tt class="docutils literal">1.0</tt> not <tt class="docutils literal">1</tt>).</p>
 <p>We define our list of possible colors as a "tuple of tuples" on <strong>lines 9-18</strong>. Tuples work just like lists, except they are <em>immutable</em> - you can't change them once they're defined. This is perfect for our list of colors, since we have no need to change it.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">The colors were chosen by searching for "RGB rainbow" and grabbing a few triplets that looked good. The exact colors could use some adjustment. If you try this code on different boards, you'll notice some variation between pixels, especially between DotStars and NeoPixels - this is expected. The electronics involved are different, and will produce slightly different wavelengths of light for each of the red, green, and blue elements.</p>
 </div>
 <p>We've added new state attributes to handle the cycling of colors on <strong>lines 38 and 39</strong>.</p>
@@ -4273,12 +4271,12 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 </td></tr></table></div><p>The NeoPixel and DotStar libraries can also take an <em>integer</em>, instead of a tuple. <tt class="docutils literal">CRGB</tt> has a <tt class="docutils literal">pack()</tt> method that will return a compatible integer. So we finally take advantage of that method when we set the pixel.</p>
 <p>In the example code, we're doing all of these steps in one line. Whether to do it this way, break it up, or vary the approach in the ways we've just explored is entirely up to you - rarely will one way or the other be any more or less efficient. It really comes down to readability, for the most part.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p class="last">This is 100% true in general, and most of the time in CircuitPython projects. But be cautious - every line of code takes up precious memory you may need for your project. Sometimes you may have to make things a little messy to squeeze in a few more bytes so you can get things working.</p>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>If you are more experienced with Python, you may have thought that the <tt class="docutils literal">cycle_color()</tt> method would be a great usecase for a <em>generator</em>.</p>
 <p>Generators are functions/methods that maintain some sort of state. Typically any variables defined inside of a function or method are lost when the it ends (or <tt class="docutils literal">return</tt>'s). A generator is different, in that it can be looped over, like a list or tuple (it's <em>iterable</em>), and as you loop over it, it calls your function each time, going back to the same point over and over, until it returns. That point is marked by using the special <tt class="docutils literal">yeild</tt> keyword.</p>
 <p>Here's how a color cycling function might look, implemented as a generator:</p>
@@ -4371,7 +4369,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <li>We've brought in logic to cover pressing both buttons. This required adding a handler for the <em>press</em> event, and the addition of the <tt class="docutils literal">both</tt> state variable.</li>
 <li>The possible colors have been stored in a tuple of tuples called <tt class="docutils literal">colors</tt>.</li>
 <li>We're rotating through the colors using a method of the state object called <tt class="docutils literal">cycle_color()</tt>. It uses a new state variable, <tt class="docutils literal">_color_index</tt> to keep track of the location within the <tt class="docutils literal">color</tt> tuple of the color that was last used. <tt class="docutils literal">cycle_color()</tt> resets <tt class="docutils literal">_color_index</tt> to zero when it reaches the maximum index of <tt class="docutils literal">colors</tt>.</li>
-<li>We're using <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> to adjust the colors to better reflect our expectations. It has a lot more functionality than that, we're just scratching the surface.</li>
+<li>We're using <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED</a> to adjust the colors to better reflect our expectations. It has a lot more functionality than that, we're just scratching the surface.</li>
 </ul>
 <p>And the requisite video of this code in action on my Trinket M0:</p>
 <div class="video-container">
@@ -4405,7 +4403,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <p>Typically, you'll only need to optimize for memory consumption when you see the dreaded <tt class="docutils literal">MemoryError</tt> exception. It can be stressful - you think you have completed your project, or found the perfect library to add the functionality you need and <em>wham</em>, you're out of memory. But resist the temptation to try to head this off by obsessing about memory consumption before you actually run out.</p>
 <p>Most of the time, its best to focus on finishing your project, not solving problems you don't have!</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">If you have other tips or tricks, or improvements to the techniques explored below, please <a class="reference external" href="/pages/contact.html">contact the author!</a>.</p>
 </div>
 <p>For comparison's sake, we're using the following code to test:</p>
@@ -4487,7 +4485,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 </pre></div>
 </td></tr></table></div><p>On my GEMMA M0, it prints <tt class="docutils literal">8944</tt> when it starts up. That's the number we'll be comparing other approaches to.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">This is including our <a class="reference internal" href="#abstractions-keeping-the-code-simple">setup.py module</a> - so we're also loading the DotStar library and setting up both buttons, even though neither are necessary for this code.</p>
 </div>
 <p>Bear in mind though that these comparisons are just to ensure we're <em>actually</em> saving memory, it's not an evaluation of the effectiveness of a particular approach. The amount of savings and how significant it might be will entirely depend on your specific situation.</p>
@@ -4774,17 +4772,17 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <p>For example, the decimal number <strong>15</strong> has a 1 in the "tens" place, and a 5 in the "ones" place. 15 is 10 + 5.</p>
 <p>The number 15 in binary is <strong>1111</strong>. There's a 1 in the ones place, a 1 in the <em>twos</em> place, a 1 in the <em>fours</em> place, and a 1 in the <em>eights</em> place. 1111 is 15, because 8 + 4 + 2 + 1 = 15.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p>The nuances and amazing properties of the binary number system and doing binary math is beyond the scope of this article.</p>
 <p>Here are a couple of videos worth checking out that explain things:</p>
 <p><strong>TBD: more/better explanations!!!</strong></p>
 <ul class="last simple">
-<li><a class="reference external" href="https://youtu.be/kcTwu6TFZ08">James May's Q&amp;A (Ep 11100)</a></li>
+<li><a class="reference external" href="https://youtu.be/kcTwu6TFZ08" target="external">James May's Q&amp;A (Ep 11100)</a></li>
 </ul>
 </div>
 <p>You can treat a binary number like an array of switches, and using binary math, flip each switch (bit) on or off to indicate a true or false state. This way you can store 32 state values in a single 32-bit integer. One variable that takes up as much space as the number 15 can store up to <em>32 values</em>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>The exact number of possible values depends on how Python is storing the number and the specific platform you are running on.</p>
 <p class="last">It's also unclear if using the same number of variables with Python's booleans (<tt class="docutils literal">True</tt>/<tt class="docutils literal">False</tt>) is less efficient.</p>
 </div>
@@ -4885,9 +4883,9 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <h3>Pre-calculate Values</h3>
 <p>Using external libraries is a big source of extraneous code that can eat into our available memory.</p>
 <p>Sometimes we're using an external library just to calculate a value that doesn't change, or isn't based on anything that couldn't be reduced to a fixed set of values.</p>
-<p>Here's an example that flashes the RGB LED instead of the red one, changing the color every time. This version uses the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED</a> library to do the math:</p>
+<p>Here's an example that flashes the RGB LED instead of the red one, changing the color every time. This version uses the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED</a> library to do the math:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">Make sure you have copied <tt class="docutils literal">adafruit_fancyled</tt> folder to the <tt class="docutils literal">lib</tt> directory on your CircuitPython board.</p>
 </div>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -5204,8 +5202,8 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <p>You can take this approach a lot further than you might think. Brightness is a factor in Fancy's gamma correction algorithm. Lets say your project lets the user adjust brightness. Instead of calculating the gamma on the fly, if you use a fixed set of brightness levels, you can precalculate every possible color/brightness combination, and store them in a list of tuples, or a tuple for every brightness level.</p>
 <p>It can seem like a lot of data, but tuples of integers are really compact.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/docs/library/array.html">array module</a> can be used to even <em>more</em> efficiently store your precalculated values.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">The <a class="reference external" href="https://circuitpython.readthedocs.io/en/3.x/docs/library/array.html" target="external">array module</a> can be used to even <em>more</em> efficiently store your precalculated values.</p>
 </div>
 <p>You will always have to balance memory used for lines of code verses memory used to store pre-calculated values, but it's a great way to save memory.</p>
 </div>
@@ -5213,7 +5211,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <h3>Compile Modules Into MPY Files</h3>
 <p>MicroPython provides a tool called <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> that can take a python module and compile it into an intermediate form that takes up less memory. These files have the <tt class="docutils literal">.mpy</tt> suffix.</p>
 <p>Adafruit has just recently begun distributing a precompiled version of this tool with new versions of CircuitPython.</p>
-<p>To compile your code, you will first need to download the appropriate version of <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> from <a class="reference external" href="https://github.com/adafruit/circuitpython/releases/">the distribution page</a>, for both your operating system and the version of CircuitPython you are using.</p>
+<p>To compile your code, you will first need to download the appropriate version of <tt class="docutils literal"><span class="pre">mpy-cross</span></tt> from <a class="reference external" href="https://github.com/adafruit/circuitpython/releases/" target="external">the distribution page</a>, for both your operating system and the version of CircuitPython you are using.</p>
 <p>Place the tool in a directory in your <tt class="docutils literal">$PATH</tt>, or some place where you will be able to access it. You may need to make it executable (<tt class="docutils literal">chmod +x</tt>).</p>
 <p>Once you have the tool, you will want to move some of your code into a separate module, and then import it into <tt class="docutils literal">code.py</tt>.</p>
 <p>Given the example we've been using, you could break it up into the following files:</p>
@@ -5537,7 +5535,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
     <span class="nb">print</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div><div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p>While this fixed a memory issue I had in the past, I can't make sense of the readings I get from <tt class="docutils literal">gc.mem_free()</tt> - the amount of available memory slowly winds down with each loop until the garbage collector runs and its recovered.</p>
 <p class="last">This will require more research 🤔.</p>
 </div>
@@ -5555,7 +5553,7 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <p>There are other applications involving driving LEDs, controlling LCD displays, handling large amounts of NeoPixels, and so on.</p>
 <p>Frequently boards will communicate via I2C or SPI. You can implement those protocols yourself to get two M0 boards to talk to each other, sharing the load of your project.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">I hope to explore cross-board communication with I2C and SPI in depth in a future blog post!</p>
 </div>
 </div>
@@ -5563,13 +5561,13 @@ When this occurs, we clear the <tt class="docutils literal">state.both</tt> attr
 <h3>Switch To Arduino</h3>
 <p>Finally, there are times when your application is just too much for the CircuitPython platform. That's where the Arduino toolchain comes into play.</p>
 <p>You can program your M0/M4 boards using the Arduino IDE just like any other compatible board. Most Arduino sketches will work without modification.</p>
-<p>Adafruit has an <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide">overview of the process</a> of getting set up, as well as some <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0">porting notes</a> for running Arduino sketches on the M0/M4 series boards.</p>
+<p>Adafruit has an <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide" target="external">overview of the process</a> of getting set up, as well as some <a class="reference external" href="https://learn.adafruit.com/adafruit-feather-m0-basic-proto/adapting-sketches-to-m0" target="external">porting notes</a> for running Arduino sketches on the M0/M4 series boards.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The links above are in the documentation for a specific product, the <a class="reference external" href="https://www.adafruit.com/product/2772">Feather M0 Basic Proto</a>, but they are completely generic. Sadly, they were the only docs the author could find at the time of writing. 💔</p>
+<h2 class="first admonition-title">Note</h2>
+<p class="last">The links above are in the documentation for a specific product, the <a class="reference external" href="https://www.adafruit.com/product/2772" target="external">Feather M0 Basic Proto</a>, but they are completely generic. Sadly, they were the only docs the author could find at the time of writing. 💔</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">The author has not had a chance to do much with M0 boards and the Arduino IDE yet, but hopes to explore the topic thoroughly in a future blog post. A gentle <a class="reference external" href="/pages/contact.html">shout out</a> might motivate him to do so sooner rather than later 😉.</p>
 </div>
 </div>

@@ -12,8 +12,6 @@
 <meta content="TouchMouse: A CircuitPython Project To Reduce Input Fatigue - The Collected Works of jjmojojjmojo " property="twitter:title"/>
 <meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <meta content="TouchMouse: A CircuitPython Project To Reduce Input Fatigue - The Collected Works of jjmojojjmojo " name="title"/>
-<meta content="/theme/images/default-social-full.jpg" property="og:image"/>
-<meta content="/theme/images/default-social-full.jpg" property="twitter:image"/>
 <title>   TouchMouse: A CircuitPython Project To Reduce Input Fatigue - The Collected Works of jjmojojjmojo 
 </title>
 <meta charset="utf-8"/>
@@ -75,7 +73,7 @@
 <!-- icons or whatever I want) -->
 <p>I had a need for creating a custom peripheral, a computer mouse 🐭 that would require as little force as possible to click, and scroll.</p>
 <p>I found the tech I needed in the Adafruit M0 series of development boards. They include both USB HID functionality <em>and</em> capacitive touch capabilities.</p>
-<p>They can be programmed with CircuitPython, Adafruit's fork of MicroPython for the chip that the M0 boards run (the <a class="reference external" href="https://www.microchip.com/wwwproducts/en/ATSAMD21G18">ATSAMD21 Cortex M0 microprocessor</a>). I've got extensive Python experience, so it was an obvious choice for my platform.</p>
+<p>They can be programmed with CircuitPython, Adafruit's fork of MicroPython for the chip that the M0 boards run (the <a class="reference external" href="https://www.microchip.com/wwwproducts/en/ATSAMD21G18" target="external">ATSAMD21 Cortex M0 microprocessor</a>). I've got extensive Python experience, so it was an obvious choice for my platform.</p>
 <p>This article chronicles my first-pass in designing and building a touch-based device that takes the place of the mouse buttons and scroll wheel.</p>
 <!-- PELICAN_END_SUMMARY -->
 <div class="section" id="overview">
@@ -105,7 +103,7 @@
 <p>Be sure to choose something that can resist high temperatures if you plan on making the board a permanent part of your project by soldering leads to it.</p>
 <p>It may take some trial and error to choose a substrate that fits your application.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">The "end game" for these sort of user interfaces is to use printed circuit board (PCB) material  - copper clad fiberglass (most commonly the type designated 'FR4'). You can use an acid etching process in concert with a laser printer (or even permanent marker) and do this yourself, or you can use a low-run PCB manufacturing service to do the work for you.</p>
 </div>
 <div class="section" id="mockup">
@@ -121,7 +119,7 @@
 <a href="/images/fullsize/touchmouse-prototype-back.jpg"><img alt="" sizes="(min-width: 2120.0px) 1600px,(min-width: 1908.0px) 1440px,(min-width: 1696.0px) 1280px,(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/touchmouse-prototype-back.jpg" srcset="/images/responsive/touchmouse-prototype-back-2000.jpg 2000w,/images/responsive/touchmouse-prototype-back-1800.jpg 1800w,/images/responsive/touchmouse-prototype-back-1600.jpg 1600w,/images/responsive/touchmouse-prototype-back-1200.jpg 1200w,/images/responsive/touchmouse-prototype-back-1000.jpg 1000w,/images/responsive/touchmouse-prototype-back-800.jpg 800w,/images/responsive/touchmouse-prototype-back-400.jpg 400w,/images/responsive/touchmouse-prototype-back-200.jpg 200w" style="width: 80%;"/></a>
 <p>Note that I was careful to avoid crossing the left click pad on the other side of the panel. This is to ensure we don't accidentally activate both pads. Capacative touch is pretty amazing in that it works even at a slight distance. We can take advantage of this to do some cool things, like creating a grid of touch inputs using a limited number of pins, but it's not what we want here.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">This is how projected capacitive multi-touch monitors work.</p>
 </div>
 <p>Granted, this plastic material I'm using is a really good insulator (it's mostly air), so it's not big concern, but it's best to be conservative.</p>
@@ -146,7 +144,7 @@
 <p>When I was younger they were the mainstay of any teacher using an overhead projector. The color markers are transparent, so the color shows through when back-lit.</p>
 <p>They also work great as semi-permanent markings for whiteboards.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
+<h2 class="first admonition-title">Tip</h2>
 <p class="last">If you need something more durable but still temporary, you can use a <em>china marker</em>. These are wax crayons used for marking pottery (that's where "china" in the name comes from). They erase from a smooth surface with alcohol (hand sanitizer works great in a pinch).</p>
 </div>
 <div class="section" id="the-pads">
@@ -176,8 +174,8 @@
 <h3>Testing</h3>
 <p>For a basic test of our pad, we'll simply test <em>continuity</em>. Continuity tells us if two points on a circuit are connected.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">For some more detail and how to get into continuity mode on several multimeters, <a class="reference external" href="https://learn.adafruit.com/multimeters/continuity">Adafruit has a nice article</a> you should check out.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">For some more detail and how to get into continuity mode on several multimeters, <a class="reference external" href="https://learn.adafruit.com/multimeters/continuity" target="external">Adafruit has a nice article</a> you should check out.</p>
 </div>
 <p>First, we'll change our multitester into continuity or "diode test" mode:</p>
 <a href="/images/fullsize/touchmouse-testing-pads.jpg"><img alt="" sizes="(min-width: 1272.0px) 960px,(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/touchmouse-testing-pads.jpg" srcset="/images/responsive/touchmouse-testing-pads-1200.jpg 1200w,/images/responsive/touchmouse-testing-pads-1000.jpg 1000w,/images/responsive/touchmouse-testing-pads-800.jpg 800w,/images/responsive/touchmouse-testing-pads-400.jpg 400w,/images/responsive/touchmouse-testing-pads-200.jpg 200w" style="width: 80%;"/></a>
@@ -203,7 +201,7 @@
 <p>Since the neopixels, DAC, and speaker are all built in to the CircuitPlayground, wiring it up is really simple - we just need to connect the aligator clips to the pads on the CircuitPlayground.</p>
 <p>We can use any pads marked A1-A7 (A0 will be used to drive the speaker).</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<h2 class="first admonition-title">Warning</h2>
 <p>Before connecting the wires, make sure the USB cable is <em>unplugged</em>. There are a couple of reasons for this.</p>
 <p>First, we don't want to accidentally short anything. This is good practice in general.</p>
 <p class="last">Second, and this is specific to our project, the touch pads are calibrated when the board first boots up. We want to let it do that properly.</p>
@@ -319,8 +317,8 @@
 <div class="video-container">
 <strong>VIDEO TBD</strong>
 </div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">You may notice, especially at lower brightness levels, that the colors seem a little off. This is due to the slight variance in the wavelengths of the three LEDs that make up each neopixel. This can be accounted for, and we'll be dealing with that later, using the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview">FancyLED library</a>.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">You may notice, especially at lower brightness levels, that the colors seem a little off. This is due to the slight variance in the wavelengths of the three LEDs that make up each neopixel. This can be accounted for, and we'll be dealing with that later, using the <a class="reference external" href="https://learn.adafruit.com/fancyled-library-for-circuitpython/overview" target="external">FancyLED library</a>.</p>
 </div>
 </div>
 <div class="section" id="testing-audio">
@@ -328,11 +326,11 @@
 <p>CircuitPlayground has a built-in speaker and DAC connected to pin <tt class="docutils literal">A0</tt>.</p>
 <p>We'll test the built-in speaker with some simple code that will play a WAV file.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p>We could also generate a noise ourselves, as shown in <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#basic-tones">the Adafruit docs</a>. This is worth checking out because it's super simple and has some really cool possibilities (want to make your own synthesizer? theramin? this is what you need)</p>
+<h2 class="first admonition-title">Tip</h2>
+<p>We could also generate a noise ourselves, as shown in <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#basic-tones" target="external">the Adafruit docs</a>. This is worth checking out because it's super simple and has some really cool possibilities (want to make your own synthesizer? theramin? this is what you need)</p>
 <p class="last">So, this would be the best way to test this, given it doesn't require any external files. However, we're going to use WAV files in our final project, so it's more prudent to create a slightly more realistic testing scenario.</p>
 </div>
-<p>The first thing we'll need to do is procure a couple of properly-formatted WAV files to play. The requirements and process are described <a class="reference external" href="https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/convert-files">here</a>. I've found some files from <a class="reference external" href="http://www.freesound.org">freesound.org</a>, and converted them to the right format.</p>
+<p>The first thing we'll need to do is procure a couple of properly-formatted WAV files to play. The requirements and process are described <a class="reference external" href="https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/convert-files" target="external">here</a>. I've found some files from <a class="reference external" href="http://www.freesound.org" target="external">freesound.org</a>, and converted them to the right format.</p>
 <p><a class="reference external" href="/images/coin.wav">This</a> file is an "8-bit coin sound". Before running the code below, copy it to the root folder of the CircuitPlayground.</p>
 <p>This code will play that sound once when the board first boots:</p>
 <div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -368,8 +366,8 @@
 <span class="n">a</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div><div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">The example code on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#playing-audio-files">Adafruit site</a> blocks - this isn't necessary, it's just so they can log "finished" after the wav is complete. The <tt class="docutils literal">audioio</tt> library is non-blocking.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">The example code on the <a class="reference external" href="https://learn.adafruit.com/adafruit-circuit-playground-express?view=all#playing-audio-files" target="external">Adafruit site</a> blocks - this isn't necessary, it's just so they can log "finished" after the wav is complete. The <tt class="docutils literal">audioio</tt> library is non-blocking.</p>
 </div>
 <p>Here's what it looks/sounds like:</p>
 <div class="video-container">
@@ -447,11 +445,11 @@ CircuitPlayground, and they are easy to add to other platforms.</p>
 <p>NeoPixels, AdaFruit's brand of addressable LEDs, are composed of three (or four, in the case of RGBW pixels) micro-sized LED elements, attached to a tiny microcontroller, housed in a surface-mount package.</p>
 <p>They operate in a manner very similar to "traditional" RGB LEDs, in that they have a common power supply, a red, green, and blue LED element, and each LED element can be controlled independently. Pulse-width-modulation is possible as well, but in the case of NeoPixels, the PWM of each LED element is controlled by the onboard microcontroller. NeoPixels also provide a means of communication such that they only require one wire to connect to a microcontroller (besides ground and power), and can be daisy-chained practically to infinity, yet stll individually addressed. This greatly simplifies adding them to a project - where adding a single RGB LED would require 3 digital, PWM-capable inputs, adding a string of, say, 10, or several dozen, NeoPixels only requires <em>one pin</em>.</p>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">Adafruit has an amazing, comprehensive <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels">NeoPixels &Uuml;berguide</a> that is <strong>required reading</strong> if you plan to do much work with these little marvels.</p>
+<h2 class="first admonition-title">Tip</h2>
+<p class="last">Adafruit has an amazing, comprehensive <a class="reference external" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels" target="external">NeoPixels &Uuml;berguide</a> that is <strong>required reading</strong> if you plan to do much work with these little marvels.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<h2 class="first admonition-title">Note</h2>
 <p class="last">NeoPixels can consume a <em>lot</em> of power. If you are using more than 10 or so in your project, you will want to consider using an external power supply.</p>
 </div>
 <p>With most neopixels, you can (theorhetically) create 16,581,375 unique colors.</p>
