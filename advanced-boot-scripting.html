@@ -70,7 +70,7 @@
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As covered in a previous post</a>,
 <a class="reference external" href="https://github.com/boot-clj/boot" target="external">boot</a> is an all-around useful tool
 for building clojure applications, but one feature in particular has
-proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#id2" id="id1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts" target="external">clojure scripting</a>. This
+proven a <em>adjuncti finalum</em> <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[*]</a> : boot lets you do <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Scripts" target="external">clojure scripting</a>. This
 elevates clojure to the same high productivity of scripting languages
 (like my personal favorite, Python), but bakes in dependency management
 and other goodies. This allows the user to build complexity iteratively,
@@ -81,22 +81,22 @@ easily develop and distribute applications and tools. There's also
 discussion about getting your jars into
 <a class="reference external" href="http://clojars.org" target="external">Clojars</a>, and setting up a simple bare-minimum
 <a class="reference external" href="http://maven.apache.org/index.html" target="external">Maven</a> repository.</p>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
 <colgroup><col class="label"/><col/></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td>I originally had "<em>interfectorem pluma</em>" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as <em>interfectorem pluma</em> literally translates to something like "feather murderer". In my amateur approach <em>adjuncti finalum</em> literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[*]</a></td><td>I originally had "<em>interfectorem pluma</em>" to represent "killer feature" in Latin, however thanks to danielsmulewicz in #hoplon reminding me how stupid Google Translate can be, I consulted a Latin-&gt;English dictionary and Wikipedia to attempt an uneducated, but better Latin equivalent. I mention it here because it's all extremely funny, as <em>interfectorem pluma</em> literally translates to something like "feather murderer". In my amateur approach <em>adjuncti finalum</em> literally translates to something like "characteristic of the ultimate goal", which, if even remotely correct, is pretty accurate.</td></tr>
 </tbody>
 </table>
 <div class="section" id="setup">
 <h2 id="setup">Setup</h2>
 <p><a class="reference external" href="/boot-getting-started-with-clojure-in-10-minutes.html">As I've covered before</a>,
 boot is easy to install. All you need is a JDK and the <a class="reference external" href="https://github.com/boot-clj/boot/releases" target="external">boot executable</a>. Here's a recap for the Linux and OSX crowd, just to get you going (we'll assume you already have a JDK set up, and have wget):</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
-<span class="gp">$</span> mkdir -p ~/bin
-<span class="gp">$</span> mv boot.sh boot <span class="o">&amp;&amp;</span> chmod a+x boot <span class="o">&amp;&amp;</span> mv boot ~/bin/
+<div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh
+<span class="gp">$ </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/bin
+<span class="gp">$ </span>mv<span class="w"> </span>boot.sh<span class="w"> </span>boot<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span>a+x<span class="w"> </span>boot<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span>boot<span class="w"> </span>~/bin/
 
-<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">"export PATH=\$PATH:\$HOME/bin"</span> &gt;&gt; ~/.bash_profile
-<span class="gp">$</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"export PATH=\$PATH:\$HOME/bin"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bash_profile
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin
 </pre></div>
 <div class="explanation section">
 <h3>Explanation</h3>
@@ -124,7 +124,7 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 </div>
 </div>
 <p>For good measure, lets ask boot to update itself:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot -u
+<div class="highlight"><pre><span></span><span class="gp">$ </span>boot<span class="w"> </span>-u
 </pre></div>
 </div>
 <div class="section" id="making-boot-faster">
@@ -144,76 +144,76 @@ boot is easy to install. All you need is a JDK and the <a class="reference exter
 <div class="section" id="quick-note-development-deviations">
 <h2 id="quick note: development deviations">Quick Note: Development Deviations</h2>
 <p>Since we're not building anything right now, or utilizing the task infrastructure, we don't need a <tt class="docutils literal">build.boot</tt> file. However, to make prototyping a bit easier, it's useful to create one that will load our dependencies or libraries we're playing with, when we run <tt class="docutils literal">boot repl</tt>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
-</pre></div>
-</td></tr></table></div><p>Alternatively, we can pre-load dependencies on the command line when we run the <tt class="docutils literal">repl</tt> task:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> boot -d twitter-api:1.8.0 repl
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">set-env!</span><span class="w"> </span><span class="ss">:dependencies</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span><span class="w"> </span><span class="s">"1.8.0"</span><span class="p">]])</span>
+</pre></div></td></tr></table></div></div>
+<p>Alternatively, we can pre-load dependencies on the command line when we run the <tt class="docutils literal">repl</tt> task:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>boot<span class="w"> </span>-d<span class="w"> </span>twitter-api:1.8.0<span class="w"> </span>repl
 </pre></div>
 </div>
 <div class="section" id="the-script-version-1">
 <h2 id="the script: version 1">The Script: Version 1</h2>
 <p>For the first pass of the script, we will hard-code our credentials, and not bother taking any command-line arguments. This illustrates what a bare-minimum boot script looks like.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
-<span class="p">(</span><span class="nf">set-env!</span> <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]])</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span><span class="w"> </span><span class="nv">boot</span>
+<span class="p">(</span><span class="nf">set-env!</span><span class="w"> </span><span class="ss">:dependencies</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span><span class="w"> </span><span class="s">"1.8.0"</span><span class="p">]])</span>
 
-<span class="p">(</span><span class="nf">use</span> <span class="o">'</span><span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp;&nbsp; <span class="o">'</span><span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp;&nbsp; <span class="o">'</span><span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp;&nbsp; <span class="o">'</span><span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
+<span class="p">(</span><span class="nf">use</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
+<span class="w">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="o">'</span><span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
+<span class="w">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="o">'</span><span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
+<span class="w">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="o">'</span><span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
 
-<span class="p">(</span><span class="nb">import </span><span class="o">'</span><span class="p">(</span><span class="nf">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">import </span><span class="o">'</span><span class="p">(</span><span class="nf">twitter.callbacks.protocols</span><span class="w"> </span><span class="nv">SyncSingleCallback</span><span class="p">))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">printer</span>
-&nbsp; <span class="p">[</span><span class="nv">response</span><span class="p">]</span>
-&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="ss">:text</span> <span class="p">(</span><span class="nb">second </span><span class="nv">response</span><span class="p">))))</span>
+<span class="w">&nbsp; </span><span class="p">[</span><span class="nv">response</span><span class="p">]</span>
+<span class="w">&nbsp;&nbsp;&nbsp; </span><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="ss">:text</span><span class="w"> </span><span class="p">(</span><span class="nb">second </span><span class="nv">response</span><span class="p">))))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span>
- &nbsp; <span class="p">[]</span>
- &nbsp; <span class="p">(</span><span class="nf">statuses-user-timeline</span>
- &nbsp;&nbsp;&nbsp; <span class="ss">:oauth-creds</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nf">make-oauth-creds</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER KEY]"</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
- &nbsp;&nbsp;&nbsp; <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="nv">exception-print</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="nv">exception-print</span><span class="p">)</span>
- &nbsp;&nbsp;&nbsp; <span class="ss">:params</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="ss">:count</span> <span class="mi">2</span><span class="p">}))</span>
-</pre></div>
-</td></tr></table></div><p>Making this script executable, it can be run on the command line. The
+<span class="w"> &nbsp; </span><span class="p">[]</span>
+<span class="w"> &nbsp; </span><span class="p">(</span><span class="nf">statuses-user-timeline</span>
+<span class="w"> &nbsp;&nbsp;&nbsp; </span><span class="ss">:oauth-creds</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="p">(</span><span class="nf">make-oauth-creds</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="s">"[YOUR CONSUMER KEY]"</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
+<span class="w"> &nbsp;&nbsp;&nbsp; </span><span class="ss">:callbacks</span><span class="w"> </span><span class="p">(</span><span class="nf">SyncSingleCallback.</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span><span class="w"> </span><span class="nv">response-return-body</span><span class="p">)</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="nv">exception-print</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="nv">exception-print</span><span class="p">)</span>
+<span class="w"> &nbsp;&nbsp;&nbsp; </span><span class="ss">:params</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="p">{</span><span class="ss">:screen-name</span><span class="w"> </span><span class="s">"nihilist_arbys"</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="ss">:count</span><span class="w"> </span><span class="mi">2</span><span class="p">}))</span>
+</pre></div></td></tr></table></div></div>
+<p>Making this script executable, it can be run on the command line. The
 result will be the last tweet. I named my script <tt class="docutils literal">downer</tt>, but you can
 name it however you'd like:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> chmod +x downer
-<span class="gp">$</span> ./downer
+<div class="highlight"><pre><span></span><span class="gp">$ </span>chmod<span class="w"> </span>+x<span class="w"> </span>downer
+<span class="gp">$ </span>./downer
 <span class="go">Rip it to shreds. Put it on a bun. Slather it in horsey sauce. Watch them line up to gorge. Feeding pigs to pigs. Arbys: a flat circle.</span>
 </pre></div>
 <div class="admonition tip">
@@ -230,21 +230,21 @@ name it however you'd like:</p>
 <p>Then we declare our sole dependency on <a class="reference external" href="https://github.com/adamwynne/twitter-api" target="external">twitter-api</a>.</p>
 </li>
 <li><p class="first">lines 4-9 are typical use/import statements. In a boot script, a special namespace is created, called <tt class="docutils literal">boot.user</tt>. You can alternatively load external code using the <tt class="docutils literal">ns</tt> form. The example code could be replaced thusly:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boot.user</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">boot.user</span>
+<span class="w">  </span><span class="p">(</span><span class="ss">:use</span><span class="w"> </span><span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
 
-  <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
-</pre></div>
-</td></tr></table></div></li>
+<span class="w">  </span><span class="p">(</span><span class="ss">:import</span><span class="w"> </span><span class="p">[</span><span class="nv">twitter.callbacks.protocols</span><span class="w"> </span><span class="nv">SyncSingleCallback</span><span class="p">]))</span>
+</pre></div></td></tr></table></div></div>
+</li>
 <li><p class="first">Lines 11-28 are the "meat" of the program. Boot will execute the first  <tt class="docutils literal"><span class="pre">-main</span></tt> function that it finds in a script. For details about what the code is doing, see the <a class="reference external" href="https://github.com/adamwynne/twitter-api" target="external">twitter-api</a> and the <a class="reference external" href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline" target="external">twitter restful api</a>    documentation. In essence, the app makes a RESTful call to the twitter API, providing an API key and the necessary parameters. We then use a special callback to print the message from the result of that call.</p>
 </li>
 </ul>
@@ -266,172 +266,172 @@ name it however you'd like:</p>
 <p>This is handled quite simply by utilizing boot's <tt class="docutils literal"><span class="pre">:source-paths</span></tt> environment option, and a little refactoring.</p>
 <p>We'll construct a directory named <tt class="docutils literal">src</tt>, and create a <tt class="docutils literal">last_tweet.clj</tt> file. In it, we'll declare a new namespace, last-tweet, and move the code there.</p>
 <p><tt class="docutils literal">src/last_tweet.clj</tt>:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">last-tweet</span>
-  <span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
-        <span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="kd">ns </span><span class="nv">last-tweet</span>
+<span class="w">  </span><span class="p">(</span><span class="ss">:use</span><span class="w"> </span><span class="p">[</span><span class="nv">twitter.oauth</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.api.restful</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.callbacks</span><span class="p">]</span>
+<span class="w">        </span><span class="p">[</span><span class="nv">twitter.callbacks.handlers</span><span class="p">])</span>
 
-  <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">twitter.callbacks.protocols</span> <span class="nv">SyncSingleCallback</span><span class="p">]))</span>
+<span class="w">  </span><span class="p">(</span><span class="ss">:import</span><span class="w"> </span><span class="p">[</span><span class="nv">twitter.callbacks.protocols</span><span class="w"> </span><span class="nv">SyncSingleCallback</span><span class="p">]))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">printer</span>
-  <span class="p">[</span><span class="nv">response</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="ss">:text</span> <span class="p">(</span><span class="nb">first </span><span class="nv">response</span><span class="p">))))</span>
+<span class="w">  </span><span class="p">[</span><span class="nv">response</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nb">println </span><span class="p">(</span><span class="ss">:text</span><span class="w"> </span><span class="p">(</span><span class="nb">first </span><span class="nv">response</span><span class="p">))))</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
-  <span class="p">[]</span>
-  <span class="p">(</span><span class="nf">statuses-user-timeline</span>
-    <span class="ss">:oauth-creds</span>
-       <span class="p">(</span><span class="nf">make-oauth-creds</span>
-         <span class="s">"[YOUR CONSUMER KEY]"</span>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
-    <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
-                 <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
-                 <span class="nv">exception-print</span>
-                 <span class="nv">exception-print</span><span class="p">)</span>
-    <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="s">"nihilist_arbys"</span>
-             <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
-</pre></div>
-</td></tr></table></div><div class="admonition note">
+<span class="w">  </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">statuses-user-timeline</span>
+<span class="w">    </span><span class="ss">:oauth-creds</span>
+<span class="w">       </span><span class="p">(</span><span class="nf">make-oauth-creds</span>
+<span class="w">         </span><span class="s">"[YOUR CONSUMER KEY]"</span>
+<span class="w"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="s">"[YOUR CONSUMER SECRET]"</span><span class="p">)</span>
+<span class="w">    </span><span class="ss">:callbacks</span><span class="w"> </span><span class="p">(</span><span class="nf">SyncSingleCallback.</span>
+<span class="w">                 </span><span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span><span class="w"> </span><span class="nv">response-return-body</span><span class="p">)</span>
+<span class="w">                 </span><span class="nv">exception-print</span>
+<span class="w">                 </span><span class="nv">exception-print</span><span class="p">)</span>
+<span class="w">    </span><span class="ss">:params</span><span class="w"> </span><span class="p">{</span><span class="ss">:screen-name</span><span class="w"> </span><span class="s">"nihilist_arbys"</span>
+<span class="w">             </span><span class="ss">:count</span><span class="w"> </span><span class="mi">1</span><span class="p">}))</span>
+</pre></div></td></tr></table></div></div>
+<div class="admonition note">
 <h2 class="first admonition-title">Note</h2>
 <p class="last">Our namespace has a dash (-) in it - this isn't supported in clojure file names. So instead, we use an underscore (_) in the name of the file.</p>
 </div>
 <p>This code is copied from the original boot script, almost verbatim. We've just made use of our own namespace, and renamed <tt class="docutils literal"><span class="pre">-main</span></tt> to <tt class="docutils literal"><span class="pre">last-tweet</span></tt>.</p>
 <p>Here is the new <tt class="docutils literal">downer</tt> script:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span><span class="w"> </span><span class="nv">boot</span>
 <span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
-  <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
+<span class="w">  </span><span class="ss">:dependencies</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span><span class="w"> </span><span class="s">"1.8.0"</span><span class="p">]]</span>
+<span class="w">  </span><span class="ss">:source-paths</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 
-<span class="p">(</span><span class="nf">require</span> <span class="o">'</span><span class="p">[</span><span class="nv">last-tweet</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">last-tweet</span><span class="p">]])</span>
+<span class="p">(</span><span class="nf">require</span><span class="w"> </span><span class="o">'</span><span class="p">[</span><span class="nv">last-tweet</span><span class="w"> </span><span class="ss">:refer</span><span class="w"> </span><span class="p">[</span><span class="nv">last-tweet</span><span class="p">]])</span>
 
 <span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span>
-  <span class="p">[]</span>
-  <span class="p">(</span><span class="nf">last-tweet</span><span class="p">))</span>
-</pre></div>
-</td></tr></table></div><p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
+<span class="w">  </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">last-tweet</span><span class="p">))</span>
+</pre></div></td></tr></table></div></div>
+<p>This greatly simplifies our script, and does a better job of separating our concerns. We've segregated the application logic from the user interface. We've set ourselves up&nbsp;for some additional refactoring to make things more flexible.</p>
 <p>We can add many namespaces to the <tt class="docutils literal">src</tt> directory. We can also add other source paths - the <tt class="docutils literal"><span class="pre">:source-paths</span></tt> directive is a <a class="reference external" href="http://clojure.org/data_structures#toc24" target="external">hash set</a>.</p>
 <p>Now we can refactor the&nbsp;<tt class="docutils literal"><span class="pre">last-tweet/last-tweet</span></tt> function to take credentials and the twitter account to get a tweet from as arguments:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
-  <span class="p">[</span><span class="nv">account</span> <span class="nv">consumer-id</span> <span class="nv">consumer-secret</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">statuses-user-timeline</span>
-    <span class="ss">:oauth-creds</span>
-       <span class="p">(</span><span class="nf">make-oauth-creds</span>
-         <span class="nv">consumer-id</span>
-         <span class="nv">consumer-secret</span><span class="p">)</span>
-    <span class="ss">:callbacks</span> <span class="p">(</span><span class="nf">SyncSingleCallback.</span>
-                 <span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span> <span class="nv">response-return-body</span><span class="p">)</span>
-                 <span class="nv">exception-print</span>
-                 <span class="nv">exception-print</span><span class="p">)</span>
-    <span class="ss">:params</span> <span class="p">{</span><span class="ss">:screen-name</span> <span class="nv">account</span>
-             <span class="ss">:count</span> <span class="mi">1</span><span class="p">}))</span>
-</pre></div>
-</td></tr></table></div><p>We've gone from a hard-coded function to one that is more general-purpose.</p>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">last-tweet</span>
+<span class="w">  </span><span class="p">[</span><span class="nv">account</span><span class="w"> </span><span class="nv">consumer-id</span><span class="w"> </span><span class="nv">consumer-secret</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">statuses-user-timeline</span>
+<span class="w">    </span><span class="ss">:oauth-creds</span>
+<span class="w">       </span><span class="p">(</span><span class="nf">make-oauth-creds</span>
+<span class="w">         </span><span class="nv">consumer-id</span>
+<span class="w">         </span><span class="nv">consumer-secret</span><span class="p">)</span>
+<span class="w">    </span><span class="ss">:callbacks</span><span class="w"> </span><span class="p">(</span><span class="nf">SyncSingleCallback.</span>
+<span class="w">                 </span><span class="p">(</span><span class="nb">comp </span><span class="nv">printer</span><span class="w"> </span><span class="nv">response-return-body</span><span class="p">)</span>
+<span class="w">                 </span><span class="nv">exception-print</span>
+<span class="w">                 </span><span class="nv">exception-print</span><span class="p">)</span>
+<span class="w">    </span><span class="ss">:params</span><span class="w"> </span><span class="p">{</span><span class="ss">:screen-name</span><span class="w"> </span><span class="nv">account</span>
+<span class="w">             </span><span class="ss">:count</span><span class="w"> </span><span class="mi">1</span><span class="p">}))</span>
+</pre></div></td></tr></table></div></div>
+<p>We've gone from a hard-coded function to one that is more general-purpose.</p>
 <p>Now we can utilize boot's extremely useful <tt class="docutils literal">defclifn</tt> macro and boot's <a class="reference external" href="https://github.com/boot-clj/boot/wiki/Task-Options-DSL" target="external">task option DSL</a>&nbsp;to wrap our function, allowing the user to provide the values on the command-line, creating a proper user interface.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span> <span class="nv">boot</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><span class="o">#</span><span class="nv">!/usr/bin/env</span><span class="w"> </span><span class="nv">boot</span>
 <span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]]</span>
-  <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
+<span class="w">  </span><span class="ss">:dependencies</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span><span class="w"> </span><span class="s">"1.8.0"</span><span class="p">]]</span>
+<span class="w">  </span><span class="ss">:source-paths</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
 
 <span class="p">(</span><span class="nf">require</span>
-  <span class="o">'</span><span class="p">[</span><span class="nv">last-tweet</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">last-tweet</span><span class="p">]]</span>
-  <span class="o">'</span><span class="p">[</span><span class="nv">boot.cli</span> <span class="ss">:as</span> <span class="nv">cli</span><span class="p">])</span>
+<span class="w">  </span><span class="o">'</span><span class="p">[</span><span class="nv">last-tweet</span><span class="w"> </span><span class="ss">:refer</span><span class="w"> </span><span class="p">[</span><span class="nv">last-tweet</span><span class="p">]]</span>
+<span class="w">  </span><span class="o">'</span><span class="p">[</span><span class="nv">boot.cli</span><span class="w"> </span><span class="ss">:as</span><span class="w"> </span><span class="nv">cli</span><span class="p">])</span>
 
-<span class="p">(</span><span class="nf">cli/defclifn</span> <span class="nv">-main</span>
-  <span class="s">"Prints the last tweet from the given account. Requires twitter user app</span>
+<span class="p">(</span><span class="nf">cli/defclifn</span><span class="w"> </span><span class="nv">-main</span>
+<span class="w">  </span><span class="s">"Prints the last tweet from the given account. Requires twitter user app</span>
 <span class="s">  authentication tokens. The authentication tokens can be set using the</span>
 <span class="s">  command-line options below, or in the TWITTER_ID and TWITTER_SECRET</span>
 <span class="s">  environment variables.</span>
 
 <span class="s">  USAGE: downer [options] [twitter account]"</span>
 
-  <span class="p">[</span><span class="nv">k</span> <span class="nv">consumer-id</span> <span class="nv">ID</span> <span class="nb">str </span><span class="s">"Consumer id from Twitter"</span>
-   <span class="nv">i</span> <span class="nv">consumer-secret</span> <span class="nv">SECRET</span> <span class="nb">str </span><span class="s">"Consumer secret from Twitter"</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">account</span> <span class="p">(</span><span class="nb">nth </span><span class="nv">*args*</span> <span class="mi">0</span> <span class="s">"nihilist_arbys"</span><span class="p">)</span>
-        <span class="nv">consumer-id</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_ID"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:consumer-id</span> <span class="nv">*opts*</span><span class="p">))</span>
-        <span class="nv">consumer-secret</span> <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span> <span class="s">"TWITTER_SECRET"</span><span class="p">)</span> <span class="p">(</span><span class="ss">:consumer-secret</span> <span class="nv">*opts*</span><span class="p">))]</span>
+<span class="w">  </span><span class="p">[</span><span class="nv">k</span><span class="w"> </span><span class="nv">consumer-id</span><span class="w"> </span><span class="nv">ID</span><span class="w"> </span><span class="nb">str </span><span class="s">"Consumer id from Twitter"</span>
+<span class="w">   </span><span class="nv">i</span><span class="w"> </span><span class="nv">consumer-secret</span><span class="w"> </span><span class="nv">SECRET</span><span class="w"> </span><span class="nb">str </span><span class="s">"Consumer secret from Twitter"</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">account</span><span class="w"> </span><span class="p">(</span><span class="nb">nth </span><span class="nv">*args*</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="s">"nihilist_arbys"</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">consumer-id</span><span class="w"> </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"TWITTER_ID"</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="ss">:consumer-id</span><span class="w"> </span><span class="nv">*opts*</span><span class="p">))</span>
+<span class="w">        </span><span class="nv">consumer-secret</span><span class="w"> </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">System/getenv</span><span class="w"> </span><span class="s">"TWITTER_SECRET"</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="ss">:consumer-secret</span><span class="w"> </span><span class="nv">*opts*</span><span class="p">))]</span>
 
-    <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-id</span><span class="p">)</span> <span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-secret</span><span class="p">))</span>
-      <span class="p">(</span><span class="nb">println </span><span class="s">"ERROR: you must provide twitter credentials. Try -h"</span><span class="p">)</span>
-      <span class="p">(</span><span class="nf">last-tweet</span>
-        <span class="nv">account</span>
-        <span class="nv">consumer-id</span>
-        <span class="nv">consumer-secret</span><span class="p">))))</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+<span class="w">    </span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-id</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nb">nil? </span><span class="nv">consumer-secret</span><span class="p">))</span>
+<span class="w">      </span><span class="p">(</span><span class="nb">println </span><span class="s">"ERROR: you must provide twitter credentials. Try -h"</span><span class="p">)</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">last-tweet</span>
+<span class="w">        </span><span class="nv">account</span>
+<span class="w">        </span><span class="nv">consumer-id</span>
+<span class="w">        </span><span class="nv">consumer-secret</span><span class="p">))))</span>
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -444,11 +444,11 @@ name it however you'd like:</p>
 </ul>
 </div>
 <p>Now we can see command-line output:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ./downer
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./downer
 <span class="go">ERROR: you must provide twitter credentials. Try -h</span>
 </pre></div>
 <p>The output of <tt class="docutils literal">./downer <span class="pre">-h</span></tt>:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ./downer -h
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./downer<span class="w"> </span>-h
 <span class="go">Prints the last tweet from the given account. Requires twitter user app</span>
 <span class="go">authentication tokens. The authentication tokens can be set using the</span>
 <span class="go">command-line options below, or in the TWITTER_ID and TWITTER_SECRET</span>
@@ -462,9 +462,9 @@ name it however you'd like:</p>
 <span class="go">  -i, --consumer-secret SECRET  SECRET sets consumer secret from Twitter.</span>
 </pre></div>
 <p>We set the environment variables, and try getting the last post from a different, possibly more depressing account:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">export</span> <span class="nv">TWITTER_ID</span><span class="o">=</span><span class="s2">"XXXXXXXXXXXXXXXXX"</span>
-<span class="gp">$</span> <span class="nb">export</span> <span class="nv">TWITTER_SECRET</span><span class="o">=</span><span class="s2">"YYYYYYYYYYYYYYYYYYYYYYYYY"</span>
-<span class="gp">$</span> ./downer jjmojojjmojo
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">TWITTER_ID</span><span class="o">=</span><span class="s2">"XXXXXXXXXXXXXXXXX"</span>
+<span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">TWITTER_SECRET</span><span class="o">=</span><span class="s2">"YYYYYYYYYYYYYYYYYYYYYYYYY"</span>
+<span class="gp">$ </span>./downer<span class="w"> </span>jjmojojjmojo
 <span class="go">FINALLY... this just makes getting the sweet, sweet carrot dogs that much easier... http://t.co/TWYer14JH4 @adzerk</span>
 </pre></div>
 </div>
@@ -485,7 +485,7 @@ name it however you'd like:</p>
 <div class="section" id="appendix-getting-rid-of-log4j-notices">
 <h2 id="appendix: getting rid of log4j notices">Appendix: Getting Rid Of Log4J Notices</h2>
 <p>You may have noticed that you get a bunch of warning messages when running our code:</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ./downer jjmojojjmojo
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./downer<span class="w"> </span>jjmojojjmojo
 <span class="go">SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".</span>
 <span class="go">SLF4J: Defaulting to no-operation (NOP) logger implementation</span>
 <span class="go">SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.</span>
@@ -518,22 +518,24 @@ This warning message is reported when the org.slf4j.impl.StaticLoggerBinder clas
 <p class="last">To find the latest <em>stable</em> version of the libary, we can click on the "All" link next to the latest version. This displays a list of every single release, where we see the latest stable version (at time of writing) is <tt class="docutils literal">1.7.25</tt>.</p>
 </div>
 <p>So now, our <tt class="docutils literal"><span class="pre">set-env!</span></tt> call looks like this (using the latest stable version of <tt class="docutils literal"><span class="pre">slf4j-nop</span></tt>):</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
-  <span class="ss">:dependencies</span> <span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span> <span class="s">"1.8.0"</span><span class="p">]</span>
-                  <span class="p">[</span><span class="nv">org.slf4j/slf4j-nop</span> <span class="s">"1.7.25"</span><span class="p">]]</span>
-  <span class="ss">:source-paths</span> <span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
-</pre></div>
-</td></tr></table></div><p>After rebuilding our jar, or running our boot script again, we'll see the <tt class="docutils literal">SLF4J</tt> warnings have disapeared.</p>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="nf">set-env!</span>
+<span class="w">  </span><span class="ss">:dependencies</span><span class="w"> </span><span class="o">'</span><span class="p">[[</span><span class="nv">twitter-api</span><span class="w"> </span><span class="s">"1.8.0"</span><span class="p">]</span>
+<span class="w">                  </span><span class="p">[</span><span class="nv">org.slf4j/slf4j-nop</span><span class="w"> </span><span class="s">"1.7.25"</span><span class="p">]]</span>
+<span class="w">  </span><span class="ss">:source-paths</span><span class="w"> </span><span class="o">#</span><span class="p">{</span><span class="s">"src"</span><span class="p">})</span>
+</pre></div></td></tr></table></div></div>
+<p>After rebuilding our jar, or running our boot script again, we'll see the <tt class="docutils literal">SLF4J</tt> warnings have disapeared.</p>
 </div>
 </div><!-- /.entry-content -->
-</section>
+<div class="body" id="contactme">
+     Questions? Comments? <a href="/pages/contact.html">Reach out!</a>
 </div>
+</section></div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>

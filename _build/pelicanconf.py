@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 from num2words import num2words
+from datetime import datetime
 
 def my_plural(amount, single, plural):
     """
@@ -43,7 +44,7 @@ SITENAME = 'The Collected Works of jjmojojjmojo'
 SITEURL = ''
 
 PLUGIN_PATHS = ["plugins", "pelican-plugins"]
-PLUGINS = ["explanation", "pelican-toc", "summary"]
+PLUGINS = ["explanation", "pelican-toc", "summary", "quote"]
 
 PATH = 'content'
 OUTPUT_PATH = "output"
@@ -121,3 +122,6 @@ TEMPLATE_PAGES = {'pages.html': 'pages/index.html'}
 DEFAULT_METADATA = {
     'status': 'draft',
 }
+
+# extras
+NOW = datetime.now()

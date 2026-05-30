@@ -112,10 +112,10 @@ the changes propagate to <em>n</em> number of servers.</li>
 <p>I started with stock Ubuntu 12.04 server instance.</p>
 <p>I installed bind9 using apt, and created a couple of directories for log
 and zone files.</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install bind9
-<span class="gp">$</span> sudo mkdir -p /var/log/named
-<span class="gp">$</span> sudo chown bind:bind /var/log/named
-<span class="gp">$</span> sudo mkdir /etc/bind/zones
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>bind9
+<span class="gp">$ </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/log/named
+<span class="gp">$ </span>sudo<span class="w"> </span>chown<span class="w"> </span>bind:bind<span class="w"> </span>/var/log/named
+<span class="gp">$ </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/bind/zones
 </pre></div>
 </div>
 <div class="section" id="zone-files">
@@ -380,7 +380,7 @@ server, so we'll use 127.0.0.1 for the server to query.</p>
 <h4>With dig</h4>
 <p>Note: remove the <tt class="docutils literal">+short</tt> parameter from the end of the query to get
 more info.</p>
-<div class="section" id="id1">
+<div class="section" id="forward-lookup-1">
 <h5>Forward Lookup</h5>
 <p>The A record:</p>
 <pre class="literal-block">
@@ -393,7 +393,7 @@ $ dig @127.0.0.1 alt.example.test +short
 192.168.0.1
 </pre>
 </div>
-<div class="section" id="id2">
+<div class="section" id="reverse-lookup-1">
 <h5>Reverse Lookup</h5>
 <pre class="literal-block">
 $ dig @127.0.0.1 -x 192.168.0.1 +short
@@ -403,7 +403,7 @@ box1.example.test.0.168.192.in-addr.arpa.
 </div>
 <div class="section" id="with-nslookup">
 <h4>With nslookup</h4>
-<div class="section" id="id3">
+<div class="section" id="forward-lookup-2">
 <h5>Forward Lookup</h5>
 <p>The A record:</p>
 <pre class="literal-block">
@@ -425,7 +425,7 @@ Name:   box1.example.test
 Address: 192.168.0.1
 </pre>
 </div>
-<div class="section" id="id4">
+<div class="section" id="reverse-lookup-2">
 <h5>Reverse Lookup</h5>
 <pre class="literal-block">
 $ nslookup 192.168.0.1 127.0.0.1
@@ -467,11 +467,13 @@ sandbox DNS server</div>
 <a class="reference external" href="http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/" target="external">http://www.cyberciti.biz/faq/ubuntu-linux-configure-dns-nameserver-ip-address/</a></p>
 </div>
 </div><!-- /.entry-content -->
-</section>
+<div class="body" id="contactme">
+     Questions? Comments? <a href="/pages/contact.html">Reach out!</a>
 </div>
+</section></div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>

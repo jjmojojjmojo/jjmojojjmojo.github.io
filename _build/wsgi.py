@@ -1,9 +1,9 @@
 """
-Simple web server for static content - uses WebOb. 
+Simple web server for static content - uses WebOb.
 
-Run this under a WSGI server like waitress, gunicorn or whatever.
+Run under waitress (see Procfile / README), e.g.::
 
-TODO: integrate the webserver into this so it's a self-contained unit
+    waitress-serve --listen=127.0.0.1:8000 wsgi:dev
 """
 
 from webob import Request, Response

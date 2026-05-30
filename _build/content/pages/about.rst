@@ -135,7 +135,7 @@ Copyright, License, Etc
 =======================
 Copyright
 ---------
-All contents are |copyright| 2020 Josh Johnson. All rights are reserved.
+All contents are |copyright| Josh Johnson. All rights are reserved.
 
 I keep a listing of content from 3rd parties on `my media sources page <{filename}/pages/image-sources.rst>`__.
 
@@ -144,11 +144,13 @@ License
 -------
 Again, all rights are reserved.
 
-License to the content of this site (code, media, text, and so on) is granted for personal, private use. You can view the code, download it, run it, be inspired by it, but you cannot use it in commercial products and you cannot use it in educational materials.
+License to the content of this site (code, media, text, and so on) is granted for personal, private use. You can view the content, download it, run it, be inspired by it, but you cannot use it in commercial products and you cannot use it in educational materials.
 
 Please do not redistribute it, use it for teaching purposes, or any commercial purposes without asking for permission. You can `reach out to me <{filename}/pages/contact.rst>`__ to obtain permission. I promise it won't be hard. |sparkleheart|
 
-Linking to this content is permitted (and encouraged), just don't be sneaky about it.
+Linking to this content is permitted (and encouraged), just don't be sneaky about it. 
+
+Attribution is appreciated
 
 Warranty
 --------

@@ -1,0 +1,3 @@
+watch: watchmedo shell-command -c "pelican -s pelicanconf.py --fatal errors -D" -i "./output/*" -p "*.jpg;*.rst;*.html;*.js;*.css;*.py" -W -R -D .
+dev: waitress-serve --listen=0.0.0.0:8001 wsgi:dev
+preview: waitress-serve --listen=0.0.0.0:8081 wsgi:preview

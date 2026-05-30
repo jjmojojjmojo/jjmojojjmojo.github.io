@@ -49,22 +49,22 @@
 <p>Code examples and command-line interactions are provided with syntax-highlighting and line numbers.</p>
 <div class="section" id="example-1-clojure-code">
 <h3>Example 1, clojure code</h3>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">add-it-up</span>
-  <span class="p">[</span><span class="o">&amp;</span><span class="nv">args</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">apply + </span><span class="nv">args</span><span class="p">))</span>
-</pre></div>
-</td></tr></table></div></div>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">add-it-up</span>
+<span class="w">  </span><span class="p">[</span><span class="o">&amp;</span><span class="nv">args</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nb">apply + </span><span class="nv">args</span><span class="p">))</span>
+</pre></div></td></tr></table></div></div>
+</div>
 <div class="section" id="example-2-command-line-interaction">
 <h3>Example 2, command-line interaction</h3>
-<div class="highlight"><pre><span></span><span class="gp">$</span> mkdir -p ~/newdir
-<span class="gp">$</span> touch ~/newdir/newfile
-<span class="gp">$</span> rm -rf ~/newdir
-<span class="gp">$</span> <span class="nb">echo</span> <span class="nv">$HOME</span>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/newdir
+<span class="gp">$ </span>touch<span class="w"> </span>~/newdir/newfile
+<span class="gp">$ </span>rm<span class="w"> </span>-rf<span class="w"> </span>~/newdir
+<span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$HOME</span>
 <span class="go">/home/jj</span>
-<span class="gp">$</span> sudo su
-<span class="gp">#</span> whoami
+<span class="gp">$ </span>sudo<span class="w"> </span>su
+<span class="gp"># </span>whoami
 <span class="go">root</span>
 </pre></div>
 <p>Note how we differentiate doing something as root and as a regular user by changing the prompt from <code>$</code> to <code>#</code>.</p>
@@ -73,17 +73,17 @@
 <div class="section" id="explainations">
 <h2 id="explainations">Explainations</h2>
 <p>Where applicable, each example is discussed in great detail below it - these explanations are hidden by default so as not to distract from the flow of the article, when such discussion would be a distraction:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -102,7 +102,7 @@
 <dd>With each iteration of the for loop, print the key and it's value in the <code>kwargs</code> dictionary. Here we are combining the two values into a single string, separated by a colon, using <em>string interpolation</em>. The special <code>%s</code> tokens are place holders for the values passed in the tuple that follows the interpolation character (<code>%</code>). The <code>s</code> is significant, in that python will cast the value to a string before interpolating it.</dd>
 </dl>
 <p>Example</p>
-<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">some_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
 <span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span>
 <span class="gp">... </span>       <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
@@ -125,12 +125,11 @@
 <p>You can click on the book icon <object class="align-middle" data="/images/book.svg" type="image/svg+xml">CLOSED_BOOK_ICON</object> to show an explanation. Clicking on the open book icon <object class="align-middle" data="/images/book-open.svg" type="image/svg+xml">OPEN_BOOK_ICON</object> will close it.</p>
 </div>
 </div>
-</div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>
-</body>
+</div></body>
 </html>

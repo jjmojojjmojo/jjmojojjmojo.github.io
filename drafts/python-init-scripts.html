@@ -340,7 +340,7 @@ are mounted", respectively.</div>
 </li>
 <li><p class="first">The script must write a file with the same name as the service to
 <tt class="docutils literal">/var/lock/subsys</tt>.</p>
-</li></ol></div><p>I'm having trouble finding concrete explanation as to why this is a
+<p>I'm having trouble finding concrete explanation as to why this is a
 requirement. All I've been able to find is a <a class="reference external" href="http://www.redhat.com/magazine/008jun05/departments/tips_tricks/" target="external">Red Hat "tips and
 tricks"
 entry</a>
@@ -349,6 +349,8 @@ entry</a>
 or what, but it was part of <a class="reference external" href="http://www.coraid.com/site/co-files/FAQ.html#ss5.14" target="external">Coraid's init script
 shell</a>, and I
 don't see any harm, so I've included it here.</p>
+</li>
+</ol>
 <p>Some other things to keep in mind:</p>
 <ul>
 <li><p class="first">Best practice dictates that we put functions and such in external
@@ -372,6 +374,7 @@ application and return a relevant status code.</p>
 cleaver way of dealing with that, which I will describe below.</p>
 </li>
 </ul>
+</div>
 <div class="section" id="code-skeleton">
 <h2 id="code skeleton">Code Skeleton</h2>
 <p>Taking the above requirements into account, I've developed a code
@@ -1366,11 +1369,13 @@ I may "fix" this just so the end use isn't caught off guard by it.</p>
 </ul>
 </div>
 </div><!-- /.entry-content -->
-</section>
+<div class="body" id="contactme">
+     Questions? Comments? <a href="/pages/contact.html">Reach out!</a>
 </div>
+</section></div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>

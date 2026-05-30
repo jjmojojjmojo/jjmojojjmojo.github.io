@@ -13,7 +13,7 @@ body {
     margin-left: 1.5vw;
     margin-right: 1.5vw;
     margin-bottom: 1vw;
-    background-color: #FFFFFF;
+    background-color: #EAF2E4;
     font-size: 1em;
 }
 
@@ -22,6 +22,7 @@ body {
     border-left: 1px #897C81 solid;
     border-right: 1px #897C81 solid;
     padding: 1vw;
+    background-color: #FFFFFF;
 }
 
 #banner {
@@ -30,6 +31,8 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
     background-image: url("/theme/images/header_4k.jpg");
+    background-position-y: top;
+    background-position-x: center;
     position: relative;
     height: 200px;
 }
@@ -92,6 +95,14 @@ body {
     border-right: 1px #897C81 solid;
     padding: 2vw;
     background-color: #b3f442;
+}
+
+#contactme {
+  text-align: center;
+  background-color: #cdffff;
+  padding: 1em;
+  border-radius: 1em;
+  font-weight: bold;
 }
 
 /* roles */
@@ -253,6 +264,22 @@ pre {
     display: block;
 }
 
+/* custom quote tag */
+.pull-quote {
+    display: block;
+    border: 1px #CCCCCC solid;
+    padding: 0.5em;
+    font-style: italic;
+}
+
+.pull-quote cite {
+    display: block;
+    position: relative;
+    font-size: smaller;
+    font-style: bold;
+    margin-left: 60%;
+}
+
 /* custom explanation tag */
 .explanation {
     display: block;
@@ -329,6 +356,8 @@ h1, h2, h3, h4, h5, h6, h7 {
     background-size: 100%;
     background-repeat: no-repeat;
     background-image: url("/theme/images/footer_4k.jpg");
+    background-position-y: top;
+    background-position-x: center;
     position: relative;
     height: 150px;
 }
@@ -340,10 +369,16 @@ h1, h2, h3, h4, h5, h6, h7 {
 	position: absolute;
 	width: 100%;
 	height: 50%;
+	color: #FFFFFF;
+	
+}
+
+#contentinfo a {
+    color: #FFFFFF;
 }
 
 #contentinfo #footer-text-wrapper {
-    background-color: rgba(256, 256, 256, 0.4);
+    background-color: rgba(0, 0, 0, 0.21);
     margin: auto;
     overflow: auto;
     top: 0;
@@ -459,6 +494,15 @@ ol.arabic ol.arabic {
   #header-site-title {
       display: none;
   }
+}
+
+/* keep the page centered on big screens */
+@media screen and (width >= 2001px) {
+    body {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 2000px;
+    }
 }
 
 @media screen and (max-width: 2000px) {

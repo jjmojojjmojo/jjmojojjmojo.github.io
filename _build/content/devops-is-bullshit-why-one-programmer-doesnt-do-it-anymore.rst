@@ -2,21 +2,18 @@ DevOps Is Bullshit: Why One Programmer Doesn't Do It Anymore
 ############################################################
 :date: 2015-03-08 11:47
 :author: jjmojojjmojo
-:category: commentary, culture, devops, editorial, classics
-:tags: culture, devops
+:category: musings
+:tags: commentary, culture, devops, editorial, classics
 :slug: devops-is-bullshit-why-one-programmer-doesnt-do-it-anymore
-:status: draft
+:status: published
 
-What's the deal with DevOps? In 2015, I asked myself that question and came up with a tounge-in-cheek answer that provided some catharsis and really helped put my career into perspective. It was one of the most popular things I've ever done. I've preserved the content here for posterity, and even managed to preserve the comments. 
-
-.. note::
-    
-    I've posted a follow-up, `Is DevOps Still Bullshit? <{filename}/is-devops-still-bs.rst>`__, where I talk about the personal impact of this post, the response, and how I feel about all of this today.
-    
+What's the deal with DevOps? In 2015, I asked myself that question and came up with a tounge-in-cheek answer that provided some catharsis and really helped put my career into perspective. It was one of the most popular things I've ever done. I've preserved it here for posterity. *The comment section is a riot.*
 
 .. PELICAN_END_SUMMARY
 
+The original is located `on my old wordpress site <https://lionfacelemonface.wordpress.com/2015/03/08/devops-is-bullshit-why-one-programmer-doesnt-do-it-anymore/>`__.
 
+----
 
 I've always been handy with hardware. I was one of "those kids" you hear
 about that keeps taking things apart just to see how they work - and

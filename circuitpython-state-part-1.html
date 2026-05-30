@@ -62,7 +62,7 @@
 </address>
 </footer><!-- /.post-info -->
 <div>
-<div id="toc"><ul><li><a class="toc-href" href="#the project, the platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions: keeping the code simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion and what" next="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
+<div id="toc"><ul><li><a class="toc-href" href="#the project, the platform" title="The Project, The Platform">The Project, The Platform</a></li><li><a class="toc-href" href="#audience" title="Audience">Audience</a></li><li><a class="toc-href" href="#demo project" title="Demo Project">Demo Project</a></li><li><a class="toc-href" href="#materials" title="Materials">Materials</a></li><li><a class="toc-href" href="#abstractions: keeping the code simple" title="Abstractions: Keeping The Code Simple">Abstractions: Keeping The Code Simple</a></li><li><a class="toc-href" href="#testing" title="Testing">Testing</a></li><li><a class="toc-href" href="#conclusion and what" next'="" s="" title="Conclusion And What">Conclusion And What's Next</a></li></ul></div>
 </div>
 <div class="entry-content status-published">
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
@@ -316,24 +316,24 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p>Abstraction helps by providing a single, simplified <em>interface</em> to do things that may have a lot of complexity.</p>
 <p>For example, instead of building an abstraction module like we're doing below, we could have a bunch of <tt class="docutils literal">if</tt> statements that, given we have a way to figure out what board we're running our code on, set up the right pins or pixels for us.</p>
 <p>Something like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># psuedo code!</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># psuedo code!</span>
 
 <span class="k">if</span> <span class="n">itsy</span><span class="o">-</span><span class="n">bitsy</span><span class="p">:</span>
   <span class="nb">set</span> <span class="n">up</span> <span class="n">dotstar</span>
@@ -351,8 +351,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
   <span class="nb">set</span> <span class="n">up</span> <span class="n">dotstar</span>
   <span class="n">use</span> <span class="n">pins</span> <span class="n">D0</span> <span class="ow">and</span> <span class="n">D1</span>
   <span class="nb">set</span> <span class="n">up</span> <span class="n">led</span> <span class="n">on</span> <span class="n">pin</span> <span class="n">D13</span>
-</pre></div>
-</td></tr></table></div><p>The problem with this approach is that, besides being messy, it's adding a lot of extra places where our code could break. And every new board you want to use adds more complexity.</p>
+</pre></div></td></tr></table></div></div>
+<p>The problem with this approach is that, besides being messy, it's adding a lot of extra places where our code could break. And every new board you want to use adds more complexity.</p>
 <p>But more importantly, you have to know <em>every detail</em> of <em>every board</em> you might use. Maybe someone wants to use our code and their LED is on pin 3. Maybe they are using touch pads instead of buttons. Maybe there's some new-fangled RGB LED product (we'll call them SunSpots&trade; 😉) that someone wants to use.</p>
 <p>If we have this chain of <tt class="docutils literal">if</tt>'s, its up to <em>us</em> to add in support for these different ways of doing what we want to do.</p>
 <p>In an abstraction, we decide on a standard way of accessing the code, or <em>interface</em>. That means we decide that variables and functions will be named a certain way. Functions will take certain parameters and return specific kinds of values.</p>
@@ -390,33 +390,33 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 <div class="section" id="for-the-circuitplayground">
 <h3>For the CircuitPlayground</h3>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as setup.py</span>
-<span class="kn">import</span> <span class="nn">board</span>
-<span class="kn">import</span> <span class="nn">neopixel</span>
-<span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># save as setup.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">board</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">neopixel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digitalio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
 
 <span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
 <span class="n">led</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
@@ -432,13 +432,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <span class="n">b_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
 <span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">DOWN</span>
 
-<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -465,33 +465,33 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <h2 class="first admonition-title">Note</h2>
 <p class="last">Be sure to change the pin numbers to reflect how you wired up your buttons.</p>
 </div>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># save as setup.py</span>
-<span class="kn">import</span> <span class="nn">board</span>
-<span class="kn">import</span> <span class="nn">adafruit_dotstar</span>
-<span class="kn">from</span> <span class="nn">digitalio</span> <span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1"># save as setup.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">board</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">adafruit_dotstar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digitalio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DigitalInOut</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Pull</span>
 
 <span class="n">led</span> <span class="o">=</span> <span class="n">DigitalInOut</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">D13</span><span class="p">)</span>
 <span class="n">led</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">OUTPUT</span>
@@ -507,13 +507,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <span class="n">b_button</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">INPUT</span>
 <span class="n">b_button</span><span class="o">.</span><span class="n">pull</span> <span class="o">=</span> <span class="n">Pull</span><span class="o">.</span><span class="n">UP</span>
 
-<span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"A"</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">a_button</span><span class="o">.</span><span class="n">value</span>
     <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">b_button</span><span class="o">.</span><span class="n">value</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h4>Explanation</h4>
 <div class="docutils container">
 </div>
@@ -537,18 +537,18 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <div class="section" id="how-it-works">
 <h3>How It Works</h3>
 <p>To use this in our other code (<tt class="docutils literal">code.py</tt>), we just need to use Python's <tt class="docutils literal">import</tt> statement:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
-</pre></div>
-</td></tr></table></div><p>Now, in our code, we use the <tt class="docutils literal">led</tt> variable to turn the red LED on/off, and use <tt class="docutils literal">rgb</tt> to control the NeoPixel/DotStar. We will use the <tt class="docutils literal">check()</tt> function to see if a button is being pressed, like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+</pre></div></td></tr></table></div></div>
+<p>Now, in our code, we use the <tt class="docutils literal">led</tt> variable to turn the red LED on/off, and use <tt class="docutils literal">rgb</tt> to control the NeoPixel/DotStar. We will use the <tt class="docutils literal">check()</tt> function to see if a button is being pressed, like this:</p>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A has been pressed"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Button A has not been pressed"</span><span class="p">)</span>
@@ -557,8 +557,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B has been pressed"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Button B has not been pressed"</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div></div>
+</pre></div></td></tr></table></div></div>
+</div>
 </div>
 <div class="section" id="testing">
 <h2 id="testing">Testing</h2>
@@ -574,19 +574,19 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 <p class="last">If you aren't familiar with this process, check out the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-libraries" target="external">CircuitPython Libraries</a> section of the <a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/overview" target="external">"Welcome To CircuitPython"</a> guide.</p>
 </div>
 <p>Also make sure you have created a <tt class="docutils literal">setup.py</tt> module, as explained in <a class="reference internal" href="#abstractions-keeping-the-code-simple">the last section</a>.</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">setup</span> <span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">setup</span><span class="w"> </span><span class="kn">import</span> <span class="n">led</span><span class="p">,</span> <span class="n">rgb</span><span class="p">,</span> <span class="n">check</span>
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">led</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
@@ -597,8 +597,8 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
         <span class="n">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -634,11 +634,13 @@ and the <a class="reference external" href="https://www.adafruit.com/product/350
 </div>
 </div>
 </div><!-- /.entry-content -->
-</section>
+<div class="body" id="contactme">
+     Questions? Comments? <a href="/pages/contact.html">Reach out!</a>
 </div>
+</section></div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>

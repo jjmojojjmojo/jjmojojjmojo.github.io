@@ -71,3 +71,30 @@ Copyright:
     © 2014 NBC Studios, Inc. All Rights Reserved.
 Source:
     Internet Movie Database, https://www.imdb.com/title/tt1266020/mediaviewer/rm3859807232
+    
+    
+.. figure:: {static}/images/taking_barbershop_to_strange_new_places.jpg
+   :figwidth: 20%
+   
+Source:
+    TV Series, *The Simpsons*. Season 5, Episode 1, "Homer's Barbershop Quartet", Screen capture.
+Copyright:
+    © 1993 20th Century Fox. All Rights Reserved.
+Source:
+    Frinkiac: https://frinkiac.com/caption/S05E01/1143392
+Obtained: 
+    05/28/2026
+    
+
+.. figure:: {static}/images/old_fashioned_guy.png
+   :figwidth: 20%
+   
+Source:
+    TV Series, *The State*. Season 1, Episode 2, Sketch: "Old Fashioned Guy", Screen capture. Cropped.
+Copyright:
+    © 1994. Owner unknown (Probably Paramount, Paramount Skydance Corporation)
+Source:
+    YouTube: https://www.youtube.com/watch?v=c9SLBbc6Y1A
+Obtained: 
+    05/29/2026
+    

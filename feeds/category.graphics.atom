@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - graphics</title><link href="/" rel="alternate"></link><link href="/feeds/category.graphics.atom" rel="self"></link><id>/</id><updated>2018-09-10T09:00:00-04:00</updated><entry><title>The Johnson Pyramid Of Programmer Greatness</title><link href="/johnson-pyramid-of-programmer-greatness.html" rel="alternate"></link><published>2018-09-10T09:00:00-04:00</published><updated>2018-09-10T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-10:/johnson-pyramid-of-programmer-greatness.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Collected Works of jjmojojjmojo - graphics</title><link href="/" rel="alternate"/><link href="/feeds/category.graphics.atom" rel="self"/><id>/</id><updated>2018-09-10T09:00:00-04:00</updated><entry><title>The Johnson Pyramid Of Programmer Greatness</title><link href="/johnson-pyramid-of-programmer-greatness.html" rel="alternate"/><published>2018-09-10T09:00:00-04:00</published><updated>2018-09-10T09:00:00-04:00</updated><author><name>jjmojojjmojo</name></author><id>tag:None,2018-09-10:/johnson-pyramid-of-programmer-greatness.html</id><summary type="html">&lt;!-- Emoji substitutions, because I can't help myself (and my editor doesn't show --&gt;
 &lt;!-- emoji for some reason - better to do this since I can replace these with --&gt;
 &lt;!-- icons or whatever I want) --&gt;
 &lt;img alt="" class="align-right" src="/images/johnson-pyramid-of-programmer-greatness/fullcolor-new.png" style="width: 20%;"/&gt;
@@ -49,7 +49,7 @@
 &lt;p&gt;It's all very tongue-in-cheek, and a ridiculous thing to push onto kids just trying to get some exercise.&lt;/p&gt;
 &lt;p&gt;And that's what got me thinking - what sort of things would I put on such a pyramid, in a similar tongue-in-cheek style, that I might push on unsuspecting software engineers? I fired up Illustrator and got to work.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id1"&gt;
+&lt;div class="section" id="the-johnson-pyramid-of-programmer-greatness-1"&gt;
 &lt;h2 id="the johnson pyramid of programmer greatness"&gt;The Johnson Pyramid Of Programmer Greatness&lt;/h2&gt;
 &lt;p&gt;My interpretation of Ron Swanson's masterpiece is probably a little more serious than his was, but it's still intended to be a light-hearted take. It was designed in Adobe Illustrator, at full 24x48" poster size. I tweaked the dimensions a little bit to accommodate printing on standard letter/A4 paper, in landscape.&lt;/p&gt;
 &lt;p&gt;Since I was refreshing the illustration for posting to this new site, I also went ahead and freshened the color scheme as well (click on the images for the full-size version):&lt;/p&gt;
@@ -67,4 +67,4 @@
 &lt;p&gt;In my pyramid, as in Ron's, the blocks of wisdom are arranged such that the least important concepts are lower on the pyramid. Now, you might argue that &lt;strong&gt;Caffeine&lt;/strong&gt; is less important than &lt;strong&gt;Attention To Detail&lt;/strong&gt;, and that's sort of the point. It's about the way &lt;em&gt;I&lt;/em&gt; feel about things, and how &lt;em&gt;you&lt;/em&gt; feel about things. It's designed to spark conversation. Like, maybe we should talk if &lt;strong&gt;Beer&lt;/strong&gt; is higher on your list than, say &lt;strong&gt;Process&lt;/strong&gt;... 🤔 The idea is that we're "busting the collective chops" of myself and my colleagues, with a gentle nudge toward what I've found to be the most useful over the years. It's all meant in good fun. 💖&lt;/p&gt;
 &lt;p&gt;That said, I think we will &lt;strong&gt;all&lt;/strong&gt; agree that &lt;strong&gt;J.F.D.I.&lt;/strong&gt; and &lt;strong&gt;Awesomeness&lt;/strong&gt; are of ultimate (and penultimate) importance! 😉&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="graphics"></category><category term="culture"></category><category term="humor"></category><category term="classics"></category></entry></feed>
+</content><category term="graphics"/><category term="culture"/><category term="humor"/><category term="classics"/></entry></feed>

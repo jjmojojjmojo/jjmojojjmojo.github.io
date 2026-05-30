@@ -74,7 +74,8 @@ Next, make sure you run the `Post-Processing Script`_::
     
 It's a good idea to run the preview web server and make sure everything looks OK before continuing::
     
-    $ chaussette --port 8080 --backend tornado wsgi:preview
+    $ cd _build
+    $ waitress-serve --listen=127.0.0.1:8080 wsgi:preview
     
 Take a look at http://127.0.0.1:8080
 
@@ -86,13 +87,13 @@ To view the current state of the generated HTML you will need to run a web serve
 
 Two WSGI applications are provided. One (``dev``) serves the files in ``output``, the other (``preview``) serves the "live" content in the main directory. 
 
-`chaussette <https://chaussette.readthedocs.io/en/latest/>`__ is provided by the ``requirements.txt``. Any WSGI webserver will work. Here's how to run the dev server::
+`waitress <https://docs.pylonsproject.org/projects/waitress/en/latest/>`__ is provided by ``requirements.txt``. From ``_build``, run the dev server::
     
-    $ chaussette --port 8000 --backend tornado wsgi:dev
+    $ waitress-serve --listen=127.0.0.1:8000 wsgi:dev
     
 And the preview server::
     
-    $ chaussette --port 8080 --backend tornado wsgi:preview
+    $ waitress-serve --listen=127.0.0.1:8080 wsgi:preview
     
 Note that both services are run by the `Development Services`_ below.
 
@@ -100,21 +101,19 @@ Development Services
 ====================
 Pelican comes with a development server that will serve the content and automatically regenerate it when files are changed. 
 
-I had some problems with it, so I use a combination of a WSGI app I built, based on `webob.FileApp <https://docs.pylonsproject.org/projects/webob/en/stable/api/static.html>`__, and watchmedo (from the `watchdog <https://github.com/gorakhargosh/watchdog>`__ library) to accomplish the same thing.
+I had some problems with it, so I use a combination of a WSGI app built on `webob.FileApp <https://docs.pylonsproject.org/projects/webob/en/stable/api/static.html>`__, `watchfiles <https://github.com/samuelcolvin/watchfiles>`__ (rebuild on change), and `honcho <https://github.com/nickstenning/honcho>`__ (process manager) to accomplish the same thing.
 
-Watchmedo runs the build command mentioned above every time a file changes. This includes source files, and changes to the theme and most static files.
+``watchfiles`` runs the Pelican build command on startup and again whenever source files, themes, or most static files change (``output/`` is ignored to avoid rebuild loops).
 
 The webserver provides directory listings (useful for looking at the drafts folder, since it's not directly served by normal web servers (like github pages)).
 
-To run the development services::
+Processes are defined in ``_build/Procfile``. To run all development services::
     
     $ source bin/activate
     $ cd _build
-    $ circusd circus.ini
+    $ honcho start
     
-As mentioned above, two services are started. On port ``8000``, the content currently in development (located in ``output``) is served.
-
-On port ``8080``, the content that will be published (located in the root of this repository) is served.
+As mentioned above, three processes start: ``watch`` (Pelican rebuild), ``dev`` on port ``8000`` (staging in ``output``), and ``preview`` on port ``8080`` (published tree at the repository root).
 
 Post-Processing Script
 ======================

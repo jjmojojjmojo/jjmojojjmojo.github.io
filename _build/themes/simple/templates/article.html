@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title%}
-   {{ article.title }} - {{ SITENAME }} 
+   {{ article.title|striptags }} - {{ SITENAME }} 
 {% endblock %}
 {% block twitter_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
 {% block og_title %}{{ article.title }} - {{ SITENAME }} {%endblock%}
@@ -76,5 +76,9 @@
   <div class="entry-content status-{{ article.status }}">
     {{ article.content }}
   </div><!-- /.entry-content -->
+  <div id="contactme" class="body">
+     Questions? Comments? <a href="{{ SITEURL }}/pages/contact.html">Reach out!</a>
+  </div>
+  </div>
 </section>
 {% endblock %}

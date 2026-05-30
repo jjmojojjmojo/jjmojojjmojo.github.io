@@ -5,11 +5,11 @@ watchdog
 WebOb
 piexif
 lxml
-circus
-chaussette
+honcho
+waitress
+watchfiles
 num2words
 bs4
 argh
 wheel
 PyYAML
-tornado

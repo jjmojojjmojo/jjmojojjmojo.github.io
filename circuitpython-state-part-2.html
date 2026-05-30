@@ -23,9 +23,9 @@
 <link href="/feeds/all.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Full RSS Feed" type="application/rss+xml"/>
 <link href="/feeds/category.tutorial.atom" rel="alternate" title="The Collected Works of jjmojojjmojo Categories Atom Feed" type="application/atom+xml"/>
 <link href="/feeds/category.tutorial.rss" rel="alternate" title="The Collected Works of jjmojojjmojo Categories RSS Feed" type="application/rss+xml"/>
-<meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" name="description" noisy="" problem="" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
-<meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" noisy="" problem="" property="og:description" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
-<meta about="" also="" and="" as="" bad.="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it="" make="" maybe="" noisy="" problem="" property="twitter:description" referred="" talk="" the="" them="" to="" way:="" we="" why="" worst=""/>
+<meta "debouncing".="" "un-noisy",="" about="" also="" and="" as="" bad."="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it's="" make="" maybe="" name="description" noisy"="" problem="" referred="" talk="" the="" them="" to="" way:="" we'll="" why="" worst,=""/>
+<meta "debouncing".="" "un-noisy",="" about="" also="" and="" as="" bad."="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it's="" make="" maybe="" noisy"="" problem="" property="og:description" referred="" talk="" the="" them="" to="" way:="" we'll="" why="" worst,=""/>
+<meta "debouncing".="" "un-noisy",="" about="" also="" and="" as="" bad."="" blocking.="" but="" buttons="" by="" commonly="" content="In this part of the series, we're going to really dig into what state actually is. We'll use analogies from real life, and then look at how we might model real-life state using Python data structures. But first, we'll discuss a common problem that all budding electronics engineers have to deal with at some point: " easiest="" fixing="" how="" in="" it's="" make="" maybe="" noisy"="" problem="" property="twitter:description" referred="" talk="" the="" them="" to="" way:="" we'll="" why="" worst,=""/>
 <meta content="circuitpython" name="tags"/>
 <meta content="python" name="tags"/>
 <meta content="hardware" name="tags"/>
@@ -62,7 +62,7 @@
 </address>
 </footer><!-- /.post-info -->
 <div>
-<div id="toc"><ul><li><a class="toc-href" href="#a use case for state: debouncing buttons" title="A Use Case For State: Debouncing Buttons">A Use Case For State: Debouncing Buttons</a></li><li><a class="toc-href" href="#blocking: one (not great) solution" title="Blocking: One (not great) Solution">Blocking: One (not great) Solution</a></li><li><a class="toc-href" href="#debouncing options" title="Debouncing Options">Debouncing Options</a></li><li><a class="toc-href" href="#basics of state" title="Basics Of State">Basics Of State</a></li><li><a class="toc-href" href="#score keeping is tracking state" title="Score Keeping Is Tracking State">Score Keeping Is Tracking State</a></li><li><a class="toc-href" href="#global state and a better analogy" title="Global State And A Better Analogy">Global State And A Better Analogy</a></li><li><a class="toc-href" href="#conclusions and what" next="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
+<div id="toc"><ul><li><a class="toc-href" href="#a use case for state: debouncing buttons" title="A Use Case For State: Debouncing Buttons">A Use Case For State: Debouncing Buttons</a></li><li><a class="toc-href" href="#blocking: one (not great) solution" title="Blocking: One (not great) Solution">Blocking: One (not great) Solution</a></li><li><a class="toc-href" href="#debouncing options" title="Debouncing Options">Debouncing Options</a></li><li><a class="toc-href" href="#basics of state" title="Basics Of State">Basics Of State</a></li><li><a class="toc-href" href="#score keeping is tracking state" title="Score Keeping Is Tracking State">Score Keeping Is Tracking State</a></li><li><a class="toc-href" href="#global state and a better analogy" title="Global State And A Better Analogy">Global State And A Better Analogy</a></li><li><a class="toc-href" href="#conclusions and what" next'="" s="" title="Conclusions And What">Conclusions And What's Next</a></li></ul></div>
 </div>
 <div class="entry-content status-published">
 <!-- Emoji substitutions, because I can't help myself (and my editor doesn't show -->
@@ -205,17 +205,17 @@
 <p>If we modeled the scoreboard in Python, we could use a single variable to store the score:</p>
 <a href="/images/fullsize/nonblocking-state-examples-02.jpg"><img alt="" class="align-center" sizes="(min-width: 1060.0px) 800px,(min-width: 848.0px) 640px,(min-width: 424.0px) 320px,(min-width: 212.0px) 160px" src="/images/fullsize/nonblocking-state-examples-02.jpg" srcset="/images/responsive/nonblocking-state-examples-02-1000.jpg 1000w,/images/responsive/nonblocking-state-examples-02-800.jpg 800w,/images/responsive/nonblocking-state-examples-02-400.jpg 400w,/images/responsive/nonblocking-state-examples-02-200.jpg 200w" style="width: 80%;"/></a>
 <p>Here, we simply name the variable <tt class="docutils literal">score</tt>. If we were modeling a real gymnastics match, we might want to differentiate between different scores, since there will be one for each judge, and each participant:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">entrant1_judge1</span> <span class="o">=</span> <span class="mf">9.70</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">entrant1_judge1</span> <span class="o">=</span> <span class="mf">9.70</span>
 <span class="n">entrant1_judge2</span> <span class="o">=</span> <span class="mf">9.45</span>
 <span class="n">entrant1_judge3</span> <span class="o">=</span> <span class="mf">10.0</span>
 
@@ -226,33 +226,33 @@
 <span class="n">entrant3_judge1</span> <span class="o">=</span> <span class="mf">10.0</span>
 <span class="n">entrant3_judge2</span> <span class="o">=</span> <span class="mf">9.99</span>
 <span class="n">entrant3_judge3</span> <span class="o">=</span> <span class="mf">9.98</span>
-</pre></div>
-</td></tr></table></div><p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics! What if we wanted to track how these values change over time?</p>
+</pre></div></td></tr></table></div></div>
+<p>This straight-forward, but a bit unwieldy. We're only set up for three judges, and three entrants, and a <em>single</em> match. In a tournament there may be 10 matches, and there could be dozens of entrants. That's a lot of variables to track, and all we're tracking is the scores. Imagine if we also wanted to give the entrants a name or id number, or track their vital statistics! What if we wanted to track how these values change over time?</p>
 <p>We can simplify and generalize things a bit by using Python's built-in data structures.</p>
 <div class="admonition tip">
 <h2 class="first admonition-title">Tip</h2>
 <p class="last">If you aren't familiar with Python's built-in data structures, Adafruit has put together a <a class="reference external" href="https://learn.adafruit.com/basic-datastructures-in-circuitpython/overview" target="external">simple guide</a>.</p>
 </div>
 <p>There are many, many ways to model a match like this, here's just one using lists and dictionaries:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">matches</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">matches</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span>
         <span class="p">{</span>
          <span class="s2">"judge1"</span><span class="p">:</span> <span class="mf">9.70</span><span class="p">,</span>
@@ -271,8 +271,8 @@
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">]</span>
-</pre></div>
-</td></tr></table></div><p>To access the second judge's score for the third entrant in the first match (remember list indexes start with 0):</p>
+</pre></div></td></tr></table></div></div>
+<p>To access the second judge's score for the third entrant in the first match (remember list indexes start with 0):</p>
 <div class="highlight"><pre><span></span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="s2">"judge2"</span><span class="p">]</span>
 </pre></div>
 <p>So that works for modeling something like a gymnastics match, where you have somewhat similar data, but it is recorded multiple times.</p>
@@ -297,14 +297,14 @@
 <p>There are alternative ways of modeling global state like this, however. The two primary ones are: using a <em>dictionary</em> and using a <em>class</em>.</p>
 <p>A dictionary in Python is a key-value mapping, also known as an <em>associative array</em>, <em>hash</em>, or <em>hashmap</em>. We worked with these earlier in the gymnastics example.</p>
 <p>Data is stored by name in a simple table. Here's what our scoreboard looks like as a dictionary:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">scoreboard</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">scoreboard</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"ball"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"out"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"strike"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -312,15 +312,15 @@
     <span class="s2">"inning"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s2">"home_score"</span><span class="p">:</span> <span class="mi">10</span>
 <span class="p">}</span>
-</pre></div>
-</td></tr></table></div><p>We access the various values like this:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">outs</span> <span class="o">=</span> <span class="n">scoreboard</span><span class="p">[</span><span class="s2">"out"</span><span class="p">]</span>
+</pre></div></td></tr></table></div></div>
+<p>We access the various values like this:</p>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">outs</span> <span class="o">=</span> <span class="n">scoreboard</span><span class="p">[</span><span class="s2">"out"</span><span class="p">]</span>
 <span class="n">scoreboard</span><span class="p">[</span><span class="s2">"inning"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="n">scoreboard</span><span class="p">[</span><span class="s2">"guest_score"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
-</pre></div>
-</td></tr></table></div><p>So we have a single, global state variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
+</pre></div></td></tr></table></div></div>
+<p>So we have a single, global state variable, <tt class="docutils literal">scoreboard</tt>, that contains all of the information about the game. As the game progresses, <tt class="docutils literal">scoreboard</tt>'s members are updated.</p>
 <p>This has the advantage over using a series of variables in that it is more compact, but flexible - we're only using up one variable name, and the names of our state attributes can be almost anything - words with spaces, dashes, even other objects.</p>
 <div class="admonition note">
 <h2 class="first admonition-title">Note</h2>
@@ -335,33 +335,33 @@
 <p>As the project progresses, say you also need to track baseballs lost, and baseballs that were caught by fans. Again, you could add more global variables with names like <tt class="docutils literal">balls_caught</tt>, and <tt class="docutils literal">balls_lost</tt>. But now we have 4 variables. Some are related (referring to actual baseballs) and one is completely different (<tt class="docutils literal">balls</tt>, referring to a kind of score that affects the progress of the game).</p>
 <p>Its a good idea to think about how you can group similar data together. This reduces the contortions you will have to go through to come up with names, makes the code cleaner, and makes the data model make more sense.</p>
 <p>We've already decided to use a dictionary for the game state, so we can do the same to track this equipment-related information:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">balls</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><span class="n">balls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">balls_lost</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">balls_used</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">balls_caught</span> <span class="o">=</span> <span class="mi">0</span>
@@ -388,8 +388,8 @@
     <span class="s1">'athletic_cups'</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
     <span class="s1">'shoes'</span><span class="p">:</span> <span class="mi">13</span>
 <span class="p">}</span>
-</pre></div>
-</td></tr></table></div><p>As you can see, modeling the data this way gives us a lot more flexibility.</p>
+</pre></div></td></tr></table></div></div>
+<p>As you can see, modeling the data this way gives us a lot more flexibility.</p>
 <p>It sets us up for modeling more complex things, like the total amount of equipment used in the game.</p>
 <p>The context makes simpler variable and key names make more sense. <tt class="docutils literal"><span class="pre">equipment['balls']['lost']</span></tt> has more contextual information than <tt class="docutils literal">balls_lost</tt>.</p>
 <p class="last">This is all very basic Python stuff, but I want to make sure you're thinking about different ways to model your data. It's one of the foundations to writing well-behaved, easy-to-read code and something you usually learn over time. Thinking about it critically now, if you're a newer programmer, gives you a big head start on becoming a great engineer. 💖</p>
@@ -409,31 +409,31 @@
 <p>Another important distinction is that methods <em>always</em> take an extra parameter, that, by convention, we call <tt class="docutils literal">self</tt>. That parameter contains the <em>instance</em> that the method is being called on. An instance is essentially an "active" copy of the class. Using architecture as an analogy, if the class is the <em>blueprint</em>, the instance would be the <em>building</em>.</p>
 <p>What it means, in practical terms, is having the instance passed as an argument gives your method access to the data and other methods that the instance contains. Inside of a method, you normally wouldn't know which instance the method was being called on. <tt class="docutils literal">self</tt> gives us that bridge from the class to the instance.</p>
 <p>Here's a simple example of a class that represents our baseball scoreboard:</p>
-<div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ScoreBoard</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><div class="highlight-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ScoreBoard</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"guest"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">"home"</span><span class="p">:</span> <span class="mi">0</span>
@@ -445,10 +445,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">strike</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">tied</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tied</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"home"</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="s2">"guest"</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">next_inning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">next_inning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inning</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -456,8 +456,8 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s2">"Game is over"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">extra_innings</span> <span class="o">=</span> <span class="kc">True</span>
-</pre></div>
-</td></tr></table></div><div class="explanation section">
+</pre></div></td></tr></table></div></div>
+<div class="explanation section">
 <h3>Explanation</h3>
 <div class="docutils container">
 </div>
@@ -535,11 +535,13 @@
 </div>
 </div>
 </div><!-- /.entry-content -->
-</section>
+<div class="body" id="contactme">
+     Questions? Comments? <a href="/pages/contact.html">Reach out!</a>
 </div>
+</section></div>
 <footer class="body" id="contentinfo">
 <div id="footer-text-wrapper">
-<div id="footer-text">&copy; 2019 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
+<div id="footer-text">&copy; 2015-2026 Josh Johnson. All Rights Reserved. <a href="/pages/about.html">About</a></div>
 </div>
 </footer>
 <script src="/theme/js/main.js"></script>
